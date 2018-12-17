@@ -41,7 +41,6 @@ For information on how to contribute, [go here](/Contribution Standard.md) .
 * Contributions which deal with complex issues that would be better if simplified.
 
 ### Apps built with AluminiumCoreLib
-[CSMarkDesktop](https://www.github.com/CSMarkLib/CSMark)
 
 ## About AluminiumCoreLib.hardware
 AluminiumCoreLib.Hardware is a complementary library which is it's own project and can be found [here](https://github.com/AluminiumTech/AluminiumCoreLib.Hardware) .
