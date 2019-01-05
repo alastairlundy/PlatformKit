@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2018 AluminiumTech
+Copyright (c) 2018-2019 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -191,6 +191,15 @@ namespace AluminiumCoreLib.Utilities{
         /// <returns></returns>
         public bool Equals(Version version){
             return (Compare(this.GetRevisionVersion(), version.GetRevisionVersion()) && Compare(this.GetBuildVersion(), version.GetBuildVersion()) && Compare(this.GetMinorVersion(), version.GetMinorVersion()) && Compare(this.GetMajorVersion(), version.GetMajorVersion()));
+        }
+        /// <summary>
+        /// Compare to a System.Version and returns if they are equal or not.
+        /// </summary>
+        /// <param name="version">A System.Version object</param>
+        /// <returns></returns>
+        public bool Equals(System.Version version)
+        {
+            return (Compare(this.GetRevisionVersion(), version.Revision) && Compare(this.GetBuildVersion(), version.Build) && Compare(this.GetMinorVersion(), version.Minor) && Compare(this.GetMajorVersion(), version.Major));
         }
         /// <summary>
         /// 
