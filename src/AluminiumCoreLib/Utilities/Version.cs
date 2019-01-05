@@ -177,6 +177,14 @@ namespace AluminiumCoreLib.Utilities{
             }
         }
         /// <summary>
+        /// Returns a System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public System.Version ToSystemVersion(){
+            return new System.Version(major, minor, build, revision);
+        }
+
+        /// <summary>
         /// Compare to another version and returns if they are equal or not.
         /// </summary>
         /// <param name="version"></param>
