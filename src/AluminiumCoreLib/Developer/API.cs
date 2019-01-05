@@ -36,17 +36,17 @@ namespace AluminiumCoreLib.Developer{
         /// 
         /// </summary>
         public API() {
-            MinimumSupportedAPIVersion = new Version();
-            RecommendedAPIVersion = new Version();
+            MinimumSupportedAPIVersion = new System.Version();
+            RecommendedAPIVersion = new System.Version();
             FeatureList = new List<Feature>();
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="minSupportedAPI"></param>
-        public API(Version minSupportedAPI){
+        public API(System.Version minSupportedAPI){
             MinimumSupportedAPIVersion = minSupportedAPI ?? throw new ArgumentNullException(nameof(minSupportedAPI));
-            RecommendedAPIVersion = new Version();
+            RecommendedAPIVersion = new System.Version();
             FeatureList = new List<Feature>();
         }
         /// <summary>
@@ -54,7 +54,7 @@ namespace AluminiumCoreLib.Developer{
         /// </summary>
         /// <param name="minSupportedAPI"></param>
         /// <param name="recommendedAPI"></param>
-        public API(Version minSupportedAPI, Version recommendedAPI){
+        public API(System.Version minSupportedAPI, System.Version recommendedAPI){
             MinimumSupportedAPIVersion = minSupportedAPI ?? throw new ArgumentNullException(nameof(minSupportedAPI));
             RecommendedAPIVersion = recommendedAPI ?? throw new ArgumentNullException(nameof(recommendedAPI));
             FeatureList = new List<Feature>();
@@ -65,7 +65,7 @@ namespace AluminiumCoreLib.Developer{
         /// <param name="minSupportedAPI"></param>
         /// <param name="recommendedAPI"></param>
         /// <param name="featureList"></param>
-        public API(Version minSupportedAPI, Version recommendedAPI, List<Feature> featureList){
+        public API(System.Version minSupportedAPI, System.Version recommendedAPI, List<Feature> featureList){
             MinimumSupportedAPIVersion = minSupportedAPI ?? throw new ArgumentNullException(nameof(minSupportedAPI));
             RecommendedAPIVersion = recommendedAPI ?? throw new ArgumentNullException(nameof(recommendedAPI));
             FeatureList = featureList ?? throw new ArgumentNullException(nameof(featureList));

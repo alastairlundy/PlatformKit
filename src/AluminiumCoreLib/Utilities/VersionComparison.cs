@@ -35,7 +35,7 @@ namespace AluminiumCoreLib.Utilities{
         /// </summary>
         /// <param name="NewVersion"></param>
         /// <param name="InstalledVersion"></param>
-        public bool CompareVersion(Version NewVersion, Version InstalledVersion) {
+        public bool CompareVersion(System.Version NewVersion, System.Version InstalledVersion) {
             if (Compare(NewVersion.Revision, InstalledVersion.Revision)) {
                 return true;
             }

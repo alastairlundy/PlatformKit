@@ -21,35 +21,22 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
-using AluminiumCoreLib.Utilities;
 using System;
+using System.Collections.Generic;
 
 namespace AluminiumCoreLib.Developer.Commercialization{
     /// <summary>
     /// 
     /// </summary>
-    public class Customer{
-        private bool isABusinessCustomer;
-        private bool isAPayingCustomer;
-        private ObjectList<Card> paymentDetails;
+    public class Customer : Person{
+        protected bool isAPayingCustomer;
+        protected List<Card> paymentDetails;
 
         /// <summary>
         /// 
         /// </summary>
         public Customer(){
-            paymentDetails = new ObjectList<Card>();
-            //Assume that the customer is not a business customer.
-            isABusinessCustomer = false;
-            //Assume that the customer is a paying customer.
-            isAPayingCustomer = true;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="isABusinessCustomer"></param>
-        public Customer(bool isABusinessCustomer){
-            paymentDetails = new ObjectList<Card>();
-            this.isABusinessCustomer = isABusinessCustomer;
+            paymentDetails = new List<Card>();
             //Assume that the customer is a paying customer.
             isAPayingCustomer = true;
         }
@@ -58,9 +45,8 @@ namespace AluminiumCoreLib.Developer.Commercialization{
         /// </summary>
         /// <param name="isABusinessCustomer"></param>
         /// <param name="isAPayingCustomer"></param>
-        public Customer(bool isABusinessCustomer, bool isAPayingCustomer){
-            paymentDetails = new ObjectList<Card>();
-            this.isABusinessCustomer = isABusinessCustomer;
+        public Customer(bool isAPayingCustomer){
+            paymentDetails = new List<Card>();
             this.isAPayingCustomer = isAPayingCustomer;
         }
 
@@ -74,23 +60,18 @@ namespace AluminiumCoreLib.Developer.Commercialization{
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public Card GetCard(int index){
+           return paymentDetails[index];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="card"></param>
         public void RemoveCard(Card card){
             paymentDetails.Remove(card);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="index"></param>
-        public void RemoveCard(int index){
-            paymentDetails.Remove(index);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsABusinessCustomer(){
-            return isABusinessCustomer;
         }
         /// <summary>
         /// 
