@@ -24,7 +24,7 @@ SOFTWARE.
 using System;
 using System.Security.Cryptography;
 
-namespace AluminiumCoreLib.Utilities.PasswordManagement{
+namespace AluminiumCoreLib.Utilities.PasswordKit{
     /// <summary>
     /// A wrapper class for the RNGCryptoServiceProvider class
     /// </summary>

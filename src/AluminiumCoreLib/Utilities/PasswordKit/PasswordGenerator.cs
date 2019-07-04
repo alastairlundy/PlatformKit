@@ -23,7 +23,7 @@ SOFTWARE.
     */
 using System;
 
-namespace AluminiumCoreLib.Utilities.PasswordManagement{
+namespace AluminiumCoreLib.Utilities.PasswordKit{
     /// <summary>
     /// A class to help generate secure passwords.
     /// </summary>
