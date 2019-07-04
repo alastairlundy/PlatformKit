@@ -21,9 +21,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
+using System;
 using System.Collections.Generic;
 
-namespace AluminiumCoreLib.Utilities{
+namespace AluminiumCoreLib{
     /// <summary>
     /// A class to store hashed keys and values similar to how Java's HashMap works.
     /// </summary>
@@ -93,13 +94,20 @@ namespace AluminiumCoreLib.Utilities{
         /// <param name="value">The new value to be associated with the key</param>
         /// <returns></returns>
         public bool Replace(TKey key, TValue value){
-            if (ContainsKey(key)){
-                dictionary.Remove(key);
-                dictionary.Add(key, value);
-                return true;
+            try{
+                if (ContainsKey(key))
+                {
+                    dictionary.Remove(key);
+                    dictionary.Add(key, value);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else{
-                return false;
+            catch(Exception ex){
+                Console.WriteLine(ex);
             }
         }
 
@@ -210,11 +218,11 @@ namespace AluminiumCoreLib.Utilities{
         }
 
         /// <summary>
-        /// Returns the HashMap as an ObjectList of type TValue.
+        /// Returns the HashMap as an List of type TValue.
         /// Note: This loses all of a HashMap's Key Values.
         /// </summary>
         /// <returns></returns>
-        public List<TValue> ToObjectList(){
+        public List<TValue> ToList(){
           var objList = new List<TValue>();
 
             foreach(KeyValuePair<TKey, TValue> t in dictionary){
@@ -230,7 +238,7 @@ namespace AluminiumCoreLib.Utilities{
         /// </summary>
         /// <returns></returns>
         public TValue[] ToArray(){
-          List<TValue> objList = ToObjectList();
+          List<TValue> objList = ToList();
            return objList.ToArray();
         }
     }

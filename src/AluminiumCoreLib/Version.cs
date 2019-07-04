@@ -24,7 +24,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 
-namespace AluminiumCoreLib.Utilities{
+namespace AluminiumCoreLib{
     /// <summary>
     /// 
     /// </summary>
