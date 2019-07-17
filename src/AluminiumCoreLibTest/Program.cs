@@ -4,7 +4,7 @@
     */
 using AluminiumCoreLib;
 using AluminiumCoreLib.Utilities;
-using AluminiumCoreLib.Utilities.PasswordManagement;
+using AluminiumCoreLib.Utilities.PasswordKit;
 
 namespace AluminiumCoreLibTest{
     class Program{

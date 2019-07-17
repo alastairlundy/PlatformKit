@@ -23,7 +23,8 @@ SOFTWARE.
     */
 using System;
 
-namespace AluminiumCoreLib.Utilities.PasswordKit{
+namespace AluminiumCoreLib.PasswordKit
+{
     /// <summary>
     /// A class to help generate secure passwords.
     /// </summary>
@@ -49,23 +50,19 @@ namespace AluminiumCoreLib.Utilities.PasswordKit{
             int random = 0;
             random = secure.NextRandom(0, 3);
 
-            if (random.Equals(0))
-            {
+            if (random.Equals(0)){
                 random = secure.NextRandom(0, alphabetLower.Length - 1);
                 password += alphabetLower[random];
             }
-            else if (random.Equals(1) && IncludeUpperCase)
-            {
+            else if (random.Equals(1) && IncludeUpperCase){
                 random = secure.NextRandom(0, alphabetUpper.Length - 1);
                 password += alphabetUpper[random];
             }
-            else if (random.Equals(2) && IncludeNumbers)
-            {
+            else if (random.Equals(2) && IncludeNumbers){
                 random = secure.NextRandom(0, numbers.Length - 1);
                 password += numbers[random];
             }
-            else if (random.Equals(3) && IncludeSpecialCharacters)
-            {
+            else if (random.Equals(3) && IncludeSpecialCharacters){
                 random = secure.NextRandom(0, specialCharacters.Length - 1);
                 password += specialCharacters[random];
             }
