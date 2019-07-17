@@ -108,6 +108,7 @@ namespace AluminiumCoreLib{
             }
             catch(Exception ex){
                 Console.WriteLine(ex);
+                return false;
             }
         }
 
@@ -137,7 +138,7 @@ namespace AluminiumCoreLib{
         /// </summary>
         /// <param name="DefaultValue">The default value to be returned in case the key is not associated with a value</param>
         /// <returns></returns>
-        public TValue GetValueOrDefaultAndPut(TKey key, TValue DefaultValue){
+        public TValue GetValueOrDefaultAndPutIfAbsent(TKey key, TValue DefaultValue){
             try{
                 return GetValue(key);
             }
