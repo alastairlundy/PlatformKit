@@ -105,7 +105,7 @@ namespace AluminiumCoreLib.PlatformKit {
         /// Warn the user if the process count is extremely high.
         /// </summary>
         public void WarnProcessCount(int ProcessWarnCount, string WarningMessage){
-            if(ReturnProcessCount() > ProcessWarnCount) {
+            if(GetProcessCount() > ProcessWarnCount) {
               Console.WriteLine(WarningMessage);
             }
          }
@@ -279,7 +279,7 @@ namespace AluminiumCoreLib.PlatformKit {
         /// </summary>
         /// <param name="ProcessName"></param>
         public void RunProcess(string ProcessName){
-            var plat = new Platform().ReturnPlatform();
+            var plat = GetPlatformAsString();
 
             if (plat.ToLower().Contains("win")){
                 RunProcessWindows(ProcessName);
@@ -298,7 +298,7 @@ namespace AluminiumCoreLib.PlatformKit {
         /// <param name="ProcessName"></param>
         /// <param name="Arguments"></param>
         public void RunProcess(string ProcessName, string Arguments){
-            var plat = new Platform().ReturnPlatform();
+            var plat = GetPlatformAsString();
 
             if (plat.ToLower().Contains("win")){
                 RunProcessWindows(ProcessName, Arguments);
