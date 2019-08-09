@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 
-namespace AluminiumCoreLib.Utilities {
+namespace AluminiumCoreLib.PlatformKit {
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
@@ -37,15 +37,8 @@ namespace AluminiumCoreLib.Utilities {
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        public string ReturnOSArchitecture() {
-            return RuntimeInformation.OSArchitecture.ToString();
-        }
-        /// <summary>
-        /// Returns the OS Architecture as a string.
-        /// </summary>
-        /// <returns></returns>
-        public CPUArchitecture ReturnOSArchitectureEnum(){
-            var x = ReturnOSArchitecture().ToLower();
+        public CPUArchitecture GetOSArchitectureAsEnum(){
+            var x = GetPlatformAsString().ToLower();
 
             try{
                 if (x.Contains("arm") && !x.Contains("64"))
@@ -72,8 +65,15 @@ namespace AluminiumCoreLib.Utilities {
             }
         }
         /// <summary>
+        /// Returns the OS Architecture as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetOSArchitectureToString(){
+            return RuntimeInformation.OSArchitecture.ToString();
+        }
+        /// <summary>
         /// Determine what OS is being run
-        /// /// </summary>
+        /// </summary>
         /// <returns></returns>
         public OSPlatform GetOSPlatform() {
             OSPlatform osPlatform = OSPlatform.Create("Other Platform");
@@ -127,7 +127,7 @@ namespace AluminiumCoreLib.Utilities {
         /// <summary>
         /// Gets the OS platform as a String.
         /// </summary>
-        public string ReturnPlatform() {
+        public string GetPlatformAsString() {
             if (GetOSPlatform().ToString().ToLower() == "windows"){
                 if (RuntimeInformation.OSDescription.Contains("Windows 10")){
                     return "Windows 10";
@@ -149,18 +149,15 @@ namespace AluminiumCoreLib.Utilities {
             }
             return null;
         }
-
-        public OperatingSystem ReturnPlatformAsOSEnum(){
+        /// <summary>
+        /// Returns the OS Platform as an Enum
+        /// </summary>
+        /// <returns></returns>
+        public OperatingSystem GetPlatformAsEnum(){
             if (GetOSPlatform().ToString().ToLower() == "windows"){
-                if (RuntimeInformation.OSDescription.Contains("Windows 10")){
+                if (RuntimeInformation.OSDescription.Contains("Windows 10") || RuntimeInformation.OSDescription.Contains("Windows 7") || RuntimeInformation.OSDescription.Contains("Windows 8.1")){
                         return OperatingSystem.Windows;
                 }
-                else if (RuntimeInformation.OSDescription.Contains("Windows 7")){
-                        return OperatingSystem.Windows;
-                    }
-                else if (RuntimeInformation.OSDescription.Contains("Windows 8.1")){
-                        return OperatingSystem.Windows;
-                    }
             }
             else if (GetOSPlatform().ToString().ToLower() == "mac"){
                 if (RuntimeInformation.OSDescription.Contains("OSX")){
@@ -170,28 +167,28 @@ namespace AluminiumCoreLib.Utilities {
             else if (GetOSPlatform().ToString().ToLower() == "linux"){
                     return OperatingSystem.Linux;
             }
-               return OperatingSystem.Unix;
+            return OperatingSystem.Unix;
         }
 
         /// <summary>
         /// Return an app's version as a string.
         /// </summary>
         /// <returns></returns>
-        public string ReturnVersionString() {
+        public string GetVersionString() {
             return Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
         /// <summary>
         /// Return an app's version as a Version data type.
         /// </summary>
         /// <returns></returns>
-        public System.Version ReturnVersion() {
+        public System.Version GetVersion() {
             return Assembly.GetEntryAssembly().GetName().Version;
         }
         /// <summary>
         /// Check how many processes are currently running.
         /// </summary>
         /// <returns></returns>
-        public int ReturnProcessCount() {
+        public int GetProcessCount() {
             int count = 0;
             Process[] processes = Process.GetProcesses();
 
@@ -205,7 +202,7 @@ namespace AluminiumCoreLib.Utilities {
         /// Get the list of processes as an ObjectList containing Strings
         /// </summary>
         /// <returns></returns>
-        public List<string> ReturnProcessListAsString() {
+        public List<string> GetProcessListAsStrings() {
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
@@ -216,34 +213,34 @@ namespace AluminiumCoreLib.Utilities {
             return strList;
         }
         /// <summary>
-        /// Returns an ObjectList containing all the running processes.
+        /// Returns a List containing all the running processes.
         /// </summary>
         /// <returns></returns>
-        public List<Process> ProcessListToObjectList(){
+        public List<Process> GetProcessListAsProcesses(){
                 var strList = new List<Process>();
                 Process[] processes = Process.GetProcesses();
 
-                foreach (Process process in processes) {
+                foreach (Process process in processes){
                     strList.Add(process);
                 }
                 strList.TrimExcess();
                 return strList;
-            }
+        }
 
         /// <summary>
-        /// Returns a HashMap containing all the running processes.
+        /// Returns a Dictionary containing all the running processes.
         /// <typeparam name="int"> The Process ID.</typeparam>
         /// <typeparam name="string"> The Process Name.</typeparam>
         /// </summary>
         /// <returns></returns>
-        public HashMap<int, string> ProcessListToHashMap(){
-                var hm = new HashMap<int, string>();
+        public Dictionary<int, string> ProcessListToDictionary(){
+                var dictionary = new Dictionary<int, string>();
                 Process[] processes = Process.GetProcesses();
 
                 foreach (Process process in processes) {
-                  hm.Put(process.Id, process.ProcessName);
+                    dictionary.Add(process.Id, process.ProcessName);
                 }
-                return hm;
+                return dictionary;
             }
 
         /// <summary>
@@ -299,6 +296,7 @@ namespace AluminiumCoreLib.Utilities {
         /// Run a Process
         /// </summary>
         /// <param name="ProcessName"></param>
+        /// <param name="Arguments"></param>
         public void RunProcess(string ProcessName, string Arguments){
             var plat = new Platform().ReturnPlatform();
 
@@ -316,20 +314,20 @@ namespace AluminiumCoreLib.Utilities {
         /// Run a process on Windows.
         /// </summary>
         /// <param name="ProcessName"></param>
-        private void RunProcessWindows(string ProcessName){
+        protected void RunProcessWindows(string ProcessName){
             Process process = new Process();
             process.StartInfo.FileName = ProcessName + ".exe";
             process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             process.Start();
         }
-        private void RunProcessWindows(string ProcessName, string Arguments){
+        protected void RunProcessWindows(string ProcessName, string Arguments){
             Process process = new Process();
             process.StartInfo.FileName = ProcessName + ".exe";
             process.StartInfo.Arguments = Arguments;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             process.Start();
         }
-        private void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws){
+        protected void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws){
             Process process = new Process();
             process.StartInfo.FileName = ProcessName + ".exe";
             process.StartInfo.Arguments = Arguments;
@@ -341,7 +339,7 @@ namespace AluminiumCoreLib.Utilities {
         /// </summary>
         /// <param name="ProcessName"></param>
         /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        private void RunProcessMac(string ProcessName){
+        protected void RunProcessMac(string ProcessName){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
@@ -353,11 +351,11 @@ namespace AluminiumCoreLib.Utilities {
             process.Start();
         }
         /// <summary>
-        /// Run a Process on Mac
+        /// Run a Process on macOS
         /// </summary>
         /// <param name="ProcessName"></param>
         /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        private void RunProcessMac(string ProcessName, string ProcessArguments){
+        protected void RunProcessMac(string ProcessName, string ProcessArguments){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
@@ -373,7 +371,7 @@ namespace AluminiumCoreLib.Utilities {
         /// Run a Process on Linux
         /// </summary>
         /// <param name="ProcessName"></param>
-        private void RunProcessLinux(string ProcessName){
+        protected void RunProcessLinux(string ProcessName){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
@@ -388,7 +386,7 @@ namespace AluminiumCoreLib.Utilities {
         /// Run a Process on Linux
         /// </summary>
         /// <param name="ProcessName"></param>
-        private void RunProcessLinux(string ProcessName, string ProcessArguments){
+        protected void RunProcessLinux(string ProcessName, string ProcessArguments){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
@@ -407,7 +405,7 @@ namespace AluminiumCoreLib.Utilities {
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         public bool OpenURLInBrowser(string url){
-            var plat = new Platform().ReturnPlatform();
+            var plat = GetPlatformAsString();
             if (plat.ToLower().Contains("win")){
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
                 return true;
@@ -424,16 +422,13 @@ namespace AluminiumCoreLib.Utilities {
         }
 
     }
-            /// <summary>
+        /// <summary>
         /// An enum to help manage OS specific code.
         /// </summary>
         public enum OperatingSystem {
             Windows, Mac, Linux, Unix, Android, IOS, tvOS, watchOS, AndroidTV, wearOS, WindowsHoloGraphic, WindowsMixedReality, Tizen
         }
-        /// <summary>
-        /// An enum to help manage CPU architecture specific code.
-        /// </summary>
-        public enum CPUArchitecture {
-            X86, X64, ARM, ARM64, POWERPC, IA64, MIPS, NotDetected
+        public enum CPUArchitecture{
+            X64, X86, ARM, ARM64, NotDetected
         }
 }
