@@ -27,6 +27,7 @@ using System.Collections.Generic;
 namespace AluminiumCoreLib{
     /// <summary>
     /// A class to store hashed keys and values similar to how Java's HashMap works.
+    /// NOTE: This class is deprecated and may be removed in the future - Please use C#'s built in Dictionary class instead
     /// </summary>
     public class HashMap<TKey, TValue>{
         private Dictionary<TKey, TValue> dictionary;
