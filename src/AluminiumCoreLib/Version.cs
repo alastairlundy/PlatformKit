@@ -178,8 +178,8 @@ namespace AluminiumCoreLib{
         /// </summary>
         /// <param name="version"></param>
         /// <returns></returns>
-        public bool Equals(Version version){
-            return (Compare(this.GetRevisionVersion(), version.GetRevisionVersion()) && Compare(this.GetBuildVersion(), version.GetBuildVersion()) && Compare(this.GetMinorVersion(), version.GetMinorVersion()) && Compare(this.GetMajorVersion(), version.GetMajorVersion()));
+        public bool Equals(AluminiumCoreLib.Version version){
+            return (CompareIsNewer(this.GetRevisionVersion(), version.GetRevisionVersion()) && CompareIsNewer(this.GetBuildVersion(), version.GetBuildVersion()) && CompareIsNewer(this.GetMinorVersion(), version.GetMinorVersion()) && CompareIsNewer(this.GetMajorVersion(), version.GetMajorVersion()));
         }
         /// <summary>
         /// Compare to a System.Version and returns if they are equal or not.
@@ -187,7 +187,7 @@ namespace AluminiumCoreLib{
         /// <param name="version">A System.Version object</param>
         /// <returns></returns>
         public bool Equals(System.Version version){
-            return (Compare(this.GetRevisionVersion(), version.Revision) && Compare(this.GetBuildVersion(), version.Build) && Compare(this.GetMinorVersion(), version.Minor) && Compare(this.GetMajorVersion(), version.Major));
+            return (CompareIsNewer(this.GetRevisionVersion(), version.Revision) && CompareIsNewer(this.GetBuildVersion(), version.Build) && CompareIsNewer(this.GetMinorVersion(), version.Minor) && CompareIsNewer(this.GetMajorVersion(), version.Major));
         }
         /// <summary>
         /// 
