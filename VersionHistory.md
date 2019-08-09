@@ -5,17 +5,17 @@ Table of Contents:
 
 ## Stable Releases
 
-### 2.0.0
+## Pre-release versions 
+
+### 2.0.0 Alpha
 
 | Version | Desktop Availability | Changelog |
 |---------|----------------------|-----------|
-| 2.0.0 Alpha 4 | October 30th 2018 | https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha4 |
-| 2.0.0 Alpha 3 | October 6th 2018 | https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha3 |
-| 2.0.0 Alpha 2 | August 11th 2018 | https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha2 |
-| 2.0.0 Alpha 1 | June 2nd 2018 | https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha1 |
-| 2.0.0 Alpha 0 | May 15th 2018 | https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha0 |
-
-## Beta Releases
+| 2.0.0 Alpha 4 | October 30th 2018 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha4) |
+| 2.0.0 Alpha 3 | October 6th 2018 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha3) |
+| 2.0.0 Alpha 2 | August 11th 2018 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha2) |
+| 2.0.0 Alpha 1 | June 2nd 2018 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha1) |
+| 2.0.0 Alpha 0 | May 15th 2018 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha0) |
 
 ### Beta 1.4.0
 
