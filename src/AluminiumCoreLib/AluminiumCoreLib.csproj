@@ -1,22 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.0.0.5</AssemblyVersion>
-    <FileVersion>2.0.0.5</FileVersion>
-    <Version>2.0.0-alpha5</Version>
+    <AssemblyVersion>2.0.0.4</AssemblyVersion>
+    <FileVersion>2.0.0.4</FileVersion>
+    <Version>2.0.0-alpha4</Version>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
     <PackageLicenseUrl>https://github.com/AluminiumTech/AluminiumCoreLib/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright (c) AluminiumTech 2017-2019</Copyright>
+    <Copyright>Copyright (c) AluminiumTech 2017-2018</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
-    <PackageReleaseNotes>### Changes
-* Removed many classes and features
-* Deprecated ``HashMap`` class - Please use C#'s built in Dictionary class instead. This may be removed in a future version.
-* Moved classes and namespaces to better reflect what they do E.g. AluminiumCoreLib.PasswordKit, AluminiumCoreLib.PlatformKit, and AluminiumCoreLib.SearchKit
-* Removed AluminiumCoreLib.IO
-* Bug fixes and general impovements</PackageReleaseNotes>
+    <PackageReleaseNotes>## Changes
+
+### Both
+
+### Java lib
+* Added native ``toString()`` method to JVersion
+* Added ``String suffix`` to JVersion and methods to access and modify it
+* Added constructor for JVersion which uses multiple Strings instead of multiple int variables
+* Added constructor for JVersion which uses a single String 
+* Added VersionComparison class to help compare versions
+* Update to Java 11
+
+### C Sharp lib
+* Removed most Compare methods in VersionComparison class and made ``Compare()`` base method public
+* Created AluminiumCoreLib.IO library and moved IO stuff into that lib - This should result in a substantially smaller nuget download size for the regular library.
+* API compatibility changes with IO classes - Instead of relying on AluminiumCoreLib, one of the IO classes hasbeen modified to use C#'s native ``List&lt;&gt;`` class instead of ``ObjectList&lt;&gt;``
+* Minor Tweaks to some enums in ``Platform.cs``</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl></PackageProjectUrl>
