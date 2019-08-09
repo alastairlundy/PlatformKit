@@ -58,8 +58,7 @@ namespace AluminiumCoreLib{
             revision = 0;
             suffix = "";
         }
-        public Version(int major, int minor, int build, int revision)
-        {
+        public Version(int major, int minor, int build, int revision){
             this.major = major;
             this.minor = minor;
             this.build = build;
@@ -88,72 +87,63 @@ namespace AluminiumCoreLib{
         /// Gets the minor version
         /// </summary>
         /// <returns></returns>
-        public int GetMinorVersion()
-        {
+        public int GetMinorVersion(){
             return minor;
         }
         /// <summary>
         /// Sets the minor version
         /// </summary>
         /// <returns></returns>
-        public void SetMinorVersion(int minor)
-        {
+        public void SetMinorVersion(int minor){
             this.minor = minor;
         }
         /// <summary>
         /// Gets the major version
         /// </summary>
         /// <returns></returns>
-        public int GetMajorVersion()
-        {
+        public int GetMajorVersion(){
             return major;
         }
         /// <summary>
         /// Sets the major version
         /// </summary>
         /// <returns></returns>
-        public void SetMajorVersion(int major)
-        {
+        public void SetMajorVersion(int major){
             this.major = major;
         }
         /// <summary>
         /// Gets the revision version
         /// </summary>
         /// <returns></returns>
-        public int GetRevisionVersion()
-        {
+        public int GetRevisionVersion(){
             return revision;
         }
         /// <summary>
         /// Sets the revision version
         /// </summary>
         /// <returns></returns>
-        public void SetRevisionVersion(int revision)
-        {
+        public void SetRevisionVersion(int revision){
             this.revision = revision;
         }
         /// <summary>
         /// Gets the build version
         /// </summary>
         /// <returns></returns>
-        public int GetBuildVersion()
-        {
+        public int GetBuildVersion(){
             return build;
         }
         /// <summary>
         /// Sets the build version
         /// </summary>
         /// <returns></returns>
-        public void SetBuildVersion(int build)
-        {
+        public void SetBuildVersion(int build){
             this.build = build;
         }
         /// <summary>
         /// Sets the String suffix of a version.
         /// </summary>
         /// <returns></returns>
-        public void SetSuffix(string suffix)
-        {
+        public void SetSuffix(string suffix){
             this.suffix = suffix;
         }
         /// <summary>
@@ -196,8 +186,7 @@ namespace AluminiumCoreLib{
         /// </summary>
         /// <param name="version">A System.Version object</param>
         /// <returns></returns>
-        public bool Equals(System.Version version)
-        {
+        public bool Equals(System.Version version){
             return (Compare(this.GetRevisionVersion(), version.Revision) && Compare(this.GetBuildVersion(), version.Build) && Compare(this.GetMinorVersion(), version.Minor) && Compare(this.GetMajorVersion(), version.Major));
         }
         /// <summary>
@@ -206,7 +195,7 @@ namespace AluminiumCoreLib{
         /// <param name="NewVersion"></param>
         /// <param name="InstalledVersion"></param>
         /// <returns></returns>
-        private bool Compare(int NewVersion, int InstalledVersion){
+        private bool CompareIsNewer(int NewVersion, int InstalledVersion){
             return (NewVersion < InstalledVersion);
         }
     }
