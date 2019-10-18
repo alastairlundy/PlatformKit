@@ -9,7 +9,10 @@ AluminiumCoreLib is designed to help programmers be more efficient when using C#
 
 This can be added to any C# .NET Standard 2.0 supported Application.
 
-[![NuGet](https://img.shields.io/nuget/v/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/) [![NuGet](https://img.shields.io/nuget/dt/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/)
+[![NuGet](https://img.shields.io/nuget/v/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/) 
+[![NuGet](https://img.shields.io/nuget/dt/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/maintainability)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/test_coverage)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/test_coverage)
 
 ### How to get AluminiumCoreLib
 
