@@ -1,5 +1,5 @@
 # Version History
-This document contains the entire version history of the AluminiumCoreLib library. This does not contain the version history for the Alpha versions.
+This document contains the entire version history of the AluminiumCoreLib library.
 
 Table of Contents:
 
@@ -10,7 +10,8 @@ Table of Contents:
 ### 2.0.0 Alpha
  
 | Version | API Version | Desktop Availability | Changelog |
-|---------|----------------------|-----------|
+|---------|----------------------|-----------|--|
+| 2.0.0 Alpha 6 | November 7th 2019 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha6)|
 | 2.0.0 Alpha 5 | August 9th 2019 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha5)|
 | 2.0.0 Alpha 4 | October 30th 2018 | |
 | 2.0.0 Alpha 3 | October 6th 2018 | |
