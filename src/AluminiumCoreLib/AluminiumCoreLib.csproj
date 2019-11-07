@@ -2,25 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.0.0.5</AssemblyVersion>
-    <FileVersion>2.0.0.5</FileVersion>
-    <Version>2.0.0-alpha5</Version>
+    <AssemblyVersion>2.0.0.6</AssemblyVersion>
+    <FileVersion>2.0.0.6</FileVersion>
+    <Version>2.0.0-alpha6</Version>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Copyright>Copyright (c) AluminiumTech 2017-2019</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
-    <PackageReleaseNotes>### Changes
-* Removed many classes and features
-* Deprecated ``HashMap`` class - Please use C#'s built in Dictionary class instead. This may be removed in a future version.
-* Moved classes and namespaces to better reflect what they do E.g. AluminiumCoreLib.PasswordKit, AluminiumCoreLib.PlatformKit, and AluminiumCoreLib.SearchKit
+    <PackageReleaseNotes>## Changes
+* Moved existing Process related functionality to new ProcessManager class
+* Removed SecureRNG to its own library
+* Added the ability to terminate processes
+* Added String process name to Process object translation method
 * Removed AluminiumCoreLib.IO
-* Bug fixes and general impovements</PackageReleaseNotes>
+* Removed old testing project</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

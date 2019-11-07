@@ -58,6 +58,13 @@ namespace AluminiumCoreLib{
             revision = 0;
             suffix = "";
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
         public Version(int major, int minor, int build, int revision){
             this.major = major;
             this.minor = minor;
@@ -65,6 +72,13 @@ namespace AluminiumCoreLib{
             this.revision = revision;
             suffix = "";
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
         public Version(string major, string minor, string build, string revision){
             this.major = int.Parse(major);
             this.minor = int.Parse(minor);
@@ -72,6 +86,10 @@ namespace AluminiumCoreLib{
             this.revision = int.Parse(revision);
             suffix = "";
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
         public Version(string version){
             char[] dot = {'.'};
             string[] versions = version.Split(dot, 5);
