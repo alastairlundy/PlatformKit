@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2019 AluminiumTech
+Copyright (c) 2019-2020 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ using System.Diagnostics;
 
 namespace AluminiumCoreLib.PlatformKit{
     /// <summary>
-    /// 
+    /// A class to manage processes on a device and/or start new processes.
     /// </summary>
     public class ProcessManager{
         Platform platform;
@@ -108,19 +108,18 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <param name="ProcessName"></param>
         /// <param name="Arguments"></param>
-        public void RunProcess(string ProcessName, string Arguments)
-        {
-            var plat = platform.GetPlatformAsString();
+        public void RunProcess(string ProcessName, string Arguments){
+            var plat = platform.GetOSArchitectureAsEnum();
 
-            if (plat.ToLower().Contains("win"))
+            if (plat.Equals(OperatingSystem.Windows))
             {
                 RunProcessWindows(ProcessName, Arguments);
             }
-            else if (plat.ToLower().Contains("osx"))
+            else if (plat.Equals(OperatingSystem.Mac))
             {
                 RunProcessMac(ProcessName, Arguments);
             }
-            else if (plat.ToLower().Contains("linux"))
+            else if (plat.Equals(OperatingSystem.Linux))
             {
                 RunProcessLinux(ProcessName, Arguments);
             }
@@ -129,23 +128,13 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Run a process on Windows.
         /// </summary>
         /// <param name="ProcessName"></param>
-        public void RunProcessWindows(string ProcessName)
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = ProcessName + ".exe";
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-            process.Start();
+        public void RunProcessWindows(string ProcessName){
+            RunProcessWindows(ProcessName + ".exe", "");
         }
-        public void RunProcessWindows(string ProcessName, string Arguments)
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = ProcessName + ".exe";
-            process.StartInfo.Arguments = Arguments;
-            process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-            process.Start();
+        public void RunProcessWindows(string ProcessName, string Arguments){
+            RunProcessWindows(ProcessName, Arguments, ProcessWindowStyle.Normal);
         }
-        public void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws)
-        {
+        public void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws){
             Process process = new Process();
             process.StartInfo.FileName = ProcessName + ".exe";
             process.StartInfo.Arguments = Arguments;
@@ -157,30 +146,30 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <param name="ProcessName"></param>
         /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        public void RunProcessMac(string ProcessName)
-        {
-            var procStartInfo = new ProcessStartInfo(ProcessName)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = false
-            };
-
-            Process process = new Process { StartInfo = procStartInfo };
-            process.Start();
+        public void RunProcessMac(string ProcessName){
+            RunProcessMac(ProcessName, "");
         }
         /// <summary>
         /// Run a Process on macOS
         /// </summary>
         /// <param name="ProcessName"></param>
         /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        public void RunProcessMac(string ProcessName, string ProcessArguments)
-        {
+        public void RunProcessMac(string ProcessName, string ProcessArguments){
+            RunProcessMac(ProcessName, ProcessArguments, ProcessWindowStyle.Normal);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        /// <param name="ProcessArguments"></param>
+        /// <param name="pws"></param>
+        public void RunProcessMac(string ProcessName, string ProcessArguments, ProcessWindowStyle pws){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
+                WindowStyle = pws,
                 Arguments = ProcessArguments
             };
 
@@ -191,64 +180,66 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Run a Process on Linux
         /// </summary>
         /// <param name="ProcessName"></param>
-        public void RunProcessLinux(string ProcessName)
-        {
-            var procStartInfo = new ProcessStartInfo(ProcessName)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = false,
-            };
-
-            Process process = new Process { StartInfo = procStartInfo };
-            process.Start();
+        public void RunProcessLinux(string ProcessName){
+            RunProcessLinux(ProcessName, "");
         }
         /// <summary>
         /// Run a Process on Linux
         /// </summary>
         /// <param name="ProcessName"></param>
-        public void RunProcessLinux(string ProcessName, string ProcessArguments)
-        {
+        public void RunProcessLinux(string ProcessName, string ProcessArguments){
+            RunProcessLinux(ProcessName, ProcessArguments, ProcessWindowStyle.Normal);
+        }
+        /// <summary>
+        /// Run a Process on Linux
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        public void RunProcessLinux(string ProcessName, string ProcessArguments, ProcessWindowStyle pws){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
+                WindowStyle = pws,
                 Arguments = ProcessArguments
             };
 
             Process process = new Process { StartInfo = procStartInfo };
             process.Start();
         }
+
         /// <summary>
         /// Open a URL in the default browser.
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-        public bool OpenURLInBrowser(string url)
-        {
-            var plat = platform.GetPlatformAsString();
-            if (plat.ToLower().Contains("win"))
+        public bool OpenURLInBrowser(string url){
+            var plat = platform.GetOSArchitectureAsEnum();
+
+            if (plat.Equals(OperatingSystem.Windows))
             {
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
                 return true;
             }
-            if (plat.ToLower().Contains("linux"))
+            if (plat.Equals(OperatingSystem.Linux))
             {
                 Process.Start("xdg-open", url);
                 return true;
             }
-            if (plat.ToLower().Contains("osx"))
+            if (plat.Equals(OperatingSystem.Mac))
             {
                 Process.Start("open", url);
                 return true;
             }
             return false;
         }
-
-        public Process StringToProcessTranslation(string ProcessName)
-        {
+        /// <summary>
+        /// Converts a String to a Process
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        /// <returns></returns>
+        public Process ConvertStringToProcess(string ProcessName){
             try
             {
                 Process process;
@@ -274,12 +265,15 @@ namespace AluminiumCoreLib.PlatformKit{
                 throw new Exception(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// End a process if it is currently running.
+        /// </summary>
+        /// <param name="ProcessName"></param>
         public void TerminateProcess(string ProcessName)
         {
             if (IsProcessRunning(ProcessName))
             {
-                Process process = StringToProcessTranslation(ProcessName);
+                Process process = ConvertStringToProcess(ProcessName);
                 process.Kill();
             }
         }
@@ -301,10 +295,10 @@ namespace AluminiumCoreLib.PlatformKit{
             return count;
         }
         /// <summary>
-        /// Get the list of processes as an ObjectList containing Strings
+        /// Get the list of processes as a List containing Strings
         /// </summary>
         /// <returns></returns>
-        public List<string> GetProcessListAsStrings()
+        public List<string> GetProcessesAsStringList()
         {
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
@@ -320,7 +314,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns a List containing all the running processes.
         /// </summary>
         /// <returns></returns>
-        public List<Process> GetProcessListAsProcesses()
+        public List<Process> GetProcessesAsProcessList()
         {
             var strList = new List<Process>();
             Process[] processes = Process.GetProcesses();

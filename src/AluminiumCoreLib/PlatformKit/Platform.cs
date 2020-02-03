@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2018-2019 AluminiumTech
+Copyright (c) 2018-2020 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ namespace AluminiumCoreLib.PlatformKit {
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        public CPUArchitecture GetOSArchitectureAsEnum(){
+        private CPUArchitecture GetOSArchitectureAsEnum(){
             var x = GetPlatformAsString().ToLower();
 
             try{
@@ -95,7 +95,7 @@ namespace AluminiumCoreLib.PlatformKit {
         /// Gets the OS platform as a String.
         /// </summary>
         public string GetPlatformAsString() {
-            if (GetOSPlatform().ToString().ToLower() == "windows"){
+            if (GetOSPlatform().ToString().ToLower().Equals("windows")){
                 if (RuntimeInformation.OSDescription.Contains("Windows 10")){
                     return "Windows 10";
                 }
@@ -106,12 +106,12 @@ namespace AluminiumCoreLib.PlatformKit {
                     return "Windows 8.1";
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower() == "mac"){
+            else if (GetOSPlatform().ToString().ToLower().Equals("mac")){
                 if (RuntimeInformation.OSDescription.Contains("OSX")){
                     return "macOS";
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower() == "linux"){
+            else if (GetOSPlatform().ToString().ToLower().Equals("linux")){
                 return "Linux";
             }
             return null;
@@ -121,20 +121,23 @@ namespace AluminiumCoreLib.PlatformKit {
         /// </summary>
         /// <returns></returns>
         public OperatingSystem GetPlatformAsEnum(){
-            if (GetOSPlatform().ToString().ToLower() == "windows"){
+            if (GetOSPlatform().ToString().ToLower().Equals("windows")){
                 if (RuntimeInformation.OSDescription.Contains("Windows 10") || RuntimeInformation.OSDescription.Contains("Windows 7") || RuntimeInformation.OSDescription.Contains("Windows 8.1")){
                         return OperatingSystem.Windows;
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower() == "mac"){
+            else if (GetOSPlatform().ToString().ToLower().Equals("mac")){
                 if (RuntimeInformation.OSDescription.Contains("OSX")){
                         return OperatingSystem.Mac;
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower() == "linux"){
+            else if (GetOSPlatform().ToString().ToLower().Equals("linux")){
                     return OperatingSystem.Linux;
             }
-            return OperatingSystem.Unix;
+            else if (GetOSPlatform().ToString().ToLower().Equals("unix")){
+                return OperatingSystem.Unix;
+            }
+            return OperatingSystem.NotDetected;
         }
 
         /// <summary>
@@ -151,7 +154,6 @@ namespace AluminiumCoreLib.PlatformKit {
         public System.Version GetVersion() {
             return Assembly.GetEntryAssembly().GetName().Version;
         }
-
 
         /// <summary>
         /// Display license information in the Console from a Text File
@@ -183,14 +185,13 @@ namespace AluminiumCoreLib.PlatformKit {
             //Do nothing to make sure everybody sees the license.
             }
           }
-
   
     }
         /// <summary>
         /// An enum to help manage OS specific code.
         /// </summary>
         public enum OperatingSystem {
-            Windows, Mac, Linux, Unix, Android, IOS, tvOS, watchOS, AndroidTV, wearOS, WindowsHoloGraphic, WindowsMixedReality, Tizen
+            Windows, Mac, Linux, Unix, Android, IOS, tvOS, watchOS, AndroidTV, wearOS, WindowsHoloGraphic, WindowsMixedReality, Tizen, NotDetected
         }
         public enum CPUArchitecture{
             X64, X86, ARM, ARM64, NotDetected
