@@ -11,13 +11,16 @@
     <PackageLicenseUrl></PackageLicenseUrl>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
-    <PackageReleaseNotes>## Changes
-* Moved existing Process related functionality to new ProcessManager class
-* Removed SecureRNG to its own library
-* Added the ability to terminate processes
-* Added String process name to Process object translation method
-* Removed AluminiumCoreLib.IO
-* Removed old testing project</PackageReleaseNotes>
+    <PackageReleaseNotes>### Changes
+* Removed SearchKit
+* Re-named ``StringToProcessTranslation`` method to ``ConvertStringToProcess``
+* Re-named ``GetProcessListAsStrings`` method to ``GetProcessesAsStringList``
+* Re-named ``GetProcessListAsProcesses`` method to ``GetProcessesAsProcessList``
+* Fixed in code documentation of ``GetProcessesAsStringList``
+* Added in code documentation for methods missing it.
+* Made the ``GetOSArchitectureAsEnum`` method inacessible for the time being. This will be re-enabled in a future version.
+* Improved robustness of checks made against OS Platform string
+* Update copyright notices</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl></PackageProjectUrl>
