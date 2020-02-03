@@ -109,7 +109,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <param name="ProcessName"></param>
         /// <param name="Arguments"></param>
         public void RunProcess(string ProcessName, string Arguments){
-            var plat = platform.GetOSArchitectureAsEnum();
+            var plat = platform.GetPlatformAsEnum();
 
             if (plat.Equals(OperatingSystem.Windows))
             {
@@ -215,7 +215,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         public bool OpenURLInBrowser(string url){
-            var plat = platform.GetOSArchitectureAsEnum();
+            var plat = platform.GetPlatformAsEnum();
 
             if (plat.Equals(OperatingSystem.Windows))
             {
