@@ -155,21 +155,11 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <param name="ProcessName"></param>
         /// Courtesy of https://github.com/fontanaricardo/RunCommand
         public void RunProcessMac(string ProcessName, string ProcessArguments){
-            RunProcessMac(ProcessName, ProcessArguments, ProcessWindowStyle.Normal);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ProcessName"></param>
-        /// <param name="ProcessArguments"></param>
-        /// <param name="pws"></param>
-        public void RunProcessMac(string ProcessName, string ProcessArguments, ProcessWindowStyle pws){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
-                WindowStyle = pws,
                 Arguments = ProcessArguments
             };
 
@@ -188,19 +178,11 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <param name="ProcessName"></param>
         public void RunProcessLinux(string ProcessName, string ProcessArguments){
-            RunProcessLinux(ProcessName, ProcessArguments, ProcessWindowStyle.Normal);
-        }
-        /// <summary>
-        /// Run a Process on Linux
-        /// </summary>
-        /// <param name="ProcessName"></param>
-        public void RunProcessLinux(string ProcessName, string ProcessArguments, ProcessWindowStyle pws){
             var procStartInfo = new ProcessStartInfo(ProcessName)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
-                WindowStyle = pws,
                 Arguments = ProcessArguments
             };
 

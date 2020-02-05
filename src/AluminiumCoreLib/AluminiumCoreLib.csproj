@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>2.0.0.7</AssemblyVersion>
-    <FileVersion>2.0.0.7</FileVersion>
-    <Version>2.0.0-alpha7</Version>
+    <AssemblyVersion>2.0.0.8</AssemblyVersion>
+    <FileVersion>2.0.0.8</FileVersion>
+    <Version>2.0.0-alpha8</Version>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
@@ -12,15 +12,8 @@
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
     <PackageReleaseNotes>### Changes
-* Removed SearchKit
-* Re-named ``StringToProcessTranslation`` method to ``ConvertStringToProcess``
-* Re-named ``GetProcessListAsStrings`` method to ``GetProcessesAsStringList``
-* Re-named ``GetProcessListAsProcesses`` method to ``GetProcessesAsProcessList``
-* Fixed in code documentation of ``GetProcessesAsStringList``
-* Added in code documentation for methods missing it.
-* Made the ``GetOSArchitectureAsEnum`` method inacessible for the time being. This will be re-enabled in a future version.
-* Improved robustness of checks made against OS Platform string
-* Update copyright notices</PackageReleaseNotes>
+* Fixes #1 
+* Nuget release: Deprecate Alpha 7 and recommend Alpha 8 instead</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl></PackageProjectUrl>
