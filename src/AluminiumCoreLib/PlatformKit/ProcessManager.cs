@@ -30,24 +30,14 @@ namespace AluminiumCoreLib.PlatformKit{
     /// A class to manage processes on a device and/or start new processes.
     /// </summary>
     public class ProcessManager{
-        Platform platform;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ProcessManager(){
-            platform = new Platform();
-        }
 
         /// <summary>
         /// Print all the processes running to the Console.
         /// </summary>
-        public void ListAllProcesses()
-        {
+        public void ListAllProcesses(){
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
-            {
+            foreach (Process process in processes){
                 //Get whatever attribute for process
                 Console.WriteLine("Process " + process.Id + ": " + process.ProcessName);
             }
@@ -87,39 +77,26 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <param name="ProcessName"></param>
         public void RunProcess(string ProcessName)
         {
-            var plat = platform.GetPlatformAsString();
-
-            if (plat.ToLower().Contains("win"))
-            {
-                RunProcessWindows(ProcessName);
-            }
-            else if (plat.ToLower().Contains("osx"))
-            {
-                RunProcessMac(ProcessName);
-            }
-            else if (plat.ToLower().Contains("linux"))
-            {
-                RunProcessLinux(ProcessName);
-                //  throw new NotImplementedException();
-            }
+            RunProcess(ProcessName, "");
         }
         /// <summary>
-        /// Run a Process
+        /// Run a Process with Arguments
         /// </summary>
         /// <param name="ProcessName"></param>
         /// <param name="Arguments"></param>
         public void RunProcess(string ProcessName, string Arguments){
-            var plat = platform.GetPlatformAsEnum();
+            Platform platform = new Platform();
+            var plat = platform.ToEnum();
 
-            if (plat.Equals(OperatingSystem.Windows))
+            if (plat.Equals(OperatingSystemFamily.Windows))
             {
                 RunProcessWindows(ProcessName, Arguments);
             }
-            else if (plat.Equals(OperatingSystem.Mac))
+            else if (plat.Equals(OperatingSystemFamily.macOS))
             {
                 RunProcessMac(ProcessName, Arguments);
             }
-            else if (plat.Equals(OperatingSystem.Linux))
+            else if (plat.Equals(OperatingSystemFamily.Linux))
             {
                 RunProcessLinux(ProcessName, Arguments);
             }
@@ -131,9 +108,20 @@ namespace AluminiumCoreLib.PlatformKit{
         public void RunProcessWindows(string ProcessName){
             RunProcessWindows(ProcessName + ".exe", "");
         }
+        /// <summary>
+        /// Run a process on Windows with Arguments
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        /// <param name="Arguments"></param>
         public void RunProcessWindows(string ProcessName, string Arguments){
             RunProcessWindows(ProcessName, Arguments, ProcessWindowStyle.Normal);
         }
+        /// <summary>
+        /// Run a process on Windows with Arguments and a Process Window Style
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        /// <param name="Arguments"></param>
+        /// <param name="pws"></param>
         public void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws){
             Process process = new Process();
             process.StartInfo.FileName = ProcessName + ".exe";
@@ -197,19 +185,20 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         public bool OpenURLInBrowser(string url){
-            var plat = platform.GetPlatformAsEnum();
+            Platform platform = new Platform();
+            var plat = platform.ToEnum();
 
-            if (plat.Equals(OperatingSystem.Windows))
+            if (plat.Equals(OperatingSystemFamily.Windows))
             {
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
                 return true;
             }
-            if (plat.Equals(OperatingSystem.Linux))
+            if (plat.Equals(OperatingSystemFamily.Linux))
             {
                 Process.Start("xdg-open", url);
                 return true;
             }
-            if (plat.Equals(OperatingSystem.Mac))
+            if (plat.Equals(OperatingSystemFamily.macOS))
             {
                 Process.Start("open", url);
                 return true;
@@ -222,18 +211,14 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <param name="ProcessName"></param>
         /// <returns></returns>
         public Process ConvertStringToProcess(string ProcessName){
-            try
-            {
+            try{
                 Process process;
 
-                if (IsProcessRunning(ProcessName))
-                {
+                if (IsProcessRunning(ProcessName)){
                     Process[] processes = Process.GetProcesses();
 
-                    foreach (Process p in processes)
-                    {
-                        if (p.ProcessName.Equals(ProcessName))
-                        {
+                    foreach (Process p in processes){
+                        if (p.ProcessName.Equals(ProcessName)){
                             process = Process.GetProcessById(p.Id);
                             return process;
                         }
@@ -242,8 +227,7 @@ namespace AluminiumCoreLib.PlatformKit{
 
                 return null;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex){
                 throw new Exception(ex.ToString());
             }
         }
@@ -251,10 +235,8 @@ namespace AluminiumCoreLib.PlatformKit{
         /// End a process if it is currently running.
         /// </summary>
         /// <param name="ProcessName"></param>
-        public void TerminateProcess(string ProcessName)
-        {
-            if (IsProcessRunning(ProcessName))
-            {
+        public void TerminateProcess(string ProcessName){
+            if (IsProcessRunning(ProcessName)){
                 Process process = ConvertStringToProcess(ProcessName);
                 process.Kill();
             }
@@ -264,13 +246,11 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Check how many processes are currently running.
         /// </summary>
         /// <returns></returns>
-        public int GetProcessCount()
-        {
+        public int GetProcessCount(){
             int count = 0;
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
-            {
+            foreach (Process process in processes){
                 //Get whatever attribute for process
                 count++;
             }
@@ -280,13 +260,11 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Get the list of processes as a List containing Strings
         /// </summary>
         /// <returns></returns>
-        public List<string> GetProcessesAsStringList()
-        {
+        public List<string> GetProcessesAsStringList(){
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
-            {
+            foreach (Process process in processes){
                 strList.Add(process.ToString());
             }
             strList.TrimExcess();
@@ -296,15 +274,14 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns a List containing all the running processes.
         /// </summary>
         /// <returns></returns>
-        public List<Process> GetProcessesAsProcessList()
-        {
+        public List<Process> GetProcessesAsProcessList(){
             var strList = new List<Process>();
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
-            {
+            foreach (Process process in processes){
                 strList.Add(process);
             }
+
             strList.TrimExcess();
             return strList;
         }
@@ -315,15 +292,14 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <typeparam name="string"> The Process Name.</typeparam>
         /// </summary>
         /// <returns></returns>
-        public Dictionary<int, string> ProcessListToDictionary()
-        {
+        public Dictionary<int, string> ProcessListToDictionary(){
             var dictionary = new Dictionary<int, string>();
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
-            {
+            foreach (Process process in processes){
                 dictionary.Add(process.Id, process.ProcessName);
             }
+
             return dictionary;
         }
     }

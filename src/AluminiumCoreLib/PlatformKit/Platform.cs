@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 
-namespace AluminiumCoreLib.PlatformKit {
+namespace AluminiumCoreLib.PlatformKit{
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
@@ -37,28 +37,28 @@ namespace AluminiumCoreLib.PlatformKit {
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        private CPUArchitecture GetOSArchitectureAsEnum(){
-            var x = GetPlatformAsString().ToLower();
+        private CPUArchitectureFamily GetOSArchitectureFamilyToEnum(){
+            var x = ToString().ToLower();
 
             try{
                 if (x.Contains("arm") && !x.Contains("64"))
                 {
-                    return CPUArchitecture.ARM;
+                    return CPUArchitectureFamily.ARM32;
                 }
                 else if (x.Contains("x86") && !x.Contains("-64"))
                 {
-                    return CPUArchitecture.X86;
+                    return CPUArchitectureFamily.X86;
                 }
                 else if (x.Contains("arm") && x.Contains("64"))
                 {
-                    return CPUArchitecture.ARM64;
+                    return CPUArchitectureFamily.ARM64;
                 }
                 else if ((x.Contains("x64")) || (x.Contains("x86") && x.Contains("-64")))
                 {
-                    return CPUArchitecture.X64;
+                    return CPUArchitectureFamily.X64;
                 }
 
-                return CPUArchitecture.NotDetected;
+                return CPUArchitectureFamily.NotDetected;
             }
             catch(Exception ex){
                 throw new Exception(ex.ToString());
@@ -89,25 +89,17 @@ namespace AluminiumCoreLib.PlatformKit {
             return osPlatform;
         }
 
-
-
         /// <summary>
         /// Gets the OS platform as a String.
         /// </summary>
-        public string GetPlatformAsString() {
-            if (GetOSPlatform().ToString().ToLower().Equals("windows")){
-                if (RuntimeInformation.OSDescription.Contains("Windows 10")){
-                    return "Windows 10";
-                }
-                else if (RuntimeInformation.OSDescription.Contains("Windows 7")){
-                    return "Windows 7";
-                }
-                else if (RuntimeInformation.OSDescription.Contains("Windows 8.1")) {
-                    return "Windows 8.1";
-                }
+        /// <returns></returns>
+        public override string ToString(){
+            if (GetOSPlatform().ToString().ToLower().Equals("windows")){ 
+                    return "Windows";
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("mac")){
-                if (RuntimeInformation.OSDescription.Contains("OSX")){
+            else if (GetOSPlatform().ToString().ToLower().Equals("mac") || GetOSPlatform().ToString().ToLower().Equals("mac"))
+            {
+                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") || RuntimeInformation.OSDescription.ToLower().Contains("darwin")){
                     return "macOS";
                 }
             }
@@ -116,42 +108,54 @@ namespace AluminiumCoreLib.PlatformKit {
             }
             return null;
         }
+
         /// <summary>
-        /// Returns the OS Platform as an Enum
+        /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
-        public OperatingSystem GetPlatformAsEnum(){
-            if (GetOSPlatform().ToString().ToLower().Equals("windows")){
-                if (RuntimeInformation.OSDescription.Contains("Windows 10") || RuntimeInformation.OSDescription.Contains("Windows 7") || RuntimeInformation.OSDescription.Contains("Windows 8.1")){
-                        return OperatingSystem.Windows;
-                }
+        public bool Is64BitOS(){
+            return Environment.Is64BitOperatingSystem;
+        }
+        /// <summary>
+        /// Returns whether or not the App currently running is 64 Bit or not.
+        /// </summary>
+        /// <returns></returns>
+        public bool Is64BitApp(){
+            return Environment.Is64BitProcess;
+        }
+
+        /// <summary>
+        /// Returns the OS Family as an Enum
+        /// </summary>
+        /// <returns></returns>
+        public OperatingSystemFamily ToEnum(){
+            if (ToString().ToLower().Equals("windows")){
+                        return OperatingSystemFamily.Windows;
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("mac")){
-                if (RuntimeInformation.OSDescription.Contains("OSX")){
-                        return OperatingSystem.Mac;
-                }
+            else if (ToString().ToLower().Equals("mac")){
+                        return OperatingSystemFamily.macOS;
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("linux")){
-                    return OperatingSystem.Linux;
+            else if (ToString().ToLower().Equals("linux")){
+                    return OperatingSystemFamily.Linux;
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("unix")){
-                return OperatingSystem.Unix;
+            else if (ToString().ToLower().Equals("unix")){
+                return OperatingSystemFamily.Unix;
             }
-            return OperatingSystem.NotDetected;
+            return OperatingSystemFamily.NotDetected;
         }
 
         /// <summary>
         /// Return an app's version as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetVersionString() {
+        public string GetAppVersionToString() {
             return Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
         /// <summary>
         /// Return an app's version as a Version data type.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetVersion() {
+        public System.Version GetAppVersionToVersion() {
             return Assembly.GetEntryAssembly().GetName().Version;
         }
 
@@ -187,13 +191,4 @@ namespace AluminiumCoreLib.PlatformKit {
           }
   
     }
-        /// <summary>
-        /// An enum to help manage OS specific code.
-        /// </summary>
-        public enum OperatingSystem {
-            Windows, Mac, Linux, Unix, Android, IOS, tvOS, watchOS, AndroidTV, wearOS, WindowsHoloGraphic, WindowsMixedReality, Tizen, NotDetected
-        }
-        public enum CPUArchitecture{
-            X64, X86, ARM, ARM64, NotDetected
-        }
 }
