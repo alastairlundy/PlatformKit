@@ -22,9 +22,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
