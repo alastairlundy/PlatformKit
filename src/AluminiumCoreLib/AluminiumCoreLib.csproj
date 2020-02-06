@@ -30,14 +30,8 @@
       <PackagePath></PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="PlatformKit\FolderManager.cs">
-      <IncludeInPackage>false</IncludeInPackage>
-    </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="PlatformKit\FolderManager.cs" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Update="PlatformKit\FolderManager.cs">
       <IncludeInPackage>false</IncludeInPackage>
