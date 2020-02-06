@@ -11,6 +11,7 @@ Table of Contents:
  
 | Version | API Version | Desktop Availability | Changelog |
 |---------|----------------------|-----------|--|
+| 2.0.0 Alpha 9 | February 6th 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha9)
 | 2.0.0 Alpha 8 | February 5th 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha8)|
 | 2.0.0 Alpha 7 | February 3rd 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha7)|
 | 2.0.0 Alpha 6 | November 7th 2019 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha6)|
