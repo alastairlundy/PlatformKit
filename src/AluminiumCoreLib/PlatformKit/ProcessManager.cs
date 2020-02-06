@@ -260,7 +260,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Get the list of processes as a List containing Strings
         /// </summary>
         /// <returns></returns>
-        public List<string> GetProcessesAsStringList(){
+        public List<string> GetProcessesToStringList(){
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
@@ -274,7 +274,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns a List containing all the running processes.
         /// </summary>
         /// <returns></returns>
-        public List<Process> GetProcessesAsProcessList(){
+        public List<Process> GetProcessesToProcessList(){
             var strList = new List<Process>();
             Process[] processes = Process.GetProcesses();
 

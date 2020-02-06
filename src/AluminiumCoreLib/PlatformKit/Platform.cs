@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -37,10 +36,10 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        private CPUArchitectureFamily GetOSArchitectureFamilyToEnum(){
+        private CPUArchitectureFamily GetOSArchitectureFamilyToEnum() {
             var x = ToString().ToLower();
 
-            try{
+            try {
                 if (x.Contains("arm") && !x.Contains("64"))
                 {
                     return CPUArchitectureFamily.ARM32;
@@ -60,7 +59,7 @@ namespace AluminiumCoreLib.PlatformKit{
 
                 return CPUArchitectureFamily.NotDetected;
             }
-            catch(Exception ex){
+            catch (Exception ex) {
                 throw new Exception(ex.ToString());
             }
         }
@@ -68,7 +67,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetOSArchitectureToString(){
+        public string GetOSArchitectureToString() {
             return RuntimeInformation.OSArchitecture.ToString();
         }
         /// <summary>
@@ -93,17 +92,17 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Gets the OS platform as a String.
         /// </summary>
         /// <returns></returns>
-        public override string ToString(){
-            if (GetOSPlatform().ToString().ToLower().Equals("windows")){ 
-                    return "Windows";
+        public override string ToString() {
+            if (GetOSPlatform().ToString().ToLower().Equals("windows")) {
+                return "Windows";
             }
             else if (GetOSPlatform().ToString().ToLower().Equals("mac") || GetOSPlatform().ToString().ToLower().Equals("mac"))
             {
-                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") || RuntimeInformation.OSDescription.ToLower().Contains("darwin")){
+                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") || RuntimeInformation.OSDescription.ToLower().Contains("darwin")) {
                     return "macOS";
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("linux")){
+            else if (GetOSPlatform().ToString().ToLower().Equals("linux")) {
                 return "Linux";
             }
             return null;
@@ -113,14 +112,14 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
-        public bool Is64BitOS(){
+        public bool Is64BitOS() {
             return Environment.Is64BitOperatingSystem;
         }
         /// <summary>
         /// Returns whether or not the App currently running is 64 Bit or not.
         /// </summary>
         /// <returns></returns>
-        public bool Is64BitApp(){
+        public bool Is64BitApp() {
             return Environment.Is64BitProcess;
         }
 
@@ -128,17 +127,17 @@ namespace AluminiumCoreLib.PlatformKit{
         /// Returns the OS Family as an Enum
         /// </summary>
         /// <returns></returns>
-        public OperatingSystemFamily ToEnum(){
-            if (ToString().ToLower().Equals("windows")){
-                        return OperatingSystemFamily.Windows;
+        public OperatingSystemFamily ToEnum() {
+            if (ToString().ToLower().Equals("windows")) {
+                return OperatingSystemFamily.Windows;
             }
-            else if (ToString().ToLower().Equals("mac")){
-                        return OperatingSystemFamily.macOS;
+            else if (ToString().ToLower().Equals("mac")) {
+                return OperatingSystemFamily.macOS;
             }
-            else if (ToString().ToLower().Equals("linux")){
-                    return OperatingSystemFamily.Linux;
+            else if (ToString().ToLower().Equals("linux")) {
+                return OperatingSystemFamily.Linux;
             }
-            else if (ToString().ToLower().Equals("unix")){
+            else if (ToString().ToLower().Equals("unix")) {
                 return OperatingSystemFamily.Unix;
             }
             return OperatingSystemFamily.NotDetected;
@@ -162,16 +161,16 @@ namespace AluminiumCoreLib.PlatformKit{
         /// <summary>
         /// Display license information in the Console from a Text File
         /// </summary>
-        public void ShowLicenseInConsole(string PathToTextFile, int durationMilliSeconds){
+        public void ShowLicenseInConsole(string PathToTextFile, int durationMilliSeconds) {
             Stopwatch licenseWatch = new Stopwatch();
             licenseWatch.Reset();
             licenseWatch.Start();
             string[] lines;
 
-            try{
+            try {
                 lines = File.ReadAllLines(PathToTextFile);
 
-                foreach (string line in lines){
+                foreach (string line in lines) {
                     Console.WriteLine(line);
                 }
 
@@ -179,16 +178,141 @@ namespace AluminiumCoreLib.PlatformKit{
                 Console.WriteLine("                                                         ");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex){
                 Console.WriteLine("Here are some details in case you need them:");
                 Console.WriteLine(ex.ToString());
             }
 
-            while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds){
-            //Do nothing to make sure everybody sees the license.
+            while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
+                //Do nothing to make sure everybody sees the license.
             }
-          }
-  
+        }
+        /// <summary>
+        /// Get's the OS's Kernel Version and returns it as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetOSKernelVersionToString(){       
+            if (ToEnum().Equals(OperatingSystemFamily.Windows)){
+                return GetWindowsKernelVersionToString();
+            }
+            else if (ToEnum().Equals(OperatingSystemFamily.macOS)){
+                return GetmacOSKernelVersionToString();
+            }
+            else if (ToEnum().Equals(OperatingSystemFamily.Linux)){
+                return GetLinuxKernelVersionToString();
+            }
+            else{
+                throw new PlatformNotSupportedException();
+            }
+        }
+        /// <summary>
+        /// Get the Windows Kernel Version returned as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetWindowsKernelVersionToString() {
+            string windowsKernel = Environment.OSVersion.ToString();
+            string[] words = windowsKernel.Split();
+
+            foreach(string word in words) {
+                if (word.ToLower().Contains("10.0") || word.ToLower().Contains("9.") || word.ToLower().Contains("8.")){
+                    //Do not replace if it contains the Windows 10 build and version info.
+                    return word;
+                }
+                else{
+                    windowsKernel.Replace(word, "");
+                }
+            }
+            return windowsKernel;
+        }
+
+        /// <summary>
+        /// Get the macOS Kernel Version returned as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetmacOSKernelVersionToString(){
+            string macOSKernel = Environment.OSVersion.ToString();
+            string[] words = macOSKernel.Split();
+
+            foreach(string word in words){
+                if (word.ToLower().Contains("xnu-")){
+                    //Do not replace if it contains xnu
+                }
+                else{
+                    macOSKernel.Replace(word, "");
+                }
+            }
+
+            macOSKernel.Replace("root:", "");
+            macOSKernel.Replace("/RELEASE_X86_64", "");
+
+            return macOSKernel;
+        }
+        /// <summary>
+        /// Get the Linux Kernel Version returned as a string.
+        /// </summary>
+        /// <returns></returns>
+        public string GetLinuxKernelVersionToString(){
+            string linuxKernel = Environment.OSVersion.ToString();
+            string[] words = linuxKernel.Split();
+
+            foreach(string word in words){
+                if (word.ToLower().Contains("2.") || word.ToLower().Contains("3.") || word.ToLower().Contains("4.") || word.ToLower().Contains("5.")){
+                    //Do not replace if it contains the Linux kernel version.
+                }
+                else{
+                    linuxKernel.Replace(word, "");
+                }         
+            }
+            return linuxKernel;
+        }
+
+        /// <summary>
+        /// Gets the OS's Kernel Version and returns it as a System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public System.Version GetOSKernelVersionToVersion(){
+            if (ToEnum().Equals(OperatingSystemFamily.Windows)){
+                return GetWindowsKernelVersionToVersion();
+            }
+            else if (ToEnum().Equals(OperatingSystemFamily.macOS)){
+                return GetmacOSKernelVersionToVersion();
+            }
+            else if (ToEnum().Equals(OperatingSystemFamily.Linux)){
+                return GetLinuxKernelVersionToVersion();
+            }
+            else{
+                throw new PlatformNotSupportedException();
+            }
+        }
+        /// <summary>
+        /// Get the Windows Kernel Version as a System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public System.Version GetWindowsKernelVersionToVersion(){
+            return new System.Version(GetWindowsKernelVersionToString());
+        }
+
+        /// <summary>
+        /// Get the macOS Kernel Version as a System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public System.Version GetmacOSKernelVersionToVersion(){
+            var kernelVersion = GetmacOSKernelVersionToString();
+
+            kernelVersion.Replace("xnu-", "");
+            kernelVersion.Replace("~", ".");
+
+            return new System.Version(kernelVersion);
+        }
+        /// <summary>
+        /// Get the Linux Kernel Version as a System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public System.Version GetLinuxKernelVersionToVersion(){
+            var kernelVersion = GetLinuxKernelVersionToString();
+
+            kernelVersion.Replace("Linux", "");
+            return new System.Version(kernelVersion);
+        }
     }
 }
