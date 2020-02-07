@@ -210,7 +210,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetWindowsKernelVersionToString() {
-            string windowsKernel = Environment.OSVersion.ToString();
+            string windowsKernel = RuntimeInformation.OSDescription;
             string[] words = windowsKernel.Split();
 
             foreach(string word in words) {
@@ -219,7 +219,7 @@ namespace AluminiumCoreLib.PlatformKit{
                     return word;
                 }
                 else{
-                    windowsKernel.Replace(word, "");
+                    windowsKernel.Replace(word, " ");
                 }
             }
             return windowsKernel;
@@ -230,20 +230,21 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetmacOSKernelVersionToString(){
-            string macOSKernel = Environment.OSVersion.ToString();
+            string macOSKernel = RuntimeInformation.OSDescription;
             string[] words = macOSKernel.Split();
 
             foreach(string word in words){
-                if (word.ToLower().Contains("xnu-")){
+                Console.WriteLine(word);
+                if (word.ToLower().Contains("xnu")){
                     //Do not replace if it contains xnu
                 }
                 else{
-                    macOSKernel.Replace(word, "");
+                    macOSKernel.Replace(word, " ");
                 }
             }
 
-            macOSKernel.Replace("root:", "");
-            macOSKernel.Replace("/RELEASE_X86_64", "");
+            macOSKernel.Replace("root:", " ");
+            macOSKernel.Replace("/RELEASE_X86_64", " ");
 
             return macOSKernel;
         }
@@ -252,7 +253,7 @@ namespace AluminiumCoreLib.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetLinuxKernelVersionToString(){
-            string linuxKernel = Environment.OSVersion.ToString();
+            string linuxKernel = RuntimeInformation.OSDescription;
             string[] words = linuxKernel.Split();
 
             foreach(string word in words){
@@ -260,7 +261,7 @@ namespace AluminiumCoreLib.PlatformKit{
                     //Do not replace if it contains the Linux kernel version.
                 }
                 else{
-                    linuxKernel.Replace(word, "");
+                    linuxKernel.Replace(word, " ");
                 }         
             }
             return linuxKernel;
@@ -299,7 +300,7 @@ namespace AluminiumCoreLib.PlatformKit{
         public System.Version GetmacOSKernelVersionToVersion(){
             var kernelVersion = GetmacOSKernelVersionToString();
 
-            kernelVersion.Replace("xnu-", "");
+            kernelVersion.Replace("xnu-", " ");
             kernelVersion.Replace("~", ".");
 
             return new System.Version(kernelVersion);
@@ -311,7 +312,7 @@ namespace AluminiumCoreLib.PlatformKit{
         public System.Version GetLinuxKernelVersionToVersion(){
             var kernelVersion = GetLinuxKernelVersionToString();
 
-            kernelVersion.Replace("Linux", "");
+            kernelVersion.Replace("Linux", " ");
             return new System.Version(kernelVersion);
         }
     }
