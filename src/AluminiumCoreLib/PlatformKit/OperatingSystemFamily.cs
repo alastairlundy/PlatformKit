@@ -22,13 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumCoreLib.PlatformKit
-{
+namespace AluminiumCoreLib.PlatformKit{
     /// <summary>
     /// An enum to help manage OS family specific code.
     /// </summary>
-    public enum OperatingSystemFamily
-    {
+    public enum OperatingSystemFamily{
         Windows, macOS, Linux, BSD, Unix, Android, LineageOS, IOS, tvOS, watchOS, AndroidTV, wearOSByGoogle, WindowsHoloGraphic, WindowsMixedReality, Tizen, NotDetected
     }
 }
