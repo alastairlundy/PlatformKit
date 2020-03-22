@@ -1,5 +1,5 @@
 # Version History
-This document contains the entire version history of the AluminiumCoreLib library.
+This document contains the entire version history of the PlatformKit (formerly AluminiumCoreLib) library.
 
 Table of Contents:
 
@@ -7,7 +7,7 @@ Table of Contents:
 
 ## Pre-release versions 
 
-### 2.0.0 Alpha
+### 2.0.0 pre-release
  
 | Version | API Level| Availability | Changelog |
 |---------|--------------|-----------|--|
