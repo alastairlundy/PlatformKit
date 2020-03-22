@@ -8,57 +8,29 @@
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/AluminiumTech/PlatformKit/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
-    <PackageReleaseNotes>### Breaking Changes
-* OperatingSystems enum
-   * ``OperatingSystems`` enum is now ``OperatingSystemsFamily`` enum
-   *  Moved ``OperatingSystemsFamily`` enum to separate dedicated code file
-   * Updated OperatingSystemsFamily enum
-      - ``Mac`` is now ``macOS``
-      - ``wearOS`` is now ``wearOSByGoogle``
-      - Added ``BSD``
-      - Added ``LineageOS`` -  Note: This should be treated similarly to Android except with respect to LineageOS specific APIs and SDKs
-* CPUArchitecture
-   * Rename ``CPUArchitecture`` enum to ``CPUArchitectureFamily`` enum
-   * Moved ``CPUArchitectureFamily`` enum to a separate dedicated code file
-   * Updated ``CPUArchitectureFamily`` enum
-      - Added ``MIPS``
-      - Added ``PowerPC``
-      - Added ``IA64``
-      - Renamed ``ARM`` to ``ARM32``
-* Updated ``Platform.cs`` to work with the revised enums
-   * Renamed ``GetOSArchitectureAsEnum`` method to ``GetOSArchitectureFamilyToEnum``
-   * Renamed ``GetPlatformAsEnum`` method to ``ToEnum``
-   * Renamed ``GetPlatformAsString`` method to override ``ToString``
-   * Renamed ``GetVersionString`` method to ``GetAppVersionToString``
-   * Renamed ``GetVersion`` method to ``GetAppVersionToVersion``
-* Updated ``Platform.cs`` to work with the revised method names
-* Updated ``ProcessManager.cs`` to work with revised method names
-* Updated ``ProcessManager.cs``
-   * Renamed ``GetProcessesAsStringList``` method to ``GetProcessesToStringList``
-   * Renamed ``GetProcessesAsProcessList`` method ``GetProcessesToProcessList`` 
-* Updated ``ToEnum`` method to rely on result from ``ToString`` so as to reduce code duplication 
-
-### Major non-breaking Changes
-* Added the ability to detect and return an OS's Kernel version
-* Improved macOS OS detection in ``Platform.cs``
-* Reduced code duplication
-* Added more in-code documentation
-* Added new Exception
-   * Added new ``PlatformNotSupportedException`` as a dedicated file
-
-### Other Changes
-* Added new ``Is64BitApp`` method to ``Platform.cs``
-* Added new ``Is64BitOS`` method to ``Platform.cs``</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
     <RootNamespace>AluminiumTech.PlatformKit</RootNamespace>
     <AssemblyName>AluminiumCoreLib</AssemblyName>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>PlatformKit</PackageId>
+    <PackageVersion>2.0.0-beta1</PackageVersion>
+    <Owners>AluminiumTech</Owners>
+    <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
+    <PackageTags>platform detection, CSharp, </PackageTags>
+    <Title>PlatformKit</Title>
+    <PackageReleaseNotes>### Changes
+* Renamed to PlatformKit
+
+### Breaking Changes
+* Changed namespace to ``AluminiumTech.PlatformKit``
+* Removed the ``Version`` class
+* Removed the ``HashMap`` class</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
