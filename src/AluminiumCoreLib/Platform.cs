@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 
-namespace AluminiumCoreLib.PlatformKit{
+namespace AluminiumTech.PlatformKit{
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
@@ -188,12 +188,12 @@ namespace AluminiumCoreLib.PlatformKit{
             }
         }
         /// <summary>
-        /// Get's the OS's Kernel Version and returns it as a string.
+        /// Get's the OS's Version and returns it as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetOSKernelVersionToString(){       
+        public string GetOSVersionToString(){       
             if (ToEnum().Equals(OperatingSystemFamily.Windows)){
-                return GetWindowsKernelVersionToString();
+                return GetWindowsVersionToString();
             }
             else if (ToEnum().Equals(OperatingSystemFamily.macOS)){
                 return GetmacOSKernelVersionToString();
@@ -206,10 +206,10 @@ namespace AluminiumCoreLib.PlatformKit{
             }
         }
         /// <summary>
-        /// Get the Windows Kernel Version returned as a string.
+        /// Get the Windows Version returned as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetWindowsKernelVersionToString() {
+        public string GetWindowsVersionToString() {
             string windowsKernel = RuntimeInformation.OSDescription;
             string[] words = windowsKernel.Split();
 
@@ -226,30 +226,26 @@ namespace AluminiumCoreLib.PlatformKit{
         }
 
         /// <summary>
-        /// Get the macOS Kernel Version returned as a string.
+        /// Get the macOS Version returned as a string.
         /// </summary>
         /// <returns></returns>
         public string GetmacOSKernelVersionToString(){
-            string macOSKernel = RuntimeInformation.OSDescription;
-            string[] words = macOSKernel.Split();
+            string macOS = RuntimeInformation.OSDescription;
 
-            foreach(string word in words){
-                Console.WriteLine(word);
-                if (word.ToLower().Contains("xnu")){
-                    //Do not replace if it contains xnu
-                }
-                else{
-                    macOSKernel.Replace(word, " ");
-                }
-            }
 
-            macOSKernel.Replace("root:", " ");
-            macOSKernel.Replace("/RELEASE_X86_64", " ");
+            macOS.Replace("Darwin", " ");
+            macOS.Replace("Kernel Version", " ");
+           // macOSKernel.Replace("", "");
+            macOS.Replace("root:xnu", "xnu");
+            macOS.Replace("/RELEASE_X86_64", " ");
 
-            return macOSKernel;
+            string x = macOS;
+
+            Console.WriteLine("New kernel string: " + x);
+            return macOS;
         }
         /// <summary>
-        /// Get the Linux Kernel Version returned as a string.
+        /// Get the Linux Version returned as a string.
         /// </summary>
         /// <returns></returns>
         public string GetLinuxKernelVersionToString(){
@@ -286,34 +282,26 @@ namespace AluminiumCoreLib.PlatformKit{
             }
         }
         /// <summary>
-        /// Get the Windows Kernel Version as a System.Version object.
+        /// Get the Windows Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
         public System.Version GetWindowsKernelVersionToVersion(){
-            return new System.Version(GetWindowsKernelVersionToString());
+            return new System.Version(GetWindowsVersionToString());
         }
 
         /// <summary>
-        /// Get the macOS Kernel Version as a System.Version object.
+        /// Get the macOS Kernel (XNU) Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
         public System.Version GetmacOSKernelVersionToVersion(){
-            var kernelVersion = GetmacOSKernelVersionToString();
-
-            kernelVersion.Replace("xnu-", " ");
-            kernelVersion.Replace("~", ".");
-
-            return new System.Version(kernelVersion);
+            return new System.Version(GetmacOSKernelVersionToString());
         }
         /// <summary>
         /// Get the Linux Kernel Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
         public System.Version GetLinuxKernelVersionToVersion(){
-            var kernelVersion = GetLinuxKernelVersionToString();
-
-            kernelVersion.Replace("Linux", " ");
-            return new System.Version(kernelVersion);
+            return new System.Version(GetLinuxKernelVersionToString());
         }
     }
 }

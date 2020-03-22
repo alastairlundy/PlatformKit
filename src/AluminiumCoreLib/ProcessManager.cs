@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace AluminiumCoreLib.PlatformKit{
+namespace AluminiumTech.PlatformKit{
     /// <summary>
     /// A class to manage processes on a device and/or start new processes.
     /// </summary>

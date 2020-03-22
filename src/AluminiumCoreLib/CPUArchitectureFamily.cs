@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumCoreLib.PlatformKit{
+namespace AluminiumTech.PlatformKit{
     public enum CPUArchitectureFamily{
         IA64, X64, X86, ARM32, ARM64, MIPS, PowerPC, NotDetected
     }
