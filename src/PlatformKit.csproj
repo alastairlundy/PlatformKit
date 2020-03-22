@@ -8,7 +8,6 @@
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
-    <PackageLicenseUrl>https://github.com/AluminiumTech/PlatformKit/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
