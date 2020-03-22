@@ -57,6 +57,8 @@
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
+    <RootNamespace>AluminiumTech.PlatformKit</RootNamespace>
+    <AssemblyName>AluminiumCoreLib</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
