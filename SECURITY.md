@@ -7,13 +7,13 @@ Versions currently supported by Security Fixes.
 | Version | Supported with Security Fixes | Supported with Bug Fixes | Supported with New Features |
 |--| --|--|--|
 | 2.x.x Beta series |  | | |
-| 2.x.x Alpha series | :white_check_mark: , Supported until March 6th 2020 | :x: , Supported until February 6th 2020 | :x: , Supported until February 6th 2020 |
+| 2.x.x Alpha series | :x: , Supported until March 22nd 2020 | :x: , Supported until February 6th 2020 | :x: , Supported until February 6th 2020 |
 | 1.x.x Beta series | :x:, Supported until February 6th 2018 |  :x:, Supported until February 6th 2018 | :x:, Supported until February 6th 2018 |
 | 1.x.x Alpha series   | :x: | :x: | :x: |
 
 ## Reporting a Vulnerability
 
-In the event you discover a security vulnerability, please email ``contact@aluminiumte.ch`` with the Subject of ``AluminiumCoreLib Vulnerability``.
+In the event you discover a security vulnerability, please email ``contact@aluminiumte.ch`` with the Subject of ``PlatformKit Vulnerability``.
 
 Upon receving the email we will make a reasonable attempt to respond within 3 days although this may not always be possible. Firstly we will send an email back confirming receipt of the security vulnerability disclosure email.
 Once we have evaluated the nature of the security vulnerability we will email you with an update on the situation.
