@@ -1,11 +1,14 @@
-# AluminiumCoreLib
+# PlatformKit (formerly AluminiumCoreLib)
 
-### About AluminiumCoreLib
-AluminiumCoreLib is a library which can be used by any C# program.
+### formerly AluminiumCoreLib
+
+AluminiumCoreLib was designed to help programmers be more efficient when using C# by using a library containing many things that programmers may need in their application.
+
+### About PlatformKit
+
+PlatformKit is a re-focussing on making the library more lighweight and focussing specifically on dealing with Platform specific code, platform specific issues, and platform detection.
 
 This is a Work In Progress and so some things may not work well or may not work at all.
-
-AluminiumCoreLib is designed to help programmers be more efficient when using C# by using a library containing many things that programmers may need in their application.
 
 This can be added to any C# .NET Standard 2.0 supported Application.
 
@@ -14,20 +17,13 @@ This can be added to any C# .NET Standard 2.0 supported Application.
 [![Maintainability](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/maintainability)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/test_coverage)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/test_coverage)
 
-### How to get AluminiumCoreLib
+### How to get the former AluminiumCoreLib library
 
 For C# projects, you can get [AluminiumCoreLib on Nuget](https://www.nuget.org/packages/AluminiumCoreLib/) - (Usable on any .NET Standard 2.0 compliant project).
 
 
 ## Contributions
-See [Contributing guide](https://github.com/AluminiumTech/AluminiumCoreLib/blob/master/CONTRIBUTING.md) for how to contribute to this project.
+See [Contributing guide](https://github.com/AluminiumTech/PlatformKit/blob/master/CONTRIBUTING.md) for how to contribute to this project.
 
-### Apps built with AluminiumCoreLib
+### Apps built with PlatformKit
 If you'd like to add your app here and it uses this library then submit a new issue asking for this.
-
-## About AluminiumCoreLib.hardware
-AluminiumCoreLib.Hardware is a complementary library which is it's own project and can be found [here](https://github.com/AluminiumTech/AluminiumCoreLib.Hardware) .
-
-AluminiumCoreLib.Hardware deals with the complexity of getting Hardware Information. It used to be part of AluminiumCoreLib but was seperated due to requiring .NET Framework 4.x .
-
-As such, AluminiumCoreLib.Hardware can only be used in .NET Framework projects.
