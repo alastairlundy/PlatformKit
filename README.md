@@ -12,14 +12,14 @@ This is a Work In Progress and so some things may not work well or may not work 
 
 This can be added to any C# .NET Standard 2.0 supported Application.
 
-[![NuGet](https://img.shields.io/nuget/v/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/) 
-[![NuGet](https://img.shields.io/nuget/dt/AluminiumCoreLib.svg)](https://www.nuget.org/packages/AluminiumCoreLib/)
-[![Maintainability](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/maintainability)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/test_coverage)](https://codeclimate.com/github/AluminiumTech/AluminiumCoreLib/test_coverage)
+[![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
+[![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/maintainability)](https://codeclimate.com/github/AluminiumTech/PlatformKit/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/test_coverage)](https://codeclimate.com/github/AluminiumTech/PlatformKit/test_coverage)
 
-### How to get the former AluminiumCoreLib library
+### How to get PlatformKit
 
-For C# projects, you can get [AluminiumCoreLib on Nuget](https://www.nuget.org/packages/AluminiumCoreLib/) - (Usable on any .NET Standard 2.0 compliant project).
+For C# projects, you can get [PlatformKit on Nuget](https://www.nuget.org/packages/PlatformKit/) - (Usable on any .NET Standard 2.0 compliant project).
 
 
 ## Contributions
