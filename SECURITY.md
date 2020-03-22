@@ -6,9 +6,9 @@ Versions currently supported by Security Fixes.
 
 | Version | Supported with Security Fixes | Supported with Bug Fixes | Supported with New Features |
 |--| --|--|--|
-| 2.x.x Beta series |  | | |
-| 2.x.x Alpha series | :x: , Supported until March 22nd 2020 | :x: , Supported until February 6th 2020 | :x: , Supported until February 6th 2020 |
-| 1.x.x Beta series | :x:, Supported until February 6th 2018 |  :x:, Supported until February 6th 2018 | :x:, Supported until February 6th 2018 |
+| 2.x.x Beta series | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| 2.x.x Alpha series | :x: , Support ended March 22nd 2020 | :x: , Support ended February 6th 2020 | :x: , Support ended February 6th 2020 |
+| 1.x.x Beta series | :x:, Support ended February 6th 2018 |  :x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
 | 1.x.x Alpha series   | :x: | :x: | :x: |
 
 ## Reporting a Vulnerability
