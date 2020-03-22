@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2020 AluminiumTech
+Copyright (c) 2018-2020 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
-using System;
-namespace AluminiumCoreLib.PlatformKit{
-    public class PlatformNotSupportedException : Exception{
-        public PlatformNotSupportedException() : base("Your platform " + new Platform().ToString() + " does not support this function or feature."){
-            
-        }
+
+namespace AluminiumTech.PlatformKit{
+    /// <summary>
+    /// An enum to help manage OS family specific code.
+    /// </summary>
+    public enum OperatingSystemFamily{
+        Windows, macOS, Linux, BSD, Unix, Android, LineageOS, IOS, tvOS, watchOS, AndroidTV, wearOSByGoogle, WindowsHoloGraphic, WindowsMixedReality, Tizen, NotDetected
     }
 }
