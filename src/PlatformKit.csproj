@@ -18,7 +18,7 @@
     <AssemblyName>AluminiumCoreLib</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>PlatformKit</PackageId>
-    <PackageVersion>2.0.0-beta1</PackageVersion>
+    <PackageVersion>2.0.0-beta2</PackageVersion>
     <Owners>AluminiumTech</Owners>
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>

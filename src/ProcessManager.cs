@@ -46,8 +46,7 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Warn the user if the process count is extremely high.
         /// </summary>
-        public void WarnProcessCount(int ProcessWarnCount, string WarningMessage)
-        {
+        public void WarnProcessCount(int ProcessWarnCount, string WarningMessage){
             if (GetProcessCount() > ProcessWarnCount)
             {
                 Console.WriteLine(WarningMessage);
@@ -57,8 +56,7 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Check to see if a process is running or not.
         /// </summary>
-        public bool IsProcessRunning(string ProcessName)
-        {
+        public bool IsProcessRunning(string ProcessName){
             Process[] processes = Process.GetProcesses();
 
             foreach (Process process in processes)
@@ -75,8 +73,7 @@ namespace AluminiumTech.PlatformKit{
         /// Run a Process
         /// </summary>
         /// <param name="ProcessName"></param>
-        public void RunProcess(string ProcessName)
-        {
+        public void RunProcess(string ProcessName){
             RunProcess(ProcessName, "");
         }
         /// <summary>
