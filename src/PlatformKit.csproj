@@ -7,7 +7,7 @@
     <Version>2.0.0-alpha9</Version>
     <Authors>AluminiumTech</Authors>
     <Company />
-    <Description>AluminiumCoreLib is designed to help programmers be more efficient in C# by containing things that programmers should have and/or may need in their application.</Description>
+    <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
     <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -23,13 +23,8 @@
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>### Changes
-* Renamed to PlatformKit
-
-### Breaking Changes
-* Changed namespace to ``AluminiumTech.PlatformKit``
-* Removed the ``Version`` class
-* Removed the ``HashMap`` class</PackageReleaseNotes>
+    <PackageReleaseNotes>## Changes
+* Removed ``PlatformNotSupportedException`` because it conflicts with an Exception in .NET</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
