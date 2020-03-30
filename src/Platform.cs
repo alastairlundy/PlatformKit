@@ -32,6 +32,7 @@ namespace AluminiumTech.PlatformKit{
     /// A class that helps get system information.
     /// </summary>
     public class Platform {
+
         /// <summary>
         /// Returns the OS Architecture as a string.
         /// </summary>
@@ -63,6 +64,7 @@ namespace AluminiumTech.PlatformKit{
                 throw new Exception(ex.ToString());
             }
         }
+
         /// <summary>
         /// Returns the OS Architecture as a string.
         /// </summary>
@@ -70,6 +72,7 @@ namespace AluminiumTech.PlatformKit{
         public string GetOSArchitectureToString() {
             return RuntimeInformation.OSArchitecture.ToString();
         }
+
         /// <summary>
         /// Determine what OS is being run
         /// </summary>
@@ -115,6 +118,7 @@ namespace AluminiumTech.PlatformKit{
         public bool Is64BitOS() {
             return Environment.Is64BitOperatingSystem;
         }
+
         /// <summary>
         /// Returns whether or not the App currently running is 64 Bit or not.
         /// </summary>
@@ -150,6 +154,7 @@ namespace AluminiumTech.PlatformKit{
         public string GetAppVersionToString() {
             return Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
+
         /// <summary>
         /// Return an app's version as a Version data type.
         /// </summary>
@@ -187,6 +192,7 @@ namespace AluminiumTech.PlatformKit{
                 //Do nothing to make sure everybody sees the license.
             }
         }
+
         /// <summary>
         /// Get's the OS's Version and returns it as a string.
         /// </summary>
@@ -205,6 +211,7 @@ namespace AluminiumTech.PlatformKit{
                 throw new PlatformNotSupportedException();
             }
         }
+
         /// <summary>
         /// Get the Windows Version returned as a string.
         /// </summary>
@@ -244,6 +251,7 @@ namespace AluminiumTech.PlatformKit{
             Console.WriteLine("New kernel string: " + x);
             return macOS;
         }
+
         /// <summary>
         /// Get the Linux Version returned as a string.
         /// </summary>
@@ -281,6 +289,7 @@ namespace AluminiumTech.PlatformKit{
                 throw new PlatformNotSupportedException();
             }
         }
+
         /// <summary>
         /// Get the Windows Version as a System.Version object.
         /// </summary>
@@ -296,6 +305,7 @@ namespace AluminiumTech.PlatformKit{
         public System.Version GetmacOSKernelVersionToVersion(){
             return new System.Version(GetmacOSKernelVersionToString());
         }
+
         /// <summary>
         /// Get the Linux Kernel Version as a System.Version object.
         /// </summary>
