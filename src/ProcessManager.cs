@@ -76,6 +76,7 @@ namespace AluminiumTech.PlatformKit{
         public void RunProcess(string ProcessName){
             RunProcess(ProcessName, "");
         }
+
         /// <summary>
         /// Run a Process with Arguments
         /// </summary>
@@ -98,6 +99,7 @@ namespace AluminiumTech.PlatformKit{
                 RunProcessLinux(ProcessName, Arguments);
             }
         }
+
         /// <summary>
         /// Run a process on Windows.
         /// </summary>
@@ -105,6 +107,7 @@ namespace AluminiumTech.PlatformKit{
         public void RunProcessWindows(string ProcessName){
             RunProcessWindows(ProcessName + ".exe", "");
         }
+
         /// <summary>
         /// Run a process on Windows with Arguments
         /// </summary>
@@ -113,6 +116,7 @@ namespace AluminiumTech.PlatformKit{
         public void RunProcessWindows(string ProcessName, string Arguments){
             RunProcessWindows(ProcessName, Arguments, ProcessWindowStyle.Normal);
         }
+
         /// <summary>
         /// Run a process on Windows with Arguments and a Process Window Style
         /// </summary>
@@ -126,6 +130,7 @@ namespace AluminiumTech.PlatformKit{
             process.StartInfo.WindowStyle = pws;
             process.Start();
         }
+
         /// <summary>
         /// Run a Process on Mac
         /// </summary>
@@ -134,6 +139,7 @@ namespace AluminiumTech.PlatformKit{
         public void RunProcessMac(string ProcessName){
             RunProcessMac(ProcessName, "");
         }
+
         /// <summary>
         /// Run a Process on macOS
         /// </summary>
@@ -151,6 +157,7 @@ namespace AluminiumTech.PlatformKit{
             Process process = new Process { StartInfo = procStartInfo };
             process.Start();
         }
+
         /// <summary>
         /// Run a Process on Linux
         /// </summary>
@@ -158,6 +165,7 @@ namespace AluminiumTech.PlatformKit{
         public void RunProcessLinux(string ProcessName){
             RunProcessLinux(ProcessName, "");
         }
+
         /// <summary>
         /// Run a Process on Linux
         /// </summary>
@@ -202,6 +210,7 @@ namespace AluminiumTech.PlatformKit{
             }
             return false;
         }
+
         /// <summary>
         /// Converts a String to a Process
         /// </summary>
@@ -228,6 +237,7 @@ namespace AluminiumTech.PlatformKit{
                 throw new Exception(ex.ToString());
             }
         }
+
         /// <summary>
         /// End a process if it is currently running.
         /// </summary>
@@ -253,6 +263,7 @@ namespace AluminiumTech.PlatformKit{
             }
             return count;
         }
+
         /// <summary>
         /// Get the list of processes as a List containing Strings
         /// </summary>
@@ -267,6 +278,7 @@ namespace AluminiumTech.PlatformKit{
             strList.TrimExcess();
             return strList;
         }
+
         /// <summary>
         /// Returns a List containing all the running processes.
         /// </summary>
