@@ -23,13 +23,19 @@ SOFTWARE.
 
 namespace AluminiumTech.PlatformKit.enums{
     public enum CPUArchitectureFamily{
+        // ReSharper disable once InconsistentNaming
         IA64,
         X64,
         X86,
+        // ReSharper disable once InconsistentNaming
         ARM32,
+        // ReSharper disable once InconsistentNaming
         ARM64,
+        // ReSharper disable once InconsistentNaming
         MIPS,
+        // ReSharper disable once InconsistentNaming
         PowerPC32,
+        // ReSharper disable once InconsistentNaming
         PowerPC64,
         NotDetected
     }

@@ -18,13 +18,17 @@
     <AssemblyName>AluminiumCoreLib</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>PlatformKit</PackageId>
-    <PackageVersion>2.0.0-beta2</PackageVersion>
+    <PackageVersion>2.0.0-beta3</PackageVersion>
     <Owners>AluminiumTech</Owners>
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
     <PackageReleaseNotes>## Changes
-* Removed ``PlatformNotSupportedException`` because it conflicts with an Exception in .NET</PackageReleaseNotes>
+* Fixed an issue where ``ToString()`` and ``ToEnum()`` would return null on macOS
+* Fixed OSArchitecture detection
+* Some method renaming
+* Removed redundant code
+* Moved enums to a seperate enum folder and namespace</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

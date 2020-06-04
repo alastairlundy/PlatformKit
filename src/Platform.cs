@@ -1,5 +1,4 @@
-﻿/*
-MIT License
+﻿/* MIT License
 
 Copyright (c) 2018-2020 AluminiumTech
 
@@ -21,11 +20,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
+
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
+
 using AluminiumTech.PlatformKit.enums;
 
 namespace AluminiumTech.PlatformKit{
@@ -97,7 +98,7 @@ namespace AluminiumTech.PlatformKit{
         }
 
         /// <summary>
-        /// Gets the OS platform as a String.
+        /// Returns the OS platform as a String.
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
@@ -258,8 +259,7 @@ namespace AluminiumTech.PlatformKit{
         /// <returns></returns>
         public string GetmacOSKernelVersionToString(){
             string macOS = RuntimeInformation.OSDescription ?? throw new ArgumentNullException("RuntimeInformation.OSDescription");
-
-
+            
            macOS = macOS.Replace("Darwin", " ");
            macOS = macOS.Replace("Kernel Version", " ");
            // macOSKernel.Replace("", "");
