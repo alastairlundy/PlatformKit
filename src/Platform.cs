@@ -26,6 +26,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
+using AluminiumTech.PlatformKit.enums;
 
 namespace AluminiumTech.PlatformKit{
     /// <summary>
@@ -34,26 +35,26 @@ namespace AluminiumTech.PlatformKit{
     public class Platform {
 
         /// <summary>
-        /// Returns the OS Architecture as a string.
+        /// Returns the OS Architecture To Enum
         /// </summary>
         /// <returns></returns>
-        private CPUArchitectureFamily GetOSArchitectureFamilyToEnum() {
-            var x = ToString().ToLower();
+        private CPUArchitectureFamily GetOsArchitectureFamilyToEnum() {
+            var osArchitecture = RuntimeInformation.OSArchitecture;
 
             try {
-                if (x.Contains("arm") && !x.Contains("64"))
+                if (osArchitecture.Equals(Architecture.Arm))
                 {
                     return CPUArchitectureFamily.ARM32;
                 }
-                else if (x.Contains("x86") && !x.Contains("-64"))
-                {
-                    return CPUArchitectureFamily.X86;
-                }
-                else if (x.Contains("arm") && x.Contains("64"))
+                else if (osArchitecture.Equals(Architecture.Arm64))
                 {
                     return CPUArchitectureFamily.ARM64;
                 }
-                else if ((x.Contains("x64")) || (x.Contains("x86") && x.Contains("-64")))
+                else if (osArchitecture.Equals(Architecture.X86))
+                {
+                    return CPUArchitectureFamily.X86;
+                }
+                else if (osArchitecture.Equals(Architecture.X64))
                 {
                     return CPUArchitectureFamily.X64;
                 }
@@ -69,7 +70,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetOSArchitectureToString() {
+        public string GetOsArchitectureToString() {
             return RuntimeInformation.OSArchitecture.ToString();
         }
 
@@ -77,17 +78,21 @@ namespace AluminiumTech.PlatformKit{
         /// Determine what OS is being run
         /// </summary>
         /// <returns></returns>
-        public OSPlatform GetOSPlatform() {
+        public OSPlatform GetOsPlatform() {
             OSPlatform osPlatform = OSPlatform.Create("Other Platform");
             // Check if it's windows
             bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
             osPlatform = isWindows ? OSPlatform.Windows : osPlatform;
             // Check if it's osx
-            bool isOSX = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-            osPlatform = isOSX ? OSPlatform.OSX : osPlatform;
+            bool isOsx = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            osPlatform = isOsx ? OSPlatform.OSX : osPlatform;
             // Check if it's Linux
             bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
             osPlatform = isLinux ? OSPlatform.Linux : osPlatform;
+            
+            bool isBsd = RuntimeInformation.IsOSPlatform(OSPlatform.Create("BSD"));
+            osPlatform = isBsd ? OSPlatform.Create("BSD") : osPlatform; 
+                
             return osPlatform;
         }
 
@@ -96,20 +101,25 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            if (GetOSPlatform().ToString().ToLower().Equals("windows")) {
+            if (GetOsPlatform().ToString().ToLower().Equals("windows")) {
                 return "Windows";
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("osx") ||
-                     GetOSPlatform().ToString().ToLower().Equals("mac") ||
-                     GetOSPlatform().ToString().ToLower().Equals("macos"))
+            else if (GetOsPlatform().ToString().ToLower().Equals("osx") ||
+                     GetOsPlatform().ToString().ToLower().Equals("mac") ||
+                     GetOsPlatform().ToString().ToLower().Equals("macos") ||
+                     GetOsPlatform().ToString().ToLower().Equals("darwin")) 
             {
                 if (RuntimeInformation.OSDescription.ToLower().Contains("osx") ||
                     RuntimeInformation.OSDescription.ToLower().Contains("darwin")) {
                     return "macOS";
                 }
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("linux")) {
+            else if (GetOsPlatform().ToString().ToLower().Equals("linux")) {
                 return "Linux";
+            }
+            else if (GetOsPlatform().ToString().ToLower().Contains("bsd"))
+            {
+                return "BSD";
             }
             return null;
         }
@@ -118,7 +128,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
-        public bool Is64BitOS() {
+        public bool Is64BitOs() {
             return Environment.Is64BitOperatingSystem;
         }
 
@@ -138,7 +148,10 @@ namespace AluminiumTech.PlatformKit{
             if (ToString().ToLower().Equals("windows")) {
                 return OperatingSystemFamily.Windows;
             }
-            else if (ToString().ToLower().Equals("mac")) {
+            else if (ToString().ToLower().Equals("mac") ||
+                     ToString().ToLower().Equals("osx") ||
+                    ToString().ToLower().Equals("darwin")
+                     ) {
                 return OperatingSystemFamily.macOS;
             }
             else if (ToString().ToLower().Equals("linux")) {
@@ -146,6 +159,10 @@ namespace AluminiumTech.PlatformKit{
             }
             else if (ToString().ToLower().Equals("unix")) {
                 return OperatingSystemFamily.Unix;
+            }
+            else if (ToString().ToLower().Contains("bsd"))
+            {
+                return OperatingSystemFamily.BSD;
             }
             return OperatingSystemFamily.NotDetected;
         }
@@ -155,7 +172,7 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetAppVersionToString() {
-            return Assembly.GetEntryAssembly().GetName().Version.ToString();
+            return Assembly.GetEntryAssembly()?.GetName().Version.ToString();
         }
 
         /// <summary>
@@ -163,20 +180,20 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public System.Version GetAppVersionToVersion() {
-            return Assembly.GetEntryAssembly().GetName().Version;
+            return Assembly.GetEntryAssembly()?.GetName().Version;
         }
 
         /// <summary>
         /// Display license information in the Console from a Text File
         /// </summary>
-        public void ShowLicenseInConsole(string PathToTextFile, int durationMilliSeconds) {
+        public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds) {
             Stopwatch licenseWatch = new Stopwatch();
             licenseWatch.Reset();
             licenseWatch.Start();
             string[] lines;
 
             try {
-                lines = File.ReadAllLines(PathToTextFile);
+                lines = File.ReadAllLines(pathToTextFile);
 
                 foreach (string line in lines) {
                     Console.WriteLine(line);
@@ -200,7 +217,7 @@ namespace AluminiumTech.PlatformKit{
         /// Get's the OS's Version and returns it as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetOSVersionToString(){       
+        public string GetOsVersionToString(){       
             if (ToEnum().Equals(OperatingSystemFamily.Windows)){
                 return GetWindowsVersionToString();
             }
@@ -229,7 +246,7 @@ namespace AluminiumTech.PlatformKit{
                     return word;
                 }
                 else{
-                    windowsKernel.Replace(word, " ");
+                    windowsKernel = windowsKernel.Replace(word, " ");
                 }
             }
             return windowsKernel;
@@ -240,14 +257,14 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetmacOSKernelVersionToString(){
-            string macOS = RuntimeInformation.OSDescription;
+            string macOS = RuntimeInformation.OSDescription ?? throw new ArgumentNullException("RuntimeInformation.OSDescription");
 
 
-            macOS.Replace("Darwin", " ");
-            macOS.Replace("Kernel Version", " ");
+           macOS = macOS.Replace("Darwin", " ");
+           macOS = macOS.Replace("Kernel Version", " ");
            // macOSKernel.Replace("", "");
-            macOS.Replace("root:xnu", "xnu");
-            macOS.Replace("/RELEASE_X86_64", " ");
+           macOS = macOS.Replace("root:xnu", "xnu");
+           macOS = macOS.Replace("/RELEASE_X86_64", " ");
 
             string x = macOS;
 
@@ -268,7 +285,7 @@ namespace AluminiumTech.PlatformKit{
                     //Do not replace if it contains the Linux kernel version.
                 }
                 else{
-                    linuxKernel.Replace(word, " ");
+                    linuxKernel = linuxKernel.Replace(word, " ");
                 }         
             }
             return linuxKernel;
@@ -278,7 +295,7 @@ namespace AluminiumTech.PlatformKit{
         /// Gets the OS's Kernel Version and returns it as a System.Version object.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetOSKernelVersionToVersion(){
+        public Version GetOsKernelVersionToVersion(){
             if (ToEnum().Equals(OperatingSystemFamily.Windows)){
                 return GetWindowsKernelVersionToVersion();
             }
@@ -297,7 +314,7 @@ namespace AluminiumTech.PlatformKit{
         /// Get the Windows Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetWindowsKernelVersionToVersion(){
+        public Version GetWindowsKernelVersionToVersion(){
             return new System.Version(GetWindowsVersionToString());
         }
 
@@ -305,7 +322,7 @@ namespace AluminiumTech.PlatformKit{
         /// Get the macOS Kernel (XNU) Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetmacOSKernelVersionToVersion(){
+        public Version GetmacOSKernelVersionToVersion(){
             return new System.Version(GetmacOSKernelVersionToString());
         }
 
@@ -313,7 +330,7 @@ namespace AluminiumTech.PlatformKit{
         /// Get the Linux Kernel Version as a System.Version object.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetLinuxKernelVersionToVersion(){
+        public Version GetLinuxKernelVersionToVersion(){
             return new System.Version(GetLinuxKernelVersionToString());
         }
     }

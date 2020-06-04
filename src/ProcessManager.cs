@@ -1,5 +1,4 @@
-﻿/*
-MIT License
+﻿/* MIT License
 
 Copyright (c) 2019-2020 AluminiumTech
 
@@ -21,9 +20,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using AluminiumTech.PlatformKit.enums;
 
 namespace AluminiumTech.PlatformKit{
     /// <summary>
@@ -46,22 +47,22 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Warn the user if the process count is extremely high.
         /// </summary>
-        public void WarnProcessCount(int ProcessWarnCount, string WarningMessage){
-            if (GetProcessCount() > ProcessWarnCount)
+        public void WarnProcessCount(int processWarnCount, string warningMessage){
+            if (GetProcessCount() > processWarnCount)
             {
-                Console.WriteLine(WarningMessage);
+                Console.WriteLine(warningMessage);
             }
         }
 
         /// <summary>
         /// Check to see if a process is running or not.
         /// </summary>
-        public bool IsProcessRunning(string ProcessName){
+        public bool IsProcessRunning(string processName){
             Process[] processes = Process.GetProcesses();
 
             foreach (Process process in processes)
             {
-                if (process.Equals(ProcessName))
+                if(process.ToString().Equals(processName))
                 {
                     return true;
                 }
@@ -72,86 +73,70 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Run a Process
         /// </summary>
-        /// <param name="ProcessName"></param>
-        public void RunProcess(string ProcessName){
-            RunProcess(ProcessName, "");
+        /// <param name="processName"></param>
+        public void RunProcess(string processName){
+            RunProcess(processName, "");
         }
 
         /// <summary>
         /// Run a Process with Arguments
         /// </summary>
-        /// <param name="ProcessName"></param>
-        /// <param name="Arguments"></param>
-        public void RunProcess(string ProcessName, string Arguments){
+        /// <param name="processName"></param>
+        /// <param name="arguments"></param>
+        public void RunProcess(string processName, string arguments){
             Platform platform = new Platform();
             var plat = platform.ToEnum();
 
             if (plat.Equals(OperatingSystemFamily.Windows))
             {
-                RunProcessWindows(ProcessName, Arguments);
+                RunProcessWindows(processName, arguments);
             }
             else if (plat.Equals(OperatingSystemFamily.macOS))
             {
-                RunProcessMac(ProcessName, Arguments);
+                RunProcessMac(processName, arguments);
             }
             else if (plat.Equals(OperatingSystemFamily.Linux))
             {
-                RunProcessLinux(ProcessName, Arguments);
+                RunProcessLinux(processName, arguments);
             }
         }
-
-        /// <summary>
-        /// Run a process on Windows.
-        /// </summary>
-        /// <param name="ProcessName"></param>
-        public void RunProcessWindows(string ProcessName){
-            RunProcessWindows(ProcessName + ".exe", "");
-        }
-
+        
         /// <summary>
         /// Run a process on Windows with Arguments
         /// </summary>
-        /// <param name="ProcessName"></param>
-        /// <param name="Arguments"></param>
-        public void RunProcessWindows(string ProcessName, string Arguments){
-            RunProcessWindows(ProcessName, Arguments, ProcessWindowStyle.Normal);
+        /// <param name="processName"></param>
+        /// <param name="arguments"></param>
+        public void RunProcessWindows(string processName, string arguments = ""){
+            RunProcessWindows(processName,ProcessWindowStyle.Normal, arguments);
         }
 
         /// <summary>
         /// Run a process on Windows with Arguments and a Process Window Style
         /// </summary>
-        /// <param name="ProcessName"></param>
-        /// <param name="Arguments"></param>
+        /// <param name="processName"></param>
+        /// <param name="arguments"></param>
         /// <param name="pws"></param>
-        public void RunProcessWindows(string ProcessName, string Arguments, ProcessWindowStyle pws){
+        public void RunProcessWindows(string processName, ProcessWindowStyle pws,  string arguments = ""){
             Process process = new Process();
-            process.StartInfo.FileName = ProcessName + ".exe";
-            process.StartInfo.Arguments = Arguments;
+            process.StartInfo.FileName = processName + ".exe";
+            process.StartInfo.Arguments = arguments;
             process.StartInfo.WindowStyle = pws;
             process.Start();
         }
 
         /// <summary>
-        /// Run a Process on Mac
-        /// </summary>
-        /// <param name="ProcessName"></param>
-        /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        public void RunProcessMac(string ProcessName){
-            RunProcessMac(ProcessName, "");
-        }
-
-        /// <summary>
         /// Run a Process on macOS
         /// </summary>
-        /// <param name="ProcessName"></param>
-        /// Courtesy of https://github.com/fontanaricardo/RunCommand
-        public void RunProcessMac(string ProcessName, string ProcessArguments){
-            var procStartInfo = new ProcessStartInfo(ProcessName)
+        /// <param name="processName"></param>
+        /// <param name="arguments"></param>
+        public void RunProcessMac(string processName, string arguments = ""){
+            var procStartInfo = new ProcessStartInfo()
             {
+                FileName = processName,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
-                Arguments = ProcessArguments
+                Arguments = arguments
             };
 
             Process process = new Process { StartInfo = procStartInfo };
@@ -161,22 +146,16 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Run a Process on Linux
         /// </summary>
-        /// <param name="ProcessName"></param>
-        public void RunProcessLinux(string ProcessName){
-            RunProcessLinux(ProcessName, "");
-        }
-
-        /// <summary>
-        /// Run a Process on Linux
-        /// </summary>
-        /// <param name="ProcessName"></param>
-        public void RunProcessLinux(string ProcessName, string ProcessArguments){
-            var procStartInfo = new ProcessStartInfo(ProcessName)
+        /// <param name="processName"></param>
+        /// <param name="processArguments"></param>
+        public void RunProcessLinux(string processName, string processArguments = ""){
+            var procStartInfo = new ProcessStartInfo()
             {
+                FileName = processName,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
-                Arguments = ProcessArguments
+                Arguments = processArguments
             };
 
             Process process = new Process { StartInfo = procStartInfo };
@@ -189,7 +168,7 @@ namespace AluminiumTech.PlatformKit{
         /// <param name="url"></param>
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-        public bool OpenURLInBrowser(string url){
+        public bool OpenUrlInBrowser(string url){
             Platform platform = new Platform();
             var plat = platform.ToEnum();
 
@@ -214,17 +193,17 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Converts a String to a Process
         /// </summary>
-        /// <param name="ProcessName"></param>
+        /// <param name="processName"></param>
         /// <returns></returns>
-        public Process ConvertStringToProcess(string ProcessName){
+        public Process ConvertStringToProcess(string processName){
             try{
                 Process process;
 
-                if (IsProcessRunning(ProcessName)){
+                if (IsProcessRunning(processName)){
                     Process[] processes = Process.GetProcesses();
 
                     foreach (Process p in processes){
-                        if (p.ProcessName.Equals(ProcessName)){
+                        if (p.ProcessName.Equals(processName)){
                             process = Process.GetProcessById(p.Id);
                             return process;
                         }
@@ -241,10 +220,10 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// End a process if it is currently running.
         /// </summary>
-        /// <param name="ProcessName"></param>
-        public void TerminateProcess(string ProcessName){
-            if (IsProcessRunning(ProcessName)){
-                Process process = ConvertStringToProcess(ProcessName);
+        /// <param name="processName"></param>
+        public void TerminateProcess(string processName){
+            if (IsProcessRunning(processName)){
+                Process process = ConvertStringToProcess(processName);
                 process.Kill();
             }
         }
@@ -255,13 +234,7 @@ namespace AluminiumTech.PlatformKit{
         /// <returns></returns>
         public int GetProcessCount(){
             int count = 0;
-            Process[] processes = Process.GetProcesses();
-
-            foreach (Process process in processes){
-                //Get whatever attribute for process
-                count++;
-            }
-            return count;
+            return Process.GetProcesses().Length;
         }
 
         /// <summary>
@@ -301,7 +274,7 @@ namespace AluminiumTech.PlatformKit{
         /// <typeparam name="string"> The Process Name.</typeparam>
         /// </summary>
         /// <returns></returns>
-        public Dictionary<int, string> ProcessListToDictionary(){
+        public Dictionary<int, string> GetProcessListToDictionary(){
             var dictionary = new Dictionary<int, string>();
             Process[] processes = Process.GetProcesses();
 
