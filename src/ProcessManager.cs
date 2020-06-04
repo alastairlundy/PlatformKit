@@ -234,7 +234,6 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public int GetProcessCount(){
-            int count = 0;
             return Process.GetProcesses().Length;
         }
 
