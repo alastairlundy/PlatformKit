@@ -1,4 +1,5 @@
-﻿/* MIT License
+﻿/*
+MIT License
 
 Copyright (c) 2018-2020 AluminiumTech
 
@@ -21,16 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumTech.PlatformKit{
-    public enum CPUArchitectureFamily{
-        IA64,
-        X64,
-        X86,
-        ARM32,
-        ARM64,
-        MIPS,
-        PowerPC32,
-        PowerPC64,
+namespace AluminiumTech.PlatformKit.enums{
+    /// <summary>
+    /// An enum to help manage OS family specific code.
+    /// </summary>
+    public enum OperatingSystemFamily{
+        Windows,
+        macOS,
+        Linux,
+        BSD,
+        Unix,
+        Android,
+        LineageOS,
+        IOS,
+        tvOS,
+        watchOS,
+        AndroidTV,
+        wearOSByGoogle,
+        WindowsHoloGraphic,
+        WindowsMixedReality,
+        Tizen,
         NotDetected
     }
 }
