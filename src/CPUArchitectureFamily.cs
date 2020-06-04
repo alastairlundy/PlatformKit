@@ -1,5 +1,4 @@
-﻿/*
-MIT License
+﻿/* MIT License
 
 Copyright (c) 2018-2020 AluminiumTech
 
@@ -24,6 +23,14 @@ SOFTWARE.
 
 namespace AluminiumTech.PlatformKit{
     public enum CPUArchitectureFamily{
-        IA64, X64, X86, ARM32, ARM64, MIPS, PowerPC, NotDetected
+        IA64,
+        X64,
+        X86,
+        ARM32,
+        ARM64,
+        MIPS,
+        PowerPC32,
+        PowerPC64,
+        NotDetected
     }
 }

@@ -99,9 +99,12 @@ namespace AluminiumTech.PlatformKit{
             if (GetOSPlatform().ToString().ToLower().Equals("windows")) {
                 return "Windows";
             }
-            else if (GetOSPlatform().ToString().ToLower().Equals("mac") || GetOSPlatform().ToString().ToLower().Equals("mac"))
+            else if (GetOSPlatform().ToString().ToLower().Equals("osx") ||
+                     GetOSPlatform().ToString().ToLower().Equals("mac") ||
+                     GetOSPlatform().ToString().ToLower().Equals("macos"))
             {
-                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") || RuntimeInformation.OSDescription.ToLower().Contains("darwin")) {
+                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") ||
+                    RuntimeInformation.OSDescription.ToLower().Contains("darwin")) {
                     return "macOS";
                 }
             }

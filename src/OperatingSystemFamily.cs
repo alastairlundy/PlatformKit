@@ -27,6 +27,21 @@ namespace AluminiumTech.PlatformKit{
     /// An enum to help manage OS family specific code.
     /// </summary>
     public enum OperatingSystemFamily{
-        Windows, macOS, Linux, BSD, Unix, Android, LineageOS, IOS, tvOS, watchOS, AndroidTV, wearOSByGoogle, WindowsHoloGraphic, WindowsMixedReality, Tizen, NotDetected
+        Windows,
+        macOS,
+        Linux,
+        BSD,
+        Unix,
+        Android,
+        LineageOS,
+        IOS,
+        tvOS,
+        watchOS,
+        AndroidTV,
+        wearOSByGoogle,
+        WindowsHoloGraphic,
+        WindowsMixedReality,
+        Tizen,
+        NotDetected
     }
 }
