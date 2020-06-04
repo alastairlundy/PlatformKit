@@ -146,16 +146,14 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public OperatingSystemFamily ToEnum() {
-            if (ToString().ToLower().Equals("windows")) {
+            if (GetOsPlatform().Equals(OSPlatform.Windows)) {
                 return OperatingSystemFamily.Windows;
             }
-            else if (ToString().ToLower().Equals("mac") ||
-                     ToString().ToLower().Equals("osx") ||
-                    ToString().ToLower().Equals("darwin")
-                     ) {
+            else if (GetOsPlatform().Equals(OSPlatform.OSX)) {
                 return OperatingSystemFamily.macOS;
             }
-            else if (ToString().ToLower().Equals("linux")) {
+            else if (GetOsPlatform().Equals(OSPlatform.Linux) ||
+                ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
             else if (ToString().ToLower().Equals("unix")) {
