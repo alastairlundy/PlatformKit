@@ -24,10 +24,11 @@ SOFTWARE.
 using System;
 using System.IO;
 
-using System.Runtime.InteropServices;
-
-namespace AluminiumTech.PlatformKit
+namespace AluminiumTech.PlatformKit.PlatformSpecifics
 {
+    /// <summary>
+    /// A class to help detect platform specific information regarding Linux.
+    /// </summary>
     public class LinuxPlatform
     {
         protected ProcessManager _processManager;
