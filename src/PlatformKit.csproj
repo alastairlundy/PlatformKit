@@ -9,7 +9,7 @@
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
-    <RepositoryUrl>https://github.com/AluminiumTech/AluminiumCoreLib</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AluminiumTech/PlatformKit</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -18,17 +18,24 @@
     <AssemblyName>AluminiumCoreLib</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>PlatformKit</PackageId>
-    <PackageVersion>2.0.0-beta3</PackageVersion>
+    <PackageVersion>2.0.0-beta4</PackageVersion>
     <Owners>AluminiumTech</Owners>
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>## Changes
-* Fixed an issue where ``ToString()`` and ``ToEnum()`` would return null on macOS
-* Fixed OSArchitecture detection
-* Some method renaming
-* Removed redundant code
-* Moved enums to a seperate enum folder and namespace</PackageReleaseNotes>
+    <PackageReleaseNotes>### Changes
+* Fixed another issue with ``ToEnum()`` on macOS 
+
+### Breaking Changes
+* Removed some redundant Kernel related detection code
+* Deprecated macOS and Windows Kernel detection code in the ``Platform`` class - This will eventually be moved to new classes and re-written similar to how it has been done for the new ``LinuxPlatform`` class
+* Moved Linux Kernel related detection code to new ``LinuxPlatform`` class
+* Revamped detection for Linux Kernel Version
+* Added detection for Linux Desktop Environment
+* Added detection for Linux Distribution
+* Added detection for Linux Distribution Version
+* Added the ability to get information from uname and lsb_release from C#
+* Added the ability to get the full Linux Kernel information from uname</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

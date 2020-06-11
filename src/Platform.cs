@@ -214,6 +214,7 @@ namespace AluminiumTech.PlatformKit{
 
         /// <summary>
         /// Get the Windows Version returned as a string.
+        /// DEPRECATION NOTICE: This function is now deprecated and will be removed in a future version.
         /// </summary>
         /// <returns></returns>
         public string GetWindowsVersionToString() {
@@ -234,6 +235,7 @@ namespace AluminiumTech.PlatformKit{
 
         /// <summary>
         /// Get the macOS Version returned as a string.
+        /// DEPRECATION NOTICE: This function is now deprecated and will be removed in a future version.
         /// </summary>
         /// <returns></returns>
         public string GetmacOSKernelVersionToString(){
