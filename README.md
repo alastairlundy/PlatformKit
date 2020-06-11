@@ -14,6 +14,7 @@ This can be added to any C# .NET Standard 2.0 supported Application.
 
 [![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/maintainability)](https://codeclimate.com/github/AluminiumTech/PlatformKit/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bebef387dc44016f8612/test_coverage)](https://codeclimate.com/github/AluminiumTech/PlatformKit/test_coverage)
 
