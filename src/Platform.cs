@@ -213,25 +213,6 @@ namespace AluminiumTech.PlatformKit{
         }
 
         /// <summary>
-        /// Get's the OS's Version and returns it as a string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetOsVersionToString(){       
-            if (ToEnum().Equals(OperatingSystemFamily.Windows)){
-                return GetWindowsVersionToString();
-            }
-            else if (ToEnum().Equals(OperatingSystemFamily.macOS)){
-                return GetmacOSKernelVersionToString();
-            }
-            else if (ToEnum().Equals(OperatingSystemFamily.Linux)){
-                return GetLinuxKernelVersionToString();
-            }
-            else{
-                throw new PlatformNotSupportedException();
-            }
-        }
-
-        /// <summary>
         /// Get the Windows Version returned as a string.
         /// </summary>
         /// <returns></returns>
@@ -268,68 +249,6 @@ namespace AluminiumTech.PlatformKit{
 
             Console.WriteLine("New kernel string: " + x);
             return macOS;
-        }
-
-        /// <summary>
-        /// Get the Linux Version returned as a string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetLinuxKernelVersionToString(){
-            string linuxKernel = RuntimeInformation.OSDescription;
-            string[] words = linuxKernel.Split();
-
-            foreach(string word in words){
-                if (word.ToLower().Contains("2.") || word.ToLower().Contains("3.") || word.ToLower().Contains("4.") || word.ToLower().Contains("5.")){
-                    //Do not replace if it contains the Linux kernel version.
-                }
-                else{
-                    linuxKernel = linuxKernel.Replace(word, " ");
-                }         
-            }
-            return linuxKernel;
-        }
-
-        /// <summary>
-        /// Gets the OS's Kernel Version and returns it as a System.Version object.
-        /// </summary>
-        /// <returns></returns>
-        public Version GetOsKernelVersionToVersion(){
-            if (ToEnum().Equals(OperatingSystemFamily.Windows)){
-                return GetWindowsKernelVersionToVersion();
-            }
-            else if (ToEnum().Equals(OperatingSystemFamily.macOS)){
-                return GetmacOSKernelVersionToVersion();
-            }
-            else if (ToEnum().Equals(OperatingSystemFamily.Linux)){
-                return GetLinuxKernelVersionToVersion();
-            }
-            else{
-                throw new PlatformNotSupportedException();
-            }
-        }
-
-        /// <summary>
-        /// Get the Windows Version as a System.Version object.
-        /// </summary>
-        /// <returns></returns>
-        public Version GetWindowsKernelVersionToVersion(){
-            return new System.Version(GetWindowsVersionToString());
-        }
-
-        /// <summary>
-        /// Get the macOS Kernel (XNU) Version as a System.Version object.
-        /// </summary>
-        /// <returns></returns>
-        public Version GetmacOSKernelVersionToVersion(){
-            return new System.Version(GetmacOSKernelVersionToString());
-        }
-
-        /// <summary>
-        /// Get the Linux Kernel Version as a System.Version object.
-        /// </summary>
-        /// <returns></returns>
-        public Version GetLinuxKernelVersionToVersion(){
-            return new System.Version(GetLinuxKernelVersionToString());
         }
     }
 }
