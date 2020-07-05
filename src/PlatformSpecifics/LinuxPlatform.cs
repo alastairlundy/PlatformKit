@@ -31,11 +31,11 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
     /// </summary>
     public class LinuxPlatform
     {
-        protected ProcessManager _processManager;
+        protected ProcessManager processManager;
 
         public LinuxPlatform()
         {
-            _processManager = new ProcessManager();
+            processManager = new ProcessManager();
         }
         
         /// <summary>
@@ -44,7 +44,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLinuxDesktopEnvironment()
         {
-            _processManager.RunProcessLinux("echo $XDG_CURRENT_DESKTOP");
+            processManager.RunProcessLinux("echo $XDG_CURRENT_DESKTOP");
             
             TextReader reader = Console.In;
             return reader.ReadLine();
@@ -102,7 +102,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLsb_releaseInformation(string parameter)
         {
-            _processManager.RunProcessLinux("lsb_release " + parameter);
+            processManager.RunProcessLinux("lsb_release " + parameter);
             
             TextReader reader = Console.In;
            return reader.ReadLine();
@@ -115,7 +115,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetUnameInformation(string parameter)
         {
-            _processManager.RunProcessLinux("uname " + parameter);
+            processManager.RunProcessLinux("uname " + parameter);
             
             TextReader reader = Console.In;
             return reader.ReadLine();

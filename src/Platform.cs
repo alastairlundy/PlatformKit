@@ -39,7 +39,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns the OS Architecture To Enum
         /// </summary>
         /// <returns></returns>
-        private CPUArchitectureFamily GetOsArchitectureFamilyToEnum() {
+        public CPUArchitectureFamily GetOsArchitectureFamilyToEnum() {
             var osArchitecture = RuntimeInformation.OSArchitecture;
 
             try {
@@ -90,10 +90,7 @@ namespace AluminiumTech.PlatformKit{
             // Check if it's Linux
             bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
             osPlatform = isLinux ? OSPlatform.Linux : osPlatform;
-            
-            bool isBsd = RuntimeInformation.IsOSPlatform(OSPlatform.Create("BSD"));
-            osPlatform = isBsd ? OSPlatform.Create("BSD") : osPlatform; 
-                
+
             return osPlatform;
         }
 
@@ -102,25 +99,15 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            if (GetOsPlatform().ToString().ToLower().Equals("windows")) {
+            if (GetOsPlatform().Equals(OSPlatform.Windows)) {
                 return "Windows";
             }
-            else if (GetOsPlatform().ToString().ToLower().Equals("osx") ||
-                     GetOsPlatform().ToString().ToLower().Equals("mac") ||
-                     GetOsPlatform().ToString().ToLower().Equals("macos") ||
-                     GetOsPlatform().ToString().ToLower().Equals("darwin")) 
+            else if (GetOsPlatform().Equals(OSPlatform.OSX))
             {
-                if (RuntimeInformation.OSDescription.ToLower().Contains("osx") ||
-                    RuntimeInformation.OSDescription.ToLower().Contains("darwin")) {
-                    return "macOS";
-                }
+                return "macOS";
             }
-            else if (GetOsPlatform().ToString().ToLower().Equals("linux")) {
+            else if (GetOsPlatform().Equals(OSPlatform.Linux)) {
                 return "Linux";
-            }
-            else if (GetOsPlatform().ToString().ToLower().Contains("bsd"))
-            {
-                return "BSD";
             }
             return null;
         }
@@ -156,13 +143,6 @@ namespace AluminiumTech.PlatformKit{
                 ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
-            else if (ToString().ToLower().Equals("unix")) {
-                return OperatingSystemFamily.Unix;
-            }
-            else if (ToString().ToLower().Contains("bsd"))
-            {
-                return OperatingSystemFamily.BSD;
-            }
             return OperatingSystemFamily.NotDetected;
         }
 
@@ -189,10 +169,9 @@ namespace AluminiumTech.PlatformKit{
             Stopwatch licenseWatch = new Stopwatch();
             licenseWatch.Reset();
             licenseWatch.Start();
-            string[] lines;
 
             try {
-                lines = File.ReadAllLines(pathToTextFile);
+                var lines = File.ReadAllLines(pathToTextFile);
 
                 foreach (string line in lines) {
                     Console.WriteLine(line);
@@ -230,27 +209,8 @@ namespace AluminiumTech.PlatformKit{
                     windowsKernel = windowsKernel.Replace(word, " ");
                 }
             }
-            return windowsKernel;
-        }
-
-        /// <summary>
-        /// Get the macOS Version returned as a string.
-        /// DEPRECATION NOTICE: This function is now deprecated and will be removed in a future version.
-        /// </summary>
-        /// <returns></returns>
-        public string GetmacOSKernelVersionToString(){
-            string macOS = RuntimeInformation.OSDescription ?? throw new ArgumentNullException("RuntimeInformation.OSDescription");
             
-           macOS = macOS.Replace("Darwin", " ");
-           macOS = macOS.Replace("Kernel Version", " ");
-           // macOSKernel.Replace("", "");
-           macOS = macOS.Replace("root:xnu", "xnu");
-           macOS = macOS.Replace("/RELEASE_X86_64", " ");
-
-            string x = macOS;
-
-            Console.WriteLine("New kernel string: " + x);
-            return macOS;
+            return windowsKernel;
         }
     }
 }
