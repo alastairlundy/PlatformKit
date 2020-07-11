@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.csproj", "{7F64AD71-C8E7-4776-892B-9179DC583634}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKitTest", "PlatformKitTest\PlatformKitTest.csproj", "{D22C191E-10BC-455B-9823-BA5499C15B31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{A806CA5A-847E-40F6-9AF9-03DB98BCEDBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{7F64AD71-C8E7-4776-892B-9179DC583634}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F64AD71-C8E7-4776-892B-9179DC583634}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F64AD71-C8E7-4776-892B-9179DC583634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22C191E-10BC-455B-9823-BA5499C15B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22C191E-10BC-455B-9823-BA5499C15B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22C191E-10BC-455B-9823-BA5499C15B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22C191E-10BC-455B-9823-BA5499C15B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A806CA5A-847E-40F6-9AF9-03DB98BCEDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A806CA5A-847E-40F6-9AF9-03DB98BCEDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A806CA5A-847E-40F6-9AF9-03DB98BCEDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A806CA5A-847E-40F6-9AF9-03DB98BCEDBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

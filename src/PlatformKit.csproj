@@ -40,6 +40,8 @@
 
   <ItemGroup>
     <None Remove="LICENSE.txt" />
+    <None Remove="PlatformKitTest\**" />
+    <None Remove="TestConsole\**" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE.txt">
@@ -53,5 +55,12 @@
     <Compile Update="PlatformKit\FolderManager.cs">
       <IncludeInPackage>false</IncludeInPackage>
     </Compile>
+    <Compile Remove="PlatformKitTest\**" />
+    <Compile Remove="TestConsole\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="PlatformKitTest\**" />
+    <EmbeddedResource Remove="TestConsole\**" />
   </ItemGroup>
 </Project>

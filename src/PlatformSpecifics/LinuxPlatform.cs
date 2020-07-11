@@ -24,12 +24,14 @@ SOFTWARE.
 using System;
 using System.IO;
 
+using AluminiumTech.PlatformKit.PlatformSpecifics.Generic;
+
 namespace AluminiumTech.PlatformKit.PlatformSpecifics
 {
     /// <summary>
     /// A class to help detect platform specific information regarding Linux.
     /// </summary>
-    public class LinuxPlatform
+     class LinuxPlatform : UnixPlatform
     {
         protected ProcessManager processManager;
 
@@ -44,8 +46,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLinuxDesktopEnvironment()
         {
-            processManager.RunProcessLinux("echo $XDG_CURRENT_DESKTOP");
-            
+            processManager.RunProcess("echo $XDG_CURRENT_DESKTOP");
             TextReader reader = Console.In;
             return reader.ReadLine();
         }
@@ -56,7 +57,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLinuxKernelInformation()
         {
-            return GetUnameInformation("--all");
+            return GetUnixKernelVersionToString();
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLinuxKernelVersionToString()
         {
-            return GetUnameInformation("-r");
+            return GetUnixKernelVersionToString();
         }
 
         /// <summary>
@@ -102,24 +103,10 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLsb_releaseInformation(string parameter)
         {
-            processManager.RunProcessLinux("lsb_release " + parameter);
-            
-            TextReader reader = Console.In;
-           return reader.ReadLine();
-        }
-        
-        /// <summary>
-        /// Returns the output of running "uname" with a specified parameter
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        public string GetUnameInformation(string parameter)
-        {
-            processManager.RunProcessLinux("uname " + parameter);
-            
-            TextReader reader = Console.In;
+           processManager.RunProcess("lsb_release " + parameter);
+            // processManager.RunConsoleCommand("lsb_release " + parameter); 
+            TextReader reader = Console.In; 
             return reader.ReadLine();
         }
-
     }
 }

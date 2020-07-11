@@ -24,8 +24,11 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
+using AluminiumTech.PlatformKit.consts;
 using AluminiumTech.PlatformKit.enums;
+using AluminiumTech.PlatformKit.PlatformSpecifics;
 
 namespace AluminiumTech.PlatformKit{
     /// <summary>
@@ -143,6 +146,30 @@ namespace AluminiumTech.PlatformKit{
             Process process = new Process { StartInfo = procStartInfo };
             process.Start();
         }
+
+        /*
+        public void RunConsoleCommand(string arguments)
+        {
+            var plat = new Platform().ToEnum();
+
+            string programName = "";
+            
+            if (plat.Equals(OperatingSystemFamily.Windows))
+            {
+                programName = "cmd";
+            }
+            else if (plat.Equals(OperatingSystemFamily.macOS))
+            {
+           //     programName = "open -b com.apple.terminal " + arguments;
+            }
+            else if (plat.Equals(OperatingSystemFamily.Linux))
+            {
+                //programName
+            }
+
+            RunProcess(programName, arguments);
+        }
+         */
 
         /// <summary>
         /// Run a Process on Linux
@@ -281,7 +308,7 @@ namespace AluminiumTech.PlatformKit{
             foreach (Process process in processes){
                 dictionary.Add(process.Id, process.ProcessName);
             }
-
+            
             return dictionary;
         }
     }
