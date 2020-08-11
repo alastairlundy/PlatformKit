@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumTech.PlatformKit.enums{
+namespace AluminiumTech.DevKit.PlatformKit.enums{
     /// <summary>
     /// An enum to help manage OS family specific code.
     /// </summary>

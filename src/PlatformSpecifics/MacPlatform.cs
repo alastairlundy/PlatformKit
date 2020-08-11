@@ -1,11 +1,8 @@
 using System;
 using System.IO;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Generic;
 
-using AluminiumTech.PlatformKit.enums;
-
-using AluminiumTech.PlatformKit.PlatformSpecifics.Generic;
-
-namespace AluminiumTech.PlatformKit.PlatformSpecifics
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
 {
      class MacPlatform : UnixPlatform
     {

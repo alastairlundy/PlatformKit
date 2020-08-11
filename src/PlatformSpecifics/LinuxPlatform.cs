@@ -23,10 +23,9 @@ SOFTWARE.
 
 using System;
 using System.IO;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Generic;
 
-using AluminiumTech.PlatformKit.PlatformSpecifics.Generic;
-
-namespace AluminiumTech.PlatformKit.PlatformSpecifics
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
 {
     /// <summary>
     /// A class to help detect platform specific information regarding Linux.
@@ -103,10 +102,20 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics
         /// <returns></returns>
         public string GetLsb_releaseInformation(string parameter)
         {
-           processManager.RunProcess("lsb_release " + parameter);
-            // processManager.RunConsoleCommand("lsb_release " + parameter); 
-            TextReader reader = Console.In; 
-            return reader.ReadLine();
+            try
+            {
+                processManager.RunProcess("lsb_release " + parameter);
+                // processManager.RunConsoleCommand("lsb_release " + parameter); 
+                TextReader reader = Console.In; 
+                return reader.ReadLine();
+            }
+            catch
+            {
+                processManager.ExecuteBuiltInLinuxCommand("lsb_release " + parameter);
+                TextReader reader = Console.In; 
+                return reader.ReadLine();
+            }
+            
         }
     }
 }

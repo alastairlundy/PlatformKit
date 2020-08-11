@@ -1,6 +1,6 @@
 /* MIT License
 
-Copyright (c) 2019-2020 AluminiumTech
+Copyright (c) 2020 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,25 @@ SOFTWARE.
 
 namespace AluminiumTech.DevKit.PlatformKit.consts
 {
-    public class MacConsts
+    public static class DeprecationMessages
     {
-        public const string MacApplicationsDirectory = "/Applications";
-        public const string MacUsersDirectory = "/System/Users";
-        //public const string MacConsoleDirectory =  MacApplicationsDirectory + "/Utilities/Terminal.app";
+        public const string V2B5 = "v2.0.0-beta.5";
+        public const string V2B6 = "v2.0.0-beta.6";
+        public const string V2B7 = "v2.0.0-beta.7";
+        public const string V2B8 = "v2.0.0-beta.8";
+        
+        public const string V2 = "v2.0.0";
+        
+        public const string Deprecation = "This method is deprecated and will be removed";
+        
+        public const string FutureDeprecation = Deprecation + " in a future version.";
+
+        public const string DeprecationV2B5 = Deprecation + " in " + V2B5;
+        public const string DeprecationV2B6 = Deprecation + " in " + V2B6;
+        public const string DeprecationV2B7 = Deprecation + " in " + V2B7;
+        public const string DeprecationV2B8 = Deprecation + " in " + V2B8;
+        
+        public const string DeprecationV2 = Deprecation + " in " + V2;
+
     }
 }

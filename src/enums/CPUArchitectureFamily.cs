@@ -21,22 +21,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumTech.PlatformKit.enums{
+namespace AluminiumTech.DevKit.PlatformKit.enums{
     public enum CPUArchitectureFamily{
         // ReSharper disable once InconsistentNaming
         IA64,
+        
         X64,
-        X86,
+        i386,
         // ReSharper disable once InconsistentNaming
         ARM32,
         // ReSharper disable once InconsistentNaming
         ARM64,
         // ReSharper disable once InconsistentNaming
+        
+        ARM_EL,
+        
         MIPS,
         // ReSharper disable once InconsistentNaming
         PowerPC32,
         // ReSharper disable once InconsistentNaming
         PowerPC64,
+        
+        PowerPC64_EL,
+        
+        S390X,
+        
         NotDetected
     }
 }

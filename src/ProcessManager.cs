@@ -24,25 +24,34 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 
-using AluminiumTech.PlatformKit.consts;
-using AluminiumTech.PlatformKit.enums;
-using AluminiumTech.PlatformKit.PlatformSpecifics;
+using AluminiumTech.DevKit.PlatformKit.consts;
+using AluminiumTech.DevKit.PlatformKit.enums;
 
-namespace AluminiumTech.PlatformKit{
+namespace AluminiumTech.DevKit.PlatformKit
+{
     /// <summary>
     /// A class to manage processes on a device and/or start new processes.
     /// </summary>
-    public class ProcessManager{
+    public class ProcessManager
+    {
+        protected Platform _platform;
+
+        public ProcessManager()
+        {
+            _platform = new Platform();
+        }
 
         /// <summary>
         /// Print all the processes running to the Console.
         /// </summary>
-        public void ListAllProcesses(){
+        [Obsolete(DeprecationMessages.DeprecationV2B6)]
+        public void ListAllProcesses()
+        {
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes){
+            foreach (Process process in processes)
+            {
                 //Get whatever attribute for process
                 Console.WriteLine("Process " + process.Id + ": " + process.ProcessName);
             }
@@ -51,7 +60,9 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Warn the user if the process count is extremely high.
         /// </summary>
-        public void WarnProcessCount(int processWarnCount, string warningMessage){
+        [Obsolete(DeprecationMessages.DeprecationV2B6)]
+        public void WarnProcessCount(int processWarnCount, string warningMessage)
+        {
             if (GetProcessCount() > processWarnCount)
             {
                 Console.WriteLine(warningMessage);
@@ -61,16 +72,18 @@ namespace AluminiumTech.PlatformKit{
         /// <summary>
         /// Check to see if a process is running or not.
         /// </summary>
-        public bool IsProcessRunning(string processName){
+        public bool IsProcessRunning(string processName)
+        {
             Process[] processes = Process.GetProcesses();
 
             foreach (Process process in processes)
             {
-                if(process.ToString().Equals(processName))
+                if (process.ToString().Equals(processName))
                 {
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -78,7 +91,8 @@ namespace AluminiumTech.PlatformKit{
         /// Run a Process
         /// </summary>
         /// <param name="processName"></param>
-        public void RunProcess(string processName){
+        public void RunProcess(string processName)
+        {
             RunProcess(processName, "");
         }
 
@@ -87,9 +101,9 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcess(string processName, string arguments){
-            Platform platform = new Platform();
-            var plat = platform.ToEnum();
+        public void RunProcess(string processName, string arguments)
+        {
+            var plat = _platform.ToEnum();
 
             if (plat.Equals(OperatingSystemFamily.Windows))
             {
@@ -104,14 +118,15 @@ namespace AluminiumTech.PlatformKit{
                 RunProcessLinux(processName, arguments);
             }
         }
-        
+
         /// <summary>
         /// Run a process on Windows with Arguments
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcessWindows(string processName, string arguments = ""){
-            RunProcessWindows(processName,ProcessWindowStyle.Normal, arguments);
+        public void RunProcessWindows(string processName, string arguments = "")
+        {
+            RunProcessWindows(processName, ProcessWindowStyle.Normal, arguments);
         }
 
         /// <summary>
@@ -120,7 +135,8 @@ namespace AluminiumTech.PlatformKit{
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
         /// <param name="pws"></param>
-        public void RunProcessWindows(string processName, ProcessWindowStyle pws,  string arguments = ""){
+        public void RunProcessWindows(string processName, ProcessWindowStyle pws, string arguments = "")
+        {
             Process process = new Process();
             process.StartInfo.FileName = processName + ".exe";
             process.StartInfo.Arguments = arguments;
@@ -133,7 +149,8 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcessMac(string processName, string arguments = ""){
+        public void RunProcessMac(string processName, string arguments = "")
+        {
             var procStartInfo = new ProcessStartInfo()
             {
                 FileName = processName,
@@ -143,7 +160,7 @@ namespace AluminiumTech.PlatformKit{
                 Arguments = arguments
             };
 
-            Process process = new Process { StartInfo = procStartInfo };
+            Process process = new Process {StartInfo = procStartInfo};
             process.Start();
         }
 
@@ -176,18 +193,41 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="processArguments"></param>
-        public void RunProcessLinux(string processName, string processArguments = ""){
-            var procStartInfo = new ProcessStartInfo()
+        public void RunProcessLinux(string processName, string processArguments = "")
+        {
+            try
             {
-                FileName = processName,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = false,
-                Arguments = processArguments
-            };
+                var procStartInfo = new ProcessStartInfo()
+                    {
+                        FileName = processName,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = false,
+                        Arguments = processArguments
+                    };
 
-            Process process = new Process { StartInfo = procStartInfo };
-            process.Start();
+                    Process process = new Process {StartInfo = procStartInfo};
+                    process.Start();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw new Exception(ex.ToString());
+            }
+            
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        public void ExecuteBuiltInLinuxCommand(string command)
+        {
+            //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
+            string processName = "/usr/bin/bash";
+            string processArguments = "-c \" " + command + " \"";
+            
+            RunProcessLinux(processName, processArguments);
         }
 
         /// <summary>
@@ -196,25 +236,29 @@ namespace AluminiumTech.PlatformKit{
         /// <param name="url"></param>
         /// <returns></returns>
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-        public bool OpenUrlInBrowser(string url){
+        public bool OpenUrlInBrowser(string url)
+        {
             Platform platform = new Platform();
-            var plat = platform.ToEnum();
 
-            if (plat.Equals(OperatingSystemFamily.Windows))
+            if (platform.ToEnum().Equals(OperatingSystemFamily.Windows))
             {
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}") { CreateNoWindow = true });
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
+                    {CreateNoWindow = true});
                 return true;
             }
-            if (plat.Equals(OperatingSystemFamily.Linux))
+
+            if (platform.ToEnum().Equals(OperatingSystemFamily.Linux))
             {
                 Process.Start("xdg-open", url);
                 return true;
             }
-            if (plat.Equals(OperatingSystemFamily.macOS))
+
+            if (platform.ToEnum().Equals(OperatingSystemFamily.macOS))
             {
                 Process.Start("open", url);
                 return true;
             }
+
             return false;
         }
 
@@ -223,15 +267,20 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <param name="processName"></param>
         /// <returns></returns>
-        public Process ConvertStringToProcess(string processName){
-            try{
+        public Process ConvertStringToProcess(string processName)
+        {
+            try
+            {
                 Process process;
 
-                if (IsProcessRunning(processName)){
+                if (IsProcessRunning(processName))
+                {
                     Process[] processes = Process.GetProcesses();
 
-                    foreach (Process p in processes){
-                        if (p.ProcessName.Equals(processName)){
+                    foreach (Process p in processes)
+                    {
+                        if (p.ProcessName.Equals(processName))
+                        {
                             process = Process.GetProcessById(p.Id);
                             return process;
                         }
@@ -240,7 +289,8 @@ namespace AluminiumTech.PlatformKit{
 
                 return null;
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 throw new Exception(ex.ToString());
             }
         }
@@ -249,10 +299,14 @@ namespace AluminiumTech.PlatformKit{
         /// End a process if it is currently running.
         /// </summary>
         /// <param name="processName"></param>
-        public void TerminateProcess(string processName){
-            if (IsProcessRunning(processName)){
+        public void TerminateProcess(string processName)
+        {
+            if (IsProcessRunning(processName))
+            {
                 Process process = ConvertStringToProcess(processName);
                 process.Kill();
+                process.Close();
+                process.Dispose();
             }
         }
 
@@ -260,7 +314,9 @@ namespace AluminiumTech.PlatformKit{
         /// Check how many processes are currently running.
         /// </summary>
         /// <returns></returns>
-        public int GetProcessCount(){
+        [Obsolete(DeprecationMessages.DeprecationV2B6)]
+        public int GetProcessCount()
+        {
             return Process.GetProcesses().Length;
         }
 
@@ -268,13 +324,16 @@ namespace AluminiumTech.PlatformKit{
         /// Get the list of processes as a List containing Strings
         /// </summary>
         /// <returns></returns>
-        public List<string> GetProcessesToStringList(){
+        public List<string> GetProcessesToStringList()
+        {
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes){
+            foreach (Process process in processes)
+            {
                 strList.Add(process.ToString());
             }
+
             strList.TrimExcess();
             return strList;
         }
@@ -283,16 +342,17 @@ namespace AluminiumTech.PlatformKit{
         /// Returns a List containing all the running processes.
         /// </summary>
         /// <returns></returns>
-        public List<Process> GetProcessesToProcessList(){
-            var strList = new List<Process>();
-            Process[] processes = Process.GetProcesses();
+        public List<Process> GetProcessesToProcessList()
+        {
+            List<Process> processList = new List<Process>();
+            var list = GetProcessesToStringList();
 
-            foreach (Process process in processes){
-                strList.Add(process);
+            foreach (string s in list)
+            {
+                processList.Add(ConvertStringToProcess(s));
             }
 
-            strList.TrimExcess();
-            return strList;
+            return processList;
         }
 
         /// <summary>
@@ -301,15 +361,52 @@ namespace AluminiumTech.PlatformKit{
         /// <typeparam name="string"> The Process Name.</typeparam>
         /// </summary>
         /// <returns></returns>
-        public Dictionary<int, string> GetProcessListToDictionary(){
+        public Dictionary<int, string> GetProcessListToDictionary()
+        {
             var dictionary = new Dictionary<int, string>();
             Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes){
+            foreach (Process process in processes)
+            {
                 dictionary.Add(process.Id, process.ProcessName);
             }
-            
+
             return dictionary;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public bool CheckIfProcessIsRunningAsAdministrator()
+        {
+            Platform platform = new Platform();
+
+            if (platform.ToEnum().Equals(OperatingSystemFamily.Windows))
+            {
+                // System.Runtime.InteropServices.
+                throw new PlatformNotSupportedException(); // This is temporary only
+            }
+            else if (platform.ToEnum().Equals(OperatingSystemFamily.macOS))
+            {
+                return (Mono.Unix.Native.Syscall.geteuid() == 0);
+            }
+            else if (platform.ToEnum().Equals(OperatingSystemFamily.Linux))
+            {
+                return (Mono.Unix.Native.Syscall.geteuid() == 0);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+/*
+        public bool CheckIfProcessIsRunningAsAdministrator(Process process)
+        {
+        //    process.
+        }
+    */
     }
 }

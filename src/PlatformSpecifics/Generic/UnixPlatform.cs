@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace AluminiumTech.PlatformKit.PlatformSpecifics.Generic
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Generic
 {
      class UnixPlatform
     {
@@ -29,10 +29,19 @@ namespace AluminiumTech.PlatformKit.PlatformSpecifics.Generic
         /// <returns></returns>
         protected string GetUnameInformation(string parameter)
         {
-            processManager.RunProcess("uname + " + parameter);
-            //processManager.RunConsoleCommand("uname " + parameter);
-            TextReader reader = Console.In;
-            return reader.ReadLine();
+            try
+            {
+                processManager.RunProcess("uname " + parameter);
+                //processManager.RunConsoleCommand("uname " + parameter);
+                TextReader reader = Console.In;
+                return reader.ReadLine();
+            }
+            catch
+            {
+                processManager.ExecuteBuiltInLinuxCommand("uname " + parameter);
+                TextReader reader = Console.In;
+                return reader.ReadLine();
+            }
         }
     }
 }

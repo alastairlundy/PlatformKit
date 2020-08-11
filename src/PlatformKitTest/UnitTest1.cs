@@ -1,7 +1,4 @@
 using System;
-
-using AluminiumTech.PlatformKit.PlatformSpecifics;
-
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;

@@ -22,14 +22,14 @@ SOFTWARE.
     */
 
 using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using AluminiumTech.DevKit.PlatformKit.consts;
+using AluminiumTech.DevKit.PlatformKit.enums;
 
-using AluminiumTech.PlatformKit.enums;
-
-namespace AluminiumTech.PlatformKit{
+namespace AluminiumTech.DevKit.PlatformKit{
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
@@ -39,7 +39,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns the OS Architecture To Enum
         /// </summary>
         /// <returns></returns>
-        public CPUArchitectureFamily GetOsArchitectureFamilyToEnum() {
+        public CPUArchitectureFamily GetOSArchitectureFamilyToEnum() {
             var osArchitecture = RuntimeInformation.OSArchitecture;
 
             try {
@@ -53,7 +53,7 @@ namespace AluminiumTech.PlatformKit{
                 }
                 else if (osArchitecture.Equals(Architecture.X86))
                 {
-                    return CPUArchitectureFamily.X86;
+                    return CPUArchitectureFamily.i386;
                 }
                 else if (osArchitecture.Equals(Architecture.X64))
                 {
@@ -71,7 +71,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns the OS Architecture as a string.
         /// </summary>
         /// <returns></returns>
-        public string GetOsArchitectureToString() {
+        public string GetOSArchitectureToString() {
             return RuntimeInformation.OSArchitecture.ToString();
         }
 
@@ -79,7 +79,7 @@ namespace AluminiumTech.PlatformKit{
         /// Determine what OS is being run
         /// </summary>
         /// <returns></returns>
-        public OSPlatform GetOsPlatform() {
+        public OSPlatform GetOSPlatform() {
             OSPlatform osPlatform = OSPlatform.Create("Other Platform");
             // Check if it's windows
             bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
@@ -99,14 +99,14 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            if (GetOsPlatform().Equals(OSPlatform.Windows)) {
+            if (GetOSPlatform().Equals(OSPlatform.Windows)) {
                 return "Windows";
             }
-            else if (GetOsPlatform().Equals(OSPlatform.OSX))
+            else if (GetOSPlatform().Equals(OSPlatform.OSX))
             {
                 return "macOS";
             }
-            else if (GetOsPlatform().Equals(OSPlatform.Linux)) {
+            else if (GetOSPlatform().Equals(OSPlatform.Linux)) {
                 return "Linux";
             }
             return null;
@@ -116,7 +116,7 @@ namespace AluminiumTech.PlatformKit{
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
-        public bool Is64BitOs() {
+        public bool Is64BitOS() {
             return Environment.Is64BitOperatingSystem;
         }
 
@@ -133,13 +133,13 @@ namespace AluminiumTech.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public OperatingSystemFamily ToEnum() {
-            if (GetOsPlatform().Equals(OSPlatform.Windows)) {
+            if (GetOSPlatform().Equals(OSPlatform.Windows)) {
                 return OperatingSystemFamily.Windows;
             }
-            else if (GetOsPlatform().Equals(OSPlatform.OSX)) {
+            else if (GetOSPlatform().Equals(OSPlatform.OSX)) {
                 return OperatingSystemFamily.macOS;
             }
-            else if (GetOsPlatform().Equals(OSPlatform.Linux) ||
+            else if (GetOSPlatform().Equals(OSPlatform.Linux) ||
                 ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
@@ -193,9 +193,9 @@ namespace AluminiumTech.PlatformKit{
 
         /// <summary>
         /// Get the Windows Version returned as a string.
-        /// DEPRECATION NOTICE: This function is now deprecated and will be removed in a future version.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV2B6)]
         public string GetWindowsVersionToString() {
             string windowsKernel = RuntimeInformation.OSDescription;
             string[] words = windowsKernel.Split();
