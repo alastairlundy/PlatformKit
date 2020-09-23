@@ -25,8 +25,6 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
 {
     public static class DeprecationMessages
     {
-        public const string V2B5 = "v2.0.0-beta.5";
-        public const string V2B6 = "v2.0.0-beta.6";
         public const string V2B7 = "v2.0.0-beta.7";
         public const string V2B8 = "v2.0.0-beta.8";
         
@@ -35,9 +33,7 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
         public const string Deprecation = "This method is deprecated and will be removed";
         
         public const string FutureDeprecation = Deprecation + " in a future version.";
-
-        public const string DeprecationV2B5 = Deprecation + " in " + V2B5;
-        public const string DeprecationV2B6 = Deprecation + " in " + V2B6;
+        
         public const string DeprecationV2B7 = Deprecation + " in " + V2B7;
         public const string DeprecationV2B8 = Deprecation + " in " + V2B8;
         
