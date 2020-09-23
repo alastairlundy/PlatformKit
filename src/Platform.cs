@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using AluminiumTech.DevKit.PlatformKit.consts;
 using AluminiumTech.DevKit.PlatformKit.enums;
 
@@ -39,7 +40,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns the OS Architecture To Enum
         /// </summary>
         /// <returns></returns>
-        public CPUArchitectureFamily GetOSArchitectureFamilyToEnum() {
+        public CPUArchitectureFamily ToCPUArchitectureFamily() {
             var osArchitecture = RuntimeInformation.OSArchitecture;
 
             try {
@@ -132,7 +133,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns the OS Family as an Enum
         /// </summary>
         /// <returns></returns>
-        public OperatingSystemFamily ToEnum() {
+        public OperatingSystemFamily ToOperatingSystemFamily() {
             if (GetOSPlatform().Equals(OSPlatform.Windows)) {
                 return OperatingSystemFamily.Windows;
             }
@@ -179,7 +180,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
                 Console.WriteLine("                                                         ");
                 Console.WriteLine("                                                         ");
-                Console.ForegroundColor = ConsoleColor.Gray;
             }
             catch (Exception ex){
                 Console.WriteLine("Here are some details in case you need them:");

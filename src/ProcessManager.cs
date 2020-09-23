@@ -103,7 +103,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="arguments"></param>
         public void RunProcess(string processName, string arguments)
         {
-            var plat = _platform.ToEnum();
+            var plat = _platform.ToOperatingSystemFamily();
 
             if (plat.Equals(OperatingSystemFamily.Windows))
             {
@@ -240,20 +240,20 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             Platform platform = new Platform();
 
-            if (platform.ToEnum().Equals(OperatingSystemFamily.Windows))
+            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
             {
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
                     {CreateNoWindow = true});
                 return true;
             }
 
-            if (platform.ToEnum().Equals(OperatingSystemFamily.Linux))
+            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
             {
                 Process.Start("xdg-open", url);
                 return true;
             }
 
-            if (platform.ToEnum().Equals(OperatingSystemFamily.macOS))
+            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
             {
                 Process.Start("open", url);
                 return true;
@@ -321,10 +321,10 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Get the list of processes as a List containing Strings
+        /// Get the list of processes as a String Array
         /// </summary>
         /// <returns></returns>
-        public List<string> GetProcessesToStringList()
+        public string[] GetProcessesToStringArray()
         {
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
@@ -335,24 +335,7 @@ namespace AluminiumTech.DevKit.PlatformKit
             }
 
             strList.TrimExcess();
-            return strList;
-        }
-
-        /// <summary>
-        /// Returns a List containing all the running processes.
-        /// </summary>
-        /// <returns></returns>
-        public List<Process> GetProcessesToProcessList()
-        {
-            List<Process> processList = new List<Process>();
-            var list = GetProcessesToStringList();
-
-            foreach (string s in list)
-            {
-                processList.Add(ConvertStringToProcess(s));
-            }
-
-            return processList;
+            return strList.ToArray();
         }
 
         /// <summary>
@@ -383,16 +366,24 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             Platform platform = new Platform();
 
-            if (platform.ToEnum().Equals(OperatingSystemFamily.Windows))
+            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
             {
-                // System.Runtime.InteropServices.
-                throw new PlatformNotSupportedException(); // This is temporary only
+                System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+
+                if (currentProcess.StartInfo.Verb.Contains("runas"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else if (platform.ToEnum().Equals(OperatingSystemFamily.macOS))
+            else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
             {
                 return (Mono.Unix.Native.Syscall.geteuid() == 0);
             }
-            else if (platform.ToEnum().Equals(OperatingSystemFamily.Linux))
+            else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
             {
                 return (Mono.Unix.Native.Syscall.geteuid() == 0);
             }
