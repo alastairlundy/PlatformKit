@@ -43,33 +43,6 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Print all the processes running to the Console.
-        /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV2B6)]
-        public void ListAllProcesses()
-        {
-            Process[] processes = Process.GetProcesses();
-
-            foreach (Process process in processes)
-            {
-                //Get whatever attribute for process
-                Console.WriteLine("Process " + process.Id + ": " + process.ProcessName);
-            }
-        }
-
-        /// <summary>
-        /// Warn the user if the process count is extremely high.
-        /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV2B6)]
-        public void WarnProcessCount(int processWarnCount, string warningMessage)
-        {
-            if (GetProcessCount() > processWarnCount)
-            {
-                Console.WriteLine(warningMessage);
-            }
-        }
-
-        /// <summary>
         /// Check to see if a process is running or not.
         /// </summary>
         public bool IsProcessRunning(string processName)
@@ -308,16 +281,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 process.Close();
                 process.Dispose();
             }
-        }
-
-        /// <summary>
-        /// Check how many processes are currently running.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2B6)]
-        public int GetProcessCount()
-        {
-            return Process.GetProcesses().Length;
         }
 
         /// <summary>
