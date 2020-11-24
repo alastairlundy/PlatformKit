@@ -11,6 +11,7 @@ Table of Contents:
  
 | Version | API Level| Availability | Changelog |
 |---------|--------------|-----------|--|
+| 2.0.0 Beta 5 | 17 | September 23rd 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta5)
 | 2.0.0 Beta 4 | 16 | June 11th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta4)
 | 2.0.0 Beta 3 | 15 | June 4th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta3)
 | 2.0.0 Beta 2 | 14 | March 30th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta2)
