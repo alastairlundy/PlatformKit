@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+using AluminiumTech.DevKit.PlatformKit.consts;
 
 namespace AluminiumTech.DevKit.PlatformKit.enums.specifics
 {
@@ -35,12 +36,6 @@ namespace AluminiumTech.DevKit.PlatformKit.enums.specifics
         /// Windows 10 Xbox OS.
         /// </summary>
         Xbox,
-        /// <summary>
-        /// Refers to obsolete Windows 10 Mobile discontinued in 2019.
-        /// DO NOT USE, this is deprecated.
-        /// </summary>
-        [Obsolete]
-        Mobile,
         HoloLens,
         /// <summary>
         /// Windows 10 Teams OS.
