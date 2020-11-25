@@ -25,8 +25,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using AluminiumTech.DevKit.PlatformKit.consts;
-using AluminiumTech.DevKit.PlatformKit.enums;
+
+using AluminiumTech.HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
@@ -77,19 +77,9 @@ namespace AluminiumTech.DevKit.PlatformKit
         public void RunProcess(string processName, string arguments)
         {
             var plat = _platform.ToOperatingSystemFamily();
-
-            if (plat.Equals(OperatingSystemFamily.Windows))
-            {
-                RunProcessWindows(processName, arguments);
-            }
-            else if (plat.Equals(OperatingSystemFamily.macOS))
-            {
-                RunProcessMac(processName, arguments);
-            }
-            else if (plat.Equals(OperatingSystemFamily.Linux))
-            {
-                RunProcessLinux(processName, arguments);
-            }
+            
+            RunOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
+                ()=> RunProcessLinux(processName, arguments));
         }
 
         /// <summary>
@@ -97,24 +87,22 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcessWindows(string processName, string arguments = "")
-        {
-            RunProcessWindows(processName, ProcessWindowStyle.Normal, arguments);
-        }
-
-        /// <summary>
-        /// Run a process on Windows with Arguments and a Process Window Style
-        /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="arguments"></param>
         /// <param name="pws"></param>
-        public void RunProcessWindows(string processName, ProcessWindowStyle pws, string arguments = "")
+        public void RunProcessWindows(string processName, string arguments = "", ProcessWindowStyle pws = ProcessWindowStyle.Normal)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = processName + ".exe";
-            process.StartInfo.Arguments = arguments;
-            process.StartInfo.WindowStyle = pws;
-            process.Start();
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = processName + ".exe";
+                process.StartInfo.Arguments = arguments;
+                process.StartInfo.WindowStyle = pws;
+                process.Start();
+            }
+            catch(Exception ex)
+            {
+               Console.WriteLine(ex.ToString());
+               throw new Exception(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -204,6 +192,44 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
+        /// Run different actions or methods depending on the operating system.
+        /// </summary>
+        /// <param name="WindowsMethod"></param>
+        /// <param name="MacMethod"></param>
+        /// <param name="LinuxMethod"></param>
+        /// <returns></returns>
+        public bool RunOn(System.Action WindowsMethod = null, Action MacMethod = null, Action LinuxMethod = null)
+        {
+            try
+            {
+                Platform platform = new Platform();
+
+                if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod != null)
+                {
+                    WindowsMethod.Invoke();
+                    return true;
+                }
+                else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod != null)
+                {
+                    LinuxMethod.Invoke();
+                    return true;
+                }
+                else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod != null)
+                {
+                    MacMethod.Invoke();
+                    return true;
+                }
+
+                return false;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        /// <summary>
         /// Open a URL in the default browser.
         /// </summary>
         /// <param name="url"></param>
@@ -211,28 +237,15 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         public bool OpenUrlInBrowser(string url)
         {
-            Platform platform = new Platform();
-
-            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
-            {
+            Action win = new Action(() => 
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
-                    {CreateNoWindow = true});
-                return true;
-            }
+                    {CreateNoWindow = true}));
 
-            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
-            {
-                Process.Start("xdg-open", url);
-                return true;
-            }
+            Action mac = new Action(() => Process.Start("xdg-open", url));
+            
+            Action linux = new Action(()=> Process.Start("open", url));
 
-            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
-            {
-                Process.Start("open", url);
-                return true;
-            }
-
-            return false;
+           return RunOn(win, mac, linux);
         }
 
         /// <summary>
@@ -356,11 +369,32 @@ namespace AluminiumTech.DevKit.PlatformKit
             }
         }
 
-/*
+        /// <summary>
+        /// WORK IN PROGRESS. 
+        /// </summary>
+        /// <param name="process"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         public bool CheckIfProcessIsRunningAsAdministrator(Process process)
         {
-        //    process.
+            Platform platform = new Platform();
+
+            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
+            {
+
+                if (process.StartInfo.Verb.Contains("runas"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
-    */
     }
 }

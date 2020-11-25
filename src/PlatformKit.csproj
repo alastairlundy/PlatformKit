@@ -30,7 +30,7 @@
 * Removed ``GetProcessesToStringList()``
 * Added ``GetProcessesToStringArray()``</PackageReleaseNotes>
     <Product>PlatformKit</Product>
-    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -60,6 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="HardwareKit.Components.Base" Version="1.1.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="5.20.1-preview" />
   </ItemGroup>
 </Project>
