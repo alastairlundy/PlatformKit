@@ -26,9 +26,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
-using AluminiumTech.DevKit.PlatformKit.consts;
-using AluminiumTech.DevKit.PlatformKit.enums;
+using AluminiumTech.HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit{
     /// <summary>
@@ -189,28 +187,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
             while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
                 //Do nothing to make sure everybody sees the license.
             }
-        }
-
-        /// <summary>
-        /// Get the Windows Version returned as a string.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2B6)]
-        public string GetWindowsVersionToString() {
-            string windowsKernel = RuntimeInformation.OSDescription;
-            string[] words = windowsKernel.Split();
-
-            foreach(string word in words) {
-                if (word.ToLower().Contains("10.0") || word.ToLower().Contains("9.") || word.ToLower().Contains("8.")){
-                    //Do not replace if it contains the Windows 10 build and version info.
-                    return word;
-                }
-                else{
-                    windowsKernel = windowsKernel.Replace(word, " ");
-                }
-            }
-            
-            return windowsKernel;
         }
     }
 }

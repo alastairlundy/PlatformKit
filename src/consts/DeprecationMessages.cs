@@ -30,7 +30,7 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
         
         public const string V2 = "v2.0.0";
         
-        public const string Deprecation = "This code is deprecated and will be removed";
+        const string Deprecation = "This code is deprecated and will be removed";
         
         public const string FutureDeprecation = Deprecation + " in a future version.";
         
