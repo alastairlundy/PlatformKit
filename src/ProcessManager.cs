@@ -61,20 +61,11 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Run a Process
-        /// </summary>
-        /// <param name="processName"></param>
-        public void RunProcess(string processName)
-        {
-            RunProcess(processName, "");
-        }
-
-        /// <summary>
         /// Run a Process with Arguments
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcess(string processName, string arguments)
+        public void RunProcess(string processName, string arguments = "")
         {
             var plat = _platform.ToOperatingSystemFamily();
             
@@ -375,7 +366,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="process"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public bool CheckIfProcessIsRunningAsAdministrator(Process process)
+        internal bool CheckIfProcessIsRunningAsAdministrator(Process process)
         {
             Platform platform = new Platform();
 
