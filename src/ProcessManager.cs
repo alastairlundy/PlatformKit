@@ -307,8 +307,6 @@ namespace AluminiumTech.DevKit.PlatformKit
 
         /// <summary>
         /// Returns a Dictionary containing all the running processes.
-        /// <typeparam name="int"> The Process ID.</typeparam>
-        /// <typeparam name="string"> The Process Name.</typeparam>
         /// </summary>
         /// <returns></returns>
         public Dictionary<int, string> GetProcessListToDictionary()
