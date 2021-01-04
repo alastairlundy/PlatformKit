@@ -11,16 +11,17 @@ Table of Contents:
  
 | Version | API Level| Availability | Changelog |
 |---------|--------------|-----------|--|
-| 2.0.0 Beta 5 | 17 | September 23rd 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta5)
-| 2.0.0 Beta 4 | 16 | June 11th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta4)
-| 2.0.0 Beta 3 | 15 | June 4th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta3)
-| 2.0.0 Beta 2 | 14 | March 30th 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta2)
-| 2.0.0 Beta 1 | 14 | March 22nd 2020 | [Changelog](https://github.com/AluminiumTech/PlatformKit/releases/tag/2.0.0-beta1)
-| 2.0.0 Alpha 9 | 13 | February 6th 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha9)
-| 2.0.0 Alpha 8 | 12 |  February 5th 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha8)|
-| 2.0.0 Alpha 7 | 12 | February 3rd 2020 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha7)|
-| 2.0.0 Alpha 6 | 11 |  November 7th 2019 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha6)|
-| 2.0.0 Alpha 5 | 10 | August 9th 2019 | [Changelog](https://github.com/AluminiumTech/AluminiumCoreLib/releases/tag/2.0.0-alpha5)|
+| 2.0.0 Beta 6 | 18 | November 25th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.6)
+| 2.0.0 Beta 5 | 17 | September 23rd 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.5)
+| 2.0.0 Beta 4 | 16 | June 11th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta4)
+| 2.0.0 Beta 3 | 15 | June 4th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta3)
+| 2.0.0 Beta 2 | 14 | March 30th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta2)
+| 2.0.0 Beta 1 | 14 | March 22nd 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta1)
+| 2.0.0 Alpha 9 | 13 | February 6th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-alpha9)
+| 2.0.0 Alpha 8 | 12 |  February 5th 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-alpha8)|
+| 2.0.0 Alpha 7 | 12 | February 3rd 2020 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-alpha7)|
+| 2.0.0 Alpha 6 | 11 |  November 7th 2019 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-alpha6)|
+| 2.0.0 Alpha 5 | 10 | August 9th 2019 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-alpha5)|
 | 2.0.0 Alpha 4 | 9 | October 30th 2018 | |
 | 2.0.0 Alpha 3 | 8 | October 6th 2018 | |
 | 2.0.0 Alpha 2 | 7 | August 11th 2018 | |
