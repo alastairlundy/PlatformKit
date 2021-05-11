@@ -1,6 +1,6 @@
 ﻿/* MIT License
 
-Copyright (c) 2018-2020 AluminiumTech
+Copyright (c) 2018-2021 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+
 using AluminiumTech.HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit{
@@ -76,6 +77,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
         /// <summary>
         /// Determine what OS is being run
+        /// Can only detect Windows, Mac, or Linux.
         /// </summary>
         /// <returns></returns>
         public OSPlatform GetOSPlatform() {
@@ -84,8 +86,8 @@ namespace AluminiumTech.DevKit.PlatformKit{
             bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
             osPlatform = isWindows ? OSPlatform.Windows : osPlatform;
             // Check if it's osx
-            bool isOsx = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-            osPlatform = isOsx ? OSPlatform.OSX : osPlatform;
+            bool isMac = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            osPlatform = isMac ? OSPlatform.OSX : osPlatform;
             // Check if it's Linux
             bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
             osPlatform = isLinux ? OSPlatform.Linux : osPlatform;
