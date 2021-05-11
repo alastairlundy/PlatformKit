@@ -42,6 +42,20 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
+        /// Allow ProcessManager.cs access to Platform.cs's OperatingSystemFamily detection.
+        /// </summary>
+        /// <returns></returns>
+        internal OperatingSystemFamily GetPlatformOperatingSystemFamily()
+        {
+            if (cachedOSFamily.Equals(null))
+            {
+                cachedOSFamily = new Platform().ToOperatingSystemFamily();
+            }
+
+            return cachedOSFamily;
+        }
+
+        /// <summary>
         /// Check to see if a process is running or not.
         /// </summary>
         public bool IsProcessRunning(string processName)
@@ -115,7 +129,9 @@ namespace AluminiumTech.DevKit.PlatformKit
             process.Start();
         }
 
+        /// This won't be implemented for V2. This will be implemented in V2.1
         /*
+         * 
         public void RunConsoleCommand(string arguments)
         {
             var plat = new Platform().ToEnum();
@@ -138,6 +154,35 @@ namespace AluminiumTech.DevKit.PlatformKit
             RunProcess(programName, arguments);
         }
          */
+
+        /// <summary>
+        /// TODO: Test, Fix, and Revamp this method as required to ensure it is working for V2.1
+        /// THIS WILL BE DISABLED FOR V2.
+        /// 
+        /// WARNING: Does not work on Windows or macOS.
+        /// </summary>
+        /// <param name="command"></param>
+        internal void RunCommandLinux(string command)
+        {
+            try
+            {
+                if (!(new Platform().ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux)))
+                {
+                    throw new PlatformNotSupportedException();
+                }
+
+                //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
+                string processName = "/usr/bin/bash";
+                string processArguments = "-c \" " + command + " \"";
+
+                RunProcessLinux(processName, processArguments);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
 
         /// <summary>
         /// Run a Process on Linux
@@ -166,42 +211,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new Exception(ex.ToString());
             }
             
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="command"></param>
-        public void ExecuteBuiltInLinuxCommand(string command)
-        {
-            try
-            {
-                if(!(new Platform().ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux)))
-                {
-                    throw new PlatformNotSupportedException();
-                }
-
-                //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
-                string processName = "/usr/bin/bash";
-                string processArguments = "-c \" " + command + " \"";
-
-                RunProcessLinux(processName, processArguments);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
-            }
-        }
-
-        internal OperatingSystemFamily GetPlatformOperatingSystemFamily()
-        {
-            if (cachedOSFamily.Equals(null))
-            {
-                cachedOSFamily = new Platform().ToOperatingSystemFamily();
-            }
-
-            return cachedOSFamily;           
         }
 
         /// <summary>
