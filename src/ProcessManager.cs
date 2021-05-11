@@ -35,11 +35,10 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// </summary>
     public class ProcessManager
     {
-        protected Platform _platform;
+        protected OperatingSystemFamily cachedOSFamily;
 
         public ProcessManager()
         {
-            _platform = new Platform();
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="arguments"></param>
         public void RunProcess(string processName, string arguments = "")
         {
-            var plat = _platform.ToOperatingSystemFamily();
+            var plat = GetPlatformOperatingSystemFamily();
             
             RunOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
                 ()=> RunProcessLinux(processName, arguments));
@@ -175,11 +174,34 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="command"></param>
         public void ExecuteBuiltInLinuxCommand(string command)
         {
-            //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
-            string processName = "/usr/bin/bash";
-            string processArguments = "-c \" " + command + " \"";
-            
-            RunProcessLinux(processName, processArguments);
+            try
+            {
+                if(!(new Platform().ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux)))
+                {
+                    throw new PlatformNotSupportedException();
+                }
+
+                //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
+                string processName = "/usr/bin/bash";
+                string processArguments = "-c \" " + command + " \"";
+
+                RunProcessLinux(processName, processArguments);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        internal OperatingSystemFamily GetPlatformOperatingSystemFamily()
+        {
+            if (cachedOSFamily.Equals(null))
+            {
+                cachedOSFamily = new Platform().ToOperatingSystemFamily();
+            }
+
+            return cachedOSFamily;           
         }
 
         /// <summary>
@@ -193,22 +215,26 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                Platform platform = new Platform();
-
-                if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod != null)
+                if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod != null)
                 {
                     WindowsMethod.Invoke();
                     return true;
                 }
-                else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod != null)
+                else if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod != null)
                 {
                     LinuxMethod.Invoke();
                     return true;
                 }
-                else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod != null)
+                else if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod != null)
                 {
                     MacMethod.Invoke();
                     return true;
+                }
+                else if(GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod == null ||
+                        GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod == null ||
+                        GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod == null)
+                {
+                    throw new ArgumentNullException();
                 }
 
                 return false;
