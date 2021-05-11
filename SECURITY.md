@@ -4,10 +4,10 @@
 
 Versions currently supported by Security Fixes.
 
-| Version | Supported with Security Fixes | Supported with Bug Fixes | Supported with New Features |
+| Version | Supported with New Features | Supported with Bug Fixes | Supported with Security Fixes | 
 |--| --|--|--|
 | 2.x.x Beta series | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| 2.x.x Alpha series | :x: , Support ended March 22nd 2020 | :x: , Support ended February 6th 2020 | :x: , Support ended February 6th 2020 |
+| 2.x.x Alpha series | :x: , Support ended February 6th 2020 | :x: , Support ended February 6th 2020 | :x: , Support ended March 22nd 2020 |
 | 1.x.x Beta series | :x:, Support ended February 6th 2018 |  :x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
 | 1.x.x Alpha series   | :x: | :x: | :x: |
 
