@@ -60,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HardwareKit.Components.Base" Version="1.1.0" />
-    <PackageReference Include="Mono.Posix.NETStandard" Version="5.20.1-preview" />
+    <PackageReference Include="HardwareKit.Components.Base" Version="1.2.0" />
   </ItemGroup>
 </Project>
