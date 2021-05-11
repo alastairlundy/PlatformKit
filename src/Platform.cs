@@ -102,7 +102,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2B7)]
+        [Obsolete(DeprecationMessages.DeprecationV2B8, true)]
         public bool Is64BitOS() {
             return Environment.Is64BitOperatingSystem;
         }
@@ -111,7 +111,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns whether or not the App currently running is 64 Bit or not.
         /// </summary>
         /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2B7)]
+        [Obsolete(DeprecationMessages.DeprecationV2B8, true)]
         public bool Is64BitApp() {
             return Environment.Is64BitProcess;
         }
@@ -208,10 +208,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
             if (appName.Length > 0)
             {
                 app = "App " + appName + " v" + appVersion + " " + bitness;
-            }
-            else
-            {
-               app = "App v" + appVersion + " " + bitness;
             }
 
             //Ensure compatibility with .NET Core 3.1 and .NET Standard 2.0
