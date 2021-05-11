@@ -1,14 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>2.0.0.9</AssemblyVersion>
-    <FileVersion>2.0.0.9</FileVersion>
-    <Version>2.0.0-alpha9</Version>
+    <AssemblyVersion>2.0.0.10</AssemblyVersion>
+    <FileVersion>2.0.0.10</FileVersion>
+    <Version>2.0.0-beta.7</Version>
+    <PackageVersion>2.0.0-beta.7</PackageVersion>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
     <Copyright>Copyright (c) AluminiumTech 2017-2020</Copyright>
-    <RepositoryUrl>https://github.com/AluminiumTech/PlatformKit</RepositoryUrl>
+    <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/PlatformKit</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -16,22 +17,16 @@
     <RootNamespace>AluminiumTech.DevKit.PlatformKit</RootNamespace>
     <AssemblyName>AluminiumTech.DevKit.PlatformKit</AssemblyName>
     <PackOnBuild>true</PackOnBuild>
-    <PackageId>PlatformKit</PackageId>
-    <PackageVersion>2.0.0-beta.6</PackageVersion>
+    <PackageId>PlatformKit</PackageId>    
     <Owners>AluminiumTech</Owners>
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>## Changes
-* Removed deprecated methods - ``WarnProcessCount()``, ``ListAllProcesses()``, and ``GetProcessCount()``
-* Removed deprecated method - ``GetWindowsVersionToString()``
-* Moved more code to HardwareKit.Detection
-* Removed unneeded duplicate constructors
-* Re-worked ``OpenUrlInBrowser()``
-* Added ``RunOn()``</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
-    <TargetFrameworks>net5.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1; netstandard2.0;</TargetFrameworks>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,9 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="PlatformKit\FolderManager.cs">
-      <IncludeInPackage>false</IncludeInPackage>
-    </Compile>
     <Compile Remove="PlatformKitTest\**" />
     <Compile Remove="TestConsole\**" />
   </ItemGroup>
