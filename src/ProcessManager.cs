@@ -1,6 +1,6 @@
 ﻿/* MIT License
 
-Copyright (c) 2019-2020 AluminiumTech
+Copyright (c) 2019-2021 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -325,39 +325,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// 
+        /// Determines whether the current process is running as an admistrator.
+        /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public bool CheckIfProcessIsRunningAsAdministrator()
+        public bool IsProcessRunningAsAdministrator()
         {
-            Platform platform = new Platform();
-
-            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
-            {
-                System.Diagnostics.Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
-
-                if (currentProcess.StartInfo.Verb.Contains("runas"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
-            {
-                return (Mono.Unix.Native.Syscall.geteuid() == 0);
-            }
-            else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
-            {
-                return (Mono.Unix.Native.Syscall.geteuid() == 0);
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+           return IsProcessRunningAsAdministrator(Process.GetCurrentProcess());
         }
 
         /// <summary>
@@ -366,7 +341,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="process"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        internal bool CheckIfProcessIsRunningAsAdministrator(Process process)
+        internal bool IsProcessRunningAsAdministrator(Process process)
         {
             Platform platform = new Platform();
 
@@ -382,6 +357,16 @@ namespace AluminiumTech.DevKit.PlatformKit
                     return false;
                 }
             }
+            /*       else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
+                 {
+                     return (Mono.Unix.Native.Syscall.geteuid() == 0);
+                 }
+                 else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
+                 {
+                     return (Mono.Unix.Native.Syscall.geteuid() == 0);
+                 }
+
+          */
             else
             {
                 throw new PlatformNotSupportedException();
