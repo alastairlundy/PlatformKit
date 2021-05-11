@@ -25,6 +25,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using System.Runtime.InteropServices;
 
 using AluminiumTech.HardwareKit.Components.Base.enums;
@@ -96,24 +97,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
         }
 
         /// <summary>
-        /// Returns the OS platform as a String.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() {
-            if (GetOSPlatform().Equals(OSPlatform.Windows)) {
-                return "Windows";
-            }
-            else if (GetOSPlatform().Equals(OSPlatform.OSX))
-            {
-                return "macOS";
-            }
-            else if (GetOSPlatform().Equals(OSPlatform.Linux)) {
-                return "Linux";
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
@@ -168,8 +151,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds) {
             Stopwatch licenseWatch = new Stopwatch();
-            licenseWatch.Reset();
-            licenseWatch.Start();
 
             try {
                 var lines = File.ReadAllLines(pathToTextFile);
@@ -186,9 +167,49 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 Console.WriteLine(ex.ToString());
             }
 
+            licenseWatch.Start();
+            
             while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
                 //Do nothing to make sure everybody sees the license.
             }
+
+            licenseWatch.Stop();
+            licenseWatch.Reset();
+        }
+
+        public string ToString()
+        {
+            string appName = "";
+
+            try
+            {
+                appName = Assembly.GetEntryAssembly()?.GetName().ToString();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("We couldn't detect the app name, continuing without failing");
+            }
+            
+            var appVersion = GetAppVersionToString();
+
+            string bitness = Is64BitApp() == true ? "64 Bit" : "32 Bit";
+
+            string app = "";
+            
+            if (appName.Length > 0)
+            {
+                app = "App " + appName + " v" + appVersion + " " + bitness;
+            }
+            else
+            {
+               app = "App v" + appVersion + " " + bitness;
+            }
+            
+            var runtime = RuntimeInformation.RuntimeIdentifier;
+
+            var running = " running on RunTimeID: " + runtime;
+
+            return app + running;
         }
     }
 }
