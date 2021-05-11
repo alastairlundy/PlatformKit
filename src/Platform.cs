@@ -30,6 +30,8 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.HardwareKit.Components.Base.enums;
 
+using AluminiumTech.DevKit.PlatformKit.consts;
+
 namespace AluminiumTech.DevKit.PlatformKit{
     /// <summary>
     /// A class that helps get system information.
@@ -100,6 +102,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns whether or not the current OS is 64 Bit.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV2B7)]
         public bool Is64BitOS() {
             return Environment.Is64BitOperatingSystem;
         }
@@ -108,6 +111,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns whether or not the App currently running is 64 Bit or not.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV2B7)]
         public bool Is64BitApp() {
             return Environment.Is64BitProcess;
         }
@@ -177,7 +181,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
             licenseWatch.Reset();
         }
 
-        public string ToString()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
             string appName = "";
 
@@ -187,12 +195,13 @@ namespace AluminiumTech.DevKit.PlatformKit{
             }
             catch(Exception ex)
             {
-                Console.WriteLine("We couldn't detect the app name, continuing without failing");
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
             }
             
             var appVersion = GetAppVersionToString();
 
-            string bitness = Is64BitApp() == true ? "64 Bit" : "32 Bit";
+            string bitness = Environment.Is64BitProcess == true ? "64 Bit" : "32 Bit";
 
             string app = "";
             
@@ -204,8 +213,10 @@ namespace AluminiumTech.DevKit.PlatformKit{
             {
                app = "App v" + appVersion + " " + bitness;
             }
-            
-            var runtime = RuntimeInformation.RuntimeIdentifier;
+
+            //Ensure compatibility with .NET Core 3.1 and .NET Standard 2.0
+            //Re-introduce RunTimeID usage when we switch to targetting .NET 5
+            var runtime = RuntimeInformation.OSDescription + " on " + RuntimeInformation.FrameworkDescription;
 
             var running = " running on RunTimeID: " + runtime;
 
