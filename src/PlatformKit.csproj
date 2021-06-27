@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>2.0.0.10</AssemblyVersion>
-    <FileVersion>2.0.0.10</FileVersion>
-    <Version>2.0.0-beta.8</Version>
-    <PackageVersion>2.0.0-beta.8</PackageVersion>
+    <AssemblyVersion>2.0.0.11</AssemblyVersion>
+    <FileVersion>2.0.0.11</FileVersion>
+    <Version>2.0.0-beta.9</Version>
+    <PackageVersion>2.0.0-beta.9</PackageVersion>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
@@ -22,13 +22,8 @@
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>### Changes since 2.0.0 Beta 7
-* Added the ability to suspend and resume processes (Windows only).
-* Removed unneeded Mac only consts
-* Removed methods deprecated in 2.0.0 Beta 7
-* Removed redundant or unneeded methods
-* Renamed some methods
-* Minor Tweaks</PackageReleaseNotes>
+    <PackageReleaseNotes>### Changes since 2.0.0 Beta 8
+* Fixed an issue where getting the app version would return an incorrect value.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
     <TargetFrameworks>netcoreapp3.1; netstandard2.0;</TargetFrameworks>
