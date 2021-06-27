@@ -26,8 +26,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-using System.Runtime.InteropServices;
-
 using AluminiumTech.HardwareKit.Components.Base.enums;
 
 using AluminiumTech.DevKit.PlatformKit.consts;
@@ -43,22 +41,22 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public CPUArchitectureFamily ToCPUArchitectureFamily() {
-            var osArchitecture = RuntimeInformation.OSArchitecture;
+            var osArchitecture = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
 
             try {
-                if (osArchitecture.Equals(Architecture.Arm))
+                if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.Arm))
                 {
                     return CPUArchitectureFamily.ARM32;
                 }
-                else if (osArchitecture.Equals(Architecture.Arm64))
+                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.Arm64))
                 {
                     return CPUArchitectureFamily.ARM64;
                 }
-                else if (osArchitecture.Equals(Architecture.X86))
+                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.X86))
                 {
                     return CPUArchitectureFamily.i386;
                 }
-                else if (osArchitecture.Equals(Architecture.X64))
+                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.X64))
                 {
                     return CPUArchitectureFamily.X64;
                 }
@@ -71,29 +69,21 @@ namespace AluminiumTech.DevKit.PlatformKit{
         }
 
         /// <summary>
-        /// Returns the OS Architecture as a string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetOSArchitectureToString() {
-            return RuntimeInformation.OSArchitecture.ToString();
-        }
-
-        /// <summary>
         /// Determine what OS is being run
         /// Can only detect Windows, Mac, or Linux.
         /// </summary>
         /// <returns></returns>
-        public OSPlatform GetOSPlatform() {
-            OSPlatform osPlatform = OSPlatform.Create("Other Platform");
+        public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
+            System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
             // Check if it's windows
-            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-            osPlatform = isWindows ? OSPlatform.Windows : osPlatform;
+            bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            osPlatform = isWindows ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
             // Check if it's osx
-            bool isMac = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-            osPlatform = isMac ? OSPlatform.OSX : osPlatform;
+            bool isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+            osPlatform = isMac ? System.Runtime.InteropServices.OSPlatform.OSX : osPlatform;
             // Check if it's Linux
-            bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-            osPlatform = isLinux ? OSPlatform.Linux : osPlatform;
+            bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+            osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
 
             return osPlatform;
         }
@@ -103,13 +93,13 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public OperatingSystemFamily ToOperatingSystemFamily() {
-            if (GetOSPlatform().Equals(OSPlatform.Windows)) {
+            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows)) {
                 return OperatingSystemFamily.Windows;
             }
-            else if (GetOSPlatform().Equals(OSPlatform.OSX)) {
+            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX)) {
                 return OperatingSystemFamily.macOS;
             }
-            else if (GetOSPlatform().Equals(OSPlatform.Linux) ||
+            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux) ||
                 ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
@@ -117,11 +107,29 @@ namespace AluminiumTech.DevKit.PlatformKit{
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetAppName()
+        {
+            return Assembly.GetExecutingAssembly()?.GetName().Name;
+        }
+
+        /// <summary>
+        /// Return's the executing app's assembly.
+        /// </summary>
+        /// <returns></returns>
+        public Assembly GetAssembly()
+        {
+            return Assembly.GetExecutingAssembly();
+        }
+
+        /// <summary>
         /// Return an app's version as a string.
         /// </summary>
         /// <returns></returns>
         public string GetAppVersionToString() {
-            return Assembly.GetEntryAssembly()?.GetName().Version.ToString();
+            return Assembly.GetExecutingAssembly()?.GetName().Version.ToString();
         }
 
         /// <summary>
@@ -129,7 +137,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public System.Version GetAppVersionToVersion() {
-            return Assembly.GetEntryAssembly()?.GetName().Version;
+            return Assembly.GetExecutingAssembly()?.GetName().Version;
         }
 
         /// <summary>
@@ -194,7 +202,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
             //Ensure compatibility with .NET Core 3.1 and .NET Standard 2.0
             //Re-introduce RunTimeID usage when we switch to targetting .NET 5
-            var runtime = RuntimeInformation.OSDescription + " on " + RuntimeInformation.FrameworkDescription;
+            var runtime = System.Runtime.InteropServices.RuntimeInformation.OSDescription + " on " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
 
             var running = " running on RunTimeID: " + runtime;
 

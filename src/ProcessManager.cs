@@ -56,24 +56,6 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Check to see if a process is running or not.
-        /// </summary>
-        public bool IsProcessRunning(string processName)
-        {
-            Process[] processes = Process.GetProcesses();
-
-            foreach (Process process in processes)
-            {
-                if (process.ToString().Equals(processName))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
         /// Run a Process with Arguments
         /// </summary>
         /// <param name="processName"></param>
@@ -82,7 +64,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             var plat = GetPlatformOperatingSystemFamily();
             
-            RunOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
+            RunActionOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
                 ()=> RunProcessLinux(processName, arguments));
         }
 
@@ -220,7 +202,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="MacMethod"></param>
         /// <param name="LinuxMethod"></param>
         /// <returns></returns>
-        public bool RunOn(System.Action WindowsMethod = null, Action MacMethod = null, Action LinuxMethod = null)
+        public bool RunActionOn(System.Action WindowsMethod = null, System.Action MacMethod = null, System.Action LinuxMethod = null)
         {
             try
             {
@@ -256,22 +238,21 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Open a URL in the default browser.
+        /// Check to see if a process is running or not.
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-        public bool OpenUrlInBrowser(string url)
+        public bool IsProcessRunning(string processName)
         {
-            Action win = new Action(() => 
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
-                    {CreateNoWindow = true}));
+            var processArray = Process.GetProcesses();
 
-            Action mac = new Action(() => Process.Start("xdg-open", url));
-            
-            Action linux = new Action(()=> Process.Start("open", url));
+            foreach (Process proc in processArray)
+            {
+                if (proc.ToString().Equals(processName))
+                {
+                    return true;
+                }
+            }
 
-           return RunOn(win, mac, linux);
+            return false;
         }
 
         /// <summary>
@@ -308,21 +289,6 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// End a process if it is currently running.
-        /// </summary>
-        /// <param name="processName"></param>
-        public void TerminateProcess(string processName)
-        {
-            if (IsProcessRunning(processName))
-            {
-                Process process = ConvertStringToProcess(processName);
-                process.Kill();
-                process.Close();
-                process.Dispose();
-            }
-        }
-
-        /// <summary>
         /// Get the list of processes as a String Array
         /// </summary>
         /// <returns></returns>
@@ -340,45 +306,116 @@ namespace AluminiumTech.DevKit.PlatformKit
             return strList.ToArray();
         }
 
-        /// <summary>
-        /// Returns a Dictionary containing all the running processes.
-        /// </summary>
-        /// <returns></returns>
-        public Dictionary<int, string> GetProcessListToDictionary()
-        {
-            var dictionary = new Dictionary<int, string>();
-            Process[] processes = Process.GetProcesses();
 
-            foreach (Process process in processes)
+        /// <summary>
+        /// Open a URL in the default browser.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
+        public bool OpenUrlInBrowser(string url)
+        {
+            try
             {
-                dictionary.Add(process.Id, process.ProcessName);
+                Platform platform = new Platform();
+
+                if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+                {
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
+                    { CreateNoWindow = true });
+                    return true;
+                }
+                else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                    return true;
+                }
+                else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                    return true;
+                }
+
+                return false;
             }
-
-            return dictionary;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
+            }
         }
 
         /// <summary>
-        /// Determines whether the current process is running as an admistrator.
-        /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
+        /// Suspends a process using native or imported method calls.
+        ///  WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        public bool IsProcessRunningAsAdministrator()
+        /// <param name="processName"></param>
+        public void SuspendProcess(string processName)
         {
-           return IsProcessRunningAsAdministrator(Process.GetCurrentProcess());
+            Platform platform = new Platform();
+
+            if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+            {
+                if (IsProcessRunning(processName))
+                {
+                    PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
+                }
+            }
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            {
+                throw new PlatformNotSupportedException();
+            }
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
+        /// Resumes a process using native or imported method calls.
+        /// WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
+        /// </summary>
+        /// <param name="processName"></param>
+        public void ResumeProcess(string processName)
+        {
+            Platform platform = new Platform();
+
+            if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+            {
+                if (IsProcessRunning(processName))
+                {
+                    PlatformSpecifics.WindowsProcessSpecifics.Resume(ConvertStringToProcess(processName));
+                }
+            }
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            {
+                throw new PlatformNotSupportedException();
+            }
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+
+        /// <summary>
+        /// Determines whether a process (or the current process if unspecified) is running as an admistrator.
+        /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
         /// WORK IN PROGRESS. 
+        /// Fix for V2
         /// </summary>
         /// <param name="process"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        internal bool IsProcessRunningAsAdministrator(Process process)
+        internal bool IsRunningAsAdministrator(Process process = null)
         {
+            if (process.Equals(null))
+            {
+                process = Process.GetCurrentProcess();
+            }
+
             Platform platform = new Platform();
 
-            if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Windows))
+            if (platform.ToOperatingSystemFamily().Equals(AluminiumTech.HardwareKit.Components.Base.enums.OperatingSystemFamily.Windows))
             {
 
                 if (process.StartInfo.Verb.Contains("runas"))

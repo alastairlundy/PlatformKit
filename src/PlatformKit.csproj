@@ -3,8 +3,8 @@
   <PropertyGroup>
     <AssemblyVersion>2.0.0.10</AssemblyVersion>
     <FileVersion>2.0.0.10</FileVersion>
-    <Version>2.0.0-beta.7</Version>
-    <PackageVersion>2.0.0-beta.7</PackageVersion>
+    <Version>2.0.0-beta.8</Version>
+    <PackageVersion>2.0.0-beta.8</PackageVersion>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
@@ -22,16 +22,7 @@
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>## Notes
-* This should be one of the final betas with new features or changes and thus should be considered feature complete.
-* Future betas of 2.0.0 will focus on ensuring features work on Windows, Mac, and Linux and that features are bug free or relatively close to bug free.
-
-## Changes
-* Removed Mono.Posix.NETSTandard dep - This was preventing use of this library on .NET Framework applications.
-* Deprecated ``Is64BitApp()`` and ``Is64BitOS()`` methods - These will be removed in Beta 8.
-* Revamped ``ToString()`` method to be more helpful to developers.
-* Minor internal tweaks - These have no breaking changes.
-* This release targets .NET Standard 2.0 and .NET Core 3.1 .</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
     <TargetFrameworks>netcoreapp3.1; netstandard2.0;</TargetFrameworks>
@@ -39,26 +30,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="LICENSE.txt" />
-    <None Remove="PlatformKitTest\**" />
-    <None Remove="TestConsole\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="PlatformKitTest\**" />
-    <Compile Remove="TestConsole\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="PlatformKitTest\**" />
-    <EmbeddedResource Remove="TestConsole\**" />
   </ItemGroup>
 
   <ItemGroup>
