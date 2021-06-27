@@ -112,7 +112,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// <returns></returns>
         public string GetAppName()
         {
-            return Assembly.GetExecutingAssembly()?.GetName().Name;
+            return GetAssembly()?.GetName().Name;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// <returns></returns>
         public Assembly GetAssembly()
         {
-            return Assembly.GetExecutingAssembly();
+            return Assembly.GetEntryAssembly();
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public string GetAppVersionToString() {
-            return Assembly.GetExecutingAssembly()?.GetName().Version.ToString();
+            return GetAssembly()?.GetName().Version.ToString();
         }
 
         /// <summary>
