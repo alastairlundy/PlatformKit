@@ -16,19 +16,18 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
 {
     internal class WindowsProcessImports
     {
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool CloseHandle(IntPtr hObject);
 
         [DllImport("kernel32.dll")]
         public static extern IntPtr OpenThread(WindowsThreadAccess dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
 
         [DllImport("kernel32.dll")]
-        public static extern uint ResumeThread(IntPtr hThread);
+        public static extern int ResumeThread(IntPtr hThread);
 
         [DllImport("kernel32.dll")]
         public static extern uint SuspendThread(IntPtr hThread);
-
+        [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool CloseHandle(IntPtr handle);
 
     }
 }

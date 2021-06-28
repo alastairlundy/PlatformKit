@@ -242,11 +242,27 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         public bool IsProcessRunning(string processName)
         {
-            var processArray = Process.GetProcesses();
-
-            foreach (Process proc in processArray)
+            foreach (Process proc in Process.GetProcesses())
             {
-                if (proc.ToString().Equals(processName))
+                proc.ProcessName.Replace("System.Diagnostics.Process (", "");
+
+                Console.WriteLine(proc.ProcessName);
+
+                processName.Replace(".exe", "");
+
+                if(proc.ProcessName == processName)
+                {
+                    return true;
+                }
+                if (proc.ProcessName.ToLower().Equals(processName.ToLower()))
+                {
+                    return true;
+                }
+                if (proc.ProcessName.ToLower().Contains(processName.ToLower()))
+                {
+                    return true;
+                }
+                if (proc.ProcessName.Contains(processName))
                 {
                     return true;
                 }
@@ -264,7 +280,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                Process process;
+                processName.Replace(".exe", "");
 
                 if (IsProcessRunning(processName))
                 {
@@ -274,13 +290,13 @@ namespace AluminiumTech.DevKit.PlatformKit
                     {
                         if (p.ProcessName.Equals(processName))
                         {
-                            process = Process.GetProcessById(p.Id);
-                            return process;
+                            return p;
                         }
                     }
                 }
 
                 return null;
+              //  throw new Exception();
             }
             catch (Exception ex)
             {
@@ -299,7 +315,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             foreach (Process process in processes)
             {
-                strList.Add(process.ToString());
+                strList.Add(process.ProcessName);
             }
 
             strList.TrimExcess();
@@ -356,10 +372,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
             {
-                if (IsProcessRunning(processName))
-                {
-                    PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
-                }
+                PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
             }
             else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
             {

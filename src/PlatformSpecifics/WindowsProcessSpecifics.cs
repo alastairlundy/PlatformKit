@@ -16,26 +16,32 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
     public class WindowsProcessSpecifics{
         public static void Suspend(Process process)
         {
-            foreach (ProcessThread thread in process.Threads)
-            {
-                var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
-                if (pOpenThread == IntPtr.Zero)
-                {
-                    break;
-                }
-                WindowsProcessImports.SuspendThread(pOpenThread);
-            }
+             foreach (ProcessThread thread in process.Threads)
+              {
+
+                  var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
+                  if (pOpenThread == IntPtr.Zero)
+                  {
+                      continue;
+                  }
+                  WindowsProcessImports.SuspendThread(pOpenThread);
+                  WindowsProcessImports.CloseHandle(pOpenThread);
+              }
+              
         }
         public static void Resume(Process process)
         {
+
             foreach (ProcessThread thread in process.Threads)
             {
                 var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
                 if (pOpenThread == IntPtr.Zero)
                 {
-                    break;
+                    continue;
                 }
+
                 WindowsProcessImports.ResumeThread(pOpenThread);
+                WindowsProcessImports.CloseHandle(pOpenThread);
             }
         }
     }
