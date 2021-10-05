@@ -1,8 +1,6 @@
 # Version History
 This document contains the entire version history of the PlatformKit (formerly AluminiumCoreLib) library.
 
-Table of Contents:
-
 ## Stable Releases
 
 ## Pre-release versions 
@@ -11,6 +9,7 @@ Table of Contents:
  
 | Version | API Level| Availability | Changelog |
 |---------|--------------|-----------|--|
+| 2.0.0 Beta 10 | 21 | October 5th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.10)
 | 2.0.0 Beta 9 | 20 | June 27th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.9)
 | 2.0.0 Beta 8 | 20 | June 27th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.8)
 | 2.0.0 Beta 7 | 19 | May 11th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.7)
@@ -31,33 +30,33 @@ Table of Contents:
 | 2.0.0 Alpha 1 | 6 | June 2nd 2018 | |
 | 2.0.0 Alpha 0 | 6 | May 15th 2018 | |
 
-### Beta 1.4.0
+### Beta 1.4.x
 
-| Version | API Level | Desktop Availability | Changelog |
+| Version | API Level | Availability | Changelog |
 |---------|--------|--------------|-----------|
 | Beta 1.4.1 | 5 | April 24th 2018 | |
 | Beta 1.4.0 | 5 | April 16th 2018 | |
 
 ### Beta 1.3.0
 
-| Version | API Level | Desktop Availability | Changelog |
+| Version | API Level | Availability | Changelog |
 |---------|------------|----------|-----------|
 | Beta 1.3.0 | 4 | March 15th 2018 | |
 
 ### Beta 1.2.0
 
-| Version | API Level | Desktop Availability | Changelog |
+| Version | API Level | Availability | Changelog |
 |---------|-----------|-----------|-----------|
 | Beta 1.2.0 | 3 | January 18th 2018 | |
 
 ### Beta 1.1.0
 
-| Version | API Level | Desktop Availability | Changelog |
+| Version | API Level | Availability | Changelog |
 |---------|------------|----------|-----------|
 | Beta 1.1.0 | 2 | January 6th 2018 | |
 
 ### Beta 1.0.0
 
-| Version | API Level | Desktop Availability | Changelog |
+| Version | API Level | Availability | Changelog |
 |---------|------------|----------|-----------|
 | Beta 1.0.0 | 1 | December 9th 2017 | |
