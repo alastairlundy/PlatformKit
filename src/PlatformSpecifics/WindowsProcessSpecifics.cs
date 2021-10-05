@@ -6,42 +6,90 @@
  */
 
 using AluminiumTech.DevKit.PlatformKit.enums;
+
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using System.Threading;
+
+using HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
     public class WindowsProcessSpecifics{
+        /// <summary>
+        /// Suspend running processes on Windows.
+        /// DOES NOT WORK on macOS or Linux. Running this on macOS or Linux will trigger a PlatformNotSupportedException.
+        /// </summary>
+        /// <param name="process"></param>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public static void Suspend(Process process)
         {
-             foreach (ProcessThread thread in process.Threads)
-              {
+            try
+            {
+                Platform platform = new Platform();
+                
+                if (platform.ToOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                {
+                    foreach (ProcessThread thread in process.Threads)
+                    {
 
-                  var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
-                  if (pOpenThread == IntPtr.Zero)
-                  {
-                      continue;
-                  }
-                  WindowsProcessImports.SuspendThread(pOpenThread);
-                  WindowsProcessImports.CloseHandle(pOpenThread);
-              }
+                        var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
+                        if (pOpenThread == IntPtr.Zero)
+                        {
+                            continue;
+                        }
+                        WindowsProcessImports.SuspendThread(pOpenThread);
+                        WindowsProcessImports.CloseHandle(pOpenThread);
+                    }
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
+            }
               
         }
+        /// <summary>
+        /// Resume a suspended Process on Windows. 
+        /// DOES NOT WORK on macOS or Linux. Running this on macOS or Linux will trigger a PlatformNotSupportedException
+        /// </summary>
+        /// <param name="process"></param>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public static void Resume(Process process)
         {
-
-            foreach (ProcessThread thread in process.Threads)
+            try
             {
-                var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false, (uint)thread.Id);
-                if (pOpenThread == IntPtr.Zero)
-                {
-                    continue;
-                }
+                Platform platform = new Platform();
 
-                WindowsProcessImports.ResumeThread(pOpenThread);
-                WindowsProcessImports.CloseHandle(pOpenThread);
+                if (platform.ToOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                {
+                    foreach (ProcessThread thread in process.Threads)
+                    {
+                        var pOpenThread = WindowsProcessImports.OpenThread(WindowsThreadAccess.SUSPEND_RESUME, false,
+                            (uint)thread.Id);
+                        if (pOpenThread == IntPtr.Zero)
+                        {
+                            continue;
+                        }
+
+                        WindowsProcessImports.ResumeThread(pOpenThread);
+                        WindowsProcessImports.CloseHandle(pOpenThread);
+                    }
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
             }
         }
     }

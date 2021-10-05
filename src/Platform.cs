@@ -39,28 +39,28 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Returns the OS Architecture To Enum
         /// </summary>
         /// <returns></returns>
-        public CPUArchitectureFamily ToCPUArchitectureFamily() {
+        public ProcessorArchitectureFamily ToProcessorArchitectureFamily() {
             var osArchitecture = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
 
             try {
-                if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.Arm))
+                if (osArchitecture == (System.Runtime.InteropServices.Architecture.Arm))
                 {
-                    return CPUArchitectureFamily.ARM32;
+                    return ProcessorArchitectureFamily.ARM32;
                 }
-                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.Arm64))
+                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.Arm64))
                 {
-                    return CPUArchitectureFamily.ARM64;
+                    return ProcessorArchitectureFamily.ARM64;
                 }
-                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.X86))
+                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.X86))
                 {
-                    return CPUArchitectureFamily.i386;
+                    return ProcessorArchitectureFamily.X86;
                 }
-                else if (osArchitecture.Equals(System.Runtime.InteropServices.Architecture.X64))
+                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.X64))
                 {
-                    return CPUArchitectureFamily.X64;
+                    return ProcessorArchitectureFamily.X64;
                 }
 
-                return CPUArchitectureFamily.NotDetected;
+                return ProcessorArchitectureFamily.NotDetected;
             }
             catch (Exception ex) {
                 throw new Exception(ex.ToString());
@@ -83,6 +83,9 @@ namespace AluminiumTech.DevKit.PlatformKit{
             // Check if it's Linux
             bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
             osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
+            // Check if it's FreeBSD
+            bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+            osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
 
             return osPlatform;
         }
@@ -102,6 +105,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
+            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
+            {
+                return OperatingSystemFamily.BSD;
+            }
+            
             return OperatingSystemFamily.NotDetected;
         }
 
@@ -109,6 +117,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// 
         /// </summary>
         /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
         public string GetAppName()
         {
             return GetAssembly()?.GetName().Name;
@@ -118,6 +127,8 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Return's the executing app's assembly.
         /// </summary>
         /// <returns></returns>
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once MemberCanBeMadeStatic.Global
         public Assembly GetAssembly()
         {
             return Assembly.GetEntryAssembly();
@@ -127,25 +138,29 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Return an app's version as a string.
         /// </summary>
         /// <returns></returns>
+        // ReSharper disable once MemberCanBePrivate.Global
         public string GetAppVersionToString() {
-            return GetAssembly()?.GetName().Version.ToString();
+            return GetAssembly()?.GetName()?.Version?.ToString();
         }
 
         /// <summary>
         /// Return an app's version as a Version data type.
         /// </summary>
         /// <returns></returns>
-        public System.Version GetAppVersionToVersion() {
-            return Assembly.GetExecutingAssembly()?.GetName().Version;
+        // ReSharper disable once UnusedMember.Global
+        public Version GetAppVersionToVersion() {
+            return Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         /// <summary>
         /// Display license information in the Console from a Text File
         /// </summary>
+        // ReSharper disable once UnusedMember.Global
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds) {
-            Stopwatch licenseWatch = new Stopwatch();
-
             try {
+                // ReSharper disable once HeapView.ObjectAllocation.Evident
+                Stopwatch licenseWatch = new Stopwatch();
+                
                 var lines = File.ReadAllLines(pathToTextFile);
 
                 foreach (string line in lines) {
@@ -154,20 +169,21 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
                 Console.WriteLine("                                                         ");
                 Console.WriteLine("                                                         ");
-            }
-            catch (Exception ex){
-                Console.WriteLine("Here are some details in case you need them:");
-                Console.WriteLine(ex.ToString());
-            }
-
-            licenseWatch.Start();
+                
+                licenseWatch.Start();
             
-            while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
-                //Do nothing to make sure everybody sees the license.
-            }
+                while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
+                    //Do nothing to make sure everybody sees the license.
+                }
 
-            licenseWatch.Stop();
-            licenseWatch.Reset();
+                licenseWatch.Stop();
+                licenseWatch.Reset();
+            }
+            catch (Exception exception){
+                Console.WriteLine("Here are some details in case you need them:");
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
+            }
         }
 
         /// <summary>
@@ -176,6 +192,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// <returns></returns>
         public override string ToString()
         {
+            // ReSharper disable once RedundantAssignment
             string appName = "";
 
             try
@@ -190,21 +207,26 @@ namespace AluminiumTech.DevKit.PlatformKit{
             
             var appVersion = GetAppVersionToString();
 
-            string bitness = Environment.Is64BitProcess == true ? "64 Bit" : "32 Bit";
+            // ReSharper disable once IdentifierTypo
+            string bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
 
             string app = "";
             
-            if (appName.Length > 0)
+            if (appName?.Length > 0)
             {
+                // ReSharper disable once HeapView.ObjectAllocation
                 app = "App " + appName + " v" + appVersion + " " + bitness;
             }
 
             //Ensure compatibility with .NET Core 3.1 and .NET Standard 2.0
-            //Re-introduce RunTimeID usage when we switch to targetting .NET 5
+            //Re-introduce RunTimeID usage when we switch to targeting .NET 5
+            // ReSharper disable once HeapView.ObjectAllocation
             var runtime = System.Runtime.InteropServices.RuntimeInformation.OSDescription + " on " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
 
+            // ReSharper disable once HeapView.ObjectAllocation
             var running = " running on RunTimeID: " + runtime;
 
+            // ReSharper disable once HeapView.ObjectAllocation
             return app + running;
         }
     }

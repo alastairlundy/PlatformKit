@@ -62,8 +62,6 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="arguments"></param>
         public void RunProcess(string processName, string arguments = "")
         {
-            var plat = GetPlatformOperatingSystemFamily();
-            
             RunActionOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
                 ()=> RunProcessLinux(processName, arguments));
         }
@@ -79,7 +77,16 @@ namespace AluminiumTech.DevKit.PlatformKit
             try
             {
                 Process process = new Process();
-                process.StartInfo.FileName = processName + ".exe";
+                
+                if (processName.Contains(".exe") || processName.EndsWith(".exe"))
+                { ;
+                    process.StartInfo.FileName = processName;
+                }
+                else
+                {
+                    process.StartInfo.FileName = processName + ".exe";
+                }                
+                
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WindowStyle = pws;
                 process.Start();
@@ -111,9 +118,8 @@ namespace AluminiumTech.DevKit.PlatformKit
             process.Start();
         }
 
-        /// This won't be implemented for V2. This will be implemented in V2.1
+        // This won't be implemented for V2. This will be implemented in V2.1 or later
         /*
-         * 
         public void RunConsoleCommand(string arguments)
         {
             var plat = new Platform().ToEnum();
@@ -198,32 +204,32 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <summary>
         /// Run different actions or methods depending on the operating system.
         /// </summary>
-        /// <param name="WindowsMethod"></param>
-        /// <param name="MacMethod"></param>
-        /// <param name="LinuxMethod"></param>
+        /// <param name="windowsMethod"></param>
+        /// <param name="macMethod"></param>
+        /// <param name="linuxMethod"></param>
         /// <returns></returns>
-        public bool RunActionOn(System.Action WindowsMethod = null, System.Action MacMethod = null, System.Action LinuxMethod = null)
+        public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null, System.Action linuxMethod = null)
         {
             try
             {
-                if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod != null)
+                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod != null)
                 {
-                    WindowsMethod.Invoke();
+                    windowsMethod.Invoke();
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod != null)
+                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod != null)
                 {
-                    LinuxMethod.Invoke();
+                    linuxMethod.Invoke();
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod != null)
+                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod != null)
                 {
-                    MacMethod.Invoke();
+                    macMethod.Invoke();
                     return true;
                 }
-                else if(GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.macOS) && MacMethod == null ||
-                        GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Linux) && LinuxMethod == null ||
-                        GetPlatformOperatingSystemFamily().Equals(OperatingSystemFamily.Windows) && WindowsMethod == null)
+                else if(GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
+                        GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
+                        GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }
@@ -243,12 +249,12 @@ namespace AluminiumTech.DevKit.PlatformKit
         public bool IsProcessRunning(string processName)
         {
             foreach (Process proc in Process.GetProcesses())
-            {
+            { 
                 proc.ProcessName.Replace("System.Diagnostics.Process (", "");
 
                 Console.WriteLine(proc.ProcessName);
 
-                processName.Replace(".exe", "");
+                processName = processName.Replace(".exe", "");
 
                 if(proc.ProcessName == processName)
                 {
@@ -280,7 +286,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                processName.Replace(".exe", "");
+                processName = processName.Replace(".exe", "");
 
                 if (IsProcessRunning(processName))
                 {
@@ -378,7 +384,7 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
             {
                 throw new PlatformNotSupportedException();
             }
@@ -404,14 +410,14 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
             {
                 throw new PlatformNotSupportedException();
             }
         }
 
         /// <summary>
-        /// Determines whether a process (or the current process if unspecified) is running as an admistrator.
+        /// Determines whether a process (or the current process if unspecified) is running as an administrator.
         /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
         /// WORK IN PROGRESS. 
         /// Fix for V2
@@ -421,14 +427,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="PlatformNotSupportedException"></exception>
         internal bool IsRunningAsAdministrator(Process process = null)
         {
-            if (process.Equals(null))
+            if (process != null)
             {
                 process = Process.GetCurrentProcess();
             }
 
             Platform platform = new Platform();
 
-            if (platform.ToOperatingSystemFamily().Equals(AluminiumTech.HardwareKit.Components.Base.enums.OperatingSystemFamily.Windows))
+            if (platform.ToOperatingSystemFamily() == (HardwareKit.Components.Base.enums.OperatingSystemFamily.Windows))
             {
 
                 if (process.StartInfo.Verb.Contains("runas"))
