@@ -259,23 +259,9 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Console.WriteLine(proc.ProcessName);
 
                 processName = processName.Replace(".exe", "");
-
-                if (proc.ProcessName == processName)
-                {
-                    return true;
-                }
-
-                if (proc.ProcessName.ToLower().Equals(processName.ToLower()))
-                {
-                    return true;
-                }
-
-                if (proc.ProcessName.ToLower().Contains(processName.ToLower()))
-                {
-                    return true;
-                }
-
-                if (proc.ProcessName.Contains(processName))
+                
+                if (proc.ProcessName.ToLower().Equals(processName.ToLower()) ||
+                    proc.ProcessName.ToLower().Contains(processName.ToLower()))
                 {
                     return true;
                 }
