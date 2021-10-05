@@ -5,12 +5,9 @@
  * 
  */
 using AluminiumTech.DevKit.PlatformKit.enums;
+
 using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security;
-using System.Threading.Tasks;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
 {

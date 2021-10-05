@@ -25,8 +25,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using HardwareKit.Components.Base.enums;
 
-using AluminiumTech.HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
