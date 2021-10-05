@@ -84,8 +84,8 @@ namespace AluminiumTech.DevKit.PlatformKit{
             bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
             osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
             // Check if it's FreeBSD
-            bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-            osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
+       //     bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+       //     osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
 
             return osPlatform;
         }
@@ -105,10 +105,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 ToString().ToLower().Equals("linux")) {
                 return OperatingSystemFamily.Linux;
             }
-            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
+      /*      else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
             {
                 return OperatingSystemFamily.BSD;
             }
+            */
             
             return OperatingSystemFamily.NotDetected;
         }

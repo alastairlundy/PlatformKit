@@ -31,8 +31,8 @@
 * Minor tweaks and changes</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
-    <TargetFrameworks>netcoreapp3.1; netstandard2.0;</TargetFrameworks>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
