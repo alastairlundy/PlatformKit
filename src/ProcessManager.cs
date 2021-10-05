@@ -35,10 +35,11 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// </summary>
     public class ProcessManager
     {
-        protected OperatingSystemFamily cachedOSFamily;
+        protected OperatingSystemFamily CachedOsFamily;
 
         public ProcessManager()
         {
+            CachedOsFamily = OperatingSystemFamily.NotDetected;
         }
 
         /// <summary>
@@ -46,13 +47,13 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <returns></returns>
         internal OperatingSystemFamily GetPlatformOperatingSystemFamily()
-        {
-            if (cachedOSFamily.Equals(null))
+        { 
+            if (CachedOsFamily == OperatingSystemFamily.NotDetected)
             {
-                cachedOSFamily = new Platform().ToOperatingSystemFamily();
+                CachedOsFamily = new Platform().ToOperatingSystemFamily();
             }
 
-            return cachedOSFamily;
+            return CachedOsFamily;
         }
 
         /// <summary>
@@ -62,8 +63,8 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="arguments"></param>
         public void RunProcess(string processName, string arguments = "")
         {
-            RunActionOn(()=> RunProcessWindows(processName, arguments), ()=> RunProcessMac(processName, arguments),
-                ()=> RunProcessLinux(processName, arguments));
+            RunActionOn(() => RunProcessWindows(processName, arguments), () => RunProcessMac(processName, arguments),
+                () => RunProcessLinux(processName, arguments));
         }
 
         /// <summary>
@@ -72,29 +73,31 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
         /// <param name="pws"></param>
-        public void RunProcessWindows(string processName, string arguments = "", ProcessWindowStyle pws = ProcessWindowStyle.Normal)
+        public void RunProcessWindows(string processName, string arguments = "",
+            ProcessWindowStyle pws = ProcessWindowStyle.Normal)
         {
             try
             {
                 Process process = new Process();
-                
+
                 if (processName.Contains(".exe") || processName.EndsWith(".exe"))
-                { ;
+                {
+                    ;
                     process.StartInfo.FileName = processName;
                 }
                 else
                 {
                     process.StartInfo.FileName = processName + ".exe";
-                }                
-                
+                }
+
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WindowStyle = pws;
                 process.Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               Console.WriteLine(ex.ToString());
-               throw new Exception(ex.ToString());
+                Console.WriteLine(ex.ToString());
+                throw new Exception(ex.ToString());
             }
         }
 
@@ -114,7 +117,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Arguments = arguments
             };
 
-            Process process = new Process {StartInfo = procStartInfo};
+            Process process = new Process { StartInfo = procStartInfo };
             process.Start();
         }
 
@@ -154,7 +157,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (!(new Platform().ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux)))
+                if (GetPlatformOperatingSystemFamily() != (OperatingSystemFamily.Linux))
                 {
                     throw new PlatformNotSupportedException();
                 }
@@ -182,23 +185,23 @@ namespace AluminiumTech.DevKit.PlatformKit
             try
             {
                 var procStartInfo = new ProcessStartInfo()
-                    {
-                        FileName = processName,
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = false,
-                        Arguments = processArguments
-                    };
+                {
+                    FileName = processName,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = false,
+                    Arguments = processArguments
+                };
 
-                    Process process = new Process {StartInfo = procStartInfo};
-                    process.Start();
+                Process process = new Process { StartInfo = procStartInfo };
+                process.Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 throw new Exception(ex.ToString());
             }
-            
+
         }
 
         /// <summary>
@@ -208,7 +211,8 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="macMethod"></param>
         /// <param name="linuxMethod"></param>
         /// <returns></returns>
-        public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null, System.Action linuxMethod = null)
+        public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null,
+            System.Action linuxMethod = null)
         {
             try
             {
@@ -227,16 +231,16 @@ namespace AluminiumTech.DevKit.PlatformKit
                     macMethod.Invoke();
                     return true;
                 }
-                else if(GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
-                        GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
-                        GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
+                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
+                         GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
+                         GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }
 
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 throw new Exception(ex.ToString());
@@ -249,25 +253,28 @@ namespace AluminiumTech.DevKit.PlatformKit
         public bool IsProcessRunning(string processName)
         {
             foreach (Process proc in Process.GetProcesses())
-            { 
+            {
                 proc.ProcessName.Replace("System.Diagnostics.Process (", "");
 
                 Console.WriteLine(proc.ProcessName);
 
                 processName = processName.Replace(".exe", "");
 
-                if(proc.ProcessName == processName)
+                if (proc.ProcessName == processName)
                 {
                     return true;
                 }
+
                 if (proc.ProcessName.ToLower().Equals(processName.ToLower()))
                 {
                     return true;
                 }
+
                 if (proc.ProcessName.ToLower().Contains(processName.ToLower()))
                 {
                     return true;
                 }
+
                 if (proc.ProcessName.Contains(processName))
                 {
                     return true;
@@ -302,7 +309,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
 
                 return null;
-              //  throw new Exception();
+                //  throw new Exception();
             }
             catch (Exception ex)
             {
@@ -339,20 +346,18 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                Platform platform = new Platform();
-
-                if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+                if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
                 {
                     Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
-                    { CreateNoWindow = true });
+                        { CreateNoWindow = true });
                     return true;
                 }
-                else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+                else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
                 {
                     Process.Start("xdg-open", url);
                     return true;
                 }
-                else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
+                else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
                 {
                     Process.Start("open", url);
                     return true;
@@ -374,17 +379,15 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processName"></param>
         public void SuspendProcess(string processName)
         {
-            Platform platform = new Platform();
-
-            if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+            if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
             {
                 PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
+            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
             {
                 throw new PlatformNotSupportedException();
             }
@@ -397,20 +400,18 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processName"></param>
         public void ResumeProcess(string processName)
         {
-            Platform platform = new Platform();
-
-            if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows))
+            if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
             {
                 if (IsProcessRunning(processName))
                 {
                     PlatformSpecifics.WindowsProcessSpecifics.Resume(ConvertStringToProcess(processName));
                 }
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux))
+            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (platform.GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX))
+            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
             {
                 throw new PlatformNotSupportedException();
             }
@@ -427,38 +428,44 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="PlatformNotSupportedException"></exception>
         internal bool IsRunningAsAdministrator(Process process = null)
         {
-            if (process != null)
+            try
             {
-                process = Process.GetCurrentProcess();
-            }
-
-            Platform platform = new Platform();
-
-            if (platform.ToOperatingSystemFamily() == (HardwareKit.Components.Base.enums.OperatingSystemFamily.Windows))
-            {
-
-                if (process.StartInfo.Verb.Contains("runas"))
+                if (process == null)
                 {
-                    return true;
+                    process = Process.GetCurrentProcess();
                 }
+                
+                if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                {
+
+                    if (process.StartInfo.Verb.Contains("runas"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                /*       else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
+                     {
+                         return (Mono.Unix.Native.Syscall.geteuid() == 0);
+                     }
+                     else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
+                     {
+                         return (Mono.Unix.Native.Syscall.geteuid() == 0);
+                     }
+    
+              */
                 else
                 {
-                    return false;
+                    throw new PlatformNotSupportedException();
                 }
             }
-            /*       else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
-                 {
-                     return (Mono.Unix.Native.Syscall.geteuid() == 0);
-                 }
-                 else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
-                 {
-                     return (Mono.Unix.Native.Syscall.geteuid() == 0);
-                 }
-
-          */
-            else
+            catch (Exception exception)
             {
-                throw new PlatformNotSupportedException();
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
             }
         }
     }
