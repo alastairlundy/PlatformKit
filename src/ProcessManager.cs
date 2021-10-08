@@ -27,7 +27,6 @@ using System.Diagnostics;
 
 using HardwareKit.Components.Base.enums;
 
-
 namespace AluminiumTech.DevKit.PlatformKit
 {
     /// <summary>
@@ -424,7 +423,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="process"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        internal bool IsRunningAsAdministrator(Process process = null)
+        public bool IsRunningAsAdministrator(Process process = null)
         {
             try
             {
