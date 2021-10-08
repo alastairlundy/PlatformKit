@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>2.0.0.11</AssemblyVersion>
-    <FileVersion>2.0.0.11</FileVersion>
-    <Version>2.0.0-beta.9</Version>
-    <PackageVersion>2.0.0-beta.10</PackageVersion>
+    <AssemblyVersion>2.0.0.12</AssemblyVersion>
+    <FileVersion>2.0.0.12</FileVersion>
+    <Version>2.0.0-rc.1</Version>
+    <PackageVersion>2.0.0-rc.1</PackageVersion>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
@@ -23,12 +23,13 @@
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
     <PackageReleaseNotes>### Changes
-* Fixed some issues from 2.0.0 Beta 9
-* Updated HardwareKit.Components.Base from 1.2.0 to 1.4.0 (Skipped 1.3.0)
-* Improved robustness of certain checks
-* Tweaks to caching of OS Family variable
-* Removed duplicate code
-* Minor tweaks and changes</PackageReleaseNotes>
+* Deprecated ``GetAppVersionToString()`` method - This will be removed in 2.0.0 RC 2
+* Renamed ``GetAppVersionToVersion()`` method to ``GetAppVersion()``
+* Made public the ``IsRunningAsAdministrator()`` method - This only works on Windows and running it elsewhere will trigger a PlatformNotSupportedException
+* Minor improvements to ``IsProcessRunning()`` method
+* General improvements to the library
+* Updated deps to prepare for the time when we ditch .NET Standard 2.0 support.
+* Limited Support for .NET Standard 2.0 - This library will drop .NET Standard 2.0 support at some point in the forseeable future. PlatformKit 2.0 will likely be the last Major Version to support .NET Standard 2.0 . Please take this opportunity to migrate to .NET Core/.NET 5, or alternatively to migrate to a different library if you cannot migrate to a newer TFM supported by .NET.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
