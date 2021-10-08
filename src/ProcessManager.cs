@@ -240,10 +240,10 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 return false;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
             }
         }
 
@@ -281,13 +281,16 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 processName = processName.Replace(".exe", "");
 
-                if (IsProcessRunning(processName))
+                if (IsProcessRunning(processName) ||
+                    IsProcessRunning(processName.ToLower()) ||
+                    IsProcessRunning(processName.ToUpper())
+                )
                 {
                     Process[] processes = Process.GetProcesses();
 
                     foreach (Process p in processes)
                     {
-                        if (p.ProcessName.Equals(processName))
+                        if (p.ProcessName.ToLower().Equals(processName.ToLower()))
                         {
                             return p;
                         }
@@ -297,9 +300,9 @@ namespace AluminiumTech.DevKit.PlatformKit
                 return null;
                 //  throw new Exception();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception(exception.ToString());
             }
         }
 
@@ -377,6 +380,10 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 throw new PlatformNotSupportedException();
             }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
@@ -398,6 +405,10 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new PlatformNotSupportedException();
             }
             else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
+            {
+                throw new PlatformNotSupportedException();
+            }
+            else
             {
                 throw new PlatformNotSupportedException();
             }
