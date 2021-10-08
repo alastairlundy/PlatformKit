@@ -84,9 +84,8 @@ namespace AluminiumTech.DevKit.PlatformKit{
             bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
             osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
             // Check if it's FreeBSD
-       //     bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-       //     osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
-
+            //bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+            //osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
             return osPlatform;
         }
 
@@ -181,7 +180,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 licenseWatch.Reset();
             }
             catch (Exception exception){
-                Console.WriteLine("Here are some details in case you need them:");
                 Console.WriteLine(exception.ToString());
                 throw new Exception(exception.ToString());
             }
@@ -198,7 +196,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
             try
             {
-                appName = Assembly.GetEntryAssembly()?.GetName().ToString();
+                appName = GetAppName();
             }
             catch(Exception ex)
             {
@@ -225,7 +223,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
             var runtime = System.Runtime.InteropServices.RuntimeInformation.OSDescription + " on " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
 
             // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTimeID: " + runtime;
+            var running = " running on RunTime: " + runtime;
 
             // ReSharper disable once HeapView.ObjectAllocation
             return app + running;
