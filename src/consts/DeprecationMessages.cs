@@ -25,17 +25,17 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
 {
     public static class DeprecationMessages
     {
-        public const string V2B10 = "v2.0.0-beta.10";
-        public const string V2B11 = "v2.0.0-beta.11";
+        const string V2RC1 = "v2.0.0-rc.1";
+        const string V2RC2 = "v2.0.0-rc.2";
         
-        public const string V2 = "v2.0.0";
+        const string V2 = "v2.0.0";
         
         const string Deprecation = "This code is deprecated and will be removed";
         
         public const string FutureDeprecation = Deprecation + " in a future version.";
         
-        public const string DeprecationV2B10 = Deprecation + " in " + V2B10;
-        public const string DeprecationV2B11 = Deprecation + " in " + V2B11;
+        public const string DeprecationV2RC1 = Deprecation + " in " + V2RC1;
+        public const string DeprecationV2RC2 = Deprecation + " in " + V2RC2;
         
         public const string DeprecationV2 = Deprecation + " in " + V2;
 
