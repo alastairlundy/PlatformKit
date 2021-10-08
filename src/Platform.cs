@@ -138,7 +138,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// Return an app's version as a string.
         /// </summary>
         /// <returns></returns>
-        // ReSharper disable once MemberCanBePrivate.Global
+        [Obsolete(DeprecationMessages.DeprecationV2RC2 + ". Use GetAppVersion().ToString(); instead")]
         public string GetAppVersionToString() {
             return GetAssembly()?.GetName()?.Version?.ToString();
         }
@@ -148,7 +148,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
-        public Version GetAppVersionToVersion() {
+        public Version GetAppVersion() {
             return Assembly.GetExecutingAssembly().GetName().Version;
         }
 
@@ -204,7 +204,7 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 throw new Exception(ex.ToString());
             }
             
-            var appVersion = GetAppVersionToString();
+            var appVersion = GetAppVersion().ToString();
 
             // ReSharper disable once IdentifierTypo
             string bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
