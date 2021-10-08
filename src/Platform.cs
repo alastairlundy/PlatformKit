@@ -26,6 +26,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
+using AluminiumTech.DevKit.PlatformKit.consts;
+
 using HardwareKit.Components.Base.enums;
 using HardwareKit.Components.Base.enums.Architecture;
 
@@ -35,6 +37,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
     /// </summary>
     public class Platform {
 
+        public Platform()
+        {
+            
+        }
+        
         /// <summary>
         /// Returns the OS Architecture To Enum
         /// </summary>
@@ -101,10 +108,12 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 return OperatingSystemFamily.macOS;
             }
             else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux) ||
-                ToString().ToLower().Equals("linux")) {
+                ToString().ToLower().Contains("linux")) {
                 return OperatingSystemFamily.Linux;
             }
-      /*      else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
+            /* Enable once we're done supporting .NET Standard 2.0
+             
+             else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
             {
                 return OperatingSystemFamily.BSD;
             }

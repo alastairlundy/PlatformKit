@@ -153,7 +153,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// WARNING: Does not work on Windows or macOS.
         /// </summary>
         /// <param name="command"></param>
-        internal void RunCommandLinux(string command)
+        /* internal void RunCommandLinux(string command)
         {
             try
             {
@@ -174,7 +174,8 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new Exception(ex.ToString());
             }
         }
-
+        */
+        
         /// <summary>
         /// Run a Process on Linux
         /// </summary>
