@@ -25,8 +25,8 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
 {
     public static class DeprecationMessages
     {
-        const string V2RC1 = "v2.0.0-rc.1";
         const string V2RC2 = "v2.0.0-rc.2";
+        const string V2RC3 = "v2.0.0-rc.3";
         
         const string V2 = "v2.0.0";
         
@@ -34,8 +34,8 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
         
         public const string FutureDeprecation = Deprecation + " in a future version.";
         
-        public const string DeprecationV2RC1 = Deprecation + " in " + V2RC1;
         public const string DeprecationV2RC2 = Deprecation + " in " + V2RC2;
+        public const string DeprecationV2RC3 = Deprecation + " in " + V2RC3;
         
         public const string DeprecationV2 = Deprecation + " in " + V2;
 
