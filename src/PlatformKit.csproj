@@ -3,8 +3,8 @@
   <PropertyGroup>
     <AssemblyVersion>2.0.0.12</AssemblyVersion>
     <FileVersion>2.0.0.12</FileVersion>
-    <Version>2.0.0-rc.1</Version>
-    <PackageVersion>2.0.0-rc.1</PackageVersion>
+    <Version>2.0.0-rc.2</Version>
+    <PackageVersion>2.0.0-rc.2</PackageVersion>
     <Authors>AluminiumTech</Authors>
     <Company />
     <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
@@ -23,13 +23,10 @@
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
     <PackageReleaseNotes>### Changes
-* Deprecated ``GetAppVersionToString()`` method - This will be removed in 2.0.0 RC 2
-* Renamed ``GetAppVersionToVersion()`` method to ``GetAppVersion()``
-* Made public the ``IsRunningAsAdministrator()`` method - This only works on Windows and running it elsewhere will trigger a PlatformNotSupportedException
-* Minor improvements to ``IsProcessRunning()`` method
-* General improvements to the library
-* Updated deps to prepare for the time when we ditch .NET Standard 2.0 support.
-* Limited Support for .NET Standard 2.0 - This library will drop .NET Standard 2.0 support at some point in the forseeable future. PlatformKit 2.0 will likely be the last Major Version to support .NET Standard 2.0 . Please take this opportunity to migrate to .NET Core/.NET 5, or alternatively to migrate to a different library if you cannot migrate to a newer TFM supported by .NET.</PackageReleaseNotes>
+* Delayed deprecating support for .NET Standard 2 - .NET Standard 2 will be supported throughout PLatformKit 2.x.x series
+* Added support for detecting FreeBSD on .NET Core 3.1 and .NET 5 - Not supported on .NET Standard 2
+* Added ``OSVersionAnalyzer`` class for getting OS version info - This currently only supported getting Windows versions but may support other OSes in the future.
+* Added ``WindowsVersion`` enum representing Windows versions from Windows Vista through to the Windows 11 RTM version.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

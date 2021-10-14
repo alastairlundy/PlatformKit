@@ -1,4 +1,5 @@
 ﻿using AluminiumTech.DevKit.PlatformKit;
+
 using System;
 using System.Diagnostics;
 
@@ -13,10 +14,15 @@ namespace PlatformKit.Testing
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
+            
+            Console.WriteLine("Desc: " +  System.Runtime.InteropServices.RuntimeInformation.OSDescription);
+            Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
+            Console.WriteLine("OsVersion: " + Environment.OSVersion);
+            Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+            
+    //        processManager.SuspendProcess("Spotify");
 
-            processManager.SuspendProcess("Spotify");
-
-            Console.WriteLine("Start suspending...");
+      //      Console.WriteLine("Start suspending...");
 
         //    PerformanceCounter
 
