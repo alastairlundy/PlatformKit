@@ -210,9 +210,12 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="windowsMethod"></param>
         /// <param name="macMethod"></param>
         /// <param name="linuxMethod"></param>
+        /// <param name="freeBsdMethod"></param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
         public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null,
-            System.Action linuxMethod = null)
+            System.Action linuxMethod = null, System.Action freeBsdMethod = null)
         {
             try
             {
@@ -221,19 +224,28 @@ namespace AluminiumTech.DevKit.PlatformKit
                     windowsMethod.Invoke();
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod != null)
+
+                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod != null)
                 {
                     linuxMethod.Invoke();
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod != null)
+                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod != null)
                 {
                     macMethod.Invoke();
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
-                         GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
-                         GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
+                
+#if NETCOREAPP3_0_OR_GREATER
+                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.FreeBSD) && freeBsdMethod != null)
+                {
+                    freeBsdMethod.Invoke();
+                    return true;
+                }
+#endif
+                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
+                    GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
+                    GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }

@@ -90,9 +90,13 @@ namespace AluminiumTech.DevKit.PlatformKit{
             // Check if it's Linux
             bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
             osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
+            
+#if NETCOREAPP3_0_OR_GREATER
             // Check if it's FreeBSD
-            //bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-            //osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
+            bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+            osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
+#endif
+
             return osPlatform;
         }
 
@@ -104,32 +108,22 @@ namespace AluminiumTech.DevKit.PlatformKit{
             if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows)) {
                 return OperatingSystemFamily.Windows;
             }
-            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX)) {
+            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX)) {
                 return OperatingSystemFamily.macOS;
             }
-            else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux) ||
+            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux) ||
                 ToString().ToLower().Contains("linux")) {
                 return OperatingSystemFamily.Linux;
             }
-            /* Enable once we're done supporting .NET Standard 2.0
-             
-             else if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
+            
+#if NETCOREAPP3_0_OR_GREATER
+            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
             {
-                return OperatingSystemFamily.BSD;
+                return OperatingSystemFamily.FreeBSD;
             }
-            */
+#endif
             
             return OperatingSystemFamily.NotDetected;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once UnusedMember.Global
-        public string GetAppName()
-        {
-            return GetAssembly()?.GetName().Name;
         }
 
         /// <summary>
@@ -144,21 +138,23 @@ namespace AluminiumTech.DevKit.PlatformKit{
         }
 
         /// <summary>
-        /// Return an app's version as a string.
+        /// 
         /// </summary>
         /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2RC2 + ". Use GetAppVersion().ToString(); instead")]
-        public string GetAppVersionToString() {
-            return GetAssembly()?.GetName()?.Version?.ToString();
+        // ReSharper disable once UnusedMember.Global
+        public string GetAppName()
+        {
+            return GetAssembly()?.GetName().Name;
         }
-
+        
         /// <summary>
         /// Return an app's version as a Version data type.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
-        public Version GetAppVersion() {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+        public Version GetAppVersion()
+        {
+            return GetAssembly().GetName().Version;
         }
 
         /// <summary>
@@ -200,39 +196,27 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// <returns></returns>
         public override string ToString()
         {
-            // ReSharper disable once RedundantAssignment
-            string appName = "";
-
-            try
-            {
-                appName = GetAppName();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
-            }
-            
-            var appVersion = GetAppVersion().ToString();
-
             // ReSharper disable once IdentifierTypo
             string bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
 
             string app = "";
             
-            if (appName?.Length > 0)
+            if (GetAppName()?.Length > 0)
             {
                 // ReSharper disable once HeapView.ObjectAllocation
-                app = "App " + appName + " v" + appVersion + " " + bitness;
+                app = "App " + GetAppName() + " v" + GetAppVersion().ToString() + " " + bitness;
             }
-
-            //Ensure compatibility with .NET Core 3.1 and .NET Standard 2.0
-            //Re-introduce RunTimeID usage when we switch to targeting .NET 5
+            
             // ReSharper disable once HeapView.ObjectAllocation
-            var runtime = System.Runtime.InteropServices.RuntimeInformation.OSDescription + " on " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
-
+#if NET5_0
+            var runtime = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
+#else
+            var runtime = System.Runtime.InteropServices.RuntimeInformation.OSDescription + " on " + 
+                System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+#endif
+            
             // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTime: " + runtime;
+            var running = " running on RunTimeID: " + runtime;
 
             // ReSharper disable once HeapView.ObjectAllocation
             return app + running;
