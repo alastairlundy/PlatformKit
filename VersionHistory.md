@@ -9,6 +9,7 @@ This document contains the entire version history of the PlatformKit (formerly A
  
 | Version | API Level| Availability | Changelog |
 |---------|--------------|-----------|--|
+| 2.0.0 RC 2 | | October 14th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-rc2)
 | 2.0.0 RC 1 | | October 8th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-rc1)
 | 2.0.0 Beta 10 | 21 | October 5th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.10)
 | 2.0.0 Beta 9 | 20 | June 27th 2021 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.0.0-beta.9)
