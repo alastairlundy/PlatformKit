@@ -66,7 +66,13 @@ namespace AluminiumTech.DevKit.PlatformKit{
                 {
                     return ProcessorArchitectureFamily.X64;
                 }
-
+  /*      #if  NET5_0
+                if (osArchitecture == (System.Runtime.InteropServices.Architecture.Wasm))
+                {
+              //      return ProcessorArchitectureFamily
+                }
+        #endif
+      */          
                 return ProcessorArchitectureFamily.NotDetected;
             }
             catch (Exception ex) {
@@ -74,27 +80,54 @@ namespace AluminiumTech.DevKit.PlatformKit{
             }
         }
 
+        public bool IsMac()
+        {
+           return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+        }
+
+        public bool IsWindows()
+        {
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+        }
+
+        public bool IsLinux()
+        {
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+        }
+
+        // ReSharper disable once InconsistentNaming
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
+        public bool IsFreeBSD()
+        {
+#if NETCOREAPP3_0_OR_GREATER
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+#endif
+            throw new PlatformNotSupportedException();
+        }
+        
         /// <summary>
         /// Determine what OS is being run
         /// Can only detect Windows, Mac, or Linux.
         /// </summary>
         /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once InconsistentNaming
         public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
             System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
             // Check if it's windows
-            bool isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-            osPlatform = isWindows ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
+            osPlatform = IsWindows() ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
             // Check if it's osx
-            bool isMac = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
-            osPlatform = isMac ? System.Runtime.InteropServices.OSPlatform.OSX : osPlatform;
+            osPlatform = IsMac() ? System.Runtime.InteropServices.OSPlatform.OSX : osPlatform;
             // Check if it's Linux
-            bool isLinux = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
-            osPlatform = isLinux ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
+            osPlatform = IsLinux() ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
             
 #if NETCOREAPP3_0_OR_GREATER
             // Check if it's FreeBSD
-            bool isFreeBsd = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-            osPlatform = isFreeBsd ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
+            osPlatform = IsFreeBSD() ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
 #endif
 
             return osPlatform;
@@ -105,19 +138,19 @@ namespace AluminiumTech.DevKit.PlatformKit{
         /// </summary>
         /// <returns></returns>
         public OperatingSystemFamily ToOperatingSystemFamily() {
-            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Windows)) {
+            if (IsWindows()) {
                 return OperatingSystemFamily.Windows;
             }
-            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.OSX)) {
+            if (IsMac()) {
                 return OperatingSystemFamily.macOS;
             }
-            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.Linux) ||
+            if (IsLinux() ||
                 ToString().ToLower().Contains("linux")) {
                 return OperatingSystemFamily.Linux;
             }
             
 #if NETCOREAPP3_0_OR_GREATER
-            if (GetOSPlatform().Equals(System.Runtime.InteropServices.OSPlatform.FreeBSD))
+            if (IsFreeBSD())
             {
                 return OperatingSystemFamily.FreeBSD;
             }
@@ -158,7 +191,8 @@ namespace AluminiumTech.DevKit.PlatformKit{
         }
 
         /// <summary>
-        /// Display license information in the Console from a Text File
+        /// Displays license information in the Console from a Text File.
+        /// The information stays in the Console window for the the duration specified in the parameter.
         /// </summary>
         // ReSharper disable once UnusedMember.Global
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds) {
