@@ -34,25 +34,11 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// </summary>
     public class ProcessManager
     {
-        protected OperatingSystemFamily CachedOsFamily;
+        protected Platform _platform;
 
         public ProcessManager()
         {
-            CachedOsFamily = OperatingSystemFamily.NotDetected;
-        }
-
-        /// <summary>
-        /// Allow ProcessManager.cs access to Platform.cs's OperatingSystemFamily detection.
-        /// </summary>
-        /// <returns></returns>
-        internal OperatingSystemFamily GetPlatformOperatingSystemFamily()
-        { 
-            if (CachedOsFamily == OperatingSystemFamily.NotDetected)
-            {
-                CachedOsFamily = new Platform().ToOperatingSystemFamily();
-            }
-
-            return CachedOsFamily;
+            _platform = new Platform();
         }
 
         /// <summary>
@@ -214,38 +200,39 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
+        // ReSharper disable once MemberCanBePrivate.Global
         public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null,
             System.Action linuxMethod = null, System.Action freeBsdMethod = null)
         {
             try
             {
-                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod != null)
+                if (_platform.IsWindows() && windowsMethod != null)
                 {
                     windowsMethod.Invoke();
                     return true;
                 }
 
-                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod != null)
+                if (_platform.IsLinux() && linuxMethod != null)
                 {
                     linuxMethod.Invoke();
                     return true;
                 }
-                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod != null)
+                if (_platform.IsMac() && macMethod != null)
                 {
                     macMethod.Invoke();
                     return true;
                 }
                 
 #if NETCOREAPP3_0_OR_GREATER
-                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.FreeBSD) && freeBsdMethod != null)
+                if (_platform.IsFreeBSD() && freeBsdMethod != null)
                 {
                     freeBsdMethod.Invoke();
                     return true;
                 }
 #endif
-                if (GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.macOS) && macMethod == null ||
-                    GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Linux) && linuxMethod == null ||
-                    GetPlatformOperatingSystemFamily() == (OperatingSystemFamily.Windows) && windowsMethod == null)
+                if (_platform.IsMac() && macMethod == null ||
+                    _platform.IsLinux() && linuxMethod == null ||
+                    _platform.IsWindows() && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }
@@ -266,14 +253,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             foreach (Process proc in Process.GetProcesses())
             {
-                proc.ProcessName.Replace("System.Diagnostics.Process (", "");
+              var procName =  proc.ProcessName.Replace("System.Diagnostics.Process (", String.Empty);
 
-                Console.WriteLine(proc.ProcessName);
+                //Console.WriteLine(proc.ProcessName);
 
-                processName = processName.Replace(".exe", "");
+                processName = processName.Replace(".exe", String.Empty);
                 
-                if (proc.ProcessName.ToLower().Equals(processName.ToLower()) ||
-                    proc.ProcessName.ToLower().Contains(processName.ToLower()))
+                if (procName.ToLower().Equals(processName.ToLower()) ||
+                    procName.ToLower().Contains(processName.ToLower()))
                 {
                     return true;
                 }
@@ -339,26 +326,27 @@ namespace AluminiumTech.DevKit.PlatformKit
 
         /// <summary>
         /// Open a URL in the default browser.
+        ///
+        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         public bool OpenUrlInBrowser(string url)
         {
             try
             {
-                if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                if (_platform.IsWindows())
                 {
                     Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
                         { CreateNoWindow = true });
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
+                else if (_platform.IsLinux())
                 {
                     Process.Start("xdg-open", url);
                     return true;
                 }
-                else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
+                else if (_platform.IsMac())
                 {
                     Process.Start("open", url);
                     return true;
@@ -375,23 +363,29 @@ namespace AluminiumTech.DevKit.PlatformKit
 
         /// <summary>
         /// Suspends a process using native or imported method calls.
-        ///  WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
         /// </summary>
         /// <param name="processName"></param>
+        /// <exception cref="PlatformNotSupportedException">This is currently only implemented on Windows and will throw an exception if run on Linux or macOS.</exception>
         public void SuspendProcess(string processName)
         {
-            if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
+            if (_platform.IsWindows())
             {
                 PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
             }
-            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
+            else if (_platform.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
+            else if (_platform.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
+#if NETCOREAPP3_0_OR_GREATER
+            else if (_platform.IsFreeBSD())
+            {
+                throw new PlatformNotSupportedException();
+            }
+#endif
             else
             {
                 throw new PlatformNotSupportedException();
@@ -405,21 +399,27 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processName"></param>
         public void ResumeProcess(string processName)
         {
-            if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
+            if (_platform.IsWindows())
             {
                 if (IsProcessRunning(processName))
                 {
                     PlatformSpecifics.WindowsProcessSpecifics.Resume(ConvertStringToProcess(processName));
                 }
             }
-            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Linux)
+            else if (_platform.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.macOS)
+            else if (_platform.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
+#if NETCOREAPP3_0_OR_GREATER
+            else if (_platform.IsFreeBSD())
+            {
+                throw new PlatformNotSupportedException();
+            }
+#endif
             else
             {
                 throw new PlatformNotSupportedException();
@@ -430,11 +430,11 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// Determines whether a process (or the current process if unspecified) is running as an administrator.
         /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
         /// WORK IN PROGRESS. 
-        /// Fix for V2
+        /// Fix for future 2.x release
         /// </summary>
         /// <param name="process"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Occurs when running on macOS or Linux as these are not currently supported.</exception>
         public bool IsRunningAsAdministrator(Process process = null)
         {
             try
@@ -444,7 +444,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     process = Process.GetCurrentProcess();
                 }
                 
-                if (GetPlatformOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                if (_platform.IsWindows())
                 {
 
                     if (process.StartInfo.Verb.Contains("runas"))
