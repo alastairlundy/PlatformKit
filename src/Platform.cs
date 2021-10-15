@@ -44,8 +44,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
         
         /// <summary>
         /// Returns the OS Architecture To Enum
+        ///
+        /// This will be moved to a separate PlatformKit.Extensions library in the future.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV2_1)]
         public ProcessorArchitectureFamily ToProcessorArchitectureFamily() {
             var osArchitecture = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
 
@@ -111,7 +114,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
         
         /// <summary>
         /// Determine what OS is being run
-        /// Can only detect Windows, Mac, or Linux.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
@@ -135,8 +137,11 @@ namespace AluminiumTech.DevKit.PlatformKit{
 
         /// <summary>
         /// Returns the OS Family as an Enum
+        ///
+        /// This will be moved to a separate PlatformKit.Extensions library in the future.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV2_1)]
         public OperatingSystemFamily ToOperatingSystemFamily() {
             if (IsWindows()) {
                 return OperatingSystemFamily.Windows;
