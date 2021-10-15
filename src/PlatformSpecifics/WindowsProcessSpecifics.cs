@@ -13,7 +13,7 @@ using System.Diagnostics;
 using HardwareKit.Components.Base.enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
-    public class WindowsProcessSpecifics{
+    public static class WindowsProcessSpecifics{
         /// <summary>
         /// Suspend running processes on Windows.
         /// DOES NOT WORK on macOS or Linux. Running this on macOS or Linux will trigger a PlatformNotSupportedException.

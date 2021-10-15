@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
 {
-    internal class WindowsProcessImports
+    internal static class WindowsProcessImports
     {
 
         [DllImport("kernel32.dll")]
