@@ -6,7 +6,7 @@ Versions currently supported by Security Fixes.
 
 | Version | Supported with New Features | Supported with Bug Fixes | Supported with Security Fixes | 
 |--| --|--|--|
-| 2.0.0 RC series | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| 2.0.0 RC series | :x:, ended October 15th 2021 | :white_check_mark:, ending November 15th 2021 | :white_check_mark:, ending December 15th 2021 |
 | 2.0.0 Beta series | :x:, ended October 8th 2021 | :x:, ended October 8th 2021 | :white_check_mark:, ending November 8th 2021 |
 | 2.0.0 Alpha series | :x: , Support ended February 6th 2020 | :x: , Support ended February 6th 2020 | :x: , Support ended March 22nd 2020 |
 | 1.x.x Beta series | :x:, Support ended February 6th 2018 |  :x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
