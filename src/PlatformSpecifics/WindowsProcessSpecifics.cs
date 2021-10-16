@@ -27,7 +27,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
             {
                 Platform platform = new Platform();
                 
-                if (platform.ToOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                if (platform.IsWindows())
                 {
                     foreach (ProcessThread thread in process.Threads)
                     {
@@ -66,7 +66,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
             {
                 Platform platform = new Platform();
 
-                if (platform.ToOperatingSystemFamily() == OperatingSystemFamily.Windows)
+                if (platform.IsWindows())
                 {
                     foreach (ProcessThread thread in process.Threads)
                     {
