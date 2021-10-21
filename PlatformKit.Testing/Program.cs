@@ -30,9 +30,9 @@ namespace PlatformKit.Testing
             {
 
             }
-            processManager.ResumeProcess("Spotify");
+       //     processManager.ResumeProcess("Spotify");
 
-            Console.WriteLine("Start resuming...");
+     //       Console.WriteLine("Start resuming...");
 
             Console.ReadLine();
         }
