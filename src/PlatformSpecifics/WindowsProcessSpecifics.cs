@@ -10,8 +10,6 @@ using AluminiumTech.DevKit.PlatformKit.enums;
 using System;
 using System.Diagnostics;
 
-using HardwareKit.Components.Base.enums;
-
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics{
     public static class WindowsProcessSpecifics{
         /// <summary>
