@@ -44,8 +44,4 @@ Note:
     </None>
     <None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="HardwareKit.Components.Base" Version="1.5.0" />
-  </ItemGroup>
 </Project>

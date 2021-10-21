@@ -28,9 +28,6 @@ using System.Reflection;
 
 using AluminiumTech.DevKit.PlatformKit.consts;
 
-using HardwareKit.Components.Base.enums;
-using HardwareKit.Components.Base.enums.Architecture;
-
 namespace AluminiumTech.DevKit.PlatformKit{
     /// <summary>
     /// A class that helps get system information.
@@ -40,47 +37,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
         public Platform()
         {
             
-        }
-        
-        /// <summary>
-        /// Returns the OS Architecture To Enum
-        ///
-        /// This will be moved to a separate PlatformKit.Extensions library in the future.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2_1)]
-        public ProcessorArchitectureFamily ToProcessorArchitectureFamily() {
-            var osArchitecture = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture;
-
-            try {
-                if (osArchitecture == (System.Runtime.InteropServices.Architecture.Arm))
-                {
-                    return ProcessorArchitectureFamily.ARM32;
-                }
-                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.Arm64))
-                {
-                    return ProcessorArchitectureFamily.ARM64;
-                }
-                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.X86))
-                {
-                    return ProcessorArchitectureFamily.X86;
-                }
-                else if (osArchitecture == (System.Runtime.InteropServices.Architecture.X64))
-                {
-                    return ProcessorArchitectureFamily.X64;
-                }
-  /*      #if  NET5_0
-                if (osArchitecture == (System.Runtime.InteropServices.Architecture.Wasm))
-                {
-              //      return ProcessorArchitectureFamily
-                }
-        #endif
-      */          
-                return ProcessorArchitectureFamily.NotDetected;
-            }
-            catch (Exception ex) {
-                throw new Exception(ex.ToString());
-            }
         }
 
         public bool IsMac()
@@ -133,35 +89,6 @@ namespace AluminiumTech.DevKit.PlatformKit{
 #endif
 
             return osPlatform;
-        }
-
-        /// <summary>
-        /// Returns the OS Family as an Enum
-        ///
-        /// This will be moved to a separate PlatformKit.Extensions library in the future.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV2_1)]
-        public OperatingSystemFamily ToOperatingSystemFamily() {
-            if (IsWindows()) {
-                return OperatingSystemFamily.Windows;
-            }
-            if (IsMac()) {
-                return OperatingSystemFamily.macOS;
-            }
-            if (IsLinux() ||
-                ToString().ToLower().Contains("linux")) {
-                return OperatingSystemFamily.Linux;
-            }
-            
-#if NETCOREAPP3_0_OR_GREATER
-            if (IsFreeBSD())
-            {
-                return OperatingSystemFamily.FreeBSD;
-            }
-#endif
-            
-            return OperatingSystemFamily.NotDetected;
         }
 
         /// <summary>
