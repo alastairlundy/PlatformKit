@@ -220,6 +220,9 @@ namespace AluminiumTech.DevKit.PlatformKit
                         case WindowsVersion.Win7:
                             osVersion = "7";
                             break;
+                        case WindowsVersion.Win7SP1:
+                            osVersion = "7";
+                            break;
                         case WindowsVersion.Win8:
                             osVersion = "8";
                             break;
