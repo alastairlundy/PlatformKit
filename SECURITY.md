@@ -8,7 +8,7 @@ Versions currently supported by Security Fixes.
 |--| --|--|
 | 2.0 series | :white_check_mark:, ending April 21st 2022 | :white_check_mark:, ending October 21st 2022 |
 | 2.0 RC series | :white_check_mark:, ending November 15th 2021 | :white_check_mark:, ending December 15th 2021 |
-| 2.0 Beta series | :x:, ended October 8th 2021 | :white_check_mark:, ending November 8th 2021 |
+| 2.0 Beta series | :x:, Support ended October 8th 2021 | :x:, Support ended November 8th 2021 |
 | 2.0 Alpha series | :x: , Support ended February 6th 2020 | :x: , Support ended March 22nd 2020 |
 | 1.x Beta series | :x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
 | 1.x Alpha series   | :x: | :x: |
