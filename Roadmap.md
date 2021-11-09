@@ -2,7 +2,8 @@
 This info is subject to change at any time.
 
 ### 2.2
-*
+* Add support for running Console Commands on ``RunConsoleCommand()`` on Windows.
+* Add support for ``IsRunningAsAdministrator()`` on macOS or Linux.
 
 ### 2.3
 
