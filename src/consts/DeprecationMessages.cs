@@ -26,7 +26,8 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
     public static class DeprecationMessages
     {
         private const string V2_2 = "v2.2.0";
-
+        private const string V2_3 = "v2.3.0";
+        
         private const string V3 = "v3.0.0";
 
         private const string CodeDeprecation = "This code is deprecated and will be removed";
@@ -35,6 +36,7 @@ namespace AluminiumTech.DevKit.PlatformKit.consts
         public const string FutureDeprecation = CodeDeprecation + " in a future version.";
         
         public const string DeprecationV2_2 = CodeDeprecation + " in " + V2_2;
+        public const string DeprecationV2_3 = CodeDeprecation + " in " + V2_3;
 
         public const string DeprecationV3 = CodeDeprecation + " in " + V3;
     }
