@@ -4,12 +4,12 @@
  * Code licensed under CC BY SA 3.0 from StackOverflow.
  * 
  */
-using AluminiumTech.DevKit.PlatformKit.enums;
 
 using System;
 using System.Runtime.InteropServices;
+using AluminiumTech.DevKit.PlatformKit.enums;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     internal static class WindowsProcessImports
     {
