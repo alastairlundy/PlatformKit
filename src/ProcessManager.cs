@@ -24,6 +24,10 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+
+// ReSharper disable HeapView.DelegateAllocation
+// ReSharper disable InvalidXmlDocComment
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
@@ -32,11 +36,11 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// </summary>
     public class ProcessManager
     {
-        protected Platform _platform;
+        protected PlatformManager _platformManager;
 
         public ProcessManager()
         {
-            _platform = new Platform();
+            _platformManager = new PlatformManager();
         }
 
         /// <summary>
@@ -61,16 +65,16 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
+                // ReSharper disable once HeapView.ObjectAllocation.Evident
                 Process process = new Process();
 
                 if (processName.Contains(".exe") || processName.EndsWith(".exe"))
                 {
-                    ;
                     process.StartInfo.FileName = processName;
                 }
                 else
                 {
-                    process.StartInfo.FileName = processName + ".exe";
+                    process.StartInfo.FileName = $"{processName}.exe";
                 }
 
                 process.StartInfo.Arguments = arguments;
@@ -199,43 +203,37 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
-        public bool RunActionOn(System.Action windowsMethod = null, System.Action macMethod = null,
-            System.Action linuxMethod = null, System.Action freeBsdMethod = null)
+        public void RunActionOn(Action windowsMethod = null, Action macMethod = null,
+            Action linuxMethod = null, Action freeBsdMethod = null)
         {
             try
             {
-                if (_platform.IsWindows() && windowsMethod != null)
+                if (_platformManager.IsWindows() && windowsMethod != null)
                 {
                     windowsMethod.Invoke();
-                    return true;
                 }
 
-                if (_platform.IsLinux() && linuxMethod != null)
+                if (_platformManager.IsLinux() && linuxMethod != null)
                 {
                     linuxMethod.Invoke();
-                    return true;
                 }
-                if (_platform.IsMac() && macMethod != null)
+                if (_platformManager.IsMac() && macMethod != null)
                 {
                     macMethod.Invoke();
-                    return true;
                 }
                 
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platform.IsFreeBSD() && freeBsdMethod != null)
+                if (_platformManager.IsFreeBSD() && freeBsdMethod != null)
                 {
                     freeBsdMethod.Invoke();
-                    return true;
                 }
 #endif
-                if (_platform.IsMac() && macMethod == null ||
-                    _platform.IsLinux() && linuxMethod == null ||
-                    _platform.IsWindows() && windowsMethod == null)
+                if (_platformManager.IsMac() && macMethod == null ||
+                    _platformManager.IsLinux() && linuxMethod == null ||
+                    _platformManager.IsWindows() && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }
-
-                return false;
             }
             catch (Exception exception)
             {
@@ -333,18 +331,18 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (_platform.IsWindows())
+                if (_platformManager.IsWindows())
                 {
                     Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
                         { CreateNoWindow = true });
                     return true;
                 }
-                else if (_platform.IsLinux())
+                else if (_platformManager.IsLinux())
                 {
                     Process.Start("xdg-open", url);
                     return true;
                 }
-                else if (_platform.IsMac())
+                else if (_platformManager.IsMac())
                 {
                     Process.Start("open", url);
                     return true;
@@ -366,20 +364,20 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="PlatformNotSupportedException">This is currently only implemented on Windows and will throw an exception if run on Linux or macOS.</exception>
         public void SuspendProcess(string processName)
         {
-            if (_platform.IsWindows())
+            if (_platformManager.IsWindows())
             {
-                PlatformSpecifics.WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
+                WindowsProcessSpecifics.Suspend(ConvertStringToProcess(processName));
             }
-            else if (_platform.IsLinux())
+            else if (_platformManager.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (_platform.IsMac())
+            else if (_platformManager.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
 #if NETCOREAPP3_0_OR_GREATER
-            else if (_platform.IsFreeBSD())
+            else if (_platformManager.IsFreeBSD())
             {
                 throw new PlatformNotSupportedException();
             }
@@ -397,23 +395,23 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processName"></param>
         public void ResumeProcess(string processName)
         {
-            if (_platform.IsWindows())
+            if (_platformManager.IsWindows())
             {
                 if (IsProcessRunning(processName))
                 {
-                    PlatformSpecifics.WindowsProcessSpecifics.Resume(ConvertStringToProcess(processName));
+                    WindowsProcessSpecifics.Resume(ConvertStringToProcess(processName));
                 }
             }
-            else if (_platform.IsLinux())
+            else if (_platformManager.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (_platform.IsMac())
+            else if (_platformManager.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
 #if NETCOREAPP3_0_OR_GREATER
-            else if (_platform.IsFreeBSD())
+            else if (_platformManager.IsFreeBSD())
             {
                 throw new PlatformNotSupportedException();
             }
@@ -442,7 +440,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     process = Process.GetCurrentProcess();
                 }
                 
-                if (_platform.IsWindows())
+                if (_platformManager.IsWindows())
                 {
 
                     if (process.StartInfo.Verb.Contains("runas"))
