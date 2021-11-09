@@ -172,11 +172,13 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         // ReSharper disable once InconsistentNaming
-        public string DetectTFM(bool useGenericTfm = false)
+        /// <summary>
+        /// Generates an approximated TFM/RunTime ID using information on how TFM/RunTime ID is structured.
+        /// </summary>
+        /// <param name="useGenericTfm"></param>
+        /// <returns></returns>
+        public string GenerateTFM(bool useGenericTfm = false)
         {
-#if NET5_0
-            return System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
-#endif
             OSVersionAnalyzer versionAnalyzer = new OSVersionAnalyzer();
 
             string runtimeId = "";            
@@ -188,16 +190,24 @@ namespace AluminiumTech.DevKit.PlatformKit
             if (IsLinux())
             {
                 osName = "linux";
+                
+                //Temporarily use Generic TFM
+                useGenericTfm = true;
             }
             if (IsMac())
             {
                 osName = "osx";
+                
+                //Temporarily use Generic TFM.
+                useGenericTfm = true;
 
-               /* switch (versionAnalyzer)
-                {
-                    
-                }
-                */
+                // mac TFM for non generic TFM is osx.major.minor-x64
+                
+                /* switch (versionAnalyzer)
+                 {
+                     
+                 }
+                 */
             }
             if (IsWindows())
             {
@@ -217,6 +227,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                             osVersion = "81";
                             break;
                         default:
+                            useGenericTfm = true;
                             break;
                     }
                 }
@@ -251,6 +262,20 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             return runtimeId;
         }
+
+
+        /// <summary>
+        /// Detects the TFM if running on .NET 5 or later and generates the TFM if running on .NET Standard 2.0 or later.
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once InconsistentNaming
+        public string DetectTFM()
+        {
+#if NET5_0_OR_GREATER
+            return System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
+#endif
+            return GenerateTFM(true);
+        }
         
         /// <summary>
         /// 
@@ -268,16 +293,9 @@ namespace AluminiumTech.DevKit.PlatformKit
                 // ReSharper disable once HeapView.ObjectAllocation
                 app = "App " + GetAppName() + " v" + GetAppVersion() + " " + bitness;
             }
-            
+
             // ReSharper disable once HeapView.ObjectAllocation
-#if NET5_0
-            var runtime = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
-#else
-            var runtime = DetectTFM(false);
-#endif
-            
-            // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTimeID: " + runtime;
+            var running = " running on RunTimeID: " + DetectTFM();
 
             // ReSharper disable once HeapView.ObjectAllocation
             return app + running;

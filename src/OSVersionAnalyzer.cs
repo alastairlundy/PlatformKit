@@ -55,7 +55,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     return true;
                 case WindowsVersion.Win10_v1703:
                     return true;
-                case WindowsVersion.Win10_v1709ForMobile:
+                case WindowsVersion.Win10_v1709_Mobile:
                     return true;
                  case WindowsVersion.Win10_v1709:
                     return true;
@@ -138,7 +138,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 if (input == new Version(10,0,15063,0))
                     return WindowsVersion.Win10_v1703;
                 if (input == new Version(10,0,15254,0))
-                    return WindowsVersion.Win10_v1709ForMobile;
+                    return WindowsVersion.Win10_v1709_Mobile;
                 if (input == new Version(10,0,16299,0))
                     return WindowsVersion.Win10_v1709;
                 if (input == new Version(10,0,17134,0))
