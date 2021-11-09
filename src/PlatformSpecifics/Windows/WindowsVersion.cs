@@ -41,7 +41,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
         Win10_v1607,
         Win10_v1703,
         Win10_v1709,
-        Win10_v1709ForMobile,
+        Win10_v1709_Mobile,
         Win10_v1803,
         Win10_v1809,
         Win10_v1903,
