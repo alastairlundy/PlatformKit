@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 // ReSharper disable HeapView.DelegateAllocation
@@ -55,12 +56,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Run a process on Windows with Arguments
+        ///  Run a process on Windows with Arguments
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
+        /// <param name="runAsAdministrator"></param>
         /// <param name="pws"></param>
-        public void RunProcessWindows(string processName, string arguments = "",
+        /// <exception cref="Exception"></exception>
+        public void RunProcessWindows(string processName, string arguments = "", bool runAsAdministrator = false,
             ProcessWindowStyle pws = ProcessWindowStyle.Normal)
         {
             try
@@ -77,6 +80,11 @@ namespace AluminiumTech.DevKit.PlatformKit
                     process.StartInfo.FileName = $"{processName}.exe";
                 }
 
+                if (runAsAdministrator)
+                {
+                    process.StartInfo.Verb = "runas";
+                }
+                
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WindowStyle = pws;
                 process.Start();
@@ -134,7 +142,7 @@ namespace AluminiumTech.DevKit.PlatformKit
          */
 
         /// <summary>
-        /// TODO: Test, Fix, and Revamp this method as required to ensure it is working for V2.1
+        /// TODO: Test, Fix, and Revamp this method as required to ensure it is working for V2.1 or later
         /// THIS WILL BE DISABLED FOR V2.
         /// 
         /// WARNING: Does not work on Windows or macOS.
