@@ -26,7 +26,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit
@@ -177,7 +177,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <param name="useGenericTfm"></param>
         /// <returns></returns>
-        public string GenerateTFM(bool useGenericTfm = false)
+        public string GenerateTFM(bool useGenericTfm = false, bool cheatOnNet5OrLater = false)
         {
             OSVersionAnalyzer versionAnalyzer = new OSVersionAnalyzer();
 
@@ -189,10 +189,43 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             if (IsLinux())
             {
+#if NET5_0_OR_GREATER
+                if (cheatOnNet5OrLater)
+                {
+                    var rtID = RuntimeInformation.RuntimeIdentifier;
+                    
+                    //var  = rtID
+                }
+                else
+                {
+                    osName = "linux";
+                }
+#else
                 osName = "linux";
-                
-                //Temporarily use Generic TFM
-                useGenericTfm = true;
+#endif
+
+                var description = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+
+                if (!useGenericTfm)
+                {
+                    if (cheatOnNet5OrLater)
+                    {
+                        //Do nothing cos OS Name has already been overwritten if this is enabled
+                    }
+                    else if (description.ToLower().Contains("ubuntu"))
+                    {
+                        osName = "ubuntu";
+                    }
+                    else if (description.ToLower().Contains("pop"))
+                    {
+                        osName = "pop";
+                    }
+                    else
+                    { 
+                        //Temporarily use Generic TFM
+                        useGenericTfm = true;
+                    }
+                }
             }
             if (IsMac())
             {

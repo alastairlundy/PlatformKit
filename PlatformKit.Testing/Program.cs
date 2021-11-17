@@ -40,7 +40,9 @@ namespace PlatformKit.Testing
             
             Console.WriteLine("Desc: " +  System.Runtime.InteropServices.RuntimeInformation.OSDescription);
             Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
-            Console.WriteLine("Generated TFM: " + platform.GenerateTFM());
+            Console.WriteLine("Generated TFM (Generic): " + platform.GenerateTFM(true));
+            Console.WriteLine("Generated TFM (Specific): " + platform.GenerateTFM(false));
+            Console.WriteLine("Generated TFM (Specific) using Cheats: " + platform.GenerateTFM(false, true));
             Console.WriteLine("OsVersion: " + Environment.OSVersion);
             Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
 
