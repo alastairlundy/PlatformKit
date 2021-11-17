@@ -30,7 +30,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <FileVersion>2.1.0.0</FileVersion>
     <Version>2.1.0.0</Version>
@@ -45,5 +45,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Deprecation\consts" />
+    <Folder Include="enums" />
   </ItemGroup>
 </Project>
