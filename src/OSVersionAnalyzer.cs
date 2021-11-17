@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit
@@ -155,6 +156,8 @@ namespace AluminiumTech.DevKit.PlatformKit
                     return WindowsVersion.Win10_20H2;
                 if (input == new Version(10,0,19043,0))
                     return WindowsVersion.Win10_21H1;
+                if (input == new Version(10, 0,19044, 0))
+                    return WindowsVersion.Win10_21H2;
                 if (input == new Version(10,0,22000,0))
                     return WindowsVersion.Win11_21H2;
                 
