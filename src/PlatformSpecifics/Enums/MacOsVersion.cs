@@ -1,4 +1,4 @@
-﻿/* MIT License
+/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -19,18 +19,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    */
+ */
 
-using System;
-
-using AluminiumTech.DevKit.PlatformKit.consts;
-
-namespace AluminiumTech.DevKit.PlatformKit{
-    /// <summary>
-    /// 
-    /// </summary>
-    [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use the PlatformManager class instead.",false)]
-    public class Platform : PlatformManager{
-
+// ReSharper disable All
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
+{
+    public enum MacOsVersion
+    {
+        v10_0_Cheetah,
+        v10_1_Puma,
+        v10_2_Jaguar,
+        v10_3_Panther,
+        v10_4_Tiger,
+        v10_5_Leopard,
+        v10_6_SnowLeopard,
+        v10_7_Lion,
+        v10_8_MountainLion,
+        v10_9_Mavericks,
+        v10_10_Yosemite,
+        v10_11_ElCapitan,
+        v10_12_Sierra,
+        v10_13_HighSierra,
+        v10_14_Mojave,
+        v10_15_Catalina,
+        v11_BigSur,
+        v12_Monterrey
     }
 }

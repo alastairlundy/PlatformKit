@@ -1,13 +1,12 @@
-﻿/*
- * https://stackoverflow.com/questions/71257/suspend-process-in-c-sharp
+﻿/*  Code licensed under CC BY SA 4.0 from StackOverflow.
  * 
- * Code licensed under CC BY SA 3.0 from StackOverflow.
+ * https://stackoverflow.com/questions/71257/suspend-process-in-c-sharp
  * 
  */
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.enums
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
 {
     [Flags]
     public enum WindowsThreadAccess : int
