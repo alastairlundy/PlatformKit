@@ -1,8 +1,3 @@
-Portions Licensed under CC BY SA 3.0.
-
-Unless otherwise specified other code is licensed under MIT.
-
-
 MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
