@@ -1,6 +1,6 @@
-/* MIT License
+﻿/* MIT License
 
-Copyright (c) 2020 AluminiumTech
+Copyright (c) 2018-2021 AluminiumTech
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,25 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    */
+*/
 
-namespace AluminiumTech.DevKit.PlatformKit.consts
-{
-    public static class DeprecationMessages
-    {
-        private const string V2_2 = "v2.2.0";
-        private const string V2_3 = "v2.3.0";
-        
-        private const string V3 = "v3.0.0";
+using System;
 
-        private const string CodeDeprecation = "This code is deprecated and will be removed";
-        private const string FeatureDeprecation = "This feature is deprecated and will be removed";
-        
-        public const string FutureDeprecation = CodeDeprecation + " in a future version.";
-        
-        public const string DeprecationV2_2 = CodeDeprecation + " in " + V2_2;
-        public const string DeprecationV2_3 = CodeDeprecation + " in " + V2_3;
+namespace AluminiumTech.DevKit.PlatformKit.Deprecation.Deprecated{
+    /// <summary>
+    /// 
+    /// </summary>
+    [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use the PlatformManager class instead.",false)]
+    public class Platform : PlatformManager{
 
-        public const string DeprecationV3 = CodeDeprecation + " in " + V3;
     }
 }
