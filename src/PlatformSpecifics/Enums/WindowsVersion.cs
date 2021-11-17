@@ -22,7 +22,7 @@ SOFTWARE.
     */
 
 // ReSharper disable InconsistentNaming
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
 {
     public enum WindowsVersion
     {
@@ -49,6 +49,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
         Win10_v2004,
         Win10_20H2,
         Win10_21H1,
+        Win10_21H2,
         
         Win11_21H2,
         NotDetected,
