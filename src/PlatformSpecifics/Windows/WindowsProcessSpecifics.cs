@@ -1,13 +1,16 @@
-﻿/*
+﻿/* Code licensed under CC BY SA 3.0 from StackOverflow.
+ *
+ * Changes made to work better with PlatformKit and to provide OS validation.
+ * 
  * https://stackoverflow.com/questions/71257/suspend-process-in-c-sharp
- * 
- * Code licensed under CC BY SA 3.0 from StackOverflow.
- * 
+ *
+ * https://stackoverflow.com/a/13109774 - CC BY SA 3.0
  */
 
 using System;
 using System.Diagnostics;
-using AluminiumTech.DevKit.PlatformKit.enums;
+
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows{
     public static class WindowsProcessSpecifics{
