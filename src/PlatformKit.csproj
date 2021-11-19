@@ -46,9 +46,4 @@
     </None>
     <None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Deprecation\consts" />
-    <Folder Include="enums" />
-  </ItemGroup>
 </Project>

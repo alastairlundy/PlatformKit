@@ -34,10 +34,18 @@ namespace PlatformKit.Testing
         {
             PlatformManager platform = new PlatformManager();
             OSVersionAnalyzer versionAnalyzer = new OSVersionAnalyzer();
+            ProcessManager processManager = new ProcessManager();
             
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            
+
+            //processManager.RunProcess("brave");
+            processManager.OpenUrlInBrowser("youtube.com");
+
+            processManager.OpenUrlInBrowser("google.com");
+            processManager.OpenUrlInBrowser("bing.com");
+            processManager.OpenUrlInBrowser("duckduckgo.com");
+
             Console.WriteLine("Desc: " +  System.Runtime.InteropServices.RuntimeInformation.OSDescription);
             Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
             Console.WriteLine("Generated TFM (Generic): " + platform.GenerateTFM(true));
