@@ -6,7 +6,7 @@
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     [Flags]
     public enum WindowsThreadAccess : int
