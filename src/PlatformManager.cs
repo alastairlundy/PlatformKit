@@ -139,200 +139,57 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Displays license information in the Console from a Text File.
-        /// The information stays in the Console window for the the duration specified in the parameter.
+        ///     Displays license information in the Console from a Text File.
+        ///     The information stays in the Console window for the the duration specified in the parameter.
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds) {
-            try {
+        public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
+        {
+            try
+            {
                 // ReSharper disable once HeapView.ObjectAllocation.Evident
-                Stopwatch licenseWatch = new Stopwatch();
-                
+                var licenseWatch = new Stopwatch();
+
                 var lines = File.ReadAllLines(pathToTextFile);
 
-                foreach (string line in lines) {
-                    Console.WriteLine(line);
-                }
+                foreach (var line in lines) Console.WriteLine(line);
 
                 Console.WriteLine("                                                         ");
                 Console.WriteLine("                                                         ");
-                
+
                 licenseWatch.Start();
-            
-                while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds) {
+
+                while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds)
+                {
                     //Do nothing to make sure everybody sees the license.
                 }
 
                 licenseWatch.Stop();
                 licenseWatch.Reset();
             }
-            catch (Exception exception){
+            catch (Exception exception)
+            {
                 Console.WriteLine(exception.ToString());
                 throw new Exception(exception.ToString());
             }
         }
 
-        // ReSharper disable once InconsistentNaming
         /// <summary>
-        /// Generates an approximated TFM/RunTime ID using information on how TFM/RunTime ID is structured.
-        /// </summary>
-        /// <param name="useGenericTfm"></param>
-        /// <returns></returns>
-        public string GenerateTFM(bool useGenericTfm = false, bool cheatOnNet5OrLater = false)
-        {
-            OSVersionAnalyzer versionAnalyzer = new OSVersionAnalyzer();
-
-            string runtimeId = "";            
-            
-            string osName = "";
-            string cpuArch = "";
-            string osVersion = "";
-
-            if (IsLinux())
-            {
-#if NET5_0_OR_GREATER
-                if (cheatOnNet5OrLater)
-                {
-                    var rtID = RuntimeInformation.RuntimeIdentifier;
-                    
-                    //var  = rtID
-                }
-                else
-                {
-                    osName = "linux";
-                }
-#else
-                osName = "linux";
-#endif
-
-                var description = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-
-                if (!useGenericTfm)
-                {
-                    if (cheatOnNet5OrLater)
-                    {
-                        //Do nothing cos OS Name has already been overwritten if this is enabled
-                    }
-                    else if (description.ToLower().Contains("ubuntu"))
-                    {
-                        osName = "ubuntu";
-                    }
-                    else if (description.ToLower().Contains("pop"))
-                    {
-                        osName = "pop";
-                    }
-                    else
-                    { 
-                        //Temporarily use Generic TFM
-                        useGenericTfm = true;
-                    }
-                }
-            }
-            if (IsMac())
-            {
-                osName = "osx";
-                
-                //Temporarily use Generic TFM.
-                useGenericTfm = true;
-
-                // mac TFM for non generic TFM is osx.major.minor-x64
-                
-                /* switch (versionAnalyzer)
-                 {
-                     
-                 }
-                 */
-            }
-            if (IsWindows())
-            {
-                osName = "win";
-                
-                if (!versionAnalyzer.IsWindows10() && !versionAnalyzer.IsWindows11())
-                {
-                    switch (versionAnalyzer.GetWindowsVersionToEnum())
-                    {
-                        case WindowsVersion.Win7:
-                            osVersion = "7";
-                            break;
-                        case WindowsVersion.Win7SP1:
-                            osVersion = "7";
-                            break;
-                        case WindowsVersion.Win8:
-                            osVersion = "8";
-                            break;
-                        case WindowsVersion.Win8_1:
-                            osVersion = "81";
-                            break;
-                        default:
-                            useGenericTfm = true;
-                            break;
-                    }
-                }
-                else if (versionAnalyzer.IsWindows10())
-                {
-                    osVersion = "10";
-                }
-                else if (versionAnalyzer.IsWindows11())
-                {
-                    osVersion = "11";
-                }
-            }
-
-            cpuArch = System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
-            {
-                Architecture.X64 => "x64",
-                Architecture.X86 => "x86",
-                Architecture.Arm => "arm",
-                Architecture.Arm64 => "arm64",
-                _ => cpuArch
-            };
-
-
-            if (useGenericTfm)
-            {
-                runtimeId = $"{osName}-{cpuArch}";
-            }
-            else
-            {
-                runtimeId = $"{osName}{osVersion}-{cpuArch}";
-            }
-
-            return runtimeId;
-        }
-
-
-        /// <summary>
-        /// Detects the TFM if running on .NET 5 or later and generates the TFM if running on .NET Standard 2.0 or later.
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once InconsistentNaming
-        public string DetectTFM()
-        {
-#if NET5_0_OR_GREATER
-            return System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier;
-#endif
-            return GenerateTFM(true);
-        }
-        
-        /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
             // ReSharper disable once IdentifierTypo
-            string bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
+            var bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
 
-            string app = "";
-            
+            var app = "";
+
             if (GetAppName()?.Length > 0)
-            {
                 // ReSharper disable once HeapView.ObjectAllocation
                 app = "App " + GetAppName() + " v" + GetAppVersion() + " " + bitness;
-            }
 
             // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTimeID: " + DetectTFM();
+            var running = " running on RunTimeID: " + new RuntimeIdentification().DetectTFM();
 
             // ReSharper disable once HeapView.ObjectAllocation
             return app + running;
