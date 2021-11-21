@@ -21,16 +21,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using System.Runtime.InteropServices;
-
 namespace AluminiumTech.DevKit.PlatformKit.Models
 {
     public class RuntimeIdentifier
-    {   
+    {
         public string GeneratedGenericIdentifier { get; set; }
-        
+
         public string GeneratedSpecificIdentifier { get; set; }
-        
+
         public string DotNetIdentifier { get; set; }
     }
 }
