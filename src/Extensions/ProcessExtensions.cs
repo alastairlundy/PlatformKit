@@ -25,8 +25,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using AluminiumTech.DevKit.PlatformKit.Deprecation.Deprecated;
-
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Extensions
