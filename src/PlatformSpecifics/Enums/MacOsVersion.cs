@@ -42,6 +42,10 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
         v10_13_HighSierra,
         v10_14_Mojave,
         v10_15_Catalina,
+        /// <summary>
+        /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
+        /// First version to support Apple Silicon on M1 powered Macs and newer.
+        /// </summary>
         v11_BigSur,
         v12_Monterrey
     }
