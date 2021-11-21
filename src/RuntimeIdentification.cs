@@ -83,9 +83,8 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             if (_platformManager.IsLinux())
             {
-                var version = versionAnalyzer.DetectLinuxDistributionVersionAsString();
+                osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
-                osVersion = version;
             }
 
             if (_platformManager.IsMac())
