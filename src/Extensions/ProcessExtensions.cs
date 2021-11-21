@@ -109,29 +109,43 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
                 throw new Exception(exception.ToString());
             }
         }
-        
-                /// <summary>
-        /// Suspends a process using native or imported method calls.
+
+        /// <summary>
+        ///     Suspends a process using native or imported method calls.
         /// </summary>
-        /// <param name="processName"></param>
-        /// <exception cref="PlatformNotSupportedException">This is currently only implemented on Windows and will throw an exception if run on Linux or macOS.</exception>
-        public static void SuspendProcess(this Process process, string processName) { 
-                    PlatformManager _platformManager = new PlatformManager();
-                    
-            if (_platformManager.IsWindows())
+        /// <param name="process"></param>
+        /// <param name="processName">
+        ///     The process to be suspended. If not specified it will suspend the instance of the Process
+        ///     class calling this method
+        /// </param>
+        /// <exception cref="ArgumentException">Is thrown if the process to be suspended is not already running.</exception>
+        /// <exception cref="PlatformNotSupportedException">
+        ///     This is currently only implemented on Windows and will throw an
+        ///     exception if run on Linux or macOS.
+        /// </exception>
+        public static void SuspendProcess(this Process process, string processName = "")
+        {
+            var platformManager = new PlatformManager();
+
+            if (processName == "" || processName.Equals(string.Empty)) processName = process.ProcessName;
+
+            if (platformManager.IsWindows())
             {
-                WindowsProcessSpecifics.Suspend(ConvertStringToProcess(process, processName));
+                if (IsProcessRunning(process, processName))
+                    WindowsProcessSpecifics.Suspend(ConvertStringToProcess(process, processName));
+                else
+                    throw new ArgumentException();
             }
-            else if (_platformManager.IsLinux())
+            else if (platformManager.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (_platformManager.IsMac())
+            else if (platformManager.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
 #if NETCOREAPP3_0_OR_GREATER
-            else if (_platformManager.IsFreeBSD())
+            else if (platformManager.IsFreeBSD())
             {
                 throw new PlatformNotSupportedException();
             }
@@ -143,31 +157,42 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
         }
 
         /// <summary>
-        /// Resumes a process using native or imported method calls.
-        /// WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
+        ///     Resumes a process using native or imported method calls.
+        ///     WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
         /// </summary>
-        /// <param name="processName"></param>
-        public static void ResumeProcess(this Process process, string processName)
+        /// <param name="process"></param>
+        /// <param name="processName">
+        ///     The process to be resumed. If not specified it will suspend the instance of the Process class
+        ///     calling this method
+        /// </param>
+        /// <exception cref="ArgumentException">Is thrown if the process to be resumed is not already running.</exception>
+        /// <exception cref="PlatformNotSupportedException">
+        ///     This feature is currently only implemented on Windows and will throw an
+        ///     exception if run on Linux or macOS.
+        /// </exception>
+        public static void ResumeProcess(this Process process, string processName = "")
         {
-            PlatformManager _platformManager = new PlatformManager();
-            
-            if (_platformManager.IsWindows())
+            if (processName == "" || processName.Equals(string.Empty)) processName = process.ProcessName;
+
+            var platformManager = new PlatformManager();
+
+            if (platformManager.IsWindows())
             {
                 if (IsProcessRunning(process, processName))
-                {
                     WindowsProcessSpecifics.Resume(ConvertStringToProcess(process, processName));
-                }
+                else
+                    throw new ArgumentException();
             }
-            else if (_platformManager.IsLinux())
+            else if (platformManager.IsLinux())
             {
                 throw new PlatformNotSupportedException();
             }
-            else if (_platformManager.IsMac())
+            else if (platformManager.IsMac())
             {
                 throw new PlatformNotSupportedException();
             }
 #if NETCOREAPP3_0_OR_GREATER
-            else if (_platformManager.IsFreeBSD())
+            else if (platformManager.IsFreeBSD())
             {
                 throw new PlatformNotSupportedException();
             }
