@@ -73,6 +73,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                     return true;
                 case WindowsVersion.Win10_21H2:
                     return true;
+                case WindowsVersion.Win10_Server2016:
+                    return true;
+                case WindowsVersion.Win10_Server2019:
+                    return true;
+                case WindowsVersion.Win10_Server_v1709:
+                    return true;
+                case WindowsVersion.Win10_Server2022:
+                    return true;
                 default:
                     return false;
             }
@@ -116,6 +124,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 if (input == new Version(6, 0, 6000, 0)) return WindowsVersion.WinVista;
                 if (input == new Version(6, 0, 6001, 0)) return WindowsVersion.WinVistaSP1;
                 if (input == new Version(6, 0, 6002, 0)) return WindowsVersion.WinVistaSP2;
+                if (input == new Version(6, 0, 6003, 0)) return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
                 if (input == new Version(6, 1, 7600, 0)) return WindowsVersion.Win7;
                 if (input == new Version(6, 1, 7601, 0)) return WindowsVersion.Win7SP1;
                 if (input == new Version(6, 2, 9200, 0)) return WindowsVersion.Win8;
@@ -124,7 +133,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 if (input == new Version(10, 0, 10586, 0)) return WindowsVersion.Win10_v1511;
                 if (input == new Version(10, 0, 14393, 0)) return WindowsVersion.Win10_v1607;
                 if (input == new Version(10, 0, 15063, 0)) return WindowsVersion.Win10_v1703;
-                if (input == new Version(10, 0, 15254, 0)) return WindowsVersion.Win10_v1709_Mobile;
+                if (input == new Version(10, 0, 15254, 0)) return WindowsVersion.Win10_v1709_Mobile; 
                 if (input == new Version(10, 0, 16299, 0)) return WindowsVersion.Win10_v1709;
                 if (input == new Version(10, 0, 17134, 0)) return WindowsVersion.Win10_v1803;
                 if (input == new Version(10, 0, 17763, 0)) return WindowsVersion.Win10_v1809;
@@ -134,6 +143,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 if (input == new Version(10, 0, 19042, 0)) return WindowsVersion.Win10_20H2;
                 if (input == new Version(10, 0, 19043, 0)) return WindowsVersion.Win10_21H1;
                 if (input == new Version(10, 0, 19044, 0)) return WindowsVersion.Win10_21H2;
+                if (input == new Version(10, 0, 20348, 0)) return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
                 if (input == new Version(10, 0, 22000, 0)) return WindowsVersion.Win11_21H2;
 
                 return WindowsVersion.NotDetected;
