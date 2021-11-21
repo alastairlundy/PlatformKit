@@ -22,11 +22,8 @@ SOFTWARE.
 */
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
@@ -34,7 +31,7 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 namespace AluminiumTech.DevKit.PlatformKit
 {
     /// <summary>
-    /// A class to manage processes on a device and/or start new processes.
+    ///     A class to manage processes on a device and/or start new processes.
     /// </summary>
     public class ProcessManager
     {
@@ -46,49 +43,51 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Run a Process with Arguments
+        ///     Run a Process with Arguments
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcess(string processName, string arguments = "")
+        public string RunProcess(string executableLocation, string executableName, string arguments = "")
         {
-            RunActionOn(() => RunProcessWindows(processName, arguments), () => RunProcessMac(processName, arguments),
-                () => RunProcessLinux(processName, arguments));
+            if (_platformManager.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments);
+            if (_platformManager.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments);
+            if (_platformManager.IsMac()) return RunProcessMac(executableLocation, executableName, arguments);
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
-        ///  Run a process on Windows with Arguments
+        ///     Run a process on Windows with Arguments
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
         /// <param name="runAsAdministrator"></param>
         /// <param name="pws"></param>
         /// <exception cref="Exception"></exception>
-        public void RunProcessWindows(string processName, string arguments = "", bool runAsAdministrator = false,
+        public string RunProcessWindows(string executableLocation, string executableName, string arguments = "",
+            bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle pws = ProcessWindowStyle.Normal)
         {
             try
             {
                 // ReSharper disable once HeapView.ObjectAllocation.Evident
-                Process process = new Process();
+                var process = new Process();
 
-                if (processName.Contains(".exe") || processName.EndsWith(".exe"))
-                {
-                    process.StartInfo.FileName = processName;
-                }
-                else
-                {
-                    process.StartInfo.FileName = $"{processName}.exe";
-                }
+                process.StartInfo.FileName = executableName;
 
-                if (runAsAdministrator)
-                {
-                    process.StartInfo.Verb = "runas";
-                }
-                
+                if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
+                    process.StartInfo.FileName += ".exe";
+
+                if (runAsAdministrator) process.StartInfo.Verb = "runas";
+
+                process.StartInfo.WorkingDirectory = executableLocation;
+                process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WindowStyle = pws;
                 process.Start();
+
+                process.WaitForExit();
+                return process.StandardOutput.ReadToEnd();
             }
             catch (Exception ex)
             {
@@ -98,49 +97,125 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// Run a Process on macOS
+        ///     Run a Process on macOS
         /// </summary>
         /// <param name="processName"></param>
         /// <param name="arguments"></param>
-        public void RunProcessMac(string processName, string arguments = "")
+        public string RunProcessMac(string executableLocation, string executableName, string arguments = "")
         {
-            var procStartInfo = new ProcessStartInfo()
+            var procStartInfo = new ProcessStartInfo
             {
-                FileName = processName,
+                WorkingDirectory = executableLocation,
+                FileName = executableName,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = false,
                 Arguments = arguments
             };
 
-            Process process = new Process { StartInfo = procStartInfo };
+            var process = new Process { StartInfo = procStartInfo };
             process.Start();
+
+            process.WaitForExit();
+            return process.StandardOutput.ReadToEnd();
+        }
+
+        /// <summary>
+        ///     Run a Process on Linux
+        /// </summary>
+        /// <param name="processName"></param>
+        /// <param name="processArguments"></param>
+        public string RunProcessLinux(string executableLocation, string executableName, string processArguments = "")
+        {
+            try
+            {
+                var procStartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = executableLocation,
+                    FileName = executableName,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = false,
+                    Arguments = processArguments
+                };
+
+                if (executableName.ToLower().StartsWith("/usr/bin/"))
+                {
+                    procStartInfo.WorkingDirectory = "/usr/bin/";
+                    procStartInfo.FileName = executableName.Replace("/usr/bin/", string.Empty);
+                }
+
+                var process = new Process { StartInfo = procStartInfo };
+                process.Start();
+
+                process.WaitForExit();
+                return process.StandardOutput.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw new Exception(ex.ToString());
+            }
         }
 
         // This won't be implemented for V2. This will be implemented in V2.1 or later
         /*
         public void RunConsoleCommand(string arguments)
         {
-            var plat = new Platform().ToEnum();
-
-            string programName = "";
-            
-            if (plat.Equals(OperatingSystemFamily.Windows))
-            {
-                programName = "cmd";
-            }
             else if (plat.Equals(OperatingSystemFamily.macOS))
             {
            //     programName = "open -b com.apple.terminal " + arguments;
-            }
-            else if (plat.Equals(OperatingSystemFamily.Linux))
-            {
-                //programName
-            }
+
 
             RunProcess(programName, arguments);
         }
          */
+
+        public string RunCommand(string command)
+        {
+            if (_platformManager.IsWindows()) return RunCmdCommand(command);
+            if (_platformManager.IsLinux()) return RunCommandLinux(command);
+            if (_platformManager.IsMac()) return RunCommandMac(command);
+
+            throw new PlatformNotSupportedException();
+        }
+
+        public string RunCmdCommand(string command)
+        {
+            return RunProcessLinux("cmd", command);
+        }
+
+        public string RunPowerShellCommand(string command)
+        {
+            return RunProcessLinux("powershell", command);
+        }
+
+        public string RunCommandMac(string command)
+        {
+            var processName = "zsh";
+            var location = "/usr/bin/";
+
+            var processArguments = "-c \" " + command + " \"";
+
+            return RunProcessLinux(location, processName, processArguments);
+        }
+
+        public string RunCommandLinux(string command)
+        {
+            var processName = "bash";
+            var location = "/usr/bin/";
+
+            /*
+            if (!Directory.Exists(location))
+            {
+                
+            }
+            */
+
+            var processArguments = "-c \" " + command + " \"";
+
+            return RunProcessLinux(location, processName, processArguments);
+        }
 
         /// <summary>
         /// TODO: Test, Fix, and Revamp this method as required to ensure it is working for V2.1 or later
@@ -159,10 +234,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
 
                 //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
-                string processName = "/usr/bin/bash";
-                string processArguments = "-c \" " + command + " \"";
-
-                RunProcessLinux(processName, processArguments);
+                
             }
             catch (Exception ex)
             {
@@ -171,38 +243,9 @@ namespace AluminiumTech.DevKit.PlatformKit
             }
         }
         */
-        
-        /// <summary>
-        /// Run a Process on Linux
-        /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="processArguments"></param>
-        public void RunProcessLinux(string processName, string processArguments = "")
-        {
-            try
-            {
-                var procStartInfo = new ProcessStartInfo()
-                {
-                    FileName = processName,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = false,
-                    Arguments = processArguments
-                };
-
-                Process process = new Process { StartInfo = procStartInfo };
-                process.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw new Exception(ex.ToString());
-            }
-
-        }
 
         /// <summary>
-        /// Run different actions or methods depending on the operating system.
+        ///     Run different actions or methods depending on the operating system.
         /// </summary>
         /// <param name="windowsMethod"></param>
         /// <param name="macMethod"></param>
@@ -217,32 +260,18 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (_platformManager.IsWindows() && windowsMethod != null)
-                {
-                    windowsMethod.Invoke();
-                }
+                if (_platformManager.IsWindows() && windowsMethod != null) windowsMethod.Invoke();
 
-                if (_platformManager.IsLinux() && linuxMethod != null)
-                {
-                    linuxMethod.Invoke();
-                }
-                if (_platformManager.IsMac() && macMethod != null)
-                {
-                    macMethod.Invoke();
-                }
-                
+                if (_platformManager.IsLinux() && linuxMethod != null) linuxMethod.Invoke();
+                if (_platformManager.IsMac() && macMethod != null) macMethod.Invoke();
+
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platformManager.IsFreeBSD() && freeBsdMethod != null)
-                {
-                    freeBsdMethod.Invoke();
-                }
+                if (_platformManager.IsFreeBSD() && freeBsdMethod != null) freeBsdMethod.Invoke();
 #endif
                 if (_platformManager.IsMac() && macMethod == null ||
                     _platformManager.IsLinux() && linuxMethod == null ||
                     _platformManager.IsWindows() && windowsMethod == null)
-                {
                     throw new ArgumentNullException();
-                }
             }
             catch (Exception exception)
             {
@@ -250,11 +279,10 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new Exception(exception.ToString());
             }
         }
-        
+
         /// <summary>
-        /// Open a URL in the default browser.
-        ///
-        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
+        ///     Open a URL in the default browser.
+        ///     Courtesy of https://github.com/dotnet/corefx/issues/10361
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -262,29 +290,30 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (!url.StartsWith("http://") || !url.StartsWith("https://") || !url.StartsWith("www."))
-                {
+                if (!url.StartsWith("https://") || !url.StartsWith("www."))
                     url = "https://" + url;
-                }
-                
+                else if (url.StartsWith("http://")) url = url.Replace("http://", "https://");
+
                 if (_platformManager.IsWindows())
                 {
-                    Task task = new Task(() =>
+                    var task = new Task(() =>
                         Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
                             { CreateNoWindow = true }));
                     task.Start();
                     return true;
                 }
-                else if (_platformManager.IsLinux())
+
+                if (_platformManager.IsLinux())
                 {
-                    Task task = new Task(() =>
+                    var task = new Task(() =>
                         Process.Start("xdg-open", url));
                     task.Start();
                     return true;
                 }
-                else if (_platformManager.IsMac())
+
+                if (_platformManager.IsMac())
                 {
-                    Task task = new Task(()=> 
+                    var task = new Task(() =>
                         Process.Start("open", url));
                     task.Start();
                     return true;
@@ -296,59 +325,6 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 Console.WriteLine(ex.ToString());
                 throw new Exception(ex.ToString());
-            }
-        }
-
-
-        /// <summary>
-        /// Determines whether a process (or the current process if unspecified) is running as an administrator.
-        /// Currently only supports Windows. Running on macOS or Linux will return a PlatformNotSupportedException.
-        /// WORK IN PROGRESS. 
-        /// Fix for future 2.x release
-        /// </summary>
-        /// <param name="process"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Occurs when running on macOS or Linux as these are not currently supported.</exception>
-        public bool IsRunningAsAdministrator(Process process = null)
-        {
-            try
-            {
-                if (process == null)
-                {
-                    process = Process.GetCurrentProcess();
-                }
-                
-                if (_platformManager.IsWindows())
-                {
-
-                    if (process.StartInfo.Verb.Contains("runas"))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                /*       else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.macOS))
-                     {
-                         return (Mono.Unix.Native.Syscall.geteuid() == 0);
-                     }
-                     else if (platform.ToOperatingSystemFamily().Equals(OperatingSystemFamily.Linux))
-                     {
-                         return (Mono.Unix.Native.Syscall.geteuid() == 0);
-                     }
-    
-              */
-                else
-                {
-                    throw new PlatformNotSupportedException();
-                }
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
             }
         }
     }
