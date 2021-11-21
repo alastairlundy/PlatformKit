@@ -158,22 +158,34 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException">
-        ///     Not yet implemented on Linux or macOS. Please do not run on Linux or macOS
+        ///     Not yet implemented on macOS. Please do not run on macOS
         ///     yet!
         /// </exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once InconsistentNaming
-        public Version GetOSVersion()
+        public Version DetectOSVersion()
         {
             try
             {
-                if (_platformManager.IsWindows()) return DetectWindowsVersion();
-                if (_platformManager.IsLinux()) return DetectLinuxDistributionVersion();
-                if (_platformManager.IsMac()) throw new NotImplementedException();
+                if (_platformManager.IsWindows())
+                {
+                    return DetectWindowsVersion();
+                }
+                if (_platformManager.IsLinux())
+                {
+                    return DetectLinuxDistributionVersion();
+                }
+                if (_platformManager.IsMac())
+                {
+                    throw new NotImplementedException();
+                }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platformManager.IsFreeBSD()) throw new NotImplementedException();
+                if (_platformManager.IsFreeBSD())
+                {
+                    throw new NotImplementedException();
+                }
 #endif
                 throw new PlatformNotSupportedException();
             }
@@ -201,19 +213,21 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 {
                     var description = RuntimeInformation.OSDescription;
                     description = description.Replace("Microsoft Windows", string.Empty);
-
-                    var descArray = description.Split(' ');
+                    description = description.Replace(" ", String.Empty);
 
                     var dotCounter = 0;
 
-                    foreach (var d in descArray)
-                        if (!d.Contains(string.Empty))
+                    for (int index = 0; index < description.Length; index++)
+                    {
+                        if (description[index].Equals('.'))
                         {
-                            description = d;
-
-                            if (d.Equals(".")) dotCounter++;
+                            dotCounter++;
                         }
-
+                    }
+#if DEBUG
+                    Console.WriteLine("Before DotCounter: " + dotCounter);
+                    Console.WriteLine("Before DescV: " + description);
+#endif
                     if (dotCounter == 1)
                     {
                         dotCounter++;
@@ -225,14 +239,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         dotCounter++;
                         description += ".0";
                     }
+#if DEBUG
+                    Console.WriteLine("After DotCounter: " + dotCounter);
+                    Console.WriteLine("After DescV: " + description);
+#endif
 
-                    if (dotCounter == 3)
-                    {
-                        dotCounter++;
-                        description += ".0";
-                    }
-
-                    return Version.Parse(description);
+                return Version.Parse(description);
                 }
 
                 throw new PlatformNotSupportedException();
@@ -295,21 +307,27 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
             var dotCounter = 0;
 
             var version = DetectLinuxDistributionVersionAsString();
-
             version = version.Replace(" ", string.Empty);
 
             foreach (var c in version)
+            {
                 if (c == '.')
+                {
                     dotCounter++;
+                }
+            }
 
             if (dotCounter == 1)
+            {
                 version += ".0";
+            }
             else if (dotCounter == 2)
+            {
                 version += ".0";
-            else if (dotCounter == 3) version += ".0";
-
-            //Console.WriteLine("Version: " + version);
-
+            }
+#if DEBUG
+            Console.WriteLine("Version: " + version);
+#endif
             return Version.Parse(version);
         }
 
