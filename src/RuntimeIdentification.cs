@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.Models;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
 
@@ -10,16 +11,16 @@ namespace AluminiumTech.DevKit.PlatformKit
 {
     public class RuntimeIdentification
     {
-        protected OSAnalyzer _osAnalyzer;
-        protected PlatformManager _platformManager;
+        protected OSAnalyzer osAnalyzer;
+        protected PlatformManager platformManager;
         protected OSVersionAnalyzer versionAnalyzer;
 
 
         public RuntimeIdentification()
         {
-            _platformManager = new PlatformManager();
+            platformManager = new PlatformManager();
             versionAnalyzer = new OSVersionAnalyzer();
-            _osAnalyzer = new OSAnalyzer();
+            osAnalyzer = new OSAnalyzer();
         }
 
         protected string GetArchitectureString()
@@ -42,15 +43,15 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             string osName = null;
 
-            if (_platformManager.IsWindows())
+            if (platformManager.IsWindows())
             {
                 osName = "win";
             }
-            if (_platformManager.IsMac())
+            if (platformManager.IsMac())
             {
                 osName = "osx";
             }
-            if (_platformManager.IsLinux())
+            if (platformManager.IsLinux())
             {
                 if (useGenericTFM)
                 {
@@ -58,7 +59,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
                 else
                 {
-                    osName = _osAnalyzer.GetLinuxDistributionInformation().Name;
+                    osName = osAnalyzer.GetLinuxDistributionInformation().Name;
                 }
             }
 
@@ -69,7 +70,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             string osVersion = null;
 
-            if (_platformManager.IsWindows())
+            if (platformManager.IsWindows())
             {
                 if (versionAnalyzer.IsWindows10())
                 {
@@ -79,16 +80,56 @@ namespace AluminiumTech.DevKit.PlatformKit
                 {
                     osVersion = "11";
                 }
+                else if (!versionAnalyzer.IsWindows10() && !versionAnalyzer.IsWindows11())
+                {
+                    switch (versionAnalyzer.GetWindowsVersionToEnum())
+                    {
+                        case WindowsVersion.WinVista:
+                            throw new PlatformNotSupportedException();
+                        case WindowsVersion.WinVistaSP1:
+                            throw new PlatformNotSupportedException();
+                        case WindowsVersion.WinVistaSP2:
+                            throw new PlatformNotSupportedException();
+                        case WindowsVersion.WinServer_2008:
+                            throw new PlatformNotSupportedException();
+                        case WindowsVersion.WinServer_2008_R2:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.Win7:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.Win7SP1:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.Win8:
+                            osVersion = "8";
+                            break;
+                        case WindowsVersion.WinServer_2012:
+                            osVersion = "8";
+                            break;
+                        case WindowsVersion.Win8_1:
+                            osVersion = "81";
+                            break;
+                        case WindowsVersion.WinServer_2012_R2:
+                            osVersion = "81";
+                            break;
+                        case WindowsVersion.NotDetected:
+                            throw new OperatingSystemVersionDetectionException();
+                        default:
+                            throw new OperatingSystemVersionDetectionException();
+                    }
+                }
             }
-
-            if (_platformManager.IsLinux())
+            if (platformManager.IsLinux())
             {
                 osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
             }
-
-            if (_platformManager.IsMac())
+            if (platformManager.IsMac())
             {
+                //For now we need to throw an error cos we don't currently have macOS Version detection built in.
+                throw new PlatformNotSupportedException();
+
                 /*
                 switch (versionAnalyzer.)
                 {
@@ -126,62 +167,84 @@ namespace AluminiumTech.DevKit.PlatformKit
                 */
             }
 
+#if DEBUG
+            Console.WriteLine("OsVersion: " + osVersion);     
+#endif
+            
             return osVersion;
         }
 
         /// <summary>
+        /// Generates a Generic Runtime ID that is OS version independent but not CPU or OS independent.
+        /// Produces a Runtime ID in the format of [OperatingSystem]-[ProcessorArchitecture]
         /// </summary>
         /// <returns></returns>
-        public string GenerateGenericTFM()
+        public string GenerateGenericRuntimeIdentifier()
         {
-            var osName = GetOsNameString(true);
-            var cpuArch = GetArchitectureString();
-
-            return $"{osName}-{cpuArch}";
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateSpecificTFM()
-        {
-            var osName = GetOsNameString(false);
-            var osVersion = GetOsVersionString();
-            var cpuArch = GetArchitectureString();
-
-            if (_platformManager.IsWindows())
+            try
             {
+                var osName = GetOsNameString(true);
+                var cpuArch = GetArchitectureString();
+
                 return $"{osName}-{cpuArch}";
             }
-            else
+            catch
             {
-                return $"{osName}.{osVersion}-{cpuArch}";
+                throw new GenericRuntimeIdentifierGenerationFailedException();
             }
         }
 
         /// <summary>
-        ///     Detects the TFM if running on .NET 5 or later and generates the TFM if running on .NET Standard 2.0 or later.
+        /// Generates the specific Runtime Identifier in the format of [OperatingSystemName].[OperatingSystemVersion]-[ProcessorArchitecture].
+        /// On Windows the dot between OS Name and OS Version is omitted because that's how Microsoft creates/uses RuntimeIDs.
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateSpecificRuntimeIdentifier()
+        {
+            try
+            {
+                var osName = GetOsNameString(false);
+                var osVersion = GetOsVersionString();
+                var cpuArch = GetArchitectureString();
+
+                if (platformManager.IsWindows())
+                {
+                    return $"{osName}{osVersion}-{cpuArch}";
+                }
+                else
+                {
+                    return $"{osName}.{osVersion}-{cpuArch}";
+                }
+            }
+            catch
+            {
+                throw new SpecificRuntimeIdentifierGenerationException();
+            }
+        }
+
+        /// <summary>
+        /// Detects the TFM if running on .NET 5 or later and generates the generic TFM if running on .NET Standard 2.0 or later.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public string DetectTFM()
+        public string DetectRuntimeIdentifier()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #endif
-            return GenerateGenericTFM();
+            return GenerateGenericRuntimeIdentifier();
         }
 
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public RuntimeIdentifier GenerateTFM()
+        public RuntimeIdentifier GenerateRuntimeIdentifier()
         {
             var runtimeIdentifier = new RuntimeIdentifier();
-            runtimeIdentifier.GeneratedGenericIdentifier = GenerateGenericTFM();
-            runtimeIdentifier.GeneratedSpecificIdentifier = GenerateSpecificTFM();
+            runtimeIdentifier.GeneratedGenericIdentifier = GenerateGenericRuntimeIdentifier();
+            runtimeIdentifier.GeneratedSpecificIdentifier = GenerateSpecificRuntimeIdentifier();
 
-            runtimeIdentifier.DotNetIdentifier = DetectTFM();
+            runtimeIdentifier.DotNetIdentifier = DetectRuntimeIdentifier();
 
             return runtimeIdentifier;
         }

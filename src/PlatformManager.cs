@@ -189,7 +189,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 app = "App " + GetAppName() + " v" + GetAppVersion() + " " + bitness;
 
             // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTimeID: " + new RuntimeIdentification().DetectTFM();
+            var running = " running on RunTimeID: " + new RuntimeIdentification().DetectRuntimeIdentifier();
 
             // ReSharper disable once HeapView.ObjectAllocation
             return app + running;

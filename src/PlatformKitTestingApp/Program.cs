@@ -43,17 +43,19 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
             //processManager.OpenUrlInBrowser("bing.com");
             //processManager.OpenUrlInBrowser("duckduckgo.com");
 
-            Console.WriteLine("Desc: " + RuntimeInformation.OSDescription);
-            Console.WriteLine("TFM: " + RuntimeInformation.RuntimeIdentifier);
-            //Console.WriteLine("Generated TFM (Specific) using Cheats: " + platform.GenerateTFM(false, true));
-
-            Console.WriteLine("Generated TFM (Generic): " + runtimeIdentification.GenerateGenericTFM());
-            Console.WriteLine("Generated TFM (Specific): " + runtimeIdentification.GenerateSpecificTFM());
-            //Console.WriteLine("Generated TFM (Generic): " + runtimeIdentification.GenerateGenericTFM());
-
-            Console.WriteLine("Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
-            Console.WriteLine("OsVersion: " + versionAnalyzer.DetectWindowsVersion());
-            // Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
+            Console.WriteLine("OS Description: " + RuntimeInformation.OSDescription);
+            Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
+            
+            Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateGenericRuntimeIdentifier());
+            Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateSpecificRuntimeIdentifier());
+            
+            if (platform.IsWindows())
+            {
+                Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
+            }
+            
+            Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
+            Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
 
             if (platform.IsLinux())
             {
