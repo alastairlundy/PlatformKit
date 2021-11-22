@@ -28,7 +28,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
