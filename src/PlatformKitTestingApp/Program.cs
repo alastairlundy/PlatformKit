@@ -31,19 +31,9 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
 
             var platform = new PlatformManager();
             var processManager = new ProcessManager();
-
             var versionAnalyzer = new OSVersionAnalyzer();
-
             var runtimeIdentification = new RuntimeIdentification();
 
-//processManager.RunProcess("brave");
-            //processManager.OpenUrlInBrowser("youtube.com");
-
-            //processManager.OpenUrlInBrowser("google.com");
-            //processManager.OpenUrlInBrowser("bing.com");
-            //processManager.OpenUrlInBrowser("duckduckgo.com");
-
-            Console.WriteLine("OS Description: " + RuntimeInformation.OSDescription);
             Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
             
             Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateGenericRuntimeIdentifier());
@@ -55,8 +45,6 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
             }
             
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
-            Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
-
             if (platform.IsLinux())
             {
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
