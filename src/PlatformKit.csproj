@@ -17,25 +17,31 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes
-            * Added the ability ability to run Processes on Windows with Run As Administrator
-            * Updated WindowsVersion enum
-            * Added macOS Version enum
-            * Updated OSVersionAnalyzer
-            * Add TFM Generation Support
-            * Removed deprecated methods
-            * Deprecated Platform class instead of PlatformManager
-        </PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.1.0
+* Added support for detecting Linux Distribution Information in the the new ``OSAnalyzer`` class which is now stored in the ``LinuxDistributionInformation`` model class.
+* Added support for detecting Linux Distribution Version in ``OSVersionAnalyzer`` - This relies on the new Linux Distribution Information being detected in the ``OSAnalyzer`` class.
+* Changed arguments required for several ``ProcessManager`` process related methods.
+* Added support for executing commands on Windows (either through using the Cmd method or Powershell method) and Linux - macOS is also technically supported but is untested and may not work well or at all.
+* Moved RuntimeIdentification code to new ``RuntimeIdentification`` class.
+* Added ``RuntimeIdentifier`` class to act as a model to hold information for some of the ``RuntimeIdentification`` class methods.
+* Renamed ``DetectTFM`` and TFM related methods to use ``RuntimeIdentifier`` instead of TFM in the name of those methods.
+* Removed deprecated ``Platform`` class - Please use the ``PlatformManager`` class instead.
+* Deprecate code that is licensed under CC BY SA - This includes the suspend and resume functions for Windows.
+
+### Known Issue(s):
+* Windows version detection may fail to detect what version of Windows is running.
+* There's no detection of Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server v1709, and Windows Server 2019 - The regular Windows version number of those versions will be detected or returned instead.
+* As a result of Windows version detection sometimes failing, Generating Specific TFM can also sometimes fail - A possible workaround is creating a Try/Catch block to try to detect the Specific TFM and falling back to the Generic TFM if it fails.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-        <FileVersion>2.1.0.0</FileVersion>
-        <Version>2.1.0.0</Version>
-        <PackageVersion>2.1.0</PackageVersion>
+        <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <FileVersion>2.2.0.0</FileVersion>
+        <Version>2.2.0.0</Version>
+        <PackageVersion>2.2.0</PackageVersion>
 
     </PropertyGroup>
 
