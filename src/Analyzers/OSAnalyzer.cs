@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+
 using AluminiumTech.DevKit.PlatformKit.Models;
 
 // ReSharper disable InconsistentNaming
@@ -37,6 +38,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
             _platformManager = new PlatformManager();
         }
 
+        /// <summary>
+        /// Detects Linux Distribution information and returns it.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         public LinuxDistributionInformation GetLinuxDistributionInformation()
         {
             var linuxDistributionInformation = new LinuxDistributionInformation();

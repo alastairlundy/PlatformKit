@@ -101,6 +101,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         }
 
         /// <summary>
+        /// 
         /// </summary>
         /// <returns></returns>
 #if NET5_0_OR_GREATER
