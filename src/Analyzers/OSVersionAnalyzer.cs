@@ -225,7 +225,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         }
                     }
 #if DEBUG
-                    Console.WriteLine("Before DotCounter: " + dotCounter);
                     Console.WriteLine("Before DescV: " + description);
 #endif
                     if (dotCounter == 1)
@@ -240,7 +239,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         description += ".0";
                     }
 #if DEBUG
-                    Console.WriteLine("After DotCounter: " + dotCounter);
                     Console.WriteLine("After DescV: " + description);
 #endif
 

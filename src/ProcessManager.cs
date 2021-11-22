@@ -23,6 +23,7 @@ SOFTWARE.
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 // ReSharper disable HeapView.DelegateAllocation
@@ -45,12 +46,13 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <summary>
         ///     Run a Process with Arguments
         /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="arguments"></param>
+        /// <param name="executableLocation">The working directory of the executable.</param>
+        /// <param name="executableName">The name of the file to be run.</param>
+        /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public string RunProcess(string executableLocation, string executableName, string arguments = "")
         {
             if (_platformManager.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments);
-            if (_platformManager.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments);
+            if (_platformManager.IsLinux()) return RunProcessLinux(executableLocation: executableLocation, executableName, arguments);
             if (_platformManager.IsMac()) return RunProcessMac(executableLocation, executableName, arguments);
 
             throw new PlatformNotSupportedException();
@@ -59,14 +61,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <summary>
         ///     Run a process on Windows with Arguments
         /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="arguments"></param>
-        /// <param name="runAsAdministrator"></param>
-        /// <param name="pws"></param>
+        /// <param name="executableLocation">The working directory of the executable.</param>
+        /// <param name="executableName">The name of the file to be run.</param>
+        /// <param name="processArguments">Arguments to be passed to the executable.</param>
+        /// <param name="windowStyle">Whether to open the window in full screen mode, normal size, minimized, or a different window mode.</param>
         /// <exception cref="Exception"></exception>
         public string RunProcessWindows(string executableLocation, string executableName, string arguments = "",
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
-            ProcessWindowStyle pws = ProcessWindowStyle.Normal)
+            ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
             try
             {
@@ -83,7 +85,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 process.StartInfo.WorkingDirectory = executableLocation;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.Arguments = arguments;
-                process.StartInfo.WindowStyle = pws;
+                process.StartInfo.WindowStyle = windowStyle;
                 process.Start();
 
                 process.WaitForExit();
@@ -99,8 +101,9 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <summary>
         ///     Run a Process on macOS
         /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="arguments"></param>
+        /// <param name="executableLocation">The working directory of the executable.</param>
+        /// <param name="executableName">The name of the file to be run.</param>
+        /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public string RunProcessMac(string executableLocation, string executableName, string arguments = "")
         {
             var procStartInfo = new ProcessStartInfo
@@ -121,10 +124,13 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        ///     Run a Process on Linux
+        /// Run a Process on Linux
         /// </summary>
-        /// <param name="processName"></param>
-        /// <param name="processArguments"></param>
+        /// <param name="executableLocation">The working directory of the executable.</param>
+        /// <param name="executableName">The name of the file to be run.</param>
+        /// <param name="processArguments">Arguments to be passed to the executable.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public string RunProcessLinux(string executableLocation, string executableName, string processArguments = "")
         {
             try
@@ -180,14 +186,19 @@ namespace AluminiumTech.DevKit.PlatformKit
             throw new PlatformNotSupportedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public string RunCmdCommand(string command)
         {
-            return RunProcessLinux("cmd", command);
+            return RunProcessWindows(Environment.SystemDirectory, "cmd", command);
         }
 
         public string RunPowerShellCommand(string command)
         {
-            return RunProcessLinux("powershell", command);
+            return RunProcessLinux(Environment.SystemDirectory, "powershell", command);
         }
 
         public string RunCommandMac(string command)
@@ -197,52 +208,34 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             var processArguments = "-c \" " + command + " \"";
 
-            return RunProcessLinux(location, processName, processArguments);
+            return RunProcessLinux(executableLocation: location, processName, processArguments);
         }
-
+        
+        /// <summary>
+        /// Run a command or program as if inside a terminal on Linux.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public string RunCommandLinux(string command)
         {
-            var processName = "bash";
+            var executableName = "bash";
             var location = "/usr/bin/";
 
-            /*
+            if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+            {
+                executableName = "zsh";
+            }
+            
             if (!Directory.Exists(location))
             {
-                
+                throw new ArgumentException("Cannot execute a command if there is no command to execute.");
             }
-            */
 
             var processArguments = "-c \" " + command + " \"";
 
-            return RunProcessLinux(location, processName, processArguments);
+            return RunProcessLinux(executableLocation: location, executableName, processArguments);
         }
-
-        /// <summary>
-        /// TODO: Test, Fix, and Revamp this method as required to ensure it is working for V2.1 or later
-        /// THIS WILL BE DISABLED FOR V2.
-        /// 
-        /// WARNING: Does not work on Windows or macOS.
-        /// </summary>
-        /// <param name="command"></param>
-        /* internal void RunCommandLinux(string command)
-        {
-            try
-            {
-                if (GetPlatformOperatingSystemFamily() != (OperatingSystemFamily.Linux))
-                {
-                    throw new PlatformNotSupportedException();
-                }
-
-                //https://askubuntu.com/questions/506985/c-opening-the-terminal-process-and-pass-commands
-                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
-            }
-        }
-        */
 
         /// <summary>
         ///     Run different actions or methods depending on the operating system.
