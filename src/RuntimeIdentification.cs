@@ -34,12 +34,18 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
+    /// <summary>
+    /// A class to manage RuntimeId detection and programmatic generation.
+    /// </summary>
     public class RuntimeIdentification
     {
         protected OSAnalyzer osAnalyzer;
         protected PlatformManager platformManager;
         protected OSVersionAnalyzer versionAnalyzer;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public RuntimeIdentification()
         {
             platformManager = new PlatformManager();
@@ -260,6 +266,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
+        /// Generates a RuntimeIdentifier object model, detects information, and return it.
         /// </summary>
         /// <returns></returns>
         public RuntimeIdentifier GenerateRuntimeIdentifier()

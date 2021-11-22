@@ -196,19 +196,45 @@ namespace AluminiumTech.DevKit.PlatformKit
             return RunProcessWindows(Environment.SystemDirectory, "cmd", command);
         }
 
+        /// <summary>
+        /// Runs commands in Windows Powershell
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public string RunPowerShellCommand(string command)
         {
-            return RunProcessLinux(Environment.SystemDirectory, "powershell", command);
+            try
+            {
+                var location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" +
+                               Path.DirectorySeparatorChar + "v1.0";
+                return RunProcessWindows(location, "powershell", command);
+            }
+            catch
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public string RunCommandMac(string command)
         {
-            var processName = "zsh";
-            var location = "/usr/bin/";
+            try
+            {
+                var processName = "zsh";
+                var location = "/usr/bin/";
 
-            var processArguments = "-c \" " + command + " \"";
+                var processArguments = "-c \" " + command + " \"";
 
-            return RunProcessLinux(executableLocation: location, processName, processArguments);
+                return RunProcessMac(location, processName, processArguments);
+            }
+            catch
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
         
         /// <summary>
@@ -219,22 +245,29 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="ArgumentException"></exception>
         public string RunCommandLinux(string command)
         {
-            var executableName = "bash";
-            var location = "/usr/bin/";
-
-            if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+            try
             {
-                executableName = "zsh";
-            }
+                var executableName = "bash";
+                var location = "/usr/bin/";
+
+                if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+                {
+                    executableName = "zsh";
+                }
             
-            if (!Directory.Exists(location))
-            {
-                throw new ArgumentException("Cannot execute a command if there is no command to execute.");
+                if (!Directory.Exists(location))
+                {
+                    throw new ArgumentException("Cannot execute a command if there is no command to execute.");
+                }
+
+                var processArguments = "-c \" " + command + " \"";
+
+                return RunProcessLinux(location, executableName, processArguments);
             }
-
-            var processArguments = "-c \" " + command + " \"";
-
-            return RunProcessLinux(executableLocation: location, executableName, processArguments);
+            catch
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
