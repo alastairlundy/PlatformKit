@@ -54,26 +54,36 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
                 for (var index = 0; index < resultArray.Length; index++)
                 {
-                    //Console.WriteLine(resultArray[index]);
-                    //Console.WriteLine("Next: " + resultArray[index + 1]);
-
+#if DEBUG
+                    Console.WriteLine("Now: " + resultArray[index]);
+                    Console.WriteLine("Next: " + resultArray[index + 1]);
+#endif
                     var isVersionLine = false;
 
                     for (var i = 0; i < 10; i++)
                     {
-                        var v_index = index == 0 ? 0 : index - 1;
-                        if (resultArray[index].Contains(i.ToString()) && resultArray[index].Contains(".") &&
-                            resultArray[v_index].Contains("VERSION")) isVersionLine = true;
+                        if (index > 0)
+                        {
+                            if (resultArray[index].Contains(i.ToString()) && resultArray[index].Contains(".") &&
+                                resultArray[index - 1].Equals("VERSION") && !resultArray[index - 1].Contains("ID"))
+                            {
+                                isVersionLine = true;
+                            }
+                        }
                     }
 
                     if (isVersionLine)
                     {
-                        var modifiedLine = resultArray[index];
+                        var versionLine = resultArray[index];
 
-                        modifiedLine = modifiedLine.Replace('"', ' ');
-
-                        modifiedLine = modifiedLine.Replace(" ", string.Empty);
-                        linuxDistributionInformation.Version = modifiedLine;
+                        versionLine = versionLine.Replace('"', ' ');
+                        versionLine = versionLine.Replace(" ", string.Empty);
+                        
+#if DEBUG
+                        Console.WriteLine("LinuxDistroVersion: " + versionLine);
+#endif
+                        
+                        linuxDistributionInformation.Version = versionLine;
                     }
                     else if (index < resultArray.Length)
                     {
