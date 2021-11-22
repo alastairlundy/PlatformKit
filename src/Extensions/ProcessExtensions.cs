@@ -24,8 +24,8 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+using AluminiumTech.DevKit.PlatformKit.Deprecation;
+using AluminiumTech.DevKit.PlatformKit.Deprecation.Deprecated.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Extensions
 {
@@ -121,6 +121,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
         ///     This is currently only implemented on Windows and will throw an
         ///     exception if run on Linux or macOS.
         /// </exception>
+        [Obsolete(DeprecationMessages.DeprecationV2_3)]
         public static void SuspendProcess(this Process process, string processName = "")
         {
             var platformManager = new PlatformManager();
@@ -168,6 +169,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
         ///     This feature is currently only implemented on Windows and will throw an
         ///     exception if run on Linux or macOS.
         /// </exception>
+        [Obsolete(DeprecationMessages.DeprecationV2_3)]
         public static void ResumeProcess(this Process process, string processName = "")
         {
             if (processName == "" || processName.Equals(string.Empty)) processName = process.ProcessName;
