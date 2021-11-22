@@ -345,8 +345,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
             var linuxDistroInfo = osAnalyzer.GetLinuxDistributionInformation();
             
+#if DEBUG
+            Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);
+#endif
+            
             var osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
-                
+
             if (osName.Contains("ubuntu") ||
                 osName.Contains("pop!_os"))
             {
@@ -357,6 +361,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                     linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
                 }
             }
+            
+#if DEBUG
+            Console.WriteLine("LinuxDistroVersion After: " + linuxDistroInfo.Version);
+#endif
             
             return linuxDistroInfo.Version;
         }
