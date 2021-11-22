@@ -42,6 +42,8 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
             if (platform.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
+                
+                Console.WriteLine(Environment.SystemDirectory);
             }
             
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
