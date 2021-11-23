@@ -286,18 +286,32 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (_platformManager.IsWindows() && windowsMethod != null) windowsMethod.Invoke();
+                if (_platformManager.IsWindows() && windowsMethod != null)
+                {
+                    windowsMethod.Invoke();
+                }
 
-                if (_platformManager.IsLinux() && linuxMethod != null) linuxMethod.Invoke();
-                if (_platformManager.IsMac() && macMethod != null) macMethod.Invoke();
+                if (_platformManager.IsLinux() && linuxMethod != null)
+                {
+                    linuxMethod.Invoke();
+                }
+                if (_platformManager.IsMac() && macMethod != null)
+                {
+                    macMethod.Invoke();
+                }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platformManager.IsFreeBSD() && freeBsdMethod != null) freeBsdMethod.Invoke();
+                if (_platformManager.IsFreeBSD() && freeBsdMethod != null)
+                {
+                    freeBsdMethod.Invoke();
+                }
 #endif
                 if (_platformManager.IsMac() && macMethod == null ||
                     _platformManager.IsLinux() && linuxMethod == null ||
                     _platformManager.IsWindows() && windowsMethod == null)
+                {
                     throw new ArgumentNullException();
+                }
             }
             catch (Exception exception)
             {
@@ -317,8 +331,13 @@ namespace AluminiumTech.DevKit.PlatformKit
             try
             {
                 if (!url.StartsWith("https://") || !url.StartsWith("www."))
+                {
                     url = "https://" + url;
-                else if (url.StartsWith("http://")) url = url.Replace("http://", "https://");
+                }
+                else if (url.StartsWith("http://"))
+                {
+                    url = url.Replace("http://", "https://");
+                }
 
                 if (_platformManager.IsWindows())
                 {
