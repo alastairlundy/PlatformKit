@@ -43,24 +43,13 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
                 
-                Console.WriteLine(Environment.SystemDirectory);
+                Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
             }
             
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
+            
             if (platform.IsLinux())
             {
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
-
-            //  processManager.SuspendProcess("Spotify");
-
-            //  Console.WriteLine("Start suspending...");
-
-            // PerformanceCounter
-
-            //   processManager.ResumeProcess("Spotify");
-
-            //  Console.WriteLine("Start resuming...");
-
-            //Console.ReadLine();
