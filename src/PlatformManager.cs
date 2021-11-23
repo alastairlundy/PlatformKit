@@ -124,7 +124,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         // ReSharper disable once UnusedMember.Global
         public string GetAppName()
         {
-            return GetAssembly()?.GetName().Name;
+            return GetAssembly().GetName().Name;
         }
         
         /// <summary>
@@ -151,8 +151,11 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 var lines = File.ReadAllLines(pathToTextFile);
 
-                foreach (var line in lines) Console.WriteLine(line);
-
+                foreach (var line in lines)
+                {
+                    Console.WriteLine(line);
+                }
+                
                 Console.WriteLine("                                                         ");
                 Console.WriteLine("                                                         ");
 
