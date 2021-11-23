@@ -25,8 +25,9 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
 {
     public static class DeprecationMessages
     {
-        private const string V2_2 = "v2.2.0";
         private const string V2_3 = "v2.3.0";
+        private const string V2_4 = "v2.4.0";
+        private const string V2_5 = "v2.5.0";
         
         private const string V3 = "v3.0.0";
 
@@ -34,10 +35,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
         
         public const string FutureDeprecation = CodeDeprecation + " in a future version.";
-        
-        public const string DeprecationV2_2 = CodeDeprecation + " in " + V2_2;
-        public const string DeprecationV2_3 = CodeDeprecation + " in " + V2_3;
 
+        public const string DeprecationV2_3 = CodeDeprecation + " in " + V2_3;
+        public const string DeprecationV2_4 = CodeDeprecation + " in " + V2_4;
+        public const string DeprecationV2_5 = CodeDeprecation + " in " + V2_5;
+        
         public const string DeprecationV3 = CodeDeprecation + " in " + V3;
     }
 }

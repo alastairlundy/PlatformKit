@@ -25,7 +25,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using AluminiumTech.DevKit.PlatformKit.Deprecation;
-using AluminiumTech.DevKit.PlatformKit.Deprecation.Deprecated.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Extensions
 {
@@ -71,10 +70,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
 
             return false;
         }
-        
+
         /// <summary>
         /// Converts a String to a Process
         /// </summary>
+        /// <param name="process"></param>
         /// <param name="processName"></param>
         /// <returns></returns>
         public static Process ConvertStringToProcess(this Process process, string processName)
@@ -105,101 +105,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
             catch (Exception exception)
             {
                 throw new Exception(exception.ToString());
-            }
-        }
-
-        /// <summary>
-        ///     Suspends a process using native or imported method calls.
-        /// </summary>
-        /// <param name="process"></param>
-        /// <param name="processName">
-        ///     The process to be suspended. If not specified it will suspend the instance of the Process
-        ///     class calling this method
-        /// </param>
-        /// <exception cref="ArgumentException">Is thrown if the process to be suspended is not already running.</exception>
-        /// <exception cref="PlatformNotSupportedException">
-        ///     This is currently only implemented on Windows and will throw an
-        ///     exception if run on Linux or macOS.
-        /// </exception>
-        [Obsolete(DeprecationMessages.DeprecationV2_3)]
-        public static void SuspendProcess(this Process process, string processName = "")
-        {
-            var platformManager = new PlatformManager();
-
-            if (processName == "" || processName.Equals(string.Empty)) processName = process.ProcessName;
-
-            if (platformManager.IsWindows())
-            {
-                if (IsProcessRunning(process, processName))
-                    WindowsProcessSpecifics.Suspend(ConvertStringToProcess(process, processName));
-                else
-                    throw new ArgumentException();
-            }
-            else if (platformManager.IsLinux())
-            {
-                throw new PlatformNotSupportedException();
-            }
-            else if (platformManager.IsMac())
-            {
-                throw new PlatformNotSupportedException();
-            }
-#if NETCOREAPP3_0_OR_GREATER
-            else if (platformManager.IsFreeBSD())
-            {
-                throw new PlatformNotSupportedException();
-            }
-#endif
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
-        }
-
-        /// <summary>
-        ///     Resumes a process using native or imported method calls.
-        ///     WARNING: This is only implemented on Windows and will throw an exception if run on Linux or macOS.
-        /// </summary>
-        /// <param name="process"></param>
-        /// <param name="processName">
-        ///     The process to be resumed. If not specified it will suspend the instance of the Process class
-        ///     calling this method
-        /// </param>
-        /// <exception cref="ArgumentException">Is thrown if the process to be resumed is not already running.</exception>
-        /// <exception cref="PlatformNotSupportedException">
-        ///     This feature is currently only implemented on Windows and will throw an
-        ///     exception if run on Linux or macOS.
-        /// </exception>
-        [Obsolete(DeprecationMessages.DeprecationV2_3)]
-        public static void ResumeProcess(this Process process, string processName = "")
-        {
-            if (processName == "" || processName.Equals(string.Empty)) processName = process.ProcessName;
-
-            var platformManager = new PlatformManager();
-
-            if (platformManager.IsWindows())
-            {
-                if (IsProcessRunning(process, processName))
-                    WindowsProcessSpecifics.Resume(ConvertStringToProcess(process, processName));
-                else
-                    throw new ArgumentException();
-            }
-            else if (platformManager.IsLinux())
-            {
-                throw new PlatformNotSupportedException();
-            }
-            else if (platformManager.IsMac())
-            {
-                throw new PlatformNotSupportedException();
-            }
-#if NETCOREAPP3_0_OR_GREATER
-            else if (platformManager.IsFreeBSD())
-            {
-                throw new PlatformNotSupportedException();
-            }
-#endif
-            else
-            {
-                throw new PlatformNotSupportedException();
             }
         }
     }
