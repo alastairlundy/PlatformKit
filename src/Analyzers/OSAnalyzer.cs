@@ -43,9 +43,9 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public LinuxDistributionInformation GetLinuxDistributionInformation()
+        public LinuxOsRelease GetLinuxDistributionInformation()
         {
-            var linuxDistributionInformation = new LinuxDistributionInformation();
+            var linuxDistributionInformation = new LinuxOsRelease();
 
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
