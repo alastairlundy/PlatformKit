@@ -23,7 +23,7 @@ SOFTWARE.
 
 namespace AluminiumTech.DevKit.PlatformKit.Models
 {
-    public class LinuxDistributionInformation
+    public class LinuxOsRelease
     {
         public bool IsLongTermSupportRelease { get; set; }
 
