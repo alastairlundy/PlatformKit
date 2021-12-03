@@ -30,6 +30,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
         private const string V2_5 = "v2.5.0";
         
         private const string V3 = "v3.0.0";
+        private const string V4 = "v4.0.0";
 
         private const string CodeDeprecation = "This code is deprecated and will be removed";
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
@@ -41,5 +42,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
         public const string DeprecationV2_5 = CodeDeprecation + " in " + V2_5;
         
         public const string DeprecationV3 = CodeDeprecation + " in " + V3;
+        public const string DeprecationV4 = CodeDeprecation + " in " + V4;
     }
 }
