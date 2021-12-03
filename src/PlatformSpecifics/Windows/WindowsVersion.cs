@@ -29,15 +29,11 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     public enum WindowsVersion
     {
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVista,
         // ReSharper disable once InconsistentNaming
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP1,
         // ReSharper disable once InconsistentNaming
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP2,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinServer_2008,
         Win7,
         // ReSharper disable once InconsistentNaming
@@ -69,7 +65,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
         /// </summary>
         Win10_Server_v1709,
         /// <summary>
-        /// This is effectively a 2nd iteration of v1703 for mobile (Identifies as Windows 10 Build 15254) but branded as V1709 for Mobile.
+        /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly branded as V1709 for Mobile.
         /// As such UWP API Compatibility is Windows 10 Build 15063 (Win10v1703) or earlier.
         /// </summary>
         Win10_v1709_Mobile,

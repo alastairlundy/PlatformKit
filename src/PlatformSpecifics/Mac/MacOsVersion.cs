@@ -29,17 +29,11 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
 {
     public enum MacOsVersion
     {
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_0_Cheetah,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_1_Puma,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_2_Jaguar,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_3_Panther,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_4_Tiger,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_5_Leopard,
         v10_6_SnowLeopard,
         v10_7_Lion,
