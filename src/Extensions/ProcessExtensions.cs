@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 namespace AluminiumTech.DevKit.PlatformKit.Extensions
