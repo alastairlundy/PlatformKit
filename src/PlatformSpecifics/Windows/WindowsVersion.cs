@@ -22,15 +22,22 @@ SOFTWARE.
     */
 
 // ReSharper disable InconsistentNaming
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
+
+using System;
+
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     public enum WindowsVersion
     {
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVista,
         // ReSharper disable once InconsistentNaming
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP1,
         // ReSharper disable once InconsistentNaming
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP2,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinServer_2008,
         Win7,
         // ReSharper disable once InconsistentNaming

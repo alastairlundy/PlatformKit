@@ -28,8 +28,9 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Runtime;
 
-            var platform = new PlatformManager();
+var platform = new PlatformManager();
             var processManager = new ProcessManager();
             var versionAnalyzer = new OSVersionAnalyzer();
             var runtimeIdentification = new RuntimeIdentification();

@@ -22,17 +22,16 @@ SOFTWARE.
 */
 
 using System;
-
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.Models;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
+
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 // ReSharper disable InconsistentNaming
 
-namespace AluminiumTech.DevKit.PlatformKit
+namespace AluminiumTech.DevKit.PlatformKit.Runtime
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.

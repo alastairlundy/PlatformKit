@@ -22,8 +22,7 @@ SOFTWARE.
     */
 
 using System;
-
-using AluminiumTech.DevKit.PlatformKit.Models;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
 
 // ReSharper disable InconsistentNaming
 

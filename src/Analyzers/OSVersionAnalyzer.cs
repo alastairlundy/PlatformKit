@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
