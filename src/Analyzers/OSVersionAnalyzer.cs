@@ -24,8 +24,9 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
@@ -83,6 +84,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                     return true;
                 case WindowsVersion.Win10_Server2022:
                     return true;
+                case WindowsVersion.NotDetected:
+                    throw new OperatingSystemVersionDetectionException();
                 default:
                     return false;
             }
@@ -97,6 +100,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
             {
                 case WindowsVersion.Win11_21H2:
                     return true;
+                case WindowsVersion.NotDetected:
+                    throw new OperatingSystemVersionDetectionException();
                 default:
                     return false;
             }
@@ -201,6 +206,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         /// <exception cref="NotImplementedException">
         ///     Not yet implemented on macOS. Please do not run on macOS
         ///     yet!
+        ///
+        ///     Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
@@ -258,9 +265,9 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
                     var dotCounter = 0;
 
-                    for (int index = 0; index < description.Length; index++)
+                    foreach (var t in description)
                     {
-                        if (description[index].Equals('.'))
+                        if (t.Equals('.'))
                         {
                             dotCounter++;
                         }
@@ -279,11 +286,16 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         dotCounter++;
                         description += ".0";
                     }
+
+                    if (dotCounter > 4)
+                    {
+                        throw new OperatingSystemVersionDetectionException();
+                    }
 #if DEBUG
                     Console.WriteLine("After DescV: " + description);
 #endif
 
-                return Version.Parse(description);
+                    return Version.Parse(description);
                 }
 
                 throw new PlatformNotSupportedException();

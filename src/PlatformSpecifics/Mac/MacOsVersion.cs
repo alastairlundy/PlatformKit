@@ -25,7 +25,7 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
     public enum MacOsVersion
     {
