@@ -158,6 +158,44 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <exception cref="OperatingSystemVersionDetectionException"></exception>
+        public MacOsVersion GetMacOsVersionToEnum(Version input)
+        {
+            try
+            {
+                if (input.Major == 10 && input.Minor == 0) return MacOsVersion.v10_0_Cheetah;
+                if (input.Major == 10 && input.Minor == 1) return MacOsVersion.v10_1_Puma;
+                if (input.Major == 10 && input.Minor == 2) return MacOsVersion.v10_2_Jaguar;
+                if (input.Major == 10 && input.Minor == 3) return MacOsVersion.v10_3_Panther;
+                if (input.Major == 10 && input.Minor == 4) return MacOsVersion.v10_4_Tiger;
+                if (input.Major == 10 && input.Minor == 5) return MacOsVersion.v10_5_Leopard;
+                if (input.Major == 10 && input.Minor == 6) return MacOsVersion.v10_6_SnowLeopard;
+                if (input.Major == 10 && input.Minor == 7) return MacOsVersion.v10_7_Lion;
+                if (input.Major == 10 && input.Minor == 8) return MacOsVersion.v10_8_MountainLion;
+                if (input.Major == 10 && input.Minor == 9) return MacOsVersion.v10_9_Mavericks;
+                if (input.Major == 10 && input.Minor == 10) return MacOsVersion.v10_10_Yosemite;
+                if (input.Major == 10 && input.Minor == 11) return MacOsVersion.v10_11_ElCapitan;
+                if (input.Major == 10 && input.Minor == 12) return MacOsVersion.v10_12_Sierra;
+                if (input.Major == 10 && input.Minor == 13) return MacOsVersion.v10_13_HighSierra;
+                if (input.Major == 10 && input.Minor == 14) return MacOsVersion.v10_14_Mojave;
+                if (input.Major == 10 && input.Minor == 15) return MacOsVersion.v10_15_Catalina;
+                if (input.Major == 11 && input.Minor is >= 0 and <= 6) return MacOsVersion.v11_BigSur;
+                if (input.Major == 12 && input.Minor is >= 0 and <= 6) return MacOsVersion.v12_Monterrey;
+
+                throw new OperatingSystemVersionDetectionException();
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw new Exception(exception.ToString());
+            }
+        }
+
+        /// <summary>
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException">
