@@ -28,6 +28,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Enums;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 using AluminiumTech.DevKit.PlatformKit.Runtime;
 
 namespace AluminiumTech.DevKit.PlatformKit
@@ -51,6 +52,37 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
         }
+        
+        public bool IsAppleSiliconMac()
+        {
+            return GetMacProcessorType() == MacProcessorType.AppleSilicon;
+        }
+
+        public MacProcessorType GetMacProcessorType()
+        {
+            try
+            {
+                if (IsMac())
+                {
+                     switch (System.Runtime.InteropServices.RuntimeInformation.OSArchitecture)
+                    {
+                        case Architecture.Arm64:
+                            return MacProcessorType.AppleSilicon;
+                        case Architecture.X64:
+                            return MacProcessorType.Intel;
+                        default:
+                            return MacProcessorType.NotDetected;
+                    }
+                }
+
+                throw new PlatformNotSupportedException();
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception);
+                throw new Exception(exception.ToString());
+            }
+        } 
 
         /// <summary>
         /// Returns whether or not the current OS is Windows.
