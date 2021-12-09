@@ -145,12 +145,12 @@ namespace AluminiumTech.DevKit.PlatformKit
                     Arguments = processArguments
                 };
 
-                if (executableName.ToLower().StartsWith("/usr/bin/"))
+               /* if (executableName.ToLower().StartsWith("/usr/bin/"))
                 {
                     procStartInfo.WorkingDirectory = "/usr/bin/";
                     procStartInfo.FileName = executableName.Replace("/usr/bin/", string.Empty);
                 }
-
+*/
                 var process = new Process { StartInfo = procStartInfo };
                 process.Start();
 
