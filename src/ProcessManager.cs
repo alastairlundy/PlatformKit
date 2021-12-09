@@ -164,19 +164,6 @@ namespace AluminiumTech.DevKit.PlatformKit
             }
         }
 
-        // This won't be implemented for V2. This will be implemented in V2.1 or later
-        /*
-        public void RunConsoleCommand(string arguments)
-        {
-            else if (plat.Equals(OperatingSystemFamily.macOS))
-            {
-           //     programName = "open -b com.apple.terminal " + arguments;
-
-
-            RunProcess(programName, arguments);
-        }
-         */
-
         public string RunCommand(string command)
         {
             if (_platformManager.IsWindows()) return RunCmdCommand(command);
