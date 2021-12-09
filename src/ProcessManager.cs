@@ -250,10 +250,10 @@ namespace AluminiumTech.DevKit.PlatformKit
                 var executableName = "bash";
                 var location = "/usr/bin/";
 
-                if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
-                {
-                    executableName = "zsh";
-                }
+       //         if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+       //         {
+       //             executableName = "zsh";
+       //         }
             
                 if (!Directory.Exists(location))
                 {
