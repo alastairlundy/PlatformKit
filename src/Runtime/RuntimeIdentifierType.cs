@@ -21,27 +21,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace AluminiumTech.DevKit.PlatformKit.Runtime
-{
-    public struct RuntimeIdentifier
-    {
-        /// <summary>
-        /// Identifier in the format of any-[processor architecture]
-        /// </summary>
-        public string AnyGenericIdentifier { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public string GenericIdentifier { get; set; }
-        
-        public string SpecificIdentifier { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DistroSpecificIdentifier { get; set; }
+namespace AluminiumTech.DevKit.PlatformKit.Runtime;
 
-        public string DotNetIdentifier { get; set; }
-    }
+public enum RuntimeIdentifierType
+{
+    AnyGeneric,
+    Generic,
+    Specific,
+    DistroSpecific,
 }
