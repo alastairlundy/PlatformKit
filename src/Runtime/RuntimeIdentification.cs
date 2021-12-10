@@ -197,23 +197,25 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         }
 
         /// <summary>
+        /// Generates a Generic Runtime ID in the format of any-[ProcessorArchtecture]
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateAnyGenericRuntimeIdentifier()
+        {
+            return $"any-{GetArchitectureString()}";
+        }
+        
+        /// <summary>
         /// Generates a Generic Runtime ID that is OS version independent but not CPU or OS independent.
         /// Produces a Runtime ID in the format of [OperatingSystem]-[ProcessorArchitecture]
         /// </summary>
         /// <returns></returns>
         public string GenerateGenericRuntimeIdentifier()
         {
-            try
-            {
-                var osName = GetOsNameString(true);
-                var cpuArch = GetArchitectureString();
+            var osName = GetOsNameString(true);
+            var cpuArch = GetArchitectureString();
 
-                return $"{osName}-{cpuArch}";
-            }
-            catch
-            {
-                throw new GenericRuntimeIdentifierGenerationFailedException();
-            }
+            return $"{osName}-{cpuArch}";
         }
 
         /// <summary>
@@ -261,8 +263,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         public RuntimeIdentifier GenerateRuntimeIdentifier()
         {
             var runtimeIdentifier = new RuntimeIdentifier();
-            runtimeIdentifier.GeneratedGenericIdentifier = GenerateGenericRuntimeIdentifier();
-            runtimeIdentifier.GeneratedSpecificIdentifier = GenerateSpecificRuntimeIdentifier();
+            
+            
+            runtimeIdentifier.GenericIdentifier = GenerateGenericRuntimeIdentifier();
+            runtimeIdentifier.SpecificIdentifier = GenerateSpecificRuntimeIdentifier();
 
             runtimeIdentifier.DotNetIdentifier = DetectRuntimeIdentifier();
 
