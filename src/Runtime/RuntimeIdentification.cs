@@ -68,26 +68,44 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             return cpuArch;
         }
 
-        protected string GetOsNameString(bool useGenericTFM)
+        protected string GetOsNameString(RuntimeIdentifierType identifierType)
         {
             string osName = null;
 
-            if (platformManager.IsWindows())
+            if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
-                osName = "win";
+                return "any";
             }
-            if (platformManager.IsMac())
+            else
             {
-                osName = "osx";
-            }
-            if (platformManager.IsLinux())
-            {
-                osName = useGenericTFM ? "linux" : osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                if (platformManager.IsWindows())
+                {
+                    osName = "win";
+                }
+                if (platformManager.IsMac())
+                {
+                    osName = "osx";
+                }
+                if (platformManager.IsLinux())
+                {
+                    if (identifierType == RuntimeIdentifierType.Generic)
+                    {
+                        return "linux";
+                    }
+                    else if (identifierType == RuntimeIdentifierType.Specific)
+                    {
+                        osName = osAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                    }
+                    else if (identifierType == RuntimeIdentifierType.DistroSpecific)
+                    {
+                        osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                    }
+                }
             }
 
             return osName;
         }
-
+        
         protected string GetOsVersionString()
         {
             string osVersion = null;
