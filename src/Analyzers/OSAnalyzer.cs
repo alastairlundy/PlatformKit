@@ -59,6 +59,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
                 for (var index = 0; index < resultArray.Length; index++)
                 {
+                    /*
 #if DEBUG
                     Console.WriteLine("Now: " + resultArray[index]);
                     
@@ -67,6 +68,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         Console.WriteLine("Next: " + resultArray[index + 1]);
                     }
 #endif
+*/
                     var isVersionLine = false;
 
                     for (var i = 0; i < 10; i++)
