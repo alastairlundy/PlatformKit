@@ -82,14 +82,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             }
             if (platformManager.IsLinux())
             {
-                if (useGenericTFM)
-                {
-                    osName = "linux";
-                }
-                else
-                {
-                    osName = osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
-                }
+                osName = useGenericTFM ? "linux" : osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
             }
 
             return osName;
