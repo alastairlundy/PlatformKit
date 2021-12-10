@@ -230,25 +230,22 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         /// <returns></returns>
         public string GenerateSpecificRuntimeIdentifier()
         {
-            try
-            {
-                var osName = GetOsNameString(false);
-                var osVersion = GetOsVersionString();
-                var cpuArch = GetArchitectureString();
+            var osName = GetOsNameString(false);
+            var osVersion = GetOsVersionString();
+            var cpuArch = GetArchitectureString();
 
-                if (platformManager.IsWindows())
-                {
-                    return $"{osName}{osVersion}-{cpuArch}";
-                }
-                else
-                {
-                    return $"{osName}.{osVersion}-{cpuArch}";
-                }
-            }
-            catch
+#if DEBUG
+            Console.WriteLine("OS Name: " + osName);
+            Console.WriteLine("OS Version: " + osVersion);
+            Console.WriteLine("CPU Arch: " + cpuArch);
+#endif
+                
+            if (platformManager.IsWindows())
             {
-                throw new SpecificRuntimeIdentifierGenerationException();
+                return $"{osName}{osVersion}-{cpuArch}";
             }
+
+            return $"{osName}.{osVersion}-{cpuArch}";
         }
 
         /// <summary>
