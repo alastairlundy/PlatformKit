@@ -145,11 +145,12 @@ namespace AluminiumTech.DevKit.PlatformKit
                     Arguments = processArguments
                 };
 
-                if (executableName.ToLower().StartsWith("/usr/bin/"))
+          /*      if (executableName.ToLower().StartsWith("/usr/bin/"))
                 {
                     procStartInfo.WorkingDirectory = "/usr/bin/";
                     procStartInfo.FileName = executableName.Replace("/usr/bin/", string.Empty);
                 }
+                */
 
                 var process = new Process { StartInfo = procStartInfo };
                 process.Start();
@@ -250,7 +251,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 var executableName = "bash";
                 var location = "/usr/bin/";
 
-                if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+          /*      if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
                 {
                     executableName = "zsh";
                 }
@@ -259,7 +260,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 {
                     throw new ArgumentException("Cannot execute a command if there is no command to execute.");
                 }
-
+*/
                 var processArguments = "-c \" " + command + " \"";
 
                 return RunProcessLinux(location, executableName, processArguments);
