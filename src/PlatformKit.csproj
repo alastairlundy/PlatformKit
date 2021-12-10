@@ -17,8 +17,26 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.3.0 Alpha 2
-</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 2.3.0 Alpha 2
+### Additions
+* Added 2 new GenerateRuntimeIdentifier methods - Most runtime ID generation methods have been consolidated into the 2 new methods.
+* Added new enum ``RuntimeIdentifierType``.
+* Added new struct ``RuntimeIdentifierSpecificity``.
+
+### Removals
+* Removed unneeded commented code.
+* Removed specific exceptions.
+
+### Other changes
+* Improved detection of of Linux Distribution Name.
+* Changed ``RuntimeIdentifier`` class to a struct.
+* Changed ``LinuxOsRelease`` class to a struct.
+
+### Bug Fixes
+* Fixed an issue with Executing Commands on Linux.
+* Fixed an issue when running as debug on Linux.
+* Removed a nuget dependency that wasn't being used.
+* Fixed issues with Linux Distribution version formatting in Generating Runtime Identifier.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
