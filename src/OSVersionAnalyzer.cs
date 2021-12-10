@@ -52,6 +52,10 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
+#if DEBUG
+            Console.WriteLine("Input is: " + input);                
+#endif
+                
                 switch (input)
                 {
                     case "6.0.6000":
@@ -122,7 +126,28 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                return Version.Parse(DetectWindowsVersion());
+                var description = DetectWindowsVersion();
+                
+                int dotCounter = 0;
+            
+                foreach (var c in description)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+
+                if (dotCounter == 1)
+                {
+                    description += ".0.0";
+                }
+                else if (dotCounter == 2)
+                {
+                    description += ".0";
+                }
+                
+                return Version.Parse(description);
             }
             catch(Exception exception)
             {
@@ -135,18 +160,20 @@ namespace AluminiumTech.DevKit.PlatformKit
         protected string DetectWindowsVersion()
         {
             var description = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            description = description.Replace("Microsoft Windows", " ");
+            description = description.Replace("Microsoft Windows", String.Empty);
 
             string[] descArray = description.Split(' ');
 
             foreach (var d in descArray)
             {
-                if (!d.Contains(string.Empty))
+                if (!d.Contains(string.Empty) && !d.Contains(" "))
                 {
                     return d;
                 }
             }
 
+            description = description.Replace(" ", String.Empty);
+            
             return description;
         }
 
