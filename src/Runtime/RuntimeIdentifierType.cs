@@ -28,5 +28,8 @@ public enum RuntimeIdentifierType
     AnyGeneric,
     Generic,
     Specific,
+    /// <summary>
+    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+    /// </summary>
     DistroSpecific,
 }
