@@ -61,7 +61,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 {
 #if DEBUG
                     Console.WriteLine("Now: " + resultArray[index]);
-                    Console.WriteLine("Next: " + resultArray[index + 1]);
+                    
+                    if ((index + 1) < resultArray.Length)
+                    {
+                        Console.WriteLine("Next: " + resultArray[index + 1]);
+                    }
 #endif
                     var isVersionLine = false;
 
