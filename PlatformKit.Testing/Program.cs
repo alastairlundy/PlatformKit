@@ -35,9 +35,6 @@ namespace PlatformKit.Testing
             PlatformManager platform = new PlatformManager();
             OSVersionAnalyzer versionAnalyzer = new OSVersionAnalyzer();
             
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            
             Console.WriteLine("Desc: " +  System.Runtime.InteropServices.RuntimeInformation.OSDescription);
             Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
             Console.WriteLine("Generated TFM (Generic): " + platform.GenerateTFM(true));
