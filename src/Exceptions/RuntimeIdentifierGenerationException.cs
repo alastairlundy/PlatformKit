@@ -25,10 +25,10 @@ using System;
 
 namespace AluminiumTech.DevKit.PlatformKit.Exceptions
 {
-    public class GenericRuntimeIdentifierGenerationFailedException : Exception
+    public class RuntimeIdentifierGenerationException : Exception
     {
 
-        public GenericRuntimeIdentifierGenerationFailedException() : base("Failed to generate the Generic RuntimeIdentifier in the format of [OperatingSystemName]-[ProcessorArchitecture].")
+        public RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
         {
             
         }
