@@ -18,23 +18,17 @@
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
     <PackageReleaseNotes>### Changes
-* Added the ability ability to run Processes on Windows with Run As Administrator
-* Updated WindowsVersion enum
-* Added macOS Version enum
-* Updated OSVersionAnalyzer
-* Add TFM Generation Support
-* Removed deprecated methods
-* Deprecated Platform class instead of PlatformManager</PackageReleaseNotes>
+* Fixed an issue with detecting Windows OS versions.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>default</LangVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
-    <Version>2.1.0.0</Version>
-    <PackageVersion>2.1.0</PackageVersion>
+    <AssemblyVersion>2.1.1.0</AssemblyVersion>
+    <FileVersion>2.1.1.0</FileVersion>
+    <Version>2.1.1.0</Version>
+    <PackageVersion>2.1.1</PackageVersion>
 
   </PropertyGroup>
 
