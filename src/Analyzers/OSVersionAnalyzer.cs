@@ -129,30 +129,86 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         {
             try
             {
-                if (input == new Version(6, 0, 6000, 0)) return WindowsVersion.WinVista;
-                if (input == new Version(6, 0, 6001, 0)) return WindowsVersion.WinVistaSP1;
-                if (input == new Version(6, 0, 6002, 0)) return WindowsVersion.WinVistaSP2;
-                if (input == new Version(6, 0, 6003, 0)) return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
-                if (input == new Version(6, 1, 7600, 0)) return WindowsVersion.Win7;
-                if (input == new Version(6, 1, 7601, 0)) return WindowsVersion.Win7SP1;
-                if (input == new Version(6, 2, 9200, 0)) return WindowsVersion.Win8;
-                if (input == new Version(6, 3, 9600, 0)) return WindowsVersion.Win8_1;
-                if (input == new Version(10, 0, 10240, 0)) return WindowsVersion.Win10_v1507;
-                if (input == new Version(10, 0, 10586, 0)) return WindowsVersion.Win10_v1511;
-                if (input == new Version(10, 0, 14393, 0)) return WindowsVersion.Win10_v1607;
-                if (input == new Version(10, 0, 15063, 0)) return WindowsVersion.Win10_v1703;
-                if (input == new Version(10, 0, 15254, 0)) return WindowsVersion.Win10_v1709_Mobile; 
-                if (input == new Version(10, 0, 16299, 0)) return WindowsVersion.Win10_v1709;
-                if (input == new Version(10, 0, 17134, 0)) return WindowsVersion.Win10_v1803;
-                if (input == new Version(10, 0, 17763, 0)) return WindowsVersion.Win10_v1809;
-                if (input == new Version(10, 0, 18362, 0)) return WindowsVersion.Win10_v1903;
-                if (input == new Version(10, 0, 18363, 0)) return WindowsVersion.Win10_v1909;
-                if (input == new Version(10, 0, 19041, 0)) return WindowsVersion.Win10_v2004;
-                if (input == new Version(10, 0, 19042, 0)) return WindowsVersion.Win10_20H2;
-                if (input == new Version(10, 0, 19043, 0)) return WindowsVersion.Win10_21H1;
-                if (input == new Version(10, 0, 19044, 0)) return WindowsVersion.Win10_21H2;
-                if (input == new Version(10, 0, 20348, 0)) return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
-                if (input == new Version(10, 0, 22000, 0)) return WindowsVersion.Win11_21H2;
+                if (input.Major == 5)
+                {
+                    //We don't support Windows XP.
+                    throw new PlatformNotSupportedException("Windows XP is not supported.");
+                }
+                if (input.Major == 6)
+                {
+                    switch (input.Build)
+                    {
+                            case 6000:
+                                return WindowsVersion.WinVista;
+                            case 6001:
+                                return WindowsVersion.WinVistaSP1;
+                            case 6002:
+                                return WindowsVersion.WinVistaSP2;
+                            case 6003:
+                                return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
+                            case 7600:
+                                return WindowsVersion.Win7;
+                            case 7601:
+                                return WindowsVersion.Win7SP1;
+                            case 9200:
+                                return WindowsVersion.Win8;
+                            case 9600:
+                                return WindowsVersion.Win8_1;
+                    }   
+                }
+                if (input.Major == 10)
+                {
+                    switch (input.Build)
+                    {
+                        case 10240:
+                            return WindowsVersion.Win10_v1507;
+                        case 10586:
+                            return WindowsVersion.Win10_v1511;
+                        case 14393:
+                            return WindowsVersion.Win10_v1607;
+                        case 15063:
+                            return WindowsVersion.Win10_v1703; 
+                        case 15254:
+                            return WindowsVersion.Win10_v1709_Mobile;
+                        case 16299:
+                            return WindowsVersion.Win10_v1709;
+                        case 17134:
+                            return WindowsVersion.Win10_v1803;
+                        case 17763:
+                            return WindowsVersion.Win10_v1809; 
+                        case 18362:
+                            return WindowsVersion.Win10_v1903;
+                        case 18363:
+                            return WindowsVersion.Win10_v1909;
+                        case 19041:
+                            return WindowsVersion.Win10_v2004;
+                        case 19042: 
+                            return WindowsVersion.Win10_20H2;
+                        case 19043:
+                            return WindowsVersion.Win10_21H1;
+                        case 19044:
+                            return WindowsVersion.Win10_21H2;
+                        case 20348:
+                            return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
+                        case 22000:
+                            return WindowsVersion.Win11_21H2;
+                        default:
+                            //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
+                            if (input.Build is > 10240 and < 22000)
+                            {
+                                return WindowsVersion.Win10_InsiderPreview;
+                            }
+                            //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
+                            else if(input.Build > 22000)
+                            {
+                                return WindowsVersion.Win11_InsiderPreview;
+                            }
+                            else
+                            {
+                                throw new OperatingSystemVersionDetectionException();
+                            }
+                    }
+                }
 
                 return WindowsVersion.NotDetected;
             }
@@ -172,22 +228,45 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         {
             try
             {
-                if (input.Major == 10 && input.Minor == 0) return MacOsVersion.v10_0_Cheetah;
-                if (input.Major == 10 && input.Minor == 1) return MacOsVersion.v10_1_Puma;
-                if (input.Major == 10 && input.Minor == 2) return MacOsVersion.v10_2_Jaguar;
-                if (input.Major == 10 && input.Minor == 3) return MacOsVersion.v10_3_Panther;
-                if (input.Major == 10 && input.Minor == 4) return MacOsVersion.v10_4_Tiger;
-                if (input.Major == 10 && input.Minor == 5) return MacOsVersion.v10_5_Leopard;
-                if (input.Major == 10 && input.Minor == 6) return MacOsVersion.v10_6_SnowLeopard;
-                if (input.Major == 10 && input.Minor == 7) return MacOsVersion.v10_7_Lion;
-                if (input.Major == 10 && input.Minor == 8) return MacOsVersion.v10_8_MountainLion;
-                if (input.Major == 10 && input.Minor == 9) return MacOsVersion.v10_9_Mavericks;
-                if (input.Major == 10 && input.Minor == 10) return MacOsVersion.v10_10_Yosemite;
-                if (input.Major == 10 && input.Minor == 11) return MacOsVersion.v10_11_ElCapitan;
-                if (input.Major == 10 && input.Minor == 12) return MacOsVersion.v10_12_Sierra;
-                if (input.Major == 10 && input.Minor == 13) return MacOsVersion.v10_13_HighSierra;
-                if (input.Major == 10 && input.Minor == 14) return MacOsVersion.v10_14_Mojave;
-                if (input.Major == 10 && input.Minor == 15) return MacOsVersion.v10_15_Catalina;
+                if (input.Major == 10)
+                {
+                    switch (input.Minor)
+                    {
+                            case 0:
+                                return MacOsVersion.v10_0_Cheetah;
+                            case 1:
+                                return MacOsVersion.v10_1_Puma;
+                            case 2:
+                                return MacOsVersion.v10_2_Jaguar;
+                            case 3:
+                                return MacOsVersion.v10_3_Panther;
+                            case 4:
+                                return MacOsVersion.v10_4_Tiger;
+                            case 5:
+                                return MacOsVersion.v10_5_Leopard;
+                            case 6:
+                                return MacOsVersion.v10_6_SnowLeopard;
+                            case 7:
+                                return MacOsVersion.v10_7_Lion;
+                            case 8:
+                                return MacOsVersion.v10_8_MountainLion;
+                            case 9:
+                                return MacOsVersion.v10_9_Mavericks;
+                            case 10:
+                                return MacOsVersion.v10_10_Yosemite;
+                            case 11:
+                                return MacOsVersion.v10_11_ElCapitan;
+                            case 12:
+                                return MacOsVersion.v10_12_Sierra;
+                            case 13:
+                                return MacOsVersion.v10_13_HighSierra;
+                            case 14:
+                                return MacOsVersion.v10_14_Mojave;
+                            case 15:
+                                return MacOsVersion.v10_15_Catalina;
+                    }
+                }
+                
                 if (input.Major == 11 && input.Minor is >= 0 and <= 6) return MacOsVersion.v11_BigSur;
                 if (input.Major == 12 && input.Minor is >= 0 and <= 6) return MacOsVersion.v12_Monterrey;
 
