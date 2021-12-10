@@ -287,13 +287,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                         description += ".0";
                     }
 
-                    if (dotCounter > 4)
+                    if (dotCounter > 3)
                     {
                         throw new OperatingSystemVersionDetectionException();
                     }
-#if DEBUG
-                    Console.WriteLine("After DescV: " + description);
-#endif
 
                     return Version.Parse(description);
                 }
