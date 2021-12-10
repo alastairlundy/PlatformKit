@@ -37,8 +37,10 @@ var platform = new PlatformManager();
 
             Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
             
-            Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateGenericRuntimeIdentifier());
-            Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateSpecificRuntimeIdentifier());
+            Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
+            Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
+            Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
+            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
             
             if (platform.IsWindows())
             {

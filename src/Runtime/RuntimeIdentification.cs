@@ -214,38 +214,56 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             return osVersion;
         }
 
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
+        {
+            if (identifierType == RuntimeIdentifierType.AnyGeneric)
+            {
+                return GenerateRuntimeIdentifier(identifierType, false, false);
+            }
+            else if (identifierType == RuntimeIdentifierType.Generic)
+            {
+                return GenerateRuntimeIdentifier(identifierType, true, false);
+            } 
+            else if (identifierType == RuntimeIdentifierType.Specific && platformManager.IsLinux())
+            {
+                return GenerateRuntimeIdentifier(identifierType, true, false);
+            }
+            else if (identifierType == RuntimeIdentifierType.Specific && !platformManager.IsLinux()
+                || identifierType == RuntimeIdentifierType.DistroSpecific)
+            {
+                return GenerateRuntimeIdentifier(identifierType, true, true);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+        
         /// <summary>
         /// Generates a Generic Runtime ID in the format of any-[ProcessorArchtecture]
         /// </summary>
         /// <returns></returns>
-        public string GenerateAnyGenericRuntimeIdentifier()
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
-            return $"any-{GetArchitectureString()}";
-        }
-        
-        /// <summary>
-        /// Generates a Generic Runtime ID that is OS version independent but not CPU or OS independent.
-        /// Produces a Runtime ID in the format of [OperatingSystem]-[ProcessorArchitecture]
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateGenericRuntimeIdentifier()
-        {
-            var osName = GetOsNameString(true);
-            var cpuArch = GetArchitectureString();
+            var osName = GetOsNameString(identifierType);
+            
+            if (identifierType == RuntimeIdentifierType.AnyGeneric ||
+                identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == false)
+            {
+                return $"any-{GetArchitectureString()}";
+            }
+            else if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == true)
+            {
+                
+                var cpuArch = GetArchitectureString();
 
-            return $"{osName}-{cpuArch}";
-        }
-
-        /// <summary>
-        /// Generates the specific Runtime Identifier in the format of [OperatingSystemName].[OperatingSystemVersion]-[ProcessorArchitecture].
-        /// On Windows the dot between OS Name and OS Version is omitted because that's how Microsoft creates/uses RuntimeIDs.
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateSpecificRuntimeIdentifier()
-        {
-            var osName = GetOsNameString(false);
-            var osVersion = GetOsVersionString();
-            var cpuArch = GetArchitectureString();
+                return $"{osName}-{cpuArch}";
+            }
+            else if (identifierType == RuntimeIdentifierType.Specific ||
+                     platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+            {
+                var osVersion = GetOsVersionString();
+                var cpuArch = GetArchitectureString();
 
 #if DEBUG
             Console.WriteLine("OS Name: " + osName);
@@ -253,12 +271,37 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             Console.WriteLine("CPU Arch: " + cpuArch);
 #endif
                 
-            if (platformManager.IsWindows())
-            {
-                return $"{osName}{osVersion}-{cpuArch}";
-            }
+                if (platformManager.IsWindows())
+                {
+                    if (includeOperatingSystemVersion == true)
+                    {
+                        return $"{osName}{osVersion}-{cpuArch}";
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
+                }
 
-            return $"{osName}.{osVersion}-{cpuArch}";
+                if ((platformManager.IsLinux() && identifierType == RuntimeIdentifierType.Specific) ||
+                    includeOperatingSystemVersion == false)
+                {
+                    return $"{osName}-{cpuArch}";
+                }
+                else
+                {
+                    return $"{osName}.{osVersion}-{cpuArch}";
+                }
+            }
+            else if(!platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+            {
+                Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
+            }
+            else
+            {
+                throw new RuntimeIdentifierGenerationException();
+            }
         }
 
         /// <summary>
@@ -271,7 +314,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #endif
-            return GenerateGenericRuntimeIdentifier();
+            if (platformManager.IsLinux())
+            {
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
+            }
+            else
+            {
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
+            }
         }
 
         /// <summary>
@@ -281,11 +331,21 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         public RuntimeIdentifier GenerateRuntimeIdentifier()
         {
             var runtimeIdentifier = new RuntimeIdentifier();
-            
-            
-            runtimeIdentifier.GenericIdentifier = GenerateGenericRuntimeIdentifier();
-            runtimeIdentifier.SpecificIdentifier = GenerateSpecificRuntimeIdentifier();
 
+            runtimeIdentifier.AnyGenericIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric);
+            runtimeIdentifier.GenericIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic);
+            runtimeIdentifier.SpecificIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
+
+            if (platformManager.IsLinux())
+            {
+                runtimeIdentifier.DistroSpecificIdentifier =
+                    GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
+            }
+            else
+            {
+                runtimeIdentifier.DistroSpecificIdentifier = "N/A";
+            }
+            
             runtimeIdentifier.DotNetIdentifier = DetectRuntimeIdentifier();
 
             return runtimeIdentifier;
