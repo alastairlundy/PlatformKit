@@ -238,6 +238,25 @@ namespace AluminiumTech.DevKit.PlatformKit
                         }
                     }
 
+                    int dotCounter = 0;
+                    
+                    foreach (var c in description)
+                    {
+                        if (c == '.')
+                        {
+                            dotCounter++;
+                        }
+                    }
+
+                    if (dotCounter == 1)
+                    {
+                        description += ".0.0";
+                    }
+                    if (dotCounter == 2)
+                    {
+                        description += ".0";
+                    }
+
                     return Version.Parse(description);
                 }
                 else

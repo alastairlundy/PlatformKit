@@ -40,7 +40,8 @@ namespace PlatformKit.Testing
             
             Console.WriteLine("Desc: " +  System.Runtime.InteropServices.RuntimeInformation.OSDescription);
             Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
-            Console.WriteLine("Generated TFM: " + platform.GenerateTFM());
+            Console.WriteLine("Generated TFM (Generic): " + platform.GenerateTFM(true));
+            Console.WriteLine("Generated TFM (Specific): " + platform.GenerateTFM(false));
             Console.WriteLine("OsVersion: " + Environment.OSVersion);
             Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
 
@@ -49,21 +50,6 @@ namespace PlatformKit.Testing
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion().ToString());
             }
             
-            //  processManager.SuspendProcess("Spotify");
-
-            //  Console.WriteLine("Start suspending...");
-
-            // PerformanceCounter
-
-            while (stopwatch.ElapsedMilliseconds < (1 * 1000))
-            {
-
-            } 
-            //   processManager.ResumeProcess("Spotify");
-
-            //  Console.WriteLine("Start resuming...");
-
-            Console.ReadLine();
         }
     }
 }

@@ -45,5 +45,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="../README.md" Pack="true" PackagePath="\" />
+    <None Remove="PlatformKitTestingApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="PlatformKitTestingApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="PlatformKitTestingApp\**" />
   </ItemGroup>
 </Project>

@@ -230,8 +230,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                             osVersion = "81";
                             break;
                         default:
-                            useGenericTfm = true;
-                            break;
+                            throw new PlatformNotSupportedException();
                     }
                 }
                 else if (versionAnalyzer.IsWindows10())
