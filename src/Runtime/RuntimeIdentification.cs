@@ -88,7 +88,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                 }
                 else
                 {
-                    osName = osAnalyzer.GetLinuxDistributionInformation().Identifier;
+                    osName = osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
                 }
             }
 
