@@ -47,17 +47,16 @@
         </None>
         <None Include="../README.md" Pack="true" PackagePath="\" />
         <None Remove="PlatformKitTestingApp\**" />
+        <None Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="PlatformKitTestingApp\**" />
+      <Compile Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKitTestingApp\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Deprecation\Deprecated" />
+      <EmbeddedResource Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 </Project>
