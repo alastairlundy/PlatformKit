@@ -98,7 +98,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     }
                     else if (identifierType == RuntimeIdentifierType.DistroSpecific)
                     {
-                        osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                        osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
+                    }
+                    else
+                    {
+                        throw new OperatingSystemVersionDetectionException();
                     }
                 }
             }
@@ -163,6 +167,27 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             if (platformManager.IsLinux())
             {
                 osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
+
+                int dotCounter = 0;
+                
+                foreach (var c in osVersion)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+
+                if (dotCounter == 2)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 2);
+                }
+
+                if (dotCounter == 3)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 4);
+                }
+                
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
             }
             if (platformManager.IsMac())
