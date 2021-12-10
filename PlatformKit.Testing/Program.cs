@@ -42,9 +42,10 @@ namespace PlatformKit.Testing
             Console.WriteLine("TFM: " + System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier);
             Console.WriteLine("Generated TFM (Generic): " + platform.GenerateTFM(true));
             Console.WriteLine("Generated TFM (Specific): " + platform.GenerateTFM(false));
-            Console.WriteLine("OsVersion: " + Environment.OSVersion);
+            Console.WriteLine("WindowsEnum: " + versionAnalyzer.GetWindowsVersionToEnum());
             Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
-
+            
+            
             if (platform.IsLinux())
             {
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion().ToString());
