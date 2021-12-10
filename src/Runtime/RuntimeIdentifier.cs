@@ -23,11 +23,21 @@ SOFTWARE.
 
 namespace AluminiumTech.DevKit.PlatformKit.Runtime
 {
-    public class RuntimeIdentifier
+    public struct RuntimeIdentifier
     {
-        public string GeneratedGenericIdentifier { get; set; }
-
-        public string GeneratedSpecificIdentifier { get; set; }
+        /// <summary>
+        /// Identifier in the format of any-[processor architecture]
+        /// </summary>
+        public string AnyGenericIdentifier { get; set; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public string GenericIdentifier { get; set; }
+        
+        public string SpecificIdentifier { get; set; }
+ 
+        public string FullySpecificIdentifier { get; set; }
 
         public string DotNetIdentifier { get; set; }
     }
