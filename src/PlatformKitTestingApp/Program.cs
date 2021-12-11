@@ -30,28 +30,39 @@ using AluminiumTech.DevKit.PlatformKit;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Runtime;
 
-var platform = new PlatformManager();
+            var platformManager = new PlatformManager();
             var processManager = new ProcessManager();
             var versionAnalyzer = new OSVersionAnalyzer();
             var runtimeIdentification = new RuntimeIdentification();
 
             Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
+
+            var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
+            Console.Title = title;
+            Console.WriteLine(title) ;
             
             Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
             Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
             Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
+            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
             Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
             
-            if (platform.IsWindows())
+            if (platformManager.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
                 
-                Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
+            //    Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
+            }
+
+            if (platformManager.IsMac())
+            {
+                Console.WriteLine("Is this AppleSilicon?: " + platformManager.IsAppleSiliconMac());
+                Console.WriteLine("Mac Processor Type: " + platformManager.GetMacProcessorType());
             }
             
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
             
-            if (platform.IsLinux())
+            if (platformManager.IsLinux())
             {
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());

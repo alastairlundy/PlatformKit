@@ -308,14 +308,26 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     }
                 }
 
-                if ((platformManager.IsLinux() && identifierType == RuntimeIdentifierType.Specific) ||
+                if (platformManager.IsMac())
+                {
+                    throw new NotImplementedException();
+                }
+
+                if (platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+                {
+                    if (includeOperatingSystemVersion)
+                    {
+                        return $"{osName}.{osVersion}--{cpuArch}";
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
+                }
+                if (((platformManager.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
                     includeOperatingSystemVersion == false)
                 {
                     return $"{osName}-{cpuArch}";
-                }
-                else
-                {
-                    return $"{osName}.{osVersion}-{cpuArch}";
                 }
             }
             else if(!platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
@@ -323,10 +335,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                 Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
-            else
-            {
-                throw new RuntimeIdentifierGenerationException();
-            }
+            
+            throw new RuntimeIdentifierGenerationException();
         }
 
         /// <summary>
@@ -365,10 +375,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             {
                 runtimeIdentifier.DistroSpecificIdentifier =
                     GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
+                
+                runtimeIdentifier.VersionLessDistroSpecificIdentifier =
+                    GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false);
             }
             else
             {
                 runtimeIdentifier.DistroSpecificIdentifier = "N/A";
+                runtimeIdentifier.VersionLessDistroSpecificIdentifier = "N/A";
             }
             
             runtimeIdentifier.DotNetIdentifier = DetectRuntimeIdentifier();

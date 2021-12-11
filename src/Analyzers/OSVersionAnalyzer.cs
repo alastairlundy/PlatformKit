@@ -224,14 +224,18 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="OperatingSystemVersionDetectionException"></exception>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public MacOsVersion GetMacOsVersionToEnum(Version input)
         {
             try
             {
-                if (input.Major == 10)
+                if (_platformManager.IsMac())
                 {
-                    switch (input.Minor)
+                    if (input.Major == 10)
                     {
+                        switch (input.Minor)
+                        {
                             case 0:
                                 return MacOsVersion.v10_0_Cheetah;
                             case 1:
@@ -264,13 +268,18 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                                 return MacOsVersion.v10_14_Mojave;
                             case 15:
                                 return MacOsVersion.v10_15_Catalina;
+                        }
                     }
-                }
-                
-                if (input.Major == 11 && input.Minor is >= 0 and <= 6) return MacOsVersion.v11_BigSur;
-                if (input.Major == 12 && input.Minor is >= 0 and <= 6) return MacOsVersion.v12_Monterrey;
 
-                throw new OperatingSystemVersionDetectionException();
+                    if (input.Major == 11 && input.Minor is >= 0 and <= 6) return MacOsVersion.v11_BigSur;
+                    if (input.Major == 12 && input.Minor is >= 0 and <= 6) return MacOsVersion.v12_Monterrey;
+
+                    throw new OperatingSystemVersionDetectionException();
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
             }
             catch(Exception exception)
             {
@@ -351,9 +360,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                             dotCounter++;
                         }
                     }
-#if DEBUG
-                    Console.WriteLine("Before DescV: " + description);
-#endif
+                    
                     if (dotCounter == 1)
                     {
                         dotCounter++;
@@ -431,69 +438,77 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         /// <returns></returns>
         public Version DetectLinuxDistributionVersion()
         {
-            var dotCounter = 0;
-
-            var version = DetectLinuxDistributionVersionAsString();
-            version = version.Replace(" ", string.Empty);
-
-            foreach (var c in version)
+            if (_platformManager.IsLinux())
             {
-                if (c == '.')
+                var dotCounter = 0;
+
+                var version = DetectLinuxDistributionVersionAsString();
+                version = version.Replace(" ", string.Empty);
+
+                foreach (var c in version)
                 {
-                    dotCounter++;
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
                 }
-            }
 
-            if (dotCounter == 1)
-            {
-                version += ".0";
-            }
-            else if (dotCounter == 2)
-            {
-                version += ".0";
-            }
+                if (dotCounter == 1)
+                {
+                    version += ".0";
+                }
+                else if (dotCounter == 2)
+                {
+                    version += ".0";
+                }
 #if DEBUG
             Console.WriteLine("Version: " + version);
 #endif
-            return Version.Parse(version);
+                return Version.Parse(version);
+            }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
-        ///     Detects the Linux Distribution Version as read from cat /etc/os-release.
-        ///     Preserves the version if the full version is in a Year.Month.Bugfix format.
+        /// Detects the Linux Distribution Version as read from cat /etc/os-release.
+        /// Preserves the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public string DetectLinuxDistributionVersionAsString()
         {
-            var osAnalyzer = new OSAnalyzer();
+            if (_platformManager.IsLinux())
+            {
+                var osAnalyzer = new OSAnalyzer();
 
-            var linuxDistroInfo = osAnalyzer.GetLinuxDistributionInformation();
+                var linuxDistroInfo = osAnalyzer.GetLinuxDistributionInformation();
             
 #if DEBUG
-            Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);
+                Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);
 #endif
             
-            var osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
+                var osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
 
-            if (osName.Contains("ubuntu") ||
-                osName.Contains("pop!_os"))
-            {
-                if (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4"))
+                if (osName.ToLower().Contains("ubuntu") ||
+                    osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
                 {
-                    //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
-                    //This normally occurs with .04 being shown as .4
-                    linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
+                    if (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4"))
+                    {
+                        //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
+                        //This normally occurs with .04 being shown as .4
+                        linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
+                    }
                 }
-            }
             
 #if DEBUG
             Console.WriteLine("LinuxDistroVersion After: " + linuxDistroInfo.Version);
 #endif
             
-            return linuxDistroInfo.Version;
+                return linuxDistroInfo.Version;
+            }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>

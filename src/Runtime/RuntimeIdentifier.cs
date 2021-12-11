@@ -41,6 +41,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         /// 
         /// </summary>
         public string DistroSpecificIdentifier { get; set; }
+        
+        public string VersionLessDistroSpecificIdentifier { get; set; }
 
         public string DotNetIdentifier { get; set; }
     }
