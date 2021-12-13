@@ -25,6 +25,7 @@ using System;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;

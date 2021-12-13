@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
 
 // ReSharper disable InconsistentNaming
@@ -89,11 +90,11 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
                         versionLine = versionLine.Replace('"', ' ');
                         versionLine = versionLine.Replace(" ", string.Empty);
-                        
+ /*                       
 #if DEBUG
                         Console.WriteLine("LinuxDistroVersion: " + versionLine);
 #endif
-                        
+*/                     
                         linuxDistributionInformation.Version = versionLine;
                     }
                     else if (index < resultArray.Length)

@@ -28,6 +28,7 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 using AluminiumTech.DevKit.PlatformKit.Runtime;
 
             var platformManager = new PlatformManager();
