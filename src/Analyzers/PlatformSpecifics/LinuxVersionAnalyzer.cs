@@ -96,11 +96,7 @@ public static class LinuxVersionAnalyzer
                         linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
                     }
                 }
-            
-#if DEBUG
-            //Console.WriteLine("LinuxDistroVersion After: " + linuxDistroInfo.Version);
-#endif
-            
+
                 return linuxDistroInfo.Version;
             }
 
