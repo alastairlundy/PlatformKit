@@ -22,6 +22,7 @@ SOFTWARE.
 */
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
@@ -361,9 +362,32 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        {
+            Dictionary<RuntimeIdentifierType, string> possibles = new Dictionary<RuntimeIdentifierType, string>
+            {
+                { RuntimeIdentifierType.AnyGeneric, GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric) },
+                { RuntimeIdentifierType.Generic, GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic) },
+                { RuntimeIdentifierType.Specific, GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific) }
+            };
+
+            if (platformManager.IsLinux())
+            {
+                possibles.Add(RuntimeIdentifierType.VersionLessDistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
+                possibles.Add(RuntimeIdentifierType.DistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
+            }
+
+            return possibles;
+        }
+        
+        /// <summary>
         /// Generates a RuntimeIdentifier object model, detects information, and return it.
         /// </summary>
         /// <returns></returns>
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         public RuntimeIdentifier GenerateRuntimeIdentifier()
         {
             var runtimeIdentifier = new RuntimeIdentifier();
