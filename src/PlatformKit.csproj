@@ -17,13 +17,7 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.3.0 Alpha 3
-* Added support for Windows 10 Insider Preview detection
-* Added support for Windows 11 Insider Preview detection
-* Fixed an issue where running the ``GenerateRuntimeIdentifier()`` method would cause an exception on MacOS - It will continue to do this only when an identifier with the version is requested.
-* Moved OS Specific OSVersionAnalyzer code to separate static classes holding Extension methods.
-* Added new ``IsAtLeastWindowsVersion(WindowsVersion windowsVersion)`` method to detect if the detected WindowsVersion is newer than or the same as a specified Windowsversion
-* Minor tweaks.</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,16 +39,13 @@
         </None>
         <None Include="../README.md" Pack="true" PackagePath="\" />
         <None Remove="PlatformKitTestingApp\**" />
-        <None Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="PlatformKitTestingApp\**" />
-      <Compile Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKitTestingApp\**" />
-      <EmbeddedResource Remove="Deprecation\Deprecated\**" />
     </ItemGroup>
 </Project>

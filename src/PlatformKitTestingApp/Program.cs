@@ -47,6 +47,11 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
             Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
             Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
+
+            foreach (var candidate in runtimeIdentification.GetPossibleRuntimeIdentifierCandidates())
+            {
+                Console.WriteLine("Possible RID: " + candidate);
+            }
             
             if (platformManager.IsWindows())
             {
