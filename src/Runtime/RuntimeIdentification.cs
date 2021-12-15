@@ -388,7 +388,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         /// Generates a RuntimeIdentifier object model, detects information, and return it.
         /// </summary>
         /// <returns></returns>
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3 + " . Please use the ``GetPossibleRuntimeIdentifierCandidates()`` method instead. This is not a direct replacement and you may need time to migrate.")]
         public RuntimeIdentifier GenerateRuntimeIdentifier()
         {
             var runtimeIdentifier = new RuntimeIdentifier();
