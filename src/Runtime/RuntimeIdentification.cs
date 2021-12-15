@@ -316,7 +316,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
 
                 if (platformManager.IsMac())
                 {
-                    throw new NotImplementedException();
+                    if (includeOperatingSystemVersion)
+                    {
+                        throw new NotImplementedException();
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
                 }
 
                 if (platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
