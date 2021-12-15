@@ -240,6 +240,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             return osVersion;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifierType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
@@ -266,7 +272,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         }
         
         /// <summary>
-        /// Generates a Generic Runtime ID in the format of any-[ProcessorArchtecture]
+        /// 
         /// </summary>
         /// <returns></returns>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
@@ -280,7 +286,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             }
             else if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == true)
             {
-                
                 var cpuArch = GetArchitectureString();
 
                 return $"{osName}-{cpuArch}";
