@@ -34,7 +34,7 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// <summary>
     ///     A class to manage processes on a device and/or start new processes.
     /// </summary>
-    public class ProcessManager
+    public class ProcessManager: IProcessManager
     {
         protected PlatformManager _platformManager;
 
@@ -190,16 +190,15 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <returns></returns>
         public string RunPowerShellCommand(string command)
         {
-            try
+            if (_platformManager.IsWindows())
             {
                 var location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
                 return RunProcessWindows(location, "powershell", command);
+   
             }
-            catch
-            {
-                throw new PlatformNotSupportedException();
-            }
+                
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
@@ -209,7 +208,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <returns></returns>
         public string RunCommandMac(string command)
         {
-            try
+            if (_platformManager.IsMac())
             {
                 var processName = "zsh";
                 var location = "/usr/bin/";
@@ -218,10 +217,8 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 return RunProcessMac(location, processName, processArguments);
             }
-            catch
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            throw new PlatformNotSupportedException();
         }
         
         /// <summary>
@@ -232,15 +229,15 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="ArgumentException"></exception>
         public string RunCommandLinux(string command)
         {
-            try
+            if (_platformManager.IsLinux())
             {
                 var executableName = "bash";
                 var location = "/usr/bin/";
 
-       //         if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
-       //         {
-       //             executableName = "zsh";
-       //         }
+                //         if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
+                //         {
+                //             executableName = "zsh";
+                //         }
             
                 if (!Directory.Exists(location))
                 {
@@ -251,14 +248,12 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 return RunProcessLinux(location, executableName, processArguments);
             }
-            catch
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
-        ///     Run different actions or methods depending on the operating system.
+        /// Run different actions or methods depending on the operating system.
         /// </summary>
         /// <param name="windowsMethod"></param>
         /// <param name="macMethod"></param>
@@ -358,6 +353,66 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Console.WriteLine(ex.ToString());
                 throw new Exception(ex.ToString());
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="value"></param>
+        /// <param name="failMessage"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
+        public string GetRegistryValue(string query, string value, string failMessage){
+            if (_platformManager.IsWindows())
+            {
+                try{
+                    RunProcessWindows("cmd", "/c REG QUERY " + query + " /v " + value);
+
+                    TextReader reader = Console.In;
+                    string result = reader.ReadLine();
+                    if (result != null)
+                    {
+                        result = result.Replace(value, "").Replace("REG_SZ", "").Replace(" ", "");
+                        return result;
+                    }
+                }
+                catch{
+                    return failMessage;
+                }
+            }
+
+            throw new PlatformNotSupportedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="wmiClass"></param>
+        /// <param name="failMessage"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
+        public string GetWMIValue(string query, string wmiClass, string failMessage){
+            if (_platformManager.IsWindows())
+            {
+                try{
+                    RunProcessWindows("powershell",
+                        "/c Get-WmiObject -query 'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
+
+                    TextReader reader = Console.In;
+                
+                    string result = reader.ReadLine()?.Replace(wmiClass, "").Replace(" ", "");
+                
+                    reader.Close();
+                    return result;
+                }
+                catch{
+                    return failMessage;
+                }
+            }
+
+            throw new PlatformNotSupportedException();
         }
     }
 }
