@@ -97,7 +97,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     {
                         osName = osAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
                     }
-                    else if (identifierType == RuntimeIdentifierType.DistroSpecific)
+                    else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
                     {
                         osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
                     }
@@ -233,10 +233,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                 */
             }
 
-#if DEBUG
-            Console.WriteLine("OsVersion: " + osVersion);     
-#endif
-            
             return osVersion;
         }
 
@@ -252,16 +248,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             {
                 return GenerateRuntimeIdentifier(identifierType, false, false);
             }
-            else if (identifierType == RuntimeIdentifierType.Generic)
-            {
-                return GenerateRuntimeIdentifier(identifierType, true, false);
-            } 
-            else if (identifierType == RuntimeIdentifierType.Specific && platformManager.IsLinux())
+            else if (identifierType == RuntimeIdentifierType.Generic ||
+                     identifierType == RuntimeIdentifierType.Specific && platformManager.IsLinux() ||
+                     identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
             else if (identifierType == RuntimeIdentifierType.Specific && !platformManager.IsLinux()
-                || identifierType == RuntimeIdentifierType.DistroSpecific)
+                     || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
             }
@@ -278,6 +272,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
             var osName = GetOsNameString(identifierType);
+            var cpuArch = GetArchitectureString();
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric ||
                 identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == false)
@@ -286,25 +281,17 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             }
             else if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == true)
             {
-                var cpuArch = GetArchitectureString();
-
                 return $"{osName}-{cpuArch}";
             }
             else if (identifierType == RuntimeIdentifierType.Specific ||
-                     platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+                     platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                     platformManager.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 var osVersion = GetOsVersionString();
-                var cpuArch = GetArchitectureString();
 
-#if DEBUG
-            Console.WriteLine("OS Name: " + osName);
-            Console.WriteLine("OS Version: " + osVersion);
-            Console.WriteLine("CPU Arch: " + cpuArch);
-#endif
-                
                 if (platformManager.IsWindows())
                 {
-                    if (includeOperatingSystemVersion == true)
+                    if (includeOperatingSystemVersion)
                     {
                         return $"{osName}{osVersion}-{cpuArch}";
                     }
@@ -326,11 +313,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     }
                 }
 
-                if (platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+                if ((platformManager.IsLinux() && 
+                     (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
                     {
-                        return $"{osName}.{osVersion}--{cpuArch}";
+                        return $"{osName}.{osVersion}-{cpuArch}";
                     }
                     else
                     {
@@ -343,7 +331,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     return $"{osName}-{cpuArch}";
                 }
             }
-            else if(!platformManager.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific)
+            else if(!platformManager.IsLinux() && (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
             {
                 Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);

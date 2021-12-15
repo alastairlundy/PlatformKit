@@ -32,4 +32,8 @@ public enum RuntimeIdentifierType
     /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
     /// </summary>
     DistroSpecific,
+    /// <summary>
+    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+    /// </summary>
+    VersionLessDistroSpecific
 }
