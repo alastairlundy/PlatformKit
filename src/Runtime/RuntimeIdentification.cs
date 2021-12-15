@@ -350,7 +350,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
-#endif
+#else
             if (platformManager.IsLinux())
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
@@ -359,6 +359,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
+#endif
         }
 
         /// <summary>
