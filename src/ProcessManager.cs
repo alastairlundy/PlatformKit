@@ -34,9 +34,10 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// <summary>
     ///     A class to manage processes on a device and/or start new processes.
     /// </summary>
-    public class ProcessManager: IProcessManager
+    public class ProcessManager
     {
-        protected PlatformManager _platformManager;
+        // ReSharper disable once InconsistentNaming
+        protected readonly PlatformManager _platformManager;
 
         public ProcessManager()
         {
@@ -353,66 +354,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Console.WriteLine(ex.ToString());
                 throw new Exception(ex.ToString());
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="value"></param>
-        /// <param name="failMessage"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
-        public string GetRegistryValue(string query, string value, string failMessage){
-            if (_platformManager.IsWindows())
-            {
-                try{
-                    RunProcessWindows("cmd", "/c REG QUERY " + query + " /v " + value);
-
-                    TextReader reader = Console.In;
-                    string result = reader.ReadLine();
-                    if (result != null)
-                    {
-                        result = result.Replace(value, "").Replace("REG_SZ", "").Replace(" ", "");
-                        return result;
-                    }
-                }
-                catch{
-                    return failMessage;
-                }
-            }
-
-            throw new PlatformNotSupportedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="wmiClass"></param>
-        /// <param name="failMessage"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
-        public string GetWMIValue(string query, string wmiClass, string failMessage){
-            if (_platformManager.IsWindows())
-            {
-                try{
-                    RunProcessWindows("powershell",
-                        "/c Get-WmiObject -query 'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
-
-                    TextReader reader = Console.In;
-                
-                    string result = reader.ReadLine()?.Replace(wmiClass, "").Replace(" ", "");
-                
-                    reader.Close();
-                    return result;
-                }
-                catch{
-                    return failMessage;
-                }
-            }
-
-            throw new PlatformNotSupportedException();
         }
     }
 }
