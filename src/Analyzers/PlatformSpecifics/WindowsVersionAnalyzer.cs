@@ -146,83 +146,73 @@ public static class WindowsVersionAnalyzer
                     //We don't support Windows XP.
                     throw new PlatformNotSupportedException("Windows XP is not supported.");
                 }
-                if (input.Major == 6)
-                {
-                    switch (input.Build)
-                    {
-                            case 6000:
-                                return WindowsVersion.WinVista;
-                            case 6001:
-                                return WindowsVersion.WinVistaSP1;
-                            case 6002:
-                                return WindowsVersion.WinVistaSP2;
-                            case 6003:
-                                return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
-                            case 7600:
-                                return WindowsVersion.Win7;
-                            case 7601:
-                                return WindowsVersion.Win7SP1;
-                            case 9200:
-                                return WindowsVersion.Win8;
-                            case 9600:
-                                return WindowsVersion.Win8_1;
-                    }   
-                }
-                if (input.Major == 10)
-                {
-                    switch (input.Build)
-                    {
-                        case 10240:
-                            return WindowsVersion.Win10_v1507;
-                        case 10586:
-                            return WindowsVersion.Win10_v1511;
-                        case 14393:
-                            return WindowsVersion.Win10_v1607;
-                        case 15063:
-                            return WindowsVersion.Win10_v1703; 
-                        case 15254:
-                            return WindowsVersion.Win10_v1709_Mobile;
-                        case 16299:
-                            return WindowsVersion.Win10_v1709;
-                        case 17134:
-                            return WindowsVersion.Win10_v1803;
-                        case 17763:
-                            return WindowsVersion.Win10_v1809; 
-                        case 18362:
-                            return WindowsVersion.Win10_v1903;
-                        case 18363:
-                            return WindowsVersion.Win10_v1909;
-                        case 19041:
-                            return WindowsVersion.Win10_v2004;
-                        case 19042: 
-                            return WindowsVersion.Win10_20H2;
-                        case 19043:
-                            return WindowsVersion.Win10_21H1;
-                        case 19044:
-                            return WindowsVersion.Win10_21H2;
-                        case 20348:
-                            return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
-                        case 22000:
-                            return WindowsVersion.Win11_21H2;
-                        default:
-                            //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
-                            if (input.Build is > 10240 and < 22000)
-                            {
-                                return WindowsVersion.Win10_InsiderPreview;
-                            }
-                            //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                            else if(input.Build > 22000)
-                            {
-                                return WindowsVersion.Win11_InsiderPreview;
-                            }
-                            else
-                            {
-                                throw new OperatingSystemVersionDetectionException();
-                            }
-                    }
-                }
 
-                return WindowsVersion.NotDetected;
+                switch (input.Build)
+                {
+                    case 6000:
+                        return WindowsVersion.WinVista;
+                    case 6001:
+                        return WindowsVersion.WinVistaSP1;
+                    case 6002:
+                        return WindowsVersion.WinVistaSP2;
+                    case 6003:
+                        return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
+                    case 7600:
+                        return WindowsVersion.Win7;
+                    case 7601:
+                        return WindowsVersion.Win7SP1;
+                    case 9200:
+                        return WindowsVersion.Win8;
+                    case 9600:
+                        return WindowsVersion.Win8_1;
+                    case 10240:
+                        return WindowsVersion.Win10_v1507;
+                    case 10586:
+                        return WindowsVersion.Win10_v1511;
+                    case 14393:
+                        return WindowsVersion.Win10_v1607;
+                    case 15063:
+                        return WindowsVersion.Win10_v1703; 
+                    case 15254:
+                        return WindowsVersion.Win10_v1709_Mobile;
+                    case 16299:
+                        return WindowsVersion.Win10_v1709;
+                    case 17134:
+                        return WindowsVersion.Win10_v1803;
+                    case 17763:
+                        return WindowsVersion.Win10_v1809; 
+                    case 18362:
+                        return WindowsVersion.Win10_v1903;
+                    case 18363:
+                        return WindowsVersion.Win10_v1909;
+                    case 19041:
+                        return WindowsVersion.Win10_v2004;
+                    case 19042: 
+                        return WindowsVersion.Win10_20H2;
+                    case 19043:
+                        return WindowsVersion.Win10_21H1;
+                    case 19044:
+                        return WindowsVersion.Win10_21H2;
+                    case 20348:
+                        return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
+                    case 22000:
+                        return WindowsVersion.Win11_21H2;
+                    default:
+                        //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
+                        if (input.Build is > 10240 and < 22000)
+                        {
+                            return WindowsVersion.Win10_InsiderPreview;
+                        }
+                        //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
+                        else if(input.Build > 22000)
+                        {
+                            return WindowsVersion.Win11_InsiderPreview;
+                        }
+                        else
+                        {
+                            return WindowsVersion.NotDetected;
+                        }
+                }
             }
             catch (Exception exception)
             {

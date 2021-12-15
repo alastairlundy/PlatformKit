@@ -58,9 +58,7 @@ public static class LinuxVersionAnalyzer
                 {
                     version += ".0";
                 }
-#if DEBUG
-            Console.WriteLine("Version: " + version);
-#endif
+
                 return Version.Parse(version);
             }
 
