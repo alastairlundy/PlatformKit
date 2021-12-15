@@ -29,18 +29,31 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
     public enum MacOsVersion
     {
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_0_Cheetah,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_1_Puma,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_2_Jaguar,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_3_Panther,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_4_Tiger,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_5_Leopard,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_6_SnowLeopard,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_7_Lion,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_8_MountainLion,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_9_Mavericks,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_10_Yosemite,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_11_ElCapitan,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_12_Sierra,
         v10_13_HighSierra,
         v10_14_Mojave,

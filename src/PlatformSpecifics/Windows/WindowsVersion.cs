@@ -29,19 +29,30 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     public enum WindowsVersion
     {
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVista,
         // ReSharper disable once InconsistentNaming
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP1,
         // ReSharper disable once InconsistentNaming
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinVistaSP2,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         WinServer_2008,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         Win7,
         // ReSharper disable once InconsistentNaming
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         Win7SP1,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2008_R2,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         Win8,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         Win8_1,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012_R2,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).

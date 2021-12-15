@@ -21,10 +21,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
+
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
     public enum MacProcessorType
     {
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV2_5)]
         PowerPC,
         Intel,
         AppleSilicon,

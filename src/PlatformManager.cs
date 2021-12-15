@@ -28,7 +28,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.Runtime;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
@@ -52,11 +51,21 @@ namespace AluminiumTech.DevKit.PlatformKit
            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
         }
         
+        /// <summary>
+        /// Returns whether or not the current OS is macOS and if the processor is AppleSilicon based.
+        /// </summary>
+        /// <returns></returns>
         public bool IsAppleSiliconMac()
         {
             return GetMacProcessorType() == MacProcessorType.AppleSilicon;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public MacProcessorType GetMacProcessorType()
         {
             try
@@ -111,8 +120,9 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
 #if NETCOREAPP3_0_OR_GREATER
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-#endif
+#else
             throw new PlatformNotSupportedException();
+#endif
         }
         
         /// <summary>
@@ -206,27 +216,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Console.WriteLine(exception.ToString());
                 throw new Exception(exception.ToString());
             }
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            // ReSharper disable once IdentifierTypo
-            var bitness = Environment.Is64BitProcess ? "64 Bit" : "32 Bit";
-
-            var app = "";
-
-            if (GetAppName()?.Length > 0)
-                // ReSharper disable once HeapView.ObjectAllocation
-                app = "App " + GetAppName() + " v" + GetAppVersion() + " " + bitness;
-
-            // ReSharper disable once HeapView.ObjectAllocation
-            var running = " running on RunTimeID: " + new RuntimeIdentification().DetectRuntimeIdentifier();
-
-            // ReSharper disable once HeapView.ObjectAllocation
-            return app + running;
         }
     }
 }
