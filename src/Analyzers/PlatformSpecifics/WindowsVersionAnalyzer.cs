@@ -84,6 +84,8 @@ public static class WindowsVersionAnalyzer
                 return true;
             case WindowsVersion.Win10_Server2022:
                 return true;
+            case WindowsVersion.Win10_InsiderPreview:
+                return true;
             case WindowsVersion.NotDetected:
                 throw new OperatingSystemVersionDetectionException();
             default:
@@ -107,6 +109,8 @@ public static class WindowsVersionAnalyzer
         switch (windowsVersion)
         {
             case WindowsVersion.Win11_21H2:
+                return true;
+            case WindowsVersion.Win11_InsiderPreview:
                 return true;
             case WindowsVersion.NotDetected:
                 throw new OperatingSystemVersionDetectionException();
@@ -302,13 +306,21 @@ public static class WindowsVersionAnalyzer
                     return new Version(6, 0, 6001);
                 case WindowsVersion.WinVistaSP2:
                     return new Version(6, 0, 6002);
+                case WindowsVersion.WinServer_2008:
+                    return new Version(6, 0, 6003);
                 case WindowsVersion.Win7:
                     return new Version(6, 1, 7600);
                 case WindowsVersion.Win7SP1:
                     return new Version(6, 1, 7601);
+                case WindowsVersion.WinServer_2008_R2:
+                    return new Version(6, 1, 7600);
                 case WindowsVersion.Win8:
                     return new Version(6, 2, 9200);
+                case WindowsVersion.WinServer_2012:
+                    return new Version(6, 2, 9200);
                 case WindowsVersion.Win8_1:
+                    return new Version(6, 3, 9600);
+                case WindowsVersion.WinServer_2012_R2:
                     return new Version(6, 3, 9600);
                 case WindowsVersion.Win10_v1507:
                     return new Version(10, 0, 10240);

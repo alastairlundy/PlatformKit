@@ -137,13 +137,13 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                             throw new PlatformNotSupportedException();
                         case WindowsVersion.WinServer_2008:
                             throw new PlatformNotSupportedException();
-                        case WindowsVersion.WinServer_2008_R2:
-                            osVersion = "7";
-                            break;
                         case WindowsVersion.Win7:
                             osVersion = "7";
                             break;
                         case WindowsVersion.Win7SP1:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.WinServer_2008_R2:
                             osVersion = "7";
                             break;
                         case WindowsVersion.Win8:
