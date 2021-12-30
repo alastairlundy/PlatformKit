@@ -7,10 +7,10 @@ Versions currently supported by Security Fixes.
 
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes | 
 |--| --|--|--|--|
-| 2.3 series | 2.3.0, released December 15th 2021 | 2.3.0 | :white_check_mark:, ending June 15th 2022 | :white_check_mark:, ending December 15th 2022 |
-| 2.2 series | 2.2.0 | 2.2.2, released December 10th 2021 | :white_check_mark:, ending May 22nd 2022 | :white_check_mark:, ending November 22nd 2022 |
-| 2.1 series | 2.1.0 | 2.1.1, released December 10th 2021 | :white_check_mark:, ending May 9th 2022 | :white_check_mark:, ending November 9th 2022 |
-| 2.0 series | 2.0.0 | 2.0.1, released December 10th 2021 | :white_check_mark:, ending April 21st 2022 | :white_check_mark:, ending October 21st 2022 |
+| 2.3 series | 2.3.0, released on December 15th 2021 | 2.3.0 | :white_check_mark:, extended to December 15th 2022 | :white_check_mark:, ending December 15th 2022 |
+| 2.2 series | 2.2.0, released on November 22nd 2021 | 2.2.2, released December 10th 2021 | :white_check_mark:, ending May 22nd 2022 | :white_check_mark:, ending November 22nd 2022 |
+| 2.1 series | 2.1.0, released on November 9th 2021 | 2.1.1, released December 10th 2021 | :white_check_mark:, ending May 9th 2022 | :white_check_mark:, ending November 9th 2022 |
+| 2.0 series | 2.0.0, released on October 21st 2021 | 2.0.1, released December 10th 2021 | :white_check_mark:, ending April 21st 2022 | :white_check_mark:, ending October 21st 2022 |
 
 ### Previously Supported Versions
 | Version series | Original Launch Version | Final version | Supported with Bug Fixes | Supported with Security Fixes | 
