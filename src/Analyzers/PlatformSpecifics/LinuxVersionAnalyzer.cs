@@ -81,13 +81,22 @@ public static class LinuxVersionAnalyzer
             
                 //Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);
 
-            
+                var dotCounter = 0;
+
+                foreach (char c in linuxDistroInfo.Version)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+                
                 var osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
 
                 if (osName.ToLower().Contains("ubuntu") ||
                     osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
                 {
-                    if (linuxDistroInfo.Version.Contains(".4."))
+                    if (linuxDistroInfo.Version.Contains(".4.") || (linuxDistroInfo.Version.EndsWith(".4") && dotCounter == 2))
                     {
                         //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
                         //This normally occurs with .04 being shown as .4
