@@ -15,7 +15,6 @@ Versions currently supported by Security Fixes.
 ### Previously Supported Versions
 | Version series | Original Launch Version | Final version | Supported with Bug Fixes | Supported with Security Fixes | 
 |--| --|--|--|--|
-| 2.0 RC series | 2.0.0 RC 1 | 2.0.0 RC 3 | :x:, Support ended November 15th 2021 | :x:, Support ended December 10th 2021 |
 | 2.0 Beta series | 2.0.0 Beta 1 | 2.0.0 Beta 10 | :x:, Support ended October 8th 2021 | :x:, Support ended November 8th 2021 |
 | 2.0 Alpha series | 2.0.0 Alpha 0 | 2.0.0 Alpha 9 |:x: , Support ended February 6th 2020 | :x: , Support ended March 22nd 2020 |
 | Beta 1.x.x series | Beta 1.0.0 | Beta 1.4.1 |:x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
