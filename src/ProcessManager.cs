@@ -54,10 +54,11 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public string RunProcess(string executableLocation, string executableName, string arguments = "")
         {
-            if (_platformManager.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments);
-            if (_platformManager.IsLinux()) return RunProcessLinux(executableLocation: executableLocation, executableName, arguments);
-            if (_platformManager.IsMac()) return RunProcessMac(executableLocation, executableName, arguments);
-
+            if (_osAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments);
+            if (_osAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments);
+            if (_osAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments);
+            if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
+            
             throw new PlatformNotSupportedException();
         }
 
@@ -81,9 +82,14 @@ namespace AluminiumTech.DevKit.PlatformKit
                 process.StartInfo.FileName = executableName;
 
                 if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
+                {
                     process.StartInfo.FileName += ".exe";
+                }
 
-                if (runAsAdministrator) process.StartInfo.Verb = "runas";
+                if (runAsAdministrator)
+                {
+                    process.StartInfo.Verb = "runas";
+                }
 
                 process.StartInfo.WorkingDirectory = executableLocation;
                 process.StartInfo.RedirectStandardOutput = true;
@@ -223,6 +229,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
             throw new PlatformNotSupportedException();
         }
+        */
         
         /// <summary>
         /// Run a command or program as if inside a terminal on Linux.

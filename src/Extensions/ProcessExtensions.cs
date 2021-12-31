@@ -82,7 +82,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Extensions
         {
             try
             {
-                processName = processName.Replace(".exe", "");
+                processName = processName.Replace(".exe", string.Empty);
 
                 if (IsProcessRunning(process, processName) ||
                     IsProcessRunning(process, processName.ToLower()) ||

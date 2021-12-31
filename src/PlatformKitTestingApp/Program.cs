@@ -1,4 +1,4 @@
-/* MIT License
+﻿/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -43,7 +43,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;
             Console.WriteLine(title) ;
-            
+         /*   
             Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
             Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
             Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
@@ -54,7 +54,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             {
                 Console.WriteLine("Possible RID: " + candidate);
             }
-            
+          */  
             if (platformManager.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());

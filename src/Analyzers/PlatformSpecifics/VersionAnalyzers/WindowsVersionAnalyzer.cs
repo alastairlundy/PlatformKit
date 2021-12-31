@@ -28,7 +28,7 @@ using System.Runtime.Versioning;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 public static class WindowsVersionAnalyzer
 {
@@ -234,11 +234,11 @@ public static class WindowsVersionAnalyzer
         {
             try
             {
-                if (new PlatformManager().IsWindows())
+                if (new OSAnalyzer().IsWindows())
                 {
                     string description = RuntimeInformation.OSDescription;
                     description = description.Replace("Microsoft Windows", string.Empty);
-                    description = description.Replace(" ", String.Empty);
+                    description = description.Replace(" ", string.Empty);
 
                     var dotCounter = 0;
 
@@ -288,71 +288,40 @@ public static class WindowsVersionAnalyzer
         /// <exception cref="OperatingSystemVersionDetectionException"></exception>
         public static Version GetWindowsVersionFromEnum(this OSVersionAnalyzer osVersionAnalyzer, WindowsVersion windowsVersion)
         {
-            switch (windowsVersion)
+            return windowsVersion switch
             {
-                case WindowsVersion.WinVista:
-                    return new Version(6, 0, 6000);
-                case WindowsVersion.WinVistaSP1:
-                    return new Version(6, 0, 6001);
-                case WindowsVersion.WinVistaSP2:
-                    return new Version(6, 0, 6002);
-                case WindowsVersion.WinServer_2008:
-                    return new Version(6, 0, 6003);
-                case WindowsVersion.Win7:
-                    return new Version(6, 1, 7600);
-                case WindowsVersion.Win7SP1:
-                    return new Version(6, 1, 7601);
-                case WindowsVersion.WinServer_2008_R2:
-                    return new Version(6, 1, 7600);
-                case WindowsVersion.Win8:
-                    return new Version(6, 2, 9200);
-                case WindowsVersion.WinServer_2012:
-                    return new Version(6, 2, 9200);
-                case WindowsVersion.Win8_1:
-                    return new Version(6, 3, 9600);
-                case WindowsVersion.WinServer_2012_R2:
-                    return new Version(6, 3, 9600);
-                case WindowsVersion.Win10_v1507:
-                    return new Version(10, 0, 10240);
-                case WindowsVersion.Win10_v1511:
-                    return new Version(10, 0, 10586);
-                case WindowsVersion.Win10_v1607:
-                    return new Version(10, 0, 14393);
-                case WindowsVersion.Win10_Server2016:
-                    return new Version(10, 0, 14393);
-                case WindowsVersion.Win10_v1703:
-                    return new Version(10, 0, 15063);
-                case WindowsVersion.Win10_v1709_Mobile:
-                    return new Version(10, 0, 15254);
-                case WindowsVersion.Win10_v1709:
-                    return new Version(10, 0, 16299);
-                case WindowsVersion.Win10_Server_v1709:
-                    return new Version(10, 0, 16299);
-                case WindowsVersion.Win10_v1803:
-                    return new Version(10, 0, 17134);
-                case WindowsVersion.Win10_v1809:
-                    return new Version(10, 0, 17763);
-                case WindowsVersion.Win10_Server2019:
-                    return new Version(10, 0, 17763);
-                case WindowsVersion.Win10_v1903:
-                    return new Version(10, 0, 18362);
-                case WindowsVersion.Win10_v1909:
-                    return new Version(10, 0, 18363);
-                case WindowsVersion.Win10_v2004:
-                    return new Version(10, 0, 19041);
-                case WindowsVersion.Win10_20H2:
-                    return new Version(10, 0, 19042);
-                case WindowsVersion.Win10_21H1:
-                    return new Version(10, 0, 19043);
-                case WindowsVersion.Win10_21H2:
-                    return new Version(10, 0, 19044);
-                case WindowsVersion.Win10_Server2022:
-                    return new Version(10, 0, 20348);
-                case WindowsVersion.Win11_21H2:
-                    return new Version(10, 0, 22000);
-                default:
-                    throw new OperatingSystemVersionDetectionException();
-            }
+                WindowsVersion.WinVista => new Version(6, 0, 6000),
+                WindowsVersion.WinVistaSP1 => new Version(6, 0, 6001),
+                WindowsVersion.WinVistaSP2 => new Version(6, 0, 6002),
+                WindowsVersion.WinServer_2008 => new Version(6, 0, 6003),
+                WindowsVersion.Win7 => new Version(6, 1, 7600),
+                WindowsVersion.Win7SP1 => new Version(6, 1, 7601),
+                WindowsVersion.WinServer_2008_R2 => new Version(6, 1, 7600),
+                WindowsVersion.Win8 => new Version(6, 2, 9200),
+                WindowsVersion.WinServer_2012 => new Version(6, 2, 9200),
+                WindowsVersion.Win8_1 => new Version(6, 3, 9600),
+                WindowsVersion.WinServer_2012_R2 => new Version(6, 3, 9600),
+                WindowsVersion.Win10_v1507 => new Version(10, 0, 10240),
+                WindowsVersion.Win10_v1511 => new Version(10, 0, 10586),
+                WindowsVersion.Win10_v1607 => new Version(10, 0, 14393),
+                WindowsVersion.Win10_Server2016 => new Version(10, 0, 14393),
+                WindowsVersion.Win10_v1703 => new Version(10, 0, 15063),
+                WindowsVersion.Win10_v1709_Mobile => new Version(10, 0, 15254),
+                WindowsVersion.Win10_v1709 => new Version(10, 0, 16299),
+                WindowsVersion.Win10_Server_v1709 => new Version(10, 0, 16299),
+                WindowsVersion.Win10_v1803 => new Version(10, 0, 17134),
+                WindowsVersion.Win10_v1809 => new Version(10, 0, 17763),
+                WindowsVersion.Win10_Server2019 => new Version(10, 0, 17763),
+                WindowsVersion.Win10_v1903 => new Version(10, 0, 18362),
+                WindowsVersion.Win10_v1909 => new Version(10, 0, 18363),
+                WindowsVersion.Win10_v2004 => new Version(10, 0, 19041),
+                WindowsVersion.Win10_20H2 => new Version(10, 0, 19042),
+                WindowsVersion.Win10_21H1 => new Version(10, 0, 19043),
+                WindowsVersion.Win10_21H2 => new Version(10, 0, 19044),
+                WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
+                WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
+                _ => throw new OperatingSystemVersionDetectionException()
+            };
         }
 
         /// <summary>
