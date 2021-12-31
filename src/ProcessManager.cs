@@ -1,4 +1,4 @@
-/* MIT License
+﻿/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -239,27 +239,39 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="ArgumentException"></exception>
         public string RunCommandLinux(string command)
         {
-            if (_platformManager.IsLinux())
+            try
             {
-                var executableName = "bash";
-                var location = "/usr/bin/";
-
-                //         if (!Directory.Exists(location + Path.DirectorySeparatorChar + executableName))
-                //         {
-                //             executableName = "zsh";
-                //         }
-            
-                if (!Directory.Exists(location))
+                if (_osAnalyzer.IsLinux())
                 {
-                    throw new ArgumentException("Cannot execute a command if there is no command to execute.");
+                    var location = "/usr/bin/";
+
+                    var args = command.Split(' ');
+                    command = args[0];
+                    var processArguments = "";
+
+                    if (args.Length > 0)
+                    {
+                        for (int index = 1; index < args.Length; index++)
+                        {
+                            processArguments += args[index].Replace(command, String.Empty);
+                        }
+                    }
+
+                    if (!Directory.Exists(location))
+                    {
+                        throw new ArgumentException("Cannot execute a command if there is no command to execute.");
+                    }
+                    
+                    return RunProcessLinux(location, command, processArguments);
                 }
 
-                var processArguments = "-c \" " + command + " \"";
-
-                return RunProcessLinux(location, executableName, processArguments);
+                throw new PlatformNotSupportedException();
             }
-
-            throw new PlatformNotSupportedException();
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                throw new Exception(exception.ToString());
+            }
         }
 
         /// <summary>
