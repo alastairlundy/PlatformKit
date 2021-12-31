@@ -89,7 +89,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
                 else
                 {
-                    osName = osAnalyzer.GetLinuxDistributionInformation().Name;
+                    osName = osAnalyzer.GetLinuxDistributionInformation().Identifier;
                 }
             }
 
@@ -154,6 +154,26 @@ namespace AluminiumTech.DevKit.PlatformKit
             {
                 osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
+                
+                int dotCounter = 0;
+                
+                foreach (var c in osVersion)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+
+                if (dotCounter == 2)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 2);
+                }
+
+                if (dotCounter == 3)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 4);
+                }
             }
             if (platformManager.IsMac())
             {
