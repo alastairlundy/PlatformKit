@@ -24,6 +24,8 @@ SOFTWARE.
 using System;
 using System.IO;
 
+using AluminiumTech.DevKit.PlatformKit.Analyzers;
+
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 public static class WindowsProcessManagerExtensions
@@ -38,16 +40,17 @@ public static class WindowsProcessManagerExtensions
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
     public static string GetRegistryValue(this ProcessManager processManager, string query, string value, string failMessage){
-            if (new PlatformManager().IsWindows())
+            if (new OSAnalyzer().IsWindows())
             {
                 try{
-                    processManager.RunProcessWindows("cmd", "/c REG QUERY " + query + " /v " + value);
+                    processManager.RunCmdCommand("/c REG QUERY " + query + " /v " + value);
 
                     TextReader reader = Console.In;
                     string result = reader.ReadLine();
+                    
                     if (result != null)
                     {
-                        result = result.Replace(value, "").Replace("REG_SZ", "").Replace(" ", "");
+                        result = result.Replace(value, String.Empty).Replace("REG_SZ", String.Empty).Replace(" ", String.Empty);
                         return result;
                     }
                 }
@@ -70,15 +73,16 @@ public static class WindowsProcessManagerExtensions
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
     // ReSharper disable once InconsistentNaming
         public static string GetWMIValue(this ProcessManager processManager, string query, string wmiClass, string failMessage){
-            if (new PlatformManager().IsWindows())
+            if (new OSAnalyzer().IsWindows())
             {
-                try{
-                    processManager.RunProcessWindows("powershell",
+                try
+                {
+                    processManager.RunPowerShellCommand(
                         "/c Get-WmiObject -query 'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
 
                     TextReader reader = Console.In;
                 
-                    string result = reader.ReadLine()?.Replace(wmiClass, "").Replace(" ", "");
+                    string result = reader.ReadLine()?.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
                 
                     reader.Close();
                     return result;
