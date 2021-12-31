@@ -30,7 +30,6 @@ using AluminiumTech.DevKit.PlatformKit;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 
             var platform = new PlatformManager();
-            var processManager = new ProcessManager();
             var versionAnalyzer = new OSVersionAnalyzer();
             var runtimeIdentification = new RuntimeIdentification();
 
@@ -52,14 +51,6 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
-
-            //  processManager.SuspendProcess("Spotify");
-
-            //  Console.WriteLine("Start suspending...");
-
-            // PerformanceCounter
-
-            //   processManager.ResumeProcess("Spotify");
 
             //  Console.WriteLine("Start resuming...");
 
