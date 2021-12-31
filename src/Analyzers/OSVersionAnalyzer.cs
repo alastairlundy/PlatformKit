@@ -24,17 +24,18 @@ SOFTWARE.
 using System;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
     // ReSharper disable once InconsistentNaming
     public class OSVersionAnalyzer
     {
-        protected PlatformManager _platformManager;
-
+        protected OSAnalyzer _osAnalyzer;
+        
         public OSVersionAnalyzer()
         {
-            _platformManager = new PlatformManager();
+            _osAnalyzer = new OSAnalyzer();
         }
 
         /// <summary>
@@ -53,21 +54,21 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         {
             try
             {
-                if (_platformManager.IsWindows())
+                if (_osAnalyzer.IsWindows())
                 {
                     return this.DetectWindowsVersion();
                 }
-                if (_platformManager.IsLinux())
+                if (_osAnalyzer.IsLinux())
                 {   
                     return this.DetectLinuxDistributionVersion();
                 }
-                if (_platformManager.IsMac())
+                if (_osAnalyzer.IsMac())
                 {
                     throw new NotImplementedException();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platformManager.IsFreeBSD())
+                if (_osAnalyzer.IsFreeBSD())
                 {
                     throw new NotImplementedException();
                 }
