@@ -23,7 +23,7 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 public static class LinuxVersionAnalyzer
 {
@@ -35,7 +35,7 @@ public static class LinuxVersionAnalyzer
         /// <returns></returns>
         public static Version DetectLinuxDistributionVersion(this OSVersionAnalyzer osVersionAnalyzer)
         {
-            if (new PlatformManager().IsLinux())
+            if (new OSAnalyzer().IsLinux())
             {
                 var dotCounter = 0;
 
@@ -73,7 +73,7 @@ public static class LinuxVersionAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public static string DetectLinuxDistributionVersionAsString(this OSVersionAnalyzer osVersionAnalyzer)
         {
-            if (new PlatformManager().IsLinux())
+            if (new OSAnalyzer().IsLinux())
             {
                 var osAnalyzer = new OSAnalyzer();
 
@@ -111,7 +111,7 @@ public static class LinuxVersionAnalyzer
         /// </exception>
         public static Version DetectLinuxKernelVersion(this OSVersionAnalyzer osVersionAnalyzer)
         {
-            if (new PlatformManager().IsLinux())
+            if (new OSAnalyzer().IsLinux())
             {
                 var description = Environment.OSVersion.ToString();
                 description = description.Replace("Unix ", string.Empty);

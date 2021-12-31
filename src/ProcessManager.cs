@@ -1,4 +1,4 @@
-﻿/* MIT License
+/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -26,6 +26,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
+using AluminiumTech.DevKit.PlatformKit.Analyzers;
+
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
@@ -37,11 +39,11 @@ namespace AluminiumTech.DevKit.PlatformKit
     public class ProcessManager
     {
         // ReSharper disable once InconsistentNaming
-        protected readonly PlatformManager _platformManager;
+        protected readonly OSAnalyzer _osAnalyzer;
 
         public ProcessManager()
         {
-            _platformManager = new PlatformManager();
+            _osAnalyzer = new OSAnalyzer();
         }
 
         /// <summary>
@@ -167,9 +169,9 @@ namespace AluminiumTech.DevKit.PlatformKit
 
         public string RunCommand(string command)
         {
-            if (_platformManager.IsWindows()) return RunCmdCommand(command);
-            if (_platformManager.IsLinux()) return RunCommandLinux(command);
-            if (_platformManager.IsMac()) return RunCommandMac(command);
+            if (_osAnalyzer.IsWindows()) return RunCmdCommand(command);
+            if (_osAnalyzer.IsLinux()) return RunCommandLinux(command);
+         //   if (_osAnalyzer.IsMac()) return RunCommandMac(command);
 
             throw new PlatformNotSupportedException();
         }
@@ -191,7 +193,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <returns></returns>
         public string RunPowerShellCommand(string command)
         {
-            if (_platformManager.IsWindows())
+            if (_osAnalyzer.IsWindows())
             {
                 var location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
@@ -269,29 +271,29 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             try
             {
-                if (_platformManager.IsWindows() && windowsMethod != null)
+                if (_osAnalyzer.IsWindows() && windowsMethod != null)
                 {
                     windowsMethod.Invoke();
                 }
 
-                if (_platformManager.IsLinux() && linuxMethod != null)
+                if (_osAnalyzer.IsLinux() && linuxMethod != null)
                 {
                     linuxMethod.Invoke();
                 }
-                if (_platformManager.IsMac() && macMethod != null)
+                if (_osAnalyzer.IsMac() && macMethod != null)
                 {
                     macMethod.Invoke();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (_platformManager.IsFreeBSD() && freeBsdMethod != null)
+                if (_osAnalyzer.IsFreeBSD() && freeBsdMethod != null)
                 {
                     freeBsdMethod.Invoke();
                 }
 #endif
-                if (_platformManager.IsMac() && macMethod == null ||
-                    _platformManager.IsLinux() && linuxMethod == null ||
-                    _platformManager.IsWindows() && windowsMethod == null)
+                if (_osAnalyzer.IsMac() && macMethod == null ||
+                    _osAnalyzer.IsLinux() && linuxMethod == null ||
+                    _osAnalyzer.IsWindows() && windowsMethod == null)
                 {
                     throw new ArgumentNullException();
                 }
@@ -322,7 +324,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     url = url.Replace("http://", "https://");
                 }
 
-                if (_platformManager.IsWindows())
+                if (_osAnalyzer.IsWindows())
                 {
                     var task = new Task(() =>
                         Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
@@ -331,7 +333,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     return true;
                 }
 
-                if (_platformManager.IsLinux())
+                if (_osAnalyzer.IsLinux())
                 {
                     var task = new Task(() =>
                         Process.Start("xdg-open", url));
@@ -339,7 +341,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                     return true;
                 }
 
-                if (_platformManager.IsMac())
+                if (_osAnalyzer.IsMac())
                 {
                     var task = new Task(() =>
                         Process.Start("open", url));

@@ -26,7 +26,7 @@ using System;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 // ReSharper disable once InconsistentNaming
 public static class MacOSVersionAnalyzer
@@ -43,7 +43,7 @@ public static class MacOSVersionAnalyzer
         {
             try
             {
-                if (new PlatformManager().IsMac())
+                if (new OSAnalyzer().IsMac())
                 {
                     if (input.Major == 10)
                     {
