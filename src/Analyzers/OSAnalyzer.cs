@@ -31,13 +31,76 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
     public class OSAnalyzer
     {
-        protected PlatformManager _platformManager;
-
         public OSAnalyzer()
         {
-            _platformManager = new PlatformManager();
+   
         }
 
+                /// <summary>
+        /// Returns whether or not the current OS is Windows.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsWindows()
+        {
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+        }
+
+        /// <summary>
+        /// Returns whether or not the current OS is macOS.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsMac()
+        {
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+        }
+        
+        /// <summary>
+        /// Returns whether or not the current OS is Linux based.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsLinux()
+        {
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+        }
+
+        // ReSharper disable once InconsistentNaming
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
+        public bool IsFreeBSD()
+        {
+#if NETCOREAPP3_0_OR_GREATER
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+        
+        /// <summary>
+        /// Determine what OS is being run
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
+        // ReSharper disable once InconsistentNaming
+        public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
+            System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
+            // Check if it's windows
+            osPlatform = IsWindows() ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
+            // Check if it's osx
+            osPlatform = IsMac() ? System.Runtime.InteropServices.OSPlatform.OSX : osPlatform;
+            // Check if it's Linux
+            osPlatform = IsLinux() ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
+            
+#if NETCOREAPP3_0_OR_GREATER
+            // Check if it's FreeBSD
+            osPlatform = IsFreeBSD() ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
+#endif
+
+            return osPlatform;
+        }
+        
         /// <summary>
         /// Detects Linux Distribution information and returns it.
         /// </summary>
@@ -50,7 +113,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (_platformManager.IsLinux())
+            if (IsLinux())
             {
                 var procManager = new ProcessManager();
                 var result = procManager.RunCommandLinux("cat /etc/os-release");

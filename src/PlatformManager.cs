@@ -27,6 +27,11 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
+using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+
+using AluminiumTech.DevKit.PlatformKit.Deprecation;
+
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
 namespace AluminiumTech.DevKit.PlatformKit
@@ -36,118 +41,55 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// </summary>
     public class PlatformManager
     {
+        protected OSAnalyzer _osAnalyzer;
         
         public PlatformManager()
         {
-            
+            _osAnalyzer = new OSAnalyzer();
         }
 
-        /// <summary>
-        /// Returns whether or not the current OS is macOS.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsMac()
-        {
-           return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
-        }
-        
-        /// <summary>
-        /// Returns whether or not the current OS is macOS and if the processor is AppleSilicon based.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsAppleSiliconMac()
-        {
-            return GetMacProcessorType() == MacProcessorType.AppleSilicon;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
-        public MacProcessorType GetMacProcessorType()
-        {
-            try
-            {
-                if (IsMac())
-                {
-                     switch (System.Runtime.InteropServices.RuntimeInformation.OSArchitecture)
-                    {
-                        case Architecture.Arm64:
-                            return MacProcessorType.AppleSilicon;
-                        case Architecture.X64:
-                            return MacProcessorType.Intel;
-                        default:
-                            return MacProcessorType.NotDetected;
-                    }
-                }
-
-                throw new PlatformNotSupportedException();
-            }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw new Exception(exception.ToString());
-            }
-        } 
-
-        /// <summary>
-        /// Returns whether or not the current OS is Windows.
-        /// </summary>
-        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's IsWindows() method instead.")]
         public bool IsWindows()
         {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-        }
-
-        /// <summary>
-        /// Returns whether or not the current OS is Linux based.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsLinux()
-        {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
-        }
-
-        // ReSharper disable once InconsistentNaming
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
-        public bool IsFreeBSD()
-        {
-#if NETCOREAPP3_0_OR_GREATER
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-#else
-            throw new PlatformNotSupportedException();
-#endif
+            return _osAnalyzer.IsWindows();
         }
         
-        /// <summary>
-        /// Determine what OS is being run
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once UnusedMember.Global
-        // ReSharper disable once InconsistentNaming
-        public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
-            System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
-            // Check if it's windows
-            osPlatform = IsWindows() ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
-            // Check if it's osx
-            osPlatform = IsMac() ? System.Runtime.InteropServices.OSPlatform.OSX : osPlatform;
-            // Check if it's Linux
-            osPlatform = IsLinux() ? System.Runtime.InteropServices.OSPlatform.Linux : osPlatform;
-            
-#if NETCOREAPP3_0_OR_GREATER
-            // Check if it's FreeBSD
-            osPlatform = IsFreeBSD() ? System.Runtime.InteropServices.OSPlatform.FreeBSD : osPlatform;
-#endif
-
-            return osPlatform;
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's IsLinux() method instead.")]
+        public bool IsLinux()
+        {
+            return _osAnalyzer.IsLinux();
+        }
+        
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's IsMac() method instead.")]
+        public bool IsMac()
+        {
+            return _osAnalyzer.IsMac();
         }
 
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's GetOSPlatform() method instead.")]
+        public OSPlatform GetOSPlatform()
+        {
+            return _osAnalyzer.GetOSPlatform();
+        }
+        
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's IsFreeBSD() method instead.")]
+        public bool IsFreeBSD()
+        {
+            return _osAnalyzer.IsFreeBSD();
+        }
+
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's IsAppleSiliconMac() method instead.")]
+        public bool IsAppleSiliconMac()
+        {
+            return _osAnalyzer.IsAppleSiliconMac();
+        }
+
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use OSAnalyzer's GetMacProcessorType() method instead.")]
+        public MacProcessorType GetMacProcessorType()
+        {
+            return _osAnalyzer.GetMacProcessorType();
+        }
+        
         /// <summary>
         /// Return's the executing app's assembly.
         /// </summary>
