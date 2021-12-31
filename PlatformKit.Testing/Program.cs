@@ -18,13 +18,21 @@ namespace PlatformKit.Testing
             Console.WriteLine("WindowsEnum: " + versionAnalyzer.GetWindowsVersionToEnum());
             Console.WriteLine("Framework: " + System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription);
 
-            
             var result = 0;
             var addition = new Action(()=> result = 30 + 10);
-            processManager.RunActionOn(addition);
-            Console.WriteLine("Result of 30 + 10 is: " + result + " which is being stored in " + nameof(result));
             
-            processManager.RunProcessWindows("cmd.exe ", "ping duckduckgo.com");
+            Console.WriteLine("Result of 30 + 10 is: " + result + " which is being stored in " + nameof(result));
+
+            if (platform.IsLinux())
+            {
+                processManager.RunActionOn(null, null, addition, null);  
+            }
+            else if (platform.IsWindows())
+            {
+                processManager.RunActionOn(addition, null, null, null);
+             
+                processManager.RunProcessWindows("cmd.exe ", "ping duckduckgo.com");
+            }
         }
     }
 }
