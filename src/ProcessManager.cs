@@ -204,17 +204,17 @@ namespace AluminiumTech.DevKit.PlatformKit
             throw new PlatformNotSupportedException();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        public string RunCommandMac(string command)
+        /* <summary>
+        / 
+         </summary>
+         <param name="command"></param>
+         <returns></returns>
+        internal string RunCommandMac(string command)
         {
-            if (_platformManager.IsMac())
+            if (_osAnalyzer.IsMac())
             {
-                var processName = "zsh";
-                var location = "/usr/bin/";
+      //          var processName = "zsh";
+      //          var location = "/usr/bin/";
 
                 var processArguments = "-c \" " + command + " \"";
 
