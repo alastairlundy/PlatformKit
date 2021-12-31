@@ -50,7 +50,9 @@ public static class WindowsProcessManagerExtensions
                     
                     if (result != null)
                     {
-                        result = result.Replace(value, String.Empty).Replace("REG_SZ", String.Empty).Replace(" ", String.Empty);
+                        result = result.Replace(value, String.Empty)
+                            .Replace("REG_SZ", String.Empty)
+                            .Replace(" ", String.Empty);
                         return result;
                     }
                 }
