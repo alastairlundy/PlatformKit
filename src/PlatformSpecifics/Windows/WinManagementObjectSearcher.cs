@@ -47,17 +47,16 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
             {
                 if (platform.IsWindows())
                 {
-                    processManager.RunProcessWindows("powershell.exe",
-                        "/c Get-WmiObject -Class " + wmiClass + " | Select-Object *");
+                    var output = processManager.RunPowerShellCommand("/c Get-WmiObject -Class " + wmiClass + " | Select-Object *");
 
-                    TextReader reader = Console.In;
-                    string result = reader.ReadLine()?.Replace(wmiClass, "");
+                    
+                    string result = output.Replace(wmiClass, string.Empty);
 
                     foreach (string query in queryObjectsList)
                     {
                         if (result != null && query.Contains(result))
                         {
-                            var value = result.Replace(query + "                         : ", "");
+                            var value = result.Replace(query + "                         : ", string.Empty);
                             queryObjectsDictionary.Add(query, value);
                         }
                         else if (result == null)
@@ -65,9 +64,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
                             throw new ArgumentNullException();
                         }
                     }
-
-                    reader.Close();
-
+                    
                     return queryObjectsDictionary;
                 }
                 else
