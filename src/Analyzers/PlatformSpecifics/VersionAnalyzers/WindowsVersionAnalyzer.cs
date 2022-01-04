@@ -27,6 +27,7 @@ using System.Runtime.Versioning;
 
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 

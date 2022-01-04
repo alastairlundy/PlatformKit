@@ -33,6 +33,7 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {
