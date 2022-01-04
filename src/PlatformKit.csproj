@@ -17,20 +17,10 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.3 series
-
-### Additions
-* Added the ability to get information from WMI using the ``GetWMIValue(string query, string wmiClass, string failMessage)`` method in the new WindowsProcessManager class - This class is aimed to holding Windows specific extension methods for ProcessManager.
-* Added the ability to get Registry ``GetRegistryValue(string query, string value, string failMessage)`` method in the new WindowsProcessManager class.
-
-### Deprecations
-* Deprecated ``IsWindows()``, ``IsMac()``, ``IsLinux()``, ``GetOSPlatform()`` methods in the PlatformManager class - These have been moved to OSAnalyzer but will continue to exist in the PlatformManager class until it is removed PlatformKit version 3.0
-* Deprecated ``IsAppleSiliconMac()`` and ``GetMacProcessorType()`` methods in the PlatformManager class - These have been moved to OSAnalyzer but will continue to exist in the PlatformManager class until it is removed in PlatformKit version 3.0.
-
-### Modifications
-* Revamped the ``RunLinuxCommand()`` method to not rely on or use Bash.
-* Cleaned up code in some classes and methods
-* The ``RunMacCommand()`` method is temporarily disabled and will be re-enabled in a future version once this method has been reworked.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.4.0 Alpha 1
+* Minor Tweaks to ``OpenUrlInBrowser()`` method on Windows
+* Add optional parameter of ProcessStartInfo to ``RunCommand()`` and ``RunProcess()`` methods
+* Change exception type if Directory is not found.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -40,7 +30,7 @@
         <AssemblyVersion>2.4.0.0</AssemblyVersion>
         <FileVersion>2.4.0.0</FileVersion>
         <Version>2.4.0.0</Version>
-        <PackageVersion>2.4.0-alpha.1</PackageVersion>
+        <PackageVersion>2.4.0-alpha.2</PackageVersion>
 
     </PropertyGroup>
 
