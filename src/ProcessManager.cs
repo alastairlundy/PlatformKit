@@ -1,4 +1,4 @@
-/* MIT License
+﻿/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -388,13 +388,11 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 if (_osAnalyzer.IsWindows())
                 {
-                    var task = new Task(() =>
-                        Process.Start(new ProcessStartInfo("cmd", $"/c start {url.Replace("&", "^&")}")
-                            { CreateNoWindow = true }));
-                    task.Start();
+                    var procStartInfo = new ProcessStartInfo { CreateNoWindow = true};
+                    
+                    RunCmdCommand($"/c start {url.Replace("&", "^&")}", procStartInfo);
                     return true;
                 }
-
                 if (_osAnalyzer.IsLinux())
                 {
                     var task = new Task(() =>
@@ -402,7 +400,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                     task.Start();
                     return true;
                 }
-
                 if (_osAnalyzer.IsMac())
                 {
                     var task = new Task(() =>
@@ -410,6 +407,12 @@ namespace AluminiumTech.DevKit.PlatformKit
                     task.Start();
                     return true;
                 }
+#if  NETCOREAPP3_1_OR_GREATER
+                if (_osAnalyzer.IsFreeBSD())
+                {
+                    throw new NotImplementedException();
+                }          
+#endif
 
                 return false;
             }
