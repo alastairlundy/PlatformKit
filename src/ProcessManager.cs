@@ -70,31 +70,44 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         /// <param name="windowStyle">Whether to open the window in full screen mode, normal size, minimized, or a different window mode.</param>
         /// <exception cref="Exception"></exception>
-        public string RunProcessWindows(string executableLocation, string executableName, string arguments = "",
+        public string RunProcessWindows(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null,
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
             try
             {
-                // ReSharper disable once HeapView.ObjectAllocation.Evident
-                var process = new Process();
-
-                process.StartInfo.FileName = executableName;
-
-                if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
+                Process process;
+            
+                if (processStartInfo != null)
                 {
-                    process.StartInfo.FileName += ".exe";
+                    processStartInfo.WorkingDirectory = executableLocation;
+                    processStartInfo.FileName = executableName;
+                    processStartInfo.Arguments = arguments;
+                    processStartInfo.RedirectStandardOutput = true;
+                    process = new Process { StartInfo = processStartInfo};
+                }
+                else
+                {
+                    process = new Process();
+                    
+                    process.StartInfo.FileName = executableName;
+
+                    if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
+                    {
+                        process.StartInfo.FileName += ".exe";
+                    }
+
+                    process.StartInfo.WorkingDirectory = executableLocation;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.Arguments = arguments;
+                    process.StartInfo.WindowStyle = windowStyle;
                 }
 
                 if (runAsAdministrator)
                 {
                     process.StartInfo.Verb = "runas";
                 }
-
-                process.StartInfo.WorkingDirectory = executableLocation;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.Arguments = arguments;
-                process.StartInfo.WindowStyle = windowStyle;
+                
                 process.Start();
 
                 process.WaitForExit();
@@ -113,7 +126,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
-        public string RunProcessMac(string executableLocation, string executableName, string arguments = "")
+        public string RunProcessMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             var procStartInfo = new ProcessStartInfo
             {
@@ -125,7 +138,22 @@ namespace AluminiumTech.DevKit.PlatformKit
                 Arguments = arguments
             };
 
-            var process = new Process { StartInfo = procStartInfo };
+            Process process;
+            
+            if (processStartInfo == null)
+            {
+                process = new Process { StartInfo = procStartInfo };
+            }
+            else
+            {
+                procStartInfo = processStartInfo;
+                procStartInfo.WorkingDirectory = executableLocation;
+                procStartInfo.FileName = executableName;
+                procStartInfo.Arguments = arguments;
+                procStartInfo.RedirectStandardOutput = true;
+                process = new Process { StartInfo = processStartInfo};
+            }
+            
             process.Start();
 
             process.WaitForExit();
@@ -137,29 +165,36 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
-        /// <param name="processArguments">Arguments to be passed to the executable.</param>
+        /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string RunProcessLinux(string executableLocation, string executableName, string processArguments = "")
+        public string RunProcessLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             try
             {
-                var procStartInfo = new ProcessStartInfo
+                ProcessStartInfo procStartInfo;
+                
+                if (processStartInfo == null)
                 {
-                    WorkingDirectory = executableLocation,
-                    FileName = executableName,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = false,
-                    Arguments = processArguments
-                };
-
-               /* if (executableName.ToLower().StartsWith("/usr/bin/"))
-                {
-                    procStartInfo.WorkingDirectory = "/usr/bin/";
-                    procStartInfo.FileName = executableName.Replace("/usr/bin/", string.Empty);
+                     procStartInfo = new ProcessStartInfo
+                    {
+                        WorkingDirectory = executableLocation,
+                        FileName = executableName,
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = false,
+                        Arguments = arguments
+                    };
                 }
-*/
+                else
+                {
+                    procStartInfo = processStartInfo;
+                    procStartInfo.WorkingDirectory = executableLocation;
+                    procStartInfo.FileName = executableName;
+                    procStartInfo.Arguments = arguments;
+                    procStartInfo.RedirectStandardOutput = true;
+                }
+                
                 var process = new Process { StartInfo = procStartInfo };
                 process.Start();
 
@@ -172,38 +207,45 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new Exception(ex.ToString());
             }
         }
-
-        public string RunCommand(string command)
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="processStartInfo"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public string RunCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            if (_osAnalyzer.IsWindows()) return RunCmdCommand(command);
-            if (_osAnalyzer.IsLinux()) return RunCommandLinux(command);
-         //   if (_osAnalyzer.IsMac()) return RunCommandMac(command);
+            if (_osAnalyzer.IsWindows()) return RunCmdCommand(command, processStartInfo);
+            if (_osAnalyzer.IsLinux()) return RunCommandLinux(command, processStartInfo);
+         //   if (_osAnalyzer.IsMac()) return RunCommandMac(command, processStartInfo);
 
             throw new PlatformNotSupportedException();
         }
 
         /// <summary>
-        /// 
+        /// Runs commands in the Windows Cmd Command Prompt.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        public string RunCmdCommand(string command)
+        public string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            return RunProcessWindows(Environment.SystemDirectory, "cmd", command);
+            return RunProcessWindows(Environment.SystemDirectory, "cmd", command, processStartInfo);
         }
 
         /// <summary>
-        /// Runs commands in Windows Powershell
+        /// Runs commands in Windows Powershell.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        public string RunPowerShellCommand(string command)
+        public string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null)
         {
             if (_osAnalyzer.IsWindows())
             {
                 var location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
-                return RunProcessWindows(location, "powershell", command);
+                return RunProcessWindows(location, "powershell", command, processStartInfo);
    
             }
                 
@@ -237,7 +279,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="command"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public string RunCommandLinux(string command)
+        public string RunCommandLinux(string command, ProcessStartInfo processStartInfo = null)
         {
             try
             {
