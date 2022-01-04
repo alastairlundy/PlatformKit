@@ -51,12 +51,13 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
-        /// <param name="processArguments">Arguments to be passed to the executable.</param>
-        public string RunProcess(string executableLocation, string executableName, string arguments = "")
+        /// <param name="processArguments">(Optional) Arguments to be passed to the executable.</param>
+        /// <param name="processStartInfo">(Optional) Process Start Information to be passed to the executable. This may have the unintended effect of overriding other optional or non-optional arguments.</param>
+        public string RunProcess(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            if (_osAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments);
-            if (_osAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments);
-            if (_osAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments);
+            if (_osAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
+            if (_osAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
+            if (_osAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
             if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
             
             throw new PlatformNotSupportedException();
