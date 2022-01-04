@@ -1,4 +1,4 @@
-﻿/* MIT License
+/* MIT License
 
 Copyright (c) 2018-2021 AluminiumTech
 
@@ -259,10 +259,10 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                     if (!Directory.Exists(location))
                     {
-                        throw new ArgumentException("Cannot execute a command if there is no command to execute.");
+                        throw new DirectoryNotFoundException("Could not find directory '" + nameof(location) + "' with value: " + location);
                     }
                     
-                    return RunProcessLinux(location, command, processArguments);
+                    return RunProcessLinux(location, command, processArguments, processStartInfo);
                 }
 
                 throw new PlatformNotSupportedException();
