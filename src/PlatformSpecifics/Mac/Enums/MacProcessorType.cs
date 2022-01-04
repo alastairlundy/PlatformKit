@@ -23,12 +23,10 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Enums
 {
     public enum MacProcessorType
     {
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV2_5)]
-        PowerPC,
         Intel,
         AppleSilicon,
         NotDetected,
