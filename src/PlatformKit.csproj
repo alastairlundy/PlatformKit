@@ -23,8 +23,7 @@
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
     <PackageReleaseNotes>### Changes since 2.0.1
-Changes since 2.2.2
-Fixed an issue with PlatformManager's ShowLicenseInConsole() method not clearing after the specified time.
+* Fixed an issue with PlatformManager's ShowLicenseInConsole() method not clearing after the specified time.
 * Final release for 2.0 series - Please migrate to the latest 2.x series to continue to receive updates.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>8</LangVersion>
