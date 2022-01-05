@@ -1,6 +1,9 @@
-# Security Policy
+# Security and Support Policies
 
 ## Supported Versions
+Starting from January 2022 onwards, support for new and old releases has been reduced. 
+
+The support policy now will be to support the latest 2 minor releases on a major version if both are on the same major version and to support only the latest minor release per version if multiple major versions are supported.
 
 ### Currently Supported Versions
 Versions currently supported by Security Fixes.
@@ -8,7 +11,7 @@ Versions currently supported by Security Fixes.
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes and Security Fixes |
 |--| --|--|--|
 | 2.3 series | 2.3.0, released on December 15th 2021 | 2.3.2, released on January 5th 2022 | :white_check_mark:, ending June 15th 2022 | 
-| 2.2 series | 2.2.0, released on November 22nd 2021 | 2.2.3, released on January 5th 2022 | :white_check_mark:, ending May 22nd 2022 |
+| 2.2 series | 2.2.0, released on November 22nd 2021 | 2.2.3, released on January 5th 2022 | Until 2.4.0 is released |
 
 
 ### Previously Supported Versions
