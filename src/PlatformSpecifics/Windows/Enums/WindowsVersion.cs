@@ -25,7 +25,7 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows.Enums
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     public enum WindowsVersion
     {

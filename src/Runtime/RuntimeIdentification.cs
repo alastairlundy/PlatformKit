@@ -31,7 +31,6 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyz
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows.Enums;
 
 // ReSharper disable InconsistentNaming
 
