@@ -373,15 +373,22 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public bool OpenUrlInBrowser(string url)
+        public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
             try
             {
                 if (!url.StartsWith("https://") || !url.StartsWith("www."))
                 {
-                    url = "https://" + url;
+                    if (allowNonSecureHttp)
+                    {
+                        url = "http://" + url;
+                    }
+                    else
+                    {
+                        url = "https://" + url;
+                    }
                 }
-                else if (url.StartsWith("http://"))
+                else if (url.StartsWith("http://") && !allowNonSecureHttp)
                 {
                     url = url.Replace("http://", "https://");
                 }
