@@ -25,7 +25,6 @@ using System;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
 {
