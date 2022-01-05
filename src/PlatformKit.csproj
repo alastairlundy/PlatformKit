@@ -17,8 +17,9 @@
     <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
     <PackageTags>platform detection, CSharp, </PackageTags>
     <Title>PlatformKit</Title>
-    <PackageReleaseNotes>### Changes
-* Fixed an issue with detecting Windows OS versions.</PackageReleaseNotes>
+    <PackageReleaseNotes>### Changes since 2.1.1
+* Fixed an issue with PlatformManager's ShowLicenseInConsole() method not clearing after the specified time.
+* Final release for 2.1 series - Please migrate to the latest 2.x series to continue to receive updates.</PackageReleaseNotes>
     <Product>PlatformKit</Product>
     <LangVersion>default</LangVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +29,7 @@
     <AssemblyVersion>2.1.1.0</AssemblyVersion>
     <FileVersion>2.1.1.0</FileVersion>
     <Version>2.1.1.0</Version>
-    <PackageVersion>2.1.1</PackageVersion>
+    <PackageVersion>2.1.2</PackageVersion>
 
   </PropertyGroup>
 

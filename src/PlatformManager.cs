@@ -164,6 +164,8 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 licenseWatch.Stop();
                 licenseWatch.Reset();
+                
+                Console.Clear();
             }
             catch (Exception exception){
                 Console.WriteLine(exception.ToString());
