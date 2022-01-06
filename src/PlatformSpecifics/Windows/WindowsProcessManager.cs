@@ -39,14 +39,11 @@ public static class WindowsProcessManagerExtensions
     /// <param name="failMessage"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
-    public static string GetRegistryValue(this ProcessManager processManager, string query, string value, string failMessage){
+    public static string GetWindowsRegistryValue(this ProcessManager processManager, string query, string value, string failMessage){
             if (new OSAnalyzer().IsWindows())
             {
                 try{
-                    processManager.RunCmdCommand("/c REG QUERY " + query + " /v " + value);
-
-                    TextReader reader = Console.In;
-                    string result = reader.ReadLine();
+                    var result = processManager.RunCmdCommand("/c REG QUERY " + query + " /v " + value);
                     
                     if (result != null)
                     {
