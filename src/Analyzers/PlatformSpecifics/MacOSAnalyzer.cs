@@ -36,7 +36,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
     public static class MacOSAnalyzer
     {
         /// <summary>
-        /// Returns whether or not the current OS is macOS and if the processor is AppleSilicon based.
+        /// Returns whether or not a Mac is Apple Silicon based.
         /// </summary>
         /// <returns></returns>
         public static bool IsAppleSiliconMac(this OSAnalyzer osAnalyzer)
@@ -45,7 +45,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
         }
 
         /// <summary>
-        /// 
+        /// Gets the type of Processor in a given Mac returned as the MacProcessorType
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
