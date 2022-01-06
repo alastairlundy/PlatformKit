@@ -159,8 +159,8 @@ namespace AluminiumTech.DevKit.PlatformKit
                     Console.WriteLine(line);
                 }
                 
-                Console.WriteLine("                                                         ");
-                Console.WriteLine("                                                         ");
+                Console.WriteLine("\r\n");
+                Console.WriteLine("\r\n");
 
                 licenseWatch.Start();
 
