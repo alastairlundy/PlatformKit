@@ -76,14 +76,10 @@ public static class WindowsProcessManagerExtensions
             {
                 try
                 {
-                    processManager.RunPowerShellCommand(
-                        "/c Get-WmiObject -query 'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
+                    var result = processManager.RunPowerShellCommand($"/c Get-WmiObject -" + query + "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
 
-                    TextReader reader = Console.In;
-                
-                    string result = reader.ReadLine()?.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
-                
-                    reader.Close();
+                    result = result.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
+                    
                     return result;
                 }
                 catch{
