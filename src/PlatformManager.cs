@@ -96,6 +96,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <returns></returns>
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once MemberCanBeMadeStatic.Global
+        [Obsolete(DeprecationMessages.DeprecationV3 + ". Please use the PlatformIdentification method instead.")]
         public Assembly GetAssembly()
         {
             return Assembly.GetEntryAssembly();
@@ -106,6 +107,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
+        [Obsolete(DeprecationMessages.DeprecationV3 + ". Please use the PlatformIdentification method instead.")]
         public string GetAppName()
         {
             return GetAssembly().GetName().Name;
@@ -116,6 +118,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
+        [Obsolete(DeprecationMessages.DeprecationV3 + ". Please use the PlatformIdentification method instead.")]
         public Version GetAppVersion()
         {
             return GetAssembly().GetName().Version;
