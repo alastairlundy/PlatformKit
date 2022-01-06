@@ -23,6 +23,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
@@ -235,6 +236,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
 
             return osVersion;
         }
+
 
         /// <summary>
         /// 

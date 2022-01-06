@@ -31,7 +31,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 public static class WindowsProcessManagerExtensions
 {
     /// <summary>
-    /// 
+    ///  Gets the value of a registry key in the Windows registry.
     /// </summary>
     /// <param name="processManager"></param>
     /// <param name="query"></param>
