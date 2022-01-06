@@ -29,7 +29,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
     public class WinManagementObjectSearcher : IWinManagementObjectSearcher
     {
-        protected AluminiumTech.DevKit.PlatformKit.PlatformManager platform;
+        protected AluminiumTech.DevKit.PlatformKit.Analyzers.OSAnalyzer osAnalyzer;
         protected AluminiumTech.DevKit.PlatformKit.ProcessManager processManager;
 
         /// <summary>
@@ -45,23 +45,23 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
             
             try
             {
-                if (platform.IsWindows())
+                if (osAnalyzer.IsWindows())
                 {
                     var output = processManager.RunPowerShellCommand("/c Get-WmiObject -Class " + wmiClass + " | Select-Object *");
 
-                    
-                    string result = output.Replace(wmiClass, string.Empty);
+                    output = output.Replace(wmiClass, string.Empty);
 
+                    if (output == null)
+                    {
+                        throw new ArgumentNullException();
+                    }
+                    
                     foreach (string query in queryObjectsList)
                     {
-                        if (result != null && query.Contains(result))
+                        if (query.Contains(output))
                         {
-                            var value = result.Replace(query + "                         : ", string.Empty);
+                            var value = output.Replace(query + "                         : ", string.Empty);
                             queryObjectsDictionary.Add(query, value);
-                        }
-                        else if (result == null)
-                        {
-                            throw new ArgumentNullException();
                         }
                     }
                     
@@ -76,7 +76,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
             {
                 Console.WriteLine(ex);
 
-                return queryObjectsDictionary;
+                throw new Exception(ex.ToString());
             }
         }
     }
