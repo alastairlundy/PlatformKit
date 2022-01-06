@@ -125,11 +125,30 @@ namespace AluminiumTech.DevKit.PlatformKit
         ///     Displays license information in the Console from a Text File.
         ///     The information stays in the Console window for the the duration specified in the parameter.
         /// </summary>
+        /// <param name="pathToTextFile"></param>
+        /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 100 will result in an exception being thrown.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Is thrown when the duration milliseconds is less than 100 milliseconds.</exception>
         // ReSharper disable once UnusedMember.Global
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
         {
             try
             {
+                if (durationMilliSeconds is 0 or < 100)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                
+                bool isMarkDownFile = pathToTextFile.ToLower().EndsWith(".md");
+                
+                var oldPath = pathToTextFile;
+                
+                if (isMarkDownFile)
+                {
+                    pathToTextFile = pathToTextFile.Replace(".md", ".txt");
+                    
+                    File.Move(oldPath, pathToTextFile);
+                }
+
                 // ReSharper disable once HeapView.ObjectAllocation.Evident
                 var licenseWatch = new Stopwatch();
 
@@ -152,6 +171,11 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 licenseWatch.Stop();
                 licenseWatch.Reset();
+
+                if (isMarkDownFile)
+                {
+                    File.Move(pathToTextFile, oldPath);
+                }
                 
                 Console.Clear();
             }
