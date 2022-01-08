@@ -18,10 +18,13 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes since 2.4.0 Alpha 3
-* Removed deprecated code in ``MacProcessorType`` enum
-* Migrate WMI to ``RunPowerShellCommand()`` method calls
-* Allow non HTTPS links to be opened in the ``OpenUrlInBrowser()`` method
-* Fix issues with ``ShowLicenseInConsole()`` method</PackageReleaseNotes>
+* Added the ability to read markdown files in ``ShowLicenseInConsole()`` method
+* Cleaned up the code getting Windows Registry information
+* Rename method for getting Windows Registry information
+* Fixed an issue with getting WMI information
+* Deprecate some methods in PlatformManager
+* Minor tweaks to in code comments
+* Cleaned up some code</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,7 +34,7 @@
         <AssemblyVersion>2.4.0.0</AssemblyVersion>
         <FileVersion>2.4.0.0</FileVersion>
         <Version>2.4.0.0</Version>
-        <PackageVersion>2.4.0-alpha.3</PackageVersion>
+        <PackageVersion>2.4.0-alpha.4</PackageVersion>
 
     </PropertyGroup>
 
