@@ -56,9 +56,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
 
         protected string GetArchitectureString()
         {
-            string cpuArch = null;
-
-            cpuArch = RuntimeInformation.OSArchitecture switch
+            string cpuArch = RuntimeInformation.OSArchitecture switch
             {
                 Architecture.X64 => "x64",
                 Architecture.X86 => "x86",
