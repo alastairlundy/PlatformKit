@@ -140,18 +140,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                
-             //   bool isMarkDownFile = pathToTextFile.ToLower().EndsWith(".md");
-                
-                var oldPath = pathToTextFile;
-                
-               /* if (isMarkDownFile)
-                {
-                    pathToTextFile = pathToTextFile.Replace(".md", ".txt");
-                    
-                    File.Move(oldPath, pathToTextFile);
-                }
-                */
 
                 // ReSharper disable once HeapView.ObjectAllocation.Evident
                 var licenseWatch = new Stopwatch();
@@ -175,12 +163,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 licenseWatch.Stop();
                 licenseWatch.Reset();
-
-              /*  if (isMarkDownFile)
-                {
-                    File.Move(pathToTextFile, oldPath);
-                }
-                */
+                
                 Console.Clear();
             }
             catch (Exception exception)
