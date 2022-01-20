@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Authors>AluminiumTech</Authors>
         <Company />
         <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
-        <Copyright>Copyright (c) AluminiumTech 2018-2021</Copyright>
+        <Copyright>Copyright (c) AluminiumTech 2018-2022</Copyright>
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
