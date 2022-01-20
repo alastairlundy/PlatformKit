@@ -129,14 +129,14 @@ namespace AluminiumTech.DevKit.PlatformKit
         ///     The information stays in the Console window for the the duration specified in the parameter.
         /// </summary>
         /// <param name="pathToTextFile"></param>
-        /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 100 will result in an exception being thrown.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Is thrown when the duration milliseconds is less than 100 milliseconds.</exception>
+        /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 500 will result in an exception being thrown.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Is thrown when the duration milliseconds is less than 500 milliseconds.</exception>
         // ReSharper disable once UnusedMember.Global
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
         {
             try
             {
-                if (durationMilliSeconds is 0 or < 100)
+                if (durationMilliSeconds is 0 or < 500)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
