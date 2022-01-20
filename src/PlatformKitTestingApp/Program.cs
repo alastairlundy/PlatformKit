@@ -75,3 +75,5 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
+            
+            Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);

@@ -36,7 +36,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
    
         }
 
-                /// <summary>
+        /// <summary>
         /// Returns whether or not the current OS is Windows.
         /// </summary>
         /// <returns></returns>
