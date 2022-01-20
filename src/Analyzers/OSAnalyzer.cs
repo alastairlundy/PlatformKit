@@ -22,7 +22,7 @@ SOFTWARE.
     */
 
 using System;
-
+using System.IO;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
 
 // ReSharper disable InconsistentNaming
@@ -115,141 +115,80 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 
             if (IsLinux())
             {
-                var procManager = new ProcessManager();
-                var result = procManager.RunCommandLinux("cat /etc/os-release");
+                char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
+                
+                string[] resultArray = File.ReadAllLines("/etc/os-release");
 
-                char[] delimiter = { ' ', '=', '\t', '\n', '\r' };
-                var resultArray = result.Split(delimiter);
-
-                for (var index = 0; index < resultArray.Length; index++)
+                for (int index = 0; index < resultArray.Length; index++)
                 {
-                    /*
-#if DEBUG
-                    Console.WriteLine("Now: " + resultArray[index]);
+                    foreach (var c in delimiter)
+                    {
+                        resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
+                    }
+
+                    if (resultArray[index].ToUpper().Contains("LTS"))
+                    {
+                        linuxDistributionInformation.IsLongTermSupportRelease = true;
+                    }
+                    else if (resultArray[index].Contains("NAME="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
+                        linuxDistributionInformation.Name = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("VERSION="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty);
+                        linuxDistributionInformation.Version = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("ID="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("ID=", string.Empty);
+                        linuxDistributionInformation.Identifier = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("ID_LIKE="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("ID_LIKE=", string.Empty);
+                        linuxDistributionInformation.Identifier_Like = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("PRETTY_NAME="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
+                        linuxDistributionInformation.PrettyName = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("VERSION_ID="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("VERSION_ID=", string.Empty);
+                        linuxDistributionInformation.VersionId = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("HOME_URL="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("HOME_URL=", string.Empty);
+                        linuxDistributionInformation.HomeUrl = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("SUPPORT_URL="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("SUPPORT_URL=", string.Empty);
+                        linuxDistributionInformation.SupportUrl = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("BUG_REPORT_URL="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
+                        linuxDistributionInformation.BugReportUrl = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("PRIVACY_POLICY_URL="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
+                        linuxDistributionInformation.PrivacyPolicyUrl = resultArray[index];
+                    }
+                    else if (resultArray[index].Contains("VERSION_CODENAME="))
+                    {
+                        resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
+                        linuxDistributionInformation.VersionCodename = resultArray[index];
+                    }
                     
-                    if ((index + 1) < resultArray.Length)
-                    {
-                        Console.WriteLine("Next: " + resultArray[index + 1]);
-                    }
-#endif
-*/
-                    var isVersionLine = false;
-
-                    for (var i = 0; i < 10; i++)
-                    {
-                        if (index > 0)
-                        {
-                            if (resultArray[index].Contains(i.ToString()) && resultArray[index].Contains(".") &&
-                                resultArray[index - 1].Equals("VERSION") && !resultArray[index - 1].Contains("ID"))
-                            {
-                                isVersionLine = true;
-                            }
-                        }
-                    }
-
-                    if (isVersionLine)
-                    {
-                        var versionLine = resultArray[index];
-
-                        versionLine = versionLine.Replace('"', ' ');
-                        versionLine = versionLine.Replace(" ", string.Empty);
- /*                       
-#if DEBUG
-                        Console.WriteLine("LinuxDistroVersion: " + versionLine);
-#endif
-*/                     
-                        linuxDistributionInformation.Version = versionLine;
-                    }
-                    else if (index < resultArray.Length)
-                    {
-                        if (resultArray[index].Equals("NAME"))
-                        {
-                            var name = resultArray[index + 1];
-                            name = name.Replace('"', ' ');
-                            name = name.Replace(" ", string.Empty);
-
-                            linuxDistributionInformation.Name = name;
-                        }
-                        else if (resultArray[index].Equals("LTS"))
-                        {
-                            linuxDistributionInformation.IsLongTermSupportRelease = true;
-                        }
-                        else if (resultArray[index].Equals("ID"))
-                        {
-                            var id = resultArray[index + 1];
-                            linuxDistributionInformation.Identifier = id;
-                        }
-                        else if (resultArray[index].Equals("ID_LIKE"))
-                        {
-                            var id_like = resultArray[index + 1];
-                            linuxDistributionInformation.Identifier_Like = id_like;
-                        }
-                        else if (resultArray[index].Equals("PRETTY_NAME"))
-                        {
-                            var pretty_name = "";
-
-                            var line1 = resultArray[index + 1];
-                            var line2 = resultArray[index + 2];
-                            var line3 = resultArray[index + 3];
-
-                            if (!line1.Equals("VERSION_ID"))
-                            {
-                                line1 = line1.Replace('"', ' ');
-                                line1 = line1.Replace(" ", string.Empty);
-
-                                pretty_name += line1;
-                            }
-
-                            if (!line2.Equals("VERSION_ID"))
-                            {
-                                line2 = line2.Replace('"', ' ');
-                                line2 = line2.Replace(" ", string.Empty);
-                            }
-
-                            if (!line3.Equals("VERSION_ID"))
-                            {
-                                line3 = line3.Replace('"', ' ');
-                                line3 = line3.Replace(" ", string.Empty);
-
-                                pretty_name += line3;
-                            }
-
-                            linuxDistributionInformation.PrettyName = pretty_name;
-                        }
-                        else if (resultArray[index].Equals("VERSION_ID"))
-                        {
-                            var versionId = resultArray[index + 1];
-                            versionId = versionId.Replace('"', ' ');
-                            versionId = versionId.Replace(" ", string.Empty);
-
-                            linuxDistributionInformation.VersionId = versionId;
-                        }
-                        else if (resultArray[index].Contains("URL"))
-                        {
-                            var line = resultArray[index + 1];
-                            line = line.Replace('"', ' ');
-                            line = line.Replace(" ", string.Empty);
-
-                            if (resultArray[index].Equals("BUG_REPORT_URL"))
-                                linuxDistributionInformation.BugReportUrl = line;
-                            else if (resultArray[index].Equals("HOME_URL"))
-                                linuxDistributionInformation.HomeUrl = line;
-                            else if (resultArray[index].Equals("SUPPORT_URL"))
-                                linuxDistributionInformation.SupportUrl = line;
-                            else if (resultArray[index].Equals("PRIVACY_POLICY_URL"))
-                                linuxDistributionInformation.PrivacyPolicyUrl = line;
-                        }
-                        else if (resultArray[index].Equals("VERSION_CODENAME"))
-                        {
-                            var codename = resultArray[index + 1];
-
-                            //codename = codename.Replace(" ", String.Empty);
-
-                            linuxDistributionInformation.VersionCodename = codename;
-                        }
-                    }
+                    //Console.WriteLine("After: " + resultArray[index]);
                 }
-
+            
                 return linuxDistributionInformation;
             }
 

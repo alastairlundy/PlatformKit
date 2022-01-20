@@ -40,7 +40,6 @@ public static class LinuxVersionAnalyzer
                 var dotCounter = 0;
 
                 var version = DetectLinuxDistributionVersionAsString(osVersionAnalyzer);
-                version = version.Replace(" ", string.Empty);
 
                 foreach (var c in version)
                 {
@@ -73,10 +72,10 @@ public static class LinuxVersionAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public static string DetectLinuxDistributionVersionAsString(this OSVersionAnalyzer osVersionAnalyzer)
         {
-            if (new OSAnalyzer().IsLinux())
-            {
-                var osAnalyzer = new OSAnalyzer();
+            var osAnalyzer = new OSAnalyzer();
 
+            if (osAnalyzer.IsLinux())
+            {
                 var linuxDistroInfo = osAnalyzer.GetLinuxDistributionInformation();
             
                 //Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);

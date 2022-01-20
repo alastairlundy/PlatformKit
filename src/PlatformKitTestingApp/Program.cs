@@ -67,13 +67,13 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Is this AppleSilicon?: " + platformManager.IsAppleSiliconMac());
                 Console.WriteLine("Mac Processor Type: " + platformManager.GetMacProcessorType());
             }
-            
+
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
-            
+    
             if (platformManager.IsLinux())
             {
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
-            
+    
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
