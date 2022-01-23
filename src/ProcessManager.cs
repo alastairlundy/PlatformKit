@@ -220,7 +220,9 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             if (_osAnalyzer.IsWindows()) return RunCmdCommand(command, processStartInfo);
             if (_osAnalyzer.IsLinux()) return RunCommandLinux(command, processStartInfo);
-         //   if (_osAnalyzer.IsMac()) return RunCommandMac(command, processStartInfo);
+            if (_osAnalyzer.IsMac()) throw new NotImplementedException();
+            if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
+                //return RunCommandMac(command, processStartInfo);
 
             throw new PlatformNotSupportedException();
         }
