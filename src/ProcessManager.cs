@@ -1,4 +1,4 @@
-﻿/* MIT License
+/* MIT License
 
 Copyright (c) 2018-2022 AluminiumTech
 
@@ -402,9 +402,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
                 if (_osAnalyzer.IsLinux())
                 {
-                    var task = new Task(() =>
-                        Process.Start("xdg-open", url));
-                    task.Start();
+                    RunCommandLinux("xdg-open " + url);
                     return true;
                 }
                 if (_osAnalyzer.IsMac())
