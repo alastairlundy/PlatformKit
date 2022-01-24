@@ -221,7 +221,7 @@ public static class WindowsVersionAnalyzer
         }
         
         /// <summary>
-        ///     Detects Windows Version and returns it as a System.Version
+        /// Detects Windows Version and returns it as a System.Version
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
@@ -236,9 +236,9 @@ public static class WindowsVersionAnalyzer
             {
                 if (new OSAnalyzer().IsWindows())
                 {
-                    string description = RuntimeInformation.OSDescription;
-                    description = description.Replace("Microsoft Windows", string.Empty);
-                    description = description.Replace(" ", string.Empty);
+                    string description = RuntimeInformation.OSDescription
+                        .Replace("Microsoft Windows", string.Empty)
+                        .Replace(" ", string.Empty);
 
                     var dotCounter = 0;
 

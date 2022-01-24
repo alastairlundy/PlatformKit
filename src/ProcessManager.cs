@@ -384,8 +384,8 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        ///     Open a URL in the default browser.
-        ///     Courtesy of https://github.com/dotnet/corefx/issues/10361
+        /// Open a URL in the default browser.
+        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
@@ -411,9 +411,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
                 if (_osAnalyzer.IsWindows())
                 {
-                    var procStartInfo = new ProcessStartInfo { CreateNoWindow = true};
-                    
-                    RunCmdCommand($"/c start {url.Replace("&", "^&")}", procStartInfo);
+                    RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
                     return true;
                 }
                 if (_osAnalyzer.IsLinux())
