@@ -27,6 +27,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAn
 
 public static class LinuxVersionAnalyzer
 {
+
         /// <summary>
         ///     Detects the Linux Distribution Version as read from cat /etc/os-release and reformats it into the format of
         ///     Version.
@@ -77,11 +78,8 @@ public static class LinuxVersionAnalyzer
             if (osAnalyzer.IsLinux())
             {
                 var linuxDistroInfo = osAnalyzer.GetLinuxDistributionInformation();
-            
-                //Console.WriteLine("LinuxDistroVersion Before: " + linuxDistroInfo.Version);
 
-            
-                var osName = osAnalyzer.GetLinuxDistributionInformation().Name.ToLower();
+                var osName = linuxDistroInfo.Name.ToLower();
 
                 if (osName.ToLower().Contains("ubuntu") ||
                     osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
@@ -112,8 +110,8 @@ public static class LinuxVersionAnalyzer
         {
             if (new OSAnalyzer().IsLinux())
             {
-                var description = Environment.OSVersion.ToString();
-                description = description.Replace("Unix ", string.Empty);
+                var description = Environment.OSVersion.ToString()
+                    .Replace("Unix ", string.Empty);
 
                 return Version.Parse(description);
             }
