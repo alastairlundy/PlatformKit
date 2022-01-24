@@ -22,10 +22,6 @@ SOFTWARE.
     */
 
 using System;
-using System.IO;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
-
-// ReSharper disable InconsistentNaming
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
@@ -99,100 +95,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 #endif
 
             return osPlatform;
-        }
-        
-        /// <summary>
-        /// Detects Linux Distribution information and returns it.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        public LinuxOsRelease GetLinuxDistributionInformation()
-        {
-            var linuxDistributionInformation = new LinuxOsRelease();
-
-            //Assign a default value.
-            linuxDistributionInformation.IsLongTermSupportRelease = false;
-
-            if (IsLinux())
-            {
-                char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
-                
-                string[] resultArray = File.ReadAllLines("/etc/os-release");
-
-                for (int index = 0; index < resultArray.Length; index++)
-                {
-                    foreach (var c in delimiter)
-                    {
-                        resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
-                    }
-
-                    if (resultArray[index].ToUpper().Contains("LTS"))
-                    {
-                        linuxDistributionInformation.IsLongTermSupportRelease = true;
-                    }
-                    else if (resultArray[index].Contains("NAME="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
-                        linuxDistributionInformation.Name = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("VERSION="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty);
-                        linuxDistributionInformation.Version = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("ID="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("ID=", string.Empty);
-                        linuxDistributionInformation.Identifier = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("ID_LIKE="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("ID_LIKE=", string.Empty);
-                        linuxDistributionInformation.Identifier_Like = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("PRETTY_NAME="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
-                        linuxDistributionInformation.PrettyName = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("VERSION_ID="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("VERSION_ID=", string.Empty);
-                        linuxDistributionInformation.VersionId = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("HOME_URL="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("HOME_URL=", string.Empty);
-                        linuxDistributionInformation.HomeUrl = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("SUPPORT_URL="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("SUPPORT_URL=", string.Empty);
-                        linuxDistributionInformation.SupportUrl = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("BUG_REPORT_URL="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
-                        linuxDistributionInformation.BugReportUrl = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("PRIVACY_POLICY_URL="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
-                        linuxDistributionInformation.PrivacyPolicyUrl = resultArray[index];
-                    }
-                    else if (resultArray[index].Contains("VERSION_CODENAME="))
-                    {
-                        resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
-                        linuxDistributionInformation.VersionCodename = resultArray[index];
-                    }
-                    
-                    //Console.WriteLine("After: " + resultArray[index]);
-                }
-            
-                return linuxDistributionInformation;
-            }
-
-            throw new PlatformNotSupportedException();
         }
     }
 }
