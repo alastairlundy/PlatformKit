@@ -31,15 +31,16 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAn
 // ReSharper disable once InconsistentNaming
 public static class MacOSVersionAnalyzer
 {
-           /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        /// <exception cref="OperatingSystemVersionDetectionException"></exception>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
-        public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer, Version input)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="osVersionAnalyzer"></param>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    /// <exception cref="OperatingSystemVersionDetectionException"></exception>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="Exception"></exception>
+    public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer, Version input)
         {
             try
             {
