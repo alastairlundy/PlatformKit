@@ -27,6 +27,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
+using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
@@ -260,7 +261,7 @@ namespace AluminiumTech.DevKit.PlatformKit
          </summary>
          <param name="command"></param>
          <returns></returns>
-        internal string RunCommandMac(string command)
+        internal string RunMacCommand(string command)
         {
             if (_osAnalyzer.IsMac())
             {
@@ -275,6 +276,18 @@ namespace AluminiumTech.DevKit.PlatformKit
             throw new PlatformNotSupportedException();
         }
         */
+
+        /// <summary>
+        /// Run a command or program as if inside a terminal on Linux.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="processStartInfo"></param>
+        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use the RunLinuxCommand() method instead.")]
+        public string RunCommandLinux(string command, ProcessStartInfo processStartInfo = null)
+        {
+            return RunLinuxCommand(command, processStartInfo);
+        }
         
         /// <summary>
         /// Run a command or program as if inside a terminal on Linux.
@@ -282,7 +295,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="command"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public string RunCommandLinux(string command, ProcessStartInfo processStartInfo = null)
+        public string RunLinuxCommand(string command, ProcessStartInfo processStartInfo = null)
         {
             try
             {
@@ -404,7 +417,7 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
                 if (_osAnalyzer.IsLinux())
                 {
-                    RunCommandLinux("xdg-open " + url);
+                    RunLinuxCommand("xdg-open " + url);
                     return true;
                 }
                 if (_osAnalyzer.IsMac())
