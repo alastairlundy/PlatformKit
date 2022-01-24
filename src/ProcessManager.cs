@@ -217,10 +217,11 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processStartInfo"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV3)]
         public string RunCommand(string command, ProcessStartInfo processStartInfo = null)
         {
             if (_osAnalyzer.IsWindows()) return RunCmdCommand(command, processStartInfo);
-            if (_osAnalyzer.IsLinux()) return RunCommandLinux(command, processStartInfo);
+            if (_osAnalyzer.IsLinux()) return RunLinuxCommand(command, processStartInfo);
             if (_osAnalyzer.IsMac()) throw new NotImplementedException();
             if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
                 //return RunCommandMac(command, processStartInfo);
