@@ -25,13 +25,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
 {
     public static class DeprecationMessages
     {
-        private const string V2_5 = "v2.5.0";
-        private const string V2_6 = "v2.6.0";
-        private const string V2_7 = "v2.7.0";
-        private const string V2_8 = "v2.8.0";
-        private const string V2_9 = "v2.9.0";
-        private const string V2_10 = "v2.10.0";
-        
         private const string V3 = "v3.0.0";
         private const string V4 = "v4.0.0";
         private const string V5 = "v5.0.0";
@@ -41,14 +34,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
         
         public const string FutureDeprecation = CodeDeprecation + " in a future version.";
 
-        public const string DeprecationV2_5 = CodeDeprecation + " in " + V2_5;
-        
-        public const string DeprecationV2_6 = CodeDeprecation + " in " + V2_6;
-        public const string DeprecationV2_7 = CodeDeprecation + " in " + V2_7;
-        public const string DeprecationV2_8 = CodeDeprecation + " in " + V2_8;
-        public const string DeprecationV2_9 = CodeDeprecation + " in " + V2_9;
-        public const string DeprecationV2_10 = CodeDeprecation + " in " + V2_10;
-        
         public const string DeprecationV3 = CodeDeprecation + " in " + V3;
         public const string DeprecationV4 = CodeDeprecation + " in " + V4;
         public const string DeprecationV5 = CodeDeprecation + " in " + V5;
