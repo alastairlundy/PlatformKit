@@ -33,7 +33,8 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyz
 
 using AluminiumTech.DevKit.PlatformKit.Runtime;
 
-            var platformManager = new PlatformManager();
+            var platformManager = new PlatformIdentification();
+            var osAnalyzer = new OSAnalyzer();
             var processManager = new ProcessManager();
             var versionAnalyzer = new OSVersionAnalyzer();
             var runtimeIdentification = new RuntimeIdentification();
@@ -54,23 +55,25 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             {
                 Console.WriteLine("Possible RID: " + candidate);
             }
-          */  
-            if (platformManager.IsWindows())
+          */
+            processManager.OpenUrlInBrowser("google.com");
+            
+            if (osAnalyzer.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
                 
             //    Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
             }
 
-            if (platformManager.IsMac())
+            if (osAnalyzer.IsMac())
             {
-                Console.WriteLine("Is this AppleSilicon?: " + platformManager.IsAppleSiliconMac());
-                Console.WriteLine("Mac Processor Type: " + platformManager.GetMacProcessorType());
+                Console.WriteLine("Is this AppleSilicon?: " + osAnalyzer.IsAppleSiliconMac());
+                Console.WriteLine("Mac Processor Type: " + osAnalyzer.GetMacProcessorType());
             }
 
             Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
-            if (platformManager.IsLinux())
+            if (osAnalyzer.IsLinux())
             {
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
