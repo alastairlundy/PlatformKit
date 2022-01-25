@@ -28,6 +28,7 @@ using System.Runtime.Versioning;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
+//Move namespace in v3.
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 public static class WindowsVersionAnalyzer

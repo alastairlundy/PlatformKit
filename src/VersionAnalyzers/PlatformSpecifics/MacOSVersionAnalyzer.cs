@@ -26,6 +26,7 @@ using System;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
+//Move namespace in v3.
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 // ReSharper disable once InconsistentNaming
