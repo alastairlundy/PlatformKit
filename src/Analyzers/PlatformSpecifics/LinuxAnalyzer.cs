@@ -59,57 +59,57 @@ public static class LinuxAnalyzer
                     {
                         linuxDistributionInformation.IsLongTermSupportRelease = true;
                     }
-                    else if (resultArray[index].Contains("NAME="))
+                    else if (resultArray[index].ToUpper().Contains("NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
                         linuxDistributionInformation.Name = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("VERSION="))
+                    else if (resultArray[index].ToUpper().Contains("VERSION="))
                     {
                         resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty);
                         linuxDistributionInformation.Version = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("ID="))
+                    else if (resultArray[index].ToUpper().Contains("ID="))
                     {
                         resultArray[index] = resultArray[index].Replace("ID=", string.Empty);
                         linuxDistributionInformation.Identifier = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("ID_LIKE="))
+                    else if (resultArray[index].ToUpper().Contains("ID_LIKE="))
                     {
                         resultArray[index] = resultArray[index].Replace("ID_LIKE=", string.Empty);
                         linuxDistributionInformation.Identifier_Like = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("PRETTY_NAME="))
+                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
                         linuxDistributionInformation.PrettyName = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("VERSION_ID="))
+                    else if (resultArray[index].ToUpper().Contains("VERSION_ID="))
                     {
                         resultArray[index] = resultArray[index].Replace("VERSION_ID=", string.Empty);
                         linuxDistributionInformation.VersionId = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("HOME_URL="))
+                    else if (resultArray[index].ToUpper().Contains("HOME_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("HOME_URL=", string.Empty);
                         linuxDistributionInformation.HomeUrl = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("SUPPORT_URL="))
+                    else if (resultArray[index].ToUpper().Contains("SUPPORT_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("SUPPORT_URL=", string.Empty);
                         linuxDistributionInformation.SupportUrl = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("BUG_REPORT_URL="))
+                    else if (resultArray[index].ToUpper().Contains("BUG_REPORT_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
                         linuxDistributionInformation.BugReportUrl = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("PRIVACY_POLICY_URL="))
+                    else if (resultArray[index].ToUpper().Contains("PRIVACY_POLICY_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
                         linuxDistributionInformation.PrivacyPolicyUrl = resultArray[index];
                     }
-                    else if (resultArray[index].Contains("VERSION_CODENAME="))
+                    else if (resultArray[index].ToUpper().Contains("VERSION_CODENAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
                         linuxDistributionInformation.VersionCodename = resultArray[index];
