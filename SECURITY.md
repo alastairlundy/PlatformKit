@@ -10,13 +10,14 @@ Versions currently supported by Security Fixes.
 
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes and Security Fixes |
 |--| --|--|--|
-| 2.3 series | 2.3.0, released on December 15th 2021 | 2.3.2, released on January 5th 2022 | :white_check_mark:, ending June 15th 2022 | 
-| 2.2 series | 2.2.0, released on November 22nd 2021 | 2.2.3, released on January 5th 2022 | Until 2.4.0 is released |
+| 2.4 series | 2.4.0, released on January 26th 2022 | 2.4.0, released on January 26th 2022 | Until 2.6.0 is released | 
+| 2.3 series | 2.3.0, released on December 15th 2021 | 2.3.2, released on January 5th 2022 | Until 2.5.0 is released | 
 
 
 ### Previously Supported Versions
 | Version series | Original Launch Version | Final version | Supported with Bug Fixes | Supported with Security Fixes | 
 |--| --|--|--|--|
+| 2.2 series | 2.2.0, released on November 22nd 2021 | 2.2.3, released on January 5th 2022 | :x:, ended January 26th 2022 | :x:, ended January 26th 2022 | 
 | 2.1 series | 2.1.0, released on November 9th 2021 | 2.1.2, released on January 5th 2022 | :x:, ended January 5th 2022 | :x:, ended January 5th 2022 |
 | 2.0 series | 2.0.0, released on October 21st 2021 | 2.0.2, released on January 5th 2022 | :x:, ended January 5th 2022 | :x:, ended January 5th 2022 |
 | 2.0 RC series | 2.0.0 RC 1 | 2.0.0 RC 3 | :x:, Support ended November 15th 2021 | :x:, Support ended December 10th 2021 |
