@@ -59,7 +59,10 @@ namespace AluminiumTech.DevKit.PlatformKit
             if (_osAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
             if (_osAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
             if (_osAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
+
+#if NETCOREAPP3_0_OR_GREATER
             if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
+#endif
             
             throw new PlatformNotSupportedException();
         }
