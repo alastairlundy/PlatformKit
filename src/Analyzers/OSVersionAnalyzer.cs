@@ -39,13 +39,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         }
 
         /// <summary>
+        /// 
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException">
-        ///     Not yet implemented on macOS. Please do not run on macOS
-        ///     yet!
-        ///
-        ///     Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
+        /// Not yet implemented on macOS. Please do not run on macOS yet!
+        /// Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
