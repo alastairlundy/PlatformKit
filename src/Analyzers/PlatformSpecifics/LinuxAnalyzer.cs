@@ -34,7 +34,7 @@ public static class LinuxAnalyzer
         /// Detects Linux Distribution information and returns it.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="PlatformNotSupportedException">This method only runs on Linux. Running it on any other platform will throw this exception.</exception>
         public static LinuxOsRelease GetLinuxDistributionInformation(this OSAnalyzer osAnalyzer)
         {
             var linuxDistributionInformation = new LinuxOsRelease();
