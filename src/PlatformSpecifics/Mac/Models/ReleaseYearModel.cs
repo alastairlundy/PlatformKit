@@ -22,6 +22,7 @@ SOFTWARE.
  */
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Shared.Models;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
