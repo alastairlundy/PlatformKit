@@ -220,7 +220,8 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="processStartInfo"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        [Obsolete(DeprecationMessages.DeprecationV3)]
+        [Obsolete(DeprecationMessages.DeprecationV3 + "\r\n" + 
+                  "This will be removed in PlatformKit 3.0 and will not be replaced. Please use platform specific RunCommand methods instead.")]
         public string RunCommand(string command, ProcessStartInfo processStartInfo = null)
         {
             if (_osAnalyzer.IsWindows()) return RunCmdCommand(command, processStartInfo);
