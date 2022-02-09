@@ -50,9 +50,9 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
         Win8,
         [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         Win8_1,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         WinServer_2012_R2,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
