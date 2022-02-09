@@ -25,6 +25,7 @@ using System;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
+    // ReSharper disable once InconsistentNaming
     public class OSAnalyzer
     {
         public OSAnalyzer()
