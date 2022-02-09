@@ -23,8 +23,11 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux
-{
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public struct LinuxOsRelease
     {
         public bool IsLongTermSupportRelease { get; set; }
@@ -49,4 +52,3 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux
 
         public string VersionCodename { get; set; }
     }
-}
