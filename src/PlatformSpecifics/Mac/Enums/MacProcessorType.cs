@@ -25,6 +25,9 @@ using System;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
+    /// <summary>
+    /// The type of processor in a Mac.
+    /// </summary>
     public enum MacProcessorType
     {
         Intel,
