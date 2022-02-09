@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Shared.Models;
 
 public enum ReleaseYearTimeframe
 {
