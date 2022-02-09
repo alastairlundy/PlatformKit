@@ -347,6 +347,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
+        [Obsolete(DeprecationMessages.DeprecationV3)]
         public void RunActionOn(Action windowsMethod = null, Action macMethod = null,
             Action linuxMethod = null, Action freeBsdMethod = null)
         {
