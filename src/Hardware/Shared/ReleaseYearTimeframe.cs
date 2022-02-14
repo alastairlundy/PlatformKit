@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Shared.Models;
+namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared;
 
 public enum ReleaseYearTimeframe
 {

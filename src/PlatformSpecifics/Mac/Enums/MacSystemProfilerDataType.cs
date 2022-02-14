@@ -26,6 +26,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac{
     /// An enum of all possible Mac SystemProfiler DataTypes
     /// </summary>
     public enum MacSystemProfilerDataType{
+        // ReSharper disable once InconsistentNaming
         ParallelATADataType,
         UniversalAccessDataType,
         ApplicationsDataType,

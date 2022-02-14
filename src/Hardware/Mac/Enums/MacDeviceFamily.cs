@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
+namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
 
 /// <summary>
 /// The device family that a Mac belongs to.

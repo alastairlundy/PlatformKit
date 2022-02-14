@@ -23,7 +23,7 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
 /// <summary>
 /// 

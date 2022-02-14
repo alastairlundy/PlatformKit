@@ -21,9 +21,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
 
 public interface IMacHardwareAnalyzer
 {
