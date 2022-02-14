@@ -24,6 +24,7 @@ SOFTWARE.
 // ReSharper disable All
 
 using System;
+using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
@@ -47,7 +48,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
         v10_7_Lion,
         [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_8_MountainLion,
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_9_Mavericks,
         [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_10_Yosemite,
@@ -55,6 +56,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
         v10_11_ElCapitan,
         [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_12_Sierra,
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_13_HighSierra,
         v10_14_Mojave,
         v10_15_Catalina,
