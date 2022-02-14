@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
-
+using AluminiumTech.DevKit.PlatformKit.ConsoleHelpers;
 using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
@@ -39,6 +39,8 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
+    [Obsolete(DeprecationMessages.DeprecationV3 + " \r\n " 
+                                                + "This class will be removed in PlatformKit 3.0")]
     public class PlatformManager
     {
         protected OSAnalyzer _osAnalyzer;
@@ -132,45 +134,11 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 500 will result in an exception being thrown.</param>
         /// <exception cref="ArgumentOutOfRangeException">Is thrown when the duration milliseconds is less than 500 milliseconds.</exception>
         // ReSharper disable once UnusedMember.Global
+        [Obsolete(DeprecationMessages.DeprecationV3 + "\r\n" 
+                                                    + "This method has been moved to the ConsoleHelper Class and will be removed from this class in PlatformKit 3.0")]
         public void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
         {
-            try
-            {
-                if (durationMilliSeconds is 0 or < 500)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-
-                // ReSharper disable once HeapView.ObjectAllocation.Evident
-                var licenseWatch = new Stopwatch();
-
-                var lines = File.ReadAllLines(pathToTextFile);
-
-                foreach (var line in lines)
-                {
-                    Console.WriteLine(line);
-                }
-                
-                Console.WriteLine("\r\n");
-                Console.WriteLine("\r\n");
-
-                licenseWatch.Start();
-
-                while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds)
-                {
-                    //Do nothing to make sure everybody sees the license.
-                }
-
-                licenseWatch.Stop();
-                licenseWatch.Reset();
-                
-                Console.Clear();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
-            }
+            ConsoleHelper.ShowLicenseInConsole(pathToTextFile,durationMilliSeconds);
         }
     }
 }
