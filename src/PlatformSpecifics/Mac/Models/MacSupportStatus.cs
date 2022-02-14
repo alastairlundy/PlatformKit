@@ -21,24 +21,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
-
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-/// <summary>
-/// 
-/// </summary>
-public struct MacModel
+public struct MacSupportStatus
 {
-    public string MacDescription { get; set; }
-
-    public MacSupportStatus SupportStatus { get; set; }
+    public bool IsOfficiallySupported { get; set; }
     
-    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
+    public MacOsSystemInformation MinimumSupportedVersion { get; set; }
     
-    public ReleaseYearModel ReleaseYear { get; set; }
-    
-    public MacDeviceFamily DeviceFamily { get; set; }
-    
-    public MacDisplayType DisplayType { get; set; }
+    public MacOsSystemInformation LastOfficiallySupportedVersion { get; set; }
 }
