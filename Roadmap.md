@@ -1,15 +1,22 @@
 ## Roadmap
-This info is subject to change at any time and is not a guarantee of changes being made in future releases.
+This information is subject to change at any time and is not a guarantee of the stated changes being made in future releases.
 
 ### 2.5
-- [ ] Test Mac related code.
-- [ ] Add detection for macOS versions
-- [ ]  Properly generate macOS Runtime Identifiers
+- [ ] Re-introduction of ``RunMacCommand`` method
+- [ ] Added initial Software Detection for macOS
+- [ ] Properly generate macOS Runtime Identifiers
+- [ ] Added support for Windows Edition Detection
 
 ### 2.6
-
+- [ ] Enhanced Software Detection for macOS
+- [ ] Added initial Hardware Detection for macOS
 
 ### 2.7
+- [ ] Enhanced Hardware Detection for macOS
 
 ### 3.0
-* Potential Removal of .NET Standard 2.0 support.
+- [ ] Potential Removal of .NET Standard 2.0 support.
+- [ ] Enums deprecated for V3 will now throw errors.
+
+### 4.0
+* OS Support Enums deprecated for V3 will be removed.
