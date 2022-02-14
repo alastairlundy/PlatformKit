@@ -24,7 +24,7 @@ SOFTWARE.
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
 
 /// <summary>
-/// 
+/// The device family that a Mac belongs to.
 /// </summary>
 public enum MacDeviceFamily
 {

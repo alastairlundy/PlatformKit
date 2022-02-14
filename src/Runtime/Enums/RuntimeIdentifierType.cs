@@ -21,8 +21,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+//Namespace to be moved in V3
 namespace AluminiumTech.DevKit.PlatformKit.Runtime;
 
+/// <summary>
+/// The type of RuntimeIdentifier generated or detected.
+/// </summary>
 public enum RuntimeIdentifierType
 {
     AnyGeneric,
