@@ -19,26 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- */
+    */
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
-/// <summary>
-/// 
-/// </summary>
-public struct MacModel
+public interface IMacHardwareAnalyzer
 {
-    public string MacDescription { get; set; }
+    public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
 
-    public MacSupportStatus SupportStatus { get; set; }
-    
-    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
-    
-    public ReleaseYearModel ReleaseYear { get; set; }
-    
-    public MacDeviceFamily DeviceFamily { get; set; }
-    
-    public MacDisplayType DisplayType { get; set; }
+    public MacOsSystemInformation GetMacSwVersionInformation();
+
+    public MacModel GetMacSystemInformation();
 }

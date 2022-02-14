@@ -19,17 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    */
+ */
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Shared.Models;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-public interface IMacSystemDetection
+public struct ReleaseYearModel
 {
-    public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
+    public int Month { get; set; }
+    public int Year { get; set; }
 
-    public MacOsSystemInformation GetMacSwVersionInformation();
-
-    public MacModel GetMacSystemInformation();
+    public ReleaseYearTimeframe Timeframe { get; set; }
 }

@@ -21,15 +21,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Hardware;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Shared.Models;
+using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-public struct ReleaseYearModel
+/// <summary>
+/// 
+/// </summary>
+public struct MacModel
 {
-    public int Month { get; set; }
-    public int Year { get; set; }
+    public string MacDescription { get; set; }
 
-    public ReleaseYearTimeframe Timeframe { get; set; }
+    public MacSupportStatus SupportStatus { get; set; }
+    
+    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
+    
+    public ReleaseYearModel ReleaseYear { get; set; }
+    
+    public MacDeviceFamily DeviceFamily { get; set; }
+    
+    public MacDisplayType DisplayType { get; set; }
 }
