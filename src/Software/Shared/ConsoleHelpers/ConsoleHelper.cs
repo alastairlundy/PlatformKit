@@ -25,7 +25,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace AluminiumTech.DevKit.PlatformKit.ConsoleHelpers;
+namespace AluminiumTech.DevKit.PlatformKit.Software.Shared.ConsoleHelpers;
 
 public class ConsoleHelper
 {

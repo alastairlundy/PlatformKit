@@ -73,7 +73,6 @@
       <Folder Include="Hardware\Windows" />
       <Folder Include="PlatformSpecifics\Mac\Enums\Hardware" />
       <Folder Include="Software\Linux" />
-      <Folder Include="Software\Mac" />
       <Folder Include="Software\Shared" />
       <Folder Include="Software\Windows" />
     </ItemGroup>
