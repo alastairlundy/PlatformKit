@@ -34,6 +34,8 @@ public enum MacDeviceFamily
     MacMini,
     MacMiniServer,
     MacPro,
+    // ReSharper disable once InconsistentNaming
     iMac,
+    // ReSharper disable once InconsistentNaming
     iMacPro,
 }
