@@ -29,10 +29,11 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
-using AluminiumTech.DevKit.PlatformKit.ConsoleHelpers;
+
 using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+using AluminiumTech.DevKit.PlatformKit.Software.Shared.ConsoleHelpers;
 
 namespace AluminiumTech.DevKit.PlatformKit
 {

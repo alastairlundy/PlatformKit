@@ -19,19 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    */
+*/
 
-using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+using System;
+using System.IO;
 
-namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
+using AluminiumTech.DevKit.PlatformKit.Analyzers;
 
-public interface IMacHardwareAnalyzer
+namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+
+public static class WindowsProcessManagerExtensions
 {
-    public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
 
-    public MacOsSystemInformation GetMacSwVersionInformation();
-
-    public MacModel GetMacSystemInformation();
 }
