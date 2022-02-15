@@ -71,9 +71,6 @@
 
     <ItemGroup>
       <Folder Include="Hardware\Windows" />
-      <Folder Include="PlatformSpecifics\Mac\Enums\Hardware" />
-      <Folder Include="Software\Linux" />
-      <Folder Include="Software\Shared" />
-      <Folder Include="Software\Windows" />
+      <Folder Include="Internal" />
     </ItemGroup>
 </Project>

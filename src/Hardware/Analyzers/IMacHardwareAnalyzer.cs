@@ -22,10 +22,10 @@ SOFTWARE.
     */
 
 using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
+using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
 
-namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
+namespace AluminiumTech.DevKit.PlatformKit.Hardware.Analyzers;
 
 public interface IMacHardwareAnalyzer
 {
