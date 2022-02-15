@@ -25,10 +25,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Software.Windows;
 
 public interface IWindowsSoftwareDetection
 {
-    public string GetWindowsRegistryValue(string query, string value);
+    public string GetWindowsRegistryValue(string query, string value, string failMessage);
 
     // ReSharper disable once InconsistentNaming
-    public string GetWindowsManagementInstrumentationValue(string query, string wmiClass);
+    public string GetWindowsManagementInstrumentationValue(string query, string wmiClass, string failMessage);
 
     //public string GetMicrosoftManagementInstrumentationValue(string query, string mmiClass);
 }

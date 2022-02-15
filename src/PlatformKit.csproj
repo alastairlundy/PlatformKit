@@ -70,7 +70,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Hardware\Windows" />
       <Folder Include="Internal" />
     </ItemGroup>
 </Project>
