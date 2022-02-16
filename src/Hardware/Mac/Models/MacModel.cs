@@ -33,6 +33,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
 public struct MacModel
 {
     public string MacDescription { get; set; }
+    
+    public string SerialNumber { get; set; }
 
     public MacSupportStatus SupportStatus { get; set; }
     
