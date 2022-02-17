@@ -22,13 +22,14 @@ SOFTWARE.
     */
 
 using System;
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+namespace AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 
 /// <summary>
 /// 
 /// </summary>
-public struct MacOsSystemInformation
+public class MacOsSystemInformation
 {
     public Version MacOsVersion { get; set; }
     

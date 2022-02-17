@@ -21,9 +21,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared;
+namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
 
-public struct ReleaseYearModel
+public class ReleaseYearModel
 {
     public int Month { get; set; }
     public int Year { get; set; }

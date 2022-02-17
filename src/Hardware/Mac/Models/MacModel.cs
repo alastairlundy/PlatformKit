@@ -23,26 +23,23 @@ SOFTWARE.
 
 using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
 using AluminiumTech.DevKit.PlatformKit.Hardware.Shared;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
+using AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
 
 /// <summary>
 /// 
 /// </summary>
-public struct MacModel
+public class MacModel
 {
-    public string MacDescription { get; set; }
-    
-    public string SerialNumber { get; set; }
-
-    public MacSupportStatus SupportStatus { get; set; }
-    
-    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
-    
     public ReleaseYearModel ReleaseYear { get; set; }
     
     public MacDeviceFamily DeviceFamily { get; set; }
     
-    public MacDisplayType DisplayType { get; set; }
+    public MacHardwareModel MacHardware { get; set; }
+    
+    public MacSupportStatus SupportStatus { get; set; }
+    
+    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
 }

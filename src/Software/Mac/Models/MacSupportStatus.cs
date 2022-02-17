@@ -21,9 +21,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac.Models;
+namespace AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 
-public struct MacSupportStatus
+public class MacSupportStatus
 {
     public bool IsOfficiallySupported { get; set; }
     

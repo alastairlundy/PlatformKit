@@ -29,7 +29,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
 /// <summary>
 /// 
 /// </summary>
-public struct WindowsModel
+public class WindowsModel
 {
     public WindowsVersion Version { get; set; }
     
