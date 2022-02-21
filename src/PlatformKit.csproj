@@ -17,27 +17,21 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.4 series
+        <PackageReleaseNotes>## Changes since 2.5.0 Alpha 1
 
 ### Additions
-* Added new ``MacOsSystemInformation`` class to represent Mac System Profiler information.
-* Re-added ``MacSystemProfilerDataType`` enum
-* Added the interface for MacSystemDetection - The implementing class will be added in a future pre-release version
-* Added in code documentation for ``MacProcessorType`` enum
-* Added Mac Specific Enums ``MacDisplayType`` and ``MacDeviceFamily``
-* Added Mac Models ``MacSupportStatus`` and ``MacModel`` to represent information regarding Mac products.
-* Added Shared Model ``ReleaseYearModel`` and Shared Enum ``ReleaseYearTimeframe``
-
+* Added new Windows enums ``WindowsEdition`` and ``WindowsDeviceFamily``
+* Added new Windows model ``WindowsModel``
+* Added new Serial Number field in ``MacModel``
+* Added new Mac Models ``MacDisplayModel`` and ``MacHardwareModel`
+* Added new Model ``DisplayModel``
 
 ### Changes
-* Clarified deprecation of ``RunCommand`` to suggest alternatives.
-* Moved ``ShowLicenseInConsole`` method to ``ConsoleHelper`` class - A copy will remain in the PlatformManager class until PlatformKit V3
-* Minor Tweaks
-
-### Deprecations
-* macOS 10.13 support has been deprecated and will throw an error in V5.
-* Delayed deprecation of Windows 8.1 and Windows Server 2012 R2 support from V4 to V5.
-* Deprecated ``RunActionOn`` method - This will be removed in V3 and will not be replaced.</PackageReleaseNotes>
+* Restructured folder and namespace directory
+* Update namespaces in 
+* Moved Windows Software Detection to separate files
+* Changed several structs to Classes
+* Minor Tweaks</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,7 +41,7 @@
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.5.0-alpha.1</PackageVersion>
+        <PackageVersion>2.5.0-alpha.2</PackageVersion>
 
     </PropertyGroup>
 
