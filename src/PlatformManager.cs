@@ -40,8 +40,9 @@ namespace AluminiumTech.DevKit.PlatformKit
     /// <summary>
     /// A class that helps get system information.
     /// </summary>
-    [Obsolete(DeprecationMessages.DeprecationV3 + " \r\n " 
-                                                + "This class will be removed in PlatformKit 3.0")]
+    [Obsolete(DeprecationMessages.DeprecationV3 + "This class will be removed in PlatformKit 3.0 . " +
+              "Please use the PlatformIdentification, OSAnalyzer, and ConsoleHelper classes instead depending on the" +
+              "functionality that you want/need.")]
     public class PlatformManager
     {
         protected OSAnalyzer _osAnalyzer;
