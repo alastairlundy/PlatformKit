@@ -23,6 +23,7 @@ SOFTWARE.
 
 using System;
 
+//Move namespace in V3
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
     // ReSharper disable once InconsistentNaming

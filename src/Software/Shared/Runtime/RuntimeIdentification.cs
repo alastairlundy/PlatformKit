@@ -35,6 +35,7 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 // ReSharper disable InconsistentNaming
 
+//Move namespace in V3
 namespace AluminiumTech.DevKit.PlatformKit.Runtime
 {
     /// <summary>

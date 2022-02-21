@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 
+//Move namespace in V3
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
 {
     

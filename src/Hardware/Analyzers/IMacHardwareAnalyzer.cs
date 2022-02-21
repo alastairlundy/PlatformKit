@@ -22,7 +22,9 @@ SOFTWARE.
     */
 
 using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums;
+
 using AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Models;
+using AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Analyzers;
 

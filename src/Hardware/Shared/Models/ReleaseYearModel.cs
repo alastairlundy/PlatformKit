@@ -21,6 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
+using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Enums;
+
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
 
 public class ReleaseYearModel
