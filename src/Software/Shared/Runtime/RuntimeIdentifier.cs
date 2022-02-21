@@ -26,7 +26,7 @@ using System;
 namespace AluminiumTech.DevKit.PlatformKit.Runtime
 {
     [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-    public struct RuntimeIdentifier
+    public class RuntimeIdentifier
     {
         /// <summary>
         /// Identifier in the format of any-[processor architecture]
