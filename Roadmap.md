@@ -3,20 +3,27 @@ This information is subject to change at any time and is not a guarantee of the 
 
 ### 2.5
 - [ ] Re-introduction of ``RunMacCommand`` method
-- [ ] Added initial Software Detection for macOS
+- [ ] Initial Software Detection for macOS
 - [ ] Properly generate macOS Runtime Identifiers
 - [ ] Added support for Windows Edition Detection
 
 ### 2.6
 - [ ] Enhanced Software Detection for macOS
-- [ ] Added initial Hardware Detection for macOS
+- [ ] Initial Hardware Detection for macOS
 
 ### 2.7
 - [ ] Enhanced Hardware Detection for macOS
 
+### 2.8
+- [ ] Initial Hardware Detection for Linux
+
+### 2.9?
+- [ ] Enhanced Hardware Detection for Linux
+
 ### 3.0
+- [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
 - [ ] Potential Removal of .NET Standard 2.0 support.
-- [ ] Enums deprecated for V3 will now throw errors.
+- [ ] Enums deprecated for V3 will either now throw errors or be removed.
 
 ### 4.0
 * OS Support Enums deprecated for V3 will be removed.
