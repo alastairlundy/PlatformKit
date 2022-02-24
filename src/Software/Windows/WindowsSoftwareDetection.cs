@@ -67,6 +67,11 @@ public class WindowsSoftwareDetection : IWindowsSoftwareDetection
             throw new PlatformNotSupportedException();
         }
 
+        public string GetWMIValue(string query, string wmiClass, string failMessage)
+        {
+            return GetWindowsManagementInstrumentationValue(query, wmiClass, failMessage);
+        }
+        
         /// <summary>
         /// 
         /// </summary>
