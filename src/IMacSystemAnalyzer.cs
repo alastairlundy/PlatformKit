@@ -27,7 +27,7 @@ using AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Analyzers;
 
-public interface IMacHardwareAnalyzer
+public interface IMacSystemAnalyzer
 {
     public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
 
