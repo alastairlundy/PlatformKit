@@ -30,7 +30,7 @@ using AluminiumTech.DevKit.PlatformKit;
 using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
-
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 using AluminiumTech.DevKit.PlatformKit.Runtime;
 
             var platformManager = new PlatformIdentification();
@@ -43,7 +43,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
 
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;
-            Console.WriteLine(title) ;
+        //    Console.WriteLine(title) ;
          /*   
             Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
             Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
@@ -69,9 +69,17 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             {
                 Console.WriteLine("Is this AppleSilicon?: " + osAnalyzer.IsAppleSiliconMac());
                 Console.WriteLine("Mac Processor Type: " + osAnalyzer.GetMacProcessorType());
+
+                Console.WriteLine("macOS Version Enum: " +
+                                  MacOSVersionAnalyzer.DetectMacOsVersionEnum(new OSVersionAnalyzer()));
+                
+                Console.WriteLine("macOS Version Detected: " + new OSVersionAnalyzer().DetectOSVersion().ToString());
+                
+                Console.WriteLine("Darwin Version: " + MacOSVersionAnalyzer.DetectDarwinVersion());
+                Console.WriteLine("Xnu Version: " + MacOSVersionAnalyzer.DetectXnuVersion());
             }
 
-            Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
+           // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (osAnalyzer.IsLinux())
             {
