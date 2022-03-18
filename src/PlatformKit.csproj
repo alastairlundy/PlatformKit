@@ -17,21 +17,20 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.5.0 Alpha 1
+        <PackageReleaseNotes>## Changes since 2.5.0 Alpha 2
+
+### Modifications
+* Rename Interface from ``IMacHardwareAnalyzer`` to ``IMacSystemAnalyzer
 
 ### Additions
-* Added new Windows enums ``WindowsEdition`` and ``WindowsDeviceFamily``
-* Added new Windows model ``WindowsModel``
-* Added new Serial Number field in ``MacModel``
-* Added new Mac Models ``MacDisplayModel`` and ``MacHardwareModel`
-* Added new Model ``DisplayModel``
+* Added initial macOS Version detection support
+* Added XNU version detection support
+* Added Darwin version detection support
+* Re-added new ``GetWMIValue()`` method
 
-### Changes
-* Restructured folder and namespace directory
-* Update namespaces in 
-* Moved Windows Software Detection to separate files
-* Changed several structs to Classes
-* Minor Tweaks</PackageReleaseNotes>
+
+### Removals
+* Removed Hardware related methods and models </PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,7 +40,7 @@
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.5.0-alpha.2</PackageVersion>
+        <PackageVersion>2.5.0-alpha.3</PackageVersion>
 
     </PropertyGroup>
 
