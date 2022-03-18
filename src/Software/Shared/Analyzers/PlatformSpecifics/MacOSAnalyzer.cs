@@ -44,7 +44,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
         {
             return GetMacProcessorType(osAnalyzer) == MacProcessorType.AppleSilicon;
         }
-
+        
         /// <summary>
         /// Gets the type of Processor in a given Mac returned as the MacProcessorType
         /// </summary>
