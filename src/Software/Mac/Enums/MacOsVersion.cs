@@ -66,7 +66,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
         /// First version to support Apple Silicon on M1 powered Macs and newer.
         /// </summary>
         v11_BigSur,
-        v12_Monterrey,
+        v12_Monterey,
         NotDetected,
         NotSupported,
     }
