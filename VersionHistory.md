@@ -6,6 +6,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 2.5
 | Version | Availability | Changelog |
 |-|-|-|
+| 2.5.0 Alpha 3 | March 18th 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.5.0-alpha.3) |
 | 2.5.0 Alpha 2 | February 21st 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.5.0-alpha.2) |
 | 2.5.0 Alpha 1 | February 14th 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/PlatformKit/-/releases/2.5.0-alpha.1) |
 
