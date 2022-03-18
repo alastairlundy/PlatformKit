@@ -63,7 +63,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
                 }
                 if (_osAnalyzer.IsMac())
                 {
-                    throw new NotImplementedException();
+                    return this.DetectMacOsVersion_HardCoded();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
