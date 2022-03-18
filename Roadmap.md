@@ -9,16 +9,6 @@ This information is subject to change at any time and is not a guarantee of the 
 
 ### 2.6
 - [ ] Enhanced Software Detection for macOS
-- [ ] Initial Hardware Detection for macOS
-
-### 2.7
-- [ ] Enhanced Hardware Detection for macOS
-
-### 2.8
-- [ ] Initial Hardware Detection for Linux
-
-### 2.9?
-- [ ] Enhanced Hardware Detection for Linux
 
 ### 3.0
 - [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
