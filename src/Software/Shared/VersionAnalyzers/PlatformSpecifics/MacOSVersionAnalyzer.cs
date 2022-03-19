@@ -128,11 +128,16 @@ public static class MacOSVersionAnalyzer
     }
     */
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public static MacOsSystemInformation DetectMacSystemInformation()
     {
         MacOsSystemInformation macOsSystemInformation = new MacOsSystemInformation();
         macOsSystemInformation.ProcessorType = new OSAnalyzer().GetMacProcessorType();
-        
+
+        macOsSystemInformation.MacOsBuildNumber = DetectMacOsBuildNumber();
         macOsSystemInformation.MacOsVersion = DetectMacOsVersion(new OSVersionAnalyzer());
         macOsSystemInformation.DarwinVersion = DetectDarwinVersion();
         macOsSystemInformation.XnuVersion = DetectXnuVersion();
