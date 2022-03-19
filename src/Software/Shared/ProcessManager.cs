@@ -261,6 +261,12 @@ namespace AluminiumTech.DevKit.PlatformKit
             throw new PlatformNotSupportedException();
         }
 
+        /*
+        public string RunMacCommand(string command)
+        {
+            
+        }
+        
         /* <summary>
         / 
          </summary>
