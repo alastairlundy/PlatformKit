@@ -43,8 +43,8 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
 
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;
-        //    Console.WriteLine(title) ;
-         /*   
+            //    Console.WriteLine(title) ;
+          
             Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
             Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
             Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
@@ -55,8 +55,8 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             {
                 Console.WriteLine("Possible RID: " + candidate);
             }
-          */
-            processManager.OpenUrlInBrowser("google.com");
+          
+            processManager.OpenUrlInBrowser("duckduckgo.com");
             
             if (osAnalyzer.IsWindows())
             {
@@ -79,7 +79,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Xnu Version: " + MacOSVersionAnalyzer.DetectXnuVersion());
             }
 
-           // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
+            // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (osAnalyzer.IsLinux())
             {
