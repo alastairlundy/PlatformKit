@@ -4,7 +4,7 @@ This information is subject to change at any time and is not a guarantee of the 
 ### 2.5
 - [ ] Re-introduction of ``RunMacCommand`` method
 - [x] Initial Software Detection for macOS (2.5.0 Alpha 3)
-- [ ] Properly generate macOS Runtime Identifiers
+- [x] Properly generate macOS Runtime Identifiers (2.5.0 Alpha 4)
 - [ ] Added support for Windows Edition Detection
 
 ### 2.6
