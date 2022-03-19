@@ -224,7 +224,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                         break;
                     default:
                         throw new PlatformNotSupportedException();
-                        break;
                 }
             }
 
