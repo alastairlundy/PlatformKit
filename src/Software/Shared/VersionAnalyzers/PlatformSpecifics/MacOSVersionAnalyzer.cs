@@ -321,6 +321,7 @@ public static class MacOSVersionAnalyzer
         return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
     }
 
+    // ReSharper disable once IdentifierTypo
     private static string[] GetMacSwVersInfo()
     {
         ProcessManager processManager = new ProcessManager();
@@ -328,5 +329,4 @@ public static class MacOSVersionAnalyzer
 
         return output.Split(' ');
     }
-    
 }
