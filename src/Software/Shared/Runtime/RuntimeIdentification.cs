@@ -30,7 +30,7 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
-
+using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 // ReSharper disable InconsistentNaming
@@ -193,11 +193,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             }
             if (osAnalyzer.IsMac())
             {
-                //For now we need to throw an error cos we don't currently have macOS Version detection built in.
-                throw new PlatformNotSupportedException();
-
-                /*
-                switch (versionAnalyzer.)
+                switch (versionAnalyzer.DetectMacOsVersionEnum())
                 {
                     case MacOsVersion.v10_9_Mavericks:
                         osVersion = "10.9";
@@ -221,16 +217,15 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                         osVersion = "10.15";
                         break;
                     case MacOsVersion.v11_BigSur:
-                        osVersion = "11.0";
+                        osVersion = "11";
                         break;
-                    case MacOsVersion.v12_Monterrey:
-                        osVersion = "12.0";
+                    case MacOsVersion.v12_Monterey:
+                        osVersion = "12";
                         break;
                     default:
                         throw new PlatformNotSupportedException();
                         break;
                 }
-                */
             }
 
             return osVersion;
