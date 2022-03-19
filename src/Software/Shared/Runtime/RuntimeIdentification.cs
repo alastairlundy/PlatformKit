@@ -300,7 +300,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                 {
                     if (includeOperatingSystemVersion)
                     {
-                        throw new NotImplementedException();
+                        return $"{osName}.{osVersion}-{cpuArch}";
                     }
                     else
                     {
