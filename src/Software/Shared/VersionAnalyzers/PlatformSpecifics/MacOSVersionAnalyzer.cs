@@ -35,7 +35,7 @@ public static class MacOSVersionAnalyzer
 {
     public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer)
     {
-        return GetMacOsVersionToEnum(osVersionAnalyzer, DetectMacOsVersion_HardCoded(osVersionAnalyzer));
+        return GetMacOsVersionToEnum(osVersionAnalyzer, DetectMacOsVersion(osVersionAnalyzer));
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ public static class MacOSVersionAnalyzer
         MacOsSystemInformation macOsSystemInformation = new MacOsSystemInformation();
         macOsSystemInformation.ProcessorType = new OSAnalyzer().GetMacProcessorType();
         
-        macOsSystemInformation.MacOsVersion = DetectMacOsVersion_HardCoded(new OSVersionAnalyzer());
+        macOsSystemInformation.MacOsVersion = DetectMacOsVersion(new OSVersionAnalyzer());
         macOsSystemInformation.DarwinVersion = DetectDarwinVersion();
         macOsSystemInformation.XnuVersion = DetectXnuVersion();
 
@@ -285,235 +285,43 @@ public static class MacOSVersionAnalyzer
         }
     }
 
-    public static Version DetectMacOsVersion_HardCoded(this OSVersionAnalyzer osVersionAnalyzer)
+    public static Version DetectMacOsVersion(this OSVersionAnalyzer osVersionAnalyzer)
     {
-        var xnuversion = DetectXnuVersion();
-        
-        var darwinVersion = DetectDarwinVersion();
-        var minorVersion = darwinVersion.Minor;
-        
-        switch (darwinVersion.Major){
-            case 1:
-                switch (minorVersion)
-                {
-                    case 1:
-                        throw new PlatformNotSupportedException();
-                    case 2:
-                        throw new PlatformNotSupportedException();
-                    case 3:
-                        return new Version(10, 0, 0, 0);
-                    case 4:
-                        return new Version(10, 1, 0, 0);
-                    default:
-                        throw new PlatformNotSupportedException();
-                }
-            case 5:
-                return new Version(10, 1, minorVersion, 0);
-            case 6:
-                return new Version(10, 2, minorVersion, 0);
-            case 7:
-                return new Version(10, 3, minorVersion, 0);
-            case 8:
-                return new Version(10, 4, minorVersion, 0);
-            case 9:
-                return new Version(10, 5, minorVersion, 0);
-            case 10:
-                return new Version(10, 6, minorVersion, 0);
-            case 11:
-                switch (minorVersion)
-                {
-                        case 4:
-                           if (darwinVersion.Build == 0)
-                           {
-                               return new Version(10, 7, 4, 0);
-                           }
-                           else
-                           {
-                               return new Version(10, 7, 5, 0);
-                           }
-                        default:
-                            if (minorVersion < 4 && minorVersion >= 0)
-                            {
-                                return new Version(10, 7, minorVersion, 0);
-                            }
-                            else
-                            {
-                                throw new PlatformNotSupportedException();
-                            }
-                }
-            case 12:
-                switch (minorVersion)
-                    {
-                        case 6:
-                            return new Version(10, 8, 5, 0);
-                        default:
-                            if (minorVersion < 6 && minorVersion >= 0)
-                            {
-                                return new Version(10, 8, minorVersion, 0);
-                            }
-                            else
-                            {
-                                throw new PlatformNotSupportedException();
-                            } 
-                    }
-            case 13:
-                switch (minorVersion)
-                {
-                        case 0:
-                            return new Version(10, 9, 0, 0);
-                        default:
-                            return new Version(10, 9, minorVersion + 1, 0);
-                }
-            case 14:
-                switch (minorVersion)
-                {
-                        case 0:
-                            return new Version(10, 10, 0, 0);
-                        case 1:
-                            return new Version(10, 10, 2, 0);
-                        default:
-                            return new Version(10, 10, minorVersion, 0);
-                }
-                case 15:
-                    switch (minorVersion)
-                    {
-                        case 0:
-                            return new Version(10, 11, 0, 0);
-                        default:
-                            return new Version(10, 11, minorVersion, 0);
-                    }
-                case 16:
-                    switch (minorVersion)
-                    {
-                        case 0:
-                            return new Version(10, 12, 0, 0);
-                        case 1:
-                            return new Version(10, 12, 1, 0);
-                        default:
-                            return new Version(10, 12, minorVersion - 1, 0);
-                    }
-            case 17:
-                if (minorVersion == 0)
-                    return new Version(10, 13, 0, 0);
-                else
-                    return new Version(10, 13, minorVersion - 1, 0);
-            case 18:
-                switch (minorVersion)
-                {
-                    case 0:
-                        return new Version(10, 14, 0, 0);
-                    case 2:
-                        if (xnuversion.Minor == 221)
-                        {
-                            return new Version(10, 14, 1, 0);
-                        }
-                        else if (xnuversion.Minor == 231)
-                        {
-                            return new Version(10, 14, 2, 0);
-                        }
-                        else
-                        {
-                            return new Version(10, 14, 3, 0);
-                        }
-                    default:
-                        return new Version(10, 14, minorVersion - 1, 0);
-                }
-            case 19:
-                switch (minorVersion)
-                {
-                    case 0:
-                        if (xnuversion.Equals(new Version(6153, 41, 3, 29)))
-                        {
-                            return new Version(10, 15, 1, 0);
-                        }
-                        else
-                        {
-                            return new Version(10, 15, 0, 0);
-                        }
-                    case 6:
-                        if (xnuversion.Minor == 141 && xnuversion.Build == 1)
-                        {
-                            return new Version(10, 15, 6, 0);
-                        }
-                        else if(xnuversion.Minor == 141 && xnuversion.Build > 1)
-                        {
-                            return new Version(10, 15, 7, 0);
-                        }
-                        else
-                        {
-                            throw new PlatformNotSupportedException();
-                        }
-                    default:
-                        return new Version(10, 15, minorVersion, 0);
-                }
-            case 20:
-                switch (minorVersion)
-                {
-                    case 1:
-                        if (xnuversion.Minor == 41)
-                        {
-                            return new Version(11, 0, 0, 0);
-                        }
-                        else if (xnuversion.Minor == 50)
-                        {
-                            return new Version(11, 0, 1, 0);
-                        }
-                        else
-                        {
-                            throw new PlatformNotSupportedException();
-                        }
-                    case 2:
-                        return new Version(11, 1, 0, 0);
-                    case 3:
-                        //TODO Investigate proper version detection here when we can detect Build Numbers
-                        //For now report as 11.2
-                        return new Version(11, 2, 0, 0);
-                    case 4:
-                        return new Version(11, 3, xnuversion.Build - 1, 0);
-                    case 5:
-                        return new Version(11, 4, 0, 0);
-                    case 6:
-                        switch (xnuversion.Build)
-                        {
-                            case 2:
-                                //TODO add proper detection here when we can detect build numbers
-                                return new Version(11, 5, 0, 0);
-                            case 6:
-                                return new Version(11, 6, 0, 0);
-                            case 8:
-                                return new Version(11, 6, 1, 0);
-                            case 14:
-                                return new Version(11, 6, 2, 0);
-                            case 19:
-                                //TODO add proper detection here when we can detect build numbers
-                                return new Version(11, 6, 3, 0);
-                            case 26:
-                                return new Version(11, 6, 5, 0);
-                            default:
-                                throw new PlatformNotSupportedException();
-                        }
-                    default:
-                            throw new PlatformNotSupportedException();
-                }
-            case 21:
-                switch (xnuversion.Minor)
-                {
-                    case 30:
-                        return new Version(12, 0, 0, 0);
-                    case 41:
-                        return new Version(12, 0, 1, 0);
-                    case 61:
-                        return new Version(12, 1, 0, 0);
-                    case 80:
-                        //TODO add proper detection here when we can detect build numbers (12.2.0 and 12.2.1 share same XNU version)
-                        return new Version(12, 2, 0, 0);
-                    case 101:
-                        return new Version(12, 3, 0, 0);
-                    default:
-                        throw new PlatformNotSupportedException();
-                }
-            default:
-                    throw new PlatformNotSupportedException();
+        var version = GetMacSwVersInfo()[1].ToLower().Replace("ProductVersion", String.Empty).Replace(" ", String.Empty);
+
+        int dotCounter = 0;
+
+        foreach (var str in version)
+        {
+            if (str == '.')
+            {
+                dotCounter++;
+            }
         }
+
+        if (dotCounter == 1)
+        {
+            version += ".0";
+        }
+        if (dotCounter == 2)
+        {
+            version += ".0";
+        }
+        
+        return Version.Parse(version);
     }
+    
+    public static string DetectMacOsBuildNumber()
+    {
+        return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+    }
+
+    private static string[] GetMacSwVersInfo()
+    {
+        ProcessManager processManager = new ProcessManager();
+        var output = processManager.RunProcessMac("/usr/bin/", "sw_vers");
+
+        return output.Split(' ');
+    }
+    
 }
