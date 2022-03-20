@@ -261,32 +261,40 @@ namespace AluminiumTech.DevKit.PlatformKit
             throw new PlatformNotSupportedException();
         }
 
-        /*
-        public string RunMacCommand(string command)
-        {
-            
-        }
         
-        /* <summary>
-        / 
-         </summary>
-         <param name="command"></param>
-         <returns></returns>
-        internal string RunMacCommand(string command)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public string RunMacCommand(string command)
         {
             if (_osAnalyzer.IsMac())
             {
-      //          var processName = "zsh";
-      //          var location = "/usr/bin/";
+                var location = "/usr/bin/";
 
-                var processArguments = "-c \" " + command + " \"";
 
-                return RunProcessMac(location, processName, processArguments);
+                string[] array = command.Split(' ');
+
+                if (array.Length > 1)
+                {
+                    var args= array.ToString().Replace(array[0], String.Empty);
+
+                    return RunProcessMac(location, array[0], args);
+                }
+                else
+                {
+                   return RunProcessMac(location, command);
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
             }
 
             throw new PlatformNotSupportedException();
         }
-        */
 
         /// <summary>
         /// Run a command or program as if inside a terminal on Linux.
