@@ -273,8 +273,7 @@ namespace AluminiumTech.DevKit.PlatformKit
             if (_osAnalyzer.IsMac())
             {
                 var location = "/usr/bin/";
-
-
+                
                 string[] array = command.Split(' ');
 
                 if (array.Length > 1)
