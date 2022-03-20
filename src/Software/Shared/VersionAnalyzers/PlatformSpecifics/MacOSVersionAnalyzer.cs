@@ -324,9 +324,7 @@ public static class MacOSVersionAnalyzer
     // ReSharper disable once IdentifierTypo
     private static string[] GetMacSwVersInfo()
     {
-        ProcessManager processManager = new ProcessManager();
-        var output = processManager.RunProcessMac("/usr/bin/", "sw_vers");
-
-        return output.Split(' ');
+        // ReSharper disable once StringLiteralTypo
+        return new ProcessManager().RunMacCommand("sw_vers").Split(' ');
     }
 }
