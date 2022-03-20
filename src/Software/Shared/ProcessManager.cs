@@ -287,10 +287,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 {
                    return RunProcessMac(location, command);
                 }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
             }
 
             throw new PlatformNotSupportedException();
