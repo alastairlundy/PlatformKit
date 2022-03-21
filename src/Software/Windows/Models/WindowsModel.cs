@@ -21,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using AluminiumTech.DevKit.PlatformKit.Hardware.Windows.Enums;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
@@ -34,6 +33,4 @@ public class WindowsModel
     public WindowsVersion Version { get; set; }
     
     public WindowsEdition Edition { get; set; }
-    
-    public WindowsDeviceFamily DeviceFamily { get; set; }
 }
