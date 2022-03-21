@@ -31,9 +31,15 @@ public enum WindowsEdition
     Home,
     Education,
     Pro,
+    ProEducation,
+    ProForWorkstations,
     // ReSharper disable once InconsistentNaming
     EnterpriseLTSC,
     EnterpriseSemiAnnualChannel,
-    GovernmentEdition,
+    IoTCore,
+    IoTEnterprise,
+    IoTEnterpriseLTSC,
+    Team,
     Server,
+    SE,
 }
