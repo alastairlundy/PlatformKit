@@ -44,7 +44,7 @@ public static class MacOSVersionAnalyzer
     /// <param name="osVersionAnalyzer"></param>
     /// <param name="input"></param>
     /// <returns></returns>
-    /// <exception cref="OperatingSystemVersionDetectionException"></exception>
+    /// <exception cref="OperatingSystemDetectionException"></exception>
     /// <exception cref="PlatformNotSupportedException"></exception>
     /// <exception cref="Exception"></exception>
     public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer, Version input)
@@ -98,7 +98,7 @@ public static class MacOSVersionAnalyzer
                 if (input.Major == 11) return MacOsVersion.v11_BigSur;
                 if (input.Major == 12) return MacOsVersion.v12_Monterey;
 
-                throw new OperatingSystemVersionDetectionException();
+                throw new OperatingSystemDetectionException();
             }
             else
             {

@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.Software.Windows;
 
@@ -39,7 +40,7 @@ public class WindowsAnalyzer
     }
     
     /// <summary>
-    /// Detect the Edition of Windows being run.
+    /// Detects the Edition of Windows being run.
     /// </summary>
     /// <returns></returns>
     /// <exception cref="OperatingSystemDetectionException"></exception>
@@ -47,29 +48,61 @@ public class WindowsAnalyzer
     {
         if (_osAnalyzer.IsWindows())
         {
-
             var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
                 "EditionID");
 
             if (edition.ToLower().Contains("home"))
             {
-                
+                return WindowsEdition.Home;
+            }
+            else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
+            {
+                return WindowsEdition.ProForWorkstations;
             }
             else if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
             {
-                
+                return WindowsEdition.Pro;
             }
             else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
             {
-                return W
+                return WindowsEdition.ProEducation;
+            }
+            else if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
+            {
+                return WindowsEdition.Education;
             }
             else if (edition.ToLower().Contains("server")){  
                 return WindowsEdition.Server;
             }
-            else if (edition.ToLower().Contains("government"))
+            else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                     !edition.ToLower().Contains("iot"))
             {
-                return WindowsEdition.GovernmentEdition;
-            } 
+                return WindowsEdition.EnterpriseLTSC;
+            }
+            else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                     !edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.EnterpriseSemiAnnualChannel;
+            }
+            else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                     edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterpriseLTSC;
+            }
+            else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                     edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterprise;
+            }
+
+            if (WindowsVersionAnalyzer.IsWindows11())
+            {
+                if (edition.ToLower().Contains("se"))
+                {
+                    return WindowsEdition.SE;
+                }
+            }
+
             throw new OperatingSystemDetectionException();
         }
         else
@@ -84,9 +117,10 @@ public class WindowsAnalyzer
         if (_osAnalyzer.IsWindows())
         { 
            // var result = processManager.
-            //"/c Get-WmiObject -" + query + "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
+           var result = _processManager.RunCmdCommand("/c Get-WmiObject -" + query +
+                                                      "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
 
-          //  return result.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
+             return result.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
         } 
         else
         {

@@ -88,7 +88,7 @@ public static class WindowsVersionAnalyzer
             case WindowsVersion.Win10_InsiderPreview:
                 return true;
             case WindowsVersion.NotDetected:
-                throw new OperatingSystemVersionDetectionException();
+                throw new OperatingSystemDetectionException();
             default:
                 return false;
         }
@@ -114,7 +114,7 @@ public static class WindowsVersionAnalyzer
             case WindowsVersion.Win11_InsiderPreview:
                 return true;
             case WindowsVersion.NotDetected:
-                throw new OperatingSystemVersionDetectionException();
+                throw new OperatingSystemDetectionException();
             default:
                 return false;
         }
@@ -265,7 +265,7 @@ public static class WindowsVersionAnalyzer
 
                     if (dotCounter > 3)
                     {
-                        throw new OperatingSystemVersionDetectionException();
+                        throw new OperatingSystemDetectionException();
                     }
 
                     return Version.Parse(description);
@@ -286,7 +286,7 @@ public static class WindowsVersionAnalyzer
         /// <param name="osVersionAnalyzer"></param>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
-        /// <exception cref="OperatingSystemVersionDetectionException"></exception>
+        /// <exception cref="OperatingSystemDetectionException"></exception>
         public static Version GetWindowsVersionFromEnum(this OSVersionAnalyzer osVersionAnalyzer, WindowsVersion windowsVersion)
         {
             return windowsVersion switch
@@ -321,7 +321,7 @@ public static class WindowsVersionAnalyzer
                 WindowsVersion.Win10_21H2 => new Version(10, 0, 19044),
                 WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
-                _ => throw new OperatingSystemVersionDetectionException()
+                _ => throw new OperatingSystemDetectionException()
             };
         }
 
@@ -339,5 +339,15 @@ public static class WindowsVersionAnalyzer
             var expected = versionAnalyzer.GetWindowsVersionFromEnum(windowsVersion);
             
             return (detected.Build >= expected.Build);
+        }
+
+        public static bool IsWindows11()
+        {
+            return IsWindows11(new OSVersionAnalyzer());
+        }
+
+        public static bool IsWindows10()
+        {
+            return IsWindows10(new OSVersionAnalyzer());
         }
 }

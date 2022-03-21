@@ -103,7 +103,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     }
                     else
                     {
-                        throw new OperatingSystemVersionDetectionException();
+                        throw new OperatingSystemDetectionException();
                     }
                 }
             }
@@ -159,9 +159,9 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                             osVersion = "81";
                             break;
                         case WindowsVersion.NotDetected:
-                            throw new OperatingSystemVersionDetectionException();
+                            throw new OperatingSystemDetectionException();
                         default:
-                            throw new OperatingSystemVersionDetectionException();
+                            throw new OperatingSystemDetectionException();
                     }
                 }
             }
