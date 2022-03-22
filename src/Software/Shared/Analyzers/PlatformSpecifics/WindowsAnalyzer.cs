@@ -38,7 +38,7 @@ public class WindowsAnalyzer
         _processManager = new ProcessManager();
         _osAnalyzer = new OSAnalyzer();
     }
-    
+
     /// <summary>
     /// Detects the Edition of Windows being run.
     /// </summary>
@@ -48,8 +48,10 @@ public class WindowsAnalyzer
     {
         if (_osAnalyzer.IsWindows())
         {
-            var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-                "EditionID");
+            var edition = GetWMIValue("Name", "Win32_OperatingSystem");
+            
+            //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+             //   "EditionID");
 
             if (edition.ToLower().Contains("home"))
             {
@@ -151,7 +153,7 @@ public class WindowsAnalyzer
     public string GetWindowsRegistryValue(string query, string value){
         if (_osAnalyzer.IsWindows())
         {
-            var result = _processManager.RunCmdCommand("/c REG QUERY " + query + " /v " + value);
+            var result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
                 if (result != null)
                 {
