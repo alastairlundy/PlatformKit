@@ -63,6 +63,13 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
                 
             //    Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
+            
+                WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
+                var desc = windowsAnalyzer.GetWMIValue("Description", "Win32_OperatingSystem");
+                var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
+                
+                Console.WriteLine("Description: " + desc);
+                Console.WriteLine("Name: " + name);
             }
 
             if (osAnalyzer.IsMac())
