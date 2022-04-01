@@ -56,7 +56,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Possible RID: " + candidate);
             }
           
-            processManager.OpenUrlInBrowser("duckduckgo.com");
+            //processManager.OpenUrlInBrowser("duckduckgo.com");
             
             if (osAnalyzer.IsWindows())
             {
