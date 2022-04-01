@@ -112,11 +112,31 @@ namespace AluminiumTech.DevKit.PlatformKit
                 {
                     process.StartInfo.Verb = "runas";
                 }
-                
-                process.Start();
 
-                process.WaitForExit();
-                return process.StandardOutput.ReadToEnd();
+                Task task = new Task(() => process.Start());
+                task.Start();
+
+                task.Wait();
+                var end = process.StandardOutput.ReadToEnd();
+
+                if (end == null)
+                {
+                    throw new NullReferenceException();
+                }
+
+                if (end.ToLower()
+                    .Contains(" is not recognized as the name of a cmdlet, function, script file, or operable program"))
+                {
+                    throw new Exception(end);
+                }
+                else if (end.ToLower()
+                         .Contains(
+                             "is not recognized as an internal or external command, operable program or batch file."))
+                {
+                    throw new Exception(end);
+                }
+
+                return end;
             }
             catch (Exception ex)
             {
@@ -252,7 +272,9 @@ namespace AluminiumTech.DevKit.PlatformKit
         {
             if (_osAnalyzer.IsWindows())
             {
-                var location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" +
+                var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
+                                                           //+ "System32" +
+                               + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
                 return RunProcessWindows(location, "powershell", command, processStartInfo);
    

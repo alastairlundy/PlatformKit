@@ -42,14 +42,20 @@
         </None>
         <None Include="../README.md" Pack="true" PackagePath="\" />
         <None Remove="PlatformKitTestingApp\**" />
+        <None Remove="TestConsole\**" />
+        <None Remove="PlatformKitTest\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="PlatformKitTestingApp\**" />
+      <Compile Remove="TestConsole\**" />
+      <Compile Remove="PlatformKitTest\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKitTestingApp\**" />
+      <EmbeddedResource Remove="TestConsole\**" />
+      <EmbeddedResource Remove="PlatformKitTest\**" />
     </ItemGroup>
 
     <ItemGroup>

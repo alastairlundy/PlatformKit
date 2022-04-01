@@ -30,9 +30,9 @@ public enum WindowsEdition
 {
     Home,
     Education,
-    Pro,
-    ProEducation,
-    ProForWorkstations,
+    Professional,
+    ProfessionalForEducation,
+    ProfessionalForWorkstations,
     // ReSharper disable once InconsistentNaming
     EnterpriseLTSC,
     EnterpriseSemiAnnualChannel,

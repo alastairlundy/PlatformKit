@@ -61,15 +61,24 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
             if (osAnalyzer.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
+
+             //   var res = processManager.RunPowerShellCommand("ping www.duckduckgo.com");
                 
-            //    Console.WriteLine(processManager.RunPowerShellCommand("ping www.duckduckgo.com"));
+             //  Console.WriteLine(res);
             
                 WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
-                var desc = windowsAnalyzer.GetWMIValue("Description", "Win32_OperatingSystem");
-                var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
+               // var caption = windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem");
+               // var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
                 
-                Console.WriteLine("Description: " + desc);
-                Console.WriteLine("Name: " + name);
+                //Console.WriteLine("Caption: " + caption);
+                //Console.WriteLine("Name: " + name);
+            
+           //     Console.WriteLine("OS :" + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
+                
+                //Console.WriteLine("Caption: " + windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem"));
+
+               // Console.WriteLine(processManager.RunPowerShellCommand("systeminfo"));
+               Console.WriteLine("WindowsEdition: " + windowsAnalyzer.DetectWindowsEdition().ToString());
             }
 
             if (osAnalyzer.IsMac())

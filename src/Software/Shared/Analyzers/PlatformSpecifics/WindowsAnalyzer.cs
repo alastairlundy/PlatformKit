@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+using System.Collections.Generic;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.Software.Windows;
@@ -46,101 +47,142 @@ public class WindowsAnalyzer
     /// <exception cref="OperatingSystemDetectionException"></exception>
     public WindowsEdition DetectWindowsEdition()
     {
-        if (_osAnalyzer.IsWindows())
+        try
         {
-            var edition = GetWMIValue("Name", "Win32_OperatingSystem");
-            
-            //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-             //   "EditionID");
+            if (_osAnalyzer.IsWindows())
+            {
+                var desc = _processManager.RunPowerShellCommand("systeminfo");
 
-            if (edition.ToLower().Contains("home"))
-            {
-                return WindowsEdition.Home;
-            }
-            else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
-            {
-                return WindowsEdition.ProForWorkstations;
-            }
-            else if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.Pro;
-            }
-            else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.ProEducation;
-            }
-            else if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.Education;
-            }
-            else if (edition.ToLower().Contains("server")){  
-                return WindowsEdition.Server;
-            }
-            else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                     !edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.EnterpriseLTSC;
-            }
-            else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                     !edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.EnterpriseSemiAnnualChannel;
-            }
-            else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                     edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.IoTEnterpriseLTSC;
-            }
-            else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                     edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.IoTEnterprise;
-            }
+                //Console.WriteLine(desc);
 
-            if (WindowsVersionAnalyzer.IsWindows11())
-            {
-                if (edition.ToLower().Contains("se"))
+                var arr = desc.Replace(":", String.Empty).Split(' ');
+                
+                var edition = arr[41].Replace("OS", String.Empty);
+
+                //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
+
+                //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+                //   "EditionID");
+
+                if (edition.ToLower().Contains("home"))
                 {
-                    return WindowsEdition.SE;
+                    return WindowsEdition.Home;
                 }
-            }
+                else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
+                {
+                    return WindowsEdition.ProfessionalForWorkstations;
+                }
+                else if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
+                {
+                    return WindowsEdition.Professional;
+                }
+                else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
+                {
+                    return WindowsEdition.ProfessionalForEducation;
+                }
+                else if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
+                {
+                    return WindowsEdition.Education;
+                }
+                else if (edition.ToLower().Contains("server"))
+                {
+                    return WindowsEdition.Server;
+                }
+                else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                         !edition.ToLower().Contains("iot"))
+                {
+                    return WindowsEdition.EnterpriseLTSC;
+                }
+                else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                         !edition.ToLower().Contains("iot"))
+                {
+                    return WindowsEdition.EnterpriseSemiAnnualChannel;
+                }
+                else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                         edition.ToLower().Contains("iot"))
+                {
+                    return WindowsEdition.IoTEnterpriseLTSC;
+                }
+                else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                         edition.ToLower().Contains("iot"))
+                {
+                    return WindowsEdition.IoTEnterprise;
+                }
 
-            throw new OperatingSystemDetectionException();
+                if (WindowsVersionAnalyzer.IsWindows11())
+                {
+                    if (edition.ToLower().Contains("se"))
+                    {
+                        return WindowsEdition.SE;
+                    }
+                }
+
+                throw new OperatingSystemDetectionException();
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
-        else
+        catch(Exception exception)
         {
-            throw new PlatformNotSupportedException();
+            Console.WriteLine(exception.ToString());
+            throw new Exception(exception.ToString());
         }
     }
 
     // ReSharper disable once InconsistentNaming
-    public string GetWMIValue(string query, string wmiClass)
+    public string GetWMIClass(string wmiClass)
     {
         if (_osAnalyzer.IsWindows())
-        { 
-           // var result = processManager.
-           var result = _processManager.RunCmdCommand("/c Get-WmiObject -" + query +
-                                                      "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
+        {
+            var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
+            // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
+            
+//#if DEBUG
+  //          Console.WriteLine(result);              
+//#endif
 
-             return result.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
+            return result;
+        }
+
+        throw new PlatformNotSupportedException();
+    }
+    
+    // ReSharper disable once InconsistentNaming
+    public string GetWMIValue(string property, string wmiClass)
+    {
+        if (_osAnalyzer.IsWindows())
+        {
+            var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
+                                                              + wmiClass + " -Property " + property);
+
+            #if DEBUG
+           //     Console.WriteLine(result);
+            #endif
+            
+            var arr = result.Split(Convert.ToChar("\r\n"));
+            
+           foreach (var str in arr)
+           {
+               Console.WriteLine(str);
+               
+               if (str.ToLower().StartsWith(property.ToLower()))
+               {
+                   return str
+                       .Replace(" : ", String.Empty)
+                       .Replace(property, String.Empty)
+                       .Replace(" ", String.Empty);
+                       
+               }
+           }
+           
+           throw new ArgumentException();
         } 
         else
         {
             throw new PlatformNotSupportedException();
         }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="wmiClass"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
-    // ReSharper disable once InconsistentNaming
-    public string GetWindowsManagementInstrumentationValue(string query, string wmiClass)
-    {
-        return GetWMIValue(query, wmiClass);
     }
 
     /// <summary>
