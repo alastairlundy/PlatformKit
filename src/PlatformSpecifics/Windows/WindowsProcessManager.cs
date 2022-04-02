@@ -43,7 +43,7 @@ public static class WindowsProcessManagerExtensions
             if (new OSAnalyzer().IsWindows())
             {
                 try{
-                    var result = processManager.RunCmdCommand("/c REG QUERY " + query + " /v " + value);
+                    var result = processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
                     if (result != null)
                     {
@@ -76,7 +76,7 @@ public static class WindowsProcessManagerExtensions
             {
                 try
                 {
-                    var result = processManager.RunPowerShellCommand($"/c Get-WmiObject -" + query + "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
+                    var result = processManager.RunPowerShellCommand($"Get-WmiObject -" + query + "'SELECT * FROM meta_class WHERE __class = '" + wmiClass);
 
                     result = result.Replace(wmiClass, String.Empty).Replace(" ", String.Empty);
                     
