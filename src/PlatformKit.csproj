@@ -17,10 +17,16 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.5.0 Alpha 4
-* Removed ``DetectMacOsVersion_Hardcoded()`` method - This has been replaced with a new ``DetectMacOsVersion()`` method that isn't based on hardcoded information.
-* Added macOS Build string detection
-* Re-added ``RunMacCommand()`` method</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.5.0 Alpha 5
+* Added Windows Edition Detection
+* Added missing items to WindowsEdition enum
+* Expanded ``Pro`` and ``ProEducation`` to ``Professional``and ``ProfessionalForEducation``
+* Removed ``WindowsDeviceFamily`` enum
+* Move Windows analysis code to ``WindowsAnalyzer`` class - Existing methods in the WindowsSoftwareDetection class is deprecated and will be removed in PlatformKit 3.0
+
+### Known Issues
+* ``GetWMIValue()`` method does not return WMI value correctly.
+* ``GetWMIClass()`` method does not return WMI class information correctly.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,7 +36,7 @@
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.5.0-alpha.5</PackageVersion>
+        <PackageVersion>2.5.0-alpha.6</PackageVersion>
 
     </PropertyGroup>
 
