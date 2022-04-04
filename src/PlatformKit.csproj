@@ -22,17 +22,26 @@
 * Fixed an issue with getting Windows registry values.
 
 ### Known Issues
-* ``GetWMIValue()`` and ``GetWindowsManagementInstrumentationValue()`` methods do not return values correctly.</PackageReleaseNotes>
+
+Changes
+
+    Fixed issues with Runtime ID Generation on Linux
+    Fixed issues with detecting OsRelease information on Linux
+
+Known Issues
+
+    GetWMIValue() method does not return WMI value correctly.
+    GetWMIClass() method does not return WMI class information correctly.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.4.1.0</AssemblyVersion>
-        <FileVersion>2.4.1.0</FileVersion>
-        <Version>2.4.1.0</Version>
-        <PackageVersion>2.4.1</PackageVersion>
+        <AssemblyVersion>2.4.2.0</AssemblyVersion>
+        <FileVersion>2.4.2.0</FileVersion>
+        <Version>2.4.2.0</Version>
+        <PackageVersion>2.4.2</PackageVersion>
 
     </PropertyGroup>
 
