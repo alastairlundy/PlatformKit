@@ -70,15 +70,23 @@ public static class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty);
                         linuxDistributionInformation.Version = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("ID="))
+                    else if (resultArray[index].ToUpper().Contains("ID=") && !resultArray[index].ToUpper().StartsWith("VERSION_"))
                     {
                         resultArray[index] = resultArray[index].Replace("ID=", string.Empty);
                         linuxDistributionInformation.Identifier = resultArray[index];
+                        
+                       // Console.WriteLine(linuxDistributionInformation.Identifier);
                     }
                     else if (resultArray[index].ToUpper().Contains("ID_LIKE="))
                     {
                         resultArray[index] = resultArray[index].Replace("ID_LIKE=", string.Empty);
                         linuxDistributionInformation.Identifier_Like = resultArray[index];
+
+                        if (linuxDistributionInformation.Identifier_Like.ToLower().Contains("ubuntu") &&
+                            linuxDistributionInformation.Identifier_Like.ToLower().Contains("debian"))
+                        {
+                            linuxDistributionInformation.Identifier_Like = "ubuntu";
+                        }
                     }
                     else if (resultArray[index].ToUpper().Contains("PRETTY_NAME="))
                     {
