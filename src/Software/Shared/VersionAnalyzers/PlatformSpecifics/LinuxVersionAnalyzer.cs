@@ -26,13 +26,15 @@ using System;
 //Move namespace in v3.
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
+/// <summary>
+/// 
+/// </summary>
 public static class LinuxVersionAnalyzer
 {
 
         /// <summary>
-        ///     Detects the Linux Distribution Version as read from cat /etc/os-release and reformats it into the format of
-        ///     Version.
-        ///     WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
+        /// Detects the Linux Distribution Version as read from cat /etc/os-release and reformats it into the format of System.Version object
+        ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
         public static Version DetectLinuxDistributionVersion(this OSVersionAnalyzer osVersionAnalyzer)
@@ -100,12 +102,11 @@ public static class LinuxVersionAnalyzer
         }
 
         /// <summary>
-        ///     Detects the linux kernel version to string.
+        /// Detects the linux kernel version to string.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">
-        ///     Throws a platform not supported exception if run on Windows, macOS, or
-        ///     any platform that isn't Linux.
+        ///  Throws a platform not supported exception if run on Windows, macOS, or any platform that isn't Linux.
         /// </exception>
         public static Version DetectLinuxKernelVersion(this OSVersionAnalyzer osVersionAnalyzer)
         {

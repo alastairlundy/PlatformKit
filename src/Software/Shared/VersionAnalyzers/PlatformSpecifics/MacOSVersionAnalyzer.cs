@@ -31,21 +31,29 @@ using AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
 // ReSharper disable once InconsistentNaming
+/// <summary>
+/// 
+/// </summary>
 public static class MacOSVersionAnalyzer
 {
+    /// <summary>
+    /// Returns macOS version as a macOS version enum.
+    /// </summary>
+    /// <param name="osVersionAnalyzer"></param>
+    /// <returns></returns>
     public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer)
     {
         return GetMacOsVersionToEnum(osVersionAnalyzer, DetectMacOsVersion(osVersionAnalyzer));
     }
 
     /// <summary>
-    /// 
+    /// Converts a macOS version to a macOS version enum.
     /// </summary>
     /// <param name="osVersionAnalyzer"></param>
     /// <param name="input"></param>
     /// <returns></returns>
     /// <exception cref="OperatingSystemDetectionException"></exception>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on Windows or macOS</exception>
     /// <exception cref="Exception"></exception>
     public static MacOsVersion GetMacOsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer, Version input)
     {
@@ -129,7 +137,7 @@ public static class MacOSVersionAnalyzer
     */
 
     /// <summary>
-    /// 
+    /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
     public static MacOsSystemInformation DetectMacSystemInformation()
@@ -220,7 +228,7 @@ public static class MacOSVersionAnalyzer
     }
     
     /// <summary>
-    /// Detects the MacOsVersion
+    /// Detects the MacOsVersion and returns it as a macOS version enum.
     /// </summary>
     /// <param name="osVersionAnalyzer"></param>
     /// <returns></returns>
@@ -290,6 +298,11 @@ public static class MacOSVersionAnalyzer
         }
     }
 
+    /// <summary>
+    /// Detects the macOS version and returns it as a System.Version object.
+    /// </summary>
+    /// <param name="osVersionAnalyzer"></param>
+    /// <returns></returns>
     public static Version DetectMacOsVersion(this OSVersionAnalyzer osVersionAnalyzer)
     {
         var version = GetMacSwVersInfo()[1].ToLower().Replace("ProductVersion", String.Empty).Replace(" ", String.Empty);
@@ -316,12 +329,20 @@ public static class MacOSVersionAnalyzer
         return Version.Parse(version);
     }
     
+    /// <summary>
+    /// Detects the macOS Build Number.
+    /// </summary>
+    /// <returns></returns>
     public static string DetectMacOsBuildNumber()
     {
         return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
     }
 
     // ReSharper disable once IdentifierTypo
+    /// <summary>
+    /// Gets info from sw_vers command on Mac.
+    /// </summary>
+    /// <returns></returns>
     private static string[] GetMacSwVersInfo()
     {
         // ReSharper disable once StringLiteralTypo

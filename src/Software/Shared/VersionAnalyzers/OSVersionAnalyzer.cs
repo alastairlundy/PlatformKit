@@ -39,11 +39,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers
         }
 
         /// <summary>
-        /// 
+        /// Detect the OS version on Windows, macOS, or Linux.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException">
-        /// Not yet implemented on macOS. Please do not run on macOS yet!
         /// Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
         /// </exception>
         /// <exception cref="PlatformNotSupportedException"></exception>

@@ -27,6 +27,9 @@ using System;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
+    /// <summary>
+    /// An enum representing different versions of Windows.
+    /// </summary>
     public enum WindowsVersion
     {
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]

@@ -29,6 +29,9 @@ using AluminiumTech.DevKit.PlatformKit.Deprecation;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
 {
+    /// <summary>
+    /// An enum representing macOS versions.
+    /// </summary>
     public enum MacOsVersion
     {
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]

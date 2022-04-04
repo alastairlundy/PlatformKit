@@ -24,7 +24,7 @@ SOFTWARE.
 namespace AluminiumTech.DevKit.PlatformKit.Software.Windows;
 
 /// <summary>
-/// 
+/// An enum representing different Windows Editions.
 /// </summary>
 public enum WindowsEdition
 {

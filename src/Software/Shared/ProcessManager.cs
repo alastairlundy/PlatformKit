@@ -48,7 +48,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        ///     Run a Process with Arguments
+        ///  Run a Process with Arguments
         /// </summary>
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
@@ -68,7 +68,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        ///     Run a process on Windows with Arguments
+        /// Run a process on Windows with Arguments
         /// </summary>
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
@@ -146,7 +146,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        ///     Run a Process on macOS
+        ///  Run a Process on macOS
         /// </summary>
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
@@ -285,7 +285,7 @@ namespace AluminiumTech.DevKit.PlatformKit
 
         
         /// <summary>
-        /// 
+        /// Run a command on macOS located in the /usr/bin/ folder.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -423,7 +423,8 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// Open a URL in the default browser.
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="url">The URL to be opened.</param>
+        /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
         /// <returns></returns>
         public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
