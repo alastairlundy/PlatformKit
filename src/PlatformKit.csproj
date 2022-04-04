@@ -18,18 +18,10 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes
-* Fixed a typo in macOS Version enum item ``Monterey`` (spelled previously as ``Monterrey``) - This may cause compatibility issues with your code and all usage of this enum in your code will need to be refactored to use the renamed enum item.\
-* Fixed an issue with getting Windows registry values.
-
-### Known Issues
-
-Changes
-
     Fixed issues with Runtime ID Generation on Linux
     Fixed issues with detecting OsRelease information on Linux
 
-Known Issues
-
+### Known Issues
     GetWMIValue() method does not return WMI value correctly.
     GetWMIClass() method does not return WMI class information correctly.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
