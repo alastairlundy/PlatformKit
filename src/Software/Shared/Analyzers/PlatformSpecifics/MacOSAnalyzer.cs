@@ -36,6 +36,14 @@ namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
     /// </summary>
     public static class MacOSAnalyzer
     {
+        
+        /*
+         *     public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
+
+    public MacOsSystemInformation GetMacSwVersionInformation();
+         * 
+         */
+        
         /// <summary>
         /// Returns whether or not a Mac is Apple Silicon based.
         /// </summary>

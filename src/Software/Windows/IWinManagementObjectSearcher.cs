@@ -21,10 +21,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
 {
+    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
     public interface IWinManagementObjectSearcher
     {
         
