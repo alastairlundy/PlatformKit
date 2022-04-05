@@ -28,7 +28,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
     /// <summary>
     /// 
     /// </summary>
-    public struct LinuxOsRelease
+    public class LinuxOsRelease
     {
         public bool IsLongTermSupportRelease { get; set; }
 
