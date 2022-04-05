@@ -25,6 +25,9 @@ using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Enums;
 
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
 
+/// <summary>
+/// 
+/// </summary>
 public class ReleaseYearModel
 {
     public int Month { get; set; }

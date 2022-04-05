@@ -55,6 +55,7 @@ public class WindowsSoftwareDetection : IWindowsSoftwareDetection
         }
     }
 
+    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
     public string GetWMIValue(string query, string wmiClass, string failMessage)
     {
         try
@@ -67,6 +68,7 @@ public class WindowsSoftwareDetection : IWindowsSoftwareDetection
         }
     }
     
+    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
     public string GetWindowsManagementInstrumentationValue(string query, string wmiClass, string failMessage)
     {
         return GetWMIValue(query, wmiClass, failMessage);

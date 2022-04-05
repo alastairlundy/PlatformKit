@@ -31,20 +31,29 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 //Move namespace in v3.
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 
+/// <summary>
+/// 
+/// </summary>
 public static class WindowsVersionAnalyzer
 {
 
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("Windows")]
-#endif
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="osVersionAnalyzer"></param>
+        /// <returns></returns>
         public static bool IsWindows10(this OSVersionAnalyzer osVersionAnalyzer)
         {
            return IsWindows10(osVersionAnalyzer, GetWindowsVersionToEnum(osVersionAnalyzer));
         }
         
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("Windows")]
-#endif
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="osVersionAnalyzer"></param>
+    /// <param name="windowsVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="OperatingSystemDetectionException"></exception>
     public static bool IsWindows10(this OSVersionAnalyzer osVersionAnalyzer, WindowsVersion windowsVersion)
     {
         switch (windowsVersion)
@@ -94,17 +103,23 @@ public static class WindowsVersionAnalyzer
         }
     }
 
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("Windows")]
-#endif
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="osVersionAnalyzer"></param>
+        /// <returns></returns>
         public static bool IsWindows11(this OSVersionAnalyzer osVersionAnalyzer)
         {
             return IsWindows11(osVersionAnalyzer, GetWindowsVersionToEnum(osVersionAnalyzer));
         }
 
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("Windows")]
-#endif
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="osVersionAnalyzer"></param>
+    /// <param name="windowsVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="OperatingSystemDetectionException"></exception>
     public static bool IsWindows11(this OSVersionAnalyzer osVersionAnalyzer, WindowsVersion windowsVersion)
     {
         switch (windowsVersion)
@@ -120,13 +135,10 @@ public static class WindowsVersionAnalyzer
         }
     }
 
-    /// <summary>
+        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("Windows")]
-#endif
         public static WindowsVersion GetWindowsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer)
         {
             return GetWindowsVersionToEnum(osVersionAnalyzer, DetectWindowsVersion(osVersionAnalyzer));
@@ -135,9 +147,6 @@ public static class WindowsVersionAnalyzer
         /// <summary>
         /// </summary>
         /// <returns></returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("Windows")]
-#endif
         public static WindowsVersion GetWindowsVersionToEnum(this OSVersionAnalyzer osVersionAnalyzer, Version input)
         {
             try
@@ -228,9 +237,6 @@ public static class WindowsVersionAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("Windows")]
-#endif
         public static Version DetectWindowsVersion(this OSVersionAnalyzer osVersionAnalyzer)
         {
             try
@@ -341,11 +347,19 @@ public static class WindowsVersionAnalyzer
             return (detected.Build >= expected.Build);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWindows11()
         {
             return IsWindows11(new OSVersionAnalyzer());
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWindows10()
         {
             return IsWindows10(new OSVersionAnalyzer());

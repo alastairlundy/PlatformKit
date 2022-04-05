@@ -29,6 +29,9 @@ using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyz
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers
 {
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// 
+    /// </summary>
     public class OSVersionAnalyzer
     {
         protected OSAnalyzer _osAnalyzer;

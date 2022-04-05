@@ -23,6 +23,9 @@ SOFTWARE.
 
 namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Enums;
 
+/// <summary>
+/// 
+/// </summary>
 public enum ReleaseYearTimeframe
 {
     Early,

@@ -29,6 +29,9 @@ using AluminiumTech.DevKit.PlatformKit.Software.Windows;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 
+/// <summary>
+/// 
+/// </summary>
 public class WindowsAnalyzer
 {
     protected readonly ProcessManager _processManager;

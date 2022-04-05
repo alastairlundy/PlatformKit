@@ -21,8 +21,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
+
 namespace AluminiumTech.DevKit.PlatformKit.Software.Windows;
 
+[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
 public interface IWindowsSoftwareDetection
 {
     public string GetWindowsRegistryValue(string query, string value, string failMessage);

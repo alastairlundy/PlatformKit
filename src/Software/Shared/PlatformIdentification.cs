@@ -26,6 +26,9 @@ using System.Reflection;
 
 namespace AluminiumTech.DevKit.PlatformKit;
 
+/// <summary>
+/// 
+/// </summary>
 public class PlatformIdentification
 {
     public PlatformIdentification()

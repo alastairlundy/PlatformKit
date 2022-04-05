@@ -55,6 +55,10 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             osAnalyzer = new OSAnalyzer();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         protected string GetArchitectureString()
         {
             string cpuArch = RuntimeInformation.OSArchitecture switch
@@ -69,6 +73,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             return cpuArch;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifierType"></param>
+        /// <returns></returns>
+        /// <exception cref="OperatingSystemDetectionException"></exception>
         protected string GetOsNameString(RuntimeIdentifierType identifierType)
         {
             string osName = null;
@@ -111,6 +121,12 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             return osName;
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="OperatingSystemDetectionException"></exception>
         protected string GetOsVersionString()
         {
             string osVersion = null;
