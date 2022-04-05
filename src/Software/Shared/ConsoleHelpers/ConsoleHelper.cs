@@ -30,8 +30,8 @@ namespace AluminiumTech.DevKit.PlatformKit.Software.Shared.ConsoleHelpers;
 public class ConsoleHelper
 {
     /// <summary>
-    ///     Displays license information in the Console from a Text File.
-    ///     The information stays in the Console window for the the duration specified in the parameter.
+    ///  Displays license information in the Console from a Text File.
+    ///  The information stays in the Console window for the the duration specified in the parameter.
     /// </summary>
     /// <param name="pathToTextFile"></param>
     /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 500 will result in an exception being thrown.</param>

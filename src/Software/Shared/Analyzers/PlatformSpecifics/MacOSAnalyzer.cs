@@ -30,7 +30,7 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
 {
     
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     /// <summary>
     /// macOS specific extensions to the OSAnalyzer class.
     /// </summary>

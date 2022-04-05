@@ -29,9 +29,12 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
 //Move namespace in V3
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 
+/// <summary>
+/// 
+/// </summary>
 public static class LinuxAnalyzer
 {
-    /// <summary>
+        /// <summary>
         /// Detects Linux Distribution information and returns it.
         /// </summary>
         /// <returns></returns>
