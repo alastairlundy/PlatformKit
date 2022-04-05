@@ -18,10 +18,17 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes
-* Fixed issues with Runtime ID Generation on Linux
-* Fixed issues with detecting OsRelease information on Linux
+* Changed ``LinuxOsRelease`` struct to a class
+* Removed ``WindowsEdition`` model
+* Removed ``IMacSystemAnalyzer`` interface
+* Added additional in code documentation
+
+### Deprecations
+* Deprecated ``IWinManagementObjectSearcher`` interface - This will be removed in PlatformKit 3.0
+* Deprecated ``WindowsSoftwareDetection`` class and ``IWindowsSoftwareDetection`` interface - This will be removed in PlatformKit 3.0
 
 ### Known Issues
+* WinManagementObjectSearcher method ``public Dictionary&lt;string, string&gt; Get(List&lt;string&gt; queryObjectsList, string wmiClass)`` does not return WMI values correctly.
 * `GetWMIValue()` method does not return WMI value correctly.
 * `GetWMIClass()` method does not return WMI class information correctly.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
@@ -33,7 +40,7 @@
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.5.0-beta.1</PackageVersion>
+        <PackageVersion>2.5.0-beta.2</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
