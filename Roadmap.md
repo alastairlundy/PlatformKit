@@ -2,7 +2,7 @@
 This information is subject to change at any time and is not a guarantee of the stated changes being made in future releases.
 
 ### 2.6
-- [ ] Introduction of ``WindowsSystemInformation`` method and detection.
+- [ ] Introduction of ``WindowsSystemInformation`` class and detection.
 - [ ] Introduction of ``GetInstalledApps`` method
 - [ ] Introduction of ``OpenMacApp`` method
 
