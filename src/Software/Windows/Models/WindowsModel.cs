@@ -26,7 +26,7 @@ using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
 namespace AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
 
 /// <summary>
-/// 
+/// A model to represent Windows Operating System Information.
 /// </summary>
 public class WindowsModel
 {

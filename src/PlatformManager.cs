@@ -107,7 +107,7 @@ namespace AluminiumTech.DevKit.PlatformKit
         }
 
         /// <summary>
-        /// 
+        /// Gets name of the .NET app or project which is executing this code.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
