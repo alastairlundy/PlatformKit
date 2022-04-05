@@ -47,7 +47,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
             {
                 if (osAnalyzer.IsWindows())
                 {
-                    var output = processManager.RunPowerShellCommand("/c Get-WmiObject -Class " + wmiClass + " | Select-Object *")
+                    var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);
 
                     if (output == null)
