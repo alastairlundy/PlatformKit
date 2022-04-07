@@ -5,13 +5,9 @@ This information is subject to change at any time and is not a guarantee of the 
 - [ ] Introduction of ``WindowsSystemInformation`` class and detection.
 - [ ] Introduction of ``GetInstalledApps`` method
 - [ ] Introduction of ``OpenMacApp`` method
-
-### 2.7
 - [ ] Detection of installed Browsers on Windows
 - [ ] Detection of installed Browsers on Linux
 - [ ] Detection of installed Browsers on macOS
-
-### 2.8
 - [ ] Introduction of ``OpenUrlWith`` method to allow opening a URL in a specific browser
 
 ### 3.0
