@@ -79,6 +79,8 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
 
                // Console.WriteLine(processManager.RunPowerShellCommand("systeminfo"));
                Console.WriteLine("WindowsEdition: " + windowsAnalyzer.DetectWindowsEdition().ToString());
+               
+               Console.WriteLine("WinOS " + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
             }
 
             if (osAnalyzer.IsMac())
