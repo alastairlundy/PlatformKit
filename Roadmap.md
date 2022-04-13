@@ -14,7 +14,6 @@ This information is subject to change at any time and is not a guarantee of the 
 - [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
 - [ ] Support for Android Detection
 - [ ] Support for IOS Detection
-- [ ] Support for Xbox Detection
 
 ### 3.1
 - [ ] Support for tvOS Detection
@@ -22,6 +21,9 @@ This information is subject to change at any time and is not a guarantee of the 
 
 ### 3.2
 - [ ] Support for FreeBSD Detection
+
+### 3.3
+- [ ] Support for Xbox Detection
 
 ### 4.0
 - [ ] OS Support Enums deprecated for V3 will be removed.
