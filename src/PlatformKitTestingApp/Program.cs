@@ -96,7 +96,7 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Darwin Version: " + MacOSVersionAnalyzer.DetectDarwinVersion());
                 Console.WriteLine("Xnu Version: " + MacOSVersionAnalyzer.DetectXnuVersion());
             }
-
+ 
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (osAnalyzer.IsLinux())
