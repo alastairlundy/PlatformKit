@@ -10,6 +10,7 @@ This information is subject to change at any time and is not a guarantee of the 
 - [ ] Detection of Installed Apps on macOS.
 - [ ] Detection of Installed Apps on Linux.
 - [ ] Introduction of ``InstalledApps.Get()`` method on Windows, macOS, and Linux.
+- [ ] Introduction of ``InstalledApps.Open()`` method on Windows, macOS, and Linux.
 
 ### 3.1
 - [ ] Detection of Installed Browsers on Windows.
@@ -32,7 +33,7 @@ This information is subject to change at any time and is not a guarantee of the 
 - [ ] Introduction of ``DefaultApps.Set()`` method on Windows, macOS, and Linux.
 
 ### 3.4
-- [ ] Introduction of ``InstalledApps.Open()`` and ``InstalledApps.Uninstall()`` methods on Windows, macOS, and Linux
+- [ ] ``InstalledApps.Uninstall()`` methods on Windows, macOS, and Linux
 
 ### 3.5
 - [ ] Support for Android Detection
