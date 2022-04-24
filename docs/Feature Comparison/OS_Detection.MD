@@ -3,7 +3,7 @@
 ### OS Detection
 | | Windows | macOS | Linux | FreeBSD |
 |-|-|-|-|-|
-| OS Name | | :heavy_check_mark:, introduced in 2.5.0| :heavy_check_mark:, introduced in | :x: |
-| OS Version | | :heavy_check_mark:, introduced in 2.5.0 | | :x: |
-| OS Build Number/Build String | | :heavy_check_mark:, introduced in 2.5.0 | :x: | :x: |
-| OS Edition | :heavy_check_mark:, introduced in 2.5.0 | N/A | N/A | N/A |
+| OS Name | :heavy_check_mark: | :heavy_check_mark:, introduced in 2.5.0 Alpha 5 | :heavy_check_mark:, introduced in 2.0.0 Beta 4 | :x: |
+| OS Version | :heavy_check_mark: | :heavy_check_mark:, introduced in 2.5.0 Alpha 3 | :heavy_check_mark:, introduced in 2.0.0 Beta 4. | :x: |
+| OS Build Number/Build String | :heavy_check_mark: | :heavy_check_mark:, introduced in 2.5.0 Alpha 5 | N/A | :x: |
+| OS Edition | :heavy_check_mark:, introduced in 2.5.0 Alpha 6 | N/A | N/A | N/A |
