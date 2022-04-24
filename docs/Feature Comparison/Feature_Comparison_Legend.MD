@@ -1,4 +1,3 @@
-
 ### Feature Comparison Table Symbol Legend
 
 | Symbol | Use/Meaning |
@@ -7,6 +6,6 @@
 | Unsupported | :x: | 
 | Deprecated | :warning: |
 | Removed | :no_entry: |
-| Being developed | :construction: |
+| Being Developed | :construction: |
 | Coming Soon | :soon: |
 | TBD | :date: |
