@@ -23,9 +23,11 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
 using AluminiumTech.DevKit.PlatformKit.Software.Windows;
+using AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
 
 namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
 
@@ -56,8 +58,8 @@ public class WindowsAnalyzer
             {
                 var desc = _processManager.RunPowerShellCommand("systeminfo");
 
-                //Console.WriteLine(desc);
-
+                desc = desc.Replace("  ", String.Empty);
+                
                 var arr = desc.Replace(":", String.Empty).Split(' ');
                 
                 var edition = arr[41].Replace("OS", String.Empty);
@@ -228,4 +230,54 @@ public class WindowsAnalyzer
 
         throw new PlatformNotSupportedException();
     }
+
+    /*
+    public WindowsSystemInformation GetWindowsSystemInformation()
+    {
+        WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
+        
+        var desc = _processManager.RunPowerShellCommand("systeminfo");
+
+        StringBuilder stringBuilder = new StringBuilder();
+               
+        char currentChar; 
+        char previousChar;
+
+        for (int charNumber = 0; charNumber < desc.Length; charNumber++)
+        {
+            if (charNumber == 0)
+            {
+                previousChar = desc[0];
+                currentChar = desc[0];
+            }
+            else
+            {
+                previousChar = desc[charNumber];
+                currentChar = desc[charNumber];
+            }
+
+            if ((previousChar.Equals(' ') && currentChar.Equals(' ')))
+            {
+                continue;
+            }
+            else
+            {
+                stringBuilder.Append(desc[charNumber]);
+            }
+        }
+        var arr = stringBuilder.ToString().Split("   ");
+
+        #region Manual Detection
+
+        windowsSystemInformation.HostName = arr[0].Replace("HostName:", String.Empty);
+        windowsSystemInformation.OsName = arr[1].Replace("OSName:", String.Empty);
+        windowsSystemInformation.OsVersion = arr[2].Replace("OSVersion:", String.Empty).Substring(0, 9);
+        windowsSystemInformation.OsManufacturer = arr[3].Replace("OSManufacturer:", String.Empty);
+        
+        #endregion
+
+        return windowsSystemInformation;
+    }
+    */
+
 }
