@@ -485,6 +485,7 @@ for (var index = 0; index < array.Length; index++)
             if(array[index + 1 + hotfixCount].Contains("[") && array[index + 1 + hotfixCount].Contains("]:"))
             {
                 hotfixes.Add(array[index + 1 + hotfixCount]);
+                hotfixCount++;
             }
             else
             {
