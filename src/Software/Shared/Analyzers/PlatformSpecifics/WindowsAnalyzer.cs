@@ -501,14 +501,11 @@ for (var index = 0; index < array.Length; index++)
 
         while (true)
         {
-            if (!next_line.Contains("[") && next_line.Contains("]:"))
+            var networkCard = new NetworkCard
             {
-                break;
-            }
-
-            NetworkCard networkCard = new NetworkCard();
-            networkCard.Name = line.Replace("Network Card(s):", String.Empty);
-            networkCard.ConnectionName = array[index + 1].Replace("Connection Name:", String.Empty);
+                Name = line.Replace("Network Card(s):", String.Empty),
+                ConnectionName = array[index + 1].Replace("Connection Name:", String.Empty)
+            };
 
             array[index + 2] = array[index + 2].Replace("DHCP Enabled:   ", String.Empty);
 
@@ -535,6 +532,11 @@ for (var index = 0; index < array.Length; index++)
 
             networkCard.IpAddresses = ipAddresses.ToArray();
             networkCards.Add(networkCard);
+            
+            if (!next_line.Contains("[") && next_line.Contains("]:"))
+            {
+                break;
+            }
         }
 
         windowsSystemInformation.NetworkCards = networkCards.ToArray();
