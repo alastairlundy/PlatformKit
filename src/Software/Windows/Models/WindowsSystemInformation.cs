@@ -22,6 +22,8 @@ SOFTWARE.
 */
 
 using System;
+using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
+
 // ReSharper disable InconsistentNaming
 
 namespace AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
@@ -55,6 +57,13 @@ public class WindowsSystemInformation
     
     public string BiosVersion { get; set; }
     
+    
+    public string WindowsDirectory { get; set; }
+    public string SystemDirectory { get; set; }
+    
+    public string BootDevice { get; set; }
+    
+    
     public string SystemLocale { get; set; }
     public string InputLocale { get; set; }
     
@@ -67,13 +76,15 @@ public class WindowsSystemInformation
     public int VirtualMemoryAvailableSizeMB { get; set; }
     public int VirtualMemoryInUse { get; set; }
     
+    public string Domain { get; set; }
+    
     public string[] PageFileLocations { get; set; }
     
     public string LogonServer { get; set; }
     
-    public string HotfixesInstalled { get; set; }
+    public string[] HotfixesInstalled { get; set; }
     
-    public string[] NetworkCards { get; set; }
+    public NetworkCard[] NetworkCards { get; set; }
     
-    public string[] HyperVRequirements { get; set; }
+    public HyperVRequirements[] HyperVRequirements { get; set; }
 }
