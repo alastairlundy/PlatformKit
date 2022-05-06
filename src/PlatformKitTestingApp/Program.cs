@@ -82,70 +82,19 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                
                Console.WriteLine("WinOS " + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
                
-               var desc = processManager.RunPowerShellCommand("systeminfo");
+              /* var desc = processManager.RunPowerShellCommand("systeminfo");
 
-               List<string> strings = new List<string>();
-
-               string currentString = "";
-
-               char nextChar;
-               char currentChar; 
-               char previousChar;
-
-               for (int charNumber = 0; charNumber < desc.Length; charNumber++)
-               {
-                   if (charNumber == 0)
-                   {
-                       previousChar = desc[0];
-                       currentChar = desc[0];
-                       nextChar = desc[1];
-                   }
-                   else
-                   {
-                       previousChar = desc[charNumber];
-                       currentChar = desc[charNumber];
-
-                       if (charNumber < desc.Length)
-                       {
-                           nextChar = desc[charNumber + 1];
-                       }
-                       else
-                       {
-                           nextChar = ' ';
-                       }
-                   }
-
-                   if ((previousChar.Equals(' ') && currentChar.Equals(' ')))
-                   {
-                       if (currentString.Equals(String.Empty))
-                       {
-                           continue;
-                       }
-                       else
-                       {
-                           strings.Add(currentString);
-                           currentString = "";
-                       }
-                       
-                   }
-                   else if (currentChar.Equals(' ') && !nextChar.Equals(' '))
-                   {
-                       strings.Add(currentString);
-                       currentString = "";
-                   }
-                   else
-                   {
-                       currentString += desc[charNumber];
-                   }
-               }
-
-               var arr = strings.ToArray();
+               var arr = desc.Split(Environment.NewLine);
+               
                    //stringBuilder.ToString().Split(" ");
 
                for (int index = 0; index < arr.Length; index++)
                {
                     Console.WriteLine(index + " " + arr[index]);
                }
+               */
+
+              var sysinfo = windowsAnalyzer.GetWindowsSystemInformation();
             }
 
             if (osAnalyzer.IsMac())

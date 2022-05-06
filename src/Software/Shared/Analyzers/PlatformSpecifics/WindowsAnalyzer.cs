@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Text;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
+using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
 using AluminiumTech.DevKit.PlatformKit.Software.Windows;
 using AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
 
@@ -231,53 +232,333 @@ public class WindowsAnalyzer
         throw new PlatformNotSupportedException();
     }
 
-    /*
+    
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
         WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
         
         var desc = _processManager.RunPowerShellCommand("systeminfo");
 
-        StringBuilder stringBuilder = new StringBuilder();
-               
-        char currentChar; 
-        char previousChar;
-
-        for (int charNumber = 0; charNumber < desc.Length; charNumber++)
+#if NET5_0_OR_GREATER
+        var array = desc.Split(Environment.NewLine);
+#elif NETSTANDARD2_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+        var array = desc.Split(new[]
         {
-            if (charNumber == 0)
-            {
-                previousChar = desc[0];
-                currentChar = desc[0];
-            }
-            else
-            {
-                previousChar = desc[charNumber];
-                currentChar = desc[charNumber];
-            }
+            Environment.NewLine
+        }, StringSplitOptions.None);
+#endif
 
-            if ((previousChar.Equals(' ') && currentChar.Equals(' ')))
+#region Manual Detection
+
+for (var index = 0; index < array.Length; index++)
+{
+    var line = array[index].Contains("  ") ? array[index].Replace("  ", String.Empty) : array[index];
+    var previous_line = index > 0 ? array[index - 1] : array[0];
+    var next_line = index < array.Length ? array[index + 1] : array[index];
+
+    if (line.ToLower().Contains("host name:"))
+    {
+        windowsSystemInformation.HostName =
+            line.Replace("Host Name:", String.Empty);
+    }
+    else if (line.ToLower().Contains("os name:"))
+    {
+        windowsSystemInformation.OsName = line.Replace("OS Name:", String.Empty);
+    }
+    else if (line.ToLower().Contains("os version:"))
+    {
+        windowsSystemInformation.OsVersion = line.Replace("OS Version:", String.Empty).Substring(0, 9);
+    }
+    else if (line.ToLower().Contains("os manufacturer:"))
+    {
+        windowsSystemInformation.OsManufacturer = line.Replace("OS Manufacturer:", String.Empty);
+    }
+    else if (line.ToLower().Contains("os configuration:"))
+    {
+        windowsSystemInformation.OsConfiguration = line.Replace("OS Configuration:", String.Empty);
+    }
+    else if (line.ToLower().Contains("os build type:"))
+    {
+        windowsSystemInformation.OsBuildType = line.Replace("OS Build Type:", String.Empty);
+    }
+    else if (line.ToLower().Contains("registered owner:"))
+    {
+        windowsSystemInformation.RegisteredOwner = line.Replace("Registered Owner:", String.Empty);
+    }
+    else if (line.ToLower().Contains("registered organization:"))
+    {
+        windowsSystemInformation.RegisteredOrganization =
+            line.Replace("Registered Organization:", String.Empty);
+    }
+    else if (line.ToLower().Contains("product id:"))
+    {
+        windowsSystemInformation.ProductId = line.Replace("Product ID:", String.Empty);
+    }
+    else if (line.ToLower().Contains("original install date:"))
+    {
+        line = line.Replace("Original Install Date:", String.Empty);
+
+        var info = line.Split(',');
+
+        DateTime dt = new DateTime();
+
+        if (info[0].Contains("/"))
+        {
+            dt = DateTime.Parse(info[0]);
+        }
+
+        if (info[1].Contains(" "))
+        {
+            info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
+
+            var hours = info[1].Substring(0, 2);
+            var mins = info[1].Substring(2, 2);
+            var seconds = info[1].Substring(3, 2);
+
+            dt = dt.AddHours(Double.Parse(hours));
+            dt = dt.AddMinutes(Double.Parse(mins));
+            dt = dt.AddSeconds(Double.Parse(seconds));
+        }
+
+        windowsSystemInformation.OriginalInstallDate = dt;
+    }
+    else if (line.ToLower().Contains("system boot time:"))
+    {
+        line = line.Replace("System Boot Time:", String.Empty);
+        var info = line.Split(',');
+
+        DateTime dt = new DateTime();
+
+        if (info[0].Contains("/"))
+        {
+            dt = DateTime.Parse(info[0]);
+        }
+
+        if (info[1].Contains(" "))
+        {
+            info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
+
+            var hours = info[1].Substring(0, 2);
+            var mins = info[1].Substring(2, 2);
+            var seconds = info[1].Substring(4, 2);
+
+            dt = dt.AddHours(Double.Parse(hours));
+            dt = dt.AddMinutes(Double.Parse(mins));
+            dt = dt.AddSeconds(Double.Parse(seconds));
+        }
+
+        windowsSystemInformation.SystemBootTime = dt;
+    }
+    else if (line.ToLower().Contains("system manufacturer:"))
+    {
+        windowsSystemInformation.SystemManufacturer = line.Replace("System Manufacturer:", String.Empty);
+    }
+    else if (line.ToLower().Contains("system model:"))
+    {
+        windowsSystemInformation.SystemModel = line.Replace("System Model:", String.Empty);
+    }
+    else if (line.ToLower().Contains("system type:"))
+    {
+        windowsSystemInformation.SystemType = line.Replace("System Type:", String.Empty);
+    }
+    else if (line.ToLower().Contains("processor(s):"))
+    {
+        List<string> processors = new List<string>();
+        
+        processors.Add(line.Replace("Processor(s):", String.Empty));
+
+        processors.Add(next_line);
+
+        int procCount = 2;
+        while (true)
+        {
+            if (array[index + procCount].Contains("[") && array[index + procCount].Contains("]:"))
             {
-                continue;
+                processors.Add(array[index + procCount]);
+                procCount++;
             }
             else
             {
-                stringBuilder.Append(desc[charNumber]);
+                break;
             }
         }
-        var arr = stringBuilder.ToString().Split("   ");
 
-        #region Manual Detection
+        windowsSystemInformation.Processors = processors.ToArray();
+    }
+    else if (line.ToLower().Contains("bios version:"))
+    {
+        windowsSystemInformation.BiosVersion = line.Replace("BIOS Version:", String.Empty);
+    }
+    else if (line.ToLower().Contains("windows directory:"))
+    {
+        windowsSystemInformation.WindowsDirectory = line.Replace("Windows Directory:", String.Empty);
+    }
+    else if (line.ToLower().Contains("system directory:"))
+    {
+        windowsSystemInformation.SystemDirectory = line.Replace("System Directory:", String.Empty);
+    }
+    else if (line.ToLower().Contains("boot device:"))
+    {
+        windowsSystemInformation.BootDevice = line.Replace("Boot Device:", String.Empty);
+    }
+    else if (line.ToLower().Contains("system locale:"))
+    {
+        windowsSystemInformation.SystemLocale = line.Replace("System Locale:", String.Empty);
+    }
+    else if (line.ToLower().Contains("input locale:"))
+    {
+        windowsSystemInformation.SystemLocale = line.Replace("Input Locale:", String.Empty);
+    }
+    else if (line.ToLower().Contains("time zone:"))
+    {
+        windowsSystemInformation.TimeZone = TimeZoneInfo.Local;
+    }
+    else if (line.ToLower().Contains("memory:"))
+    {
+        line = line.Replace(",", String.Empty).Replace(" MB", String.Empty);
 
-        windowsSystemInformation.HostName = arr[0].Replace("HostName:", String.Empty);
-        windowsSystemInformation.OsName = arr[1].Replace("OSName:", String.Empty);
-        windowsSystemInformation.OsVersion = arr[2].Replace("OSVersion:", String.Empty).Substring(0, 9);
-        windowsSystemInformation.OsManufacturer = arr[3].Replace("OSManufacturer:", String.Empty);
+        if (line.ToLower().Contains("total physical memory:"))
+        {
+            line = line.Replace("Total Physical Memory:", String.Empty);
+            windowsSystemInformation.TotalPhysicalMemoryMB = int.Parse(line);
+        }
+        else if (line.ToLower().Contains("available physical memory"))
+        {
+            line = line.Replace("Available Physical Memory:", String.Empty);
+            windowsSystemInformation.AvailablePhysicalMemoryMB = int.Parse(line);
+        }
+        if (line.ToLower().Contains("virtual memory: max size:"))
+        {
+            line = line.Replace("Virtual Memory: Max Size:", String.Empty);
+            windowsSystemInformation.VirtualMemoryMaxSizeMB = int.Parse(line);
+        }
+        else if (line.ToLower().Contains("virtual memory: available:"))
+        {
+            line = line.Replace("Virtual Memory: Available:", String.Empty);
+            windowsSystemInformation.VirtualMemoryAvailableSizeMB = int.Parse(line);
+        }
+        else if (line.ToLower().Contains("virtual memory: in use:"))
+        {
+            line = line.Replace("Virtual Memory: In Use:", String.Empty);
+            windowsSystemInformation.VirtualMemoryInUse = int.Parse(line);
+        }
+    }
+    else if (line.ToLower().Contains("page file location(s):"))
+    {
+        List<string> locations = new List<string>();
+
+        locations.Add(array[index].Replace("Page File Location(s):", String.Empty));
+
+        int locationNumber = 1;
+        
+        while (true)
+        {
+            if (array[index + locationNumber].ToLower().Contains("domain"))
+            {
+                break;
+            }
+            else
+            {
+                locations.Add(array[index + locationNumber]);
+                locationNumber++;
+            }
+        }
+
+        windowsSystemInformation.PageFileLocations = locations.ToArray();
+    }
+    else if (line.ToLower().Contains("domain:"))
+    {
+        windowsSystemInformation.Domain = line.Replace("Domain:", String.Empty);
+    }
+    else if (line.ToLower().Contains("logon server:"))
+    {
+        windowsSystemInformation.LogonServer = line.Replace("Logon Server:", String.Empty);
+    }
+    else if (line.ToLower().Contains("hotfix(s):"))
+    {
+        List<string> hotfixes = new List<string>();
+        hotfixes.Add(line.Replace("Hotfix(s):", String.Empty));
+
+        int hotfixCount = 0;
+        while (true && index < array.Length)
+        {
+            if(array[index + 1 + hotfixCount].Contains("[") && array[index + 1 + hotfixCount].Contains("]:"))
+            {
+                hotfixes.Add(array[index + 1 + hotfixCount]);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        windowsSystemInformation.HotfixesInstalled = hotfixes.ToArray();
+    }
+    else if (line.ToLower().Contains("network card(s):"))
+    {
+        List<NetworkCard> networkCards = new List<NetworkCard>();
+
+        while (true)
+        {
+            if (!next_line.Contains("[") && next_line.Contains("]:"))
+            {
+                break;
+            }
+
+            NetworkCard networkCard = new NetworkCard();
+            networkCard.Name = line.Replace("Network Card(s):", String.Empty);
+            networkCard.ConnectionName = array[index + 1].Replace("Connection Name:", String.Empty);
+
+            array[index + 2] = array[index + 2].Replace("DHCP Enabled:   ", String.Empty);
+
+            var yesOrNo = array[index + 2].ToLower().Equals("yes");
+
+            networkCard.DhcpEnabled = yesOrNo;
+
+            networkCard.DhcpServer = array[index + 3].Replace("DHCP Server:   ", String.Empty);
+
+            List<string> ipAddresses = new List<string>();
+        
+            int ipNumber = 0;
+            while (true)
+            {
+                if (array[index + 4 + ipNumber].Contains("[") && array[index + 4 + ipNumber].Contains("]:"))
+                {
+                    ipAddresses.Add(array[index + 4 + ipNumber]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            networkCard.IpAddresses = ipAddresses.ToArray();
+            networkCards.Add(networkCard);
+        }
+
+        windowsSystemInformation.NetworkCards = networkCards.ToArray();
+    }
+    else if (line.ToLower().Contains("hyper-v requirements:"))
+    {
+        HyperVRequirements hyperVRequirements = new HyperVRequirements();
+        hyperVRequirements.VmMonitorModeExtensions = line.Replace("Hyper-V Requirements:", String.Empty)
+            .Replace("VM Monitor Mode Extensions: ", String.Empty).Contains("Yes");
+
+        hyperVRequirements.VirtualizationEnabledInFirmware =
+            next_line.Replace("Virtualization Enabled In Firmware:", String.Empty).Contains("Yes");
+
+        hyperVRequirements.SecondLevelAddressTranslation = array[index + 2]
+            .Replace("Second Level Address Translation:", String.Empty).Contains("Yes");
+        
+        hyperVRequirements.DataExecutionPreventionAvailable = array[index + 3]
+            .Replace("Data Execution Prevention Available:", String.Empty).Contains("Yes");
+    }
+}
         
         #endregion
 
         return windowsSystemInformation;
     }
-    */
+    
 
 }
