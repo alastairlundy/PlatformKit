@@ -232,7 +232,10 @@ public class WindowsAnalyzer
         throw new PlatformNotSupportedException();
     }
 
-    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
         WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();

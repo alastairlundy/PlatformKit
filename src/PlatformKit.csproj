@@ -17,49 +17,9 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.4 series
+        <PackageReleaseNotes>Windows only changes
 
-### Additions
-* Additions for Windows platform
-     * Re-added new `GetWMIValue()` method
-     * Added new Windows enums `WindowsEdition`
-     * Added Windows Edition Detection
-     * Move Windows analysis code to `WindowsAnalyzer` class - Existing methods in the WindowsSoftwareDetection class is deprecated and will be removed in PlatformKit 3.0
-* Additions for macOS platform
-     * Added in code documentation for `MacProcessorType` enum
-     * macOS Detection support for:
-          * XNU version
-          * Darwin version
-          * macOS version
-          * macOS Build String
-     * Re-added `RunMacCommand()` method
-     * Re-added `MacSystemProfilerDataType` enum
-     * Fixed macOS Runtime ID Generation now that macOS version detection exists in PlatformKit.
-* Additions for all platforms
-     * Added Shared Model `ReleaseYearModel` and Shared Enum `ReleaseYearTimeframe`
-     * Changed `LinuxOsRelease` struct to a class
-     * Added additional in code documentation
-
-### Changes
-* Clarified deprecation of `RunCommand` to suggest alternatives.
-* Moved `ShowLicenseInConsole` method to `ConsoleHelper` class - A copy will remain in the PlatformManager class until PlatformKit V3
-* Restructured folder and namespace directory
-* Moved Windows Software Detection to separate files
-* Changed several structs to Classes
-* Fixed issues with Runtime ID Generation on Linux
-* Fixed issues with detecting OsRelease information on Linux
-* Minor Tweaks
-
-### Deprecations
-* macOS 10.13 support has been deprecated and will throw an error in V5.
-* Delayed deprecation of Windows 8.1 and Windows Server 2012 R2 support from V4 to V5.
-* Deprecated `RunActionOn` method - This will be removed in V3 and will not be replaced.
-* Deprecated `IWinManagementObjectSearcher` interface - This will be removed in PlatformKit 3.0
-* Deprecated `WindowsSoftwareDetection` class and `IWindowsSoftwareDetection` interface - This will be removed in PlatformKit 3.0
-
-### Known Issues
-* WinManagementObjectSearcher method `public Dictionary&lt;string, string&gt; Get(List&lt;string&gt; queryObjectsList, string wmiClass)` does not return WMI values correctly.
-* `GetWMIValue()` method does not return WMI value correctly.</PackageReleaseNotes>
+Added WindowsSystemInformation detection</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -69,7 +29,7 @@
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.5.0</PackageVersion>
+        <PackageVersion>2.6.0-alpha.1</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
