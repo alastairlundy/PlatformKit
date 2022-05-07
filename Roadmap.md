@@ -2,7 +2,7 @@
 This information is subject to change at any time and is not a guarantee of the stated changes being made in future releases.
 
 ### 2.6
-- [ ] Introduction of ``WindowsSystemInformation`` class and detection.
+- [x] Introduction of ``WindowsSystemInformation`` class and detection - (Added in 2.6.0 Alpha 1)
 
 ### 3.0
 - [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
