@@ -73,7 +73,7 @@ public static class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty).Replace("LTS", String.Empty);
                         linuxDistributionInformation.Version = resultArray[index];
                         
-                        Console.WriteLine("v" + resultArray[index]);
+                        //Console.WriteLine("v" + resultArray[index]);
                     }
                     else if (resultArray[index].ToUpper().Contains("ID=") && !resultArray[index].ToUpper().StartsWith("VERSION_"))
                     {
