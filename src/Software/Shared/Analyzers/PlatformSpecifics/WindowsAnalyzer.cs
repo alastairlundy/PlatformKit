@@ -253,8 +253,7 @@ public class WindowsAnalyzer
 for (var index = 0; index < array.Length; index++)
 {
     var line = array[index].Contains("  ") ? array[index].Replace("  ", String.Empty) : array[index];
-    var previous_line = index > 0 ? array[index - 1] : array[0];
-    var next_line = index < array.Length ? array[index + 1] : array[index];
+    var nextLine = index < array.Length ? array[index + 1] : array[index];
 
     if (line.ToLower().Contains("host name:"))
     {
@@ -367,20 +366,13 @@ for (var index = 0; index < array.Length; index++)
         
         processors.Add(line.Replace("Processor(s):", String.Empty));
 
-        processors.Add(next_line);
+        processors.Add(nextLine);
 
         int procCount = 2;
-        while (true)
+        while (array[index + procCount].Contains("[") && array[index + procCount].Contains("]:"))
         {
-            if (array[index + procCount].Contains("[") && array[index + procCount].Contains("]:"))
-            {
-                processors.Add(array[index + procCount]);
-                procCount++;
-            }
-            else
-            {
-                break;
-            }
+            processors.Add(array[index + procCount]);
+            procCount++;
         }
 
         windowsSystemInformation.Processors = processors.ToArray();
@@ -451,17 +443,10 @@ for (var index = 0; index < array.Length; index++)
 
         int locationNumber = 1;
         
-        while (true)
+        while (!array[index + locationNumber].ToLower().Contains("domain"))
         {
-            if (array[index + locationNumber].ToLower().Contains("domain"))
-            {
-                break;
-            }
-            else
-            {
-                locations.Add(array[index + locationNumber]);
-                locationNumber++;
-            }
+            locations.Add(array[index + locationNumber]);
+            locationNumber++;
         }
 
         windowsSystemInformation.PageFileLocations = locations.ToArray();
@@ -480,17 +465,10 @@ for (var index = 0; index < array.Length; index++)
         hotfixes.Add(line.Replace("Hotfix(s):", String.Empty));
 
         int hotfixCount = 0;
-        while (true && index < array.Length)
+        while (array[index + 1 + hotfixCount].Contains("[") && array[index + 1 + hotfixCount].Contains("]:"))
         {
-            if(array[index + 1 + hotfixCount].Contains("[") && array[index + 1 + hotfixCount].Contains("]:"))
-            {
-                hotfixes.Add(array[index + 1 + hotfixCount]);
-                hotfixCount++;
-            }
-            else
-            {
-                break;
-            }
+            hotfixes.Add(array[index + 1 + hotfixCount]);
+            hotfixCount++;
         }
 
         windowsSystemInformation.HotfixesInstalled = hotfixes.ToArray();
@@ -518,22 +496,16 @@ for (var index = 0; index < array.Length; index++)
             List<string> ipAddresses = new List<string>();
         
             int ipNumber = 0;
-            while (true)
+            while (array[index + 4 + ipNumber].Contains("[") && array[index + 4 + ipNumber].Contains("]:"))
             {
-                if (array[index + 4 + ipNumber].Contains("[") && array[index + 4 + ipNumber].Contains("]:"))
-                {
-                    ipAddresses.Add(array[index + 4 + ipNumber]);
-                }
-                else
-                {
-                    break;
-                }
+                ipAddresses.Add(array[index + 4 + ipNumber]);
+                ipNumber++;
             }
 
             networkCard.IpAddresses = ipAddresses.ToArray();
             networkCards.Add(networkCard);
             
-            if (!next_line.Contains("[") && next_line.Contains("]:"))
+            if (!nextLine.Contains("[") && nextLine.Contains("]:"))
             {
                 break;
             }
@@ -548,7 +520,7 @@ for (var index = 0; index < array.Length; index++)
             .Replace("VM Monitor Mode Extensions: ", String.Empty).Contains("Yes");
 
         hyperVRequirements.VirtualizationEnabledInFirmware =
-            next_line.Replace("Virtualization Enabled In Firmware:", String.Empty).Contains("Yes");
+            nextLine.Replace("Virtualization Enabled In Firmware:", String.Empty).Contains("Yes");
 
         hyperVRequirements.SecondLevelAddressTranslation = array[index + 2]
             .Replace("Second Level Address Translation:", String.Empty).Contains("Yes");
