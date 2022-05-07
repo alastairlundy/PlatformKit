@@ -17,9 +17,16 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>Windows only changes
+        <PackageReleaseNotes>## Changes since 2.6.0 Alpha 1
+* Fixed an issue with detecting Ubuntu and Pop!_OS LTS releases - This has been backported in part to 2.4.3 and 2.5.1 although it is possible further updates in the form of 2.5.2 and 2.4.4 are released with the full backport.
+* Fixed a number of issues with WindowsSystemInformation detection - It is now detected properly with the exceptions outlined in the Known Issues section.
 
-Added WindowsSystemInformation detection</PackageReleaseNotes>
+### Known Issues
+* WindowsSystemInformation detection may fail to detect when more than 1 Network Card is installed.
+* WindowsSystemInformation detection may fail to detect when more than 1 Processor is installed.
+
+### Notes
+* We would like your feedback on how you use PlatformKit so that we can better understand where we need to improve and what we need to focus on. We would greatly appreciate you filling out this survey. The survey link is https://forms.gle/p739XioKWVw4p3yk8 . It may ask you to signin to Google but this information is purely to avoid duplicate answers and isn't stored by us.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -29,7 +36,7 @@ Added WindowsSystemInformation detection</PackageReleaseNotes>
         <AssemblyVersion>2.5.0.0</AssemblyVersion>
         <FileVersion>2.5.0.0</FileVersion>
         <Version>2.5.0.0</Version>
-        <PackageVersion>2.6.0-alpha.1</PackageVersion>
+        <PackageVersion>2.6.0-alpha.2</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
