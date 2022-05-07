@@ -86,5 +86,73 @@ public class WindowsSystemInformation
     
     public NetworkCard[] NetworkCards { get; set; }
     
-    public HyperVRequirements[] HyperVRequirements { get; set; }
+    public HyperVRequirements HyperVRequirements { get; set; }
+
+    public void ToConsoleWriteLine()
+    {
+        Console.WriteLine(nameof(HostName) + ": " + HostName);
+        Console.WriteLine(nameof(OsName) + ": " + OsName);
+        Console.WriteLine(nameof(OsVersion) + ": " + OsVersion);
+        Console.WriteLine(nameof(OsManufacturer) + ": " + OsManufacturer);
+        Console.WriteLine(nameof(OsConfiguration) + ": " + OsConfiguration);
+        Console.WriteLine(nameof(OsBuildType) + ": " + OsBuildType);
+        Console.WriteLine(nameof(RegisteredOwner) + ": " + RegisteredOwner);
+        Console.WriteLine(nameof(RegisteredOrganization) + ": " + RegisteredOrganization);
+        Console.WriteLine(nameof(ProductId) + ": " + ProductId);
+        Console.WriteLine(nameof(OriginalInstallDate) + ": " + OriginalInstallDate);
+        Console.WriteLine(nameof(SystemBootTime) + ": " + SystemBootTime);
+        Console.WriteLine(nameof(SystemManufacturer) + ": " + SystemManufacturer);
+        Console.WriteLine(nameof(SystemModel) + ": " + SystemModel);
+
+        foreach (var str in Processors)
+        {
+            Console.WriteLine(nameof(Processors) + ": " + str);
+        }
+        
+        Console.WriteLine(nameof(BiosVersion) + ": " + BiosVersion);
+        Console.WriteLine(nameof(WindowsDirectory) + ": " + WindowsDirectory);
+        Console.WriteLine(nameof(SystemDirectory) + ": " + SystemDirectory);
+        Console.WriteLine(nameof(BootDevice) + ": " + BootDevice);;
+        Console.WriteLine(nameof(SystemLocale) + ": " + SystemLocale);
+        Console.WriteLine(nameof(InputLocale) + ": " + InputLocale);
+        Console.WriteLine(nameof(TimeZone) + ": " + TimeZone);
+        Console.WriteLine(nameof(TotalPhysicalMemoryMB) + ": " + TotalPhysicalMemoryMB);
+        Console.WriteLine(nameof(AvailablePhysicalMemoryMB) + ": " + AvailablePhysicalMemoryMB);
+        Console.WriteLine(nameof(VirtualMemoryMaxSizeMB) + ": " + VirtualMemoryMaxSizeMB);
+        Console.WriteLine(nameof(VirtualMemoryAvailableSizeMB) + ": " + VirtualMemoryAvailableSizeMB);
+        Console.WriteLine(nameof(VirtualMemoryInUse) + ": " + VirtualMemoryInUse);
+        
+        foreach (var str in PageFileLocations)
+        {
+            Console.WriteLine(nameof(PageFileLocations) + ": " + str);
+        }
+        
+        Console.WriteLine(nameof(Domain) + ": " + Domain);
+        Console.WriteLine(nameof(LogonServer) + ": " + LogonServer);
+
+        foreach (var str in HotfixesInstalled)
+        {
+            Console.WriteLine(nameof(HotfixesInstalled) + ": " + str);
+        }
+/*
+        foreach (var networkCard in NetworkCards)
+        {
+            Console.WriteLine(nameof(networkCard.Name) + ": " + networkCard.Name);
+            Console.WriteLine(nameof(networkCard.ConnectionName) + ": " + networkCard.ConnectionName);
+            Console.WriteLine(nameof(networkCard.DhcpEnabled) + ": " + networkCard.DhcpEnabled);
+            Console.WriteLine(nameof(networkCard.DhcpServer) + ": " + networkCard.DhcpServer);
+            
+
+            foreach (var ipAddress in networkCard.IpAddresses)
+            {
+                Console.WriteLine(nameof(networkCard.IpAddresses) + ": " + ipAddress);
+            }
+        }
+  */        
+        Console.WriteLine(nameof(HyperVRequirements.DataExecutionPreventionAvailable) + ": " + HyperVRequirements.DataExecutionPreventionAvailable);
+        Console.WriteLine(nameof(HyperVRequirements.SecondLevelAddressTranslation) + ": " + HyperVRequirements.SecondLevelAddressTranslation);
+        Console.WriteLine(nameof(HyperVRequirements.VirtualizationEnabledInFirmware) + ": " + HyperVRequirements.VirtualizationEnabledInFirmware);
+        Console.WriteLine(nameof(HyperVRequirements.VmMonitorModeExtensions) + ": " + HyperVRequirements.VmMonitorModeExtensions);
+        
+    }
 }
