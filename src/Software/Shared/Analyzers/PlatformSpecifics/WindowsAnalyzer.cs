@@ -23,6 +23,7 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
 using AluminiumTech.DevKit.PlatformKit.Exceptions;
@@ -232,6 +233,19 @@ public class WindowsAnalyzer
         throw new PlatformNotSupportedException();
     }
 
+    protected int GetNetworkCardPositionInWindowsSysInfo(List<NetworkCard> networkCards, NetworkCard lastNetworkCard)
+    {
+        for (int position = 0; position < networkCards.Count; position++)
+        {
+            if (Equals(networkCards[position], lastNetworkCard))
+            {
+                return position;
+            }
+        }
+
+        throw new ArgumentException();
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -239,6 +253,11 @@ public class WindowsAnalyzer
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
         WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
+
+        HyperVRequirements hyperVRequirements = new HyperVRequirements();
+        List<NetworkCard> networkCards = new List<NetworkCard>();
+        List<string> ipAddresses = new List<string>();
+        NetworkCard lastNetworkCard = null;
         
         var desc = _processManager.RunPowerShellCommand("systeminfo");
 
@@ -255,52 +274,67 @@ public class WindowsAnalyzer
 
 for (var index = 0; index < array.Length; index++)
 {
-    var line = array[index].Contains("  ") ? array[index].Replace("  ", String.Empty) : array[index];
-    var nextLine = index < array.Length ? array[index + 1] : array[index];
+    
+    var nextLine = "";
 
-    if (line.ToLower().Contains("host name:"))
+    array[index] = array[index].Replace("  ", String.Empty);
+
+    if (index < (array.Length - 1))
+    {
+        nextLine = array[index + 1].Replace("  ", String.Empty);
+    }
+    else
+    {
+        nextLine = array[index].Replace("  ", String.Empty);
+    }
+
+    #if DEBUG
+    Console.WriteLine("NextLine: " + nextLine);
+    #endif
+    
+    if (nextLine.ToLower().Contains("host name:"))
     {
         windowsSystemInformation.HostName =
-            line.Replace("Host Name:", String.Empty);
+            nextLine.Replace("Host Name:", String.Empty);
     }
-    else if (line.ToLower().Contains("os name:"))
+    else if (nextLine.ToLower().Contains("os name:"))
     {
-        windowsSystemInformation.OsName = line.Replace("OS Name:", String.Empty);
+        windowsSystemInformation.OsName = nextLine.Replace("OS Name:", String.Empty);
     }
-    else if (line.ToLower().Contains("os version:"))
+    else if (nextLine.ToLower().Contains("os version:") && !nextLine.ToLower().Contains("bios"))
     {
-        windowsSystemInformation.OsVersion = line.Replace("OS Version:", String.Empty).Substring(0, 9);
+        windowsSystemInformation.OsVersion = nextLine.Replace("OS Version:", String.Empty);
     }
-    else if (line.ToLower().Contains("os manufacturer:"))
+    else if (nextLine.ToLower().Contains("os manufacturer:"))
     {
-        windowsSystemInformation.OsManufacturer = line.Replace("OS Manufacturer:", String.Empty);
+        windowsSystemInformation.OsManufacturer = nextLine.Replace("OS Manufacturer:", String.Empty);
     }
-    else if (line.ToLower().Contains("os configuration:"))
+    else if (nextLine.ToLower().Contains("os configuration:"))
     {
-        windowsSystemInformation.OsConfiguration = line.Replace("OS Configuration:", String.Empty);
+        windowsSystemInformation.OsConfiguration = nextLine.Replace("OS Configuration:", String.Empty);
     }
-    else if (line.ToLower().Contains("os build type:"))
+    else if (nextLine.ToLower().Contains("os build type:"))
     {
-        windowsSystemInformation.OsBuildType = line.Replace("OS Build Type:", String.Empty);
+        windowsSystemInformation.OsBuildType = nextLine.Replace("OS Build Type:", String.Empty);
     }
-    else if (line.ToLower().Contains("registered owner:"))
+    else if (nextLine.ToLower().Contains("registered owner:"))
     {
-        windowsSystemInformation.RegisteredOwner = line.Replace("Registered Owner:", String.Empty);
+        windowsSystemInformation.RegisteredOwner = nextLine.Replace("Registered Owner:", String.Empty);
     }
-    else if (line.ToLower().Contains("registered organization:"))
+    else if (nextLine.ToLower().Contains("registered organization:"))
     {
         windowsSystemInformation.RegisteredOrganization =
-            line.Replace("Registered Organization:", String.Empty);
+            nextLine.Replace("Registered Organization:", String.Empty);
     }
-    else if (line.ToLower().Contains("product id:"))
+    else if (nextLine.ToLower().Contains("product id:"))
     {
-        windowsSystemInformation.ProductId = line.Replace("Product ID:", String.Empty);
+        windowsSystemInformation.ProductId = nextLine.Replace("Product ID:", String.Empty);
     }
-    else if (line.ToLower().Contains("original install date:"))
+    else if (nextLine.ToLower().Contains("original install date:"))
     {
-        line = line.Replace("Original Install Date:", String.Empty);
+        nextLine = nextLine.Replace("Original Install Date:", String.Empty);
 
-        var info = line.Split(',');
+        var info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -324,10 +358,10 @@ for (var index = 0; index < array.Length; index++)
 
         windowsSystemInformation.OriginalInstallDate = dt;
     }
-    else if (line.ToLower().Contains("system boot time:"))
+    else if (nextLine.ToLower().Contains("system boot time:"))
     {
-        line = line.Replace("System Boot Time:", String.Empty);
-        var info = line.Split(',');
+        nextLine = nextLine.Replace("System Boot Time:", String.Empty);
+        var info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -351,190 +385,212 @@ for (var index = 0; index < array.Length; index++)
 
         windowsSystemInformation.SystemBootTime = dt;
     }
-    else if (line.ToLower().Contains("system manufacturer:"))
+    else if (nextLine.ToLower().Contains("system manufacturer:"))
     {
-        windowsSystemInformation.SystemManufacturer = line.Replace("System Manufacturer:", String.Empty);
+        windowsSystemInformation.SystemManufacturer = nextLine.Replace("System Manufacturer:", String.Empty);
     }
-    else if (line.ToLower().Contains("system model:"))
+    else if (nextLine.ToLower().Contains("system model:"))
     {
-        windowsSystemInformation.SystemModel = line.Replace("System Model:", String.Empty);
+        windowsSystemInformation.SystemModel = nextLine.Replace("System Model:", String.Empty);
     }
-    else if (line.ToLower().Contains("system type:"))
+    else if (nextLine.ToLower().Contains("system type:"))
     {
-        windowsSystemInformation.SystemType = line.Replace("System Type:", String.Empty);
+        windowsSystemInformation.SystemType = nextLine.Replace("System Type:", String.Empty);
     }
-    else if (line.ToLower().Contains("processor(s):"))
+    else if (nextLine.ToLower().Contains("processor(s):"))
     {
         List<string> processors = new List<string>();
         
-        processors.Add(line.Replace("Processor(s):", String.Empty));
+        processors.Add(nextLine.Replace("Processor(s):", String.Empty));
 
-        processors.Add(nextLine);
-
-        int procCount = 2;
-        while (array[index + procCount].Contains("[") && array[index + procCount].Contains("]:"))
+        int procCount = 1;
+        while (array[index + 1 + procCount].Contains("[") && array[index + 1 + procCount].Contains("]:"))
         {
-            processors.Add(array[index + procCount]);
+            processors.Add(array[index + 1 + procCount].Replace("  ", String.Empty));
             procCount++;
         }
 
         windowsSystemInformation.Processors = processors.ToArray();
     }
-    else if (line.ToLower().Contains("bios version:"))
+    else if (nextLine.ToLower().Contains("bios version:"))
     {
-        windowsSystemInformation.BiosVersion = line.Replace("BIOS Version:", String.Empty);
+        windowsSystemInformation.BiosVersion = nextLine.Replace("BIOS Version:", String.Empty);
     }
-    else if (line.ToLower().Contains("windows directory:"))
+    else if (nextLine.ToLower().Contains("windows directory:"))
     {
-        windowsSystemInformation.WindowsDirectory = line.Replace("Windows Directory:", String.Empty);
+        windowsSystemInformation.WindowsDirectory = nextLine.Replace("Windows Directory:", String.Empty);
     }
-    else if (line.ToLower().Contains("system directory:"))
+    else if (nextLine.ToLower().Contains("system directory:"))
     {
-        windowsSystemInformation.SystemDirectory = line.Replace("System Directory:", String.Empty);
+        windowsSystemInformation.SystemDirectory = nextLine.Replace("System Directory:", String.Empty);
     }
-    else if (line.ToLower().Contains("boot device:"))
+    else if (nextLine.ToLower().Contains("boot device:"))
     {
-        windowsSystemInformation.BootDevice = line.Replace("Boot Device:", String.Empty);
+        windowsSystemInformation.BootDevice = nextLine.Replace("Boot Device:", String.Empty);
     }
-    else if (line.ToLower().Contains("system locale:"))
+    else if (nextLine.ToLower().Contains("system locale:"))
     {
-        windowsSystemInformation.SystemLocale = line.Replace("System Locale:", String.Empty);
+        windowsSystemInformation.SystemLocale = nextLine.Replace("System Locale:", String.Empty);
     }
-    else if (line.ToLower().Contains("input locale:"))
+    else if (nextLine.ToLower().Contains("input locale:"))
     {
-        windowsSystemInformation.SystemLocale = line.Replace("Input Locale:", String.Empty);
+        windowsSystemInformation.InputLocale = nextLine.Replace("Input Locale:", String.Empty);
     }
-    else if (line.ToLower().Contains("time zone:"))
+    else if (nextLine.ToLower().Contains("time zone:"))
     {
         windowsSystemInformation.TimeZone = TimeZoneInfo.Local;
     }
-    else if (line.ToLower().Contains("memory:"))
+    else if (nextLine.ToLower().Contains("memory:"))
     {
-        line = line.Replace(",", String.Empty).Replace(" MB", String.Empty);
+        nextLine = nextLine.Replace(",", String.Empty).Replace(" MB", String.Empty);
 
-        if (line.ToLower().Contains("total physical memory:"))
+        if (nextLine.ToLower().Contains("total physical memory:"))
         {
-            line = line.Replace("Total Physical Memory:", String.Empty);
-            windowsSystemInformation.TotalPhysicalMemoryMB = int.Parse(line);
+            nextLine = nextLine.Replace("Total Physical Memory:", String.Empty);
+            windowsSystemInformation.TotalPhysicalMemoryMB = int.Parse(nextLine);
         }
-        else if (line.ToLower().Contains("available physical memory"))
+        else if (nextLine.ToLower().Contains("available physical memory"))
         {
-            line = line.Replace("Available Physical Memory:", String.Empty);
-            windowsSystemInformation.AvailablePhysicalMemoryMB = int.Parse(line);
+            nextLine = nextLine.Replace("Available Physical Memory:", String.Empty);
+            windowsSystemInformation.AvailablePhysicalMemoryMB = int.Parse(nextLine);
         }
-        if (line.ToLower().Contains("virtual memory: max size:"))
+        if (nextLine.ToLower().Contains("virtual memory: max size:"))
         {
-            line = line.Replace("Virtual Memory: Max Size:", String.Empty);
-            windowsSystemInformation.VirtualMemoryMaxSizeMB = int.Parse(line);
+            nextLine = nextLine.Replace("Virtual Memory: Max Size:", String.Empty);
+            windowsSystemInformation.VirtualMemoryMaxSizeMB = int.Parse(nextLine);
         }
-        else if (line.ToLower().Contains("virtual memory: available:"))
+        else if (nextLine.ToLower().Contains("virtual memory: available:"))
         {
-            line = line.Replace("Virtual Memory: Available:", String.Empty);
-            windowsSystemInformation.VirtualMemoryAvailableSizeMB = int.Parse(line);
+            nextLine = nextLine.Replace("Virtual Memory: Available:", String.Empty);
+            windowsSystemInformation.VirtualMemoryAvailableSizeMB = int.Parse(nextLine);
         }
-        else if (line.ToLower().Contains("virtual memory: in use:"))
+        else if (nextLine.ToLower().Contains("virtual memory: in use:"))
         {
-            line = line.Replace("Virtual Memory: In Use:", String.Empty);
-            windowsSystemInformation.VirtualMemoryInUse = int.Parse(line);
+            nextLine = nextLine.Replace("Virtual Memory: In Use:", String.Empty);
+            windowsSystemInformation.VirtualMemoryInUse = int.Parse(nextLine);
         }
     }
-    else if (line.ToLower().Contains("page file location(s):"))
+    else if (nextLine.ToLower().Contains("page file location(s):"))
     {
         List<string> locations = new List<string>();
 
-        locations.Add(array[index].Replace("Page File Location(s):", String.Empty));
+        locations.Add(nextLine.Replace("Page File Location(s):", String.Empty));
 
         int locationNumber = 1;
         
-        while (!array[index + locationNumber].ToLower().Contains("domain"))
+        while (!array[index + 1 + locationNumber].ToLower().Contains("domain"))
         {
-            locations.Add(array[index + locationNumber]);
+            locations.Add(array[index + 1 + locationNumber]);
             locationNumber++;
         }
 
         windowsSystemInformation.PageFileLocations = locations.ToArray();
     }
-    else if (line.ToLower().Contains("domain:"))
+    else if (nextLine.ToLower().Contains("domain:"))
     {
-        windowsSystemInformation.Domain = line.Replace("Domain:", String.Empty);
+        windowsSystemInformation.Domain = nextLine.Replace("Domain:", String.Empty);
     }
-    else if (line.ToLower().Contains("logon server:"))
+    else if (nextLine.ToLower().Contains("logon server:"))
     {
-        windowsSystemInformation.LogonServer = line.Replace("Logon Server:", String.Empty);
+        windowsSystemInformation.LogonServer = nextLine.Replace("Logon Server:", String.Empty);
     }
-    else if (line.ToLower().Contains("hotfix(s):"))
+    else if (nextLine.ToLower().Contains("hotfix(s):"))
     {
         List<string> hotfixes = new List<string>();
-        hotfixes.Add(line.Replace("Hotfix(s):", String.Empty));
+        hotfixes.Add(nextLine.Replace("Hotfix(s):", String.Empty));
 
         int hotfixCount = 0;
-        while (array[index + 1 + hotfixCount].Contains("[") && array[index + 1 + hotfixCount].Contains("]:"))
+        while (array[index + 2 + hotfixCount].Contains("[") && array[index + 2 + hotfixCount].Contains("]:"))
         {
-            hotfixes.Add(array[index + 1 + hotfixCount]);
+            hotfixes.Add(array[index + 2 + hotfixCount].Replace("  ", String.Empty));
             hotfixCount++;
         }
 
         windowsSystemInformation.HotfixesInstalled = hotfixes.ToArray();
     }
-    else if (line.ToLower().Contains("network card(s):"))
+    else if (nextLine.ToLower().Contains("network card(s):"))
     {
-        List<NetworkCard> networkCards = new List<NetworkCard>();
-
-        while (true)
-        {
-            var networkCard = new NetworkCard
-            {
-                Name = line.Replace("Network Card(s):", String.Empty),
-                ConnectionName = array[index + 1].Replace("Connection Name:", String.Empty)
-            };
-
-            array[index + 2] = array[index + 2].Replace("DHCP Enabled:   ", String.Empty);
-
-            var yesOrNo = array[index + 2].ToLower().Equals("yes");
-
-            networkCard.DhcpEnabled = yesOrNo;
-
-            networkCard.DhcpServer = array[index + 3].Replace("DHCP Server:   ", String.Empty);
-
-            List<string> ipAddresses = new List<string>();
+        NetworkCard networkCard = new NetworkCard();
+        networkCard.Name = array[index + 2].Replace("  ", String.Empty);
         
-            int ipNumber = 0;
-            while (array[index + 4 + ipNumber].Contains("[") && array[index + 4 + ipNumber].Contains("]:"))
-            {
-                ipAddresses.Add(array[index + 4 + ipNumber]);
-                ipNumber++;
-            }
+        networkCards.Add(networkCard);
+        lastNetworkCard = networkCard;
+    }
+    else if (nextLine.ToLower().Contains("connection name:"))
+    {
+        if (networkCards.Contains(lastNetworkCard))
+        {
+           var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+           networkCards[position].ConnectionName = nextLine.Replace("Connection Name:", String.Empty);
+        }
+    }
+    else if (nextLine.ToLower().Contains("dhcp enabled:"))
+    {
+        nextLine = nextLine.Replace("DHCP Enabled:", String.Empty);
 
-            networkCard.IpAddresses = ipAddresses.ToArray();
-            networkCards.Add(networkCard);
-            
-            if (!nextLine.Contains("[") && nextLine.Contains("]:"))
+        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        networkCards[position].DhcpEnabled = array[index + 4].ToLower().Contains("yes");
+    }
+    else if (nextLine.ToLower().Contains("dhcp server:"))
+    {
+        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        networkCards[position].DhcpServer = nextLine.Replace("DHCP Server:", String.Empty);
+    }
+    else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
+    {
+        var compare = nextLine.Replace("]:", String.Empty);
+        
+        int dotCounter = 0;
+        foreach (char c in compare)
+        {
+            if (c == '.' || c == ':')
             {
-                break;
+                dotCounter++;
             }
         }
 
-        windowsSystemInformation.NetworkCards = networkCards.ToArray();
+        if (dotCounter >= 3)
+        {
+            ipAddresses.Add(nextLine);
+        }
+        else if (array[index - 1].ToLower().Contains("network card:") || array[index].ToLower().Contains("network card:"))
+        {
+            var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+            networkCards[position].IpAddresses = ipAddresses.ToArray();
+            ipAddresses.Clear();
+        }
+        else if (!nextLine.ToUpper().Contains("KB") && nextLine.Contains("Network Connection"))
+        {
+            windowsSystemInformation.NetworkCards = networkCards.ToArray();
+        }
     }
-    else if (line.ToLower().Contains("hyper-v requirements:"))
-    {
-        HyperVRequirements hyperVRequirements = new HyperVRequirements();
-        hyperVRequirements.VmMonitorModeExtensions = line.Replace("Hyper-V Requirements:", String.Empty)
-            .Replace("VM Monitor Mode Extensions: ", String.Empty).Contains("Yes");
 
+    else if (nextLine.ToLower().Contains("hyper-v requirements:"))
+    {
+        hyperVRequirements.VmMonitorModeExtensions = nextLine.Replace("Hyper-V Requirements:", String.Empty)
+            .Replace("VM Monitor Mode Extensions: ", String.Empty).Contains("Yes");
+    }
+    else if (nextLine.ToLower().Contains("virtualization enabled in firmware:"))
+    {
         hyperVRequirements.VirtualizationEnabledInFirmware =
             nextLine.Replace("Virtualization Enabled In Firmware:", String.Empty).Contains("Yes");
-
-        hyperVRequirements.SecondLevelAddressTranslation = array[index + 2]
+    }
+    else if (nextLine.ToLower().Contains("second level address translation:"))
+    {
+        hyperVRequirements.SecondLevelAddressTranslation = nextLine
             .Replace("Second Level Address Translation:", String.Empty).Contains("Yes");
-        
-        hyperVRequirements.DataExecutionPreventionAvailable = array[index + 3]
+    }
+    else if (nextLine.ToLower().Contains("data execution prevention available:"))
+    {
+        hyperVRequirements.DataExecutionPreventionAvailable = nextLine
             .Replace("Data Execution Prevention Available:", String.Empty).Contains("Yes");
+        break;
     }
 }
         
         #endregion
 
+        windowsSystemInformation.HyperVRequirements = hyperVRequirements;
         return windowsSystemInformation;
     }
     

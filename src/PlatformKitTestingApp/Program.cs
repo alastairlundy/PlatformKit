@@ -94,7 +94,8 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                }
                */
 
-              //var sysinfo = windowsAnalyzer.GetWindowsSystemInformation();
+              var sysinfo = windowsAnalyzer.GetWindowsSystemInformation();
+              sysinfo.ToConsoleWriteLine();
             }
 
             if (osAnalyzer.IsMac())
