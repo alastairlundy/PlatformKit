@@ -59,18 +59,21 @@ public static class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
                     }
 
-                    if (resultArray[index].ToUpper().Contains("LTS"))
-                    {
-                        linuxDistributionInformation.IsLongTermSupportRelease = true;
-                    }
-                    else if (resultArray[index].ToUpper().Contains("NAME="))
+                   
+                    if (resultArray[index].ToUpper().Contains("NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
                         linuxDistributionInformation.Name = resultArray[index];
                     }
                     else if (resultArray[index].ToUpper().Contains("VERSION="))
                     {
-                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty);
+                        if (resultArray[index].ToUpper().Contains("LTS"))
+                        {
+                            linuxDistributionInformation.IsLongTermSupportRelease = true;
+                        }
+                        
+                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty).Replace("LTS", String.Empty);
+                        
                         linuxDistributionInformation.Version = resultArray[index];
                     }
                     else if (resultArray[index].ToUpper().Contains("ID=") && !resultArray[index].ToUpper().StartsWith("VERSION_"))
