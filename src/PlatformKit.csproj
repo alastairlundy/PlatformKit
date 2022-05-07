@@ -17,13 +17,7 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes
-    Fixed issues with Runtime ID Generation on Linux
-    Fixed issues with detecting OsRelease information on Linux
-
-### Known Issues
-    GetWMIValue() method does not return WMI value correctly.
-    GetWMIClass() method does not return WMI class information correctly.</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +27,7 @@
         <AssemblyVersion>2.4.2.0</AssemblyVersion>
         <FileVersion>2.4.2.0</FileVersion>
         <Version>2.4.2.0</Version>
-        <PackageVersion>2.4.2</PackageVersion>
+        <PackageVersion>2.4.3</PackageVersion>
 
     </PropertyGroup>
 
