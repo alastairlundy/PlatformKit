@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Authors>AluminiumTech</Authors>
         <Company />
-        <Description>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Description>
+        <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/blob/master/FeatureComparisonByPlatform.md</Description>
         <Copyright>Copyright (c) AluminiumTech 2018-2022</Copyright>
         <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
