@@ -279,6 +279,8 @@ public class WindowsAnalyzer
 bool wasLastLineProcLine = false;
 bool wasLastLineNetworkLine = false;
 
+int networkCardNumber = 0;
+
 for (var index = 0; index < array.Length; index++)
 {
     var nextLine = "";
@@ -520,41 +522,46 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("network card(s):"))
     {
+        if (networkCardNumber > 0)
+        {
+            if (lastNetworkCard != null)  networkCards[networkCardNumber - 1].IpAddresses = ipAddresses.ToArray();
+            ipAddresses.Clear();
+        }
+        
         wasLastLineProcLine = false;
         
-        NetworkCard networkCard = new NetworkCard();
-        networkCard.Name = array[index + 2].Replace("  ", String.Empty);
-        
+        NetworkCard networkCard = new NetworkCard
+        {
+            Name = array[index + 2].Replace("  ", String.Empty)
+        };
+
         networkCards.Add(networkCard);
         lastNetworkCard = networkCard; 
 
         wasLastLineNetworkLine = true;
+        networkCardNumber++;
     }
     else if (nextLine.ToLower().Contains("connection name:"))
     {
-        wasLastLineNetworkLine = false;
         wasLastLineProcLine = false;
         
         if (networkCards.Contains(lastNetworkCard))
         {
            var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
-           networkCards[position].ConnectionName = nextLine.Replace("Connection Name:", String.Empty);
+           networkCards[position].ConnectionName = nextLine.Replace("Connection Name:", String.Empty).Replace("  ", String.Empty);
         }
     }
     else if (nextLine.ToLower().Contains("dhcp enabled:"))
     {
-        wasLastLineNetworkLine = false;
         wasLastLineProcLine = false;
         
-        nextLine = nextLine.Replace("DHCP Enabled:", String.Empty);
-
         var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
         networkCards[position].DhcpEnabled = array[index + 4].ToLower().Contains("yes");
     }
     else if (nextLine.ToLower().Contains("dhcp server:"))
     {
         var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
-        networkCards[position].DhcpServer = nextLine.Replace("DHCP Server:", String.Empty);
+        networkCards[position].DhcpServer = nextLine.Replace("DHCP Server:", String.Empty).Replace("  ", String.Empty);
     }
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
@@ -569,15 +576,9 @@ for (var index = 0; index < array.Length; index++)
             }
         }
 
-        if (dotCounter >= 3)
+        if (dotCounter >= 3 && wasLastLineNetworkLine)
         {
             ipAddresses.Add(nextLine);
-        }
-        else if (wasLastLineNetworkLine)
-        {
-            var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
-            networkCards[position].IpAddresses = ipAddresses.ToArray();
-            ipAddresses.Clear();
         }
         else if (wasLastLineProcLine)
         {
@@ -616,7 +617,15 @@ for (var index = 0; index < array.Length; index++)
 }
         
         #endregion
-
+        
+        if (networkCardNumber == 1)
+        {
+            if (lastNetworkCard != null && ipAddresses != null && networkCards.Count > 0)
+                networkCards[networkCardNumber - 1].IpAddresses = ipAddresses.ToArray();
+            
+            ipAddresses.Clear();
+        }
+        
         windowsSystemInformation.NetworkCards = networkCards.ToArray();
         windowsSystemInformation.Processors = processors.ToArray();
         windowsSystemInformation.HyperVRequirements = hyperVRequirements;

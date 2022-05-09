@@ -137,10 +137,10 @@ public class WindowsSystemInformation
 
         foreach (var networkCard in NetworkCards)
         {
-            Console.WriteLine(nameof(networkCard.Name) + ": " + networkCard.Name);
-            Console.WriteLine(nameof(networkCard.ConnectionName) + ": " + networkCard.ConnectionName);
-            Console.WriteLine(nameof(networkCard.DhcpEnabled) + ": " + networkCard.DhcpEnabled);
-            Console.WriteLine(nameof(networkCard.DhcpServer) + ": " + networkCard.DhcpServer);
+            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.Name) + ": " + networkCard.Name);
+            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.ConnectionName) + ": " + networkCard.ConnectionName);
+            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.DhcpEnabled) + ": " + networkCard.DhcpEnabled);
+            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.DhcpServer) + ": " + networkCard.DhcpServer);
             
 
             foreach (var ipAddress in networkCard.IpAddresses)
