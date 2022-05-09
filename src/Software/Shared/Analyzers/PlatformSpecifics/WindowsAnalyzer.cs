@@ -255,9 +255,13 @@ public class WindowsAnalyzer
         WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
 
         HyperVRequirements hyperVRequirements = new HyperVRequirements();
+        
+        List<string> processors = new List<string>();
         List<NetworkCard> networkCards = new List<NetworkCard>();
         List<string> ipAddresses = new List<string>();
+        
         NetworkCard lastNetworkCard = null;
+        string lastProcessor = "";
         
         var desc = _processManager.RunPowerShellCommand("systeminfo");
 
@@ -272,9 +276,11 @@ public class WindowsAnalyzer
 
 #region Manual Detection
 
+bool wasLastLineProcLine = false;
+bool wasLastLineNetworkLine = false;
+
 for (var index = 0; index < array.Length; index++)
 {
-    
     var nextLine = "";
 
     array[index] = array[index].Replace("  ", String.Empty);
@@ -399,18 +405,10 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("processor(s):"))
     {
-        List<string> processors = new List<string>();
-        
         processors.Add(nextLine.Replace("Processor(s):", String.Empty));
 
-        int procCount = 1;
-        while (array[index + 1 + procCount].Contains("[") && array[index + 1 + procCount].Contains("]:"))
-        {
-            processors.Add(array[index + 1 + procCount].Replace("  ", String.Empty));
-            procCount++;
-        }
-
-        windowsSystemInformation.Processors = processors.ToArray();
+        wasLastLineProcLine = true;
+        wasLastLineNetworkLine = false;
     }
     else if (nextLine.ToLower().Contains("bios version:"))
     {
@@ -472,6 +470,9 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("page file location(s):"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         List<string> locations = new List<string>();
 
         locations.Add(nextLine.Replace("Page File Location(s):", String.Empty));
@@ -488,14 +489,23 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("domain:"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         windowsSystemInformation.Domain = nextLine.Replace("Domain:", String.Empty);
     }
     else if (nextLine.ToLower().Contains("logon server:"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         windowsSystemInformation.LogonServer = nextLine.Replace("Logon Server:", String.Empty);
     }
     else if (nextLine.ToLower().Contains("hotfix(s):"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         List<string> hotfixes = new List<string>();
         hotfixes.Add(nextLine.Replace("Hotfix(s):", String.Empty));
 
@@ -510,14 +520,21 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("network card(s):"))
     {
+        wasLastLineProcLine = false;
+        
         NetworkCard networkCard = new NetworkCard();
         networkCard.Name = array[index + 2].Replace("  ", String.Empty);
         
         networkCards.Add(networkCard);
-        lastNetworkCard = networkCard;
+        lastNetworkCard = networkCard; 
+
+        wasLastLineNetworkLine = true;
     }
     else if (nextLine.ToLower().Contains("connection name:"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         if (networkCards.Contains(lastNetworkCard))
         {
            var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
@@ -526,6 +543,9 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("dhcp enabled:"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         nextLine = nextLine.Replace("DHCP Enabled:", String.Empty);
 
         var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
@@ -538,7 +558,7 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
-        var compare = nextLine.Replace("]:", String.Empty);
+        var compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
         
         int dotCounter = 0;
         foreach (char c in compare)
@@ -553,15 +573,15 @@ for (var index = 0; index < array.Length; index++)
         {
             ipAddresses.Add(nextLine);
         }
-        else if (array[index - 1].ToLower().Contains("network card:") || array[index].ToLower().Contains("network card:"))
+        else if (wasLastLineNetworkLine)
         {
             var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
             networkCards[position].IpAddresses = ipAddresses.ToArray();
             ipAddresses.Clear();
         }
-        else if (!nextLine.ToUpper().Contains("KB") && nextLine.Contains("Network Connection"))
+        else if (wasLastLineProcLine)
         {
-            windowsSystemInformation.NetworkCards = networkCards.ToArray();
+            processors.Add(nextLine);
         }
     }
 
@@ -582,17 +602,26 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("data execution prevention available:"))
     {
+        wasLastLineNetworkLine = false;
+        wasLastLineProcLine = false;
+        
         hyperVRequirements.DataExecutionPreventionAvailable = nextLine
             .Replace("Data Execution Prevention Available:", String.Empty).Contains("Yes");
         break;
+    }
+    else
+    {
+        
     }
 }
         
         #endregion
 
+        windowsSystemInformation.NetworkCards = networkCards.ToArray();
+        windowsSystemInformation.Processors = processors.ToArray();
         windowsSystemInformation.HyperVRequirements = hyperVRequirements;
         return windowsSystemInformation;
     }
-    
+
 
 }

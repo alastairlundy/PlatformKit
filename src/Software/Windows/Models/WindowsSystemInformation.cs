@@ -134,7 +134,7 @@ public class WindowsSystemInformation
         {
             Console.WriteLine(nameof(HotfixesInstalled) + ": " + str);
         }
-/*
+
         foreach (var networkCard in NetworkCards)
         {
             Console.WriteLine(nameof(networkCard.Name) + ": " + networkCard.Name);
@@ -148,7 +148,7 @@ public class WindowsSystemInformation
                 Console.WriteLine(nameof(networkCard.IpAddresses) + ": " + ipAddress);
             }
         }
-  */        
+          
         Console.WriteLine(nameof(HyperVRequirements.DataExecutionPreventionAvailable) + ": " + HyperVRequirements.DataExecutionPreventionAvailable);
         Console.WriteLine(nameof(HyperVRequirements.SecondLevelAddressTranslation) + ": " + HyperVRequirements.SecondLevelAddressTranslation);
         Console.WriteLine(nameof(HyperVRequirements.VirtualizationEnabledInFirmware) + ": " + HyperVRequirements.VirtualizationEnabledInFirmware);
