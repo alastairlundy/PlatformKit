@@ -25,6 +25,7 @@ using System;
 
 namespace AluminiumTech.DevKit.PlatformKit.Exceptions
 {
+    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
     public class RuntimeIdentifierGenerationException : Exception
     {
 
