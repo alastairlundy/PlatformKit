@@ -22,10 +22,10 @@ SOFTWARE.
 */
 
 using System;
-using PlatformKit.Software.Shared.Analyzers;
-using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+using PlatformKit.Analyzers;
+using PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
-namespace PlatformKit.Software.Shared.VersionAnalyzers
+namespace PlatformKit.VersionAnalyzers
 {
     // ReSharper disable once InconsistentNaming
     /// <summary>

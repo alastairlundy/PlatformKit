@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace AluminiumTech.DevKit.PlatformKit.Software.Windows;
+namespace PlatformKit.Software.Windows;
 
 /// <summary>
 /// An enum representing different Windows Editions.

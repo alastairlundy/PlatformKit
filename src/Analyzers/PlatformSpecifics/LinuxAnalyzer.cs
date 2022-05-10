@@ -26,7 +26,7 @@ using System.IO;
 using PlatformKit.Software.Linux.Models;
 
 //Move namespace in V3
-namespace PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
+namespace PlatformKit.Analyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

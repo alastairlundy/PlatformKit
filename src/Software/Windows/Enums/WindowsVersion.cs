@@ -23,9 +23,7 @@ SOFTWARE.
 
 // ReSharper disable InconsistentNaming
 
-using System;
-
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
+namespace PlatformKit.Software.Windows
 {
     /// <summary>
     /// An enum representing different versions of Windows.

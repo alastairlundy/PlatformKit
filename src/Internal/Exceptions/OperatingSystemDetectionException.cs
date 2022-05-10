@@ -23,12 +23,11 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.Exceptions
+namespace PlatformKit.Internal.Exceptions
 {
-    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-    public class OperatingSystemDetectionException : Exception
+    internal class OperatingSystemDetectionException : Exception
     {
-        public OperatingSystemDetectionException() : base("Failed to detect details about the Operating System running.")
+        internal OperatingSystemDetectionException() : base("Failed to detect details about the Operating System running.")
         {
             
         }

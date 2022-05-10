@@ -1,4 +1,4 @@
-﻿namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
+﻿namespace PlatformKit.Hardware.Shared.Models;
 
 public class NetworkCard
 {

@@ -22,10 +22,9 @@ SOFTWARE.
     */
 
 using System;
+using PlatformKit.Hardware.Mac.Enums;
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-
-namespace AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
+namespace PlatformKit.Software.Mac.Models;
 
 /// <summary>
 /// 

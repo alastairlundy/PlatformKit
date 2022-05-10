@@ -22,7 +22,7 @@ SOFTWARE.
 */
 
 //Namespace to be moved in V3
-namespace PlatformKit.Software.Shared.Runtime.Enums;
+namespace PlatformKit.RuntimeIdentification.Enums;
 
 /// <summary>
 /// The type of RuntimeIdentifier generated or detected.

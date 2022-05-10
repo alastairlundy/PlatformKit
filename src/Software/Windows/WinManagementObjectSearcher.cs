@@ -23,14 +23,15 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using PlatformKit.Analyzers;
+using PlatformKit.Software.Shared;
 
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
+namespace PlatformKit.Software.Windows
 {
-    public class WinManagementObjectSearcher : IWinManagementObjectSearcher
+    public class WinManagementObjectSearcher
     {
-        protected AluminiumTech.DevKit.PlatformKit.Analyzers.OSAnalyzer osAnalyzer;
-        protected AluminiumTech.DevKit.PlatformKit.ProcessManager processManager;
+        protected OSAnalyzer osAnalyzer;
+        protected ProcessManager processManager;
 
         /// <summary>
         ///

@@ -24,7 +24,7 @@ SOFTWARE.
 using System;
 
 //Move namespace in V3
-namespace PlatformKit.Software.Shared.Analyzers
+namespace PlatformKit.Analyzers
 {
     // ReSharper disable once InconsistentNaming
     public class OSAnalyzer

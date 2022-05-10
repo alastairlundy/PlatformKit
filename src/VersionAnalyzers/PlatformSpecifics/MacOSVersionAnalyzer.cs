@@ -23,14 +23,14 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
-using PlatformKit.PlatformSpecifics.Mac;
+using PlatformKit.Analyzers;
+using PlatformKit.Analyzers.PlatformSpecifics;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.PlatformSpecifics.Mac;
 using PlatformKit.Software.Mac.Models;
-using PlatformKit.Software.Shared.Analyzers;
-using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
 
 //Move namespace in v3.
-namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+namespace PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
 // ReSharper disable once InconsistentNaming
 /// <summary>

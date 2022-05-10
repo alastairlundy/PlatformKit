@@ -24,19 +24,19 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using PlatformKit.Analyzers;
+using PlatformKit.Analyzers.PlatformSpecifics;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.PlatformSpecifics.Mac;
-using PlatformKit.Software.Shared.Analyzers;
-using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
-using PlatformKit.Software.Shared.Runtime.Enums;
-using PlatformKit.Software.Shared.VersionAnalyzers;
-using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+using PlatformKit.RuntimeIdentification.Enums;
 using PlatformKit.Software.Windows;
+using PlatformKit.VersionAnalyzers;
+using PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
 // ReSharper disable InconsistentNaming
 
 //Move namespace in V3
-namespace PlatformKit.Runtime
+namespace PlatformKit.RuntimeIdentification
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.

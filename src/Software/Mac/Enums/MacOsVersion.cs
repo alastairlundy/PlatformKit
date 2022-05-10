@@ -25,9 +25,7 @@ SOFTWARE.
 
 using System;
 
-using AluminiumTech.DevKit.PlatformKit.Deprecation;
-
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
+namespace PlatformKit.PlatformSpecifics.Mac
 {
     /// <summary>
     /// An enum representing macOS versions.

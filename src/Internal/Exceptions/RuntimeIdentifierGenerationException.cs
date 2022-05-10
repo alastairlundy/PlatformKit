@@ -23,13 +23,12 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.Exceptions
+namespace PlatformKit.Internal.Exceptions
 {
-    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-    public class RuntimeIdentifierGenerationException : Exception
+    internal class RuntimeIdentifierGenerationException : Exception
     {
 
-        public RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
+        internal RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
         {
             
         }

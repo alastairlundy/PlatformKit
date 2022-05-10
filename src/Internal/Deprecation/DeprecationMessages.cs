@@ -23,12 +23,10 @@ SOFTWARE.
 
 using System;
 
-namespace AluminiumTech.DevKit.PlatformKit.Deprecation
+namespace PlatformKit.Internal.Deprecation
 {
-    [Obsolete(DeprecationV3)]
-    public static class DeprecationMessages
+    internal static class DeprecationMessages
     {
-        private const string V3 = "v3.0.0";
         private const string V4 = "v4.0.0";
         private const string V5 = "v5.0.0";
 
@@ -36,8 +34,7 @@ namespace AluminiumTech.DevKit.PlatformKit.Deprecation
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
         
         public const string FutureDeprecation = CodeDeprecation + " in a future version.";
-
-        public const string DeprecationV3 = CodeDeprecation + " in " + V3;
+        
         public const string DeprecationV4 = CodeDeprecation + " in " + V4;
         public const string DeprecationV5 = CodeDeprecation + " in " + V5;
     }

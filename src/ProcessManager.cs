@@ -25,13 +25,12 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using PlatformKit.Internal.Deprecation;
-using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Analyzers;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
-namespace PlatformKit.Software.Shared
+namespace PlatformKit
 {
     /// <summary>
     ///     A class to manage processes on a device and/or start new processes.

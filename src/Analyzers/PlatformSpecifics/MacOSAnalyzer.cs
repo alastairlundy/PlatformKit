@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 using PlatformKit.Hardware.Mac.Enums;
 
 //Move namespace in V3
-namespace PlatformKit.Software.Shared.Analyzers.PlatformSpecifics
+namespace PlatformKit.Analyzers.PlatformSpecifics
 {
     
     // ReSharper disable once InconsistentNaming

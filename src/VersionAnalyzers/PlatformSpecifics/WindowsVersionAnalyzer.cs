@@ -23,12 +23,12 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
+using PlatformKit.Analyzers;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Software.Shared.Analyzers;
 using PlatformKit.Software.Windows;
 
 //Move namespace in v3.
-namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+namespace PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

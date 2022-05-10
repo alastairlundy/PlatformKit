@@ -24,7 +24,7 @@ SOFTWARE.
 using System;
 using System.Reflection;
 
-namespace PlatformKit.Software.Shared;
+namespace PlatformKit;
 
 /// <summary>
 /// 

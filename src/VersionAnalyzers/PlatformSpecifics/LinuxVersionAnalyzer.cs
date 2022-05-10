@@ -22,11 +22,11 @@ SOFTWARE.
 */
 
 using System;
-using PlatformKit.Software.Shared.Analyzers;
-using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
+using PlatformKit.Analyzers;
+using PlatformKit.Analyzers.PlatformSpecifics;
 
 //Move namespace in v3.
-namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+namespace PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

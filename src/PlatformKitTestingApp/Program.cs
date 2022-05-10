@@ -26,14 +26,17 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
-using AluminiumTech.DevKit.PlatformKit;
-using AluminiumTech.DevKit.PlatformKit.Analyzers;
-using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
-using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.Runtime;
+using PlatformKit;
+using PlatformKit.Analyzers;
+using PlatformKit.Analyzers.PlatformSpecifics;
 
-            var platformManager = new PlatformIdentification();
+using PlatformKit.RuntimeIdentification;
+using PlatformKit.RuntimeIdentification.Enums;
+
+using PlatformKit.VersionAnalyzers;
+using PlatformKit.VersionAnalyzers.PlatformSpecifics;
+
+var platformManager = new PlatformIdentification();
             var osAnalyzer = new OSAnalyzer();
             var processManager = new ProcessManager();
             var versionAnalyzer = new OSVersionAnalyzer();

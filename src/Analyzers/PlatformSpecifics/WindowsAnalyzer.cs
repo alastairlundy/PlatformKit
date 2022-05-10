@@ -23,13 +23,14 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+
 using PlatformKit.Hardware.Shared.Models;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
 using PlatformKit.Software.Windows;
 using PlatformKit.Software.Windows.Models;
+using PlatformKit.VersionAnalyzers.PlatformSpecifics;
 
-namespace PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
+namespace PlatformKit.Analyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

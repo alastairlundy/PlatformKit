@@ -22,11 +22,11 @@ SOFTWARE.
 */
 
 using System;
-using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
+using PlatformKit.Hardware.Shared.Models;
 
 // ReSharper disable InconsistentNaming
 
-namespace AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
+namespace PlatformKit.Software.Windows.Models;
 
 /// <summary>
 /// 

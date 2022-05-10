@@ -9,8 +9,6 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RepositoryType>git</RepositoryType>
-        <RootNamespace>AluminiumTech.DevKit.PlatformKit</RootNamespace>
-        <AssemblyName>AluminiumTech.DevKit.PlatformKit</AssemblyName>
         <PackOnBuild>true</PackOnBuild>
         <PackageId>PlatformKit</PackageId>
         <Owners>AluminiumTech</Owners>
@@ -49,18 +47,21 @@
         <None Remove="PlatformKitTestingApp\**" />
         <None Remove="TestConsole\**" />
         <None Remove="PlatformKitTest\**" />
+        <None Remove="PlatformKit.Hardware\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Compile Remove="PlatformKitTestingApp\**" />
       <Compile Remove="TestConsole\**" />
       <Compile Remove="PlatformKitTest\**" />
+      <Compile Remove="PlatformKit.Hardware\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKitTestingApp\**" />
       <EmbeddedResource Remove="TestConsole\**" />
       <EmbeddedResource Remove="PlatformKitTest\**" />
+      <EmbeddedResource Remove="PlatformKit.Hardware\**" />
     </ItemGroup>
 
     <ItemGroup>
