@@ -1,4 +1,5 @@
 ## PlatformKit Feature Comparison
+* Note: This information is incomplete.
 
 ### By Feature
 * [OS Detection](/docs/Feature Comparison/features/OS_Detection.MD)
