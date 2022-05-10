@@ -17,11 +17,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.6.0 Alpha 2
-* Fixed an issue where WindowsSystemInformation detection may fail to detect when more than 1 Network Card is installed.
-* Fixed an issue where WindowsSystemInformation detection may fail to detect when more than 1 Processor is installed.
+        <PackageReleaseNotes>### Changes since 2.5 series
+* Limited Support for PlatformKit 2.x series - Bug Fix updates will continue for some time if deemed necessary. Work on PlatformKit 3.x pre-releases will be starting soon.
+* Deprecated the DeprecationMessages static class and other internal classes (also part of 2.5.2) - These will be made internal only in PlatformKit 3.0
+* Added support for Detecting WindowsSystemInformation on Windows operating systems.
 
 ### Notes
+* Thank you for using PlatformKit 2.x - The past year has been transformative for this library. Hopefully the PlatformKit 3.x series will be just as transformative if not more.
 * We would like your feedback on how you use PlatformKit so that we can better understand where we need to improve and what we need to focus on. The survey link is [https://forms.gle/p739XioKWVw4p3yk8](https://forms.gle/p739XioKWVw4p3yk8)</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
@@ -29,10 +31,10 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.5.0.0</AssemblyVersion>
-        <FileVersion>2.5.0.0</FileVersion>
-        <Version>2.5.0.0</Version>
-        <PackageVersion>2.6.0-alpha.3</PackageVersion>
+        <AssemblyVersion>2.6.0.0</AssemblyVersion>
+        <FileVersion>2.6.0.0</FileVersion>
+        <Version>2.6.0.0</Version>
+        <PackageVersion>2.6.0</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
