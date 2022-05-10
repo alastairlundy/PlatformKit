@@ -19,19 +19,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- */
+*/
 
-using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Enums;
-
-namespace AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
+//Namespace to be moved in V3
+namespace PlatformKit.Software.Shared.Runtime.Enums;
 
 /// <summary>
-/// 
+/// The type of RuntimeIdentifier generated or detected.
 /// </summary>
-public class ReleaseYearModel
+public enum RuntimeIdentifierType
 {
-    public int Month { get; set; }
-    public int Year { get; set; }
-
-    public ReleaseYearTimeframe Timeframe { get; set; }
+    AnyGeneric,
+    Generic,
+    Specific,
+    /// <summary>
+    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+    /// </summary>
+    DistroSpecific,
+    /// <summary>
+    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+    /// </summary>
+    VersionLessDistroSpecific
 }

@@ -19,31 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 
-using System;
-using System.IO;
+namespace PlatformKit.Hardware.Shared.Enums;
 
-using AluminiumTech.DevKit.PlatformKit.Analyzers;
-using AluminiumTech.DevKit.PlatformKit.Deprecation;
-using AluminiumTech.DevKit.PlatformKit.Software.Windows;
-
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
-
-[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-public static class WindowsProcessManagerExtensions
+/// <summary>
+/// 
+/// </summary>
+public enum ReleaseYearTimeframe
 {
-    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-    public static string GetWindowsRegistryValue(string query, string value, string failMessage)
-    {
-        return new WindowsSoftwareDetection().GetWindowsRegistryValue(query, value, failMessage);
-    }
-
-    [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-    // ReSharper disable once InconsistentNaming
-    public static string GetWMIValue(string query, string wmiClass, string failMessage)
-    {
-        return new WindowsSoftwareDetection().GetWindowsManagementInstrumentationValue(query, wmiClass, failMessage);
-    }
-    
+    Early,
+    Mid,
+    Late,
+    NotApplicable
 }

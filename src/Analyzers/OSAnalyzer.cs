@@ -24,7 +24,7 @@ SOFTWARE.
 using System;
 
 //Move namespace in V3
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers
+namespace PlatformKit.Software.Shared.Analyzers
 {
     // ReSharper disable once InconsistentNaming
     public class OSAnalyzer

@@ -25,14 +25,13 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-
-using AluminiumTech.DevKit.PlatformKit.Analyzers;
-using AluminiumTech.DevKit.PlatformKit.Deprecation;
+using PlatformKit.Internal.Deprecation;
+using PlatformKit.Software.Shared.Analyzers;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
-namespace AluminiumTech.DevKit.PlatformKit
+namespace PlatformKit.Software.Shared
 {
     /// <summary>
     ///     A class to manage processes on a device and/or start new processes.
@@ -232,26 +231,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 throw new Exception(ex.ToString());
             }
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="processStartInfo"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        [Obsolete(DeprecationMessages.DeprecationV3 + "\r\n" + 
-                  "This will be removed in PlatformKit 3.0 and will not be replaced. Please use platform specific RunCommand methods instead.")]
-        public string RunCommand(string command, ProcessStartInfo processStartInfo = null)
-        {
-            if (_osAnalyzer.IsWindows()) return RunCmdCommand(command, processStartInfo);
-            if (_osAnalyzer.IsLinux()) return RunLinuxCommand(command, processStartInfo);
-            if (_osAnalyzer.IsMac()) throw new NotImplementedException();
-            if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
-                //return RunCommandMac(command, processStartInfo);
-
-            throw new PlatformNotSupportedException();
-        }
 
         /// <summary>
         /// Runs commands in the Windows Cmd Command Prompt.
@@ -317,18 +296,6 @@ namespace AluminiumTech.DevKit.PlatformKit
         /// Run a command or program as if inside a terminal on Linux.
         /// </summary>
         /// <param name="command"></param>
-        /// <param name="processStartInfo"></param>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV3 + " . Please use the RunLinuxCommand() method instead.")]
-        public string RunCommandLinux(string command, ProcessStartInfo processStartInfo = null)
-        {
-            return RunLinuxCommand(command, processStartInfo);
-        }
-        
-        /// <summary>
-        /// Run a command or program as if inside a terminal on Linux.
-        /// </summary>
-        /// <param name="command"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         public string RunLinuxCommand(string command, ProcessStartInfo processStartInfo = null)
@@ -360,57 +327,6 @@ namespace AluminiumTech.DevKit.PlatformKit
                 }
 
                 throw new PlatformNotSupportedException();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
-            }
-        }
-
-        /// <summary>
-        /// Run different actions or methods depending on the operating system.
-        /// </summary>
-        /// <param name="windowsMethod"></param>
-        /// <param name="macMethod"></param>
-        /// <param name="linuxMethod"></param>
-        /// <param name="freeBsdMethod"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="Exception"></exception>
-        // ReSharper disable once MemberCanBePrivate.Global
-        [Obsolete(DeprecationMessages.DeprecationV3)]
-        public void RunActionOn(Action windowsMethod = null, Action macMethod = null,
-            Action linuxMethod = null, Action freeBsdMethod = null)
-        {
-            try
-            {
-                if (_osAnalyzer.IsWindows() && windowsMethod != null)
-                {
-                    windowsMethod.Invoke();
-                }
-
-                if (_osAnalyzer.IsLinux() && linuxMethod != null)
-                {
-                    linuxMethod.Invoke();
-                }
-                if (_osAnalyzer.IsMac() && macMethod != null)
-                {
-                    macMethod.Invoke();
-                }
-
-#if NETCOREAPP3_0_OR_GREATER
-                if (_osAnalyzer.IsFreeBSD() && freeBsdMethod != null)
-                {
-                    freeBsdMethod.Invoke();
-                }
-#endif
-                if (_osAnalyzer.IsMac() && macMethod == null ||
-                    _osAnalyzer.IsLinux() && linuxMethod == null ||
-                    _osAnalyzer.IsWindows() && windowsMethod == null)
-                {
-                    throw new ArgumentNullException();
-                }
             }
             catch (Exception exception)
             {

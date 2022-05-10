@@ -19,21 +19,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 
-using System;
+using PlatformKit.Hardware.Shared.Enums;
 
-//Update in v3
-namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
+namespace PlatformKit.Hardware.Shared.Models;
+
+/// <summary>
+/// 
+/// </summary>
+public class ReleaseYearModel
 {
-    /// <summary>
-    /// The type of processor in a Mac.
-    /// </summary>
-    public enum MacProcessorType
-    {
-        Intel,
-        AppleSilicon,
-        NotDetected,
-        NotSupported
-    }
+    public int Month { get; set; }
+    public int Year { get; set; }
+
+    public ReleaseYearTimeframe Timeframe { get; set; }
 }

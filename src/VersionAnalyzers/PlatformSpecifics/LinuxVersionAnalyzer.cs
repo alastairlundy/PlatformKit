@@ -22,9 +22,11 @@ SOFTWARE.
 */
 
 using System;
+using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
 
 //Move namespace in v3.
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
+namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

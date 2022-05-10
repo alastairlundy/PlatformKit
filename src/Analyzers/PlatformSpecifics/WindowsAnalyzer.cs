@@ -23,15 +23,13 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
-using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.Hardware.Shared.Models;
-using AluminiumTech.DevKit.PlatformKit.Software.Windows;
-using AluminiumTech.DevKit.PlatformKit.Software.Windows.Models;
+using PlatformKit.Hardware.Shared.Models;
+using PlatformKit.Internal.Exceptions;
+using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+using PlatformKit.Software.Windows;
+using PlatformKit.Software.Windows.Models;
 
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+namespace PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
 
 /// <summary>
 /// 
@@ -267,8 +265,7 @@ public class WindowsAnalyzer
         List<string> ipAddresses = new List<string>();
         
         NetworkCard lastNetworkCard = null;
-        string lastProcessor = "";
-        
+
         var desc = _processManager.RunPowerShellCommand("systeminfo");
 
 #if NET5_0_OR_GREATER

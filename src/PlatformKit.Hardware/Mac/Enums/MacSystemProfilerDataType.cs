@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
     */
 
-namespace AluminiumTech.DevKit.PlatformKit.Hardware.Mac.Enums{
+namespace PlatformKit.Hardware.Mac.Enums{
     /// <summary>
     /// An enum of all possible Mac SystemProfiler DataTypes
     /// </summary>

@@ -23,11 +23,10 @@ SOFTWARE.
 
 using System;
 using System.IO;
-
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
+using PlatformKit.Software.Linux.Models;
 
 //Move namespace in V3
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
+namespace PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

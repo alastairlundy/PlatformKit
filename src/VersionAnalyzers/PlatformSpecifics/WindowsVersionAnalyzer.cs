@@ -23,13 +23,12 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-
-using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+using PlatformKit.Internal.Exceptions;
+using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Software.Windows;
 
 //Move namespace in v3.
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
+namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
 
 /// <summary>
 /// 

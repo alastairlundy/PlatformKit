@@ -19,67 +19,66 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    */
+*/
 
 using System;
-using System.Runtime.InteropServices;
+using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
 
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-
-//Move namespace in V3
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics
+namespace PlatformKit.Software.Shared.VersionAnalyzers
 {
-    
     // ReSharper disable once InconsistentNaming
     /// <summary>
-    /// macOS specific extensions to the OSAnalyzer class.
+    /// 
     /// </summary>
-    public static class MacOSAnalyzer
+    public class OSVersionAnalyzer
     {
+        protected OSAnalyzer _osAnalyzer;
         
-        /*
-         *     public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
-
-    public MacOsSystemInformation GetMacSwVersionInformation();
-         * 
-         */
-        
-        /// <summary>
-        /// Returns whether or not a Mac is Apple Silicon based.
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsAppleSiliconMac(this OSAnalyzer osAnalyzer)
+        public OSVersionAnalyzer()
         {
-            return GetMacProcessorType(osAnalyzer) == MacProcessorType.AppleSilicon;
+            _osAnalyzer = new OSAnalyzer();
         }
-        
+
         /// <summary>
-        /// Gets the type of Processor in a given Mac returned as the MacProcessorType
+        /// Detect the OS version on Windows, macOS, or Linux.
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="NotImplementedException">
+        /// Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
+        /// </exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
-        public static MacProcessorType GetMacProcessorType(this OSAnalyzer osAnalyzer)
+        // ReSharper disable once InconsistentNaming
+        public Version DetectOSVersion()
         {
             try
             {
-                if (osAnalyzer.IsMac())
+                if (_osAnalyzer.IsWindows())
                 {
-                    return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
-                    {
-                        Architecture.Arm64 => MacProcessorType.AppleSilicon,
-                        Architecture.X64 => MacProcessorType.Intel,
-                        _ => MacProcessorType.NotDetected
-                    };
+                    return this.DetectWindowsVersion();
+                }
+                if (_osAnalyzer.IsLinux())
+                {   
+                    return this.DetectLinuxDistributionVersion();
+                }
+                if (_osAnalyzer.IsMac())
+                {
+                    return this.DetectMacOsVersion();
                 }
 
+#if NETCOREAPP3_0_OR_GREATER
+                if (_osAnalyzer.IsFreeBSD())
+                {
+                    throw new NotImplementedException();
+                }
+#endif
                 throw new PlatformNotSupportedException();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
-                Console.WriteLine(exception);
                 throw new Exception(exception.ToString());
             }
-        } 
+        }
     }
 }

@@ -23,12 +23,14 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
-using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.Software.Mac.Models;
+using PlatformKit.PlatformSpecifics.Mac;
+using PlatformKit.Internal.Exceptions;
+using PlatformKit.Software.Mac.Models;
+using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
 
 //Move namespace in v3.
-namespace AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
+namespace PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
 
 // ReSharper disable once InconsistentNaming
 /// <summary>

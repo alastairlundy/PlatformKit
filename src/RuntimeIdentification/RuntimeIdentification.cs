@@ -23,20 +23,20 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.InteropServices;
-
-using AluminiumTech.DevKit.PlatformKit.Analyzers;
-using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics;
-using AluminiumTech.DevKit.PlatformKit.Analyzers.PlatformSpecifics.VersionAnalyzers;
-using AluminiumTech.DevKit.PlatformKit.Exceptions;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac;
-using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows;
+using PlatformKit.Internal.Exceptions;
+using PlatformKit.PlatformSpecifics.Mac;
+using PlatformKit.Software.Shared.Analyzers;
+using PlatformKit.Software.Shared.Analyzers.PlatformSpecifics;
+using PlatformKit.Software.Shared.Runtime.Enums;
+using PlatformKit.Software.Shared.VersionAnalyzers;
+using PlatformKit.Software.Shared.VersionAnalyzers.PlatformSpecifics;
+using PlatformKit.Software.Windows;
 
 // ReSharper disable InconsistentNaming
 
 //Move namespace in V3
-namespace AluminiumTech.DevKit.PlatformKit.Runtime
+namespace PlatformKit.Runtime
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
@@ -392,38 +392,6 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
             }
 
             return possibles;
-        }
-        
-        /// <summary>
-        /// Generates a RuntimeIdentifier object model, detects information, and return it.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3 + " . Please use the ``GetPossibleRuntimeIdentifierCandidates()`` method instead. This is not a direct replacement and you may need time to migrate.")]
-        public RuntimeIdentifier GenerateRuntimeIdentifier()
-        {
-            var runtimeIdentifier = new RuntimeIdentifier();
-
-            runtimeIdentifier.AnyGenericIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric);
-            runtimeIdentifier.GenericIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic);
-            runtimeIdentifier.SpecificIdentifier = GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
-
-            if (osAnalyzer.IsLinux())
-            {
-                runtimeIdentifier.DistroSpecificIdentifier =
-                    GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
-                
-                runtimeIdentifier.VersionLessDistroSpecificIdentifier =
-                    GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false);
-            }
-            else
-            {
-                runtimeIdentifier.DistroSpecificIdentifier = "N/A";
-                runtimeIdentifier.VersionLessDistroSpecificIdentifier = "N/A";
-            }
-            
-            runtimeIdentifier.DotNetIdentifier = DetectRuntimeIdentifier();
-
-            return runtimeIdentifier;
         }
     }
 }
