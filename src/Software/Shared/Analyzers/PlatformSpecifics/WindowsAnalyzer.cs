@@ -247,11 +247,17 @@ public class WindowsAnalyzer
     }
 
     /// <summary>
-    /// 
+    /// Detect WindowsSystemInformation
     /// </summary>
     /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
+        if (!_osAnalyzer.IsWindows())
+        {
+            throw new PlatformNotSupportedException();
+        }
+        
         WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
 
         HyperVRequirements hyperVRequirements = new HyperVRequirements();
@@ -509,8 +515,7 @@ for (var index = 0; index < array.Length; index++)
         wasLastLineProcLine = false;
         
         List<string> hotfixes = new List<string>();
-        hotfixes.Add(nextLine.Replace("Hotfix(s):", String.Empty));
-
+        
         int hotfixCount = 0;
         while (array[index + 2 + hotfixCount].Contains("[") && array[index + 2 + hotfixCount].Contains("]:"))
         {
