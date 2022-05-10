@@ -2,7 +2,7 @@
 
 | | Windows | macOS | Linux | FreeBSD |
 |-|-|-|-|-|
-| IsWindows() | | | |  |
-| IsMac() | | | | |
-| IsLinux() | | | | |
-| IsFreeBSD() | | | |  |
+| Windows Detection | | | |  |
+| macOS Detection | | | | |
+| Linux Detection | | | | |
+| FreeBSD Detection | | | |  |
