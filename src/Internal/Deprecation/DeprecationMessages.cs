@@ -21,8 +21,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System;
+
 namespace AluminiumTech.DevKit.PlatformKit.Deprecation
 {
+    [Obsolete(DeprecationV3)]
     public static class DeprecationMessages
     {
         private const string V3 = "v3.0.0";
