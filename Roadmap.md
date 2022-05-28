@@ -2,8 +2,8 @@
 This information is subject to change at any time and is not a guarantee of the stated changes being made in future releases.
 
 ### Pre 3.0 updates
-* [ ] 2.5.3 - Fix issues with macOS detection
-* [ ] 2.6.1 - Fix issues with macOS detection
+* [ ] 2.5.4 - Fix issues with macOS detection
+* [ ] 2.6.2 - Fix issues with macOS detection
 
 ### 3.0
 - [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
