@@ -307,7 +307,12 @@ public static class MacOSVersionAnalyzer
     /// <returns></returns>
     public static Version DetectMacOsVersion(this OSVersionAnalyzer osVersionAnalyzer)
     {
-        var version = GetMacSwVersInfo()[1].ToLower().Replace("ProductVersion", String.Empty).Replace(" ", String.Empty);
+        
+        #if DEBUG
+            Console.WriteLine(GetMacSwVersInfo()[0]);
+        #endif
+        
+        var version = GetMacSwVersInfo()[1].ToLower().Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
         int dotCounter = 0;
 
