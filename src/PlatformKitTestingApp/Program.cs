@@ -118,7 +118,8 @@ var platformManager = new PlatformIdentification();
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (osAnalyzer.IsLinux())
-            {
+            {  
+                Console.WriteLine("Linux Distro Name: " + LinuxAnalyzer.GetLinuxDistributionInformation(osAnalyzer).Name);
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }

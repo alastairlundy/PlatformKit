@@ -93,7 +93,7 @@ public static class LinuxAnalyzer
                             linuxDistributionInformation.Identifier_Like = "ubuntu";
                         }
                     }
-                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME="))
+                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME=") || resultArray[index].ToUpper().Contains("PRETTY="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
                         linuxDistributionInformation.PrettyName = resultArray[index];
@@ -128,8 +128,10 @@ public static class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
                         linuxDistributionInformation.VersionCodename = resultArray[index];
                     }
-                    
-                    //Console.WriteLine("After: " + resultArray[index]);
+                   
+                 #if DEBUG   
+                    Console.WriteLine("After: " + resultArray[index]);
+                    #endif
                 }
             
                 return linuxDistributionInformation;
