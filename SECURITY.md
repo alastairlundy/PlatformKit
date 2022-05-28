@@ -11,7 +11,7 @@ Versions currently supported by Security Fixes.
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes and Security Fixes |
 |--| --|--|--|
 | 2.6 series | 2.6.0, released on May 10th 2022 | 2.6.1, released on May 28th 2022 | TBD | 
-| 2.5 series | 2.5.0, released on April 7th 2022 | 2.5.2, released on May 10th 2022 | Until 3.0.0 is released | 
+| 2.5 series | 2.5.0, released on April 7th 2022 | 2.5.3, released on May 28th 2022 | Until 3.0.0 is released | 
 
 
 ### Previously Supported Versions
