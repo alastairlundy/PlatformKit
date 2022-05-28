@@ -23,7 +23,7 @@ SOFTWARE.
 
 using System;
 using System.IO;
-
+using System.Linq;
 using AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Linux;
 
 //Move namespace in V3
@@ -48,7 +48,7 @@ public static class LinuxAnalyzer
 
             if (osAnalyzer.IsLinux())
             {
-                char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
+                char[] delimiter = { Convert.ToChar(Environment.NewLine), '\t', '\n', '\r', '"' };
                 
                 string[] resultArray = File.ReadAllLines("/etc/os-release");
 
@@ -60,12 +60,12 @@ public static class LinuxAnalyzer
                     }
 
                    
-                    if (resultArray[index].ToUpper().Contains("NAME="))
+                    if (resultArray[index].ToUpper().StartsWith("NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
                         linuxDistributionInformation.Name = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("VERSION="))
+                    else if (resultArray[index].ToUpper().StartsWith("VERSION="))
                     {
                         if (resultArray[index].ToUpper().Contains("LTS"))
                         {
@@ -83,7 +83,7 @@ public static class LinuxAnalyzer
                         
                        // Console.WriteLine(linuxDistributionInformation.Identifier);
                     }
-                    else if (resultArray[index].ToUpper().Contains("ID_LIKE="))
+                    else if (resultArray[index].ToUpper().StartsWith("ID_LIKE="))
                     {
                         resultArray[index] = resultArray[index].Replace("ID_LIKE=", string.Empty);
                         linuxDistributionInformation.Identifier_Like = resultArray[index];
@@ -94,43 +94,62 @@ public static class LinuxAnalyzer
                             linuxDistributionInformation.Identifier_Like = "ubuntu";
                         }
                     }
-                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME="))
+                    else if (resultArray[index].ToUpper().StartsWith("PRETTY_NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
+
+                        /*
+                        for(int index1 = 0; index1 < resultArray[index].Length; index1++)
+                        {
+                            char c = resultArray[index][index1];
+                            
+                            for (int i = 0; i < 9; i++)
+                            {
+                                if (c == i)
+                                {
+                                   // resultArray[index] = resultArray[index].Remove(index1);
+                                   // resultArray[index] = resultArray[index].Insert(index1, " ");
+                                }
+                            }
+                        }
+                        */
+                        
                         linuxDistributionInformation.PrettyName = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("VERSION_ID="))
+                    else if (resultArray[index].ToUpper().StartsWith("VERSION_ID="))
                     {
                         resultArray[index] = resultArray[index].Replace("VERSION_ID=", string.Empty);
                         linuxDistributionInformation.VersionId = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("HOME_URL="))
+                    else if (resultArray[index].ToUpper().StartsWith("HOME_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("HOME_URL=", string.Empty);
                         linuxDistributionInformation.HomeUrl = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("SUPPORT_URL="))
+                    else if (resultArray[index].ToUpper().StartsWith("SUPPORT_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("SUPPORT_URL=", string.Empty);
                         linuxDistributionInformation.SupportUrl = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("BUG_REPORT_URL="))
+                    else if (resultArray[index].ToUpper().StartsWith("BUG_REPORT_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
                         linuxDistributionInformation.BugReportUrl = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("PRIVACY_POLICY_URL="))
+                    else if (resultArray[index].ToUpper().StartsWith("PRIVACY_POLICY_URL="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
                         linuxDistributionInformation.PrivacyPolicyUrl = resultArray[index];
                     }
-                    else if (resultArray[index].ToUpper().Contains("VERSION_CODENAME="))
+                    else if (resultArray[index].ToUpper().StartsWith("VERSION_CODENAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
                         linuxDistributionInformation.VersionCodename = resultArray[index];
                     }
                     
-                    //Console.WriteLine("After: " + resultArray[index]);
+                    #if DEBUG
+                  //  Console.WriteLine("After: " + resultArray[index]);
+                    #endif
                 }
             
                 return linuxDistributionInformation;
