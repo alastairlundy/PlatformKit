@@ -18,17 +18,20 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes since 2.4.3
-* Fixed an issue where version detection fails on Ubuntu 22.04 LTS and other Ubuntu derivative LTS releases</PackageReleaseNotes>
+* Fixed an issue with Linux Distribution Name detection and other Linux Distribution information detection.
+
+### Notes
+* This version is no longer officially supported and updates are not guaranteed. This is likely to be a one off fix unless any other major bugs are found.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.4.3.0</AssemblyVersion>
-        <FileVersion>2.4.3.0</FileVersion>
-        <Version>2.4.2.0</Version>
-        <PackageVersion>2.4.3</PackageVersion>
+        <AssemblyVersion>2.4.4.0</AssemblyVersion>
+        <FileVersion>2.4.4.0</FileVersion>
+        <Version>2.4.4.0</Version>
+        <PackageVersion>2.4.4</PackageVersion>
 
     </PropertyGroup>
 

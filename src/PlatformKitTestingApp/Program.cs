@@ -75,6 +75,8 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
     
             if (osAnalyzer.IsLinux())
             {
+                Console.WriteLine("Linux Distro Name: " + LinuxAnalyzer.GetLinuxDistributionInformation(osAnalyzer).Name);
+                Console.WriteLine("Linux Distro Pretty Name: " + LinuxAnalyzer.GetLinuxDistributionInformation(osAnalyzer).PrettyName);
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
