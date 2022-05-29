@@ -126,7 +126,7 @@ public static class LinuxAnalyzer
                         linuxDistributionInformation.VersionCodename = resultArray[index];
                     }
                     
-                    Console.WriteLine("After: " + resultArray[index]);
+                    //Console.WriteLine("After: " + resultArray[index]);
                 }
             
                 return linuxDistributionInformation;
