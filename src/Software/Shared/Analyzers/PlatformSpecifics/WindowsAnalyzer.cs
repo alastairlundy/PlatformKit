@@ -548,13 +548,13 @@ for (var index = 0; index < array.Length; index++)
             {
                 start = index1;
             }
-            else if (c == ']')
+            else if (c == ':')
             {
                 finish = index1;
             }
         }
 
-        array[index + 2] = array[index + 2].Remove(start, (finish - start));
+        array[index + 2] = array[index + 2].Remove(start, Math.Abs(finish - start) + 1);
         
         networkCard.Name = array[index + 2].Replace("  ", String.Empty);
 
@@ -598,7 +598,7 @@ for (var index = 0; index < array.Length; index++)
                 dotCounter++;
             }
         }
-
+/*
         int start = 0;
         int finish = 0;
         
@@ -610,14 +610,14 @@ for (var index = 0; index < array.Length; index++)
             {
                 start = index1;
             }
-            else if (c == ']')
+            else if (c == ':')
             {
                 finish = index1;
             }
         }
 
-        nextLine = nextLine.Remove(start, (finish - start));
-        
+        nextLine = nextLine.Remove(start, Math.Abs(finish - start) + 1);
+  */      
         //nextLine = nextLine.Replace("[", String.Empty).Replace("]", String.Empty);
 
         if (dotCounter >= 3 && wasLastLineNetworkLine)
