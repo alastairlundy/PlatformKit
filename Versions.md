@@ -1,4 +1,4 @@
-## Cuurrently Supported Versions
+## Currently Supported Versions
 
 | Version series | Latest Update |
 |-|-|
