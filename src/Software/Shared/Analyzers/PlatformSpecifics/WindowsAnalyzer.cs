@@ -413,7 +413,7 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("processor(s):"))
     {
-        processors.Add(nextLine.Replace("Processor(s):", String.Empty));
+      //  processors.Add(nextLine.Replace("Processor(s):", String.Empty));
 
         wasLastLineProcLine = true;
         wasLastLineNetworkLine = false;
@@ -535,10 +535,28 @@ for (var index = 0; index < array.Length; index++)
         
         wasLastLineProcLine = false;
         
-        NetworkCard networkCard = new NetworkCard
+        NetworkCard networkCard = new NetworkCard();
+        
+        int start = 0;
+        int finish = 0;
+        
+        for (int index1 = 0; index1 < array[index + 2].Length; index1++)
         {
-            Name = array[index + 2].Replace("  ", String.Empty)
-        };
+            var c = array[index + 2][index1];
+            
+            if (c == '[')
+            {
+                start = index1;
+            }
+            else if (c == ']')
+            {
+                finish = index1;
+            }
+        }
+
+        array[index + 2] = array[index + 2].Remove(start, (finish - start));
+        
+        networkCard.Name = array[index + 2].Replace("  ", String.Empty);
 
         networkCards.Add(networkCard);
         lastNetworkCard = networkCard; 
@@ -580,6 +598,27 @@ for (var index = 0; index < array.Length; index++)
                 dotCounter++;
             }
         }
+
+        int start = 0;
+        int finish = 0;
+        
+        for (int index1 = 0; index1 < nextLine.Length; index1++)
+        {
+            var c = nextLine[index1];
+            
+            if (c == '[')
+            {
+                start = index1;
+            }
+            else if (c == ']')
+            {
+                finish = index1;
+            }
+        }
+
+        nextLine = nextLine.Remove(start, (finish - start));
+        
+        //nextLine = nextLine.Replace("[", String.Empty).Replace("]", String.Empty);
 
         if (dotCounter >= 3 && wasLastLineNetworkLine)
         {
