@@ -17,21 +17,18 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 2.5.2
-* Fixed issues with detecting Linux Distribution information as a Linux Distribution Name
-
-### Known Issues
-* macOS Version detection may fail to detect the macOS version being run.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.5.3
+* Fixed issues with macOS version detection. </PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.5.3.0</AssemblyVersion>
-        <FileVersion>2.5.3.0</FileVersion>
-        <Version>2.5.3.0</Version>
-        <PackageVersion>2.5.3</PackageVersion>
+        <AssemblyVersion>2.5.4.0</AssemblyVersion>
+        <FileVersion>2.5.4.0</FileVersion>
+        <Version>2.5.4.0</Version>
+        <PackageVersion>2.5.4</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
