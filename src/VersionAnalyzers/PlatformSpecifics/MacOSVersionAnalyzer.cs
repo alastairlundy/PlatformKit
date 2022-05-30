@@ -307,12 +307,7 @@ public static class MacOSVersionAnalyzer
     /// <returns></returns>
     public static Version DetectMacOsVersion(this OSVersionAnalyzer osVersionAnalyzer)
     {
-        
-        #if DEBUG
-            Console.WriteLine(GetMacSwVersInfo()[0]);
-        #endif
-        
-        var version = GetMacSwVersInfo()[1].ToLower().Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
+        var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
         int dotCounter = 0;
 
@@ -353,6 +348,6 @@ public static class MacOSVersionAnalyzer
     private static string[] GetMacSwVersInfo()
     {
         // ReSharper disable once StringLiteralTypo
-        return new ProcessManager().RunMacCommand("sw_vers").Split(' ');
+        return new ProcessManager().RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
     }
 }
