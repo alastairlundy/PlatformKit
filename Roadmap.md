@@ -1,11 +1,9 @@
 ## Roadmap
 This information is subject to change at any time and is not a guarantee of the stated changes being made in future releases.
 
-### Pre 3.0 Updates
-* [ ] 2.6.3 - Possible intrduction of ``GetPlatformKitVersion()`` method in PlatformIdentification class
-
 ### 3.0
-- [ ] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit
+- [x] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit - Part of 3.0 Alpha 1
+- [x] Removed deprecated code scheduled for removal in V3 - Part of 3.0 Alpha 1
 - [ ] Introduction of ``InstalledApps.Get()`` method.
 - [ ] Introduction of ``InstalledApps.Open()`` method.
 - [ ] Introduction of ``InstalledApps.GetBrowsers()`` method.
