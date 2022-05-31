@@ -123,5 +123,7 @@ var platformManager = new PlatformIdentification();
                 Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
-    
+
+Console.WriteLine("PlatformKit Version: " + new PlatformIdentification().GetPlatformKitVersion().ToString());
+
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
