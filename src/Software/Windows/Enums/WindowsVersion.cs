@@ -23,6 +23,8 @@ SOFTWARE.
 
 // ReSharper disable InconsistentNaming
 
+using System;
+
 namespace PlatformKit.Software.Windows
 {
     /// <summary>
@@ -30,16 +32,6 @@ namespace PlatformKit.Software.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-        WinVista,
-        // ReSharper disable once InconsistentNaming
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-        WinVistaSP1,
-        // ReSharper disable once InconsistentNaming
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-        WinVistaSP2,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
-        WinServer_2008,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         Win7,
         // ReSharper disable once InconsistentNaming

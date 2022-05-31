@@ -146,14 +146,6 @@ namespace PlatformKit.RuntimeIdentification
                 {
                     switch (versionAnalyzer.GetWindowsVersionToEnum())
                     {
-                        case WindowsVersion.WinVista:
-                            throw new PlatformNotSupportedException();
-                        case WindowsVersion.WinVistaSP1:
-                            throw new PlatformNotSupportedException();
-                        case WindowsVersion.WinVistaSP2:
-                            throw new PlatformNotSupportedException();
-                        case WindowsVersion.WinServer_2008:
-                            throw new PlatformNotSupportedException();
                         case WindowsVersion.Win7:
                             osVersion = "7";
                             break;

@@ -159,13 +159,17 @@ public static class WindowsVersionAnalyzer
                 switch (input.Build)
                 {
                     case 6000:
-                        return WindowsVersion.WinVista;
+                        throw new PlatformNotSupportedException("Windows Vista is no longer supported.");
+                        //return WindowsVersion.WinVista;
                     case 6001:
-                        return WindowsVersion.WinVistaSP1;
+                        throw new PlatformNotSupportedException("Windows Vista SP1 is no longer supported.");
+                        //return WindowsVersion.WinVistaSP1;
                     case 6002:
-                        return WindowsVersion.WinVistaSP2;
+                        throw new PlatformNotSupportedException("Windows Vista SP2 is no longer supported.");
+                        //return WindowsVersion.WinVistaSP2;
                     case 6003:
-                        return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
+                        throw new PlatformNotSupportedException("Windows Server 2008 is no longer supported.");
+                        //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
                     case 7600:
                         return WindowsVersion.Win7;
                     case 7601:
@@ -296,10 +300,10 @@ public static class WindowsVersionAnalyzer
         {
             return windowsVersion switch
             {
-                WindowsVersion.WinVista => new Version(6, 0, 6000),
-                WindowsVersion.WinVistaSP1 => new Version(6, 0, 6001),
-                WindowsVersion.WinVistaSP2 => new Version(6, 0, 6002),
-                WindowsVersion.WinServer_2008 => new Version(6, 0, 6003),
+                //WindowsVersion.WinVista => new Version(6, 0, 6000),
+                //WindowsVersion.WinVistaSP1 => new Version(6, 0, 6001),
+                //WindowsVersion.WinVistaSP2 => new Version(6, 0, 6002),
+                //WindowsVersion.WinServer_2008 => new Version(6, 0, 6003),
                 WindowsVersion.Win7 => new Version(6, 1, 7600),
                 WindowsVersion.Win7SP1 => new Version(6, 1, 7601),
                 WindowsVersion.WinServer_2008_R2 => new Version(6, 1, 7600),
