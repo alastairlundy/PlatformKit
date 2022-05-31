@@ -1,3 +1,9 @@
+## Upcoming Versions
+
+| Version series | Latest Pre-release |
+|-|-|
+| 3.0 | 3.0.0 Alpha 1 |
+
 ## Currently Supported Versions
 
 | Version series | Latest Update |
