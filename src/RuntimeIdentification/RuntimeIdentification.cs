@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using PlatformKit.Analyzers;
 using PlatformKit.Analyzers.PlatformSpecifics;
 using PlatformKit.Internal.Exceptions;
