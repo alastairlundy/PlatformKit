@@ -21,9 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
-
-//Update in v3
 namespace PlatformKit.Hardware.Mac.Enums
 {
     /// <summary>
