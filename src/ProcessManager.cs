@@ -25,7 +25,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using PlatformKit.Analyzers;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment

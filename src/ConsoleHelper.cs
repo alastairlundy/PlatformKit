@@ -25,7 +25,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace PlatformKit.Software.Shared.ConsoleHelpers;
+namespace PlatformKit;
 
 public class ConsoleHelper
 {

@@ -26,15 +26,14 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+
+using PlatformKit.Identification;
+using PlatformKit.Identification.Enums;
+
 using PlatformKit;
-using PlatformKit.Analyzers;
-using PlatformKit.Analyzers.PlatformSpecifics;
-
-using PlatformKit.RuntimeIdentification;
-using PlatformKit.RuntimeIdentification.Enums;
-
-using PlatformKit.VersionAnalyzers;
-using PlatformKit.VersionAnalyzers.PlatformSpecifics;
+using PlatformKit.Linux;
+using PlatformKit.Mac;
+using PlatformKit.Windows;
 
 var platformManager = new PlatformIdentification();
             var osAnalyzer = new OSAnalyzer();

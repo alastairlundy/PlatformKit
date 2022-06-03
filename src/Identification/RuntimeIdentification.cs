@@ -1,0 +1,389 @@
+/* MIT License
+
+Copyright (c) 2018-2022 AluminiumTech
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using PlatformKit.Identification.Enums;
+using PlatformKit.Internal.Exceptions;
+
+using PlatformKit.PlatformSpecifics.Mac;
+
+using PlatformKit.Windows;
+using PlatformKit.Linux;
+using PlatformKit.Mac;
+
+// ReSharper disable InconsistentNaming
+
+//Move namespace in V3
+namespace PlatformKit.Identification
+{
+    /// <summary>
+    /// A class to manage RuntimeId detection and programmatic generation.
+    /// </summary>
+    public class RuntimeIdentification
+    {
+        protected OSAnalyzer osAnalyzer;
+        protected OSVersionAnalyzer versionAnalyzer;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public RuntimeIdentification()
+        {
+            versionAnalyzer = new OSVersionAnalyzer();
+            osAnalyzer = new OSAnalyzer();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected string GetArchitectureString()
+        {
+            string cpuArch = RuntimeInformation.OSArchitecture switch
+            {
+                Architecture.X64 => "x64",
+                Architecture.X86 => "x86",
+                Architecture.Arm => "arm",
+                Architecture.Arm64 => "arm64",
+                _ => null
+            };
+
+            return cpuArch;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifierType"></param>
+        /// <returns></returns>
+        /// <exception cref="OperatingSystemDetectionException"></exception>
+        protected string GetOsNameString(RuntimeIdentifierType identifierType)
+        {
+            string osName = null;
+
+            if (identifierType == RuntimeIdentifierType.AnyGeneric)
+            {
+                return "any";
+            }
+            else
+            {
+                if (osAnalyzer.IsWindows())
+                {
+                    osName = "win";
+                }
+                if (osAnalyzer.IsMac())
+                {
+                    osName = "osx";
+                }
+                if (osAnalyzer.IsLinux())
+                {
+                    if (identifierType == RuntimeIdentifierType.Generic)
+                    {
+                        return "linux";
+                    }
+                    else if (identifierType == RuntimeIdentifierType.Specific)
+                    {
+                        osName = osAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                    }
+                    else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                    {
+                        osName = osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                    }
+                    else
+                    {
+                        throw new OperatingSystemDetectionException();
+                    }
+                }
+            }
+
+            return osName;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="OperatingSystemDetectionException"></exception>
+        protected string GetOsVersionString()
+        {
+            string osVersion = null;
+
+            if (osAnalyzer.IsWindows())
+            {
+                if (versionAnalyzer.IsWindows10())
+                {
+                    osVersion = "10";
+                }
+                else if (versionAnalyzer.IsWindows11())
+                {
+                    osVersion = "11";
+                }
+                else if (!versionAnalyzer.IsWindows10() && !versionAnalyzer.IsWindows11())
+                {
+                    switch (versionAnalyzer.GetWindowsVersionToEnum())
+                    {
+                        case WindowsVersion.Win7:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.Win7SP1:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.WinServer_2008_R2:
+                            osVersion = "7";
+                            break;
+                        case WindowsVersion.Win8:
+                            osVersion = "8";
+                            break;
+                        case WindowsVersion.WinServer_2012:
+                            osVersion = "8";
+                            break;
+                        case WindowsVersion.Win8_1:
+                            osVersion = "81";
+                            break;
+                        case WindowsVersion.WinServer_2012_R2:
+                            osVersion = "81";
+                            break;
+                        case WindowsVersion.NotDetected:
+                            throw new OperatingSystemDetectionException();
+                        default:
+                            throw new OperatingSystemDetectionException();
+                    }
+                }
+            }
+            if (osAnalyzer.IsLinux())
+            {
+                osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
+
+                int dotCounter = 0;
+                
+                foreach (var c in osVersion)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+
+                if (dotCounter == 2)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 2);
+                }
+
+                if (dotCounter == 3)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 4);
+                }
+                
+                //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
+            }
+            if (osAnalyzer.IsMac())
+            {
+                switch (versionAnalyzer.DetectMacOsVersionEnum())
+                {
+                    case MacOsVersion.v10_9_Mavericks:
+                        osVersion = "10.9";
+                        break;
+                    case MacOsVersion.v10_10_Yosemite:
+                        osVersion = "10.10";
+                        break;
+                    case MacOsVersion.v10_11_ElCapitan:
+                        osVersion = "10.11";
+                        break;
+                    case MacOsVersion.v10_12_Sierra:
+                        osVersion = "10.12";
+                        break;
+                    case MacOsVersion.v10_13_HighSierra:
+                        osVersion = "10.13";
+                        break;
+                    case MacOsVersion.v10_14_Mojave:
+                        osVersion = "10.14";
+                        break;
+                    case MacOsVersion.v10_15_Catalina:
+                        osVersion = "10.15";
+                        break;
+                    case MacOsVersion.v11_BigSur:
+                        osVersion = "11";
+                        break;
+                    case MacOsVersion.v12_Monterey:
+                        osVersion = "12";
+                        break;
+                    default:
+                        throw new PlatformNotSupportedException();
+                }
+            }
+
+            return osVersion;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifierType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
+        {
+            if (identifierType == RuntimeIdentifierType.AnyGeneric)
+            {
+                return GenerateRuntimeIdentifier(identifierType, false, false);
+            }
+            else if (identifierType == RuntimeIdentifierType.Generic ||
+                     identifierType == RuntimeIdentifierType.Specific && osAnalyzer.IsLinux() ||
+                     identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+            {
+                return GenerateRuntimeIdentifier(identifierType, true, false);
+            }
+            else if (identifierType == RuntimeIdentifierType.Specific && !osAnalyzer.IsLinux()
+                     || identifierType == RuntimeIdentifierType.DistroSpecific)
+            {
+                return GenerateRuntimeIdentifier(identifierType, true, true);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
+        {
+            var osName = GetOsNameString(identifierType);
+            var cpuArch = GetArchitectureString();
+            
+            if (identifierType == RuntimeIdentifierType.AnyGeneric ||
+                identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == false)
+            {
+                return $"any-{GetArchitectureString()}";
+            }
+            else if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == true)
+            {
+                return $"{osName}-{cpuArch}";
+            }
+            else if (identifierType == RuntimeIdentifierType.Specific ||
+                     osAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                     osAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+            {
+                var osVersion = GetOsVersionString();
+
+                if (osAnalyzer.IsWindows())
+                {
+                    if (includeOperatingSystemVersion)
+                    {
+                        return $"{osName}{osVersion}-{cpuArch}";
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
+                }
+
+                if (osAnalyzer.IsMac())
+                {
+                    if (includeOperatingSystemVersion)
+                    {
+                        return $"{osName}.{osVersion}-{cpuArch}";
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
+                }
+
+                if ((osAnalyzer.IsLinux() && 
+                     (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
+                {
+                    if (includeOperatingSystemVersion)
+                    {
+                        return $"{osName}.{osVersion}-{cpuArch}";
+                    }
+                    else
+                    {
+                        return $"{osName}-{cpuArch}";
+                    }
+                }
+                if (((osAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
+                    includeOperatingSystemVersion == false)
+                {
+                    return $"{osName}-{cpuArch}";
+                }
+            }
+            else if(!osAnalyzer.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
+            {
+                Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
+            }
+            
+            throw new RuntimeIdentifierGenerationException();
+        }
+
+        /// <summary>
+        /// Detects the TFM if running on .NET 5 or later and generates the generic TFM if running on .NET Standard 2.0 or later.
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once InconsistentNaming
+        public string DetectRuntimeIdentifier()
+        {
+#if NET5_0_OR_GREATER
+            return RuntimeInformation.RuntimeIdentifier;
+#else
+            if (osAnalyzer.IsLinux())
+            {
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
+            }
+            else
+            {
+                return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
+            }
+#endif
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        {
+            Dictionary<RuntimeIdentifierType, string> possibles = new Dictionary<RuntimeIdentifierType, string>
+            {
+                { RuntimeIdentifierType.AnyGeneric, GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric) },
+                { RuntimeIdentifierType.Generic, GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic) },
+                { RuntimeIdentifierType.Specific, GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific) }
+            };
+
+            if (osAnalyzer.IsLinux())
+            {
+                possibles.Add(RuntimeIdentifierType.VersionLessDistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
+                possibles.Add(RuntimeIdentifierType.DistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
+            }
+
+            return possibles;
+        }
+    }
+}
