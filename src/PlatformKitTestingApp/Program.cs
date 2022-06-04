@@ -38,8 +38,11 @@ using PlatformKit.Windows;
 var platformManager = new PlatformIdentification();
             var osAnalyzer = new OSAnalyzer();
             var processManager = new ProcessManager();
-            var versionAnalyzer = new OSVersionAnalyzer();
-            var runtimeIdentification = new RuntimeIdentification();
+var runtimeIdentification = new RuntimeIdentification();
+
+var windowsAnalyzer = new WindowsAnalyzer();
+var linuxAnalyzer = new LinuxAnalyzer();
+var macAnalyzer = new MacOSAnalyzer();
 
             Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
 
@@ -62,13 +65,12 @@ var platformManager = new PlatformIdentification();
             
             if (osAnalyzer.IsWindows())
             {
-                Console.WriteLine("Windows Version Enum: " + versionAnalyzer.GetWindowsVersionToEnum());
+                Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
 
              //   var res = processManager.RunPowerShellCommand("ping www.duckduckgo.com");
                 
              //  Console.WriteLine(res);
-            
-                WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
+             
                // var caption = windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem");
                // var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
                 
@@ -102,25 +104,25 @@ var platformManager = new PlatformIdentification();
 
             if (osAnalyzer.IsMac())
             {
-                Console.WriteLine("Is this AppleSilicon?: " + osAnalyzer.IsAppleSiliconMac());
-                Console.WriteLine("Mac Processor Type: " + osAnalyzer.GetMacProcessorType());
+                Console.WriteLine("Is this AppleSilicon?: " + macAnalyzer.IsAppleSiliconMac());
+                Console.WriteLine("Mac Processor Type: " + macAnalyzer.GetMacProcessorType());
 
                 Console.WriteLine("macOS Version Enum: " +
-                                  MacOSVersionAnalyzer.DetectMacOsVersionEnum(new OSVersionAnalyzer()));
+                                  macAnalyzer.GetMacOsVersionToEnum());
                 
-                Console.WriteLine("macOS Version Detected: " + new OSVersionAnalyzer().DetectOSVersion().ToString());
+                Console.WriteLine("macOS Version Detected: " + osAnalyzer.DetectOSVersion().ToString());
                 
-                Console.WriteLine("Darwin Version: " + MacOSVersionAnalyzer.DetectDarwinVersion());
-                Console.WriteLine("Xnu Version: " + MacOSVersionAnalyzer.DetectXnuVersion());
+                Console.WriteLine("Darwin Version: " + macAnalyzer.DetectDarwinVersion());
+                Console.WriteLine("Xnu Version: " + macAnalyzer.DetectXnuVersion());
             }
  
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (osAnalyzer.IsLinux())
             {  
-                Console.WriteLine("Linux Distro Name: " + LinuxAnalyzer.GetLinuxDistributionInformation(osAnalyzer).Name);
-                Console.WriteLine("Linux Distro Version: " + versionAnalyzer.DetectLinuxDistributionVersionAsString());
-                Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
+                Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
+                Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
+                Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.DetectLinuxKernelVersion());
             }
 
 Console.WriteLine("PlatformKit Version: " + new PlatformIdentification().GetPlatformKitVersion().ToString());

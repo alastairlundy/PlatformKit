@@ -27,11 +27,10 @@ using System.Runtime.InteropServices;
 using PlatformKit.Identification.Enums;
 using PlatformKit.Internal.Exceptions;
 
-using PlatformKit.PlatformSpecifics.Mac;
-
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
+using PlatformKit.Mac.Enums;
 
 // ReSharper disable InconsistentNaming
 
@@ -44,15 +43,21 @@ namespace PlatformKit.Identification
     public class RuntimeIdentification
     {
         protected OSAnalyzer osAnalyzer;
-        protected OSVersionAnalyzer versionAnalyzer;
-        
+
+        protected WindowsAnalyzer _windowsAnalyzer;
+        protected MacOSAnalyzer _macOsAnalyzer;
+        protected LinuxAnalyzer _linuxAnalyzer;
+
         /// <summary>
         /// 
         /// </summary>
         public RuntimeIdentification()
         {
-            versionAnalyzer = new OSVersionAnalyzer();
             osAnalyzer = new OSAnalyzer();
+
+            _windowsAnalyzer = new WindowsAnalyzer();
+            _macOsAnalyzer = new MacOSAnalyzer();
+            _linuxAnalyzer = new LinuxAnalyzer();
         }
 
         /// <summary>
@@ -105,11 +110,11 @@ namespace PlatformKit.Identification
                     }
                     else if (identifierType == RuntimeIdentifierType.Specific)
                     {
-                        osName = osAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                        osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
                     }
                     else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
                     {
-                        osName = osAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                        osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
                     }
                     else
                     {
@@ -133,17 +138,17 @@ namespace PlatformKit.Identification
 
             if (osAnalyzer.IsWindows())
             {
-                if (versionAnalyzer.IsWindows10())
+                if (_windowsAnalyzer.IsWindows10())
                 {
                     osVersion = "10";
                 }
-                else if (versionAnalyzer.IsWindows11())
+                else if (_windowsAnalyzer.IsWindows11())
                 {
                     osVersion = "11";
                 }
-                else if (!versionAnalyzer.IsWindows10() && !versionAnalyzer.IsWindows11())
+                else if (!_windowsAnalyzer.IsWindows10() && !_windowsAnalyzer.IsWindows11())
                 {
-                    switch (versionAnalyzer.GetWindowsVersionToEnum())
+                    switch (_windowsAnalyzer.GetWindowsVersionToEnum())
                     {
                         case WindowsVersion.Win7:
                             osVersion = "7";
@@ -175,7 +180,7 @@ namespace PlatformKit.Identification
             }
             if (osAnalyzer.IsLinux())
             {
-                osVersion = versionAnalyzer.DetectLinuxDistributionVersionAsString();
+                osVersion = _linuxAnalyzer.DetectLinuxDistributionVersionAsString();
 
                 int dotCounter = 0;
                 
@@ -201,7 +206,7 @@ namespace PlatformKit.Identification
             }
             if (osAnalyzer.IsMac())
             {
-                switch (versionAnalyzer.DetectMacOsVersionEnum())
+                switch (_macOsAnalyzer.GetMacOsVersionToEnum())
                 {
                     case MacOsVersion.v10_9_Mavericks:
                         osVersion = "10.9";

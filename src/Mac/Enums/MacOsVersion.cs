@@ -25,7 +25,7 @@ SOFTWARE.
 
 using System;
 
-namespace PlatformKit.PlatformSpecifics.Mac
+namespace PlatformKit.Mac.Enums
 {
     /// <summary>
     /// An enum representing macOS versions.

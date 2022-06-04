@@ -22,6 +22,9 @@ SOFTWARE.
     */
 
 using System;
+using PlatformKit.Linux;
+using PlatformKit.Mac;
+using PlatformKit.Windows;
 
 //Move namespace in V3
 namespace PlatformKit
@@ -97,6 +100,47 @@ namespace PlatformKit
 #endif
 
             return osPlatform;
+        }
+        
+        /// <summary>
+        /// Detect the OS version on Windows, macOS, or Linux.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException">
+        /// Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
+        /// </exception>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
+        // ReSharper disable once InconsistentNaming
+        public Version DetectOSVersion()
+        {
+            try
+            {
+                if (IsWindows())
+                {
+                    return new WindowsAnalyzer().DetectWindowsVersion();
+                }
+                if (IsLinux())
+                {
+                    return new LinuxAnalyzer().DetectLinuxDistributionVersion();
+                }
+                if (IsMac())
+                {
+                    return new MacOSAnalyzer().DetectMacOsVersion();
+                }
+
+#if NETCOREAPP3_0_OR_GREATER
+                if (IsFreeBSD())
+                {
+                    throw new NotImplementedException();
+                }
+#endif
+                throw new PlatformNotSupportedException();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.ToString());
+            }
         }
     }
 }
