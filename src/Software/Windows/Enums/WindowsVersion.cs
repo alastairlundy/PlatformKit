@@ -107,6 +107,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Windows
         /// We've created a ``IsWindows11()`` method to detect if a device is running on Windows 11 for your (and our) convenience.
         /// </summary>
         Win11_21H2,
+        Win11_22H2,
         Win10_InsiderPreview,
         Win11_InsiderPreview,
         NotDetected,

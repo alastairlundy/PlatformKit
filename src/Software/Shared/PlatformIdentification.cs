@@ -67,6 +67,7 @@ public class PlatformIdentification
             return GetAssembly().GetName().Version;
         }
 
+        /*
     /// <summary>
     /// Return the version of PlatformKit being run.
     /// </summary>
@@ -75,4 +76,5 @@ public class PlatformIdentification
     {
         return Assembly.GetExecutingAssembly().GetName().Version;
     }
+    */
 }
