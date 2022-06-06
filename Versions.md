@@ -8,7 +8,7 @@
 
 | Version series | Latest Update |
 |-|-|
-| 2.6 | 2.6.2 |
+| 2.6 | 2.6.3 |
 | 2.5 | 2.5.4 |
 
 ## Unsupported Versions
