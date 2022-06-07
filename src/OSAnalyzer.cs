@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+using PlatformKit.FreeBSD;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -106,10 +107,6 @@ namespace PlatformKit
         /// Detect the OS version on Windows, macOS, or Linux.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException">
-        /// Not yet implemented on FreeBSD either! Please do not run on FreeBSD.
-        /// </exception>
-        /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once InconsistentNaming
         public Version DetectOSVersion()
@@ -132,7 +129,7 @@ namespace PlatformKit
 #if NETCOREAPP3_0_OR_GREATER
                 if (IsFreeBSD())
                 {
-                    throw new NotImplementedException();
+                    return new FreeBSDAnalyzer().DetectFreeBSDVersion();
                 }
 #endif
                 throw new PlatformNotSupportedException();
