@@ -23,8 +23,6 @@ SOFTWARE.
 
 using System;
 using System.IO;
-using PlatformKit.Identification.Requirements.Enum;
-using PlatformKit.Linux.Models;
 
 //Move namespace in V3
 namespace PlatformKit.Linux;
