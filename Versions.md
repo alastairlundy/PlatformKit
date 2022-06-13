@@ -2,7 +2,7 @@
 
 | Version series | Latest Pre-release |
 |-|-|
-| 3.0 | 3.0.0 Alpha 1 |
+| 3.0 | 3.0.0 Alpha 2 |
 
 ## Currently Supported Versions
 

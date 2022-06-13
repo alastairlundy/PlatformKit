@@ -4,6 +4,7 @@ This information is subject to change at any time and is not a guarantee of the 
 ### 3.0
 - [x] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit - Part of 3.0 Alpha 1
 - [x] Removed deprecated code scheduled for removal in V3 - Part of 3.0 Alpha 1
+- [ ] Add support for macOS 13 "Ventura"
 - [ ] Introduction of ``InstalledApps.Get()`` method.
 - [ ] Introduction of ``InstalledApps.Open()`` method.
 - [ ] Introduction of ``InstalledApps.GetBrowsers()`` method.
