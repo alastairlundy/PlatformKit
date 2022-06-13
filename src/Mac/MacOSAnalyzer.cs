@@ -23,10 +23,8 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
-using PlatformKit.Internal.Exceptions;
 
-using PlatformKit.Mac.Enums;
-using PlatformKit.Mac.Models;
+using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.Mac;
 

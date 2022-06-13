@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace PlatformKit.Mac.Enums
+namespace PlatformKit.Mac
 {
     /// <summary>
     /// The type of processor in a Mac.

@@ -22,9 +22,8 @@ SOFTWARE.
     */
 
 using System;
-using PlatformKit.Mac.Enums;
 
-namespace PlatformKit.Mac.Models;
+namespace PlatformKit.Mac;
 
 /// <summary>
 /// 
