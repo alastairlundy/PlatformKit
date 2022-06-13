@@ -23,7 +23,7 @@ SOFTWARE.
 
 using System;
 using System.IO;
-
+using PlatformKit.Identification.Requirements.Enum;
 using PlatformKit.Linux.Models;
 
 //Move namespace in V3
@@ -232,6 +232,51 @@ public class LinuxAnalyzer
                 return Version.Parse(description);
             }
 
+            throw new PlatformNotSupportedException();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="linuxKernelVersion"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
+        {
+            if (_osAnalyzer.IsLinux())
+            {
+                var detected = DetectLinuxKernelVersion();
+
+                var expected = linuxKernelVersion;
+
+                if (detected.Major >= expected.Major)
+                {
+                    if (detected.Minor >= expected.Minor)
+                    {
+                        if (detected.Build >= expected.Build)
+                        {
+                            if (detected.Revision >= expected.Revision)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                return false;
+            }
             throw new PlatformNotSupportedException();
         }
 }
