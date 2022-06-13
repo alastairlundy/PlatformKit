@@ -30,7 +30,6 @@ using PlatformKit.Internal.Exceptions;
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
-using PlatformKit.Mac.Enums;
 
 // ReSharper disable InconsistentNaming
 
