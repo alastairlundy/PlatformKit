@@ -24,8 +24,8 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Windows.Models;
 
 namespace PlatformKit.Windows;
 

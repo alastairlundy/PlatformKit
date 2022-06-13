@@ -25,7 +25,7 @@ using System;
 
 // ReSharper disable InconsistentNaming
 
-namespace PlatformKit.Windows.Models;
+namespace PlatformKit.Windows;
 
 /// <summary>
 /// 
