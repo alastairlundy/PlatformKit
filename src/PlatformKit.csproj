@@ -17,19 +17,23 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.6.2
-* Added support for Windows 11 22H2
-* Added the ability to detect PlatformKit versions from within PlatformKit</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 2.6.3
+* Deprecated support for OS X 10.0 through 10.5 - Support for these Operating Systems will be removed in PlatformKit 3.0
+* Fixed a potential issue where Windows 11 22H2 may be inaccurately detected as a Windows 11 Insider Preview Build.
+* Fixed a potential issue where Windows Server 2022 (based on Windows 10) may be inaccurately detected as a Windows 10 Insider Preview Build.
+
+### Notes
+* macOS 13 "Ventura" support will not be coming to the PlatformKit 2.6 series. This will be added in PlatformKit 3.0</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.6.3.0</AssemblyVersion>
-        <FileVersion>2.6.3.0</FileVersion>
-        <Version>2.6.3.0</Version>
-        <PackageVersion>2.6.3</PackageVersion>
+        <AssemblyVersion>2.6.4.0</AssemblyVersion>
+        <FileVersion>2.6.4.0</FileVersion>
+        <Version>2.6.4.0</Version>
+        <PackageVersion>2.6.4</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
