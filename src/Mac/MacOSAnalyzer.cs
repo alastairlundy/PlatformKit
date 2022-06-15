@@ -23,7 +23,7 @@ SOFTWARE.
 
 using System;
 using System.Runtime.InteropServices;
-
+using System.Runtime.InteropServices.ComTypes;
 using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.Mac;
@@ -114,17 +114,23 @@ namespace PlatformKit.Mac;
                     switch (input.Minor)
                     {
                         case 0:
-                            return MacOsVersion.v10_0_Cheetah;
+                            //return MacOsVersion.v10_0_Cheetah;
+                            return MacOsVersion.NotSupported;
                         case 1:
-                            return MacOsVersion.v10_1_Puma;
+                            // return MacOsVersion.v10_1_Puma;
+                            return MacOsVersion.NotSupported;
                         case 2:
-                            return MacOsVersion.v10_2_Jaguar;
+                            // return MacOsVersion.v10_2_Jaguar;
+                            return MacOsVersion.NotSupported;
                         case 3:
-                            return MacOsVersion.v10_3_Panther;
+                            // return MacOsVersion.v10_3_Panther;
+                            return MacOsVersion.NotSupported;
                         case 4:
-                            return MacOsVersion.v10_4_Tiger;
+                            // return MacOsVersion.v10_4_Tiger;
+                            return MacOsVersion.NotSupported;
                         case 5:
-                            return MacOsVersion.v10_5_Leopard;
+                            // return MacOsVersion.v10_5_Leopard;
+                            return MacOsVersion.NotSupported;
                         case 6:
                             return MacOsVersion.v10_6_SnowLeopard;
                         case 7:
@@ -173,18 +179,6 @@ namespace PlatformKit.Mac;
     {
         switch (macOsVersion)
         {
-            case MacOsVersion.v10_0_Cheetah:
-                return new(10, 0, 0, 0);
-            case MacOsVersion.v10_1_Puma:
-                return new(10, 1, 0, 0);
-            case MacOsVersion.v10_2_Jaguar:
-                return new(10, 2, 0, 0);
-            case MacOsVersion.v10_3_Panther:
-                return new(10, 3, 0, 0);
-            case MacOsVersion.v10_4_Tiger:
-                return new(10, 4, 0, 0);
-            case MacOsVersion.v10_5_Leopard:
-                return new(10, 5, 0, 0);
             case MacOsVersion.v10_6_SnowLeopard:
                 return new(10, 6, 0, 0);
             case MacOsVersion.v10_7_Lion:
