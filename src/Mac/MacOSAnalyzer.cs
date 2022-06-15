@@ -35,17 +35,12 @@ namespace PlatformKit.Mac;
     public class MacOSAnalyzer
     {
         protected OSAnalyzer _osAnalyzer;
-
-        /*
-         *     public string GetMacSystemProfilerValue(MacSystemProfilerDataType dataType, string value);
-
-    public MacOsSystemInformation GetMacSwVersionInformation();
-         * 
-         */
+        protected ProcessManager _processManager;
 
         public MacOSAnalyzer()
         {
             _osAnalyzer = new OSAnalyzer();
+            _processManager = new ProcessManager();
         }
         
         /// <summary>
@@ -83,6 +78,84 @@ namespace PlatformKit.Mac;
             {
                 Console.WriteLine(exception);
                 throw new Exception(exception.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Gets a value from the Mac System Profiler information associated with a key
+        /// </summary>
+        /// <param name="macSystemProfilerDataType"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
+        {
+            string info = _processManager.RunMacCommand("system_profiler SP" + macSystemProfilerDataType);
+
+            string[] array = info.Split(Environment.NewLine);
+
+            foreach (var str in array)
+            {
+                if (str.ToLower().Contains(key.ToLower()))
+                {
+                    return str.Replace(key, String.Empty).Replace(":", String.Empty);
+                }
+            }
+
+            throw new ArgumentException();
+        }    
+    
+        public bool IsSecureVirtualMemoryEnabled()
+        {
+            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+
+            if (result.ToLower().Contains("disabled"))
+            {
+                return false;
+            }
+            else if (result.ToLower().Contains("enabled"))
+            {
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+    
+        public bool IsSystemIntegrityProtectionEnabled()
+        {
+            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
+
+            if (result.ToLower().Contains("disabled"))
+            {
+                return false;
+            }
+            else if (result.ToLower().Contains("enabled"))
+            {
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public bool IsActivationLockEnabled()
+        {
+            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+
+            if (result.ToLower().Contains("disabled"))
+            {
+                return false;
+            }
+            else if (result.ToLower().Contains("enabled"))
+            {
+                return true;
+            }
+            else
+            {
+                throw new ArgumentException();
             }
         }
         
