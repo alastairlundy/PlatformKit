@@ -213,12 +213,12 @@ public static class WindowsVersionAnalyzer
                         return WindowsVersion.Win11_22H2;
                     default:
                         //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
-                        if (input.Build is > 10240 and < 22000)
+                        if (input.Build is > 10240 and < 20348)
                         {
                             return WindowsVersion.Win10_InsiderPreview;
                         }
                         //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22000)
+                        else if(input.Build > 22621)
                         {
                             return WindowsVersion.Win11_InsiderPreview;
                         }
