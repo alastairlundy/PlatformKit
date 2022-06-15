@@ -205,37 +205,22 @@ namespace PlatformKit.Identification
             }
             if (osAnalyzer.IsMac())
             {
-                switch (_macOsAnalyzer.GetMacOsVersionToEnum())
+                var version = _macOsAnalyzer.DetectMacOsVersion();
+
+                if (version.Major == 10)
                 {
-                    case MacOsVersion.v10_9_Mavericks:
-                        osVersion = "10.9";
-                        break;
-                    case MacOsVersion.v10_10_Yosemite:
-                        osVersion = "10.10";
-                        break;
-                    case MacOsVersion.v10_11_ElCapitan:
-                        osVersion = "10.11";
-                        break;
-                    case MacOsVersion.v10_12_Sierra:
-                        osVersion = "10.12";
-                        break;
-                    case MacOsVersion.v10_13_HighSierra:
-                        osVersion = "10.13";
-                        break;
-                    case MacOsVersion.v10_14_Mojave:
-                        osVersion = "10.14";
-                        break;
-                    case MacOsVersion.v10_15_Catalina:
-                        osVersion = "10.15";
-                        break;
-                    case MacOsVersion.v11_BigSur:
-                        osVersion = "11";
-                        break;
-                    case MacOsVersion.v12_Monterey:
-                        osVersion = "12";
-                        break;
-                    default:
+                    if (version.Minor < 9)
+                    {
                         throw new PlatformNotSupportedException();
+                    }
+                    else
+                    {
+                        osVersion = $"{version.Major}.{version.Major}";
+                    }
+                }
+                else if (version.Major > 10)
+                {
+                    osVersion = $"{version.Major}";
                 }
             }
 
