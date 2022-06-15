@@ -86,7 +86,7 @@ namespace PlatformKit.Mac;
             }
         }
         
-            /// <summary>
+        /// <summary>
     /// Returns macOS version as a macOS version enum.
     /// </summary>
     /// <returns></returns>
@@ -153,6 +153,7 @@ namespace PlatformKit.Mac;
 
                 if (input.Major == 11) return MacOsVersion.v11_BigSur;
                 if (input.Major == 12) return MacOsVersion.v12_Monterey;
+                if (input.Major == 13) return MacOsVersion.v13_Ventura;
 
                 throw new OperatingSystemDetectionException();
             }
@@ -208,6 +209,8 @@ namespace PlatformKit.Mac;
                 return new(11, 0, 0, 0);
             case MacOsVersion.v12_Monterey:
                 return new(12, 0, 0, 0);
+            case MacOsVersion.v13_Ventura:
+                return new(13, 0, 0, 0);
             case MacOsVersion.NotSupported:
                 throw new PlatformNotSupportedException();
             case MacOsVersion.NotDetected:
