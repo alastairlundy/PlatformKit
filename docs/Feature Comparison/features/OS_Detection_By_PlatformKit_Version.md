@@ -14,12 +14,15 @@
 | Windows Server 2022 | 2.2.0 | Still supported |
 | Windows 10 21H2 | 2.2.0 | Still supported |
 | Windows 10 21H1 | 2.0.0 | Still supported |
+| Windows Server 2016 through Windows Server 2019 | 2.0.0 | Still supported |
 | Windows 10 v1507 through Windows 10 20H2 | 2.0.0 | Still supported |
 
 ### Windows 7, 8, and 8.1
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
+| Windows Server 2012 R2 | 2.0.0 | Still supported |
 | Windows 8.1 | 2.0.0 | Still supported |
+| Windows Server 2012 | 2.0.0 | Still supported |
 | Windows 8 | 2.0.0 | Still supported |
 | Windows Server 2008 R2 | 2.0.0 | Still supported |
 | Windows 7 SP1 | 2.0.0 | Still supported |
