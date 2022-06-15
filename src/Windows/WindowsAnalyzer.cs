@@ -747,22 +747,22 @@ for (var index = 0; index < array.Length; index++)
                 if (input.Major == 5)
                 {
                     //We don't support Windows XP.
-                    throw new PlatformNotSupportedException("Windows XP is not supported.");
+                    return WindowsVersion.Unsupported;
                 }
 
                 switch (input.Build)
                 {
                     case 6000:
-                        throw new PlatformNotSupportedException("Windows Vista is no longer supported.");
+                        return WindowsVersion.Unsupported;
                         //return WindowsVersion.WinVista;
                     case 6001:
-                        throw new PlatformNotSupportedException("Windows Vista SP1 is no longer supported.");
+                        return WindowsVersion.Unsupported;
                         //return WindowsVersion.WinVistaSP1;
                     case 6002:
-                        throw new PlatformNotSupportedException("Windows Vista SP2 is no longer supported.");
+                        return WindowsVersion.Unsupported;
                         //return WindowsVersion.WinVistaSP2;
                     case 6003:
-                        throw new PlatformNotSupportedException("Windows Server 2008 is no longer supported.");
+                        return WindowsVersion.Unsupported;
                         //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
                     case 7600:
                         return WindowsVersion.Win7;
@@ -813,7 +813,7 @@ for (var index = 0; index < array.Length; index++)
                             return WindowsVersion.Win10_InsiderPreview;
                         }
                         //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22000)
+                        else if(input.Build > 22621)
                         {
                             return WindowsVersion.Win11_InsiderPreview;
                         }
