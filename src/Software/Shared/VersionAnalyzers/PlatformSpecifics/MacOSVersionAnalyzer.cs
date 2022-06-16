@@ -119,22 +119,6 @@ public static class MacOSVersionAnalyzer
             throw new Exception(exception.ToString());
         }
     }
-    
-/*
-    // ReSharper disable once InconsistentNaming
-    public static bool IsAtLeastMacOSVersion(this OSVersionAnalyzer osVersionAnalyzer, MacOsVersion macOsVersion)
-    {
-        var detected_mac = DetectMacOSVersion();
-        
-                /// <summary>
-            var detected = versionAnalyzer.DetectOSVersion();
-
-            var expected = versionAnalyzer.GetMacVersionFromEnum(macOsVersion);
-            
-            return (detected.Build >= expected.Build);
-        }
-    }
-    */
 
     /// <summary>
     /// Detects macOS System Information.
