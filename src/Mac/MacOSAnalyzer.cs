@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+
 using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.Mac;
@@ -92,8 +93,11 @@ namespace PlatformKit.Mac;
         {
             string info = _processManager.RunMacCommand("system_profiler SP" + macSystemProfilerDataType);
 
+#if NETSTANDARD2_0_OR_GREATER
+            string[] array = info.Split(Convert.ToChar(Environment.NewLine));
+#elif NET5_0_OR_GREATER
             string[] array = info.Split(Environment.NewLine);
-
+#endif
             foreach (var str in array)
             {
                 if (str.ToLower().Contains(key.ToLower()))
@@ -123,6 +127,11 @@ namespace PlatformKit.Mac;
             }
         }
     
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public bool IsSystemIntegrityProtectionEnabled()
         {
             var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
@@ -141,6 +150,11 @@ namespace PlatformKit.Mac;
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public bool IsActivationLockEnabled()
         {
             var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
@@ -294,8 +308,28 @@ namespace PlatformKit.Mac;
         var detected = DetectMacOsVersion();
 
         var expected = GetMacOsVersionFromEnum(macOsVersion);
-            
-            return (detected.Build >= expected.Build);
+
+        if (detected.Major >= expected.Major)
+        {
+            if (detected.Minor >= expected.Minor)
+            {
+                if (detected.Build >= expected.Build)
+                {
+                    if (detected.Revision >= expected.Revision)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+
+            return false;
+        }
+
+        return false;
     }
     
 

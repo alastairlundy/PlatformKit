@@ -99,6 +99,6 @@ namespace PlatformKit.Windows
         Win10_InsiderPreview,
         Win11_InsiderPreview,
         NotDetected,
-        Unsupported,
+        NotSupported,
     }
 }

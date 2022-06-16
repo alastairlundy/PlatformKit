@@ -691,6 +691,8 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.NotDetected:
                 throw new OperatingSystemDetectionException();
+            case WindowsVersion.NotSupported:
+                return false;
             default:
                 return false;
         }
@@ -721,6 +723,8 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.Win11_InsiderPreview:
                 return true;
+            case WindowsVersion.NotSupported:
+                return false;
             case WindowsVersion.NotDetected:
                 throw new OperatingSystemDetectionException();
             default:
@@ -747,22 +751,22 @@ for (var index = 0; index < array.Length; index++)
                 if (input.Major == 5)
                 {
                     //We don't support Windows XP.
-                    return WindowsVersion.Unsupported;
+                    return WindowsVersion.NotSupported;
                 }
 
                 switch (input.Build)
                 {
                     case 6000:
-                        return WindowsVersion.Unsupported;
+                        return WindowsVersion.NotSupported;
                         //return WindowsVersion.WinVista;
                     case 6001:
-                        return WindowsVersion.Unsupported;
+                        return WindowsVersion.NotSupported;
                         //return WindowsVersion.WinVistaSP1;
                     case 6002:
-                        return WindowsVersion.Unsupported;
+                        return WindowsVersion.NotSupported;
                         //return WindowsVersion.WinVistaSP2;
                     case 6003:
-                        return WindowsVersion.Unsupported;
+                        return WindowsVersion.NotSupported;
                         //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
                     case 7600:
                         return WindowsVersion.Win7;
