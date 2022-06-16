@@ -35,7 +35,7 @@ namespace PlatformKit.Internal.Deprecation
         
         public const string FutureDeprecation = CodeDeprecation + " in a future version.";
         
-        public const string DeprecationV4 = CodeDeprecation + " in " + V4;
-        public const string DeprecationV5 = CodeDeprecation + " in " + V5;
+        public const string DeprecationV4 = FeatureDeprecation + " in " + V4;
+        public const string DeprecationV5 = FeatureDeprecation + " in " + V5;
     }
 }

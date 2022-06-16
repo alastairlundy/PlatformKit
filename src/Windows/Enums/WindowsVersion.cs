@@ -23,6 +23,8 @@ SOFTWARE.
 
 // ReSharper disable InconsistentNaming
 
+using System;
+
 namespace PlatformKit.Windows
 {
     /// <summary>
@@ -30,20 +32,20 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7,
         // ReSharper disable once InconsistentNaming
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7SP1,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2008_R2,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8_1,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012_R2,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
