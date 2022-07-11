@@ -238,6 +238,9 @@ namespace AluminiumTech.DevKit.PlatformKit.Runtime
                     case MacOsVersion.v12_Monterey:
                         osVersion = "12";
                         break;
+                    case MacOsVersion.v13_Ventura:
+                        osVersion = "13";
+                        break;
                     default:
                         throw new PlatformNotSupportedException();
                 }

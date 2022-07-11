@@ -70,6 +70,7 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
         /// </summary>
         v11_BigSur,
         v12_Monterey,
+        v13_Ventura,
         NotDetected,
         NotSupported,
     }

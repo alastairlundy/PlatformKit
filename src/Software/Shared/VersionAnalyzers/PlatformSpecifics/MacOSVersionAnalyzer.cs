@@ -105,6 +105,7 @@ public static class MacOSVersionAnalyzer
 
                 if (input.Major == 11) return MacOsVersion.v11_BigSur;
                 if (input.Major == 12) return MacOsVersion.v12_Monterey;
+                if (input.Major == 13) return MacOsVersion.v13_Ventura;
 
                 throw new OperatingSystemDetectionException();
             }
