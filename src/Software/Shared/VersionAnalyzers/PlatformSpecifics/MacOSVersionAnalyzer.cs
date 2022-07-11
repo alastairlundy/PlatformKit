@@ -273,7 +273,13 @@ public static class MacOSVersionAnalyzer
                     return MacOsVersion.v11_BigSur;
                 case 21:
                     return MacOsVersion.v12_Monterey;
+                case 22:
+                    return MacOsVersion.v13_Ventura;
                 default:
+                    if (darwinVersion.Major > 22)
+                    {
+                        return MacOsVersion.v13_Ventura;
+                    }
                     throw new PlatformNotSupportedException();
             }
         }
