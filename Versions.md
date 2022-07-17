@@ -7,8 +7,8 @@
 ## Currently Supported Versions
 
 | Version series | Latest Update |
-|-|-|
-| 2.6 | 2.6.5 |
+|-|-|-|
+| 2.6 | 2.6.6 | July 17th 2022|
 
 ## Unsupported Versions
 
