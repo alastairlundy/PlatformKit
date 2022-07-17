@@ -6,7 +6,7 @@
 
 ## Currently Supported Versions
 
-| Version series | Latest Update |
+| Version series | Latest Update | Date of Latest Release |
 |-|-|-|
 | 2.6 | 2.6.6 | July 17th 2022|
 
@@ -16,7 +16,7 @@
 |-|-|-|
 | 2.5 | 2.5.5 | June 15th 2022 |
 | 2.4 | 2.4.4 | May 29th 2022 | 
-| 2.3 | 2.3.2 | |
-| 2.2 | 2.2.3 | | 
-| 2.1 | 2.1.2 | |
-| 2.0 | 2.0.2 | |
+| 2.3 | 2.3.2 | January 5th 2022 |
+| 2.2 | 2.2.3 | January 5th 2022 | 
+| 2.1 | 2.1.2 | January 5th 2022 |
+| 2.0 | 2.0.2 | January 5th 2022 |
