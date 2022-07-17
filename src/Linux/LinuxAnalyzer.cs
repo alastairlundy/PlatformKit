@@ -65,7 +65,9 @@ public class LinuxAnalyzer
                     }
 
                    
-                    if (resultArray[index].ToUpper().Contains("NAME="))
+                    if (resultArray[index].ToUpper().Contains("NAME=") 
+                        && !resultArray[index].ToUpper().Contains("CODE") 
+                        && !resultArray[index].ToUpper().Contains("PRETTY"))
                     {
                         resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
                         linuxDistributionInformation.Name = resultArray[index];
@@ -99,7 +101,7 @@ public class LinuxAnalyzer
                             linuxDistributionInformation.Identifier_Like = "ubuntu";
                         }
                     }
-                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME=") || resultArray[index].ToUpper().Contains("PRETTY="))
+                    else if (resultArray[index].ToUpper().Contains("PRETTY_NAME="))
                     {
                         resultArray[index] = resultArray[index].Replace("PRETTY_NAME=", string.Empty);
                         linuxDistributionInformation.PrettyName = resultArray[index];
@@ -146,7 +148,7 @@ public class LinuxAnalyzer
             throw new PlatformNotSupportedException();
         }
         
-                /// <summary>
+        /// <summary>
         /// Detects the Linux Distribution Version as read from cat /etc/os-release and reformats it into the format of System.Version object
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
