@@ -17,9 +17,12 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.6.4
+        <PackageReleaseNotes>### Changes since 2.6.5
+* Fixed an issue with Linux Distribution Name detection
+
+### Changes since 2.6.4
 * Added full support for macOS 13 "Ventura" - reversing a prior decision to make that part of PlatformKit 3.0
-* Limited support for future macOS versions after macOS 13 "Ventura" - Future macOS versions where a MacOsVersion enum is required will be detected as macOS 13 "Ventura" but will otherwise detect the correct version 
+* Limited support for future macOS versions after macOS 13 "Ventura" - Future macOS versions where a MacOsVersion enum is required will be detected as macOS 13 "Ventura" but will otherwise detect the correct version
 * Limited support for future Windows 11 versions after Windows 11 22H2 - Windows 11 Detection will continue to work but may be detected as Windows 11 Insider Preview</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
@@ -27,10 +30,10 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.6.4.0</AssemblyVersion>
-        <FileVersion>2.6.4.0</FileVersion>
-        <Version>2.6.4.0</Version>
-        <PackageVersion>2.6.5</PackageVersion>
+        <AssemblyVersion>2.6.6.0</AssemblyVersion>
+        <FileVersion>2.6.6.0</FileVersion>
+        <Version>2.6.6.0</Version>
+        <PackageVersion>2.6.6</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
