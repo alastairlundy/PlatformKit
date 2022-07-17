@@ -60,7 +60,9 @@ public static class LinuxAnalyzer
                     }
 
                    
-                    if (resultArray[index].ToUpper().StartsWith("NAME="))
+                    if (resultArray[index].ToUpper().Contains("NAME=") 
+                        && !resultArray[index].ToUpper().Contains("CODE") 
+                        && !resultArray[index].ToUpper().Contains("PRETTY"))
                     {
                         resultArray[index] = resultArray[index].Replace("NAME=", string.Empty);
                         linuxDistributionInformation.Name = resultArray[index];
