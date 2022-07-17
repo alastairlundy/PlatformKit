@@ -29,11 +29,10 @@ namespace PlatformKit.Internal.Deprecation
     {
         private const string V4 = "v4.0.0";
         private const string V5 = "v5.0.0";
-
-        private const string CodeDeprecation = "This code is deprecated and will be removed";
+        
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
         
-        public const string FutureDeprecation = CodeDeprecation + " in a future version.";
+        public const string FutureDeprecation = FeatureDeprecation + " in a future version.";
         
         public const string DeprecationV4 = FeatureDeprecation + " in " + V4;
         public const string DeprecationV5 = FeatureDeprecation + " in " + V5;
