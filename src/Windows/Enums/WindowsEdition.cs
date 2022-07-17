@@ -41,5 +41,8 @@ public enum WindowsEdition
     IoTEnterpriseLTSC,
     Team,
     Server,
+    /// <summary>
+    /// Windows 11 or newer only
+    /// </summary>
     SE,
 }

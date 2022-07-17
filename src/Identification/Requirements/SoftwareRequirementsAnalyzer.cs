@@ -29,6 +29,9 @@ using PlatformKit.Windows;
 
 namespace PlatformKit.Identification.Requirements;
 
+/// <summary>
+/// 
+/// </summary>
 public class SoftwareRequirementsAnalyzer
 {
     protected OSAnalyzer _osAnalyzer;
