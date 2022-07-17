@@ -219,11 +219,14 @@ namespace PlatformKit.Mac;
                             // return MacOsVersion.v10_5_Leopard;
                             return MacOsVersion.NotSupported;
                         case 6:
-                            return MacOsVersion.v10_6_SnowLeopard;
+                            //return MacOsVersion.v10_6_SnowLeopard;
+                            return MacOsVersion.NotSupported;
                         case 7:
-                            return MacOsVersion.v10_7_Lion;
+                            //return MacOsVersion.v10_7_Lion;
+                            return MacOsVersion.NotSupported;
                         case 8:
-                            return MacOsVersion.v10_8_MountainLion;
+                            //return MacOsVersion.v10_8_MountainLion;
+                            return MacOsVersion.NotSupported;
                         case 9:
                             return MacOsVersion.v10_9_Mavericks;
                         case 10:
@@ -266,12 +269,6 @@ namespace PlatformKit.Mac;
     {
         switch (macOsVersion)
         {
-            case MacOsVersion.v10_6_SnowLeopard:
-                return new(10, 6, 0, 0);
-            case MacOsVersion.v10_7_Lion:
-                return new(10, 7, 0, 0);
-            case MacOsVersion.v10_8_MountainLion:
-                return new(10, 8, 0, 0);
             case MacOsVersion.v10_9_Mavericks:
                 return new(10, 9, 0, 0);
             case MacOsVersion.v10_10_Yosemite:
