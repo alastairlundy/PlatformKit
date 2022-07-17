@@ -1,6 +1,6 @@
 ## Upcoming Versions
 
-| Version series | Latest Pre-release | Released On |
+| Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
 | 3.0 | 3.0.0 Alpha 3 | July 17th 2022 |
 
