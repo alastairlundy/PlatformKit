@@ -47,10 +47,13 @@ namespace AluminiumTech.DevKit.PlatformKit.PlatformSpecifics.Mac
         [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_5_Leopard,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_6_SnowLeopard,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_7_Lion,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
+        [Obsolete(Deprecation.DeprecationMessages.DeprecationV3)]
         v10_8_MountainLion,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV4)]
         v10_9_Mavericks,
