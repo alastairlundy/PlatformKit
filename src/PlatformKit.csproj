@@ -15,11 +15,12 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.0.0 Alpha 1
-* Added initial support for detecting FreeBSD OS Version - This is untested for the time being and is experimental. Use at your own risk.
-* Minor namespace changes within PlatformKit.Windows, PlatformKit.Mac, and PlatformKit.Linux
-* Added new ``SoftwareRequirementsAnalyzer`` class - This currently has support for checking the installed Windows version, macOS version, or Linux Kernel version against the required version parameter (in the form of an enum for Windows and macOS, and a System.Version object for the Linux Kernel version)
-* Removed .NET 5 and .NET Core 3.1 build targets as support for both is coming to an end</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.0.0 Alpha 2
+* Discontinued support for OS X 10.0 through 10.8
+* Fixed issues with Linux Distribution Name Detection - This will be backported to PlatformKit 2.6 series
+* Re-added MacSystemProfilerDataType
+* Removal of hardcoded values in Runtime Identification
+* Initial support for macOS 13 "Ventura"</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -29,7 +30,7 @@
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
         <FileVersion>3.0.0.0</FileVersion>
         <Version>3.0.0.0</Version>
-        <PackageVersion>3.0.0-alpha.2</PackageVersion>
+        <PackageVersion>3.0.0-alpha.3</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/</PackageProjectUrl>
 
     </PropertyGroup>

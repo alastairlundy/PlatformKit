@@ -4,7 +4,7 @@
 
 PlatformKit is a C# .NET library focusing on dealing with cross-platform OS detection, OS version detection, platform specific code, and platform specific issues.
 
-This can be added to any .NET Standard 2.0, .NET Core 3.1, .NET 5, or .NET 6 supported Application or Library.
+This can be added to any .NET Standard 2.0 or .NET 6 supported Application or Library.
 
 [![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
