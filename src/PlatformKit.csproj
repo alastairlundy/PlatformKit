@@ -5,7 +5,7 @@
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/blob/master/FeatureComparisonByPlatform.md</Description>
         <Copyright>Copyright (c) AluminiumTech 2018-2022</Copyright>
-        <RepositoryUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</RepositoryUrl>
+        <RepositoryUrl>https://github.com/NeverSpyTech/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RepositoryType>git</RepositoryType>
@@ -17,24 +17,26 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.6.5
-* Fixed an issue with Linux Distribution Name detection
+        <PackageReleaseNotes>### IMPORTANT NOTE: DO NOT IGNORE
+If you use PlatformKit regularly, please help determine PlatformKit's future with a quick straw poll that will take you less than a minute to complete.
+Please visit [https://strawpoll.com/polls/QrgeVWO6OZp](https://strawpoll.com/polls/QrgeVWO6OZp) to vote on the future of PlatformKit.
+Thanks
 
-### Changes since 2.6.4
-* Added full support for macOS 13 "Ventura" - reversing a prior decision to make that part of PlatformKit 3.0
-* Limited support for future macOS versions after macOS 13 "Ventura" - Future macOS versions where a MacOsVersion enum is required will be detected as macOS 13 "Ventura" but will otherwise detect the correct version
-* Limited support for future Windows 11 versions after Windows 11 22H2 - Windows 11 Detection will continue to work but may be detected as Windows 11 Insider Preview</PackageReleaseNotes>
+### Changes since 2.6.6.0
+* Moved code to GitHub from GitLab
+* Updated references in Nuget package to reflect the changes
+</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>2.6.6.0</AssemblyVersion>
-        <FileVersion>2.6.6.0</FileVersion>
-        <Version>2.6.6.0</Version>
-        <PackageVersion>2.6.6</PackageVersion>
-        <PackageProjectUrl>https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit</PackageProjectUrl>
+        <AssemblyVersion>2.6.6.1</AssemblyVersion>
+        <FileVersion>2.6.6.1</FileVersion>
+        <Version>2.6.6.1</Version>
+        <PackageVersion>2.6.6.1</PackageVersion>
+        <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
 
     </PropertyGroup>
 
