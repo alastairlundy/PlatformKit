@@ -22,18 +22,9 @@ Versions currently supported by Security Fixes.
 | 2.1 series | 2.1.0, released on November 9th 2021 | 2.1.2, released on January 5th 2022 | :x:, ended January 5th 2022 |
 | 2.0 series | 2.0.0, released on October 21st 2021 | 2.0.2, released on January 5th 2022 | :x:, ended January 5th 2022 |
 
-### Pre 2.0 Supported Versions
-| Version series | Original Launch Version | Final version | Supported with Bug Fixes | Supported with Security Fixes | 
-|--|--|--|--|--|
-| 2.0 RC series | 2.0.0 RC 1 | 2.0.0 RC 3 | :x:, Support ended November 15th 2021 | :x:, Support ended December 10th 2021 |
-| 2.0 Beta series | 2.0.0 Beta 1 | 2.0.0 Beta 10 | :x:, Support ended October 8th 2021 | :x:, Support ended November 8th 2021 |
-| 2.0 Alpha series | 2.0.0 Alpha 0 | 2.0.0 Alpha 9 |:x: , Support ended February 6th 2020 | :x: , Support ended March 22nd 2020 |
-| Beta 1.x.x series | Beta 1.0.0 | Beta 1.4.1 |:x:, Support ended February 6th 2018 | :x:, Support ended February 6th 2018 |
-| Alpha 1.x.x series | | | :x: | :x: |
-
 ## Reporting a Vulnerability
 
-In the event you discover a security vulnerability, please email ``contact@aluminiumte.ch`` with the Subject of ``PlatformKit Vulnerability``.
+In the event you discover a security vulnerability, please email ``contact@neverspy.tech`` with the Subject of ``PlatformKit Vulnerability``.
 
 Upon receving the email we will make a reasonable attempt to respond within 3 days although this may not always be possible. Firstly we will send an email back confirming receipt of the security vulnerability disclosure email.
 Once we have evaluated the nature of the security vulnerability we will email you with an update on the situation.
