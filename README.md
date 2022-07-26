@@ -1,4 +1,4 @@
-# PlatformKit (formerly AluminiumCoreLib)
+# PlatformKit
 
 ## About PlatformKit
 
