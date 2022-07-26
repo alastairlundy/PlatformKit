@@ -53,12 +53,12 @@ namespace PlatformKit
         /// <param name="processStartInfo">(Optional) Process Start Information to be passed to the executable. This may have the unintended effect of overriding other optional or non-optional arguments.</param>
         public string RunProcess(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            if (_osAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
-            if (_osAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
-            if (_osAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
+            if (OSAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
+            if (OSAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
+            if (OSAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
 
 #if NETCOREAPP3_0_OR_GREATER
-            if (_osAnalyzer.IsFreeBSD()) throw new NotImplementedException();
+            if (OSAnalyzer.IsFreeBSD()) throw new NotImplementedException();
 #endif
             
             throw new PlatformNotSupportedException();
@@ -247,7 +247,7 @@ namespace PlatformKit
         /// <returns></returns>
         public string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            if (_osAnalyzer.IsWindows())
+            if (OSAnalyzer.IsWindows())
             {
                 var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
                                                            //+ "System32" +
@@ -269,7 +269,7 @@ namespace PlatformKit
         /// <exception cref="PlatformNotSupportedException"></exception>
         public string RunMacCommand(string command)
         {
-            if (_osAnalyzer.IsMac())
+            if (OSAnalyzer.IsMac())
             {
                 var location = "/usr/bin/";
                 
@@ -277,7 +277,7 @@ namespace PlatformKit
 
                 if (array.Length > 1)
                 {
-                    var args= array.ToString().Replace(array[0], String.Empty);
+                    var args= array.ToString()?.Replace(array[0], String.Empty);
 
                     return RunProcessMac(location, array[0], args);
                 }
@@ -300,7 +300,7 @@ namespace PlatformKit
         {
             try
             {
-                if (_osAnalyzer.IsLinux())
+                if (OSAnalyzer.IsLinux())
                 {
                     var location = "/usr/bin/";
 
@@ -360,17 +360,17 @@ namespace PlatformKit
                     url = url.Replace("http://", "https://");
                 }
 
-                if (_osAnalyzer.IsWindows())
+                if (OSAnalyzer.IsWindows())
                 {
                     RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
                     return true;
                 }
-                if (_osAnalyzer.IsLinux())
+                if (OSAnalyzer.IsLinux())
                 {
                     RunLinuxCommand("xdg-open " + url);
                     return true;
                 }
-                if (_osAnalyzer.IsMac())
+                if (OSAnalyzer.IsMac())
                 {
                     var task = new Task(() =>
                         Process.Start("open", url));
@@ -378,7 +378,7 @@ namespace PlatformKit
                     return true;
                 }
 #if  NETCOREAPP3_1_OR_GREATER
-                if (_osAnalyzer.IsFreeBSD())
+                if (OSAnalyzer.IsFreeBSD())
                 {
                     throw new NotImplementedException();
                 }          

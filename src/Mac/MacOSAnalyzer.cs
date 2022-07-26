@@ -35,12 +35,10 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOSAnalyzer
     {
-        protected OSAnalyzer _osAnalyzer;
         protected ProcessManager _processManager;
 
         public MacOSAnalyzer()
         {
-            _osAnalyzer = new OSAnalyzer();
             _processManager = new ProcessManager();
         }
         
@@ -63,7 +61,7 @@ namespace PlatformKit.Mac;
         {
             try
             {
-                if (_osAnalyzer.IsMac())
+                if (OSAnalyzer.IsMac())
                 {
                     return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
                     {
@@ -194,7 +192,7 @@ namespace PlatformKit.Mac;
     {
         try
         {
-            if (_osAnalyzer.IsMac())
+            if (OSAnalyzer.IsMac())
             {
                 if (input.Major == 10)
                 {
@@ -354,7 +352,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throws an error if it is run on Windows or Linux (or any OS which isn't macOS)</exception>
     public Version DetectDarwinVersion()
     {
-        if (_osAnalyzer.IsMac())
+        if (OSAnalyzer.IsMac())
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
@@ -394,7 +392,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Not supported on platforms other than macOS</exception>
     public Version DetectXnuVersion()
     {
-        if (_osAnalyzer.IsMac())
+        if (OSAnalyzer.IsMac())
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');

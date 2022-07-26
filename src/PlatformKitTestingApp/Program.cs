@@ -63,7 +63,7 @@ var macAnalyzer = new MacOSAnalyzer();
           
             //processManager.OpenUrlInBrowser("duckduckgo.com");
             
-            if (osAnalyzer.IsWindows())
+            if (OSAnalyzer.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
 
@@ -102,7 +102,7 @@ var macAnalyzer = new MacOSAnalyzer();
               sysinfo.ToConsoleWriteLine();
             }
 
-            if (osAnalyzer.IsMac())
+            if (OSAnalyzer.IsMac())
             {
                 Console.WriteLine("Is this AppleSilicon?: " + macAnalyzer.IsAppleSiliconMac());
                 Console.WriteLine("Mac Processor Type: " + macAnalyzer.GetMacProcessorType());
@@ -118,13 +118,13 @@ var macAnalyzer = new MacOSAnalyzer();
  
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
-            if (osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {  
                 Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
                 Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.DetectLinuxKernelVersion());
             }
 
-Console.WriteLine("PlatformKit Version: " + new PlatformIdentification().GetPlatformKitVersion().ToString());
+Console.WriteLine("PlatformKit Version: " + PlatformIdentification.GetPlatformKitVersion().ToString());
 
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);

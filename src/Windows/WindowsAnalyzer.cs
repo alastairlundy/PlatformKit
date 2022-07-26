@@ -35,12 +35,10 @@ namespace PlatformKit.Windows;
 public class WindowsAnalyzer
 {
     protected readonly ProcessManager _processManager;
-    protected readonly OSAnalyzer _osAnalyzer;
-    
+
     public WindowsAnalyzer()
     {
         _processManager = new ProcessManager();
-        _osAnalyzer = new OSAnalyzer();
     }
 
     /// <summary>
@@ -52,7 +50,7 @@ public class WindowsAnalyzer
     {
         try
         {
-            if (_osAnalyzer.IsWindows())
+            if (OSAnalyzer.IsWindows())
             {
                 var desc = _processManager.RunPowerShellCommand("systeminfo");
 
@@ -143,7 +141,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public string GetWMIClass(string wmiClass)
     {
-        if (_osAnalyzer.IsWindows())
+        if (OSAnalyzer.IsWindows())
         {
             var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
             // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
@@ -169,7 +167,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public string GetWMIValue(string property, string wmiClass)
     {
-        if (_osAnalyzer.IsWindows())
+        if (OSAnalyzer.IsWindows())
         {
             var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
@@ -210,7 +208,7 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
     public string GetWindowsRegistryValue(string query, string value){
-        if (_osAnalyzer.IsWindows())
+        if (OSAnalyzer.IsWindows())
         {
             var result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
@@ -249,7 +247,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
-        if (!_osAnalyzer.IsWindows())
+        if (!OSAnalyzer.IsWindows())
         {
             throw new PlatformNotSupportedException();
         }
@@ -844,7 +842,7 @@ for (var index = 0; index < array.Length; index++)
         {
             try
             {
-                if (_osAnalyzer.IsWindows())
+                if (OSAnalyzer.IsWindows())
                 {
                     string description = RuntimeInformation.OSDescription
                         .Replace("Microsoft Windows", string.Empty)

@@ -32,11 +32,10 @@ namespace PlatformKit.Linux;
 /// </summary>
 public class LinuxAnalyzer
 {
-    protected OSAnalyzer _osAnalyzer;
 
     public LinuxAnalyzer()
     {
-        _osAnalyzer = new OSAnalyzer();
+        
     }
     
         /// <summary>
@@ -51,7 +50,7 @@ public class LinuxAnalyzer
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (_osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {
                 char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
                 
@@ -155,7 +154,7 @@ public class LinuxAnalyzer
         /// <returns></returns>
         public Version DetectLinuxDistributionVersion()
         {
-            if (_osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {
                 var dotCounter = 0;
 
@@ -192,7 +191,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public string DetectLinuxDistributionVersionAsString()
         {
-            if (_osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {
                 var linuxDistroInfo = GetLinuxDistributionInformation();
 
@@ -224,7 +223,7 @@ public class LinuxAnalyzer
         /// </exception>
         public Version DetectLinuxKernelVersion()
         {
-            if (_osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {
                 var description = Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty);
@@ -243,7 +242,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
-            if (_osAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux())
             {
                 var detected = DetectLinuxKernelVersion();
 

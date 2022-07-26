@@ -28,7 +28,6 @@ namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
     {
-        protected OSAnalyzer osAnalyzer;
         protected ProcessManager processManager;
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace PlatformKit.Windows
             
             try
             {
-                if (osAnalyzer.IsWindows())
+                if (OSAnalyzer.IsWindows())
                 {
                     var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);
