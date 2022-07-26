@@ -6,7 +6,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 2.6
 | Version | Availability | Changelog |
 |-|-|-|
-| 2.6.6.1 | July 22nd 2022 | [Changelog](https://gitlab.com/NeverSpyTech/PlatformKit/-/releases/2.6.6.1) |
+| 2.6.6.1 | July 25th 2022 | [Changelog](https://gitlab.com/NeverSpyTech/PlatformKit/-/releases/2.6.6.1) |
 | 2.6.6 | July 17th 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/releases/2.6.6) |
 | 2.6.5 | July 11th 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/releases/2.6.5) |
 | 2.6.4 | June 15th 2022 | [Changelog](https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/releases/2.6.4) |
