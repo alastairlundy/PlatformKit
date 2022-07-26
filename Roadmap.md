@@ -7,29 +7,17 @@ This information is subject to change at any time and is not a guarantee of the 
 - [x] Add support for macOS 13 "Ventura" - Part of 3.0 Alpha 3
 
 ### 3.1
-- [ ] Introduction of ``InstalledApps.Get()`` method.
-- [ ] Introduction of ``InstalledApps.Open()`` method.
-- [ ] Introduction of ``InstalledApps.GetBrowsers()`` method.
-- [ ] Introduction of ``OpenUrlWith`` method to allow opening a URL in a specific browser.
 - [ ] Support for FreeBSD Detection.
 
 ### 3.2
-- [ ] Introduction of ``InstalledApps.GetByType()`` method on Windows, macOS, and Linux.
-- [ ] Introduction of ``DefaultApps.Get()`` method on Windows, macOS, and Linux.
-- [ ] Introduction of ``DefaultApps.Set()`` method on Windows, macOS, and Linux.
-
-### 3.3
-- [ ] ``InstalledApps.Uninstall()`` methods on Windows, macOS, and Linux
-
-### 3.4
 - [ ] Support for Android Detection
 - [ ] Support for IOS Detection
 
-### 3.5
+### 3.3
 - [ ] Support for tvOS Detection
 - [ ] Support for watchOS Detection
 
-### 3.6
+### 3.4
 - [ ] Support for Xbox Detection
 
 ### 4.0
