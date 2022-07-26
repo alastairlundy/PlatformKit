@@ -1,6 +1,7 @@
 MIT License
 
 Copyright (c) 2018-2022 AluminiumTech
+
 Copyright (c) 2022 NeverSpy Tech Limited
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
