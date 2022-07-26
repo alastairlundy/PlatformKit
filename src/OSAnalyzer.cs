@@ -22,6 +22,7 @@ SOFTWARE.
     */
 
 using System;
+
 using PlatformKit.FreeBSD;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
@@ -42,7 +43,7 @@ namespace PlatformKit
         /// Returns whether or not the current OS is Windows.
         /// </summary>
         /// <returns></returns>
-        public bool IsWindows()
+        public static bool IsWindows()
         {
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
         }
@@ -51,7 +52,7 @@ namespace PlatformKit
         /// Returns whether or not the current OS is macOS.
         /// </summary>
         /// <returns></returns>
-        public bool IsMac()
+        public static bool IsMac()
         {
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
         }
@@ -60,7 +61,7 @@ namespace PlatformKit
         /// Returns whether or not the current OS is Linux based.
         /// </summary>
         /// <returns></returns>
-        public bool IsLinux()
+        public static bool IsLinux()
         {
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
         }
@@ -71,7 +72,7 @@ namespace PlatformKit
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
-        public bool IsFreeBSD()
+        public static bool IsFreeBSD()
         {
 #if NETCOREAPP3_0_OR_GREATER
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
