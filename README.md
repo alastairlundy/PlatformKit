@@ -21,3 +21,4 @@ To see what we're thinking of working on next, check out PlatformKit's [Roadmap]
 
 ### Apps and Libraries built with PlatformKit
 If you'd like to add your app here and it uses this library then please submit a new issue asking for this.
+* [RyzenAdj Wrapper for C#](https://gitlab.com/envioussoftware/envioussoftware-oss/RyzenAdjWrapper-for-CSharp)
