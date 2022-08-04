@@ -15,5 +15,5 @@
 | RunProcess (Generic) | | | | | 
 | RunProcess___ | | | 2nd Iteration: Introduced in 2.4.0 | :x: |
 | Run___Command | :heavy_check_mark:, Introduced in 2.4.0 | :heavy_check_mark:, Introduced in 2.4.0 | :heavy_check_mark:, Introduced in 2.4.0 | :x: |
-| RunCommand___ | :x:, Removed in 3.0.0 | :x:, Removed in 3.0.0 | :x:, Removed in 3.0.0 | :x: |
-| RunCommand (Generic) | :x:, Removed in 3.0.0 | :x:, Removed in 3.0.0 | :x:, Removed in 3.0.0 | :x: |
+| RunCommand___ | :no_entry:, Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :x: |
+| RunCommand (Generic) | :no_entry: , Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :x: |
