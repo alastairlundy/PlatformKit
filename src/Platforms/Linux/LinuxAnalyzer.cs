@@ -24,7 +24,6 @@ SOFTWARE.
 using System;
 using System.IO;
 
-//Move namespace in V3
 namespace PlatformKit.Linux;
 
 /// <summary>
@@ -235,7 +234,7 @@ public class LinuxAnalyzer
         }
         
         /// <summary>
-        /// 
+        /// Returns whether the installed Linux Kernel version is equal to or newer than the Kernel Version provided as a parameter
         /// </summary>
         /// <param name="linuxKernelVersion"></param>
         /// <returns></returns>
@@ -248,13 +247,29 @@ public class LinuxAnalyzer
 
                 var expected = linuxKernelVersion;
 
-                if (detected.Major >= expected.Major)
+                if (detected.Major > expected.Major)
                 {
-                    if (detected.Minor >= expected.Minor)
+                    return true;
+                }
+                else if(detected.Major == expected.Major)
+                {
+                    if (detected.Minor > expected.Minor)
                     {
-                        if (detected.Build >= expected.Build)
+                        return true;
+                    }
+                    else if (detected.Minor == expected.Minor)
+                    {
+                        if (detected.Build > expected.Build)
                         {
-                            if (detected.Revision >= expected.Revision)
+                            return true;
+                        }
+                        else if (detected.Build == expected.Build)
+                        {
+                            if (detected.Revision > expected.Revision)
+                            {
+                                return true;
+                            }
+                            else if (detected.Revision == expected.Revision)
                             {
                                 return true;
                             }
@@ -273,8 +288,10 @@ public class LinuxAnalyzer
                         return false;
                     }
                 }
-
-                return false;
+                else
+                {
+                    return false;
+                }
             }
             throw new PlatformNotSupportedException();
         }

@@ -24,7 +24,7 @@ SOFTWARE.
 namespace PlatformKit.Linux;
 
     /// <summary>
-    /// 
+    /// Represents a Linux Distribution's OsRelease file and information contained therein.
     /// </summary>
     public class LinuxOsRelease
     {
