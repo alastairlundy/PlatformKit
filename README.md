@@ -15,9 +15,9 @@ You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
 
 
 ## Contributions
-See [Contributing guide](https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/blob/master/CONTRIBUTING.md) for how to contribute to this project.
+See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
 
-To see what we're thinking of working on next, check out PlatformKit's [Roadmap](https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/blob/master/Roadmap.md)
+To see what we're thinking of working on next, check out PlatformKit's [Roadmap](/Roadmap.md)
 
 ### Apps and Libraries built with PlatformKit
 If you'd like to add your app here and it uses this library then please submit a new issue asking for this.
