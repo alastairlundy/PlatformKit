@@ -24,14 +24,9 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
- - OS: [e.g. Windows 10 64 Bit]
-- .NET version used [E.g. .NET Core 2.2, .NET Framework 4.8]
-- Xamarin version (if used) [E.g. Xamarin.Mac 5.99]
-
-**Smartphone (please complete the following information):**
- - OS: [e.g. Windows 10 64 Bit]
-- .NET version used [E.g. .NET Core 2.2, .NET Framework 4.8]
-- Xamarin version (if used) [E.g. Xamarin Forms 4.0.0]
+ - OS e.g. Windows 10 64 Bit
+- .NET version used e.g. .NET 5, .NET Framework 4.8
+- PlatformKit Version Used e.g. PlatformKit 2.6.6
 
 **Additional context**
 Add any other context about the problem here.
