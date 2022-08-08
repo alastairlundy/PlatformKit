@@ -26,7 +26,7 @@ using System;
 namespace PlatformKit.Mac;
 
 /// <summary>
-/// 
+/// A class to represent basic macOS System Information.
 /// </summary>
 public class MacOsSystemInformation
 {
