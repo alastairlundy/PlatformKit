@@ -52,13 +52,7 @@ public class WindowsAnalyzer
         {
             if (OSAnalyzer.IsWindows())
             {
-                var desc = _processManager.RunPowerShellCommand("systeminfo");
-
-                desc = desc.Replace("  ", String.Empty);
-                
-                var arr = desc.Replace(":", String.Empty).Split(' ');
-                
-                var edition = arr[41].Replace("OS", String.Empty);
+                var edition = GetWindowsSystemInformation().OsName.ToLower();
 
                 //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
 
