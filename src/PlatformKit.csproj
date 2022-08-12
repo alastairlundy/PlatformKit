@@ -15,16 +15,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since PlatformKit 3.0.0 Alpha 3
-* Made the ``IsWindows``, ``IsMac``, ``IsLinux``, and ``IsFreeBSD`` methods static to greatly increase their ease of use in your code
-* Updated PlatformKit's own usage of the above methods to use the updated static version
-* Removed deprecation warnings for future V4 deprecations
-* Fixed issues with the Linux Kernel Version comparison method
-* Added some in code comments to classes and methods
-
-### Non -Code changes
-* Re-organized code folder structure of PlatformKit project
-* Updated Copyright to reflect NeverSpy Tech Limited's ownership of this project going forward.</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since PlatformKit 3.0.0 Alpha 4
+* Fixed an issue with Windows Edition Detection
+            
+### Known Issues
+* macOS SystemProfiler information detection fails.            
+* All methods that use the macOS SystemProfiler information detection fails.
+</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
