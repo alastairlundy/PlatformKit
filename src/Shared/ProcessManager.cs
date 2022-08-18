@@ -277,9 +277,16 @@ namespace PlatformKit
 
                 if (array.Length > 1)
                 {
-                    var args= array.ToString()?.Replace(array[0], String.Empty);
+                    string args = "";
 
-                    return RunProcessMac(location, array[0], args);
+                    foreach (string arg in array)
+                    {
+                        args += arg + " ";
+                    }
+
+                    args = args.Replace(array[0], String.Empty);
+
+                   return RunProcessMac(location, array[0], args);
                 }
                 else
                 {
@@ -344,7 +351,7 @@ namespace PlatformKit
         {
             try
             {
-                if (!url.StartsWith("https://") || !url.StartsWith("www."))
+                if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
                 {
                     if (allowNonSecureHttp)
                     {
