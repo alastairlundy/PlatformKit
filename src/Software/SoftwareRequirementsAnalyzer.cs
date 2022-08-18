@@ -22,12 +22,12 @@ SOFTWARE.
  */
 
 using System;
-
+using PlatformKit.Internal.Licensing;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-namespace PlatformKit.Identification.Requirements;
+namespace PlatformKit.Software;
 
 /// <summary>
 /// 
@@ -39,6 +39,7 @@ public class SoftwareRequirementsAnalyzer
     public SoftwareRequirementsAnalyzer()
     {
         _osAnalyzer = new OSAnalyzer();
+        
     }
 
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)
