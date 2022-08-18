@@ -295,14 +295,24 @@ namespace AluminiumTech.DevKit.PlatformKit
             if (_osAnalyzer.IsMac())
             {
                 var location = "/usr/bin/";
-                
-                string[] array = command.Split(' ');
 
-                if (array.Length > 1)
+                if (new OSAnalyzer().IsMac())
                 {
-                    var args= array.ToString().Replace(array[0], String.Empty);
+                    string[] array = command.Split(' ');
 
-                    return RunProcessMac(location, array[0], args);
+                    if (array.Length > 1)
+                    {
+                        string args = "";
+
+                        foreach (string arg in array)
+                        {
+                            args += arg + " ";
+                        }
+
+                        args = args.Replace(array[0], String.Empty);
+
+                        return RunProcessMac(location, array[0], args);
+                    }
                 }
                 else
                 {
