@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PlatformKit.csproj" />
+      <ProjectReference Include="..\src\PlatformKit.csproj" />
     </ItemGroup>
 
 </Project>

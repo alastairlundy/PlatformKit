@@ -122,4 +122,5 @@ using AluminiumTech.DevKit.PlatformKit.Runtime;
                 Console.WriteLine("Linux Kernel Version: " + versionAnalyzer.DetectLinuxKernelVersion());
             }
     
+            Console.WriteLine("PlatformKit Version: " + new PlatformIdentification().GetPlatformKitVersion());
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
