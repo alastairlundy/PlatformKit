@@ -8,8 +8,8 @@ This information is subject to change at any time and is not a guarantee of the 
 - [x] Re-introduction of PlatformKit as the root namespace instead of AluminiumTech.DevKit.PlatformKit - Part of 3.0 Alpha 1
 - [x] Removed deprecated code scheduled for removal in V3 - Part of 3.0 Alpha 1
 - [x] Add support for macOS 13 "Ventura" - Part of 3.0 Alpha 3
-- [ ] Fix issues with ``RunMacCommand`` method
-- [ ] Fix issues with Mac SystemProfiler information collection (Does not affect PlatformKit v2)
+- [x] Fix issues with ``RunMacCommand`` method
+- [x] Fix issues with Mac SystemProfiler information collection (Does not affect PlatformKit v2)
 
 ### 3.1
 - [ ] Introduction of ``InstalledApps.Get()`` method.
@@ -18,7 +18,7 @@ This information is subject to change at any time and is not a guarantee of the 
 - [ ] Introduction of ``OpenUrlWith`` method to allow opening a URL in a specific browser.
 - [ ] Support for FreeBSD Detection.
 
-### 3.2
+### Possibly part of 3.1 or 3.2
 - [ ] Introduction of ``InstalledApps.GetByType()`` method on Windows, macOS, and Linux.
 - [ ] Introduction of ``DefaultApps.Get()`` method on Windows, macOS, and Linux.
 - [ ] Introduction of ``DefaultApps.Set()`` method on Windows, macOS, and Linux.
