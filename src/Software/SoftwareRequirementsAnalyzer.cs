@@ -40,6 +40,7 @@ public class SoftwareRequirementsAnalyzer
     {
         _osAnalyzer = new OSAnalyzer();
         
+        LicenseManager.CheckLicenseStatus();
     }
 
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)
