@@ -25,6 +25,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using PlatformKit.Internal.Licensing;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
@@ -42,6 +43,8 @@ namespace PlatformKit
         public ProcessManager()
         {
             _osAnalyzer = new OSAnalyzer();
+            
+            LicenseManager.CheckLicenseStatus();
         }
 
         /// <summary>

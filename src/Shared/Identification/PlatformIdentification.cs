@@ -24,6 +24,8 @@ SOFTWARE.
 using System;
 using System.Reflection;
 
+using PlatformKit.Internal.Licensing;
+
 namespace PlatformKit.Identification;
 
 /// <summary>
@@ -33,7 +35,7 @@ public class PlatformIdentification
 {
     public PlatformIdentification()
     {
-        
+        LicenseManager.CheckLicenseStatus();
     }
     
         /// <summary>
@@ -74,5 +76,14 @@ public class PlatformIdentification
         public static Version GetPlatformKitVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static PlatformKitLicenseContext GetLicenseContext()
+        {
+            return LicenseManager.LicenseContext;
         }
 }

@@ -31,9 +31,12 @@ using PlatformKit.Identification;
 using PlatformKit.Identification.Enums;
 
 using PlatformKit;
+using PlatformKit.Internal.Licensing;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
+
+//LicenseManager.LicenseContext = PlatformKitLicenseContext.NotSet;
 
 var platformManager = new PlatformIdentification();
             var osAnalyzer = new OSAnalyzer();
@@ -44,7 +47,7 @@ var windowsAnalyzer = new WindowsAnalyzer();
 var linuxAnalyzer = new LinuxAnalyzer();
 var macAnalyzer = new MacOSAnalyzer();
 
-            Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
+Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
 
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;

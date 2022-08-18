@@ -22,6 +22,7 @@ SOFTWARE.
 */
 
 using System;
+using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.FreeBSD;
 
@@ -35,6 +36,8 @@ public class FreeBSDAnalyzer
     {
         _processManager = new ProcessManager();
         _osAnalyzer = new OSAnalyzer();
+        
+        LicenseManager.CheckLicenseStatus();
     }
 
     // ReSharper disable once InconsistentNaming

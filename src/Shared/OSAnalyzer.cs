@@ -24,6 +24,7 @@ SOFTWARE.
 using System;
 
 using PlatformKit.FreeBSD;
+using PlatformKit.Internal.Licensing;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -36,7 +37,7 @@ namespace PlatformKit
     {
         public OSAnalyzer()
         {
-   
+            LicenseManager.CheckLicenseStatus();
         }
 
         /// <summary>

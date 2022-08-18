@@ -24,12 +24,18 @@ SOFTWARE.
 using System;
 using System.Diagnostics;
 using System.IO;
+using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit;
 
 public class ConsoleHelper
 {
-    /// <summary>
+    public ConsoleHelper()
+    {
+        LicenseManager.CheckLicenseStatus();
+    }
+
+        /// <summary>
     ///  Displays license information in the Console from a Text File.
     ///  The information stays in the Console window for the the duration specified in the parameter.
     /// </summary>

@@ -23,12 +23,20 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
     {
         protected ProcessManager processManager;
+
+        public WinManagementObjectSearcher()
+        {
+            processManager = new ProcessManager();
+            
+            LicenseManager.CheckLicenseStatus();
+        }
 
         /// <summary>
         ///
