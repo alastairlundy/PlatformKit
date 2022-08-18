@@ -195,11 +195,21 @@ public static class MacOSVersionAnalyzer
                 if (arr[index].ToLower().StartsWith("root:xnu-"))
                 {
                     arr[index] = arr[index].Replace("root:xnu-", String.Empty)
-                        .Replace("/RELEASE_X86_64", String.Empty)
                         .Replace("~", ".");
 
-                    //Console.WriteLine(arr[index]);
-                
+                    if (new OSAnalyzer().IsAppleSiliconMac())
+                    {
+                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
+                    }
+                    else
+                    {
+                        arr[index] = arr[index].Replace("/RELEASE_X86_64", String.Empty);
+                    }
+
+            #if DEBUG
+                    Console.WriteLine(arr[index]);
+            #endif                
+
                     return Version.Parse(arr[index]);
                 }
             }
