@@ -19,6 +19,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 2.6
 | Version | Availability | Changelog |
 |-|-|-|
+| 2.6.9 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.9) | 
 | 2.6.8 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.8) | 
 | 2.6.7 | August 11th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.7) | 
 | 2.6.6.1 | July 25th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.6.1) | 
