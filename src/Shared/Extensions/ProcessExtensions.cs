@@ -24,7 +24,6 @@ SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Shared.Extensions
 {
@@ -36,8 +35,6 @@ namespace PlatformKit.Shared.Extensions
         /// <returns></returns>
          static  string[] ToStringArray(this Process process)
         {
-            LicenseManager.CheckLicenseStatus();
-
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
@@ -55,8 +52,6 @@ namespace PlatformKit.Shared.Extensions
         /// </summary>
         public static bool IsProcessRunning(this Process process, string processName)
         {
-            LicenseManager.CheckLicenseStatus();
-
             foreach (Process proc in Process.GetProcesses())
             {
                 var procName =  proc.ProcessName.Replace("System.Diagnostics.Process (", String.Empty);
@@ -85,8 +80,6 @@ namespace PlatformKit.Shared.Extensions
         {
             try
             {
-                LicenseManager.CheckLicenseStatus();
-                
                 processName = processName.Replace(".exe", string.Empty);
 
                 if (IsProcessRunning(process, processName) ||

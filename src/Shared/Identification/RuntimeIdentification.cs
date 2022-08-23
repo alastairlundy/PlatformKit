@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 
 using PlatformKit.Identification.Enums;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Internal.Licensing;
+
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
@@ -54,8 +54,6 @@ namespace PlatformKit.Identification
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOSAnalyzer();
             _linuxAnalyzer = new LinuxAnalyzer();
-            
-            LicenseManager.CheckLicenseStatus();
         }
 
         /// <summary>
