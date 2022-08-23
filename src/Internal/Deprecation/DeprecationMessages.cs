@@ -32,9 +32,9 @@ namespace PlatformKit.Internal.Deprecation
         
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
         
-        public const string FutureDeprecation = FeatureDeprecation + " in a future version.";
+        internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
         
-        public const string DeprecationV4 = FeatureDeprecation + " in " + V4;
-        public const string DeprecationV5 = FeatureDeprecation + " in " + V5;
+        internal const string DeprecationV4 = FeatureDeprecation + " in " + V4;
+        internal const string DeprecationV5 = FeatureDeprecation + " in " + V5;
     }
 }
