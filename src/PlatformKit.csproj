@@ -30,10 +30,16 @@
         <Version>2.6.9.0</Version>
         <PackageVersion>2.6.9</PackageVersion>
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
+        <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
 
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="..\images\logos\platformkit_logo_512x.jpg">
+          <Pack>True</Pack>
+          <PackagePath></PackagePath>
+          <Link>platformkit_logo_512x.jpg</Link>
+        </None>
         <None Include="LICENSE.txt">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
