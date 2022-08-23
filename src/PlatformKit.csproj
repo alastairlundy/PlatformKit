@@ -69,4 +69,8 @@
     <ItemGroup>
       <Folder Include="Platforms" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LicensingKit" Version="1.0.0" />
+    </ItemGroup>
 </Project>
