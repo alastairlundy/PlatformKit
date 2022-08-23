@@ -23,7 +23,6 @@ SOFTWARE.
 
 using System;
 using System.IO;
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Linux;
 
@@ -35,7 +34,7 @@ public class LinuxAnalyzer
 
     public LinuxAnalyzer()
     {
-        LicenseManager.CheckLicenseStatus();
+
     }
     
         /// <summary>

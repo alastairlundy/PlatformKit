@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Internal.Licensing;
+
 
 namespace PlatformKit.Mac;
 
@@ -41,8 +41,6 @@ namespace PlatformKit.Mac;
         public MacOSAnalyzer()
         {
             _processManager = new ProcessManager();
-            
-            LicenseManager.CheckLicenseStatus();
         }
         
         /// <summary>

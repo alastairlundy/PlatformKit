@@ -23,7 +23,6 @@ SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Windows
 {
@@ -34,8 +33,6 @@ namespace PlatformKit.Windows
         public WinManagementObjectSearcher()
         {
             processManager = new ProcessManager();
-            
-            LicenseManager.CheckLicenseStatus();
         }
 
         /// <summary>

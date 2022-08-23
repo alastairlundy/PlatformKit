@@ -31,12 +31,10 @@ using PlatformKit.Identification;
 using PlatformKit.Identification.Enums;
 
 using PlatformKit;
-using PlatformKit.Internal.Licensing;
+
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
-
-//LicenseManager.LicenseContext = PlatformKitLicenseContext.NotSet;
 
 var platformManager = new PlatformIdentification();
             var osAnalyzer = new OSAnalyzer();
