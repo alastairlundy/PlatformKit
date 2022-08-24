@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using PlatformKit.Internal.Licensing;
+
 namespace PlatformKit.Shared.Extensions
 {
     public static class ProcessExtensions
@@ -28,6 +30,8 @@ namespace PlatformKit.Shared.Extensions
         /// <returns></returns>
          static  string[] ToStringArray(this Process process)
         {
+            PlatformKitConstants.CheckLicenseState();
+
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
@@ -45,6 +49,9 @@ namespace PlatformKit.Shared.Extensions
         /// </summary>
         public static bool IsProcessRunning(this Process process, string processName)
         {
+            PlatformKitConstants.CheckLicenseState();
+
+
             foreach (Process proc in Process.GetProcesses())
             {
                 var procName =  proc.ProcessName.Replace("System.Diagnostics.Process (", String.Empty);
@@ -73,6 +80,8 @@ namespace PlatformKit.Shared.Extensions
         {
             try
             {
+                  PlatformKitConstants.CheckLicenseState();
+
                 processName = processName.Replace(".exe", string.Empty);
 
                 if (IsProcessRunning(process, processName) ||

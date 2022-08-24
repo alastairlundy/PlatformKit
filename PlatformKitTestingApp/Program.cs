@@ -1,3 +1,18 @@
+﻿/*
+ PlatformKit is dual-licensed under the GPLv3 and the PlatformKit Licenses.
+ 
+ You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
+ 
+ You can view the GPLv3 in the file GPLv3_License.md .
+ You can view the PlatformKit Licenses at
+    Commercial License - https://neverspy.tech/platformkit-commercial-license or in the PlatformKit_Commercial_License.md
+    Non-Commercial License - https://neverspy.tech/platformkit-noncommercial-license or in the PlatformKit_NonCommercial_License.md
+  
+  To use PlatformKit under either a commercial or non-commercial license you must purchase a license from https://neverspy.tech
+ 
+ Copyright (c) AluminiumTech 2018-2022
+ Copyright (c) NeverSpy Tech Limited 2022
+ */
 
 // See https://aka.ms/new-console-template for more information
 
@@ -8,13 +23,15 @@ using System.Text;
 using PlatformKit.Identification;
 
 using PlatformKit;
-
+using PlatformKit.Internal.Licensing;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-var platformManager = new PlatformIdentification();
-            var osAnalyzer = new OSAnalyzer();
+PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
+
+    var platformManager = new PlatformIdentification();
+var osAnalyzer = new OSAnalyzer();
             var processManager = new ProcessManager();
 var runtimeIdentification = new RuntimeIdentification();
 

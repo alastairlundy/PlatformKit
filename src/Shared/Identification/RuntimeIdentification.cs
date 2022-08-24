@@ -18,8 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using PlatformKit.Identification.Enums;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Internal.Licensing;
 
 using PlatformKit.Windows;
 using PlatformKit.Linux;
@@ -27,7 +27,6 @@ using PlatformKit.Mac;
 
 // ReSharper disable InconsistentNaming
 
-//Move namespace in V3
 namespace PlatformKit.Identification
 {
     /// <summary>
@@ -47,6 +46,8 @@ namespace PlatformKit.Identification
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOSAnalyzer();
             _linuxAnalyzer = new LinuxAnalyzer();
+            
+            PlatformKitConstants.CheckLicenseState();
         }
 
         /// <summary>

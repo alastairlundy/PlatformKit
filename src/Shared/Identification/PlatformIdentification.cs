@@ -17,6 +17,10 @@
 using System;
 using System.Reflection;
 
+using LicensingKit;
+using LicensingKit.Enums;
+using PlatformKit.Internal.Licensing;
+
 namespace PlatformKit.Identification;
 
 /// <summary>
@@ -26,7 +30,7 @@ public class PlatformIdentification
 {
     public PlatformIdentification()
     {
-
+        PlatformKitConstants.CheckLicenseState();
     }
     
         /// <summary>
@@ -67,5 +71,14 @@ public class PlatformIdentification
         public static Version GetPlatformKitVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static LicenseUsageState GetLicenseUsageState()
+        {
+           return LicenseManager.LicenseUsageState;
         }
 }
