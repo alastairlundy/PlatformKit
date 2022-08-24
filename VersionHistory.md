@@ -6,6 +6,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 3.0
 | Version | Availability | Changelog |
 |-|-|-|
+| 3.0.0 RC 1 | August 24th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-rc.1) |
 | 3.0.0 Beta 2 | August 23rd 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-beta.2) |
 | 3.0.0 Beta 1 | August 18th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-beta.1) |
 | 3.0.0 Alpha 4 | August 8th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-alpha.4) |
