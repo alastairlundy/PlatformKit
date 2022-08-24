@@ -9,10 +9,14 @@ This can be added to any .NET Standard 2.0 or .NET 6 supported Application or Li
 [![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
 
-### How to get PlatformKit
+## License Change
+Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license but PlatformKit is now licensed under the GPLv3 or later and the PlatformKit Licenses.
+
+If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, you may purchase a non-commercial or commercial license at https://neverspy.tech .
+
+## How to get PlatformKit
 
 You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
-
 
 ## Contributions
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
