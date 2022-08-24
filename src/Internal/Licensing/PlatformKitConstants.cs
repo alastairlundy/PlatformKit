@@ -22,7 +22,7 @@ namespace PlatformKit.Internal.Licensing;
 
 public class PlatformKitConstants
 {
-    public static OpenSourceLicense GPLv3_OrLater =
+    public static readonly OpenSourceLicense GPLv3_OrLater =
         new("GPLv3_OrLater", LicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
 
     public static readonly ProprietaryLicense PlatformKitCommercialLicense = new("PlatformKit Commercial License",
