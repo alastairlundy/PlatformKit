@@ -14,6 +14,13 @@ Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license b
 
 If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, you may purchase a non-commercial or commercial license at https://neverspy.tech .
 
+### Setting PlatformKit License in PlatformKit 3.0.0 RC 1 or later
+
+Using GPLv3
+```csharp PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;```
+
+If using the paid version of PlatformKit please refer to documentation provided to you.
+
 ## How to get PlatformKit
 
 You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
