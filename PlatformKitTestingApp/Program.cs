@@ -110,7 +110,9 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("Darwin Version: " + macAnalyzer.DetectDarwinVersion());
                 Console.WriteLine("Xnu Version: " + macAnalyzer.DetectXnuVersion());
             }
- 
+
+            processManager.OpenUrlInBrowser("duckduckgo.com");
+
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (OSAnalyzer.IsLinux())
@@ -118,6 +120,8 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
                 Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.DetectLinuxKernelVersion());
+                
+                Console.WriteLine("Is an LTS release? " + linuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
             }
 
 Console.WriteLine("PlatformKit Version: " + PlatformIdentification.GetPlatformKitVersion().ToString());
