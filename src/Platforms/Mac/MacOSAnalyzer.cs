@@ -16,9 +16,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 
-using LicensingKit;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
