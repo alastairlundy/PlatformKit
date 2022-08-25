@@ -5,8 +5,8 @@
  
  You can view the GPLv3 in the file GPLv3_License.md .
  You can view the PlatformKit Licenses at
-    Commercial License - https://neverspy.tech/platformkit-commercial-license or in the PlatformKit_Commercial_License.md
-    Non-Commercial License - https://neverspy.tech/platformkit-noncommercial-license or in the PlatformKit_NonCommercial_License.md
+    Commercial License - https://neverspy.tech/platformkit-commercial-license or in the PlatformKit_Commercial_License.txt
+    Non-Commercial License - https://neverspy.tech/platformkit-noncommercial-license or in the PlatformKit_NonCommercial_License.txt
   
   To use PlatformKit under either a commercial or non-commercial license you must purchase a license from https://neverspy.tech
  
