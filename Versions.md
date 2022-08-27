@@ -8,7 +8,7 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 2.6 | 2.6.8 | August 18th 2022|
+| 2.6 | 2.6.9.1 | August 25th 2022|
 
 ## Unsupported Versions
 
