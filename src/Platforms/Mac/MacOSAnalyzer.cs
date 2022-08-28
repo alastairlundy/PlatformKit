@@ -29,7 +29,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOSAnalyzer
     {
-        protected ProcessManager _processManager;
+        protected readonly ProcessManager _processManager;
 
         public MacOSAnalyzer()
         {
