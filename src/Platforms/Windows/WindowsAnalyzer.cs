@@ -52,10 +52,7 @@ public class WindowsAnalyzer
                 var edition = GetWindowsSystemInformation().OsName.ToLower();
 
                 //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
-
-                //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-                //   "EditionID");
-
+                
                 if (edition.ToLower().Contains("home"))
                 {
                     return WindowsEdition.Home;
