@@ -17,7 +17,9 @@ If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, 
 ### Setting PlatformKit License in PlatformKit 3.0.0 RC 1 or later
 
 Using GPLv3
-```csharp PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;```
+```csharp
+PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
+```
 
 If using the paid version of PlatformKit please refer to documentation provided to you.
 
