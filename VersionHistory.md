@@ -6,11 +6,11 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 3.0
 | Version | Availability | Changelog |
 |-|-|-|
-| 3.0.0 RC 2 | August 27th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-rc.2) |
-| 3.0.0 RC 1 | August 24th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-rc.1) |
-| 3.0.0 Beta 2 | August 23rd 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-beta.2) |
-| 3.0.0 Beta 1 | August 18th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-beta.1) |
-| 3.0.0 Alpha 4 | August 8th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-alpha.4) |
+| 3.0.0 RC 2 | August 27th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-rc.2) | 
+| 3.0.0 RC 1 | August 24th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-rc.1) | 
+| 3.0.0 Beta 2 | August 23rd 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-beta.2) | 
+| 3.0.0 Beta 1 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-beta.1) | 
+| 3.0.0 Alpha 4 | August 8th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-alpha.4) | 
 | 3.0.0 Alpha 3 | July 17th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-alpha.3) |
 | 3.0.0 Alpha 2 | June 13th 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-alpha.2) |
 | 3.0.0 Alpha 1 | May 31st 2022 | [Changelog](https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/-/releases/3.0.0-alpha.1) |
