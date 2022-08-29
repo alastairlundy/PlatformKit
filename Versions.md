@@ -2,12 +2,13 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 3.0 | 3.0.0 RC 2 | August 27th 2022 |
+
 
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
+| 3.0 | 3.0.0 | August 29th 2022 |
 | 2.6 | 2.6.9.1 | August 25th 2022|
 
 ## Unsupported Versions
