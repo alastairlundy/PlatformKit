@@ -50,8 +50,6 @@ public class WindowsAnalyzer
             if (OSAnalyzer.IsWindows())
             {
                 var edition = GetWindowsSystemInformation().OsName.ToLower();
-
-                //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
                 
                 if (edition.ToLower().Contains("home"))
                 {
