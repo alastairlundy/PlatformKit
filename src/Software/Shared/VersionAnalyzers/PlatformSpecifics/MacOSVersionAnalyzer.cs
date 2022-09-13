@@ -199,7 +199,11 @@ public static class MacOSVersionAnalyzer
 
                     if (new OSAnalyzer().IsAppleSiliconMac())
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
+                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
+                        
+                        arr[index] = arr[index].Remove((arr.Length + 1) - 3);
+                        // M1 specific code
+                        // arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
                     }
                     else
                     {
