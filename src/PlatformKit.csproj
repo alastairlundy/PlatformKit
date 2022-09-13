@@ -17,8 +17,9 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 2.6.9
-* Added PlatformKit logo to Nuget package</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.6.9.1
+* Fixed a potential issue with XNU Detection on M2 Apple Silicon Mac
+* __Final Update for PlatformKit 2.6 series__</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +29,7 @@
         <AssemblyVersion>2.6.9.1</AssemblyVersion>
         <FileVersion>2.6.9.1</FileVersion>
         <Version>2.6.9.1</Version>
-        <PackageVersion>2.6.9.1</PackageVersion>
+        <PackageVersion>2.6.10</PackageVersion>
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
 
