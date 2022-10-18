@@ -8,7 +8,7 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 3.0 | 3.0.0 | August 29th 2022 |
+| 3.0 | 3.0.2 | October 18th 2022 |
 
 ## Unsupported Versions
 

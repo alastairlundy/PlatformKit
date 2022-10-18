@@ -12,6 +12,7 @@
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
 | Windows Server 2022 | 2.2.0 | Still supported |
+| Windows 10 22H2 | 3.0.2 | Still supported |
 | Windows 10 21H2 | 2.2.0 | Still supported |
 | Windows 10 21H1 | 2.0.0 | Still supported |
 | Windows Server 2016 through Windows Server 2019 | 2.0.0 | Still supported |
