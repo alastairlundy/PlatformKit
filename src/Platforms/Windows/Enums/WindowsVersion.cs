@@ -78,6 +78,7 @@ namespace PlatformKit.Windows
         Win10_20H2,
         Win10_21H1,
         Win10_21H2,
+        Win10_22H2,
         /// <summary>
         /// Windows Server 2022 based on Windows 10 HOWEVER this does not share a build number with a Windows 10 release.
         /// Server 2022 identifies as Windows 10 Build 20348 which is unique to Server 2022.

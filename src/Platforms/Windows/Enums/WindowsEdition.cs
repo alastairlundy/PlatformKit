@@ -37,5 +37,6 @@ public enum WindowsEdition
     /// <summary>
     /// Windows 11 or newer only
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     SE,
 }

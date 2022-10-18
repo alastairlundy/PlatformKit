@@ -674,6 +674,8 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.Win10_21H2:
                 return true;
+            case WindowsVersion.Win10_22H2:
+                return true;
             case WindowsVersion.Win10_Server2022:
                 return true;
             case WindowsVersion.Win10_InsiderPreview:
@@ -793,6 +795,8 @@ for (var index = 0; index < array.Length; index++)
                         return WindowsVersion.Win10_21H1;
                     case 19044:
                         return WindowsVersion.Win10_21H2;
+                    case 19045:
+                        return WindowsVersion.Win10_22H2;
                     case 20348:
                         return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
                     case 22000:
@@ -906,12 +910,13 @@ for (var index = 0; index < array.Length; index++)
                 WindowsVersion.Win10_v1803 => new Version(10, 0, 17134),
                 WindowsVersion.Win10_v1809 => new Version(10, 0, 17763),
                 WindowsVersion.Win10_Server2019 => new Version(10, 0, 17763),
-                WindowsVersion.Win10_v1903 => new Version(10, 0, 18362),
-                WindowsVersion.Win10_v1909 => new Version(10, 0, 18363),
-                WindowsVersion.Win10_v2004 => new Version(10, 0, 19041),
-                WindowsVersion.Win10_20H2 => new Version(10, 0, 19042),
-                WindowsVersion.Win10_21H1 => new Version(10, 0, 19043),
-                WindowsVersion.Win10_21H2 => new Version(10, 0, 19044),
+                WindowsVersion.Win10_v1903 => new Version(10,0, 18362),
+                WindowsVersion.Win10_v1909 => new Version(10,0, 18363),
+                WindowsVersion.Win10_v2004 => new Version(10,0, 19041),
+                WindowsVersion.Win10_20H2 => new Version(10,0, 19042),
+                WindowsVersion.Win10_21H1 => new Version(10,0, 19043),
+                WindowsVersion.Win10_21H2 => new Version(10,0, 19044),
+                WindowsVersion.Win10_22H2 => new Version(10,0,19045),
                 WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
                 WindowsVersion.Win11_22H2 => new Version(10,0,22621),
