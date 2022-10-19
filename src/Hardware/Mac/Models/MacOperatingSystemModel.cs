@@ -25,6 +25,5 @@ namespace PlatformKit.Hardware.Mac
         /// </summary>
         public new bool? IsProprietary => true;
 
-        public new OperatingSystemFamily? SystemFamily => OperatingSystemFamily.macOS;
     }
 }
