@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using PlatformKit.Hardware.Windows;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -224,6 +224,35 @@ public class WindowsAnalyzer
         }
 
         throw new ArgumentException();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public WindowsOperatingSystemModel GetWindowsOperatingSystemModel()
+    {
+        WindowsOperatingSystemModel windowsOperatingSystemModel = new WindowsOperatingSystemModel();
+
+        windowsOperatingSystemModel.BuildNumber = int.Parse(GetWMIValue("BuildNumber", "Win32_OperatingSystem"));
+        windowsOperatingSystemModel.Edition = DetectWindowsEdition();
+        windowsOperatingSystemModel.OsVersion = DetectWindowsVersion();
+        windowsOperatingSystemModel.EncryptionLevel = GetWMIValue("EncryptionLevel", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.Locale = GetWMIValue("Locale", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.ManufacturerName = GetWMIValue("ManufacturerName", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.SystemDirectory = GetWMIValue("SystemDirectory", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.SystemDrive = GetWMIValue("SystemDrive", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.Is64Bit = Environment.Is64BitOperatingSystem;
+        windowsOperatingSystemModel.ProductName = GetWMIValue("Name", "Win32_OperatingSystem");
+        
+        windowsOperatingSystemModel.InstallDate = GetWMIValue("InstallDate", "Win32_OperatingSystem");
+        
+        windowsOperatingSystemModel.BootDevice = GetWMIValue("BootDevice", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.IsPaeEnabled = Boolean.Parse( GetWMIValue("PAEEnabled", "Win32_OperatingSystem"));
+        windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
+
+        return windowsOperatingSystemModel;
     }
 
     /// <summary>
