@@ -30,6 +30,7 @@
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
+        <Nullable>disable</Nullable>
 
     </PropertyGroup>
 
