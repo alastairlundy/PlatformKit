@@ -3,6 +3,11 @@ This document contains the entire version history of the PlatformKit (formerly A
 
 ## Upcoming Releases
 
+### 3.1
+| Version | Availability | Changelog |
+|-|-|-|
+| 3.1.0 Alpha 1 | October 19th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.1) |
+
 
 ## Stable Releases
 
