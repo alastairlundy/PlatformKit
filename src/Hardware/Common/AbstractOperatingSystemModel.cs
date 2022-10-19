@@ -22,29 +22,25 @@ namespace PlatformKit.Hardware.Common{
     /// </summary>
     public abstract class AbstractOperatingSystemModel : SoftwareComponentModel{
 
-        public string? EncryptionLevel { get; set; }
-        public string? Locale { get; set; }
-        public DateTime? InstallDate { get; set; }
+        public string EncryptionLevel { get; set; }
+        public string Locale { get; set; }
+        public string InstallDate { get; set; }
         
-        public bool? IsPaeEnabled { get; set; }
+        public bool IsPaeEnabled { get; set; }
         
-        public string? SystemDrive { get; set; }
-        public string? SystemDirectory { get; set; }
+        public string SystemDrive { get; set; }
+        public string SystemDirectory { get; set; }
         
-        public OperatingSystemFamily? SystemFamily { get; set; }
+        public System.Version OsKernelVersion { get; set; }
 
-        public System.Version? OsKernelVersion { get; set; }
-
-        public object? Owner { get; set; }
-        public string? BootDevice { get; set; }
+        public object Owner { get; set; }
+        public string BootDevice { get; set; }
         
-        public string? Bitness { get; set; }
+        public string CountryCode { get; set; }
+        public string CurrentTimeZone { get; set; }
+
+        public KernelSupportType OsKernelSupportType { get; set; }
         
-        public string? CountryCode { get; set; }
-        public string? CurrentTimeZone { get; set; }
-
-        public KernelSupportType? OsKernelSupportType { get; set; }
-
         public System.Version OsVersion { get; set; }
     }
 }

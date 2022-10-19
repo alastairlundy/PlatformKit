@@ -19,18 +19,25 @@ namespace PlatformKit.Hardware.Common{
     /// <summary>
     /// A class to store Memory Information.
     /// </summary>
-    public class MemoryModel : HardwareComponentModel {
-        public int CapacityMB { get; set; }
-        public int CapacityGB => CapacityMB / 1000;
+    public class MemoryModel : HardwareComponentModel
+    {
+        public int AvailablePhysicalRamMB { get; set; }
+        public int AvailablePhysicalRamGB => AvailablePhysicalRamMB / 1000;
+
+        public int TotalPhysicalRamMB { get; set; }
+        public int TotalPhysicalRamGB => TotalPhysicalRamMB / 1000;
+
         
-        public int? VoltageMilliVolts { get; set; }
-        public int? MemorySpeedMHz { get; set; }
-        public string? AvailableRam { get; set; }
-        public string? TotalRam { get; set; }
+        public int AvailableVirtualRamMB { get; set; }
+        public int AvailableVirtualRamGB => AvailableVirtualRamMB / 1000;
+
+        public int TotalVirtualRamMB { get; set; }
+        public int TotalVirtualRamGB => TotalVirtualRamMB / 1000;
         
-        public int? MinVoltageMillivolts { get; set; }
-        public int? MaxVoltageMillivolts { get; set; }
-        
-        public ulong? PhysicalMemory { get; set; }
+        public int VoltageMilliVolts { get; set; }
+        public int MemorySpeedMHz { get; set; }
+
+        public int MinVoltageMillivolts { get; set; }
+        public int MaxVoltageMillivolts { get; set; }
     }
 }

@@ -19,38 +19,38 @@ namespace PlatformKit.Hardware.Common{
     /// A class to store gpu information.
     /// </summary>
     public class GraphicsProcessorModel : HardwareComponentModel{
-        public int? NumberOfStreamProcessors { get; set; }
-        public int? NumberOfTextureMappingUnits { get; set; }
-        public int? NumberOfRasterOperatingUnits { get; set; }
+        public int NumberOfStreamProcessors { get; set; }
+        public int NumberOfTextureMappingUnits { get; set; }
+        public int NumberOfRasterOperatingUnits { get; set; }
         
-        public int? NumberOfComputeUnits { get; set; }
+        public int NumberOfComputeUnits { get; set; }
         
-        //public GraphicsApiSupport? GraphicsApiSupport { get; set; }
+        //public GraphicsApiSupport GraphicsApiSupport { get; set; }
         
-        public string? ArchitectureName { get; set; }
+        public string ArchitectureName { get; set; }
         
         // ReSharper disable once InconsistentNaming
-        public int? L2CacheSizeMB { get; set; }
+        public int L2CacheSizeMB { get; set; }
         // ReSharper disable once InconsistentNaming
-        public int? L1CacheSizeKB { get; set; }
+        public int L1CacheSizeKB { get; set; }
 
-        public string? GraphicsProcessorModelName { get; set; }
+        public string GraphicsProcessorModelName { get; set; }
         
-        public SoftwareComponentModel? Driver { get; set; }
+        public SoftwareComponentModel Driver { get; set; }
         
-        public string? MaxRefreshRate { get; set; }
-        public string? MinRefreshRate { get; set; }
+        public string MaxRefreshRate { get; set; }
+        public string MinRefreshRate { get; set; }
 
-        public MemoryModel? VideoMemory { get; set; }
+        public MemoryModel VideoMemory { get; set; }
         
-        public string? VideoModeDescription { get; set; }
+        public string VideoModeDescription { get; set; }
         
-        public string? VideoMode { get; set; }
-        public string? VideoArchitecture { get; set; }
+        public string VideoMode { get; set; }
+        public string VideoArchitecture { get; set; }
         
-        public int? BaseClockSpeedMHz { get; set; }
-        public int? BoostClockSpeedMHz { get; set; }
+        public int BaseClockSpeedMHz { get; set; }
+        public int BoostClockSpeedMHz { get; set; }
         
-        public string? FabricationProcess { get; set; }
+        public string FabricationProcess { get; set; }
     }
 }
