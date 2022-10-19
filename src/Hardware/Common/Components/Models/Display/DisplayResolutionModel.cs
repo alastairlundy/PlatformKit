@@ -20,31 +20,34 @@ namespace PlatformKit.Hardware.Common
 {
     public class DisplayResolutionModel
     {
-        public int? VerticalResolutionPx { get; set; }
-        public int? HorizontalResolutionPx { get; set; }
+        public int VerticalResolutionPx { get; set; }
+        public int HorizontalResolutionPx { get; set; }
 
-        public int? TotalPixelsPx => VerticalResolutionPx * HorizontalResolutionPx;
+        public int TotalPixelsPx => VerticalResolutionPx * HorizontalResolutionPx;
         
-        public double? DisplaySizeInches { get; set; }
+        public double DisplaySizeInches { get; set; }
         
-        public bool? IsHiDpi { get; set; }
+        public bool IsHiDpi { get; set; }
 
-        public double? PixelsPerInch => DiagonalResolutionPx / DisplaySizeInches;
+        public double PixelsPerInch => DiagonalResolutionPx / DisplaySizeInches;
         
-        public double? DiagonalResolutionPx
+        public double DiagonalResolutionPx
         {
             get
             {
-                if (HorizontalResolutionPx != null && VerticalResolutionPx != null)
+                try
                 {
                     return Math.Sqrt(Convert.ToDouble((VerticalResolutionPx * VerticalResolutionPx) +
                                                       (HorizontalResolutionPx * HorizontalResolutionPx)));
                 }
-
-                throw new ArgumentNullException();
+                catch
+                {
+                    throw new ArgumentNullException();
+                }
+               
             }
         }
 
-        public double? DotPitchMillimeters => (DisplaySizeInches / DiagonalResolutionPx) * (25.4 / DisplaySizeInches);
+        public double DotPitchMillimeters => (DisplaySizeInches / DiagonalResolutionPx) * (25.4 / DisplaySizeInches);
     }
 }

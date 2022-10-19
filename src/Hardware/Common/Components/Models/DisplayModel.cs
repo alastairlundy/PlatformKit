@@ -21,15 +21,13 @@ namespace PlatformKit.Hardware.Common{
     /// </summary>
     public class DisplayModel : HardwareComponentModel{
         
-        public int? RefreshRate { get; set; }
+        public int RefreshRateHz { get; set; }
 
-        public DisplayResolutionModel? DisplayResolution { get; set; }
-        public ColorGamutModel? DisplayColorGamut { get; set; }
+        public DisplayResolutionModel DisplayResolution { get; set; }
+        public ColorGamutModel DisplayColorGamut { get; set; }
         
-        public DisplayInputModel? DisplayInputsSupported { get; set; }
+        public DisplayInputModel DisplayInputsSupported { get; set; }
         
-        public bool? SupportsVariableRefreshRate { get; set; }
-        
-        public bool? SupportsFaceUnlock { get; set; }
+        public bool SupportsVariableRefreshRate { get; set; } 
     }
 }
