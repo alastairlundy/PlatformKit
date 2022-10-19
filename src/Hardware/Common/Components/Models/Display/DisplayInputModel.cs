@@ -18,7 +18,9 @@ namespace PlatformKit.Hardware.Common
 {
     public class DisplayInputModel
     {
-        public TouchInputModel TouchInput { get; set; }
+        public bool SupportsTouchInput { get; set; }
         
+        public bool SupportsPenInput { get; set; }
+
     }
 }
