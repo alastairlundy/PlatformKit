@@ -20,9 +20,8 @@ namespace PlatformKit.Hardware.Linux
 {
     public class LinuxOperatingSystemModel : AbstractOperatingSystemModel
     {
-
-        public LinuxKernelVariant? KernelVariant { get; set; }
+        public LinuxKernelVariant KernelVariant { get; set; }
         
-        public LinuxKernelType? KernelType { get; set; }
+        public LinuxKernelType KernelType { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace PlatformKit.Hardware.Common
     public abstract class ComponentModel : ManufactureInformation
     {
 
-        public bool? CanDetectInformation { get; set; }
+        public bool CanDetectInformation { get; set; }
     }
 }

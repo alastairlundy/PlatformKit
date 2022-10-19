@@ -21,9 +21,9 @@ namespace PlatformKit.Hardware.Common{
     /// A class to help store hardware component information.
     /// </summary>
     public class HardwareComponentModel : ComponentModel{
-        public System.DateTime? DateOfManufacture { get; set; }
-        public string? SerialNumber { get; set; }
+        public System.DateTime DateOfManufacture { get; set; }
+        public string SerialNumber { get; set; }
         
-       // public List<Sensor>? ListOfSensors { get; set; }
+       // public List<Sensor> ListOfSensors { get; set; }
     }
 }

@@ -43,8 +43,9 @@ public class WindowsSystemInformation
     
     public string SystemManufacturer { get; set; }
     public string SystemModel { get; set; }
+
     public string SystemType { get; set; }
-    
+
     public string[] Processors { get; set; }
     
     public string BiosVersion { get; set; }

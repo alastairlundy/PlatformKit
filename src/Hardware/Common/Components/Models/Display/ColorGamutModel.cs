@@ -20,10 +20,10 @@ namespace PlatformKit.Hardware.Common
     {
         
         // ReSharper disable once InconsistentNaming
-        public int? PercentageOf_sRGB_Support { get; set; }
-        public int? PercentageOfAdobeRgbSupport { get; set; }
-        public int? PercentageOfDciP3Support { get; set; }
+        public int PercentageOf_sRGB_Support { get; set; }
+        public int PercentageOfAdobeRgbSupport { get; set; }
+        public int PercentageOfDciP3Support { get; set; }
         
-        public bool? SupportsHdr { get; set; }
+        public bool SupportsHdr { get; set; }
     }
 }

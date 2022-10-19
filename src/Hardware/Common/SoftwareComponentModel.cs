@@ -22,17 +22,12 @@ namespace PlatformKit.Hardware.Common{
     /// </summary>
     public class SoftwareComponentModel : ComponentModel{
 
-        public bool? IsProprietary { get; set; }
-        public bool? IsOpenSource { get; set; }
-        public bool? Is64Bit { get; set; }
-
-        public OperatingSystemFamily? TargetOperatingSystem { get; set; }
+        public bool IsProprietary { get; set; }
+        public bool Is64Bit { get; set; }
         
-        public string? CurrentLanguage { get; set; }
+        public Version SoftwareVersion { get; set; }
 
-        public Version? SoftwareVersion { get; set; }
-
-        public string? Developer { get; set; }
-        public string? Publisher { get; set; }
+        public string Developer { get; set; }
+        public string Publisher { get; set; }
     }
 }

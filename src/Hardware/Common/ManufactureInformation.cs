@@ -20,16 +20,12 @@ namespace PlatformKit.Hardware.Common
 {
     public class ManufactureInformation
     {
-        public string? ManufacturerName { get; set; }
+        public string ManufacturerName { get; set; }
         
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
 
-        public string? Description { get; set; }
-        
-        public System.DateTime? ReleaseDate { get; set; }
+        public string Description { get; set; }
 
-        public string? Sku { get; set; }
-                
-        protected Version? ComponentVersion { get; set; }
+        protected Version ComponentVersion { get; set; }
     }
 }

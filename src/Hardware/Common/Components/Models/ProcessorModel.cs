@@ -20,32 +20,32 @@ namespace PlatformKit.Hardware.Common{
     /// </summary>
     public class ProcessorModel : HardwareComponentModel{
         
-        public string? ProcessorName { get; set; }
+        public string ProcessorName { get; set; }
 
-        public string? Stepping { get; set; }
-        public string? CPUFamily { get; set; }
-        public string? Revision { get; set; }
+        public string Stepping { get; set; }
+        public string CPUFamily { get; set; }
+        public string Revision { get; set; }
 
-        public bool? SupportsVirtualization { get; set; }
+        public bool SupportsVirtualization { get; set; }
         
-        public double? ThermalDesignPowerWatts { get; set; }
+        public double ThermalDesignPowerWatts { get; set; }
         
-        public string? Socket { get; set; }
-        public string? ProcessorFamilyDescription { get; set; }
+        public string Socket { get; set; }
+        public string ProcessorFamilyDescription { get; set; }
         
-        public string? NominalClockSpeed { get; set; }
-        public string? NominalVoltage { get; set; }
+        public string NominalClockSpeed { get; set; }
+        public string NominalVoltage { get; set; }
         
-        public int? L3CacheSizeMB { get; set; }
-        public int? L2CacheSizeKB { get; set; }
+        public int L3CacheSizeMB { get; set; }
+        public int L2CacheSizeKB { get; set; }
         
-        public string? FabricationProcess { get; set; }
-        public string? ArchitectureName { get; set; }
+        public string FabricationProcess { get; set; }
+        public string ArchitectureName { get; set; }
         
-        public int? BaseClockSpeedMHz { get; set; }
-        public int? BoostClockSpeedMHz { get; set; }
+        public int BaseClockSpeedMHz { get; set; }
+        public int BoostClockSpeedMHz { get; set; }
         
-        public int? CoreCount { get; set; }
-        public int? ThreadCount { get; set; }
+        public int CoreCount { get; set; }
+        public int ThreadCount { get; set; }
     }
 }

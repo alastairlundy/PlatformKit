@@ -19,16 +19,16 @@ namespace PlatformKit.Hardware.Common{
     /// 
     /// </summary>
     public class BatteryModel : HardwareComponentModel{
-        public string? ExpectedBatteryLife { get; set; }
-        public string? FullCapacityCharge { get; set; }
-        public string? ExpectedLife { get; set; }
+        public string ExpectedBatteryLife { get; set; }
+        public string FullCapacityCharge { get; set; }
+        public string ExpectedLife { get; set; }
         
-        public string? EstimatedRunTime { get; set; }
-        public string? EstimatedChargeRemaining { get; set; }
+        public string EstimatedRunTime { get; set; }
+        public string EstimatedChargeRemaining { get; set; }
         
-        public string? MaxRechargeTime { get; set; }
-        public string? TimeToFullCharge { get; set; }
+        public string MaxRechargeTime { get; set; }
+        public string TimeToFullCharge { get; set; }
         
-        public string? Status { get; set; }
+        public string Status { get; set; }
     }
 }
