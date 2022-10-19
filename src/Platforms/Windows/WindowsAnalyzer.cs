@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PlatformKit.Hardware.Windows;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -252,6 +253,8 @@ public class WindowsAnalyzer
         windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
         windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
 
+        windowsOperatingSystemModel.ReleaseName = GetWindowsVersionToEnum(DetectWindowsVersion()).ToString();
+        
         return windowsOperatingSystemModel;
     }
 
@@ -651,7 +654,7 @@ for (var index = 0; index < array.Length; index++)
         /// <returns></returns>
         public bool IsWindows10()
         {
-           return IsWindows10(GetWindowsVersionToEnum());
+           return IsWindows10(GetWindowsVersion());
         }
         
     /// <summary>
@@ -719,7 +722,7 @@ for (var index = 0; index < array.Length; index++)
         /// <returns></returns>
         public bool IsWindows11()
         {
-            return IsWindows11(GetWindowsVersionToEnum());
+            return IsWindows11(GetWindowsVersion());
         }
 
     /// <summary>
@@ -751,17 +754,25 @@ for (var index = 0; index < array.Length; index++)
         /// 
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public WindowsVersion GetWindowsVersionToEnum()
+        {
+            return GetWindowsVersion();
+        }
+
+        public WindowsVersion GetWindowsVersion()
         {
             return GetWindowsVersionToEnum(DetectWindowsVersion());
         }
 
         /// <summary>
+        /// Get the WIndo
         /// </summary>
+        /// <param name="input"></param>
         /// <returns></returns>
-        public WindowsVersion GetWindowsVersionToEnum(Version input)
+        public WindowsVersion GetWindowsVersion(Version input)
         {
-            try
+           try
             {
                 if (input.Major == 5)
                 {
@@ -848,6 +859,15 @@ for (var index = 0; index < array.Length; index++)
             {
                 throw new Exception(exception.ToString());
             }
+        }
+        
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
+        public WindowsVersion GetWindowsVersionToEnum(Version input)
+        {
+            return GetWindowsVersion(input);
         }
         
         /// <summary>
