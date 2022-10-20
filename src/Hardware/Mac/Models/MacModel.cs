@@ -28,10 +28,10 @@ public class MacModel
     public ReleaseYearModel ReleaseYear { get; set; }
     
     public MacDeviceFamily DeviceFamily { get; set; }
-    
+
     public MacHardwareModel MacHardware { get; set; }
     
-    public MacSupportStatus SupportStatus { get; set; }
+    public string MacIdentifier { get; set; }
     
     public MacOsSystemInformation InstalledOperatingSystem { get; set; }
 }
