@@ -648,14 +648,28 @@ for (var index = 0; index < array.Length; index++)
         return windowsSystemInformation;
     }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsWindows10()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public bool IsWindows10()
+    {
+        try
         {
-           return IsWindows10(GetWindowsVersion());
+            if (OSAnalyzer.IsWindows())
+            {
+                return IsWindows10(GetWindowsVersion());
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
+        catch(Exception exception)
+        {
+            throw new Exception(exception.ToString());
+        }
+    }
         
     /// <summary>
     /// Returns whether a WindowsVersion is Windows 10 or not. 
