@@ -22,7 +22,7 @@ using PlatformKit.Internal.Licensing;
 namespace PlatformKit.Linux;
 
 /// <summary>
-/// 
+/// A class to Detect Linux versions, Linux features, and find out more about a user's Linux installation.
 /// </summary>
 public class LinuxAnalyzer
 {

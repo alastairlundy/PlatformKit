@@ -28,7 +28,7 @@ using PlatformKit.Internal.Licensing;
 namespace PlatformKit
 {
     /// <summary>
-    ///     A class to manage processes on a device and/or start new processes.
+    ///  A class to manage processes on a device and/or start new processes.
     /// </summary>
     public class ProcessManager
     {

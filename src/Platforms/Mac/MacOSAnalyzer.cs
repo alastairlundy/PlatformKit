@@ -25,7 +25,7 @@ namespace PlatformKit.Mac;
 
 // ReSharper disable once InconsistentNaming
     /// <summary>
-    /// macOS specific extensions to the OSAnalyzer class.
+    /// A class to Detect macOS versions, macOS features, and find out more about a user's macOS installation.
     /// </summary>
     public class MacOSAnalyzer
     {

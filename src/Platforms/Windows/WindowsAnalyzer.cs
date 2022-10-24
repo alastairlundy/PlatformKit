@@ -25,7 +25,7 @@ using PlatformKit.Internal.Licensing;
 namespace PlatformKit.Windows;
 
 /// <summary>
-/// 
+/// A class to Detect Windows versions, Windows features, and find out more about a user's Windows installation.
 /// </summary>
 public class WindowsAnalyzer
 {
@@ -622,7 +622,7 @@ for (var index = 0; index < array.Length; index++)
     }
 
         /// <summary>
-        /// 
+        /// Checks whether the detected version of Windows is Windows 10
         /// </summary>
         /// <returns></returns>
         public bool IsWindows10()
@@ -631,7 +631,7 @@ for (var index = 0; index < array.Length; index++)
         }
         
     /// <summary>
-    /// 
+    /// Checks whether a WindowsVersion is Windows 10
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
