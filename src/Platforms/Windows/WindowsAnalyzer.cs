@@ -658,7 +658,7 @@ for (var index = 0; index < array.Length; index++)
         }
         
     /// <summary>
-    /// 
+    /// Returns whether a WindowsVersion is Windows 10 or not. 
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -760,13 +760,17 @@ for (var index = 0; index < array.Length; index++)
             return GetWindowsVersion();
         }
 
+        /// <summary>
+        /// Gets the Windows Version as an enum using the Detected version of Windows.
+        /// </summary>
+        /// <returns></returns>
         public WindowsVersion GetWindowsVersion()
         {
             return GetWindowsVersion(DetectWindowsVersion());
         }
 
         /// <summary>
-        /// Get the WIndo
+        /// Get the Windows version when provided with a version parameter.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
