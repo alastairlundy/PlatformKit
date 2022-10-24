@@ -253,7 +253,7 @@ public class WindowsAnalyzer
         windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
         windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
 
-        windowsOperatingSystemModel.ReleaseName = GetWindowsVersionToEnum(DetectWindowsVersion()).ToString();
+        windowsOperatingSystemModel.ReleaseName = GetWindowsVersion(DetectWindowsVersion()).ToString();
         
         return windowsOperatingSystemModel;
     }
@@ -762,7 +762,7 @@ for (var index = 0; index < array.Length; index++)
 
         public WindowsVersion GetWindowsVersion()
         {
-            return GetWindowsVersionToEnum(DetectWindowsVersion());
+            return GetWindowsVersion(DetectWindowsVersion());
         }
 
         /// <summary>
