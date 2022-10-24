@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Hardware.Common;
+using PlatformKit.Mac;
 using PlatformKit.Windows;
 
 namespace PlatformKit.Hardware.Common;
@@ -31,7 +32,14 @@ public class MemoryDetection
 
     protected MemoryModel DetectMac()
     {
-        throw new System.NotImplementedException();
+        MemoryModel memoryModel = new MemoryModel();
+
+        MacOSAnalyzer macOsAnalyzer = new MacOSAnalyzer();
+
+      //  memoryModel.AvailablePhysicalRamMB =
+        //    macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "");
+
+        return memoryModel;
     }
 
     protected MemoryModel DetectLinux()
