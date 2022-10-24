@@ -635,7 +635,6 @@ for (var index = 0; index < array.Length; index++)
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="OperatingSystemDetectionException"></exception>
     public bool IsWindows10(WindowsVersion windowsVersion)
     {
         switch (windowsVersion)
@@ -727,12 +726,30 @@ for (var index = 0; index < array.Length; index++)
         /// 
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            return GetWindowsVersionToEnum(DetectWindowsVersion());
+            try
+            {
+                if (OSAnalyzer.IsWindows())
+                {
+                    return GetWindowsVersionToEnum(DetectWindowsVersion());
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.ToString());
+            }
         }
 
         /// <summary>
+        ///
+        /// 
         /// </summary>
         /// <returns></returns>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
