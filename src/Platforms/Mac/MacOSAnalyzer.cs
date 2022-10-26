@@ -473,6 +473,6 @@ namespace PlatformKit.Mac;
     private string[] GetMacSwVersInfo()
     {
         // ReSharper disable once StringLiteralTypo
-        return new ProcessManager().RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
+        return _processManager.RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
     }
 }
