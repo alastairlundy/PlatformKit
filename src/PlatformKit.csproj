@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Authors>AluminiumTech</Authors>
         <Company />
-        <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://gitlab.com/aluminiumtechdevkit/devkit-csharp/PlatformKit/-/blob/master/FeatureComparisonByPlatform.md</Description>
+        <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
         <Copyright>Copyright (c) AluminiumTech 2018-2022, NeverSpy Tech Limited 2022</Copyright>
         <RepositoryUrl>https://github.com/NeverSpyTech/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
@@ -26,7 +26,7 @@
         <FileVersion>3.0.2.0</FileVersion>
         <Version>3.0.2.0</Version>
         <PackageVersion>3.0.2</PackageVersion>
-        <PackageProjectUrl>https://gitlab.com/hardwarekit/hardwarekit-csharp/PlatformKit/</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
 
