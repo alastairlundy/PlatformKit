@@ -265,25 +265,25 @@ namespace PlatformKit.Mac;
         switch (macOsVersion)
         {
             case MacOsVersion.v10_9_Mavericks:
-                return new(10, 9, 0, 0);
+                return new(10, 9);
             case MacOsVersion.v10_10_Yosemite:
-                return new(10, 10, 0, 0);
+                return new(10, 10);
             case MacOsVersion.v10_11_ElCapitan:
-                return new(10, 11, 0, 0);
+                return new(10, 11);
             case MacOsVersion.v10_12_Sierra:
-                return new(10, 12, 0, 0);
+                return new(10, 12);
             case MacOsVersion.v10_13_HighSierra:
-                return new(10, 13, 0, 0);
+                return new(10, 13);
             case MacOsVersion.v10_14_Mojave:
-                return new(10, 14, 0, 0);
+                return new(10, 14);
             case MacOsVersion.v10_15_Catalina:
-                return new(10, 15, 0, 0);
+                return new(10, 15);
             case MacOsVersion.v11_BigSur:
-                return new(11, 0, 0, 0);
+                return new(11, 0);
             case MacOsVersion.v12_Monterey:
-                return new(12, 0, 0, 0);
+                return new(12, 0);
             case MacOsVersion.v13_Ventura:
-                return new(13, 0, 0, 0);
+                return new(13, 0);
             case MacOsVersion.NotSupported:
                 throw new PlatformNotSupportedException();
             case MacOsVersion.NotDetected:
@@ -413,11 +413,7 @@ namespace PlatformKit.Mac;
                     {
                         arr[index] = arr[index].Replace("/RELEASE_X86_64", String.Empty);
                     }
-                    
-                #if DEBUG
-                    Console.WriteLine(arr[index]);
-                #endif
-                    
+
                     return Version.Parse(arr[index]);
                 }
             }
