@@ -14,8 +14,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.0.1
-* Added support for Windows 10 22H2</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.1.0 Alpha 1
+* Added RAM detection on Windows based systems - This throws an error on macOS and Linux based systems.
+* Added ``WindowsOperatingSystemModel`` class.
+* Added ``WindowsOperatingSystemModel`` detection in WindowsAnalyzer class.
+* Remove ``MacOperatingSystemModel`` class.
+* Removed some other classes.
+* Removal of nullable types and replacement with normal types.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -25,7 +30,7 @@
         <AssemblyVersion>3.0.2.0</AssemblyVersion>
         <FileVersion>3.0.2.0</FileVersion>
         <Version>3.0.2.0</Version>
-        <PackageVersion>3.0.2</PackageVersion>
+        <PackageVersion>3.0.3</PackageVersion>
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
