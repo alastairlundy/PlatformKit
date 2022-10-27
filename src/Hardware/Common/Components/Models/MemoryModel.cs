@@ -34,7 +34,6 @@ namespace PlatformKit.Hardware.Common{
         public int TotalVirtualRamMB { get; set; }
         public int TotalVirtualRamGB => TotalVirtualRamMB / 1000;
         
-        public int VoltageMilliVolts { get; set; }
         public int MemorySpeedMHz { get; set; }
 
         public int MinVoltageMillivolts { get; set; }

@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PlatformKit.Hardware.Windows;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -252,6 +253,8 @@ public class WindowsAnalyzer
         windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
         windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
 
+        windowsOperatingSystemModel.ReleaseName = GetWindowsVersion(DetectWindowsVersion()).ToString();
+        
         return windowsOperatingSystemModel;
     }
 
@@ -645,17 +648,31 @@ for (var index = 0; index < array.Length; index++)
         return windowsSystemInformation;
     }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsWindows10()
-        {
-           return IsWindows10(GetWindowsVersionToEnum());
-        }
-        
     /// <summary>
     /// 
+    /// </summary>
+    /// <returns></returns>
+    public bool IsWindows10()
+    {
+        try
+        {
+            if (OSAnalyzer.IsWindows())
+            {
+                return IsWindows10(GetWindowsVersion());
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
+        catch(Exception exception)
+        {
+            throw new Exception(exception.ToString());
+        }
+    }
+        
+    /// <summary>
+    /// Returns whether a WindowsVersion is Windows 10 or not. 
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -719,7 +736,7 @@ for (var index = 0; index < array.Length; index++)
         /// <returns></returns>
         public bool IsWindows11()
         {
-            return IsWindows11(GetWindowsVersionToEnum());
+            return IsWindows11(GetWindowsVersion());
         }
 
     /// <summary>
@@ -751,17 +768,29 @@ for (var index = 0; index < array.Length; index++)
         /// 
         /// </summary>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            return GetWindowsVersionToEnum(DetectWindowsVersion());
+            return GetWindowsVersion();
         }
 
         /// <summary>
+        /// Gets the Windows Version as an enum using the Detected version of Windows.
         /// </summary>
         /// <returns></returns>
-        public WindowsVersion GetWindowsVersionToEnum(Version input)
+        public WindowsVersion GetWindowsVersion()
         {
-            try
+            return GetWindowsVersion(DetectWindowsVersion());
+        }
+
+        /// <summary>
+        /// Get the Windows version when provided with a version parameter.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public WindowsVersion GetWindowsVersion(Version input)
+        {
+           try
             {
                 if (input.Major == 5)
                 {
@@ -848,6 +877,15 @@ for (var index = 0; index < array.Length; index++)
             {
                 throw new Exception(exception.ToString());
             }
+        }
+        
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
+        public WindowsVersion GetWindowsVersionToEnum(Version input)
+        {
+            return GetWindowsVersion(input);
         }
         
         /// <summary>

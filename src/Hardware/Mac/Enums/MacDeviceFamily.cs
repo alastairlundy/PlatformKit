@@ -32,4 +32,5 @@ public enum MacDeviceFamily
     iMac,
     // ReSharper disable once InconsistentNaming
     iMacPro,
+    NotDetected
 }
