@@ -14,11 +14,19 @@
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
+using System;
+using PlatformKit.Mac;
+using PlatformKit.Windows;
+
 namespace PlatformKit.Hardware.Common{
     /// <summary>
     /// A class to store Processor Information.
     /// </summary>
     public class ProcessorModel : HardwareComponentModel{
+
+        public ProcessorModel() : base()
+        {
+        }
         
         public string ProcessorName { get; set; }
 
@@ -47,5 +55,29 @@ namespace PlatformKit.Hardware.Common{
         
         public int CoreCount { get; set; }
         public int ThreadCount { get; set; }
+
+        protected override void DetectWindows()
+        {
+            ProcessorName = _windowsAnalyzer.GetWMIValue("Name", "Win32_Processor");
+            CoreCount = int.Parse(_windowsAnalyzer.GetWMIValue("NumberOfCores", "Win32_Processor"));
+            ThreadCount = int.Parse(_windowsAnalyzer.GetWMIValue("ThreadCount", "Win32_Processor"));
+            //processorModel Nominal clockspeed
+
+            BoostClockSpeedMHz = int.Parse(_windowsAnalyzer.GetWMIValue("MaxClockSpeed", "Win32_Processor"));
+
+            ArchitectureName = _windowsAnalyzer.GetWMIValue("Architecture", "Win32_Processor");
+            CPUFamily = _windowsAnalyzer.GetWMIValue("Family", "Win32_Processor");
+            ProcessorFamilyDescription = _windowsAnalyzer.GetWMIValue("OtherFamilyDescription", "Win32_Processor");
+
+            L2CacheSizeKB = int.Parse(_windowsAnalyzer.GetWMIValue("L2CacheSize", "Win32_Processor"));
+            L3CacheSizeMB = int.Parse(_windowsAnalyzer.GetWMIValue("L3CacheSize", "Win32_Processor")) / 1024;
+
+            Socket = _windowsAnalyzer.GetWMIValue("SocketDesignation", "Win32_Processor");
+            Revision = _windowsAnalyzer.GetWMIValue("Revision", "Win32_Processor");
+
+            SupportsVirtualization =
+                bool.Parse(_windowsAnalyzer.GetWMIValue("VirtualizationFirmwareEnabled", "Win32_Processor"));
+
+        }
     }
 }

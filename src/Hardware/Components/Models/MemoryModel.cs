@@ -21,6 +21,11 @@ namespace PlatformKit.Hardware.Common{
     /// </summary>
     public class MemoryModel : HardwareComponentModel
     {
+        public MemoryModel() : base()
+        {
+            
+        }
+        
         public int AvailablePhysicalRamMB { get; set; }
         public int AvailablePhysicalRamGB => AvailablePhysicalRamMB / 1000;
 
@@ -38,5 +43,27 @@ namespace PlatformKit.Hardware.Common{
 
         public int MinVoltageMillivolts { get; set; }
         public int MaxVoltageMillivolts { get; set; }
+
+        protected override void DetectWindows()
+        {
+            var windowsSystemInfo = _windowsAnalyzer.GetWindowsSystemInformation();
+            
+            TotalPhysicalRamMB = windowsSystemInfo.TotalPhysicalMemoryMB;
+            AvailablePhysicalRamMB = windowsSystemInfo.AvailablePhysicalMemoryMB;
+            AvailableVirtualRamMB = windowsSystemInfo.VirtualMemoryAvailableSizeMB;
+            TotalVirtualRamMB = windowsSystemInfo.VirtualMemoryMaxSizeMB;
+            
+            //Get all other MemoryModel values from WMI
+            MinVoltageMillivolts = int.Parse(_windowsAnalyzer.GetWMIValue("MinVoltage", "Win32_PhysicalMemory"));
+            MaxVoltageMillivolts = int.Parse(_windowsAnalyzer.GetWMIValue("MaxVoltage", "Win32_PhysicalMemory"));
+            MemorySpeedMHz = int.Parse(_windowsAnalyzer.GetWMIValue("ConfiguredClockSpeed", "Win32_PhysicalMemory"));
+        }
+
+        protected override void DetectMac()
+        {
+            //  memoryModel.AvailablePhysicalRamMB =
+            //    macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "");
+
+        }
     }
 }
