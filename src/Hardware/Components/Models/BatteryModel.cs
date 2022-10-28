@@ -18,17 +18,35 @@ namespace PlatformKit.Hardware.Common{
     /// <summary>
     /// 
     /// </summary>
-    public class BatteryModel : HardwareComponentModel{
+    public class BatteryModel : HardwareComponentModel
+    {
+
+        public BatteryModel() : base()
+        {
+            
+        }
+        
+        public string Name { get; set; }
+        
         public string ExpectedBatteryLife { get; set; }
         public string FullCapacityCharge { get; set; }
-        public string ExpectedLife { get; set; }
-        
+
         public string EstimatedRunTime { get; set; }
-        public string EstimatedChargeRemaining { get; set; }
         
         public string MaxRechargeTime { get; set; }
         public string TimeToFullCharge { get; set; }
         
         public string Status { get; set; }
+
+        protected override void DetectWindows()
+        {
+            ExpectedBatteryLife = _windowsAnalyzer.GetWMIValue("ExpectedBatteryLife", "Win32_Battery");
+            FullCapacityCharge = _windowsAnalyzer.GetWMIValue("FullChargeCapacity", "Win32_Battery");
+            EstimatedRunTime = _windowsAnalyzer.GetWMIValue("EstimatedRunTime", "Win32_Battery");
+            TimeToFullCharge = _windowsAnalyzer.GetWMIValue("TimeToFullCharge", "Win32_Battery");
+            MaxRechargeTime = _windowsAnalyzer.GetWMIValue("MaxRechargeTime", "Win32_Battery");
+            Status = _windowsAnalyzer.GetWMIValue("Status", "Win32_Battery");
+            Name = _windowsAnalyzer.GetWMIValue("Name", "Win32_Battery");
+        }
     }
 }
