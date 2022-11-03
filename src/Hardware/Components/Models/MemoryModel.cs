@@ -58,12 +58,5 @@ namespace PlatformKit.Hardware.Common{
             MaxVoltageMillivolts = int.Parse(_windowsAnalyzer.GetWMIValue("MaxVoltage", "Win32_PhysicalMemory"));
             MemorySpeedMHz = int.Parse(_windowsAnalyzer.GetWMIValue("ConfiguredClockSpeed", "Win32_PhysicalMemory"));
         }
-
-        protected override void DetectMac()
-        {
-            //  memoryModel.AvailablePhysicalRamMB =
-            //    macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "");
-
-        }
     }
 }
