@@ -23,13 +23,50 @@ namespace PlatformKit.Mac;
 /// </summary>
 public class MacOsSystemInformation
 {
-    public Version MacOsVersion { get; set; }
+    public Version MacOsVersion
+    {
+        get
+        {
+           return macOsAnalyzer.DetectMacOsVersion();
+        }
+    }
+
+    public Version DarwinVersion
+    {
+        get
+        {
+            return macOsAnalyzer.DetectDarwinVersion();
+        }
+    }
+
+    public Version XnuVersion
+    {
+        get
+        {
+           return macOsAnalyzer.DetectXnuVersion();
+        }
+    }
+
+    public string MacOsBuildNumber
+    {
+        get
+        {
+           return macOsAnalyzer.DetectMacOsBuildNumber();
+        }
+    }
+
+    public MacProcessorType ProcessorType
+    {
+        get
+        {
+           return macOsAnalyzer.GetMacProcessorType();
+        }
+    }
+
+    protected MacOSAnalyzer macOsAnalyzer;
     
-    public Version DarwinVersion { get; set; }
-    
-    public Version XnuVersion { get; set; } 
-    
-    public string MacOsBuildNumber { get; set; }
-    
-    public MacProcessorType ProcessorType { get; set; }
+    public MacOsSystemInformation()
+    {
+        macOsAnalyzer = new MacOSAnalyzer();
+    }
 }

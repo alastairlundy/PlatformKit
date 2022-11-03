@@ -14,6 +14,7 @@
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
+using System;
 using PlatformKit.Hardware.Common;
 
 using PlatformKit.Mac;
@@ -21,17 +22,95 @@ using PlatformKit.Mac;
 namespace PlatformKit.Hardware.Mac;
 
 /// <summary>
-/// 
+/// A class to represent Mac models
 /// </summary>
 public class MacModel
 {
-    public ReleaseYearModel ReleaseYear { get; set; }
-    
-    public MacDeviceFamily DeviceFamily { get; set; }
+    //public ReleaseYearModel ReleaseYear { get; }
 
-    public MacHardwareModel MacHardware { get; set; }
+    MacDeviceFamily DeviceFamily
+    {
+        get
+        {
+            MacDeviceFamily macDeviceFamily;
+        
+            switch (MacHardware.MacDescription.ToLower().Replace(" ", String.Empty))
+            {
+                case "macbookair":
+                    macDeviceFamily = MacDeviceFamily.MacBookAir;
+                    break;
+                case "macbookpro":
+                    macDeviceFamily = MacDeviceFamily.MacBookPro;
+                    break;
+                case "macbook":
+                    macDeviceFamily = MacDeviceFamily.MacBook;
+                    break;
+                case "macmini":
+                    macDeviceFamily = MacDeviceFamily.MacMini;
+                    break;
+                case "macstudio":
+                    macDeviceFamily = MacDeviceFamily.MacStudio;
+                    break;
+                case "macpro":
+                    macDeviceFamily = MacDeviceFamily.MacPro;
+                    break;
+                case "imacpro":
+                    macDeviceFamily = MacDeviceFamily.iMacPro;
+                    break;
+                case "imac":
+                    macDeviceFamily = MacDeviceFamily.iMac;
+                    break;
+                case "macminiserver":
+                    macDeviceFamily = MacDeviceFamily.MacMiniServer;
+                    break;
+                default:
+                    macDeviceFamily = MacDeviceFamily.NotDetected;
+                    break;
+            }
+
+            return macDeviceFamily;
+        }
+    }
+
+    public MacHardwareModel MacHardware
+    {
+        get
+        {
+            return new MacHardwareModel()
+            {
+                MacDescription = macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Model Name"),
+                ProcessorDescription = macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Processor Name"),
+                SerialNumber = macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Serial Number (system)"),
+                //GraphicsProcessorDescription = 
+                //StartupDiskDescription = 
+                //MacDisplayModel = 
+            };
+        }
+    }
     
-    public string MacIdentifier { get; set; }
+    public string MacIdentifier 
+    {
+        get
+        {
+            return macOsAnalyzer.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Model Identifier");
+        }
+    }
     
-    public MacOsSystemInformation InstalledOperatingSystem { get; set; }
+    public MacOsSystemInformation InstalledOperatingSystem 
+    {
+        get
+        {
+            var macOsSystemInformation = new MacOsSystemInformation();
+            macOsSystemInformation.Detect();
+            return macOsSystemInformation;
+        }
+    }
+
+
+    protected MacOSAnalyzer macOsAnalyzer;
+    
+    public MacModel()
+    {
+        macOsAnalyzer = new MacOSAnalyzer();
+    }
 }

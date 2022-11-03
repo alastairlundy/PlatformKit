@@ -17,6 +17,7 @@
 using System;
 using System.Runtime.InteropServices;
 using PlatformKit.Hardware.Mac;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -329,82 +330,12 @@ namespace PlatformKit.Mac;
     /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
+    [Obsolete(DeprecationMessages.DeprecationV4 + " This code will be moved to the MacOsSystemInformation class.")]
     public MacOsSystemInformation DetectMacSystemInformation()
     {
         MacOsSystemInformation macOsSystemInformation = new MacOsSystemInformation();
-        macOsSystemInformation.ProcessorType = GetMacProcessorType();
-
-        macOsSystemInformation.MacOsBuildNumber = DetectMacOsBuildNumber();
-        macOsSystemInformation.MacOsVersion = DetectMacOsVersion();
-        macOsSystemInformation.DarwinVersion = DetectDarwinVersion();
-        macOsSystemInformation.XnuVersion = DetectXnuVersion();
 
         return macOsSystemInformation;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public MacModel DetectMacModel()
-    {
-        MacModel macModel = new MacModel();
-
-        macModel.MacIdentifier =
-            GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Model Identifier");
-
-        macModel.InstalledOperatingSystem = DetectMacSystemInformation();
-        //macModel.ReleaseYear = 
-
-        macModel.MacHardware = new MacHardwareModel()
-        {
-            MacDescription = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Model Name"),
-            ProcessorDescription = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Processor Name"),
-            SerialNumber = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Serial Number (system)"),
-            //GraphicsProcessorDescription = 
-            //StartupDiskDescription = 
-            //MacDisplayModel = 
-        };
-
-        MacDeviceFamily macDeviceFamily;
-        
-        switch (macModel.MacHardware.MacDescription.ToLower().Replace(" ", String.Empty))
-        {
-         case "macbookair":
-             macDeviceFamily = MacDeviceFamily.MacBookAir;
-             break;
-         case "macbookpro":
-             macDeviceFamily = MacDeviceFamily.MacBookPro;
-             break;
-         case "macbook":
-             macDeviceFamily = MacDeviceFamily.MacBook;
-             break;
-         case "macmini":
-             macDeviceFamily = MacDeviceFamily.MacMini;
-             break;
-         case "macstudio":
-             macDeviceFamily = MacDeviceFamily.MacStudio;
-             break;
-         case "macpro":
-             macDeviceFamily = MacDeviceFamily.MacPro;
-            break;
-         case "imacpro":
-             macDeviceFamily = MacDeviceFamily.iMacPro;
-             break;
-         case "imac":
-             macDeviceFamily = MacDeviceFamily.iMac;
-             break;
-         case "macminiserver":
-             macDeviceFamily = MacDeviceFamily.MacMiniServer;
-             break;
-         default:
-             macDeviceFamily = MacDeviceFamily.NotDetected;
-             break;
-        }
-
-        macModel.DeviceFamily = macDeviceFamily;
-
-        return macModel;
     }
 
     /// <summary>
