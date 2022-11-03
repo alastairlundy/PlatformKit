@@ -260,7 +260,13 @@ namespace PlatformKit.Mac;
             throw new Exception(exception.ToString());
         }
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="macOsVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)

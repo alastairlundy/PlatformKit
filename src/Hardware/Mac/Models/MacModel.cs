@@ -15,7 +15,6 @@
  */
 
 using System;
-using PlatformKit.Hardware.Common;
 
 using PlatformKit.Mac;
 
@@ -100,9 +99,7 @@ public class MacModel
     {
         get
         {
-            var macOsSystemInformation = new MacOsSystemInformation();
-            macOsSystemInformation.Detect();
-            return macOsSystemInformation;
+            return new MacOsSystemInformation();
         }
     }
 
