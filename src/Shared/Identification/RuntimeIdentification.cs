@@ -136,7 +136,7 @@ namespace PlatformKit.Identification
                 }
                 else if (!_windowsAnalyzer.IsWindows10() && !_windowsAnalyzer.IsWindows11())
                 {
-                    switch (_windowsAnalyzer.GetWindowsVersion())
+                    switch (_windowsAnalyzer.GetWindowsVersionToEnum())
                     {
                         case WindowsVersion.Win7:
                             osVersion = "7";
