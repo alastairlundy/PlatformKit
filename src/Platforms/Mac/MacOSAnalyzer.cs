@@ -28,7 +28,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOSAnalyzer
     {
-        protected readonly ProcessManager _processManager;
+        protected ProcessManager _processManager;
 
         public MacOSAnalyzer()
         {
@@ -478,6 +478,6 @@ namespace PlatformKit.Mac;
     private string[] GetMacSwVersInfo()
     {
         // ReSharper disable once StringLiteralTypo
-        return new ProcessManager().RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
+        return _processManager.RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
     }
 }
