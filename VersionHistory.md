@@ -6,6 +6,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 3.1
 | Version | Availability | Changelog |
 |-|-|-|
+| 3.1.0 Alpha 4 | November 11th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.4) |
 | 3.1.0 Alpha 3 | November 3rd 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.3) |
 | 3.1.0 Alpha 2 | October 19th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.2) |
 | 3.1.0 Alpha 1 | October 19th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.1) |

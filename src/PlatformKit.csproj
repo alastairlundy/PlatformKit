@@ -14,15 +14,10 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.1.0 Alpha 2
-* Moved RAM and Processor Detection code to component model classes
-* Re-organized files and classes
-* Added missing license text in some classes
-* Made significant changes to MacModel and Mac hardware model classes
-* Moved away from using deprecated methods
-* Added MacModel detection
-* Added Battery Detection on Windows
-* Added Display Information Detection on Windows</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.1.0 Alpha 3
+* Ported changes from 3.0.3 to 3.1.0 Alpha series
+    * Removed unused protected variable in FreeBSDAnalyzer class
+    * Improved memory and CPU efficiency of detecting Mac Software Information - This improvement comes about by using the existing ProcessManager class instance in the MacOSAnalyzer class rather than creating a new instance each time Mac Software Information is requested.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,7 +27,7 @@
         <AssemblyVersion>3.1.0.0</AssemblyVersion>
         <FileVersion>3.1.0.0</FileVersion>
         <Version>3.1.0.0</Version>
-        <PackageVersion>3.1.0-alpha.3</PackageVersion>
+        <PackageVersion>3.1.0-alpha.4</PackageVersion>
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
