@@ -14,22 +14,19 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.0.2
-* Added more in code documentation through code comments
-* Updated existing in code comments
-* Removed unused protected variable in ``FreeBSDAnalyzer`` class
-* Improved memory and CPU efficiency of detecting Mac Software Information - This improvement comes about by using the existing ProcessManager class instance in the ``MacOSAnalyzer`` class rather than creating a new instance each time Mac Software Information is requested.
-* Modified versions returned by the ``GetMacVersionToEnum`` method to exclude a bug fix version of 0 and a revision version of 0.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.0.3
+* Removed Non-Commerical License Option in PlatformKit Settings
+* Removed Non-Commercial License notices from PlatformKit</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>3.0.3.0</AssemblyVersion>
-        <FileVersion>3.0.3.0</FileVersion>
-        <Version>3.0.3.0</Version>
-        <PackageVersion>3.0.3</PackageVersion>
+        <AssemblyVersion>3.0.4.0</AssemblyVersion>
+        <FileVersion>3.0.4.0</FileVersion>
+        <Version>3.0.4.0</Version>
+        <PackageVersion>3.0.4</PackageVersion>
         <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
