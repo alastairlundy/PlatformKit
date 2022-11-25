@@ -70,6 +70,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Cryptolens.Licensing.CrossPlatform" Version="4.0.41" />
       <PackageReference Include="LicensingKit" Version="1.0.0" />
     </ItemGroup>
 </Project>
