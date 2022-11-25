@@ -12,14 +12,20 @@
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
+using System.Reflection;
 using LicensingKit;
 using LicensingKit.Enums;
 using LicensingKit.Models;
+
+using PlatformKit.Internal.Exceptions;
+using SKM.V3;
+using SKM.V3.Methods;
 
 namespace PlatformKit.Internal.Licensing;
 
 public class PlatformKitConstants
 {
+    // ReSharper disable once InconsistentNaming
     public static readonly OpenSourceLicense GPLv3_OrLater =
         new("GPLv3_OrLater", LicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
 
@@ -43,14 +49,28 @@ public class PlatformKitConstants
 
         if (LicenseManager.LicenseUsageState == LicenseUsageState.AcceptableLicenseSelected)
         {
-            if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense){
-               /*
-                *  if (PlatformKitSettings.LicenseKey == null)
-                {
-                    LicenseManager.LicenseUsageState = 
-                }
-                */
+            if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
+            {
+                VerifyKey();
+                VerifyProjectCount();
             }
         }
+    }
+
+    protected static void VerifyKey()
+    {
+        var rsa =
+        
+       var license = SKM.V3.Methods.Helpers.VerifySDKLicenseCertificate(rsa);
+
+       if (license != null)
+       {
+           throw new AssemblyNotSignedException();
+       }
+    }
+
+    protected static void VerifyProjectCount()
+    {
+     //   string projectName = Assembly.GetExecutingAssembly().GetName().Name;
     }
 }
