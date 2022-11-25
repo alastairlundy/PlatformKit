@@ -46,14 +46,11 @@ public class PlatformKitConstants
         LicenseManager.RegisterLicense(PlatformKitCommercialLicense);
         LicenseManager.SelectedLicense = PlatformKitSettings.SelectedLicense;
         LicenseManager.CheckLicenseStatus();
-
-        if (LicenseManager.LicenseUsageState == LicenseUsageState.AcceptableLicenseSelected)
+        
+        if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
         {
-            if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
-            {
-                VerifyKey();
-                VerifyProjectCount();
-            }
+            VerifyKey();
+            //VerifyProjectCount();
         }
     }
 
@@ -63,7 +60,7 @@ public class PlatformKitConstants
         
        var license = SKM.V3.Methods.Helpers.VerifySDKLicenseCertificate(rsa);
 
-       if (license != null)
+       if (license == null)
        {
            throw new AssemblyNotSignedException();
        }
