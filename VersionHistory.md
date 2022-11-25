@@ -1,7 +1,12 @@
 # Version History
 This document contains the entire version history of the PlatformKit (formerly AluminiumCoreLib) library.
 
-## Upcoming Releases
+## Stable Releases
+
+### 3.1
+| Version | Availability | Changelog |
+|-|-|-|
+| 3.1.0 | November 24th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0) |
 
 ### 3.0
 | Version | Availability | Changelog |
@@ -19,9 +24,6 @@ This document contains the entire version history of the PlatformKit (formerly A
 | 3.0.0 Alpha 3 | July 17th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-alpha.3) |
 | 3.0.0 Alpha 2 | June 13th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-alpha.2) |
 | 3.0.0 Alpha 1 | May 31st 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-alpha.1) |
-
-
-## Stable Releases
 
 
 ### 2.6

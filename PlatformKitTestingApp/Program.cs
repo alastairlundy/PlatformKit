@@ -28,7 +28,7 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
+PlatformKitSettings.SelectedLicense = PlatformKitConstants.PlatformKitCommercialLicense;
 
     var platformManager = new PlatformIdentification();
 var osAnalyzer = new OSAnalyzer();
