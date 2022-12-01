@@ -27,6 +27,9 @@ If using the paid version of PlatformKit please refer to documentation provided 
 
 You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
 
+## Privacy
+PlatformKit 3.1.1 and newer will communicate with NEVERSPY TECH analytics unless youopt out. Please see [our Privacy page](/privacy.md) for more details.
+
 ## Contributions
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
 
