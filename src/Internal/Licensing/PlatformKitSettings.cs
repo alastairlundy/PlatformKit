@@ -13,7 +13,7 @@
  */
 
 #nullable enable
-using LicensingKit.Models;
+using LicensingKit.Licenses.Models;
 
 namespace PlatformKit.Internal.Licensing;
 
@@ -21,9 +21,8 @@ public class PlatformKitSettings
 {
 
     public static AbstractLicense SelectedLicense { get; set; }
-
-    /// <summary>
-    /// A license key for using of PlatformKit under a Commercial License.
-    /// </summary>
-    //public static string? LicenseKey { get; set; }
+    
+    public static string? LicenseKey { get; set; }
+    
+    public static bool? AllowErrorReporting { get; set; }
 }

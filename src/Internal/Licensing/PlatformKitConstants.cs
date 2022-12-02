@@ -12,14 +12,12 @@
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
-using System.Reflection;
 using LicensingKit;
-using LicensingKit.Enums;
-using LicensingKit.Models;
+using LicensingKit.Licenses.Enums;
+using LicensingKit.Licenses.Models;
 
+using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Exceptions;
-using SKM.V3;
-using SKM.V3.Methods;
 
 namespace PlatformKit.Internal.Licensing;
 
@@ -27,10 +25,12 @@ public class PlatformKitConstants
 {
     // ReSharper disable once InconsistentNaming
     public static readonly OpenSourceLicense GPLv3_OrLater =
-        new("GPLv3_OrLater", LicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
+        new("GPLv3_OrLater", SoftwareLicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
 
+    public static bool Initialized = false;
+    
     public static readonly ProprietaryLicense PlatformKitCommercialLicense = new("PlatformKit Commercial License",
-        LicenseType.ClosedSourceProprietary,
+        SoftwareLicenseType.SourceAvailableProprietary,
         new LicensePermissionsModel(true,
             false,
             true,
@@ -42,9 +42,19 @@ public class PlatformKitConstants
 
     internal static void CheckLicenseState()
     {
-        LicenseManager.RegisterLicense(GPLv3_OrLater);
-        LicenseManager.RegisterLicense(PlatformKitCommercialLicense);
-        LicenseManager.SelectedLicense = PlatformKitSettings.SelectedLicense;
+        CheckAnalyticsPermission();
+        
+        if (!Initialized)
+        {
+            PlatformKitAnalytics.InitializeAnalytics();
+            
+            LicenseManager.RegisterLicense(GPLv3_OrLater);
+            LicenseManager.RegisterLicense(PlatformKitCommercialLicense);
+            LicenseManager.SelectedLicense = PlatformKitSettings.SelectedLicense;
+            
+            PlatformKitAnalytics.InitializeAnalytics();
+        }
+        
         LicenseManager.CheckLicenseStatus();
         
         if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
@@ -54,9 +64,17 @@ public class PlatformKitConstants
         }
     }
 
+    internal static void CheckAnalyticsPermission()
+    {
+        if (PlatformKitSettings.AllowErrorReporting == null)
+        {
+            PlatformKitSettings.AllowErrorReporting = true;
+        }
+    }
+    
     protected static void VerifyKey()
     {
-        var rsa =
+        var rsa = "";
         
        var license = SKM.V3.Methods.Helpers.VerifySDKLicenseCertificate(rsa);
 

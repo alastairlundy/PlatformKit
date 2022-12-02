@@ -16,8 +16,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-
-
+using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Licensing;
 
 // ReSharper disable HeapView.DelegateAllocation
@@ -54,9 +53,14 @@ namespace PlatformKit
             if (OSAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
 
 #if NETCOREAPP3_0_OR_GREATER
-            if (OSAnalyzer.IsFreeBSD()) throw new NotImplementedException();
+            if (OSAnalyzer.IsFreeBSD())
+            {
+                PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(RunProcess));
+                throw new NotImplementedException();
+            }
 #endif
             
+            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunProcess));
             throw new PlatformNotSupportedException();
         }
 
@@ -114,18 +118,22 @@ namespace PlatformKit
 
                 if (end == null)
                 {
+                    PlatformKitAnalytics.ReportError(new NullReferenceException(), nameof(RunProcessWindows));
                     throw new NullReferenceException();
                 }
 
                 if (end.ToLower()
                     .Contains(" is not recognized as the name of a cmdlet, function, script file, or operable program"))
                 {
+                    PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
                     throw new Exception(end);
                 }
                 else if (end.ToLower()
                          .Contains(
                              "is not recognized as an internal or external command, operable program or batch file."))
                 {
+                    PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
+
                     throw new Exception(end);
                 }
 
@@ -134,6 +142,7 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                PlatformKitAnalytics.ReportError(ex, nameof(RunProcessWindows));
                 throw new Exception(ex.ToString());
             }
         }
@@ -146,36 +155,45 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public string RunProcessMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            var procStartInfo = new ProcessStartInfo
+            try
             {
-                WorkingDirectory = executableLocation,
-                FileName = executableName,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = false,
-                Arguments = arguments
-            };
+                var procStartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = executableLocation,
+                    FileName = executableName,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = false,
+                    Arguments = arguments
+                };
 
-            Process process;
+                Process process;
             
-            if (processStartInfo == null)
-            {
-                process = new Process { StartInfo = procStartInfo };
-            }
-            else
-            {
-                procStartInfo = processStartInfo;
-                procStartInfo.WorkingDirectory = executableLocation;
-                procStartInfo.FileName = executableName;
-                procStartInfo.Arguments = arguments;
-                procStartInfo.RedirectStandardOutput = true;
-                process = new Process { StartInfo = processStartInfo};
-            }
+                if (processStartInfo == null)
+                {
+                    process = new Process { StartInfo = procStartInfo };
+                }
+                else
+                {
+                    procStartInfo = processStartInfo;
+                    procStartInfo.WorkingDirectory = executableLocation;
+                    procStartInfo.FileName = executableName;
+                    procStartInfo.Arguments = arguments;
+                    procStartInfo.RedirectStandardOutput = true;
+                    process = new Process { StartInfo = processStartInfo};
+                }
             
-            process.Start();
+                process.Start();
 
-            process.WaitForExit();
-            return process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+                return process.StandardOutput.ReadToEnd();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                PlatformKitAnalytics.ReportError(ex, nameof(RunProcessMac));
+                throw new Exception(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -221,7 +239,8 @@ namespace PlatformKit
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.ToString());
+                PlatformKitAnalytics.ReportError(ex, nameof(RunProcessLinux));
                 throw new Exception(ex.ToString());
             }
         }
@@ -253,6 +272,7 @@ namespace PlatformKit
    
             }
                 
+            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunPowerShellCommand));
             throw new PlatformNotSupportedException();
         }
 
@@ -290,6 +310,7 @@ namespace PlatformKit
                 }
             }
 
+            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));
             throw new PlatformNotSupportedException();
         }
 
@@ -327,11 +348,13 @@ namespace PlatformKit
                     return RunProcessLinux(location, command, processArguments, processStartInfo);
                 }
 
+                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
+                PlatformKitAnalytics.ReportError(exception, nameof(RunLinuxCommand));
                 throw new Exception(exception.ToString());
             }
         }
@@ -383,6 +406,7 @@ namespace PlatformKit
 #if  NETCOREAPP3_1_OR_GREATER
                 if (OSAnalyzer.IsFreeBSD())
                 {
+                    PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(OpenUrlInBrowser));
                     throw new NotImplementedException();
                 }          
 #endif
@@ -392,6 +416,7 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                PlatformKitAnalytics.ReportError(ex, nameof(OpenUrlInBrowser));
                 throw new Exception(ex.ToString());
             }
         }
