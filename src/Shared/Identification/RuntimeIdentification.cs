@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -106,7 +106,8 @@ namespace PlatformKit.Identification
                     }
                     else
                     {
-                        throw new OperatingSystemDetectionException();
+                        PlatformKitAnalytics.ReportError(new LinuxVersionDetectionException(), nameof(GetOsNameString));
+                        throw new LinuxVersionDetectionException();
                     }
                 }
             }
@@ -119,7 +120,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="OperatingSystemDetectionException"></exception>
+        /// <exception cref="WindowsVersionDetectionException"></exception>
         protected string GetOsVersionString()
         {
             string osVersion = null;
@@ -160,9 +161,11 @@ namespace PlatformKit.Identification
                             osVersion = "81";
                             break;
                         case WindowsVersion.NotDetected:
-                            throw new OperatingSystemDetectionException();
+                            PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
+                            throw new WindowsVersionDetectionException();
                         default:
-                            throw new OperatingSystemDetectionException();
+                            PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
+                            throw new WindowsVersionDetectionException();
                     }
                 }
             }
@@ -200,6 +203,7 @@ namespace PlatformKit.Identification
                 {
                     if (version.Minor < 9)
                     {
+                        PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetOsVersionString));
                         throw new PlatformNotSupportedException();
                     }
                     else
@@ -242,6 +246,7 @@ namespace PlatformKit.Identification
             }
             else
             {
+                PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GenerateRuntimeIdentifier));
                 throw new ArgumentException();
             }
         }
@@ -314,10 +319,12 @@ namespace PlatformKit.Identification
             }
             else if(!OSAnalyzer.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
-                Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
+                Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
+                                  " Calling method using RuntimeIdentifierType.Specific instead.");
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
             
+            PlatformKitAnalytics.ReportError(new RuntimeIdentifierGenerationException(), nameof(GenerateRuntimeIdentifier));
             throw new RuntimeIdentifierGenerationException();
         }
 

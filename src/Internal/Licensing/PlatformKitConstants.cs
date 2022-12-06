@@ -12,6 +12,7 @@
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
+using System;
 using LicensingKit;
 using LicensingKit.Licenses.Enums;
 using LicensingKit.Licenses.Models;
@@ -54,8 +55,15 @@ public class PlatformKitConstants
             
             PlatformKitAnalytics.InitializeAnalytics();
         }
-        
-        LicenseManager.CheckLicenseStatus();
+
+        try
+        {
+            LicenseManager.CheckLicenseStatus();
+        }
+        catch(Exception exception)
+        {
+            PlatformKitAnalytics.ReportError(exception, nameof(CheckLicenseState));
+        }
         
         if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
         {
@@ -80,6 +88,7 @@ public class PlatformKitConstants
 
        if (license == null)
        {
+           PlatformKit.Internal.Analytics.PlatformKitAnalytics.ReportError(new AssemblyNotSignedException(), nameof(VerifyKey));
            throw new AssemblyNotSignedException();
        }
     }

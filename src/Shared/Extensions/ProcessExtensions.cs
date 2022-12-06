@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Shared.Extensions
@@ -103,6 +103,7 @@ namespace PlatformKit.Shared.Extensions
             }
             catch (Exception exception)
             {
+                PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(ConvertStringToProcess));
                 throw new Exception(exception.ToString());
             }
         }
