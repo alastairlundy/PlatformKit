@@ -39,23 +39,12 @@ public class PlatformKitConstants
             false,
             false,
             true));
-    
-    public static readonly ProprietaryLicense PlatformKitNonCommercialLicense = new("PlatformKit Non-Commercial License",
-        LicenseType.ClosedSourceProprietary,
-        new LicensePermissionsModel(true,
-            false,
-            true,
-            true,
-            false,
-            false,
-            false,
-            true));
 
     internal static void CheckLicenseState()
     {
         LicenseManager.RegisterLicense(PlatformKitConstants.GPLv3_OrLater);
         LicenseManager.RegisterLicense(PlatformKitConstants.PlatformKitCommercialLicense);
-        LicenseManager.RegisterLicense(PlatformKitNonCommercialLicense);
+        
         LicenseManager.SelectedLicense = PlatformKitSettings.SelectedLicense;
         LicenseManager.CheckLicenseStatus();
     }
