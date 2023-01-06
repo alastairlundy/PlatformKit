@@ -14,7 +14,7 @@
 
 using System;
 using System.Collections.Generic;
-using PlatformKit.Internal.Analytics;
+
 using PlatformKit.Internal.Licensing;
 
 
@@ -51,7 +51,7 @@ namespace PlatformKit.Windows
 
                     if (output == null)
                     {
-                        PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(Get));
+                     //   PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(Get));
                         throw new ArgumentNullException();
                     }
                     
@@ -68,7 +68,7 @@ namespace PlatformKit.Windows
                 }
                 else
                 {
-                    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(Get));
+             //       PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(Get));
                     throw new PlatformNotSupportedException();
                 }
             }

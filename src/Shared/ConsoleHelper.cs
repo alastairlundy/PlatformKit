@@ -15,7 +15,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit;
@@ -72,7 +71,7 @@ public class ConsoleHelper
         catch (Exception exception)
         {
             Console.WriteLine(exception.ToString());
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(ShowLicenseInConsole));
+       //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(ShowLicenseInConsole));
             throw new Exception(exception.ToString());
         }
     }

@@ -17,7 +17,6 @@ using System;
 using PlatformKit.Internal.Licensing;
 
 using PlatformKit.FreeBSD;
-using PlatformKit.Internal.Analytics;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -128,12 +127,12 @@ namespace PlatformKit
                     return new FreeBSDAnalyzer().DetectFreeBSDVersion();
                 }
 #endif
-                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectOSVersion));
+           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectOSVersion));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
             {
-                PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
+         //       PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
                 throw new Exception(exception.ToString());
             }
         }

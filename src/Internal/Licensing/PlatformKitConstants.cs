@@ -17,7 +17,6 @@ using LicensingKit;
 using LicensingKit.Licenses.Enums;
 using LicensingKit.Licenses.Models;
 
-using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.Internal.Licensing;
@@ -29,31 +28,13 @@ public class PlatformKitConstants
         new("GPLv3_OrLater", SoftwareLicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
 
     public static bool Initialized = false;
-    
-    public static readonly ProprietaryLicense PlatformKitCommercialLicense = new("PlatformKit Commercial License",
-        SoftwareLicenseType.SourceAvailableProprietary,
-        new LicensePermissionsModel(true,
-            false,
-            true,
-            true,
-            true,
-            false,
-            false,
-            true));
 
     internal static void CheckLicenseState()
     {
-        CheckAnalyticsPermission();
-        
         if (!Initialized)
         {
-            PlatformKitAnalytics.InitializeAnalytics();
-            
             LicenseManager.RegisterLicense(GPLv3_OrLater);
-            LicenseManager.RegisterLicense(PlatformKitCommercialLicense);
             LicenseManager.SelectedLicense = PlatformKitSettings.SelectedLicense;
-            
-            PlatformKitAnalytics.InitializeAnalytics();
         }
 
         try
@@ -62,39 +43,8 @@ public class PlatformKitConstants
         }
         catch(Exception exception)
         {
-            PlatformKitAnalytics.ReportError(exception, nameof(CheckLicenseState));
+           Console.WriteLine(exception);
+            //PlatformKitAnalytics.ReportError(exception, nameof(CheckLicenseState));
         }
-        
-        if (PlatformKitSettings.SelectedLicense == PlatformKitCommercialLicense)
-        {
-            VerifyKey();
-            //VerifyProjectCount();
-        }
-    }
-
-    internal static void CheckAnalyticsPermission()
-    {
-        if (PlatformKitSettings.AllowErrorReporting == null)
-        {
-            PlatformKitSettings.AllowErrorReporting = true;
-        }
-    }
-    
-    protected static void VerifyKey()
-    {
-        var rsa = "";
-        
-       var license = SKM.V3.Methods.Helpers.VerifySDKLicenseCertificate(rsa);
-
-       if (license == null)
-       {
-           PlatformKit.Internal.Analytics.PlatformKitAnalytics.ReportError(new AssemblyNotSignedException(), nameof(VerifyKey));
-           throw new AssemblyNotSignedException();
-       }
-    }
-
-    protected static void VerifyProjectCount()
-    {
-     //   string projectName = Assembly.GetExecutingAssembly().GetName().Name;
     }
 }

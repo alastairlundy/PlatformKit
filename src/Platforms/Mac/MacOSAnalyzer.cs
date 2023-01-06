@@ -15,7 +15,6 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using PlatformKit.Internal.Analytics;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -67,7 +66,7 @@ namespace PlatformKit.Mac;
                     };
                 }
 
-                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacProcessorType));
+              //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacProcessorType));
                 throw new PlatformNotSupportedException();
             }
             catch(Exception exception)
@@ -101,7 +100,7 @@ namespace PlatformKit.Mac;
                 }
             }
 
-            PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetMacSystemProfilerInformation));
+           // PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetMacSystemProfilerInformation));
             throw new ArgumentException();
         }    
     
@@ -119,7 +118,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
-                PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSecureVirtualMemoryEnabled));
+             //   PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSecureVirtualMemoryEnabled));
                 throw new ArgumentException();
             }
         }
@@ -143,7 +142,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
-                PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSystemIntegrityProtectionEnabled));
+            //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSystemIntegrityProtectionEnabled));
                 throw new ArgumentException();
             }
         }
@@ -167,7 +166,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
-                PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsActivationLockEnabled));
+            //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsActivationLockEnabled));
                 throw new ArgumentException();
             }
         }
@@ -250,12 +249,12 @@ namespace PlatformKit.Mac;
                 if (input.Major == 12) return MacOsVersion.v12_Monterey;
                 if (input.Major == 13) return MacOsVersion.v13_Ventura;
 
-                PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionToEnum));
+            //    PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionToEnum));
                 throw new MacOsVersionDetectionException();
             }
             else
             {
-                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionToEnum));
+               // PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionToEnum));
                 throw new PlatformNotSupportedException();
             }
         }
@@ -291,13 +290,13 @@ namespace PlatformKit.Mac;
             case MacOsVersion.v13_Ventura:
                 return new(13, 0);
             case MacOsVersion.NotSupported:
-                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
+           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
                 throw new PlatformNotSupportedException();
             case MacOsVersion.NotDetected:
-                PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionFromEnum));
+           //     PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionFromEnum));
                 throw new MacOsVersionDetectionException();
             default:
-                PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
+           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
                 throw new PlatformNotSupportedException();
         }        
     }
@@ -383,12 +382,12 @@ namespace PlatformKit.Mac;
                 return Version.Parse(arr[1]);
             }
 
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
+        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
         else
         {
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
+        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
     }
@@ -429,12 +428,12 @@ namespace PlatformKit.Mac;
                 }
             }
 
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
+         //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
             throw new PlatformNotSupportedException();
         }
         else
         {
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
+          //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
             throw new PlatformNotSupportedException();
         }
     }
@@ -472,7 +471,7 @@ namespace PlatformKit.Mac;
         }
         catch(Exception exception)
         {
-            PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsVersion));
+         //   PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsVersion));
             throw new Exception(exception.ToString());
         }
     }
@@ -489,7 +488,7 @@ namespace PlatformKit.Mac;
         }
         catch(Exception exception)
         {
-            PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsBuildNumber));
+         //   PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsBuildNumber));
             throw new Exception(exception.ToString());
         }
     }
