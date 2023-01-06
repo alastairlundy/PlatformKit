@@ -7,4 +7,3 @@ the PlatformKit Non-Commercial License requires purchasing a subscription from [
 These licenses are included in this repository in the following files:
 * [GPLv3](/GPLv3_License.md)
 * [PlatformKit Commercial License](/PlatformKit_Commercial_License.txt)
-* [PlatformKit Non-Commercial License](/PlatformKit_NonCommercial_License.txt)
