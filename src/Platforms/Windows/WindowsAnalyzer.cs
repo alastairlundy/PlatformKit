@@ -265,37 +265,6 @@ public class WindowsAnalyzer
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public WindowsOperatingSystemModel GetWindowsOperatingSystemModel()
-    {
-        WindowsOperatingSystemModel windowsOperatingSystemModel = new WindowsOperatingSystemModel();
-
-        windowsOperatingSystemModel.BuildNumber = int.Parse(GetWMIValue("BuildNumber", "Win32_OperatingSystem"));
-        windowsOperatingSystemModel.Edition = DetectWindowsEdition();
-        windowsOperatingSystemModel.OsVersion = DetectWindowsVersion();
-        windowsOperatingSystemModel.EncryptionLevel = GetWMIValue("EncryptionLevel", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.Locale = GetWMIValue("Locale", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.ManufacturerName = GetWMIValue("ManufacturerName", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.SystemDirectory = GetWMIValue("SystemDirectory", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.SystemDrive = GetWMIValue("SystemDrive", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.Is64Bit = Environment.Is64BitOperatingSystem;
-        windowsOperatingSystemModel.ProductName = GetWMIValue("Name", "Win32_OperatingSystem");
-        
-        windowsOperatingSystemModel.InstallDate = GetWMIValue("InstallDate", "Win32_OperatingSystem");
-        
-        windowsOperatingSystemModel.BootDevice = GetWMIValue("BootDevice", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.IsPaeEnabled = Boolean.Parse( GetWMIValue("PAEEnabled", "Win32_OperatingSystem"));
-        windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
-
-        windowsOperatingSystemModel.ReleaseName = GetWindowsVersion(DetectWindowsVersion()).ToString();
-        
-        return windowsOperatingSystemModel;
-    }
-
-    /// <summary>
     /// Detect WindowsSystemInformation
     /// </summary>
     /// <returns></returns>
@@ -709,11 +678,7 @@ for (var index = 0; index < array.Length; index++)
     }
         
     /// <summary>
-<<<<<<< HEAD
-    /// Checks whether a WindowsVersion is Windows 10
-=======
     /// Returns whether a WindowsVersion is Windows 10 or not. 
->>>>>>> main
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -805,32 +770,10 @@ for (var index = 0; index < array.Length; index++)
                 return false;
         }
     }
-
-        /// <summary>
+    
         /// 
-        /// </summary>
-        /// <returns></returns>
-<<<<<<< HEAD
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
-        public WindowsVersion GetWindowsVersionToEnum()
-        {
-            return GetWindowsVersion();
-        }
-
-        /// <summary>
-        /// Gets the Windows Version as an enum using the Detected version of Windows.
-        /// </summary>
-        /// <returns></returns>
-        public WindowsVersion GetWindowsVersion()
-        {
-            return GetWindowsVersion(DetectWindowsVersion());
-        }
-
-        /// <summary>
         ///
         /// 
-=======
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public WindowsVersion GetWindowsVersionToEnum()
         {
@@ -839,7 +782,6 @@ for (var index = 0; index < array.Length; index++)
 
         /// <summary>
         /// Gets the Windows Version as an enum using the Detected version of Windows.
->>>>>>> main
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -953,14 +895,6 @@ for (var index = 0; index < array.Length; index++)
             return GetWindowsVersion(input);
         }
         
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public WindowsVersion GetWindowsVersionToEnum(Version input)
-        {
-            return GetWindowsVersion(input);
-        }
         
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version
