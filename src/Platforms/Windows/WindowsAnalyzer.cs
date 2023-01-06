@@ -4,9 +4,15 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
+<<<<<<< HEAD
+ You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
+
+ To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
+=======
  You can view the PlatformKit Licenses at https://neverspy.tech
   
   To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
+>>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
@@ -15,6 +21,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using PlatformKit.Hardware.Windows;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Hardware.Windows;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
@@ -223,6 +231,37 @@ public class WindowsAnalyzer
         }
 
         throw new ArgumentException();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public WindowsOperatingSystemModel GetWindowsOperatingSystemModel()
+    {
+        WindowsOperatingSystemModel windowsOperatingSystemModel = new WindowsOperatingSystemModel();
+
+        windowsOperatingSystemModel.BuildNumber = int.Parse(GetWMIValue("BuildNumber", "Win32_OperatingSystem"));
+        windowsOperatingSystemModel.Edition = DetectWindowsEdition();
+        windowsOperatingSystemModel.OsVersion = DetectWindowsVersion();
+        windowsOperatingSystemModel.EncryptionLevel = GetWMIValue("EncryptionLevel", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.Locale = GetWMIValue("Locale", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.ManufacturerName = GetWMIValue("ManufacturerName", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.SystemDirectory = GetWMIValue("SystemDirectory", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.SystemDrive = GetWMIValue("SystemDrive", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.Is64Bit = Environment.Is64BitOperatingSystem;
+        windowsOperatingSystemModel.ProductName = GetWMIValue("Name", "Win32_OperatingSystem");
+        
+        windowsOperatingSystemModel.InstallDate = GetWMIValue("InstallDate", "Win32_OperatingSystem");
+        
+        windowsOperatingSystemModel.BootDevice = GetWMIValue("BootDevice", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.IsPaeEnabled = Boolean.Parse( GetWMIValue("PAEEnabled", "Win32_OperatingSystem"));
+        windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
+        windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
+
+        windowsOperatingSystemModel.ReleaseName = GetWindowsVersion(DetectWindowsVersion()).ToString();
+        
+        return windowsOperatingSystemModel;
     }
 
     /// <summary>
@@ -670,7 +709,11 @@ for (var index = 0; index < array.Length; index++)
     }
         
     /// <summary>
+<<<<<<< HEAD
+    /// Checks whether a WindowsVersion is Windows 10
+=======
     /// Returns whether a WindowsVersion is Windows 10 or not. 
+>>>>>>> main
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -735,6 +778,7 @@ for (var index = 0; index < array.Length; index++)
         public bool IsWindows11()
         {
             return IsWindows11(GetWindowsVersion());
+            return IsWindows11(GetWindowsVersion());
         }
 
     /// <summary>
@@ -766,7 +810,9 @@ for (var index = 0; index < array.Length; index++)
         /// 
         /// </summary>
         /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
+<<<<<<< HEAD
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
             return GetWindowsVersion();
@@ -775,6 +821,27 @@ for (var index = 0; index < array.Length; index++)
         /// <summary>
         /// Gets the Windows Version as an enum using the Detected version of Windows.
         /// </summary>
+        /// <returns></returns>
+        public WindowsVersion GetWindowsVersion()
+        {
+            return GetWindowsVersion(DetectWindowsVersion());
+        }
+
+        /// <summary>
+        ///
+        /// 
+=======
+        [Obsolete(DeprecationMessages.DeprecationV4)]
+        public WindowsVersion GetWindowsVersionToEnum()
+        {
+            return GetWindowsVersion();
+        }
+
+        /// <summary>
+        /// Gets the Windows Version as an enum using the Detected version of Windows.
+>>>>>>> main
+        /// </summary>
+        /// <param name="input"></param>
         /// <returns></returns>
         public WindowsVersion GetWindowsVersion()
         {
@@ -875,6 +942,15 @@ for (var index = 0; index < array.Length; index++)
             {
                 throw new Exception(exception.ToString());
             }
+        }
+        
+        /// <summary>
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
+        public WindowsVersion GetWindowsVersionToEnum(Version input)
+        {
+            return GetWindowsVersion(input);
         }
         
         /// <summary>
