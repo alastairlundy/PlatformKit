@@ -2,12 +2,12 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 3.2 | 3.1.0 Alpha 4 | November 11th 2022 |
 
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
+| 3.2 | 3.2.0 | January 6th 2023 |
 | 3.1 | 3.1.0 | November 24th 2022 |
 | 3.0 | 3.0.4 | November 24th 2022 |
 
