@@ -14,7 +14,7 @@
 
 using System;
 using System.IO;
-using PlatformKit.Internal.Analytics;
+
 using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Linux;
@@ -135,8 +135,7 @@ public class LinuxAnalyzer
             
                 return linuxDistributionInformation;
             }
-
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetLinuxDistributionInformation));
+            
             throw new PlatformNotSupportedException();
         }
         
@@ -172,8 +171,7 @@ public class LinuxAnalyzer
 
                 return Version.Parse(version);
             }
-
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectLinuxDistributionVersion));
+            
             throw new PlatformNotSupportedException();
         }
 
@@ -204,8 +202,7 @@ public class LinuxAnalyzer
 
                 return linuxDistroInfo.Version;
             }
-
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectLinuxDistributionVersionAsString));
+            
             throw new PlatformNotSupportedException();
         }
 
@@ -225,8 +222,7 @@ public class LinuxAnalyzer
 
                 return Version.Parse(description);
             }
-
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectLinuxKernelVersion));
+            
             throw new PlatformNotSupportedException();
         }
         
@@ -290,7 +286,7 @@ public class LinuxAnalyzer
                     return false;
                 }
             }
-            PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(IsAtLeastKernelVersion));
+
             throw new PlatformNotSupportedException();
         }
 }
