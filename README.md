@@ -12,7 +12,7 @@ This can be added to any .NET Standard 2.0 or .NET 6 supported Application or Li
 ## License Change
 Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license but PlatformKit is now licensed under the GPLv3 or later and the PlatformKit Licenses.
 
-If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, you may purchase a non-commercial or commercial license at https://neverspy.tech .
+If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, you may purchase a commercial license at https://neverspy.tech .
 
 ### Setting PlatformKit License in PlatformKit 3.0.0 RC 1 or later
 
@@ -26,9 +26,6 @@ If using the paid version of PlatformKit please refer to documentation provided 
 ## How to get PlatformKit
 
 You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
-
-## Privacy
-PlatformKit 3.1.1 and newer will communicate with NEVERSPY TECH unless you opt out for analytics purposes. Please see [our Privacy page](/privacy.md) for more details.
 
 ## Contributions
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
