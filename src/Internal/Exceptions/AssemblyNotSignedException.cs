@@ -13,19 +13,16 @@
  */
 
 using System;
+using System.Reflection;
 
-namespace PlatformKit.Internal.Deprecation
+namespace PlatformKit.Internal.Exceptions;
+
+internal class AssemblyNotSignedException : Exception
 {
-    internal static class DeprecationMessages
+    internal AssemblyNotSignedException() : base(
+        "Project '" + Assembly.GetEntryAssembly().GetName().Name + "' using the PlatformKit SDK does not have a signed assembly" +
+        " and so cannot use PlatformKit SDK under a commercial license. For support please contact NEVERSPY TECH at https://neverspy.tech .")
     {
-        private const string V4 = "v4.0.0";
-        private const string V5 = "v5.0.0";
         
-        private const string FeatureDeprecation = "This feature is deprecated and will be removed";
-        
-        internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
-        
-        internal const string DeprecationV4 = FeatureDeprecation + " in " + V4;
-        internal const string DeprecationV5 = FeatureDeprecation + " in " + V5;
     }
 }

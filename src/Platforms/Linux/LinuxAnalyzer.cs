@@ -4,15 +4,9 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
-<<<<<<< HEAD
  You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
 
  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
-=======
- You can view the PlatformKit Licenses at https://neverspy.tech
-  
-  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
->>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
@@ -26,7 +20,7 @@ using PlatformKit.Internal.Licensing;
 namespace PlatformKit.Linux;
 
 /// <summary>
-/// 
+/// A class to Detect Linux versions, Linux features, and find out more about a user's Linux installation.
 /// </summary>
 public class LinuxAnalyzer
 {
@@ -141,12 +135,12 @@ public class LinuxAnalyzer
             
                 return linuxDistributionInformation;
             }
-
+            
             throw new PlatformNotSupportedException();
         }
         
         /// <summary>
-        /// Detects the Linux Distribution Version as read from cat /etc/os-release and reformats it into the format of System.Version object
+        /// Detects the Linux Distribution Version as read from /etc/os-release and re-formats it into the format of System.Version object
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
@@ -177,12 +171,12 @@ public class LinuxAnalyzer
 
                 return Version.Parse(version);
             }
-
+            
             throw new PlatformNotSupportedException();
         }
 
         /// <summary>
-        /// Detects the Linux Distribution Version as read from cat /etc/os-release.
+        /// Detects the Linux Distribution Version as read from /etc/os-release.
         /// Preserves the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
@@ -208,7 +202,7 @@ public class LinuxAnalyzer
 
                 return linuxDistroInfo.Version;
             }
-
+            
             throw new PlatformNotSupportedException();
         }
 
@@ -228,7 +222,7 @@ public class LinuxAnalyzer
 
                 return Version.Parse(description);
             }
-
+            
             throw new PlatformNotSupportedException();
         }
         
@@ -292,6 +286,7 @@ public class LinuxAnalyzer
                     return false;
                 }
             }
+
             throw new PlatformNotSupportedException();
         }
 }

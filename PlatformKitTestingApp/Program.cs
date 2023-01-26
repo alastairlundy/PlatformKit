@@ -6,12 +6,11 @@
  You can view the GPLv3 in the file GPLv3_License.md .
  You can view the PlatformKit Licenses at
     Commercial License - https://neverspy.tech/platformkit-commercial-license or in the PlatformKit_Commercial_License.txt
-    Non-Commercial License - https://neverspy.tech/platformkit-noncommercial-license or in the PlatformKit_NonCommercial_License.txt
-  
+      
   To use PlatformKit under either a commercial or non-commercial license you must purchase a license from https://neverspy.tech
  
- Copyright (c) AluminiumTech 2018-2022
- Copyright (c) NeverSpy Tech Limited 2022
+ Copyright (c) AluminiumTech 2018-2023
+ Copyright (c) NEVERSPYTECH 2022-2023
  */
 
 // See https://aka.ms/new-console-template for more information
@@ -21,14 +20,14 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using PlatformKit.Identification;
+using PlatformKit.Internal.Licensing;
 
 using PlatformKit;
-using PlatformKit.Internal.Licensing;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
+PlatformKitSettings.SelectedLicense = PlatformKitConstants.PlatformKitCommercialLicense;
 
     var platformManager = new PlatformIdentification();
 var osAnalyzer = new OSAnalyzer();

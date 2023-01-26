@@ -4,15 +4,9 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
-<<<<<<< HEAD
  You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
 
  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
-=======
- You can view the PlatformKit Licenses at https://neverspy.tech
-  
-  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
->>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
@@ -21,8 +15,6 @@
 using System;
 using System.Reflection;
 
-using LicensingKit;
-using LicensingKit.Enums;
 using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Identification;
@@ -75,14 +67,5 @@ public class PlatformIdentification
         public static Version GetPlatformKitVersion()
         {
             return Assembly.GetExecutingAssembly().GetName().Version;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static LicenseUsageState GetLicenseUsageState()
-        {
-           return LicenseManager.LicenseUsageState;
         }
 }

@@ -4,15 +4,9 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
-<<<<<<< HEAD
  You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
 
  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
-=======
- You can view the PlatformKit Licenses at https://neverspy.tech
-  
-  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
->>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
@@ -112,7 +106,8 @@ namespace PlatformKit.Identification
                     }
                     else
                     {
-                        throw new OperatingSystemDetectionException();
+                      //  PlatformKitAnalytics.ReportError(new LinuxVersionDetectionException(), nameof(GetOsNameString));
+                        throw new LinuxVersionDetectionException();
                     }
                 }
             }
@@ -125,7 +120,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="OperatingSystemDetectionException"></exception>
+        /// <exception cref="WindowsVersionDetectionException"></exception>
         protected string GetOsVersionString()
         {
             string osVersion = null;
@@ -142,7 +137,7 @@ namespace PlatformKit.Identification
                 }
                 else if (!_windowsAnalyzer.IsWindows10() && !_windowsAnalyzer.IsWindows11())
                 {
-                    switch (_windowsAnalyzer.GetWindowsVersion())
+                    switch (_windowsAnalyzer.GetWindowsVersionToEnum())
                     {
                         case WindowsVersion.Win7:
                             osVersion = "7";
@@ -166,9 +161,11 @@ namespace PlatformKit.Identification
                             osVersion = "81";
                             break;
                         case WindowsVersion.NotDetected:
-                            throw new OperatingSystemDetectionException();
+                    //        PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
+                            throw new WindowsVersionDetectionException();
                         default:
-                            throw new OperatingSystemDetectionException();
+                     //       PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
+                            throw new WindowsVersionDetectionException();
                     }
                 }
             }
@@ -206,6 +203,7 @@ namespace PlatformKit.Identification
                 {
                     if (version.Minor < 9)
                     {
+                   //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetOsVersionString));
                         throw new PlatformNotSupportedException();
                     }
                     else
@@ -248,6 +246,7 @@ namespace PlatformKit.Identification
             }
             else
             {
+           //     PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GenerateRuntimeIdentifier));
                 throw new ArgumentException();
             }
         }
@@ -320,10 +319,12 @@ namespace PlatformKit.Identification
             }
             else if(!OSAnalyzer.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
-                Console.WriteLine("WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.");
+                Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
+                                  " Calling method using RuntimeIdentifierType.Specific instead.");
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
             
+       //     PlatformKitAnalytics.ReportError(new RuntimeIdentifierGenerationException(), nameof(GenerateRuntimeIdentifier));
             throw new RuntimeIdentifierGenerationException();
         }
 

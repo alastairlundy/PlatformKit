@@ -4,15 +4,9 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
-<<<<<<< HEAD
  You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
 
  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
-=======
- You can view the PlatformKit Licenses at https://neverspy.tech
-  
-  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
->>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
@@ -21,18 +15,14 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using PlatformKit.Hardware.Windows;
-using PlatformKit.Internal.Deprecation;
-using PlatformKit.Hardware.Windows;
-using PlatformKit.Internal.Deprecation;
+
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
-
 
 namespace PlatformKit.Windows;
 
 /// <summary>
-/// 
+/// A class to Detect Windows versions, Windows features, and find out more about a user's Windows installation.
 /// </summary>
 public class WindowsAnalyzer
 {
@@ -57,7 +47,12 @@ public class WindowsAnalyzer
             if (OSAnalyzer.IsWindows())
             {
                 var edition = GetWindowsSystemInformation().OsName.ToLower();
-                
+
+                //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
+
+                //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+                //   "EditionID");
+
                 if (edition.ToLower().Contains("home"))
                 {
                     return WindowsEdition.Home;
@@ -111,16 +106,20 @@ public class WindowsAnalyzer
                     }
                 }
 
-                throw new OperatingSystemDetectionException();
+             //   PlatformKitAnalytics.ReportError(new WindowsEditionDetectionException(), nameof(DetectWindowsEdition));
+                throw new WindowsEditionDetectionException();
             }
             else
             {
+            //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectWindowsEdition));
                 throw new PlatformNotSupportedException();
             }
         }
         catch(Exception exception)
         {
             Console.WriteLine(exception.ToString());
+            
+         //   PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(DetectWindowsEdition));
             throw new Exception(exception.ToString());
         }
     }
@@ -146,6 +145,7 @@ public class WindowsAnalyzer
             return result;
         }
 
+     //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWMIClass));
         throw new PlatformNotSupportedException();
     }
     
@@ -185,10 +185,12 @@ public class WindowsAnalyzer
                }
            }
            
+      //     PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetWMIValue));
            throw new ArgumentException();
         } 
         else
         {
+      //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWMIValue));
             throw new PlatformNotSupportedException();
         }
     }
@@ -213,10 +215,12 @@ public class WindowsAnalyzer
                 }
                 else
                 {
+        //            PlatformKitAnalytics.ReportError(new ArgumentNullException(), nameof(GetWindowsRegistryValue));
                     throw new ArgumentNullException();
                 }
         }
 
+      //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsRegistryValue));
         throw new PlatformNotSupportedException();
     }
 
@@ -230,38 +234,8 @@ public class WindowsAnalyzer
             }
         }
 
+    //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetNetworkCardPositionInWindowsSysInfo));
         throw new ArgumentException();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public WindowsOperatingSystemModel GetWindowsOperatingSystemModel()
-    {
-        WindowsOperatingSystemModel windowsOperatingSystemModel = new WindowsOperatingSystemModel();
-
-        windowsOperatingSystemModel.BuildNumber = int.Parse(GetWMIValue("BuildNumber", "Win32_OperatingSystem"));
-        windowsOperatingSystemModel.Edition = DetectWindowsEdition();
-        windowsOperatingSystemModel.OsVersion = DetectWindowsVersion();
-        windowsOperatingSystemModel.EncryptionLevel = GetWMIValue("EncryptionLevel", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.Locale = GetWMIValue("Locale", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.ManufacturerName = GetWMIValue("ManufacturerName", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.SystemDirectory = GetWMIValue("SystemDirectory", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.SystemDrive = GetWMIValue("SystemDrive", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.Is64Bit = Environment.Is64BitOperatingSystem;
-        windowsOperatingSystemModel.ProductName = GetWMIValue("Name", "Win32_OperatingSystem");
-        
-        windowsOperatingSystemModel.InstallDate = GetWMIValue("InstallDate", "Win32_OperatingSystem");
-        
-        windowsOperatingSystemModel.BootDevice = GetWMIValue("BootDevice", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.IsPaeEnabled = Boolean.Parse( GetWMIValue("PAEEnabled", "Win32_OperatingSystem"));
-        windowsOperatingSystemModel.CountryCode =  GetWMIValue("CountryCode", "Win32_OperatingSystem");
-        windowsOperatingSystemModel.CurrentTimeZone =  GetWMIValue("CurrentTimeZone", "Win32_OperatingSystem");
-
-        windowsOperatingSystemModel.ReleaseName = GetWindowsVersion(DetectWindowsVersion()).ToString();
-        
-        return windowsOperatingSystemModel;
     }
 
     /// <summary>
@@ -273,6 +247,7 @@ public class WindowsAnalyzer
     {
         if (!OSAnalyzer.IsWindows())
         {
+    //        PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsSystemInformation));
             throw new PlatformNotSupportedException();
         }
         
@@ -654,35 +629,20 @@ for (var index = 0; index < array.Length; index++)
         return windowsSystemInformation;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public bool IsWindows10()
-    {
-        try
+        /// <summary>
+        /// Checks whether the detected version of Windows is Windows 10
+        /// </summary>
+        /// <returns></returns>
+        public bool IsWindows10()
         {
-            if (OSAnalyzer.IsWindows())
-            {
-                return IsWindows10(GetWindowsVersion());
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+           return IsWindows10(GetWindowsVersionToEnum());
         }
-        catch(Exception exception)
-        {
-            throw new Exception(exception.ToString());
-        }
-    }
         
     /// <summary>
-    /// Returns whether a WindowsVersion is Windows 10 or not. 
+    /// Checks whether a WindowsVersion is Windows 10
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="OperatingSystemDetectionException"></exception>
     public bool IsWindows10(WindowsVersion windowsVersion)
     {
         switch (windowsVersion)
@@ -728,7 +688,8 @@ for (var index = 0; index < array.Length; index++)
             case WindowsVersion.Win10_InsiderPreview:
                 return true;
             case WindowsVersion.NotDetected:
-                throw new OperatingSystemDetectionException();
+       //         PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(IsWindows10));
+                throw new WindowsVersionDetectionException();
             case WindowsVersion.NotSupported:
                 return false;
             default:
@@ -742,8 +703,7 @@ for (var index = 0; index < array.Length; index++)
         /// <returns></returns>
         public bool IsWindows11()
         {
-            return IsWindows11(GetWindowsVersion());
-            return IsWindows11(GetWindowsVersion());
+            return IsWindows11(GetWindowsVersionToEnum());
         }
 
     /// <summary>
@@ -765,39 +725,47 @@ for (var index = 0; index < array.Length; index++)
             case WindowsVersion.NotSupported:
                 return false;
             case WindowsVersion.NotDetected:
-                throw new OperatingSystemDetectionException();
+     //           PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(IsWindows11));
+                throw new WindowsVersionDetectionException();
             default:
                 return false;
         }
     }
-    
+
+        /// <summary>
         /// 
-        ///
-        /// 
-        [Obsolete(DeprecationMessages.DeprecationV4)]
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            return GetWindowsVersion();
+            try
+            {
+                if (OSAnalyzer.IsWindows())
+                {
+                    return GetWindowsVersionToEnum(DetectWindowsVersion());
+                }
+                else
+                {
+            //        PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsVersionToEnum));
+                    throw new PlatformNotSupportedException();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.ToString());
+            }
         }
 
         /// <summary>
-        /// Gets the Windows Version as an enum using the Detected version of Windows.
+        ///
+        /// 
         /// </summary>
-        /// <param name="input"></param>
         /// <returns></returns>
-        public WindowsVersion GetWindowsVersion()
+        public WindowsVersion GetWindowsVersionToEnum(Version input)
         {
-            return GetWindowsVersion(DetectWindowsVersion());
-        }
-
-        /// <summary>
-        /// Get the Windows version when provided with a version parameter.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public WindowsVersion GetWindowsVersion(Version input)
-        {
-           try
+            try
             {
                 if (input.Major == 5)
                 {
@@ -882,19 +850,10 @@ for (var index = 0; index < array.Length; index++)
             }
             catch (Exception exception)
             {
+           //     PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(GetWindowsVersionToEnum));
                 throw new Exception(exception.ToString());
             }
         }
-        
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public WindowsVersion GetWindowsVersionToEnum(Version input)
-        {
-            return GetWindowsVersion(input);
-        }
-        
         
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version
@@ -937,12 +896,14 @@ for (var index = 0; index < array.Length; index++)
 
                     if (dotCounter > 3)
                     {
-                        throw new OperatingSystemDetectionException();
+              //          PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(DetectWindowsVersion));
+                        throw new WindowsVersionDetectionException();
                     }
 
                     return Version.Parse(description);
                 }
 
+              //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectWindowsVersion));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
@@ -980,17 +941,17 @@ for (var index = 0; index < array.Length; index++)
                 WindowsVersion.Win10_v1803 => new Version(10, 0, 17134),
                 WindowsVersion.Win10_v1809 => new Version(10, 0, 17763),
                 WindowsVersion.Win10_Server2019 => new Version(10, 0, 17763),
-                WindowsVersion.Win10_v1903 => new Version(10, 0, 18362),
-                WindowsVersion.Win10_v1909 => new Version(10, 0, 18363),
-                WindowsVersion.Win10_v2004 => new Version(10, 0, 19041),
-                WindowsVersion.Win10_20H2 => new Version(10, 0, 19042),
-                WindowsVersion.Win10_21H1 => new Version(10, 0, 19043),
-                WindowsVersion.Win10_21H2 => new Version(10, 0, 19044),
+                WindowsVersion.Win10_v1903 => new Version(10,0, 18362),
+                WindowsVersion.Win10_v1909 => new Version(10,0, 18363),
+                WindowsVersion.Win10_v2004 => new Version(10,0, 19041),
+                WindowsVersion.Win10_20H2 => new Version(10,0, 19042),
+                WindowsVersion.Win10_21H1 => new Version(10,0, 19043),
+                WindowsVersion.Win10_21H2 => new Version(10,0, 19044),
                 WindowsVersion.Win10_22H2 => new Version(10,0,19045),
                 WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
                 WindowsVersion.Win11_22H2 => new Version(10,0,22621),
-                _ => throw new OperatingSystemDetectionException()
+                _ => throw new WindowsVersionDetectionException()
             };
         }
 

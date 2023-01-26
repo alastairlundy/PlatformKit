@@ -4,24 +4,17 @@
  You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
  
  You can view the GPLv3 in the file GPLv3_License.md .
-<<<<<<< HEAD
  You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
 
  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
-=======
- You can view the PlatformKit Licenses at https://neverspy.tech
-  
-  To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
->>>>>>> main
  
  Copyright (c) AluminiumTech 2018-2022
  Copyright (c) NeverSpy Tech Limited 2022
  */
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-
-using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Licensing;
 
@@ -30,7 +23,7 @@ namespace PlatformKit.Mac;
 
 // ReSharper disable once InconsistentNaming
     /// <summary>
-    /// macOS specific extensions to the OSAnalyzer class.
+    /// A class to Detect macOS versions, macOS features, and find out more about a user's macOS installation.
     /// </summary>
     public class MacOSAnalyzer
     {
@@ -73,6 +66,7 @@ namespace PlatformKit.Mac;
                     };
                 }
 
+              //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacProcessorType));
                 throw new PlatformNotSupportedException();
             }
             catch(Exception exception)
@@ -106,6 +100,7 @@ namespace PlatformKit.Mac;
                 }
             }
 
+           // PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetMacSystemProfilerInformation));
             throw new ArgumentException();
         }    
     
@@ -123,6 +118,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
+             //   PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSecureVirtualMemoryEnabled));
                 throw new ArgumentException();
             }
         }
@@ -146,6 +142,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
+            //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsSystemIntegrityProtectionEnabled));
                 throw new ArgumentException();
             }
         }
@@ -169,6 +166,7 @@ namespace PlatformKit.Mac;
             }
             else
             {
+            //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(IsActivationLockEnabled));
                 throw new ArgumentException();
             }
         }
@@ -251,10 +249,12 @@ namespace PlatformKit.Mac;
                 if (input.Major == 12) return MacOsVersion.v12_Monterey;
                 if (input.Major == 13) return MacOsVersion.v13_Ventura;
 
-                throw new OperatingSystemDetectionException();
+            //    PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionToEnum));
+                throw new MacOsVersionDetectionException();
             }
             else
             {
+               // PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionToEnum));
                 throw new PlatformNotSupportedException();
             }
         }
@@ -264,20 +264,7 @@ namespace PlatformKit.Mac;
             throw new Exception(exception.ToString());
         }
     }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="macOsVersion"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="macOsVersion"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)
@@ -297,16 +284,19 @@ namespace PlatformKit.Mac;
             case MacOsVersion.v10_15_Catalina:
                 return new(10, 15);
             case MacOsVersion.v11_BigSur:
-                return new(11,0);
+                return new(11, 0);
             case MacOsVersion.v12_Monterey:
                 return new(12, 0);
             case MacOsVersion.v13_Ventura:
                 return new(13, 0);
             case MacOsVersion.NotSupported:
+           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
                 throw new PlatformNotSupportedException();
             case MacOsVersion.NotDetected:
-                throw new PlatformNotSupportedException();
+           //     PlatformKitAnalytics.ReportError(new MacOsVersionDetectionException(), nameof(GetMacOsVersionFromEnum));
+                throw new MacOsVersionDetectionException();
             default:
+           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacOsVersionFromEnum));
                 throw new PlatformNotSupportedException();
         }        
     }
@@ -347,10 +337,15 @@ namespace PlatformKit.Mac;
     /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
-    [Obsolete(DeprecationMessages.DeprecationV4 + " This code will be moved to the MacOsSystemInformation class.")]
     public MacOsSystemInformation DetectMacSystemInformation()
     {
         MacOsSystemInformation macOsSystemInformation = new MacOsSystemInformation();
+        macOsSystemInformation.ProcessorType = GetMacProcessorType();
+
+        macOsSystemInformation.MacOsBuildNumber = DetectMacOsBuildNumber();
+        macOsSystemInformation.MacOsVersion = DetectMacOsVersion();
+        macOsSystemInformation.DarwinVersion = DetectDarwinVersion();
+        macOsSystemInformation.XnuVersion = DetectXnuVersion();
 
         return macOsSystemInformation;
     }
@@ -387,10 +382,12 @@ namespace PlatformKit.Mac;
                 return Version.Parse(arr[1]);
             }
 
+        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
         else
         {
+        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
     }
@@ -426,20 +423,17 @@ namespace PlatformKit.Mac;
                     {
                         arr[index] = arr[index].Replace("/RELEASE_X86_64", String.Empty);
                     }
-                    
-                    
-                #if DEBUG
-                    Console.WriteLine(arr[index]);
-                #endif
-                    
+
                     return Version.Parse(arr[index]);
                 }
             }
 
+         //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
             throw new PlatformNotSupportedException();
         }
         else
         {
+          //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
             throw new PlatformNotSupportedException();
         }
     }
@@ -450,28 +444,36 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     public Version DetectMacOsVersion()
     {
-        var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
-
-        int dotCounter = 0;
-
-        foreach (var str in version)
+        try
         {
-            if (str == '.')
+            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
+
+            int dotCounter = 0;
+
+            foreach (var str in version)
             {
-                dotCounter++;
+                if (str == '.')
+                {
+                    dotCounter++;
+                }
             }
-        }
 
-        if (dotCounter == 1)
-        {
-            version += ".0";
-        }
-        if (dotCounter == 2)
-        {
-            version += ".0";
-        }
+            if (dotCounter == 1)
+            {
+                version += ".0";
+            }
+            if (dotCounter == 2)
+            {
+                version += ".0";
+            }
         
-        return Version.Parse(version);
+            return Version.Parse(version);
+        }
+        catch(Exception exception)
+        {
+         //   PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsVersion));
+            throw new Exception(exception.ToString());
+        }
     }
     
     /// <summary>
@@ -480,7 +482,15 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     public string DetectMacOsBuildNumber()
     {
-        return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+        try
+        {
+            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+        }
+        catch(Exception exception)
+        {
+         //   PlatformKitAnalytics.ReportError(exception, nameof(DetectMacOsBuildNumber));
+            throw new Exception(exception.ToString());
+        }
     }
 
     // ReSharper disable once IdentifierTypo
