@@ -10,7 +10,7 @@ Versions currently supported by Security Fixes.
 
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes and Security Fixes |
 |--| --|--|--|
-| PlatformKit 3.2 | 3.2.0, released on January 6th 2023 | 3.2.0, released on January 6th 2023 | Yes, until July 6th 2023 | 
+| PlatformKit 3.2 | 3.2.0, released on January 6th 2023 | 3.2.0.1, released on January 26th 2023 | Yes, until January 6th 2024 | 
 | PlatformKit 3.0 | 3.0.0, released on August 29th 2022 | 3.0.4, released on November 24th 2022 | Yes, until January 29th 2023 | 
 
 ### Previously Supported Versions

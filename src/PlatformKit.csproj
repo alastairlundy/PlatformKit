@@ -4,8 +4,8 @@
         <Authors>AluminiumTech</Authors>
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
-        <Copyright>Copyright (c) AluminiumTech 2018-2022, NeverSpy Tech Limited 2022</Copyright>
-        <RepositoryUrl>https://github.com/NeverSpyTech/PlatformKit</RepositoryUrl>
+        <Copyright>Copyright (c) AluminiumTech 2018-2023, NeverSpy Tech Limited 2022-2023</Copyright>
+        <RepositoryUrl>https://gitlab.com/neverspytech/platformkit/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <PackOnBuild>true</PackOnBuild>
@@ -16,8 +16,9 @@
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes since 3.1.0
 * Fixed an issue where LicensingKit was not updated to 2.0.1 from 1.0.0
-* Added new Windows, macOS, and Linux specific Exceptions to replace the ``OperatingSystemDetectionExeption``
-* Removed the dependency on ``Cryptolens.Licensing``
+### Changes since 3.2.0
+* Updated the repository and project links since the move back to GitLab
+* Minor Tweaks and improvements* Removed the dependency on ``Cryptolens.Licensing``
 * Removed options for Commercial usage in Nuget package - The Nuget package will exclusively be GPLv3 going forward. Commercial license versions of the library will be available via a private Nuget type of feed.</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
@@ -25,11 +26,11 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>3.2.0.0</AssemblyVersion>
-        <FileVersion>3.2.0.0</FileVersion>
-        <Version>3.2.0.0</Version>
-        <PackageVersion>3.2.0</PackageVersion>
-        <PackageProjectUrl>https://github.com/NeverSpyTech/PlatformKit</PackageProjectUrl>
+        <AssemblyVersion>3.2.0.1</AssemblyVersion>
+        <FileVersion>3.2.0.1</FileVersion>
+        <Version>3.2.0.1</Version>
+        <PackageVersion>3.2.0.1</PackageVersion>
+        <PackageProjectUrl>https://gitlab.com/neverspytech/platformkit/PlatformKit</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
 
