@@ -14,12 +14,9 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.1.0
-* Fixed an issue where LicensingKit was not updated to 2.0.1 from 1.0.0
-### Changes since 3.2.0
-* Updated the repository and project links since the move back to GitLab
-* Minor Tweaks and improvements* Removed the dependency on ``Cryptolens.Licensing``
-* Removed options for Commercial usage in Nuget package - The Nuget package will exclusively be GPLv3 going forward. Commercial license versions of the library will be available via a private Nuget type of feed.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.2.0
+            * Updated the repository and project links since the move back to GitLab
+            * Minor Tweaks and improvements</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
