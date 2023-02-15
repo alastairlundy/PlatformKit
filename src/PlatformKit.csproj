@@ -38,11 +38,6 @@
           <PackagePath></PackagePath>
           <Link>platformkit_logo_512x.jpg</Link>
         </None>
-
-        <None Include="LICENSE.txt">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
         
         <None Include="../README.md" Pack="true" PackagePath="\" />
         <None Remove="PlatformKitTestingApp\**" />
@@ -71,5 +66,11 @@
 
     <ItemGroup>
       <PackageReference Include="LicensingKit" Version="2.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\GPLv3.txt">
+        <Link>LICENSE.txt</Link>
+      </Content>
     </ItemGroup>
 </Project>
