@@ -14,7 +14,7 @@
 
 //#define OSS_RELEASE
 
-#define COMMERCIAL_RELEASE
+#define OSS_RELEASE
 
 using System;
 using LicensingKit;
@@ -31,6 +31,7 @@ public class PlatformKitConstants
     // ReSharper disable once InconsistentNaming
     public static readonly OpenSourceLicense GPLv3_OrLater =
         new("GPLv3_OrLater", SoftwareLicenseType.OpenSource, CommonOpenSourceLicenses.GPLv3_OR_LATER);
+    
 #elif COMMERCIAL_RELEASE
     public static readonly ProprietaryLicense PlatformKitCommercialLicense = new ProprietaryLicense(
         "PlatformKit Commercial License", SoftwareLicenseType.SourceAvailableProprietary, 

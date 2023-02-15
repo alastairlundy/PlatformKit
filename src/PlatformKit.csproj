@@ -14,19 +14,18 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.2.0
-            * Updated the repository and project links since the move back to GitLab
-            * Minor Tweaks and improvements</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.2.0.1
+            * Fixed an issue where an incorrectly configured build was uploaded to Nuget</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>3.2.0.1</AssemblyVersion>
-        <FileVersion>3.2.0.1</FileVersion>
-        <Version>3.2.0.1</Version>
-        <PackageVersion>3.2.0.1</PackageVersion>
+        <AssemblyVersion>3.2.0.2</AssemblyVersion>
+        <FileVersion>3.2.02</FileVersion>
+        <Version>3.2.0.2</Version>
+        <PackageVersion>3.2.0.2</PackageVersion>
         <PackageProjectUrl>https://gitlab.com/neverspytech/platformkit/PlatformKit</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
