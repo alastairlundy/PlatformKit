@@ -10,18 +10,11 @@ This can be added to any .NET Standard 2.0 or .NET 6 supported Application or Li
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
 
 ## License Change
-Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license but PlatformKit is now licensed under the GPLv3 or later and the PlatformKit Licenses.
+Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license.
 
-If you are unable to use PlatformKit 3.0 or newer under the terms of the GPLv3, you may purchase a commercial license at https://neverspy.tech .
+PlatformKit 3.0.0 through PlatformKit 3.2.0.2 are licensed under the GPLv3 or later.
 
-### Setting PlatformKit License in PlatformKit 3.0.0 RC 1 or later
-
-Using GPLv3
-```csharp
-PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
-```
-
-If using the paid version of PlatformKit please refer to documentation provided to you.
+PlatformKit 3.3 and later are licensed are under the Mozilla Public License 2.0
 
 ## How to get PlatformKit
 
