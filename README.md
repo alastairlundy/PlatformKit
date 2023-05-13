@@ -14,7 +14,7 @@ Until PlatformKit 3.0.0 Beta 2, PlatformKit was licensed under the MIT license.
 
 PlatformKit 3.0.0 through PlatformKit 3.2.0.2 are licensed under the GPLv3 or later.
 
-PlatformKit 3.3 and later are licensed are under the Mozilla Public License 2.0
+PlatformKit 3.3 and later are licensed are under the LGPLv3 or later
 
 ## How to get PlatformKit
 
