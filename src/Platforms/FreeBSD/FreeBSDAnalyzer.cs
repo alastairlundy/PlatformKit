@@ -1,15 +1,21 @@
 ﻿/*
- PlatformKit is dual-licensed under the GPLv3 and the PlatformKit Licenses.
- 
- You may choose to use PlatformKit under either license so long as you abide by the respective license's terms and restrictions.
- 
- You can view the GPLv3 in the file GPLv3_License.md .
- You can view the PlatformKit Licenses at https://neverspy.tech/platformkit-commercial-license or in the file PlatformKit_Commercial_License.txt
+    PlatformKit
+    
+    Copyright (c) Alastair Lundy 2018-2023
+    Copyright (c) NeverSpyTech Limited 2022
 
- To use PlatformKit under a commercial license you must purchase a license from https://neverspy.tech
- 
- Copyright (c) AluminiumTech 2018-2022
- Copyright (c) NeverSpy Tech Limited 2022
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+     any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 using System;
