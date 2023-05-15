@@ -15,7 +15,6 @@
 using System;
 using System.Reflection;
 
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Identification;
 
@@ -26,7 +25,7 @@ public class PlatformIdentification
 {
     public PlatformIdentification()
     {
-        PlatformKitConstants.CheckLicenseState();
+        
     }
     
         /// <summary>

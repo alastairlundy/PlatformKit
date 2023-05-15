@@ -20,14 +20,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using PlatformKit.Identification;
-using PlatformKit.Internal.Licensing;
 
 using PlatformKit;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-PlatformKitSettings.SelectedLicense = PlatformKitConstants.GPLv3_OrLater;
 
     var platformManager = new PlatformIdentification();
 var osAnalyzer = new OSAnalyzer();

@@ -14,8 +14,6 @@
 
 using System;
 
-using PlatformKit.Internal.Licensing;
-
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -32,8 +30,6 @@ public class SoftwareRequirementsAnalyzer
     public SoftwareRequirementsAnalyzer()
     {
         _osAnalyzer = new OSAnalyzer();
-        
-        PlatformKitConstants.CheckLicenseState();
     }
 
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)

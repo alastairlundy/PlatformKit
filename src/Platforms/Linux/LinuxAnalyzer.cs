@@ -15,8 +15,6 @@
 using System;
 using System.IO;
 
-using PlatformKit.Internal.Licensing;
-
 namespace PlatformKit.Linux;
 
 /// <summary>
@@ -27,7 +25,7 @@ public class LinuxAnalyzer
 
     public LinuxAnalyzer()
     {
-        PlatformKitConstants.CheckLicenseState();
+        
     }
     
         /// <summary>

@@ -15,9 +15,6 @@
 using System;
 using System.Collections.Generic;
 
-using PlatformKit.Internal.Licensing;
-
-
 namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
@@ -27,8 +24,6 @@ namespace PlatformKit.Windows
         public WinManagementObjectSearcher()
         {
             processManager = new ProcessManager();
-
-            PlatformKitConstants.CheckLicenseState();
         }
 
         /// <summary>

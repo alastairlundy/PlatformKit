@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit.Windows;
 
@@ -31,8 +30,6 @@ public class WindowsAnalyzer
     public WindowsAnalyzer()
     {
         _processManager = new ProcessManager();
-
-        PlatformKitConstants.CheckLicenseState();
     }
 
     /// <summary>

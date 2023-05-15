@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Internal.Licensing;
 
 using PlatformKit.Windows;
 using PlatformKit.Linux;
@@ -43,9 +42,7 @@ namespace PlatformKit.Identification
         {
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOSAnalyzer();
-            _linuxAnalyzer = new LinuxAnalyzer();
-            
-            PlatformKitConstants.CheckLicenseState();
+            _linuxAnalyzer = new LinuxAnalyzer(); 
         }
 
         /// <summary>

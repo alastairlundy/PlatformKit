@@ -15,7 +15,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PlatformKit.Internal.Licensing;
 
 namespace PlatformKit;
 
@@ -23,7 +22,7 @@ public class ConsoleHelper
 {
     public ConsoleHelper()
     {
-        PlatformKitConstants.CheckLicenseState();
+        
     }
 
         /// <summary>
