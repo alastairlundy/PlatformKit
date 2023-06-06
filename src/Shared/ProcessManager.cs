@@ -122,21 +122,21 @@ namespace PlatformKit
 
                 if (end == null)
                 {
-            //        PlatformKitAnalytics.ReportError(new NullReferenceException(), nameof(RunProcessWindows));
+                    //        PlatformKitAnalytics.ReportError(new NullReferenceException(), nameof(RunProcessWindows));
                     throw new NullReferenceException();
                 }
 
                 if (end.ToLower()
                     .Contains(" is not recognized as the name of a cmdlet, function, script file, or operable program"))
                 {
-            //        PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
+                    //        PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
                     throw new Exception(end);
                 }
                 else if (end.ToLower()
                          .Contains(
                              "is not recognized as an internal or external command, operable program or batch file."))
                 {
-               //     PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
+                    //     PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
 
                     throw new Exception(end);
                 }
@@ -276,7 +276,7 @@ namespace PlatformKit
    
             }
                 
-          //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunPowerShellCommand));
+            //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunPowerShellCommand));
             throw new PlatformNotSupportedException();
         }
 
@@ -314,7 +314,7 @@ namespace PlatformKit
                 }
             }
 
-       //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));
+            //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));
             throw new PlatformNotSupportedException();
         }
 
@@ -352,13 +352,13 @@ namespace PlatformKit
                     return RunProcessLinux(location, command, processArguments, processStartInfo);
                 }
 
-          //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
+                //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
-        //        PlatformKitAnalytics.ReportError(exception, nameof(RunLinuxCommand));
+                //        PlatformKitAnalytics.ReportError(exception, nameof(RunLinuxCommand));
                 throw new Exception(exception.ToString());
             }
         }
