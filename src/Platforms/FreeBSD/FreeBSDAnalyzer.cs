@@ -35,33 +35,40 @@ public class FreeBSDAnalyzer
     // ReSharper disable once InconsistentNaming
     public Version DetectFreeBSDVersion()
     {
-        var v = _processManager.RunProcess("", "uname", "-v");
+        if (OSAnalyzer.IsFreeBSD())
+        {
+            var v = _processManager.RunProcess("", "uname", "-v");
 
-        v = v.Replace("FreeBSD", String.Empty);
+            v = v.Replace("FreeBSD", String.Empty);
 
-        var arr = v.Split(' ');
+            var arr = v.Split(' ');
 
-        var rel = arr[0].Replace("-release", String.Empty);
+            var rel = arr[0].Replace("-release", String.Empty);
 
-        int dotCounter = 0;
+            int dotCounter = 0;
         
-        foreach (char c in rel)
-        {
-            if (c == '.')
+            foreach (char c in rel)
             {
-                dotCounter++;
+                if (c == '.')
+                {
+                    dotCounter++;
+                }
             }
-        }
 
-        if (dotCounter == 1)
-        {
-            rel += ".0.0";
-        }
-        else if (dotCounter == 2)
-        {
-            rel += ".0.0";
-        }
+            if (dotCounter == 1)
+            {
+                rel += ".0.0";
+            }
+            else if (dotCounter == 2)
+            {
+                rel += ".0.0";
+            }
 
-        return Version.Parse(rel);
+            return Version.Parse(rel);
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }
