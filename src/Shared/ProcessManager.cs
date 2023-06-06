@@ -397,7 +397,7 @@ namespace PlatformKit
                 }
                 if (OSAnalyzer.IsLinux())
                 {
-                    RunLinuxCommand("xdg-open " + url);
+                    RunLinuxCommand($"xdg-open {url}");
                     return true;
                 }
                 if (OSAnalyzer.IsMac())
