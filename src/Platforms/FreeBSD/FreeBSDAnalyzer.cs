@@ -19,6 +19,7 @@
  */
 
 using System;
+using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.FreeBSD;
 
@@ -33,35 +34,46 @@ public class FreeBSDAnalyzer
     }
 
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// Detects and Returns the Installed version of FreeBSD
+    /// </summary>
+    /// <returns></returns>
     public Version DetectFreeBSDVersion()
     {
-        var v = _processManager.RunProcess("", "uname", "-v");
-
-        v = v.Replace("FreeBSD", String.Empty);
-
-        var arr = v.Split(' ');
-
-        var rel = arr[0].Replace("-release", String.Empty);
-
-        int dotCounter = 0;
-        
-        foreach (char c in rel)
+        if (OSAnalyzer.IsFreeBSD())
         {
-            if (c == '.')
+            var v = _processManager.RunProcess("", "uname", "-v");
+
+            v = v.Replace("FreeBSD", String.Empty);
+
+            var arr = v.Split(' ');
+
+            var rel = arr[0].Replace("-release", String.Empty);
+
+            int dotCounter = 0;
+
+            foreach (char c in rel)
             {
-                dotCounter++;
+                if (c == '.')
+                {
+                    dotCounter++;
+                }
             }
-        }
 
-        if (dotCounter == 1)
-        {
-            rel += ".0.0";
-        }
-        else if (dotCounter == 2)
-        {
-            rel += ".0.0";
-        }
+            if (dotCounter == 1)
+            {
+                rel += ".0.0";
+            }
+            else if (dotCounter == 2)
+            {
+                rel += ".0.0";
+            }
 
-        return Version.Parse(rel);
+            return Version.Parse(rel);
+        }
+        else
+        {
+            throw new OperatingSystemDetectionException();
+        }
     }
 }
