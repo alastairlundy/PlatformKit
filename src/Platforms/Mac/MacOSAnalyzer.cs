@@ -68,7 +68,7 @@ namespace PlatformKit.Mac;
                     };
                 }
 
-              //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacProcessorType));
+                //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetMacProcessorType));
                 throw new PlatformNotSupportedException();
             }
             catch(Exception exception)
@@ -102,7 +102,7 @@ namespace PlatformKit.Mac;
                 }
             }
 
-           // PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetMacSystemProfilerInformation));
+            // PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetMacSystemProfilerInformation));
             throw new ArgumentException();
         }    
     
@@ -384,12 +384,12 @@ namespace PlatformKit.Mac;
                 return Version.Parse(arr[1]);
             }
 
-        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
+            //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
         else
         {
-        //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
+            //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectDarwinVersion));
             throw new PlatformNotSupportedException();
         }
     }
@@ -430,7 +430,7 @@ namespace PlatformKit.Mac;
                 }
             }
 
-         //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
+            //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectXnuVersion));
             throw new PlatformNotSupportedException();
         }
         else
