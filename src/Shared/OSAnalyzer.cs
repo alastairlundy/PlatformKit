@@ -65,7 +65,7 @@ namespace PlatformKit
 
         // ReSharper disable once InconsistentNaming
         /// <summary>
-        /// 
+        /// Returns whether or not the current OS is FreeBSD based.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
@@ -136,7 +136,7 @@ namespace PlatformKit
             }
             catch (Exception exception)
             {
-         //       PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
+                //       PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
                 throw new Exception(exception.ToString());
             }
         }
