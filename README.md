@@ -20,6 +20,9 @@ PlatformKit 3.3 and later are licensed are under the LGPLv3 or later
 
 You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
 
+### PlatformKit Capabilities
+To learn more about which versions of PlatformKit support which features, please check out [our feature comparison document](docs/FeatureComparisonByPlatform.md)
+
 ## Contributions
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
 
