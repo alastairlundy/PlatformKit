@@ -22,6 +22,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using PlatformKit.Internal.Deprecation;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
@@ -48,6 +49,7 @@ namespace PlatformKit
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="processArguments">(Optional) Arguments to be passed to the executable.</param>
         /// <param name="processStartInfo">(Optional) Process Start Information to be passed to the executable. This may have the unintended effect of overriding other optional or non-optional arguments.</param>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public string RunProcess(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             if (OSAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
@@ -57,7 +59,7 @@ namespace PlatformKit
 #if NETCOREAPP3_0_OR_GREATER
             if (OSAnalyzer.IsFreeBSD())
             {
-         //       PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(RunProcess));
+                //       PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(RunProcess));
                 throw new NotImplementedException();
             }
 #endif
