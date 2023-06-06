@@ -106,6 +106,11 @@ namespace PlatformKit.Mac;
             throw new ArgumentException();
         }    
     
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public bool IsSecureVirtualMemoryEnabled()
         {
             var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
@@ -267,6 +272,13 @@ namespace PlatformKit.Mac;
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="macOsVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="MacOsVersionDetectionException"></exception>
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)
@@ -304,6 +316,11 @@ namespace PlatformKit.Mac;
     }
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="macOsVersion"></param>
+    /// <returns></returns>
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastMacOSVersion(MacOsVersion macOsVersion)
     {
@@ -341,15 +358,14 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     public MacOsSystemInformation DetectMacSystemInformation()
     {
-        MacOsSystemInformation macOsSystemInformation = new MacOsSystemInformation();
-        macOsSystemInformation.ProcessorType = GetMacProcessorType();
-
-        macOsSystemInformation.MacOsBuildNumber = DetectMacOsBuildNumber();
-        macOsSystemInformation.MacOsVersion = DetectMacOsVersion();
-        macOsSystemInformation.DarwinVersion = DetectDarwinVersion();
-        macOsSystemInformation.XnuVersion = DetectXnuVersion();
-
-        return macOsSystemInformation;
+        return new MacOsSystemInformation()
+        {
+            ProcessorType = GetMacProcessorType(),
+            MacOsBuildNumber = DetectMacOsBuildNumber(),
+            MacOsVersion = DetectMacOsVersion(),
+            DarwinVersion = DetectDarwinVersion(),
+            XnuVersion = DetectXnuVersion()
+        };
     }
 
     /// <summary>
