@@ -14,7 +14,8 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 3.3
 | Version | Availability | Changelog |
 |-|-|-|
-| 3.3.0 | 15th May 2023 | https://github.com/PlatformKit-Project/PlatformKit/releases/3.3.0 |
+| 3.3.1 | June 21st 2023 | https://github.com/PlatformKit-Project/PlatformKit/releases/3.3.1 |
+| 3.3.0 | May 15th 2023 | https://github.com/PlatformKit-Project/PlatformKit/releases/3.3.0 |
 
 ### 3.2
 | Version | Availability | Changelog |
