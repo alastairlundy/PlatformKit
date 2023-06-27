@@ -276,7 +276,7 @@ namespace PlatformKit
    
             }
                 
-          //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunPowerShellCommand));
+                //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunPowerShellCommand));
             throw new PlatformNotSupportedException();
         }
 
@@ -352,7 +352,7 @@ namespace PlatformKit
                     return RunProcessLinux(location, command, processArguments, processStartInfo);
                 }
 
-          //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
+                //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
