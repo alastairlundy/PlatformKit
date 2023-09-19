@@ -143,7 +143,6 @@ public class WindowsAnalyzer
             return result;
         }
 
-     //   PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWMIClass));
         throw new PlatformNotSupportedException();
     }
     
@@ -183,12 +182,10 @@ public class WindowsAnalyzer
                }
            }
            
-      //     PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetWMIValue));
            throw new ArgumentException();
         } 
         else
         {
-      //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWMIValue));
             throw new PlatformNotSupportedException();
         }
     }
@@ -213,12 +210,10 @@ public class WindowsAnalyzer
                 }
                 else
                 {
-        //            PlatformKitAnalytics.ReportError(new ArgumentNullException(), nameof(GetWindowsRegistryValue));
                     throw new ArgumentNullException();
                 }
         }
 
-      //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsRegistryValue));
         throw new PlatformNotSupportedException();
     }
 
@@ -232,7 +227,6 @@ public class WindowsAnalyzer
             }
         }
 
-    //    PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GetNetworkCardPositionInWindowsSysInfo));
         throw new ArgumentException();
     }
 
@@ -245,7 +239,6 @@ public class WindowsAnalyzer
     {
         if (!OSAnalyzer.IsWindows())
         {
-    //        PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsSystemInformation));
             throw new PlatformNotSupportedException();
         }
         
@@ -686,7 +679,6 @@ for (var index = 0; index < array.Length; index++)
             case WindowsVersion.Win10_InsiderPreview:
                 return true;
             case WindowsVersion.NotDetected:
-       //         PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(IsWindows10));
                 throw new WindowsVersionDetectionException();
             case WindowsVersion.NotSupported:
                 return false;
@@ -723,7 +715,6 @@ for (var index = 0; index < array.Length; index++)
             case WindowsVersion.NotSupported:
                 return false;
             case WindowsVersion.NotDetected:
-     //           PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(IsWindows11));
                 throw new WindowsVersionDetectionException();
             default:
                 return false;
@@ -746,7 +737,6 @@ for (var index = 0; index < array.Length; index++)
                 }
                 else
                 {
-            //        PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetWindowsVersionToEnum));
                     throw new PlatformNotSupportedException();
                 }
             }
@@ -848,7 +838,6 @@ for (var index = 0; index < array.Length; index++)
             }
             catch (Exception exception)
             {
-           //     PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(GetWindowsVersionToEnum));
                 throw new Exception(exception.ToString());
             }
         }
@@ -894,14 +883,12 @@ for (var index = 0; index < array.Length; index++)
 
                     if (dotCounter > 3)
                     {
-              //          PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(DetectWindowsVersion));
                         throw new WindowsVersionDetectionException();
                     }
 
                     return Version.Parse(description);
                 }
 
-              //  PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectWindowsVersion));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
