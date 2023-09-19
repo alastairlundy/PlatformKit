@@ -118,7 +118,7 @@ public class WindowsAnalyzer
         catch(Exception exception)
         {
             Console.WriteLine(exception.ToString());
-            throw new Exception(exception.ToString());
+            throw;
         }
     }
 

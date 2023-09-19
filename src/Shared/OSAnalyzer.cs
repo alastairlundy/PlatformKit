@@ -135,7 +135,7 @@ namespace PlatformKit
             }
             catch (Exception exception)
             {
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
     }

@@ -255,7 +255,7 @@ namespace PlatformKit.Mac;
         catch (Exception exception)
         {
             Console.WriteLine(exception);
-            throw new Exception(exception.ToString());
+            throw;
         }
     }
 
