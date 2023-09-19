@@ -283,6 +283,8 @@ namespace PlatformKit.Mac;
                 return new(12, 0);
             case MacOsVersion.v13_Ventura:
                 return new(13, 0);
+            case MacOsVersion.v14_Sonoma:
+                return new Version(14, 0);
             case MacOsVersion.NotSupported:
                 throw new PlatformNotSupportedException();
             case MacOsVersion.NotDetected:

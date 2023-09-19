@@ -41,11 +41,12 @@ namespace PlatformKit.Mac
         v10_15_Catalina,
         /// <summary>
         /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
-        /// First version to support Apple Silicon on M1 powered Macs and newer.
+        /// First version to support Apple Silicon Macs.
         /// </summary>
         v11_BigSur,
         v12_Monterey,
         v13_Ventura,
+        v14_Sonoma,
         NotDetected,
         NotSupported,
     }
