@@ -74,34 +74,26 @@ namespace PlatformKit.Shared.Extensions
         /// <returns></returns>
         public static Process ConvertStringToProcess(this Process process, string processName)
         {
-            try
+            processName = processName.Replace(".exe", string.Empty);
+
+            if (IsProcessRunning(process, processName) ||
+                IsProcessRunning(process, processName.ToLower()) ||
+                IsProcessRunning(process, processName.ToUpper())
+               )
             {
-                processName = processName.Replace(".exe", string.Empty);
+                Process[] processes = Process.GetProcesses();
 
-                if (IsProcessRunning(process, processName) ||
-                    IsProcessRunning(process, processName.ToLower()) ||
-                    IsProcessRunning(process, processName.ToUpper())
-                )
+                foreach (Process p in processes)
                 {
-                    Process[] processes = Process.GetProcesses();
-
-                    foreach (Process p in processes)
+                    if (p.ProcessName.ToLower().Equals(processName.ToLower()))
                     {
-                        if (p.ProcessName.ToLower().Equals(processName.ToLower()))
-                        {
-                            return p;
-                        }
+                        return p;
                     }
                 }
+            }
 
-                return null;
-                //  throw new Exception();
-            }
-            catch (Exception exception)
-            {
-              //     PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(ConvertStringToProcess));
-                throw new Exception(exception.ToString());
-            }
+            return null;
+            //  throw new Exception();
         }
     }
 }
