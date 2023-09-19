@@ -4,7 +4,7 @@
         <Authors>Alastair Lundy</Authors>
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
-        <Copyright>Copyright (c) Alastaiir Lundy 2018-2023, NeverSpy Tech Limited 2022-2023</Copyright>
+        <Copyright>Copyright (c) Alastaiir Lundy 2018-2023</Copyright>
         <RepositoryUrl>https://github.com/PlatformKit-Project/PlatformKit</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
@@ -14,11 +14,6 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.2 series
-* Changed licensing scheme to LGPLv3 or later
-* Removed LicensingKit dependency and all licensing related code
-* Updated license notices in PlatformKit
-* Fixed a potential issue that could have caused a Null Reference Exception when throwing an Assembly Not Signed Exception</PackageReleaseNotes>
         <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
