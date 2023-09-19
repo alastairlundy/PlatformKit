@@ -24,7 +24,6 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-//Move namespace in V3
 namespace PlatformKit
 {
     // ReSharper disable once InconsistentNaming
