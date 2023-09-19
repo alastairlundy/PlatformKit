@@ -135,7 +135,6 @@ namespace PlatformKit
             }
             catch (Exception exception)
             {
-         //       PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
                 throw new Exception(exception.ToString());
             }
         }

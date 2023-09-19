@@ -75,7 +75,6 @@ public class ConsoleHelper
         catch (Exception exception)
         {
             Console.WriteLine(exception.ToString());
-       //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(ShowLicenseInConsole));
             throw new Exception(exception.ToString());
         }
     }

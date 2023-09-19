@@ -108,7 +108,6 @@ namespace PlatformKit.Identification
                     }
                     else
                     {
-                      //  PlatformKitAnalytics.ReportError(new LinuxVersionDetectionException(), nameof(GetOsNameString));
                         throw new LinuxVersionDetectionException();
                     }
                 }
@@ -163,10 +162,8 @@ namespace PlatformKit.Identification
                             osVersion = "81";
                             break;
                         case WindowsVersion.NotDetected:
-                    //        PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
                             throw new WindowsVersionDetectionException();
                         default:
-                     //       PlatformKitAnalytics.ReportError(new WindowsVersionDetectionException(), nameof(GetOsVersionString));
                             throw new WindowsVersionDetectionException();
                     }
                 }
@@ -205,7 +202,6 @@ namespace PlatformKit.Identification
                 {
                     if (version.Minor < 9)
                     {
-                   //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(GetOsVersionString));
                         throw new PlatformNotSupportedException();
                     }
                     else
@@ -248,7 +244,6 @@ namespace PlatformKit.Identification
             }
             else
             {
-           //     PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(GenerateRuntimeIdentifier));
                 throw new ArgumentException();
             }
         }
@@ -326,7 +321,6 @@ namespace PlatformKit.Identification
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
             
-       //     PlatformKitAnalytics.ReportError(new RuntimeIdentifierGenerationException(), nameof(GenerateRuntimeIdentifier));
             throw new RuntimeIdentifierGenerationException();
         }
 

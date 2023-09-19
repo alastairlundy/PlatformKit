@@ -68,7 +68,6 @@ namespace PlatformKit.Windows
                 }
                 else
                 {
-             //       PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(Get));
                     throw new PlatformNotSupportedException();
                 }
             }

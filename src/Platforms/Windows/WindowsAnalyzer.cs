@@ -108,20 +108,16 @@ public class WindowsAnalyzer
                     }
                 }
 
-             //   PlatformKitAnalytics.ReportError(new WindowsEditionDetectionException(), nameof(DetectWindowsEdition));
                 throw new WindowsEditionDetectionException();
             }
             else
             {
-            //    PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectWindowsEdition));
                 throw new PlatformNotSupportedException();
             }
         }
         catch(Exception exception)
         {
             Console.WriteLine(exception.ToString());
-            
-         //   PlatformKitAnalytics.ReportError(new Exception(exception.ToString()), nameof(DetectWindowsEdition));
             throw new Exception(exception.ToString());
         }
     }
