@@ -4,8 +4,8 @@
         <Authors>Alastair Lundy</Authors>
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
-        <Copyright>Copyright (c) Alastaiir Lundy 2018-2023, NeverSpy Tech Limited 2022-2023</Copyright>
-        <RepositoryUrl>https://github.com/PlatformKit-Project/PlatformKit</RepositoryUrl>
+        <Copyright>Copyright (c) Alastaiir Lundy 2018-2023</Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/PlatformKit/</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <PackOnBuild>true</PackOnBuild>
@@ -14,22 +14,29 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 3.3.0
-* Deprecated generic ``RunProcess`` method - This will be removed in 4.0
-* Added OS checks to increase robustness of FreeBSD Version detection - This is still relatively untested code and testing of this would be appreciated.
-* Cleaned up macOS System Information detection code - There is no difference in the returned models or the method signature from this change
-* Cleaned up Linux URL opening code - There is no difference in the functioning of this method or the method signature from this change.</PackageReleaseNotes>
-        <Product>PlatformKit</Product>
+        <PackageReleaseNotes>## Changes since 3.3 series
+
+### Code changes
+* Add support for macOS 14 "Sonoma"
+* Remove references to NST
+* Remoe unneeded code that was commented out
+* Removed re-throwing of exceptions - Exceptions are now thrown directly.
+* Removed a try/catch
+* Replaced == with .equals in ``IsAppleSiliconMac()`` method
+
+### Non-Code changes
+* Re-licensed PlatformKit under Mozilla Public License 2.0 - PlatformKit.Hardware will also be licensed under this license.</PackageReleaseNotes>
+   <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-        <AssemblyVersion>3.3.1.0</AssemblyVersion>
-        <FileVersion>3.3.1.0</FileVersion>
-        <Version>3.3.1</Version>
-        <PackageVersion>3.3.1</PackageVersion>
-        <PackageProjectUrl>https://github.com/PlatformKit-Project/PlatformKit/</PackageProjectUrl>
+   <AssemblyVersion>3.4.0.0</AssemblyVersion>
+        <FileVersion>3.4.0.0</FileVersion>
+        <Version>3.4.0</Version>
+        <PackageVersion>3.4.0</PackageVersion>
+        <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
@@ -50,7 +57,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\COPYING.LESSER .txt">
+      <Content Include="..\LICENSE.txt">
         <Link>LICENSE.txt</Link>
           <PackagePath>LICENSE.txt</PackagePath>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>

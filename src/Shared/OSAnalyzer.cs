@@ -2,7 +2,6 @@
     PlatformKit
     
     Copyright (c) Alastair Lundy 2018-2023
-    Copyright (c) NeverSpyTech Limited 2022
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -25,7 +24,6 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-//Move namespace in V3
 namespace PlatformKit
 {
     // ReSharper disable once InconsistentNaming
@@ -136,8 +134,8 @@ namespace PlatformKit
             }
             catch (Exception exception)
             {
-                //       PlatformKitAnalytics.ReportError(exception, nameof(DetectOSVersion));
-                throw new Exception(exception.ToString());
+                throw;
+
             }
         }
     }

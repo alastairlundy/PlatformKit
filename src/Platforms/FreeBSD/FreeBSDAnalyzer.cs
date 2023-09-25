@@ -2,7 +2,6 @@
     PlatformKit
     
     Copyright (c) Alastair Lundy 2018-2023
-    Copyright (c) NeverSpyTech Limited 2022
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -19,6 +18,7 @@
  */
 
 using System;
+using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.FreeBSD;
 
@@ -33,6 +33,10 @@ public class FreeBSDAnalyzer
     }
 
     // ReSharper disable once InconsistentNaming
+    /// <summary>
+    /// Detects and Returns the Installed version of FreeBSD
+    /// </summary>
+    /// <returns></returns>
     public Version DetectFreeBSDVersion()
     {
         if (OSAnalyzer.IsFreeBSD())
@@ -46,7 +50,7 @@ public class FreeBSDAnalyzer
             var rel = arr[0].Replace("-release", String.Empty);
 
             int dotCounter = 0;
-        
+
             foreach (char c in rel)
             {
                 if (c == '.')
@@ -68,7 +72,7 @@ public class FreeBSDAnalyzer
         }
         else
         {
-            throw new PlatformNotSupportedException();
+            throw new OperatingSystemDetectionException();
         }
     }
 }

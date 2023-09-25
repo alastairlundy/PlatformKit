@@ -2,7 +2,6 @@
     PlatformKit
     
     Copyright (c) Alastair Lundy 2018-2023
-    Copyright (c) NeverSpyTech Limited 2022
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -69,7 +68,6 @@ namespace PlatformKit.Windows
                 }
                 else
                 {
-             //       PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(Get));
                     throw new PlatformNotSupportedException();
                 }
             }
