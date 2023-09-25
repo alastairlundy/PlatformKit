@@ -7,7 +7,7 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 3.3 | 3.3.1 | June 21st 2023
+| 3.3 | 3.3.1 | June 21st 2023 |
 | 3.2 | 3.2.0.1 | January 26th 2023 |
 
 ## Unsupported Versions
