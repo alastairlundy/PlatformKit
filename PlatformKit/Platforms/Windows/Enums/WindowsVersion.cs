@@ -1,21 +1,12 @@
 /*
-    PlatformKit
-    
-    Copyright (c) Alastair Lundy 2018-2023
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-     any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
+      PlatformKit
+      
+      Copyright (c) Alastair Lundy 2018-2023
+      
+      This Source Code Form is subject to the terms of the Mozilla Public
+      License, v. 2.0. If a copy of the MPL was not distributed with this
+      file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
 
 // ReSharper disable InconsistentNaming
 
@@ -28,20 +19,13 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7,
         // ReSharper disable once InconsistentNaming
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7SP1,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2008_R2,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8_1,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012_R2,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
@@ -95,6 +79,7 @@ namespace PlatformKit.Windows
         /// </summary>
         Win11_21H2,
         Win11_22H2,
+        Win11_23H2,
         Win10_InsiderPreview,
         Win11_InsiderPreview,
         NotDetected,

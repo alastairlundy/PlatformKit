@@ -4,7 +4,7 @@
         <Authors>Alastair Lundy</Authors>
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
-        <Copyright>Copyright (c) Alastaiir Lundy 2018-2023</Copyright>
+        <Copyright>Copyright (c) Alastair Lundy 2018-2023</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit/</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
@@ -14,28 +14,24 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 3.3 series
-
-### Code changes
-* Add support for macOS 14 "Sonoma"
-* Remove references to NST
-* Remoe unneeded code that was commented out
-* Removed re-throwing of exceptions - Exceptions are now thrown directly.
-* Removed a try/catch
-* Replaced == with .equals in ``IsAppleSiliconMac()`` method
-
-### Non-Code changes
-* Re-licensed PlatformKit under Mozilla Public License 2.0 - PlatformKit.Hardware will also be licensed under this license.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.4.1
+* Added support for Windows 11 23H2 - Fixing a bug where Windows 11 23H2 would be detected as a Windows 11 Insider Preview Build
+* Fixed a bug where macOS detection would fail to detect macOS 14 "Sonoma"
+* Improved robustness of some macOS detection methods to throw exceptions if not run on macOS
+* Improved robustness of some Windows detection methods to throw exceptions if not run on Windows
+* Added additional in code documentation
+* Fixed issues with existing in code documentation
+* Fixed license notices in code to reflect current project license.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.4.0.0</AssemblyVersion>
-        <FileVersion>3.4.0.0</FileVersion>
-        <Version>3.4.0</Version>
-        <PackageVersion>3.4.0</PackageVersion>
+   <AssemblyVersion>3.4.1.0</AssemblyVersion>
+        <FileVersion>3.4.1.0</FileVersion>
+        <Version>3.4.1</Version>
+        <PackageVersion>3.4.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>

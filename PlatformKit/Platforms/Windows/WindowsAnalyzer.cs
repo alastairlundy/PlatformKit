@@ -1,21 +1,12 @@
 /*
-    PlatformKit
-    
-    Copyright (c) Alastair Lundy 2018-2023
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-     any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
+      PlatformKit
+      
+      Copyright (c) Alastair Lundy 2018-2023
+      
+      This Source Code Form is subject to the terms of the Mozilla Public
+      License, v. 2.0. If a copy of the MPL was not distributed with this
+      file, You can obtain one at http://mozilla.org/MPL/2.0/.
+   */
 
 using System;
 using System.Collections.Generic;
@@ -603,7 +594,6 @@ for (var index = 0; index < array.Length; index++)
         
     }
 }
-        
         #endregion
         
         if (networkCardNumber == 1)
@@ -680,20 +670,26 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.NotDetected:
                 throw new WindowsVersionDetectionException();
-            case WindowsVersion.NotSupported:
-                return false;
             default:
                 return false;
         }
     }
 
         /// <summary>
-        /// 
+        /// Returns whether the currently installed version of Windows is Windows 11.
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-            return IsWindows11(GetWindowsVersionToEnum());
+            if (OSAnalyzer.IsWindows())
+            {
+                return IsWindows11(GetWindowsVersionToEnum());
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
     /// <summary>
@@ -710,6 +706,8 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.Win11_22H2:
                 return true;
+            case WindowsVersion.Win11_23H2:
+                return true;
             case WindowsVersion.Win11_InsiderPreview:
                 return true;
             case WindowsVersion.NotSupported:
@@ -722,15 +720,12 @@ for (var index = 0; index < array.Length; index++)
     }
 
         /// <summary>
-        /// 
+        /// Detects the installed version of Windows and returns it as an enum.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            try
-            {
                 if (OSAnalyzer.IsWindows())
                 {
                     return GetWindowsVersionToEnum(DetectWindowsVersion());
@@ -739,18 +734,14 @@ for (var index = 0; index < array.Length; index++)
                 {
                     throw new PlatformNotSupportedException();
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
         }
 
         /// <summary>
-        ///
-        /// 
+        /// Converts the specified version input to an enum corresponding to a Windows version.
         /// </summary>
+        /// <param name="input"></param>
         /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
         {
             try
@@ -819,6 +810,8 @@ for (var index = 0; index < array.Length; index++)
                         return WindowsVersion.Win11_21H2;
                     case 22621:
                         return WindowsVersion.Win11_22H2;
+                    case 22631:
+                        return WindowsVersion.Win11_23H2;
                     default:
                         //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
                         if (input.Build is > 10240 and < 22000)
@@ -826,7 +819,7 @@ for (var index = 0; index < array.Length; index++)
                             return WindowsVersion.Win10_InsiderPreview;
                         }
                         //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22621)
+                        else if(input.Build > 22631)
                         {
                             return WindowsVersion.Win11_InsiderPreview;
                         }
@@ -936,6 +929,7 @@ for (var index = 0; index < array.Length; index++)
                 WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
                 WindowsVersion.Win11_22H2 => new Version(10,0,22621),
+                WindowsVersion.Win11_23H2 => new Version(10,0,22631),
                 _ => throw new WindowsVersionDetectionException()
             };
         }
@@ -945,14 +939,21 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public bool IsAtLeastWindowsVersion(WindowsVersion windowsVersion)
         {
-            var detected = DetectWindowsVersion();    
+            if (OSAnalyzer.IsWindows())
+            {
+                var detected = DetectWindowsVersion();    
 
-            var expected = GetWindowsVersionFromEnum(windowsVersion);
+                var expected = GetWindowsVersionFromEnum(windowsVersion);
             
-            return (detected.Build >= expected.Build);
+                return (detected.Build >= expected.Build);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
         
 }
