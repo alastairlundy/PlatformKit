@@ -594,7 +594,6 @@ for (var index = 0; index < array.Length; index++)
         
     }
 }
-        
         #endregion
         
         if (networkCardNumber == 1)
@@ -677,12 +676,20 @@ for (var index = 0; index < array.Length; index++)
     }
 
         /// <summary>
-        /// 
+        /// Returns whether the currently installed version of Windows is Windows 11.
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-            return IsWindows11(GetWindowsVersionToEnum());
+            if (OSAnalyzer.IsWindows())
+            {
+                return IsWindows11(GetWindowsVersionToEnum());
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
     /// <summary>
@@ -732,7 +739,9 @@ for (var index = 0; index < array.Length; index++)
         /// <summary>
         /// Converts the specified version input to an enum corresponding to a Windows version.
         /// </summary>
+        /// <param name="input"></param>
         /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
         {
             try
@@ -930,14 +939,21 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public bool IsAtLeastWindowsVersion(WindowsVersion windowsVersion)
         {
-            var detected = DetectWindowsVersion();    
+            if (OSAnalyzer.IsWindows())
+            {
+                var detected = DetectWindowsVersion();    
 
-            var expected = GetWindowsVersionFromEnum(windowsVersion);
+                var expected = GetWindowsVersionFromEnum(windowsVersion);
             
-            return (detected.Build >= expected.Build);
+                return (detected.Build >= expected.Build);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
         
 }
