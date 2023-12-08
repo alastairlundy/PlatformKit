@@ -671,8 +671,6 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.NotDetected:
                 throw new WindowsVersionDetectionException();
-            case WindowsVersion.NotSupported:
-                return false;
             default:
                 return false;
         }
@@ -701,6 +699,8 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.Win11_22H2:
                 return true;
+            case WindowsVersion.Win11_23H2:
+                return true;
             case WindowsVersion.Win11_InsiderPreview:
                 return true;
             case WindowsVersion.NotSupported:
@@ -713,15 +713,12 @@ for (var index = 0; index < array.Length; index++)
     }
 
         /// <summary>
-        /// 
+        /// Detects the installed version of Windows and returns it as an enum.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            try
-            {
                 if (OSAnalyzer.IsWindows())
                 {
                     return GetWindowsVersionToEnum(DetectWindowsVersion());
@@ -730,16 +727,10 @@ for (var index = 0; index < array.Length; index++)
                 {
                     throw new PlatformNotSupportedException();
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
         }
 
         /// <summary>
-        ///
-        /// 
+        /// Converts the specified version input to an enum corresponding to a Windows version.
         /// </summary>
         /// <returns></returns>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
@@ -810,6 +801,8 @@ for (var index = 0; index < array.Length; index++)
                         return WindowsVersion.Win11_21H2;
                     case 22621:
                         return WindowsVersion.Win11_22H2;
+                    case 22631:
+                        return WindowsVersion.Win11_23H2;
                     default:
                         //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
                         if (input.Build is > 10240 and < 22000)
@@ -817,7 +810,7 @@ for (var index = 0; index < array.Length; index++)
                             return WindowsVersion.Win10_InsiderPreview;
                         }
                         //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22621)
+                        else if(input.Build > 22631)
                         {
                             return WindowsVersion.Win11_InsiderPreview;
                         }
@@ -927,6 +920,7 @@ for (var index = 0; index < array.Length; index++)
                 WindowsVersion.Win10_Server2022 => new Version(10, 0, 20348),
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
                 WindowsVersion.Win11_22H2 => new Version(10,0,22621),
+                WindowsVersion.Win11_23H2 => new Version(10,0,22631),
                 _ => throw new WindowsVersionDetectionException()
             };
         }

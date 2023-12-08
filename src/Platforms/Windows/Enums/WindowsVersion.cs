@@ -79,6 +79,7 @@ namespace PlatformKit.Windows
         /// </summary>
         Win11_21H2,
         Win11_22H2,
+        Win11_23H2,
         Win10_InsiderPreview,
         Win11_InsiderPreview,
         NotDetected,
