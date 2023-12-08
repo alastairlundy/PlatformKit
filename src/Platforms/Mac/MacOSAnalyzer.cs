@@ -10,6 +10,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using PlatformKit.Internal.Exceptions;
 
 
@@ -160,10 +161,11 @@ namespace PlatformKit.Mac;
                 throw new ArgumentException();
             }
         }
-
+        
         /// <summary>
     /// Returns macOS version as a macOS version enum.
     /// </summary>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on any platform besides macOS.</exception>
     /// <returns></returns>
     public MacOsVersion GetMacOsVersionToEnum()
     {
@@ -175,13 +177,10 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    /// <exception cref="OperatingSystemDetectionException"></exception>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on Windows or macOS</exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on any platform besides macOS.</exception>
     /// <exception cref="Exception"></exception>
     public MacOsVersion GetMacOsVersionToEnum(Version input)
     {
-        try
-        {
             if (OSAnalyzer.IsMac())
             {
                 if (input.Major == 10)
@@ -246,21 +245,15 @@ namespace PlatformKit.Mac;
             {
                 throw new PlatformNotSupportedException();
             }
-        }
-        catch (Exception exception)
-        {
-            Console.WriteLine(exception);
-            throw;
-        }
     }
 
     /// <summary>
-    /// 
+    /// Converts a macOS version enum to a macOS version as a Version object.
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
-    /// <exception cref="MacOsVersionDetectionException"></exception>
+    /// <exception cref="ArgumentException">Throws an exception if an unsupported macOS version is provided.</exception>
+    /// <exception cref="MacOsVersionDetectionException">Throws an exception if detection fails.</exception>
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)
@@ -292,32 +285,38 @@ namespace PlatformKit.Mac;
             case MacOsVersion.NotDetected:
                 throw new MacOsVersionDetectionException();
             default:
-                throw new PlatformNotSupportedException();
+                throw new ArgumentException();
         }        
     }
 
 
     /// <summary>
-    /// 
+    /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastMacOSVersion(MacOsVersion macOsVersion)
     {
-        var detected = DetectMacOsVersion();
-
-        var expected = GetMacOsVersionFromEnum(macOsVersion);
-
-        if (detected.Major >= expected.Major)
+        if (OSAnalyzer.IsMac())
         {
-            if (detected.Minor >= expected.Minor)
+            var detected = DetectMacOsVersion();
+
+            var expected = GetMacOsVersionFromEnum(macOsVersion);
+
+            if (detected.Major >= expected.Major)
             {
-                if (detected.Build >= expected.Build)
+                if (detected.Minor >= expected.Minor)
                 {
-                    if (detected.Revision >= expected.Revision)
+                    if (detected.Build >= expected.Build)
                     {
-                        return true;
+                        if (detected.Revision >= expected.Revision)
+                        {
+                            return true;
+                        }
+
+                        return false;
                     }
 
                     return false;
@@ -328,8 +327,10 @@ namespace PlatformKit.Mac;
 
             return false;
         }
-
-        return false;
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
     
 
@@ -353,7 +354,7 @@ namespace PlatformKit.Mac;
     /// Detects the Darwin Version on macOS
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an error if it is run on Windows or Linux (or any OS which isn't macOS)</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
     public Version DetectDarwinVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -438,52 +439,70 @@ namespace PlatformKit.Mac;
     /// Detects the macOS version and returns it as a System.Version object.
     /// </summary>
     /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
     public Version DetectMacOsVersion()
     {
-        try
+        if (OSAnalyzer.IsMac())
         {
-            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
-
-            int dotCounter = 0;
-
-            foreach (var str in version)
+            try
             {
-                if (str == '.')
+                var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
+
+                int dotCounter = 0;
+
+                foreach (var str in version)
                 {
-                    dotCounter++;
+                    if (str == '.')
+                    {
+                        dotCounter++;
+                    }
                 }
-            }
 
-            if (dotCounter == 1)
-            {
-                version += ".0";
-            }
-            if (dotCounter == 2)
-            {
-                version += ".0";
-            }
+                if (dotCounter == 1)
+                {
+                    version += ".0";
+                }
+                if (dotCounter == 2)
+                {
+                    version += ".0";
+                }
         
-            return Version.Parse(version);
+                return Version.Parse(version);
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.ToString());
+            }
         }
-        catch(Exception exception)
+        else
         {
-            throw new Exception(exception.ToString());
+            throw new PlatformNotSupportedException();
         }
     }
     
     /// <summary>
-    /// Detects the macOS Build Number.
+    /// Detects the Build Number of the installed version of macOS.
     /// </summary>
     /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if not run o n macOS.</exception>
     public string DetectMacOsBuildNumber()
     {
-        try
+        if (OSAnalyzer.IsMac())
         {
-            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+            try
+            {
+                return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+            }
+            catch(Exception exception)
+            {
+                throw new Exception(exception.ToString());
+            }
         }
-        catch(Exception exception)
+        else
         {
-            throw new Exception(exception.ToString());
+            throw new PlatformNotSupportedException();
         }
     }
 
