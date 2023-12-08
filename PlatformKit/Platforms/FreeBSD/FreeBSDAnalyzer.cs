@@ -32,12 +32,11 @@ public class FreeBSDAnalyzer
     {
         if (OSAnalyzer.IsFreeBSD())
         {
-            var v = _processManager.RunProcess("", "uname", "-v");
-
+            var v = _processManager.RunProcessLinux("", "uname", "-v");
             v = v.Replace("FreeBSD", String.Empty);
 
             var arr = v.Split(' ');
-
+            
             var rel = arr[0].Replace("-release", String.Empty);
 
             int dotCounter = 0;
