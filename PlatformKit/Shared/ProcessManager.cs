@@ -236,7 +236,6 @@ namespace PlatformKit
                                + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
                 return RunProcessWindows(location, "powershell", command, processStartInfo);
-   
             }
                 
             throw new PlatformNotSupportedException();
