@@ -19,20 +19,13 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7,
         // ReSharper disable once InconsistentNaming
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win7SP1,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2008_R2,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         Win8_1,
-        //[Obsolete(Internal.Deprecation.DeprecationMessages.DeprecationV4)]
         WinServer_2012_R2,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
