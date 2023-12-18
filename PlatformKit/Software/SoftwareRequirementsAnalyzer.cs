@@ -35,7 +35,7 @@ public class SoftwareRequirementsAnalyzer
 
     public bool HasRequiredMacOsVersion(MacOsVersion requiredMacOsVersionVersion)
     {
-        return new MacOSAnalyzer().IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
+        return new MacOsAnalyzer().IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
     }
 
     public bool HasRequiredWindowsVersion(WindowsVersion requiredWindowsVersion)

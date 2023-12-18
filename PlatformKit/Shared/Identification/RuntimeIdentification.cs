@@ -28,7 +28,7 @@ namespace PlatformKit.Identification
     public class RuntimeIdentification
     {
         protected WindowsAnalyzer _windowsAnalyzer;
-        protected MacOSAnalyzer _macOsAnalyzer;
+        protected MacOsAnalyzer _macOsAnalyzer;
         protected LinuxAnalyzer _linuxAnalyzer;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace PlatformKit.Identification
         public RuntimeIdentification()
         {
             _windowsAnalyzer = new WindowsAnalyzer();
-            _macOsAnalyzer = new MacOSAnalyzer();
+            _macOsAnalyzer = new MacOsAnalyzer();
             _linuxAnalyzer = new LinuxAnalyzer(); 
         }
 
