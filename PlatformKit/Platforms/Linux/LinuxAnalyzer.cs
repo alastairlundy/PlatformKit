@@ -11,6 +11,9 @@
 using System;
 using System.IO;
 
+using PlatformKit.Internal.Exceptions;
+using PlatformKit.Linux.Enums;
+
 namespace PlatformKit.Linux;
 
 /// <summary>
@@ -23,6 +26,43 @@ public class LinuxAnalyzer
     {
         
     }
+
+    /// <summary>
+    /// Detects what base Linux Distribution a Distro is based off of.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public LinuxDistroBase DetectDistroBase()
+    {
+        if (OSAnalyzer.IsLinux())
+        {
+            var osRel = GetLinuxDistributionInformation();
+
+            if (osRel.Identifier_Like.ToLower().Contains("debian"))
+            {
+                return LinuxDistroBase.Debian;
+            }
+            if (osRel.Identifier_Like.ToLower().Contains("ubuntu"))
+            {
+                return LinuxDistroBase.Ubuntu;
+            }
+            if (osRel.Identifier_Like.ToLower().Contains("arch"))
+            {
+                return LinuxDistroBase.Arch;
+            }
+            if (osRel.Identifier_Like.ToLower().Contains("fedora"))
+            {
+                return LinuxDistroBase.Fedora;
+            }
+
+            throw new OperatingSystemDetectionException();
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+    
     
         /// <summary>
         /// Detects Linux Distribution information and returns it.
