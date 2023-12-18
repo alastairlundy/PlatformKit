@@ -53,6 +53,7 @@ namespace PlatformKit.Identification
                 Architecture.X86 => "x86",
                 Architecture.Arm => "arm",
                 Architecture.Arm64 => "arm64",
+                Architecture.S390x => "s390x",
                 _ => null
             };
 
@@ -83,6 +84,12 @@ namespace PlatformKit.Identification
                 {
                     osName = "osx";
                 }
+                #if NETCOREAPP3_0_OR_GREATER
+                if (OSAnalyzer.IsFreeBSD())
+                {
+                    osName = "freebsd";
+                }
+                #endif
                 if (OSAnalyzer.IsLinux())
                 {
                     if (identifierType == RuntimeIdentifierType.Generic)
