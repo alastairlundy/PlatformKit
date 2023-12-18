@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.csproj", "{F342367A-019D-4361-9796-0B8C2CC36928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKitTestingApp", "..\PlatformKitTestingApp\PlatformKitTestingApp.csproj", "{749C0EB6-759C-4B0E-B63E-362699C60FE6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.Build.0 = Release|Any CPU
-		{749C0EB6-759C-4B0E-B63E-362699C60FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{749C0EB6-759C-4B0E-B63E-362699C60FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{749C0EB6-759C-4B0E-B63E-362699C60FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{749C0EB6-759C-4B0E-B63E-362699C60FE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
