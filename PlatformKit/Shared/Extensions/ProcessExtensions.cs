@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace PlatformKit.Shared.Extensions
+namespace PlatformKit.Extensions
 {
     public static class ProcessExtensions
     {
