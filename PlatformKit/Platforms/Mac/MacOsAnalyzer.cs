@@ -20,11 +20,11 @@ namespace PlatformKit.Mac;
     /// <summary>
     /// A class to Detect macOS versions, macOS features, and find out more about a user's macOS installation.
     /// </summary>
-    public class MacOSAnalyzer
+    public class MacOsAnalyzer
     {
         protected ProcessManager _processManager;
 
-        public MacOSAnalyzer()
+        public MacOsAnalyzer()
         {
             _processManager = new ProcessManager();
         }

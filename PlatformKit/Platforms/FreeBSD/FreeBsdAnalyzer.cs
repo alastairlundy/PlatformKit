@@ -14,11 +14,11 @@ using PlatformKit.Internal.Exceptions;
 namespace PlatformKit.FreeBSD;
 
 // ReSharper disable once InconsistentNaming
-public class FreeBSDAnalyzer
+public class FreeBsdAnalyzer
 {
     protected readonly ProcessManager _processManager;
 
-    public FreeBSDAnalyzer()
+    public FreeBsdAnalyzer()
     {
         _processManager = new ProcessManager();
     }
