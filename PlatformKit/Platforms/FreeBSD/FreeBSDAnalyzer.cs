@@ -32,7 +32,7 @@ public class FreeBSDAnalyzer
     {
         if (OSAnalyzer.IsFreeBSD())
         {
-            var v = _processManager.RunProcess("", "uname", "-v");
+            var v = _processManager.RunProcessLinux("", "uname", "-v");
 
             v = v.Replace("FreeBSD", String.Empty);
 

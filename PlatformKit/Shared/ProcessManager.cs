@@ -185,7 +185,6 @@ namespace PlatformKit
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-         //       PlatformKitAnalytics.ReportError(ex, nameof(RunProcessMac));
                 throw new Exception(ex.ToString());
             }
         }
@@ -234,7 +233,6 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-          //      PlatformKitAnalytics.ReportError(ex, nameof(RunProcessLinux));
                 throw new Exception(ex.ToString());
             }
         }
