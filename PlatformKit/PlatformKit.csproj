@@ -14,24 +14,28 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.4.1
-* Added support for Windows 11 23H2 - Fixing a bug where Windows 11 23H2 would be detected as a Windows 11 Insider Preview Build
-* Fixed a bug where macOS detection would fail to detect macOS 14 "Sonoma"
-* Improved robustness of some macOS detection methods to throw exceptions if not run on macOS
-* Improved robustness of some Windows detection methods to throw exceptions if not run on Windows
-* Added additional in code documentation
-* Fixed issues with existing in code documentation
-* Fixed license notices in code to reflect current project license.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.4 series
+* Added support for more easily detecting what Linux Distro a Distro is based off of - (e.g. Pop!_OS is based off of Ubuntu and Ubuntu is based off of Debian)
+* Experimental support for FreeBSD based Runtime ID generation
+* Added new ``MacOsAnalyzer`` class - This is intended to replace the existing ``MacOSAnalyzer`` class
+* Added new ``FreeBsdAnalyzer`` class - This is intended to replace the existing ``FreeBSDAnalyzer`` class
+* Deprecated ``MacOSAnalyzer`` class - This will be removed in PlatformKit 4
+* Deprecated ``FreeBSDAnalyzer`` class - This will be removed in PlatformKit 4
+* Changed ``OSAnalyzer`` to no longer create new instances of ``WindowsAnalyzer``, ``MacOsAnalyzer``, ``LinuxAnalyzer``, and ``FreeBsdAnalyzer`` when detecting OS version. 
+
+### Notes
+* The ``MacOsAnalyzer`` class is functionally identical to the ``MacOSAnalyzer`` class. The only difference is the name.
+* The ``FreeBsdAnalyzer`` class is functionally identical to the ``FreeBSDAnalyzer`` class. The only difference is the name.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.4.1.0</AssemblyVersion>
-        <FileVersion>3.4.1.0</FileVersion>
-        <Version>3.4.1</Version>
-        <PackageVersion>3.4.1</PackageVersion>
+   <AssemblyVersion>3.5.0.0</AssemblyVersion>
+        <FileVersion>3.5.0.0</FileVersion>
+        <Version>3.5.0</Version>
+        <PackageVersion>3.5.0</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
