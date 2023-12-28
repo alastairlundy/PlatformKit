@@ -127,7 +127,6 @@ namespace PlatformKit
                     return _freeBsdAnalyzer.DetectFreeBSDVersion();
                 }
 #endif
-           //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectOSVersion));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
