@@ -20,7 +20,7 @@ namespace PlatformKit.Shared.Extensions
         /// Get the list of processes as a String Array
         /// </summary>
         /// <returns></returns>
-         static  string[] ToStringArray(this Process process)
+        public static string[] ToStringArray(this Process process)
         {
             var strList = new List<string>();
             Process[] processes = Process.GetProcesses();
