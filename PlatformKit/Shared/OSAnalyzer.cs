@@ -20,9 +20,17 @@ namespace PlatformKit
     // ReSharper disable once InconsistentNaming
     public class OSAnalyzer
     {
+        private readonly WindowsAnalyzer _windowsAnalyzer;
+        private readonly MacOsAnalyzer _macOsAnalyzer;
+        private readonly LinuxAnalyzer _linuxAnalyzer;
+        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
+        
         public OSAnalyzer()
         {
-            
+            _windowsAnalyzer = new WindowsAnalyzer();
+            _macOsAnalyzer = new MacOsAnalyzer();
+            _linuxAnalyzer = new LinuxAnalyzer();
+            _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
 
         /// <summary>
@@ -102,21 +110,21 @@ namespace PlatformKit
             {
                 if (IsWindows())
                 {
-                    return new WindowsAnalyzer().DetectWindowsVersion();
+                    return _windowsAnalyzer.DetectWindowsVersion();
                 }
                 if (IsLinux())
                 {
-                    return new LinuxAnalyzer().DetectLinuxDistributionVersion();
+                    return _linuxAnalyzer.DetectLinuxDistributionVersion();
                 }
                 if (IsMac())
                 {
-                    return new MacOSAnalyzer().DetectMacOsVersion();
+                    return _macOsAnalyzer.DetectMacOsVersion();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
                 if (IsFreeBSD())
                 {
-                    return new FreeBSDAnalyzer().DetectFreeBSDVersion();
+                    return _freeBsdAnalyzer.DetectFreeBSDVersion();
                 }
 #endif
            //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(DetectOSVersion));

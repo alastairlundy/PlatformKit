@@ -21,7 +21,7 @@ namespace PlatformKit.Windows;
 /// </summary>
 public class WindowsAnalyzer
 {
-    protected readonly ProcessManager _processManager;
+    private readonly ProcessManager _processManager;
 
     public WindowsAnalyzer()
     {
