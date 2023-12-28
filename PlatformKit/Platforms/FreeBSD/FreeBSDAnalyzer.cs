@@ -9,16 +9,23 @@
    */
 
 using System;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.FreeBSD;
 
 // ReSharper disable once InconsistentNaming
-public class FreeBSDAnalyzer
+[Obsolete(DeprecationMessages.DeprecationV4)]
+public class FreeBSDAnalyzer : FreeBsdAnalyzer
+{
+    
+}
+
+public class FreeBsdAnalyzer
 {
     private readonly ProcessManager _processManager;
 
-    public FreeBSDAnalyzer()
+    public FreeBsdAnalyzer()
     {
         _processManager = new ProcessManager();
     }
