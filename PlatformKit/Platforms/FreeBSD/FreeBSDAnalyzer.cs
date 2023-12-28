@@ -16,7 +16,7 @@ namespace PlatformKit.FreeBSD;
 // ReSharper disable once InconsistentNaming
 public class FreeBSDAnalyzer
 {
-    protected readonly ProcessManager _processManager;
+    private readonly ProcessManager _processManager;
 
     public FreeBSDAnalyzer()
     {
@@ -32,11 +32,11 @@ public class FreeBSDAnalyzer
     {
         if (OSAnalyzer.IsFreeBSD())
         {
-            var v = _processManager.RunProcessLinux("", "uname", "-v");
+            var version = _processManager.RunProcessLinux("", "uname", "-v");
 
-            v = v.Replace("FreeBSD", String.Empty);
+            version = version.Replace("FreeBSD", String.Empty);
 
-            var arr = v.Split(' ');
+            var arr = version.Split(' ');
 
             var rel = arr[0].Replace("-release", String.Empty);
 
