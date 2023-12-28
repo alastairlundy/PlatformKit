@@ -20,16 +20,17 @@ namespace PlatformKit
     // ReSharper disable once InconsistentNaming
     public class OSAnalyzer
     {
-        protected WindowsAnalyzer _windowsAnalyzer;
-        protected MacOsAnalyzer _macOsAnalyzer;
-        protected LinuxAnalyzer _linuxAnalyzer;
-        protected FreeBsdAnalyzer _freeBsdAnalyzer;
+        private readonly WindowsAnalyzer _windowsAnalyzer;
+        private readonly MacOsAnalyzer _macOsAnalyzer;
+        private readonly LinuxAnalyzer _linuxAnalyzer;
+        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
         
         public OSAnalyzer()
         {
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOsAnalyzer();
             _linuxAnalyzer = new LinuxAnalyzer();
+            _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
 
         /// <summary>

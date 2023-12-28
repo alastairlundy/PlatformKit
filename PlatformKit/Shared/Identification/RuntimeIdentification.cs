@@ -11,7 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
@@ -27,9 +27,10 @@ namespace PlatformKit.Identification
     /// </summary>
     public class RuntimeIdentification
     {
-        protected WindowsAnalyzer _windowsAnalyzer;
-        protected MacOsAnalyzer _macOsAnalyzer;
-        protected LinuxAnalyzer _linuxAnalyzer;
+        private readonly WindowsAnalyzer _windowsAnalyzer;
+        private readonly MacOsAnalyzer _macOsAnalyzer;
+        private readonly LinuxAnalyzer _linuxAnalyzer;
+        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
 
         /// <summary>
         /// 
@@ -38,7 +39,8 @@ namespace PlatformKit.Identification
         {
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOsAnalyzer();
-            _linuxAnalyzer = new LinuxAnalyzer(); 
+            _linuxAnalyzer = new LinuxAnalyzer();
+            _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
 
         /// <summary>
@@ -53,6 +55,9 @@ namespace PlatformKit.Identification
                 Architecture.X86 => "x86",
                 Architecture.Arm => "arm",
                 Architecture.Arm64 => "arm64",
+#if NET6_0_OR_GREATER
+                Architecture.S390x => "s390x",
+#endif
                 _ => null
             };
 

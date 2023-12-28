@@ -16,7 +16,7 @@ namespace PlatformKit.FreeBSD;
 // ReSharper disable once InconsistentNaming
 public class FreeBsdAnalyzer
 {
-    protected readonly ProcessManager _processManager;
+    private readonly ProcessManager _processManager;
 
     public FreeBsdAnalyzer()
     {
