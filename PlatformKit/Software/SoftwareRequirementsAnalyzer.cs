@@ -21,13 +21,13 @@ namespace PlatformKit.Software;
 /// </summary>
 public class SoftwareRequirementsAnalyzer
 {
-    private readonly MacOSAnalyzer _macOsAnalyzer;
+    private readonly MacOsAnalyzer _macOsAnalyzer;
     private readonly LinuxAnalyzer _linuxAnalyzer;
     private readonly WindowsAnalyzer _windowsAnalyzer;
 
     public SoftwareRequirementsAnalyzer()
     {
-        _macOsAnalyzer = new MacOSAnalyzer();
+        _macOsAnalyzer = new MacOsAnalyzer();
         _linuxAnalyzer = new LinuxAnalyzer();
         _windowsAnalyzer = new WindowsAnalyzer();
     }
