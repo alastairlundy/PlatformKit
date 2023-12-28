@@ -9,22 +9,34 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
 
 namespace PlatformKit.Mac;
 
 // ReSharper disable once InconsistentNaming
+/// <summary>
+/// A class to Detect macOS versions, macOS features, and find out more about a user's macOS installation.
+/// </summary>
+
+[Obsolete(DeprecationMessages.DeprecationV4)]
+public class MacOSAnalyzer : MacOsAnalyzer
+{
+
+}
+
+// ReSharper disable once InconsistentNaming
     /// <summary>
     /// A class to Detect macOS versions, macOS features, and find out more about a user's macOS installation.
     /// </summary>
-    public class MacOSAnalyzer
+    public class MacOsAnalyzer
     {
-        protected ProcessManager _processManager;
+        private readonly ProcessManager _processManager;
 
-        public MacOSAnalyzer()
+        public MacOsAnalyzer()
         {
             _processManager = new ProcessManager();
         }
