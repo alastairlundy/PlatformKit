@@ -21,7 +21,6 @@ namespace PlatformKit.Linux;
 /// </summary>
 public class LinuxAnalyzer
 {
-
     public LinuxAnalyzer()
     {
         
