@@ -21,25 +21,29 @@ namespace PlatformKit.Software;
 /// </summary>
 public class SoftwareRequirementsAnalyzer
 {
-    protected OSAnalyzer _osAnalyzer;
+    protected MacOSAnalyzer _macOsAnalyzer;
+    protected LinuxAnalyzer _linuxAnalyzer;
+    protected WindowsAnalyzer _windowsAnalyzer;
 
     public SoftwareRequirementsAnalyzer()
     {
-        _osAnalyzer = new OSAnalyzer();
+        _macOsAnalyzer = new MacOSAnalyzer();
+        _linuxAnalyzer = new LinuxAnalyzer();
+        _windowsAnalyzer = new WindowsAnalyzer();
     }
 
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)
     {
-        return new LinuxAnalyzer().IsAtLeastKernelVersion(requiredLinuxKernel);
+        return _linuxAnalyzer.IsAtLeastKernelVersion(requiredLinuxKernel);
     }
 
     public bool HasRequiredMacOsVersion(MacOsVersion requiredMacOsVersionVersion)
     {
-        return new MacOSAnalyzer().IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
+        return _macOsAnalyzer.IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
     }
 
     public bool HasRequiredWindowsVersion(WindowsVersion requiredWindowsVersion)
     {
-        return new WindowsAnalyzer().IsAtLeastWindowsVersion(requiredWindowsVersion);
+        return _windowsAnalyzer.IsAtLeastWindowsVersion(requiredWindowsVersion);
     }
 }
