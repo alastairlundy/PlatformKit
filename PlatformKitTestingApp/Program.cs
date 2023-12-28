@@ -27,7 +27,7 @@ var runtimeIdentification = new RuntimeIdentification();
 
 var windowsAnalyzer = new WindowsAnalyzer();
 var linuxAnalyzer = new LinuxAnalyzer();
-var macAnalyzer = new MacOSAnalyzer();
+var macAnalyzer = new MacOsAnalyzer();
 
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
 

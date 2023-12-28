@@ -22,7 +22,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOsAnalyzer
     {
-        protected ProcessManager _processManager;
+        private readonly ProcessManager _processManager;
 
         public MacOsAnalyzer()
         {
@@ -62,7 +62,7 @@ namespace PlatformKit.Mac;
             catch(Exception exception)
             {
                 Console.WriteLine(exception);
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
 
