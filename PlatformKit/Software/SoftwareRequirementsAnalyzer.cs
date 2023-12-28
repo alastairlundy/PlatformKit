@@ -9,7 +9,7 @@
    */
 
 using System;
-
+using PlatformKit.FreeBSD;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -21,25 +21,31 @@ namespace PlatformKit.Software;
 /// </summary>
 public class SoftwareRequirementsAnalyzer
 {
-    protected OSAnalyzer _osAnalyzer;
+    private readonly WindowsAnalyzer _windowsAnalyzer;
+    private readonly MacOsAnalyzer _macOsAnalyzer;
+    private readonly LinuxAnalyzer _linuxAnalyzer;
+    private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
 
     public SoftwareRequirementsAnalyzer()
     {
-        _osAnalyzer = new OSAnalyzer();
+        _windowsAnalyzer = new WindowsAnalyzer();
+        _macOsAnalyzer = new MacOsAnalyzer();
+        _linuxAnalyzer = new LinuxAnalyzer();
+        _freeBsdAnalyzer = new FreeBsdAnalyzer();
     }
 
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)
     {
-        return new LinuxAnalyzer().IsAtLeastKernelVersion(requiredLinuxKernel);
+        return _linuxAnalyzer.IsAtLeastKernelVersion(requiredLinuxKernel);
     }
 
     public bool HasRequiredMacOsVersion(MacOsVersion requiredMacOsVersionVersion)
     {
-        return new MacOsAnalyzer().IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
+        return _macOsAnalyzer.IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
     }
 
     public bool HasRequiredWindowsVersion(WindowsVersion requiredWindowsVersion)
     {
-        return new WindowsAnalyzer().IsAtLeastWindowsVersion(requiredWindowsVersion);
+        return _windowsAnalyzer.IsAtLeastWindowsVersion(requiredWindowsVersion);
     }
 }
