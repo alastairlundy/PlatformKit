@@ -14,28 +14,25 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.4 series
-* Added support for more easily detecting what Linux Distro a Distro is based off of - (e.g. Pop!_OS is based off of Ubuntu and Ubuntu is based off of Debian)
-* Experimental support for FreeBSD based Runtime ID generation
-* Added new ``MacOsAnalyzer`` class - This is intended to replace the existing ``MacOSAnalyzer`` class
-* Added new ``FreeBsdAnalyzer`` class - This is intended to replace the existing ``FreeBSDAnalyzer`` class
-* Deprecated ``MacOSAnalyzer`` class - This will be removed in PlatformKit 4
-* Deprecated ``FreeBSDAnalyzer`` class - This will be removed in PlatformKit 4
-* Changed ``OSAnalyzer`` to no longer create new instances of ``WindowsAnalyzer``, ``MacOsAnalyzer``, ``LinuxAnalyzer``, and ``FreeBsdAnalyzer`` when detecting OS version. 
+        <PackageReleaseNotes>### Changes since 3.5.0
+* Added Build numbers assignments to WindowsVersion enum values
+    *  Note: Windows 10 Insider Preview and Windows 11 Insider Preview as well as Not Supported and Not Detected enumerated values are not assigned any build numbers.
+* Deprecated OSAnalyzer ``IsWindows()``, ``IsMac()``, and ``IsLinux()`` methods - These methods will be available only for projects targeting .NET Standard 2.0 or .NET Standard 2.1`` in PlatformKit 4 - This is to ensure that projects which do not have access to the newer OperatingSystem APIs on .NET 5 and onwards can continue to receive access to these methods and this functionality.
+* Deprecated ``ConvertStringToProcess`` method. This method will be replaced by the ``GetProcessesFromProcessName`` method which has identical functionality
+* Replaced the exception type thrown when attempting to detect a FreeBSD version on an OS which is not FreeBSD
 
 ### Notes
-* The ``MacOsAnalyzer`` class is functionally identical to the ``MacOSAnalyzer`` class. The only difference is the name.
-* The ``FreeBsdAnalyzer`` class is functionally identical to the ``FreeBSDAnalyzer`` class. The only difference is the name.</PackageReleaseNotes>
+* Final minor release of PlatformKit 3 - Bug fixes and Security Updates will continue if required in accordance with the PlatformKit Security Policy.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.5.0.0</AssemblyVersion>
-        <FileVersion>3.5.0.0</FileVersion>
-        <Version>3.5.0</Version>
-        <PackageVersion>3.5.0</PackageVersion>
+   <AssemblyVersion>3.6.0.0</AssemblyVersion>
+        <FileVersion>3.6.0.0</FileVersion>
+        <Version>3.6.0</Version>
+        <PackageVersion>3.6.0</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
