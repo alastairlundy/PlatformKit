@@ -108,21 +108,21 @@ namespace PlatformKit
         {
             try
             {
-                if (IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     return _windowsAnalyzer.DetectWindowsVersion();
                 }
-                if (IsLinux())
+                if (OperatingSystem.IsLinux())
                 {
                     return _linuxAnalyzer.DetectLinuxDistributionVersion();
                 }
-                if (IsMac())
+                if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
                 {
                     return _macOsAnalyzer.DetectMacOsVersion();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (IsFreeBSD())
+                if (OperatingSystem.IsFreeBSD())
                 {
                     return _freeBsdAnalyzer.DetectFreeBSDVersion();
                 }
