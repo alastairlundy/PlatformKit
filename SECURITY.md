@@ -10,12 +10,12 @@ Versions currently supported by Security Fixes.
 
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes and Security Fixes |
 |--| --|--|--|
-| 3.x from 3.5 onwards | 3.5.0, released on December 28th 2023 | 3.5.0, released on December 28th 2023 | Yes, until June 28th 2024 | 
+| 3.5 and 3.6 | 3.5.0, released on December 28th 2023 | 3.6.0, released on January 16th 2023 | Yes, until June 28th 2024 | 
 | 3.4 | 3.4.0, released on September 25th 2023 | 3.4.1, released on December 8th 2023 | Yes, until June 25th 2024 | 
 
 ## Reporting a Security Vulnerability
 
-To report a security vulnerability please email ``oss@platformkit.pro`` with the Email Subject line of "Security Vulnerability". We will try to reply to your email within 3-5 Business Days acknowledging receipt of your email.
+To report a security vulnerability please email ``oss@`` with the Email Subject line of "Security Vulnerability". We will try to reply to your email within 3-5 Business Days acknowledging receipt of your email.
 
 We will then investigate the issue further and decide whether or not to accept the vulnerability. We will then inform you whether we accept the vulnerability or not.
 
