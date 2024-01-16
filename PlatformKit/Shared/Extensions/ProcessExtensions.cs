@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit.Shared.Extensions
 {
@@ -20,6 +21,7 @@ namespace PlatformKit.Shared.Extensions
         /// Get the list of processes as a String Array
         /// </summary>
         /// <returns></returns>
+        ///
         public static string[] ToStringArray(this Process process)
         {
             var strList = new List<string>();
@@ -66,6 +68,37 @@ namespace PlatformKit.Shared.Extensions
         /// <param name="process"></param>
         /// <param name="processName"></param>
         /// <returns></returns>
+        public static Process GetProcessFromProcessName(this Process process, string processName)
+        {
+            processName = processName.Replace(".exe", string.Empty);
+
+            if (IsProcessRunning(process, processName) ||
+                IsProcessRunning(process, processName.ToLower()) ||
+                IsProcessRunning(process, processName.ToUpper())
+               )
+            {
+                Process[] processes = Process.GetProcesses();
+
+                foreach (Process p in processes)
+                {
+                    if (p.ProcessName.ToLower().Equals(processName.ToLower()))
+                    {
+                        return p;
+                    }
+                }
+            }
+
+            return null;
+            //  throw new Exception();
+        }
+
+        /// <summary>
+        /// Converts a String to a Process
+        /// </summary>
+        /// <param name="process"></param>
+        /// <param name="processName"></param>
+        /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public static Process ConvertStringToProcess(this Process process, string processName)
         {
             processName = processName.Replace(".exe", string.Empty);
