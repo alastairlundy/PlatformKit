@@ -37,7 +37,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public Version DetectFreeBSDVersion()
     {
-        if (OSAnalyzer.IsFreeBSD())
+        if (OperatingSystem.IsFreeBSD())
         {
             var version = _processManager.RunProcessLinux("", "uname", "-v");
 
