@@ -33,7 +33,7 @@ public class LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public LinuxDistroBase DetectDistroBase()
     {
-        if (OSAnalyzer.IsLinux())
+        if (OperatingSystem.IsLinux())
         {
             var osRel = GetLinuxDistributionInformation();
 
@@ -75,7 +75,7 @@ public class LinuxAnalyzer
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
                 
