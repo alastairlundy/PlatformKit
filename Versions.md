@@ -7,13 +7,15 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 3.4 | 3.4.1 | December 8th 2023 |
-| 3.3 | 3.3.1 | June 21st 2023 |
+| 3.6 | 3.6.0 | January 16th 2024 |
+| 3.5 | 3.5.0 | December 28th 2023 |
 
 ## Unsupported Versions
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 3.4 | 3.4.1 | December 8th 2023 |
+| 3.3 | 3.3.1 | June 21st 2023 |
 | 3.2 | 3.2.0.1 | January 26th 2023 |
 | 3.1 | 3.1.0 | November 24th 2022 |
 | 3.0 | 3.0.4 | November 24th 2022 |
