@@ -925,7 +925,7 @@ for (var index = 0; index < array.Length; index++)
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
-        public bool IsAtLeastWindowsVersion(WindowsVersion windowsVersion)
+        public bool IsAtLeastVersion(WindowsVersion windowsVersion)
         {
             if (OSAnalyzer.IsWindows())
             {

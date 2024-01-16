@@ -41,11 +41,11 @@ public class SoftwareRequirementsAnalyzer
 
     public bool HasRequiredMacOsVersion(MacOsVersion requiredMacOsVersionVersion)
     {
-        return _macOsAnalyzer.IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
+        return _macOsAnalyzer.IsAtLeastVersion(requiredMacOsVersionVersion);
     }
 
     public bool HasRequiredWindowsVersion(WindowsVersion requiredWindowsVersion)
     {
-        return _windowsAnalyzer.IsAtLeastWindowsVersion(requiredWindowsVersion);
+        return _windowsAnalyzer.IsAtLeastVersion(requiredWindowsVersion);
     }
 }

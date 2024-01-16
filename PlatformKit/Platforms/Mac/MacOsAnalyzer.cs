@@ -296,7 +296,7 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
     // ReSharper disable once InconsistentNaming
-    public bool IsAtLeastMacOSVersion(MacOsVersion macOsVersion)
+    public bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
         if (OSAnalyzer.IsMac())
         {
