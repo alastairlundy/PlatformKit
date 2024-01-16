@@ -35,8 +35,11 @@ namespace PlatformKit.Shared.Extensions
         }
         
         /// <summary>
-        /// Check to see if a process is running or not.
+        /// Check to see if a specified process is running or not.
         /// </summary>
+        /// <param name="process"></param>
+        /// <param name="processName"></param>
+        /// <returns></returns>
         public static bool IsProcessRunning(this Process process, string processName)
         {
             foreach (Process proc in Process.GetProcesses())
