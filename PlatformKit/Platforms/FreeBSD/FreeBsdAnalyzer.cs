@@ -9,16 +9,8 @@
    */
 
 using System;
-using PlatformKit.Internal.Deprecation;
-using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.FreeBSD;
-
-[Obsolete(DeprecationMessages.DeprecationV4)]
-public class FreeBSDAnalyzer : FreeBsdAnalyzer
-{
-    
-}
 
 /// <summary>
 /// A class to detect FreeBSD versions and features.
@@ -38,15 +30,9 @@ public class FreeBsdAnalyzer
     /// </summary>
     /// <returns></returns>
     public Version DetectFreeBSDVersion()
-    {
-        if (OSAnalyzer.IsFreeBSD())
+    { 
+        if (OSAnalyzer.IsWindows())
         {
-            var v = _processManager.RunProcessLinux("", "uname", "-v");
-            v = v.Replace("FreeBSD", String.Empty);
-
-            var arr = v.Split(' ');
-            
-
             var version = _processManager.RunProcessLinux("", "uname", "-v");
 
             version = version.Replace("FreeBSD", String.Empty);

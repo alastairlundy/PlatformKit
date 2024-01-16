@@ -9,11 +9,16 @@
    */
 
 using System;
-
+using System.Runtime.InteropServices;
 using PlatformKit.FreeBSD;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
+
+#if NETSTANDARD2_0
+
+#endif
 
 namespace PlatformKit
 {
@@ -32,6 +37,46 @@ namespace PlatformKit
             _linuxAnalyzer = new LinuxAnalyzer();
             _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
+
+        internal static bool IsWindows()
+        {
+#if NET5_0_OR_GREATER
+                  return OperatingSystem.IsWindows();
+#else
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+#endif
+        }
+        
+        internal static bool IsMac()
+        {
+#if NET5_0_OR_GREATER
+                  return OperatingSystem.IsMacOS();
+#else
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+#endif
+        }
+        
+        internal static bool IsLinux()
+        {
+#if NET5_0_OR_GREATER
+                  return OperatingSystem.IsLinux();
+#else
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+#endif
+        }
+        
+        // ReSharper disable once InconsistentNaming
+        internal static bool IsFreeBSD()
+        {
+#if NET5_0_OR_GREATER
+                  return OperatingSystem.IsFreeBSD();
+#else
+        #if NETCOREAPP3_0_OR_GREATER
+            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD);
+        #endif
+            throw new PlatformNotSupportedException();
+#endif
+        }
         
         /// <summary>
         /// Determine what OS is being run
@@ -39,7 +84,8 @@ namespace PlatformKit
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
         // ReSharper disable once InconsistentNaming
-        public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
+        public static System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
             System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
             // Check if it's windows
             osPlatform = IsWindows() ? System.Runtime.InteropServices.OSPlatform.Windows : osPlatform;
@@ -66,21 +112,21 @@ namespace PlatformKit
         {
             try
             {
-                if (OperatingSystem.IsWindows())
+                if (IsWindows())
                 {
                     return _windowsAnalyzer.DetectWindowsVersion();
                 }
-                if (OperatingSystem.IsLinux())
+                if (IsLinux())
                 {
                     return _linuxAnalyzer.DetectLinuxDistributionVersion();
                 }
-                if (OperatingSystem.IsMacOS())
+                if (IsMac())
                 {
                     return _macOsAnalyzer.DetectMacOsVersion();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (OperatingSystem.IsFreeBSD())
+                if (IsFreeBSD())
                 {
                     return _freeBsdAnalyzer.DetectFreeBSDVersion();
                 }

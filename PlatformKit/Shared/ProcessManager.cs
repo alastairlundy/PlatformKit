@@ -371,7 +371,6 @@ namespace PlatformKit
 #if  NETCOREAPP3_1_OR_GREATER
                 if (OSAnalyzer.IsFreeBSD())
                 {
-             //       PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(OpenUrlInBrowser));
                     throw new NotImplementedException();
                 }          
 #endif
@@ -381,7 +380,6 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-          //      PlatformKitAnalytics.ReportError(ex, nameof(OpenUrlInBrowser));
                 throw new Exception(ex.ToString());
             }
         }

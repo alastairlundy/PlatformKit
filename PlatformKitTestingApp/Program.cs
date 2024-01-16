@@ -48,7 +48,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
           
             //processManager.OpenUrlInBrowser("duckduckgo.com");
             
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
 
@@ -87,7 +87,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
               sysinfo.ToConsoleWriteLine();
             }
 
-            if (OSAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 Console.WriteLine("Is this AppleSilicon?: " + macAnalyzer.IsAppleSiliconMac());
                 Console.WriteLine("Mac Processor Type: " + macAnalyzer.GetMacProcessorType());
@@ -105,7 +105,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
 
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {  
                 Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
                 Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
