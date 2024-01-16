@@ -206,7 +206,6 @@ namespace PlatformKit.Identification
             return osVersion;
         }
 
-
         /// <summary>
         /// 
         /// </summary>
