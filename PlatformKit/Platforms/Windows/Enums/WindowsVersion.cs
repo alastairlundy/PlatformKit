@@ -22,11 +22,11 @@ namespace PlatformKit.Windows
         Win7 = 7600,
         // ReSharper disable once InconsistentNaming
         Win7SP1 = 7601,
-        WinServer_2008_R2,
-        Win8,
-        WinServer_2012,
-        Win8_1,
-        WinServer_2012_R2,
+        WinServer_2008_R2 = 7601,
+        Win8 = 9200,
+        WinServer_2012 = 9200,
+        Win8_1 = 9600,
+        WinServer_2012_R2 = 9600,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
         /// </summary>

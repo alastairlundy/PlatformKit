@@ -13,6 +13,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
+using PlatformKit.Internal.Deprecation;
+
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
@@ -158,7 +160,6 @@ namespace PlatformKit
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-         //       PlatformKitAnalytics.ReportError(ex, nameof(RunProcessMac));
                 throw new Exception(ex.ToString());
             }
         }
@@ -207,7 +208,6 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-          //      PlatformKitAnalytics.ReportError(ex, nameof(RunProcessLinux));
                 throw new Exception(ex.ToString());
             }
         }

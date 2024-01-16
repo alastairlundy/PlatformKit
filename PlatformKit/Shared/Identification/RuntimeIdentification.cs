@@ -88,6 +88,12 @@ namespace PlatformKit.Identification
                 {
                     osName = "osx";
                 }
+                #if NETCOREAPP3_0_OR_GREATER
+                if (OSAnalyzer.IsFreeBSD())
+                {
+                    osName = "freebsd";
+                }
+                #endif
                 if (OSAnalyzer.IsLinux())
                 {
                     if (identifierType == RuntimeIdentifierType.Generic)
@@ -139,22 +145,13 @@ namespace PlatformKit.Identification
                         case WindowsVersion.Win7:
                             osVersion = "7";
                             break;
-                        case WindowsVersion.Win7SP1:
+                        case WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2:
                             osVersion = "7";
                             break;
-                        case WindowsVersion.WinServer_2008_R2:
-                            osVersion = "7";
-                            break;
-                        case WindowsVersion.Win8:
+                        case WindowsVersion.Win8 or WindowsVersion.WinServer_2012:
                             osVersion = "8";
                             break;
-                        case WindowsVersion.WinServer_2012:
-                            osVersion = "8";
-                            break;
-                        case WindowsVersion.Win8_1:
-                            osVersion = "81";
-                            break;
-                        case WindowsVersion.WinServer_2012_R2:
+                        case WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2:
                             osVersion = "81";
                             break;
                         case WindowsVersion.NotDetected:
@@ -213,7 +210,6 @@ namespace PlatformKit.Identification
 
             return osVersion;
         }
-
 
         /// <summary>
         /// 

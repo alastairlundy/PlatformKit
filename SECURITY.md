@@ -1,8 +1,4 @@
 # Security and Support Policies
-
-## Supported Versions
-Starting from January 2022 onwards, support for new and old releases has been reduced. 
-
 The support policy now will be to support the latest 2 minor releases on a major version if both are on the same major version and to support only the latest minor release per version if multiple major versions are supported.
 
 ### Currently Supported Versions

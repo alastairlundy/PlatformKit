@@ -1,6 +1,5 @@
 /*
-      PlatformKit
-      
+      PlatformKit      
       Copyright (c) Alastair Lundy 2018-2023
       
       This Source Code Form is subject to the terms of the Mozilla Public
