@@ -91,36 +91,5 @@ namespace PlatformKit.Extensions
             return null;
             //  throw new Exception();
         }
-
-        /// <summary>
-        /// Converts a String to a Process
-        /// </summary>
-        /// <param name="process"></param>
-        /// <param name="processName"></param>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public static Process ConvertStringToProcess(this Process process, string processName)
-        {
-            processName = processName.Replace(".exe", string.Empty);
-
-            if (IsProcessRunning(process, processName) ||
-                IsProcessRunning(process, processName.ToLower()) ||
-                IsProcessRunning(process, processName.ToUpper())
-               )
-            {
-                Process[] processes = Process.GetProcesses();
-
-                foreach (Process p in processes)
-                {
-                    if (p.ProcessName.ToLower().Equals(processName.ToLower()))
-                    {
-                        return p;
-                    }
-                }
-            }
-
-            return null;
-            //  throw new Exception();
-        }
     }
 }
