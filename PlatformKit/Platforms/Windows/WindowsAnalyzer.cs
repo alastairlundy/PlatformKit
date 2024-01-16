@@ -11,7 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 
 namespace PlatformKit.Windows;
@@ -939,4 +939,21 @@ for (var index = 0; index < array.Length; index++)
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="windowsVersion"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+        public bool IsAtLeastVersion(Version windowsVersion)
+        {
+            if (OSAnalyzer.IsWindows())
+            {
+                return IsAtLeastVersion(GetWindowsVersionToEnum(windowsVersion));
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
+        }
 }

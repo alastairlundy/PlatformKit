@@ -10,6 +10,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 
 
@@ -309,6 +310,12 @@ namespace PlatformKit.Mac;
             throw new PlatformNotSupportedException();
         }
     }
+    
+    public bool IsAtLeastVersion(Version macOsVersion)
+    {
+        if (OSAnalyzer.IsMac())
+        {
+            return IsAtLeastVersion(GetMacOsVersionToEnum(macOsVersion));
         }
         else
         {
