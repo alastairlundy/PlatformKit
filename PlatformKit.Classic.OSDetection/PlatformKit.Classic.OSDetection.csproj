@@ -11,10 +11,11 @@
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
         <PackageTags>OS Detection</PackageTags>
-        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <PackageReleaseNotes>Fixed Issues with re-adding Windows, Linux, and macOS detection to PlatformKit.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <IncludeContentInPack>true</IncludeContentInPack>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <Version>1.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,6 +31,10 @@
             <PackagePath>LICENSE.txt</PackagePath>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PlatformKit" Version="3.6.0" />
     </ItemGroup>
 
 </Project>
