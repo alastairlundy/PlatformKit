@@ -632,23 +632,17 @@ for (var index = 0; index < array.Length; index++)
                 return true;
             case WindowsVersion.Win10_v1511:
                 return true;
-            case WindowsVersion.Win10_v1607:
-                return true;
-            case WindowsVersion.Win10_Server2016:
+            case WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016:
                 return true;
             case WindowsVersion.Win10_v1703:
                 return true;
             case WindowsVersion.Win10_v1709_Mobile:
                 return true;
-            case WindowsVersion.Win10_Server_v1709:
-                return true;
-            case WindowsVersion.Win10_v1709:
+            case WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709:
                 return true;
             case WindowsVersion.Win10_v1803:
                 return true;
-            case WindowsVersion.Win10_v1809:
-                return true;
-            case WindowsVersion.Win10_Server2019:
+            case WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019:
                 return true;
             case WindowsVersion.Win10_v1903:
                 return true;
@@ -902,23 +896,17 @@ for (var index = 0; index < array.Length; index++)
             return windowsVersion switch
             {
                 WindowsVersion.Win7 => new Version(6, 1, 7600),
-                WindowsVersion.Win7SP1 => new Version(6, 1, 7601),
-                WindowsVersion.WinServer_2008_R2 => new Version(6, 1, 7600),
-                WindowsVersion.Win8 => new Version(6, 2, 9200),
-                WindowsVersion.WinServer_2012 => new Version(6, 2, 9200),
-                WindowsVersion.Win8_1 => new Version(6, 3, 9600),
-                WindowsVersion.WinServer_2012_R2 => new Version(6, 3, 9600),
+                WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2 => new Version(6, 1, 7601),
+                WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => new Version(6, 2, 9200),
+                WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => new Version(6, 3, 9600),
                 WindowsVersion.Win10_v1507 => new Version(10, 0, 10240),
                 WindowsVersion.Win10_v1511 => new Version(10, 0, 10586),
-                WindowsVersion.Win10_v1607 => new Version(10, 0, 14393),
-                WindowsVersion.Win10_Server2016 => new Version(10, 0, 14393),
+                WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016 => new Version(10, 0, 14393),
                 WindowsVersion.Win10_v1703 => new Version(10, 0, 15063),
                 WindowsVersion.Win10_v1709_Mobile => new Version(10, 0, 15254),
-                WindowsVersion.Win10_v1709 => new Version(10, 0, 16299),
-                WindowsVersion.Win10_Server_v1709 => new Version(10, 0, 16299),
+                WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709=> new Version(10, 0, 16299),
                 WindowsVersion.Win10_v1803 => new Version(10, 0, 17134),
-                WindowsVersion.Win10_v1809 => new Version(10, 0, 17763),
-                WindowsVersion.Win10_Server2019 => new Version(10, 0, 17763),
+                WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019=> new Version(10, 0, 17763),
                 WindowsVersion.Win10_v1903 => new Version(10,0, 18362),
                 WindowsVersion.Win10_v1909 => new Version(10,0, 18363),
                 WindowsVersion.Win10_v2004 => new Version(10,0, 19041),
