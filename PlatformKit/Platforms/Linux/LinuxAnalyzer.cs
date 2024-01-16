@@ -1,7 +1,7 @@
 /*
       PlatformKit
       
-      Copyright (c) Alastair Lundy 2018-2023
+      Copyright (c) Alastair Lundy 2018-2024
       
       This Source Code Form is subject to the terms of the Mozilla Public
       License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,7 +10,7 @@
 
 using System;
 using System.IO;
-
+using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 
@@ -87,8 +87,7 @@ public class LinuxAnalyzer
                     {
                         resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
                     }
-
-                   
+                    
                     if (resultArray[index].ToUpper().Contains("NAME=") 
                         && !resultArray[index].ToUpper().Contains("CODE") 
                         && !resultArray[index].ToUpper().Contains("PRETTY"))
@@ -181,17 +180,9 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var dotCounter = 0;
-
                 var version = DetectLinuxDistributionVersionAsString();
 
-                foreach (var c in version)
-                {
-                    if (c == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
+                var dotCounter = version.CountDotsInString();
 
                 if (dotCounter == 1)
                 {
@@ -271,53 +262,7 @@ public class LinuxAnalyzer
             {
                 var detected = DetectLinuxKernelVersion();
 
-                var expected = linuxKernelVersion;
-
-                if (detected.Major > expected.Major)
-                {
-                    return true;
-                }
-                else if(detected.Major == expected.Major)
-                {
-                    if (detected.Minor > expected.Minor)
-                    {
-                        return true;
-                    }
-                    else if (detected.Minor == expected.Minor)
-                    {
-                        if (detected.Build > expected.Build)
-                        {
-                            return true;
-                        }
-                        else if (detected.Build == expected.Build)
-                        {
-                            if (detected.Revision > expected.Revision)
-                            {
-                                return true;
-                            }
-                            else if (detected.Revision == expected.Revision)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
+                return detected.IsAtLeast(linuxKernelVersion);
             }
 
             throw new PlatformNotSupportedException();

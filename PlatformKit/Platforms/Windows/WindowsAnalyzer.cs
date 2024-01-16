@@ -851,15 +851,7 @@ for (var index = 0; index < array.Length; index++)
                         .Replace("Microsoft Windows", string.Empty)
                         .Replace(" ", string.Empty);
 
-                    var dotCounter = 0;
-
-                    foreach (var t in description)
-                    {
-                        if (t.Equals('.'))
-                        {
-                            dotCounter++;
-                        }
-                    }
+                    var dotCounter = description.CountDotsInString();
                     
                     if (dotCounter == 1)
                     {
@@ -939,9 +931,7 @@ for (var index = 0; index < array.Length; index++)
             {
                 var detected = DetectWindowsVersion();    
 
-                var expected = GetWindowsVersionFromEnum(windowsVersion);
-            
-                return (detected.Build >= expected.Build);
+                return detected.IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
             else
             {

@@ -1,7 +1,7 @@
 ﻿/*
       PlatformKit
       
-      Copyright (c) Alastair Lundy 2018-2023
+      Copyright (c) Alastair Lundy 2018-2024
       
       This Source Code Form is subject to the terms of the Mozilla Public
       License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,6 +9,7 @@
    */
 
 using System;
+using PlatformKit.Extensions;
 
 namespace PlatformKit.FreeBSD;
 
@@ -33,23 +34,13 @@ public class FreeBsdAnalyzer
     { 
         if (OSAnalyzer.IsWindows())
         {
-            var version = _processManager.RunProcessLinux("", "uname", "-v");
-
-            version = version.Replace("FreeBSD", String.Empty);
+            var version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", String.Empty);
 
             var arr = version.Split(' ');
 
             var rel = arr[0].Replace("-release", String.Empty);
 
-            int dotCounter = 0;
-
-            foreach (char c in rel)
-            {
-                if (c == '.')
-                {
-                    dotCounter++;
-                }
-            }
+            int dotCounter = rel.CountDotsInString();
 
             if (dotCounter == 1)
             {

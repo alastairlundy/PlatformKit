@@ -302,29 +302,13 @@ namespace PlatformKit.Mac;
         {
             var detected = DetectMacOsVersion();
 
-            var expected = GetMacOsVersionFromEnum(macOsVersion);
-
-            if (detected.Major >= expected.Major)
-            {
-                if (detected.Minor >= expected.Minor)
-                {
-                    if (detected.Build >= expected.Build)
-                    {
-                        if (detected.Revision >= expected.Revision)
-                        {
-                            return true;
-                        }
-
-                        return false;
-                    }
-
-                    return false;
-                }
-
-                return false;
-            }
-
-            return false;
+            return detected.IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
         }
         else
         {
