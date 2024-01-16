@@ -17,12 +17,13 @@
         <PackageReleaseNotes>### Changes since 3.5.0
 * Added Build numbers assignments to WindowsVersion enum values
     *  Note: Windows 10 Insider Preview and Windows 11 Insider Preview as well as Not Supported and Not Detected enumerated values are not assigned any build numbers.
-* Deprecated OSAnalyzer ``IsWindows()``, ``IsMac()``, and ``IsLinux()`` methods - These methods will be available only for projects targeting .NET Standard 2.0 or .NET Standard 2.1`` in PlatformKit 4 - This is to ensure that projects which do not have access to the newer OperatingSystem APIs on .NET 5 and onwards can continue to receive access to these methods and this functionality.
+* Deprecated OSAnalyzer ``IsWindows()``, ``IsMac()``, and ``IsLinux()`` methods - These methods will be available only for projects targeting .NET Standard 2.0 or .NET Standard 2.1`` in PlatformKit 4 - This is to ensure that projects which do not have access to the newer OperatingSystem APIs on .NET 5 and onwards can continue to receive access to these methods and this functionality. - Please use the OperatingSystem APIs on .NET 5 if your project is targeting .NET 5 or newer.
 * Deprecated ``ConvertStringToProcess`` method. This method will be replaced by the ``GetProcessesFromProcessName`` method which has identical functionality
 * Replaced the exception type thrown when attempting to detect a FreeBSD version on an OS which is not FreeBSD
 
 ### Notes
-* Final minor release of PlatformKit 3 - Bug fixes and Security Updates will continue if required in accordance with the PlatformKit Security Policy.</PackageReleaseNotes>
+* Final minor release of PlatformKit 3 - Bug fixes and Security Updates will continue if required in accordance with the PlatformKit Security Policy.
+* PlatformKit 4 Pre-release builds are expected to commence within a few weeks</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
