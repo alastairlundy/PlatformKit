@@ -6,7 +6,7 @@
         <Title>PlatformKit.Classic.OSDetection</Title>
         <Authors>Alastair Lundy</Authors>
         <Description>Add Windows, macOS, and Linux detection to .NET Standard 2 projects.</Description>
-        <Copyright>Copyright (c) Alastair Lundy 2023</Copyright>
+        <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit</PackageProjectUrl>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
