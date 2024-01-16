@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>PlatformKit.Classic.OSDetection</Title>
+        <Authors>Alastair Lundy</Authors>
+        <Description>Add Windows, macOS, and Linux detection to .NET Standard 2 projects.</Description>
+        <Copyright>Copyright (c) Alastair Lundy 2023</Copyright>
+        <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit</PackageProjectUrl>
+        <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
+        <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
+        <PackageTags>OS Detection</PackageTags>
+        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="platformkit_logo_512x.jpg">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\LICENSE.txt">
+            <Link>LICENSE.txt</Link>
+            <PackagePath>LICENSE.txt</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

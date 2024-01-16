@@ -11,7 +11,6 @@
 using System;
 
 using PlatformKit.FreeBSD;
-using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -32,52 +31,6 @@ namespace PlatformKit
             _macOsAnalyzer = new MacOsAnalyzer();
             _linuxAnalyzer = new LinuxAnalyzer();
             _freeBsdAnalyzer = new FreeBsdAnalyzer();
-        }
-
-        /// <summary>
-        /// Returns whether or not the current OS is Windows.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public static bool IsWindows()
-        {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
-        }
-
-        /// <summary>
-        /// Returns whether or not the current OS is macOS.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public static bool IsMac()
-        {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
-        }
-        
-        /// <summary>
-        /// Returns whether or not the current OS is Linux based.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public static bool IsLinux()
-        {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
-        }
-
-        // ReSharper disable once InconsistentNaming
-        /// <summary>
-        /// Returns whether or not the current OS is FreeBSD based.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
-        public static bool IsFreeBSD()
-        {
-#if NETCOREAPP3_0_OR_GREATER
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-#else
-            throw new PlatformNotSupportedException();
-#endif
         }
         
         /// <summary>
@@ -113,15 +66,15 @@ namespace PlatformKit
         {
             try
             {
-                if (IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     return _windowsAnalyzer.DetectWindowsVersion();
                 }
-                if (IsLinux())
+                if (OperatingSystem.IsLinux())
                 {
                     return _linuxAnalyzer.DetectLinuxDistributionVersion();
                 }
-                if (IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     return _macOsAnalyzer.DetectMacOsVersion();
                 }
