@@ -21,6 +21,9 @@ public class FreeBSDAnalyzer : FreeBsdAnalyzer
     
 }
 
+/// <summary>
+/// A class to detect FreeBSD versions and features.
+/// </summary>
 public class FreeBsdAnalyzer
 {
     private readonly ProcessManager _processManager;
@@ -70,7 +73,7 @@ public class FreeBsdAnalyzer
         }
         else
         {
-            throw new OperatingSystemDetectionException();
+            throw new PlatformNotSupportedException();
         }
     }
 }
