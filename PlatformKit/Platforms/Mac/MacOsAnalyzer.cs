@@ -345,19 +345,11 @@ namespace PlatformKit.Mac;
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
 
-            int dotCounter = 0;
-            
-            foreach(var s in arr[1])
-            {
-                if (s == '.')
-                {
-                    dotCounter++;
-                }
-            }
+            int dotCounter = arr[1].CountDotsInString();
 
             if (dotCounter == 2)
             {
-                arr[1] = arr[1] + ".0";
+                arr[1] += ".0";
                 return Version.Parse(arr[1]);
             }
             if (dotCounter == 3)
