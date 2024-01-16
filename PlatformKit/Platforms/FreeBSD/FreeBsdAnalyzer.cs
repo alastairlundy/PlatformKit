@@ -58,4 +58,24 @@ public class FreeBsdAnalyzer
             throw new PlatformNotSupportedException();
         }
     }
+    
+    /// <summary>
+    /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
+    /// </summary>
+    /// <param name="expectedVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public bool IsAtLeastVersion(Version expectedVersion)
+    {
+        if (OSAnalyzer.IsFreeBSD())
+        {
+            var detected = DetectFreeBSDVersion();
+
+            return detected.IsAtLeast((expectedVersion));
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
 }
