@@ -113,15 +113,15 @@ namespace PlatformKit
         {
             try
             {
-                if (OperatingSystem.IsWindows())
+                if (IsWindows())
                 {
                     return _windowsAnalyzer.DetectWindowsVersion();
                 }
-                if (OperatingSystem.IsLinux())
+                if (IsLinux())
                 {
                     return _linuxAnalyzer.DetectLinuxDistributionVersion();
                 }
-                if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
+                if (IsMac())
                 {
                     return _macOsAnalyzer.DetectMacOsVersion();
                 }
