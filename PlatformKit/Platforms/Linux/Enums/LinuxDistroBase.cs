@@ -14,5 +14,6 @@ public enum LinuxDistroBase
     Debian,
     Ubuntu,
     Arch,
+    Manjaro,
     Fedora
 }

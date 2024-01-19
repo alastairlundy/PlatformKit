@@ -49,6 +49,10 @@ public class LinuxAnalyzer
             {
                 return LinuxDistroBase.Arch;
             }
+            if (osRel.Identifier_Like.ToLower().Contains("manjaro"))
+            {
+                return LinuxDistroBase.Manjaro;
+            }
             if (osRel.Identifier_Like.ToLower().Contains("fedora"))
             {
                 return LinuxDistroBase.Fedora;
@@ -61,7 +65,6 @@ public class LinuxAnalyzer
             throw new PlatformNotSupportedException();
         }
     }
-    
     
         /// <summary>
         /// Detects Linux Distribution information and returns it.
