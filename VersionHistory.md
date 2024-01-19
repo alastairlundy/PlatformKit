@@ -6,6 +6,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 4.0
 | Version | Availability | Changelog |
 |-|-|-|
+| 4.0 Alpha 2 | January 19th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.2 | 
 | 4.0 Alpha 1 | January 16th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.1 | 
 
 ## Stable Releases
