@@ -25,13 +25,6 @@ namespace PlatformKit
     /// </summary>
     public class ProcessManager
     {
-        // ReSharper disable once InconsistentNaming
-        protected readonly OSAnalyzer _osAnalyzer;
-
-        public ProcessManager()
-        {
-            _osAnalyzer = new OSAnalyzer();
-        }
 
         /// <summary>
         ///  Run a Process with Arguments
