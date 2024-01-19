@@ -86,7 +86,7 @@ public class SteamOsAnalyzer
                 }
                 else
                 {
-                    throw new ArgumentException();
+                    return SteamOSMode.OsIsNotSteamOS;
                 }
             }
             
@@ -105,11 +105,11 @@ public class SteamOsAnalyzer
                 }
                 else
                 {
-                    throw new ArgumentException();
+                    return SteamOSMode.OsIsNotSteamOS;
                 }
             }
 
-            throw new PlatformNotSupportedException();
+            return SteamOSMode.OsIsNotSteamOS;
         }
         else
         {

@@ -14,5 +14,7 @@ namespace PlatformKit.Linux.Enums;
 public enum SteamOSMode
 {
     GamingMode,
-    DesktopMode
+    DesktopMode,
+    // ReSharper disable once InconsistentNaming
+    OsIsNotSteamOS
 }
