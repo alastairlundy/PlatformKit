@@ -16,12 +16,8 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
-#if NETSTANDARD2_0
+namespace PlatformKit;
 
-#endif
-
-namespace PlatformKit
-{
     // ReSharper disable once InconsistentNaming
     public class OSAnalyzer
     {
@@ -116,4 +112,3 @@ namespace PlatformKit
             }
         }
     }
-}
