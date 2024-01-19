@@ -14,32 +14,17 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 3.x
-
-### Additions
-* Added ``StringExtensions`` extension class
-* Added ``VersionExtensions`` extensions class
-* Added overloads to the ``IsAtLeastVersion`` methods in WindowsAnalyzer and MacOsAnalyzer to use System.Version objects as parameters.
-
-### Changes
-* Changed ``IsAtLeastWindowsVersion`` method to ``IsAtLeastVersion``
-* Changed ``IsAtLeastMacOsVersion`` method to ``IsAtLeastVersion`` 
-* Made the ``IsWindows``, ``IsMac``, ``IsLinux``, and ``IsFreeBSD`` methods internal only - .NET Standard 2.0 projects needing access to these methods should add the ``PlatformKit.Classic.OSDetection`` nuget package.
-
-### Removals
-* Removed ``FreeBSDAnalyzer`` class - Please use the ``FreeBsdAnalyzer`` class instead.
-* Removed ``MacOSAnalyzer class - Please use the ``MacOsAnalyzer`` class instead.
-* Removed the ``GetOSPlatform`` method from ``OSAnalyzer``</PackageReleaseNotes>
+        <PackageReleaseNotes>* Fixed an issue where a StackOverFlow would occur due to recursive OSAnalyzer instances being created in ProcessManager</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net6.0;netstandard2.0;net8.0</TargetFrameworks>
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0-alpha.1</Version>
-        <PackageVersion>4.0.0-alpha.1</PackageVersion>
+        <PackageVersion>4.0.0-alpha.2</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
