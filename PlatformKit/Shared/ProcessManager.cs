@@ -300,7 +300,7 @@ namespace PlatformKit
 
                     if (!Directory.Exists(location))
                     {
-                        throw new DirectoryNotFoundException("Could not find directory '" + nameof(location) + "' with value: " + location);
+                        throw new DirectoryNotFoundException("Could not find directory " + location);
                     }
                     
                     return RunProcessLinux(location, command, processArguments, processStartInfo);
