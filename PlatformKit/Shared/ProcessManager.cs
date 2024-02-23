@@ -361,7 +361,7 @@ namespace PlatformKit
                     task.Start();
                     return true;
                 }
-#if  NETCOREAPP3_1_OR_GREATER
+#if  NETCOREAPP3_0_OR_GREATER
                 if (OSAnalyzer.IsFreeBSD())
                 {
                     throw new NotImplementedException();
