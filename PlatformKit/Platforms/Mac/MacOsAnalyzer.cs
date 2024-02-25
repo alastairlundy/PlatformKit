@@ -377,7 +377,7 @@ namespace PlatformKit.Mac;
     /// Detects macOS's XNU Version.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Not supported on platforms other than macOS</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectXnuVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -422,7 +422,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectMacOsVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -468,7 +468,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if not run o n macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public string DetectMacOsBuildNumber()
     {
         if (OSAnalyzer.IsMac())
