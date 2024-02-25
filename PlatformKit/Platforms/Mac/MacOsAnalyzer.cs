@@ -189,7 +189,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     /// <exception cref="Exception"></exception>
     public MacOsVersion GetMacOsVersionToEnum(Version input)
     {
@@ -265,7 +265,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException">Throws an exception if an unsupported macOS version is provided.</exception>
-    /// <exception cref="MacOsVersionDetectionException">Throws an exception if detection fails.</exception>
+    /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)
@@ -307,7 +307,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastMacOSVersion(MacOsVersion macOsVersion)
     {
@@ -366,7 +366,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// Detects the Darwin Version on macOS
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectDarwinVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -407,7 +407,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// Detects macOS's XNU Version.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Not supported on platforms other than macOS</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectXnuVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -452,7 +452,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectMacOsVersion()
     {
         if (OSAnalyzer.IsMac())
@@ -498,7 +498,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if not run o n macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public string DetectMacOsBuildNumber()
     {
         if (OSAnalyzer.IsMac())
