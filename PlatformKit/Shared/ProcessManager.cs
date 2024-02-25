@@ -332,7 +332,6 @@ namespace PlatformKit
                     return RunProcessLinux(location, command, processArguments, processStartInfo);
                 }
 
-                //      PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunLinuxCommand));
                 throw new PlatformNotSupportedException();
             }
             catch (Exception exception)
