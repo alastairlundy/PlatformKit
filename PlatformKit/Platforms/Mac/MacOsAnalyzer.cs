@@ -106,7 +106,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         }    
     
         /// <summary>
-        /// 
+        /// Returns whether the Mac where this method is run has Secure Virtual Memory enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -129,7 +129,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         }
     
         /// <summary>
-        /// 
+        ///  Returns whether the Mac where this method is run has System Integrity Protection enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -152,7 +152,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         }
 
         /// <summary>
-        /// 
+        /// Returns if the Mac where the method is called has Activation Lock enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
