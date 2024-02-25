@@ -253,7 +253,7 @@ namespace PlatformKit.Mac;
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException">Throws an exception if an unsupported macOS version is provided.</exception>
-    /// <exception cref="MacOsVersionDetectionException">Throws an exception if detection fails.</exception>
+    /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
     public Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
         switch (macOsVersion)
