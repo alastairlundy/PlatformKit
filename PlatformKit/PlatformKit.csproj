@@ -4,7 +4,7 @@
         <Authors>Alastair Lundy</Authors>
         <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/NeverSpyTech/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
-        <Copyright>Copyright (c) Alastair Lundy 2018-2023</Copyright>
+        <Copyright>Copyright (c) Alastair Lundy 2018-2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit/</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>

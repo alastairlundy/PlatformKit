@@ -1,7 +1,7 @@
 /*
     PlatformKit
     
-    Copyright (c) Alastair Lundy 2018-2023
+    Copyright (c) Alastair Lundy 2018-2024
     
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,7 +9,6 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
