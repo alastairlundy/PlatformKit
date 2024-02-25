@@ -160,10 +160,6 @@ public class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
                         linuxDistributionInformation.VersionCodename = resultArray[index];
                     }
-                   
-                 #if DEBUG   
-                    Console.WriteLine("After: " + resultArray[index]);
-                    #endif
                 }
             
                 return linuxDistributionInformation;
