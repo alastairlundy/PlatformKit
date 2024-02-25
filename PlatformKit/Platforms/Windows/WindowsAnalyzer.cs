@@ -881,7 +881,7 @@ for (var index = 0; index < array.Length; index++)
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
 

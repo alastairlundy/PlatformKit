@@ -65,8 +65,7 @@ namespace PlatformKit.Windows
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
     }
