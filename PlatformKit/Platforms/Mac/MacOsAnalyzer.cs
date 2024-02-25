@@ -350,7 +350,7 @@ namespace PlatformKit.Mac;
     /// Detects the Darwin Version on macOS
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectDarwinVersion()
     {
         if (OSAnalyzer.IsMac())
