@@ -18,7 +18,7 @@
 * Removed instances of re-throwing exceptions - This should make for easier troubleshooting of any thrown exceptions.
 * Fixed a typo in an in code comment in macOS Analyzer
 * Updated macOS Analyzer in code comments to be more consistent about the exception details (e.g. when they're thrown)
-* Removed  development debugging code in LinuxOSAnalyzer that could needlessly fill up the console/terminal output</PackageReleaseNotes>
+* Removed development debugging code in LinuxAnalyzer that could needlessly fill up the console/terminal output</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
