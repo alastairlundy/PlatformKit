@@ -293,7 +293,7 @@ namespace PlatformKit.Mac;
     /// <summary>
     /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
     /// </summary>
-    /// <param name="macOsVersion"></param>
+    /// <param name="macOsVersion">A MacOsVersion enum representing a major version of macOS.</param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
@@ -311,6 +311,12 @@ namespace PlatformKit.Mac;
         }
     }
     
+    /// <summary>
+    /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
+    /// </summary>
+    /// <param name="macOsVersion"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public bool IsAtLeastVersion(Version macOsVersion)
     {
         if (OSAnalyzer.IsMac())
