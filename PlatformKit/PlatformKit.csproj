@@ -14,18 +14,21 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since PlatformKit 3.6.0
-* Fixed an issue where a StackOverFlow exception would occur when using the ProcessManager class due to recursive OSAnalyzer instances being created in ProcessManager</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.6.1
+* Removed instances of re-throwing exceptions - This should make for easier troubleshooting of any thrown exceptions.
+* Fixed a typo in an in code comment in macOS Analyzer
+* Updated macOS Analyzer in code comments to be more consistent about the exception details (e.g. when they're thrown)
+* Removed  development debugging code in LinuxOSAnalyzer that could needlessly fill up the console/terminal output</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.6.1.0</AssemblyVersion>
-        <FileVersion>3.6.1.0</FileVersion>
-        <Version>3.6.1</Version>
-        <PackageVersion>3.6.1</PackageVersion>
+   <AssemblyVersion>3.6.2.0</AssemblyVersion>
+        <FileVersion>3.6.2.0</FileVersion>
+        <Version>3.6.2</Version>
+        <PackageVersion>3.6.2</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
