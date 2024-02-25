@@ -295,7 +295,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any platform besides macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
