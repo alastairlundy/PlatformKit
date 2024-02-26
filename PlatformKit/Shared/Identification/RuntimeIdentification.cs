@@ -44,7 +44,7 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
         protected string GetArchitectureString()
@@ -65,7 +65,7 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Returns the OS name as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
@@ -76,7 +76,7 @@ namespace PlatformKit.Identification
 
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
-                return "any";
+                return "any";TFM
             }
             else
             {
@@ -119,7 +119,7 @@ namespace PlatformKit.Identification
         }
         
         /// <summary>
-        /// 
+        /// Returns the OS version as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
@@ -212,7 +212,9 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Programmatically generates a .NET Runtime Identifier.
+        /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
+        /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
@@ -241,7 +243,9 @@ namespace PlatformKit.Identification
         }
         
         /// <summary>
-        /// 
+        /// Programmatically generates a .NET Runtime Identifier.
+        /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
+        /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <returns></returns>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
@@ -317,7 +321,7 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// Detects the TFM if running on .NET 5 or later and generates the generic TFM if running on .NET Standard 2.0 or later.
+        /// Detects the RuntimeID if running on .NET 5 or later and generates the generic RuntimeID if running on .NET Standard 2.0 or later.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
@@ -338,7 +342,7 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns></returns>
         public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
