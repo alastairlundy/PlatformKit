@@ -117,3 +117,6 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
 Console.WriteLine("PlatformKit Version: " + PlatformIdentification.GetPlatformKitVersion().ToString());
 
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
+            
+            Console.WriteLine(RuntimeInformation.RuntimeIdentifier);
+            Console.WriteLine(RuntimeInformation.FrameworkDescription);
