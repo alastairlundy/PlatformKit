@@ -243,7 +243,7 @@ namespace PlatformKit.Identification
         }
         
         /// <summary>
-        /// Programmatically generates a .NET Runtime Identifier.
+        /// Programmatically generates a .NET Runtime Identifier based on the system calling the method.
         /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
         /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
