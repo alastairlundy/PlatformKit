@@ -42,7 +42,6 @@ namespace PlatformKit.Windows
 
                     if (output == null)
                     {
-                     //   PlatformKitAnalytics.ReportError(new ArgumentException(), nameof(Get));
                         throw new ArgumentNullException();
                     }
                     
