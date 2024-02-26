@@ -12,13 +12,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using PlatformKit.Extensions;
-using PlatformKit.FreeBSD;
+
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
+using PlatformKit.FreeBSD;
+
 
 // ReSharper disable InconsistentNaming
 
@@ -430,7 +433,7 @@ namespace PlatformKit.Identification
                         {
                             return stringBuilder.ToString();
                         }
-                        else if(targetFrameworkType == TargetFrameworkType.OperatingSystemSpecific)
+                        else if(targetFrameworkType == TargetFrameworkType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkType.OperatingSystemVersionSpecific)
                         {
                             if (OperatingSystem.IsMacOS())
                             {
@@ -480,6 +483,64 @@ namespace PlatformKit.Identification
                                     stringBuilder.Append("browser");
                                 }
                             }
+
+
+                            if (targetFrameworkType == TargetFrameworkType.OperatingSystemVersionSpecific && version.Major >= 5)
+                            {
+                                if (OperatingSystem.IsMacOS())
+                                {
+                                    MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
+                                    var macOsVersion = macOsAnalyzer.DetectMacOsVersion();
+
+                                    stringBuilder.Append(macOsVersion.Major);
+                                    stringBuilder.Append(".");
+                                    stringBuilder.Append(macOsVersion.Minor);
+                                }
+                                else if (OperatingSystem.IsLinux())
+                                {
+                                    //Do nothing because Linux doesn't have a version specific TFM.
+                                }
+                                else if (OperatingSystem.IsWindows())
+                                {
+                                    WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
+                                    var windowsVersion = windowsAnalyzer.DetectWindowsVersion();
+
+                                    var windowsVersionEnum = windowsAnalyzer.GetWindowsVersionToEnum();
+
+                                    switch (windowsVersionEnum)
+                                    {
+                                        case WindowsVersion.Win7 or WindowsVersion.Win7SP1:
+                                            stringBuilder.Append("7.0");
+                                            break;
+                                        case WindowsVersion.Win8:
+                                            stringBuilder.Append("8.0");
+                                            break;
+                                        case WindowsVersion.Win8_1:
+                                            stringBuilder.Append("8.1");
+                                            break;
+                                        default:
+                                            if (windowsAnalyzer.IsWindows10() || windowsAnalyzer.IsWindows11())
+                                            {
+                                                if (windowsVersion.Build >= 14393)
+                                                {
+                                                    stringBuilder.Append(windowsVersion.ToString());
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                throw new OperatingSystemDetectionException();
+                                            }
+                                    }
+                                    
+                                    return stringBuilder.ToString();
+                                }
+                            }
+                            
                             return stringBuilder.ToString();
                         }
                     }
