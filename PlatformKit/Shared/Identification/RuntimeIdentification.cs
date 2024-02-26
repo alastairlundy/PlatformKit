@@ -76,7 +76,7 @@ namespace PlatformKit.Identification
 
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
-                return "any";TFM
+                return "any";
             }
             else
             {
