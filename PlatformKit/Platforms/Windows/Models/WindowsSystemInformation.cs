@@ -9,6 +9,7 @@
    */
 
 using System;
+using PlatformKit.Internal.Deprecation;
 
 // ReSharper disable InconsistentNaming
 
@@ -74,6 +75,7 @@ public class WindowsSystemInformation
     
     public HyperVRequirements HyperVRequirements { get; set; }
 
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public void ToConsoleWriteLine()
     {
         Console.WriteLine(nameof(HostName) + ": " + HostName);
