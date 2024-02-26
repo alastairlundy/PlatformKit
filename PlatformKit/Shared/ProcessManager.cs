@@ -368,7 +368,8 @@ namespace PlatformKit
 #if  NETCOREAPP3_0_OR_GREATER
                 if (OSAnalyzer.IsFreeBSD())
                 {
-                    throw new NotImplementedException();
+                    RunFreeBsdCommand($"xdg-open {url}");
+                    return true;
                 }          
 #endif
 
