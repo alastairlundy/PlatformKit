@@ -199,6 +199,20 @@ namespace PlatformKit
         }
 
         /// <summary>
+        /// Run a Process on FreeBSD
+        /// </summary>
+        /// <param name="executableLocation">The working directory of the executable.</param>
+        /// <param name="executableName">The name of the file to be run.</param>
+        /// <param name="arguments">Arguments to be passed to the executable.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string RunProcessFreeBsd(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
+        {
+            return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
+        }
+
+        
+        /// <summary>
         /// Runs commands in the Windows Cmd Command Prompt.
         /// </summary>
         /// <param name="command"></param>
