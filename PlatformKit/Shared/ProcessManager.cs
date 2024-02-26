@@ -84,7 +84,7 @@ namespace PlatformKit
                 }
 
                 if (end.ToLower()
-                    .Contains(" is not recognized as the name of a cmdlet, function, script file, or operable program"))
+                    .Contains("is not recognized as the name of a cmdlet, function, script file, or operable program"))
                 {
                     throw new Exception(end);
                 }
