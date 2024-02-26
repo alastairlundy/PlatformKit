@@ -13,5 +13,6 @@ namespace PlatformKit.Identification;
 public enum TargetFrameworkType
 {
     Generic,
-    OperatingSystemSpecific
+    OperatingSystemSpecific,
+    OperatingSystemVersionSpecific
 }
