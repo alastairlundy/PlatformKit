@@ -293,7 +293,7 @@ namespace PlatformKit
         {
             try
             {
-                if (OSAnalyzer.IsLinux())
+                if (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD())
                 {
                     var location = "/usr/bin/";
 
