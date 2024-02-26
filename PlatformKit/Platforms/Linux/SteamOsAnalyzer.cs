@@ -64,7 +64,7 @@ public class SteamOsAnalyzer
     /// <param name="includeHoloIsoAsSteamOs"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException">Thrown if Holo ISO is detected and Holo ISO isn't counted as SteamOS.</exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any OS not based on SteamOS 3</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any OS that isn't SteamOS 3</exception>
     public SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
         if (IsSteamOS(false))
