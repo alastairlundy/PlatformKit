@@ -94,7 +94,7 @@ namespace PlatformKit.Mac;
         }    
     
         /// <summary>
-        /// 
+        /// Returns whether the Mac running this method has Secure Virtual Memory enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -117,7 +117,6 @@ namespace PlatformKit.Mac;
         }
     
         /// <summary>
-        /// 
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -140,7 +139,7 @@ namespace PlatformKit.Mac;
         }
 
         /// <summary>
-        /// 
+        ///  Returns whether the Mac running this method has Activation Lock enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
