@@ -273,6 +273,17 @@ namespace PlatformKit
         }
 
         /// <summary>
+        /// Run a command or program as if inside a terminal on FreeBSD.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="processStartInfo"></param>
+        /// <returns></returns>
+        public string RunFreeBsdCommand(string command, ProcessStartInfo processStartInfo = null)
+        {
+            return RunLinuxCommand(command, processStartInfo);
+        }
+        
+        /// <summary>
         /// Run a command or program as if inside a terminal on Linux.
         /// </summary>
         /// <param name="command"></param>
