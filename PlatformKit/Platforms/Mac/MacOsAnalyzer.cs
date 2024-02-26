@@ -117,6 +117,7 @@ namespace PlatformKit.Mac;
         }
     
         /// <summary>
+        ///  Returns whether the Mac running this method has System Integrity Protection enabled or not.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
@@ -162,30 +163,29 @@ namespace PlatformKit.Mac;
         }
         
         /// <summary>
-    /// Returns macOS version as a macOS version enum.
-    /// </summary>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on any platform besides macOS.</exception>
-    /// <returns></returns>
-    public MacOsVersion GetMacOsVersionToEnum()
-    {
-        return GetMacOsVersionToEnum(DetectMacOsVersion());
-    }
+        /// Returns macOS version as a macOS version enum.
+        /// </summary>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
+        /// <returns></returns>
+        public MacOsVersion GetMacOsVersionToEnum()
+        {
+            return GetMacOsVersionToEnum(DetectMacOsVersion());
+        }
 
-    /// <summary>
-    /// Converts a macOS version to a macOS version enum.
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on any platform besides macOS.</exception>
-    /// <exception cref="Exception"></exception>
-    public MacOsVersion GetMacOsVersionToEnum(Version input)
-    {
-            if (OSAnalyzer.IsMac())
-            {
-                if (input.Major == 10)
+        /// <summary>
+        /// Converts a macOS version to a macOS version enum.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
+        /// <exception cref="Exception"></exception>
+        public MacOsVersion GetMacOsVersionToEnum(Version input)
+        {
+                if (OSAnalyzer.IsMac())
                 {
-                    switch (input.Minor)
+                    if (input.Major == 10)
                     {
+                        switch (input.Minor) {
                         case 0:
                             //return MacOsVersion.v10_0_Cheetah;
                             return MacOsVersion.NotSupported;
@@ -230,21 +230,21 @@ namespace PlatformKit.Mac;
                         //This is for compatibility reasons.
                         case 16:
                             return MacOsVersion.v11_BigSur;
+                        }
                     }
-                }
 
-                if (input.Major == 11) return MacOsVersion.v11_BigSur;
-                if (input.Major == 12) return MacOsVersion.v12_Monterey;
-                if (input.Major == 13) return MacOsVersion.v13_Ventura;
-                if (input.Major == 14) return MacOsVersion.v14_Sonoma;
+                    if (input.Major == 11) return MacOsVersion.v11_BigSur;
+                    if (input.Major == 12) return MacOsVersion.v12_Monterey;
+                    if (input.Major == 13) return MacOsVersion.v13_Ventura;
+                    if (input.Major == 14) return MacOsVersion.v14_Sonoma;
                 
-                throw new MacOsVersionDetectionException();
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
-    }
+                    throw new MacOsVersionDetectionException();
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
+        }
 
     /// <summary>
     /// Converts a macOS version enum to a macOS version as a Version object.
@@ -294,15 +294,13 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion">A MacOsVersion enum representing a major version of macOS.</param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
         if (OSAnalyzer.IsMac())
         {
-            var detected = DetectMacOsVersion();
-
-            return detected.IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+            return DetectMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
         }
         else
         {
@@ -315,7 +313,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS. </exception>
     public bool IsAtLeastVersion(Version macOsVersion)
     {
         if (OSAnalyzer.IsMac())
