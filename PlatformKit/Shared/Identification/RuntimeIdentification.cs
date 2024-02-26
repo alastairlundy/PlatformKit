@@ -438,16 +438,22 @@ namespace PlatformKit.Identification
                         }
                         else if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                         {
+#if NET5_0_OR_GREATER
                             if (OperatingSystem.IsMacOS())
+#else
+                            if(OSAnalyzer.IsMac())
+#endif
                             {
                                 stringBuilder.Append("-");
                                 stringBuilder.Append("macos");
                             }
+#if NET5_0_OR_GREATER
                             else if (OperatingSystem.IsMacCatalyst())
                             {
                                 stringBuilder.Append("-");
                                 stringBuilder.Append("maccatalyst");
                             }
+#endif
                             else if (OSAnalyzer.IsWindows())
                             {
                                 stringBuilder.Append("-");
@@ -457,6 +463,7 @@ namespace PlatformKit.Identification
                             {
                                 //Do nothing because Linux doesn't have a dedicated TFM yet
                             }
+#if NET5_0_OR_GREATER
                             else if (OperatingSystem.IsAndroid())
                             {
                                 stringBuilder.Append("-");
@@ -486,11 +493,16 @@ namespace PlatformKit.Identification
                                     stringBuilder.Append("browser");
                                 }
                             }
+#endif
 
 
                             if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
                             {
+#if NET5_0_OR_GREATER
                                 if (OperatingSystem.IsMacOS())
+#else
+                                if(OSAnalyzer.IsMac())
+#endif
                                 {
                                     MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
                                     var macOsVersion = macOsAnalyzer.DetectMacOsVersion();
@@ -499,11 +511,19 @@ namespace PlatformKit.Identification
                                     stringBuilder.Append(".");
                                     stringBuilder.Append(macOsVersion.Minor);
                                 }
+#if NET5_0_OR_GREATER
                                 else if (OperatingSystem.IsLinux())
+#else
+                                else if(OSAnalyzer.IsLinux())
+#endif
                                 {
                                     //Do nothing because Linux doesn't have a version specific TFM.
                                 }
+#if NET5_0_OR_GREATER
                                 else if (OperatingSystem.IsWindows())
+#else
+                                else if(OSAnalyzer.IsWindows())
+#endif
                                 {
                                     WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
                                     var windowsVersion = windowsAnalyzer.DetectWindowsVersion();
@@ -552,15 +572,21 @@ namespace PlatformKit.Identification
                 {
                     stringBuilder.Clear();
                     stringBuilder.Append("mono");
-
+                    
+#if NET5_0_OR_GREATER
                     if (OperatingSystem.IsMacOS())
+#else
+                    if(OSAnalyzer.IsMac())
+#endif
                     {
                         stringBuilder.Append("mac");
                     }
+#if NET5_0_OR_GREATER
                     else if (OperatingSystem.IsAndroid())
                     {
                         stringBuilder.Append("android");
                     }
+#endif
                     else
                     {
                        return stringBuilder.ToString();
