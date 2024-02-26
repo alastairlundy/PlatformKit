@@ -210,7 +210,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 
 | Version | Availability |
 |---------|------------|
-| Beta 1.1.0 | 2 | January 6th 2018 |
+| Beta 1.1.0 | January 6th 2018 |
 
 ### Beta 1.0.0
 
