@@ -11,6 +11,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
+using PlatformKit.Extensions;
 using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Exceptions;
 
@@ -362,5 +364,148 @@ namespace PlatformKit.Identification
 
             return possibles;
         }
+      
+        /// <summary>
+        /// Detect the Target Framework Moniker (TFM) of the currently running system.
+        /// Note: This does not detect .NET Standard TFMs, UWP TFMs, Windows Phone TFMs, Silverlight TFMs, and Windows Store TFMs.
+        /// </summary>
+        /// <param name="targetFrameworkType"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public string GetTargetFrameworkMoniker(TargetFrameworkType targetFrameworkType)
+        {
+            if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.Append("netcoreapp");
+                
+                var versionString = RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
+                    .Replace("core", String.Empty)
+                    .Replace(" ", String.Empty);
+                
+                versionString = new Version().AddMissingZeroes(versionString);
+
+                Version version = new Version(versionString);
+
+                stringBuilder.Append(version.Major);
+                stringBuilder.Append(".");
+                stringBuilder.Append(version.Minor);
+
+                return stringBuilder.ToString();
+            }
+            else
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                
+                if (RuntimeInformation.FrameworkDescription.ToLower().Contains(".net"))
+                {
+                    var versionString = RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
+                        .Replace(" ", String.Empty);
+                    
+                    versionString = new Version().AddMissingZeroes(versionString);
+
+                    Version version = new Version(versionString);
+                    
+                    stringBuilder.Append("net");
+                    
+                    if (version.Major < 5)
+                    {
+                        stringBuilder.Append(version.Major);
+                        stringBuilder.Append(version.Minor);
+                                                    
+                        if (version.Build != 0)
+                        {
+                            stringBuilder.Append(version.Build);
+                        }
+
+                        return stringBuilder.ToString();
+                    }
+                    else
+                    {
+                        stringBuilder.Append(version.Major);
+                        stringBuilder.Append(".");
+                        stringBuilder.Append(version.Minor);
+
+                        if (targetFrameworkType == TargetFrameworkType.Generic)
+                        {
+                            return stringBuilder.ToString();
+                        }
+                        else if(targetFrameworkType == TargetFrameworkType.OperatingSystemSpecific)
+                        {
+                            if (OperatingSystem.IsMacOS())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("macos");
+                            }
+                            else if (OperatingSystem.IsMacCatalyst())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("maccatalyst");
+                            }
+                            else if (OSAnalyzer.IsWindows())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("windows");
+                            }
+                            else if (OSAnalyzer.IsLinux())
+                            {
+                                //Do nothing because Linux doesn't have a dedicated TFM yet
+                            }
+                            else if (OperatingSystem.IsAndroid())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("android");
+                            }
+                            else if (OperatingSystem.IsIOS())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("ios");
+                            }
+                            else if (OperatingSystem.IsTvOS())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("tvos");
+                            }
+                            else if (OperatingSystem.IsWatchOS())
+                            {
+                                stringBuilder.Append("-");
+                                stringBuilder.Append("watchos");
+                            }
+
+                            if (version.Major >= 8)
+                            {
+                                if (OperatingSystem.IsBrowser())
+                                {
+                                    stringBuilder.Append("-");
+                                    stringBuilder.Append("browser");
+                                }
+                            }
+                            return stringBuilder.ToString();
+                        }
+                    }
+                }
+                else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))
+                {
+                    stringBuilder.Clear();
+                    stringBuilder.Append("mono");
+
+                    if (OperatingSystem.IsMacOS())
+                    {
+                        stringBuilder.Append("mac");
+                    }
+                    else if (OperatingSystem.IsAndroid())
+                    {
+                        stringBuilder.Append("android");
+                    }
+                    else
+                    {
+                       return stringBuilder.ToString();
+                    }
+                }
+            }
+
+            throw new PlatformNotSupportedException();
+        }
+        
     }
 }
