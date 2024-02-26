@@ -14,7 +14,20 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>* Fixed an issue where a StackOverFlow would occur due to recursive OSAnalyzer instances being created in ProcessManager</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0.0 Alpha 3
+* Deprecated ``WindowsSystemInformation.ToConsoleWriteLine()`` - This will be replaced in Version 5
+* Added missing in code comments (Partially backported to 3.6.2)
+* Made some code more compact
+* Add ``TargetFrameworkMonikerType`` enum
+* Add TFM Detection/Generation
+* Added Version extension method to add missing zeroes called ``AddMissingZeroes``
+* Added ``RunProcessFreeBsd`` method
+* Added ``RunFreeBsdCommand`` method
+* Added ``OpenUrlInBrowser`` support for FreeBsd
+* Remove re-throwing of exceptions (Also backported to 3.6.2)
+
+### Notes
+This is likely to be the final PlatformKit 4 Alpha release. The next pre-release version is expected to be 4.0.0 Beta 1</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -23,8 +36,8 @@
         <TargetFrameworks>net6.0;netstandard2.0;net8.0</TargetFrameworks>
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
-        <Version>4.0.0-alpha.1</Version>
-        <PackageVersion>4.0.0-alpha.2</PackageVersion>
+        <Version>4.0.0-alpha.3</Version>
+        <PackageVersion>4.0.0-alpha.3</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
