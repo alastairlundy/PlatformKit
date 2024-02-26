@@ -25,6 +25,7 @@ public enum WindowsEdition
     EnterpriseSemiAnnualChannel,
     IoTCore,
     IoTEnterprise,
+    // ReSharper disable once InconsistentNaming
     IoTEnterpriseLTSC,
     Team,
     Server,
