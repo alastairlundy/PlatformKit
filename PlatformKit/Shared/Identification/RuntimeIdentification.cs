@@ -367,15 +367,16 @@ namespace PlatformKit.Identification
 
             return possibles;
         }
-      
+        
         /// <summary>
         /// Detect the Target Framework Moniker (TFM) of the currently running system.
         /// Note: This does not detect .NET Standard TFMs, UWP TFMs, Windows Phone TFMs, Silverlight TFMs, and Windows Store TFMs.
         /// </summary>
-        /// <param name="targetFrameworkType"></param>
+        /// <param name="targetFrameworkType">The type of TFM to generate.</param>
         /// <returns></returns>
+        /// <exception cref="OperatingSystemDetectionException">Thrown if there's an issue detecting the Windows Version whilst running on Windows.</exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public string GetTargetFrameworkMoniker(TargetFrameworkType targetFrameworkType)
+        public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
@@ -429,11 +430,11 @@ namespace PlatformKit.Identification
                         stringBuilder.Append(".");
                         stringBuilder.Append(version.Minor);
 
-                        if (targetFrameworkType == TargetFrameworkType.Generic)
+                        if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
                         {
                             return stringBuilder.ToString();
                         }
-                        else if(targetFrameworkType == TargetFrameworkType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkType.OperatingSystemVersionSpecific)
+                        else if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                         {
                             if (OperatingSystem.IsMacOS())
                             {
@@ -485,7 +486,7 @@ namespace PlatformKit.Identification
                             }
 
 
-                            if (targetFrameworkType == TargetFrameworkType.OperatingSystemVersionSpecific && version.Major >= 5)
+                            if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
                             {
                                 if (OperatingSystem.IsMacOS())
                                 {

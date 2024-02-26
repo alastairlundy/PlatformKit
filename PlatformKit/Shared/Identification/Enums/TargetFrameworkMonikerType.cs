@@ -10,7 +10,7 @@
 
 namespace PlatformKit.Identification;
 
-public enum TargetFrameworkType
+public enum TargetFrameworkMonikerType
 {
     Generic,
     OperatingSystemSpecific,
