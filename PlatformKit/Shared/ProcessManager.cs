@@ -100,7 +100,7 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
 
@@ -148,7 +148,7 @@ namespace PlatformKit
             catch(Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
 
@@ -196,7 +196,7 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
 
@@ -317,7 +317,7 @@ namespace PlatformKit
             catch (Exception exception)
             {
                 Console.WriteLine(exception.ToString());
-                throw new Exception(exception.ToString());
+                throw;
             }
         }
 
@@ -377,7 +377,7 @@ namespace PlatformKit
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
     }
