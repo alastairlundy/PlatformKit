@@ -69,9 +69,7 @@ public class FreeBsdAnalyzer
     {
         if (OSAnalyzer.IsFreeBSD())
         {
-            var detected = DetectFreeBSDVersion();
-
-            return detected.IsAtLeast((expectedVersion));
+            return DetectFreeBSDVersion().IsAtLeast((expectedVersion));
         }
         else
         {
