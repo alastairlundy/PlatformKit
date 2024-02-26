@@ -114,7 +114,6 @@ public class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("ID=", string.Empty);
                         linuxDistributionInformation.Identifier = resultArray[index];
                         
-                       // Console.WriteLine(linuxDistributionInformation.Identifier);
                     }
                     else if (resultArray[index].ToUpper().Contains("ID_LIKE="))
                     {
@@ -162,10 +161,6 @@ public class LinuxAnalyzer
                         resultArray[index] = resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
                         linuxDistributionInformation.VersionCodename = resultArray[index];
                     }
-                   
-                 #if DEBUG   
-                    Console.WriteLine("After: " + resultArray[index]);
-                    #endif
                 }
             
                 return linuxDistributionInformation;
@@ -263,9 +258,7 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var detected = DetectLinuxKernelVersion();
-
-                return detected.IsAtLeast(linuxKernelVersion);
+                return DetectLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
             }
 
             throw new PlatformNotSupportedException();
