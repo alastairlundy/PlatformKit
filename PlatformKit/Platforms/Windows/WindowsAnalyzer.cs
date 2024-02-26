@@ -32,7 +32,8 @@ public class WindowsAnalyzer
     /// Detects the Edition of Windows being run.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="OperatingSystemDetectionException"></exception>
+    /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public WindowsEdition DetectWindowsEdition()
     {
         try
@@ -119,17 +120,13 @@ public class WindowsAnalyzer
     /// </summary>
     /// <param name="wmiClass"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWMIClass(string wmiClass)
     {
         if (OSAnalyzer.IsWindows())
         {
             var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
             // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
-            
-//#if DEBUG
-  //          Console.WriteLine(result);              
-//#endif
 
             return result;
         }
@@ -145,7 +142,7 @@ public class WindowsAnalyzer
     /// <param name="wmiClass"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWMIValue(string property, string wmiClass)
     {
         if (OSAnalyzer.IsWindows())
@@ -187,7 +184,7 @@ public class WindowsAnalyzer
     /// <param name="query"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWindowsRegistryValue(string query, string value){
         if (OSAnalyzer.IsWindows())
         {
@@ -920,7 +917,7 @@ for (var index = 0; index < array.Length; index++)
         }
 
         /// <summary>
-        /// 
+        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
@@ -938,7 +935,7 @@ for (var index = 0; index < array.Length; index++)
         }
         
         /// <summary>
-        /// 
+        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
