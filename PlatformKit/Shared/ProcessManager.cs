@@ -13,8 +13,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
-using PlatformKit.Internal.Deprecation;
-
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
@@ -263,7 +261,6 @@ namespace PlatformKit
                 }
             }
 
-            //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));
             throw new PlatformNotSupportedException();
         }
 
