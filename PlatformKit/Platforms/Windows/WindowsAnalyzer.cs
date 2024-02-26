@@ -929,9 +929,7 @@ for (var index = 0; index < array.Length; index++)
         {
             if (OSAnalyzer.IsWindows())
             {
-                var detected = DetectWindowsVersion();    
-
-                return detected.IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
+                return DetectWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
             else
             {
