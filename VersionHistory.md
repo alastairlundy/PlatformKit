@@ -37,56 +37,56 @@ This document contains the entire version history of the PlatformKit (formerly A
 | 3.3.0 | May 15th 2023 | https://github.com/PlatformKit-Project/PlatformKit/releases/3.3.0 |
 
 ### 3.2
-| Version | Availability | Changelog |
-|-|-|-|
-| 3.2.0.1 | January 26th 2023 | | 
-| 3.2.0 | January 6th 2023 | | 
-| 3.1.0 Alpha 4 | November 11th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.4) |
-| 3.1.0 Alpha 3 | November 3rd 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.3) |
-| 3.1.0 Alpha 2 | October 19th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.2) |
-| 3.1.0 Alpha 1 | October 19th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0-alpha.1) |
+| Version | Availability |
+|-|-|
+| 3.2.0.1 | January 26th 2023 |
+| 3.2.0 | January 6th 2023 | 
+| 3.1.0 Alpha 4 | November 11th 2022 | 
+| 3.1.0 Alpha 3 | November 3rd 2022 |
+| 3.1.0 Alpha 2 | October 19th 2022 |
+| 3.1.0 Alpha 1 | October 19th 2022 |
 
 
 ### 3.1
-| Version | Availability | Changelog |
-|-|-|-|
-| 3.1.0 | November 24th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.1.0) | 
+| Version | Availability |
+|-|-|
+| 3.1.0 | November 24th 2022 |
 
 ### 3.0
-| Version | Availability | Changelog |
-|-|-|-|
-| 3.0.4 | November 24th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.4) | 
-| 3.0.3 | October 27th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.3) | 
-| 3.0.2 | October 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.2) | 
-| 3.0.1 | September 16th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.1) | 
-| 3.0.0 | August 29th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0) | 
-| 3.0.0 RC 2 | August 27th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-rc.2) | 
-| 3.0.0 RC 1 | August 24th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-rc.1) | 
-| 3.0.0 Beta 2 | August 23rd 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-beta.2) | 
-| 3.0.0 Beta 1 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-beta.1) | 
-| 3.0.0 Alpha 4 | August 8th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/3.0.0-alpha.4) | 
-| 3.0.0 Alpha 3 | July 17th 2022 | |
-| 3.0.0 Alpha 2 | June 13th 2022 |  |
-| 3.0.0 Alpha 1 | May 31st 2022 |  |
+| Version | Availability |
+|-|-|
+| 3.0.4 | November 24th 2022 | 
+| 3.0.3 | October 27th 2022 | 
+| 3.0.2 | October 18th 2022 | 
+| 3.0.1 | September 16th 2022 | 
+| 3.0.0 | August 29th 2022 | 
+| 3.0.0 RC 2 | August 27th 2022 | 
+| 3.0.0 RC 1 | August 24th 2022 | 
+| 3.0.0 Beta 2 | August 23rd 2022 |  
+| 3.0.0 Beta 1 | August 18th 2022 | 
+| 3.0.0 Alpha 4 | August 8th 2022 |
+| 3.0.0 Alpha 3 | July 17th 2022 | 
+| 3.0.0 Alpha 2 | June 13th 2022 |  
+| 3.0.0 Alpha 1 | May 31st 2022 |  
 
 ### 2.6
-| Version | Availability | Changelog |
-|-|-|-|
-| 2.6.10 | September 13th 2022 | |
-| 2.6.9 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.9) | 
-| 2.6.8 | August 18th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.8) | 
-| 2.6.7 | August 11th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.7) | 
-| 2.6.6.1 | July 25th 2022 | [Changelog](https://github.com/NeverSpyTech/PlatformKit/releases/tag/2.6.6.1) | 
-| 2.6.6 | July 17th 2022 | | 
-| 2.6.5 | July 11th 2022 |  | 
-| 2.6.4 | June 6th 2022 |  | 
-| 2.6.3 | June 6th 2022 | | 
-| 2.6.2 | May 31st 2022 | |
-| 2.6.1 | May 28th 2022 | |
-| 2.6.0 | May 10th 2022 | |
-| 2.6.0 Alpha 3 | May 9th 2022 |  |
-| 2.6.0 Alpha 2 | May 7th 2022 |  |
-| 2.6.0 Alpha 1 | May 7th 2022 |  |
+| Version | Availability | 
+|-|-|
+| 2.6.10 | September 13th 2022 |
+| 2.6.9 | August 18th 2022 | 
+| 2.6.8 | August 18th 2022 |
+| 2.6.7 | August 11th 2022 |
+| 2.6.6.1 | July 25th 2022 |
+| 2.6.6 | July 17th 2022 |  
+| 2.6.5 | July 11th 2022 |   
+| 2.6.4 | June 6th 2022 |   
+| 2.6.3 | June 6th 2022 |  
+| 2.6.2 | May 31st 2022 | 
+| 2.6.1 | May 28th 2022 | 
+| 2.6.0 | May 10th 2022 | 
+| 2.6.0 Alpha 3 | May 9th 2022 |  
+| 2.6.0 Alpha 2 | May 7th 2022 |  
+| 2.6.0 Alpha 1 | May 7th 2022 | 
 
 ### 2.5
 | Version | Availability |
@@ -210,10 +210,10 @@ This document contains the entire version history of the PlatformKit (formerly A
 
 | Version | Availability |
 |---------|------------|
-| Beta 1.1.0 | 2 | January 6th 2018 |
+| Beta 1.1.0 | January 6th 2018 |
 
 ### Beta 1.0.0
 
-| Version | Availability | Changelog |
+| Version | Availability |
 |---------|------------|
 | Beta 1.0.0 | December 9th 2017 |
