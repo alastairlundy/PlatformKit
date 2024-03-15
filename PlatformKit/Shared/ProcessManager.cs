@@ -348,7 +348,6 @@ namespace PlatformKit
         /// <param name="url">The URL to be opened.</param>
         /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
         /// <returns></returns>
-        [Obsolete(DeprecationMessages.DeprecationV4)]
         public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
             try
