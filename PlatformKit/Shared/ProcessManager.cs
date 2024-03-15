@@ -369,8 +369,7 @@ namespace PlatformKit
                 }
                 if (OSAnalyzer.IsMac())
                 {
-                    var task = new Task(() =>
-                        Process.Start("open", url));
+                    var task = new Task(() => Process.Start("open", url));
                     task.Start();
                 }
 #if  NETCOREAPP3_0_OR_GREATER
