@@ -15,19 +15,11 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes since 4.0.0 Alpha 3
-* Deprecated ``WindowsSystemInformation.ToConsoleWriteLine()`` - This will be replaced in Version 5
-* Added missing in code comments (Partially backported to 3.6.2)
-* Made some code more compact
-* Add ``TargetFrameworkMonikerType`` enum
-* Add TFM Detection/Generation
-* Added Version extension method to add missing zeroes called ``AddMissingZeroes``
-* Added ``RunProcessFreeBsd`` method
-* Added ``RunFreeBsdCommand`` method
-* Added ``OpenUrlInBrowser`` support for FreeBsd
-* Remove re-throwing of exceptions (Also backported to 3.6.2)
-
-### Notes
-This is likely to be the final PlatformKit 4 Alpha release. The next pre-release version is expected to be 4.0.0 Beta 1</PackageReleaseNotes>
+* Changed ``OpenUrlInBrowser`` method return type from ``bool`` to ``void``
+* Minor code formatting changes
+* Deprecate ``WindowsVersion`` enum values for Windows 7 through Windows 8.1 and Windows Server 2012 R2`` - These will be removed in PlatformKit 5
+* Deprecate ``MacOsVersion`` enum values for OS X 10.9 "Mavericks" through OS X 10.11 "El Capitan" - These will be removed in PlatformKit 5
+* Made some ``public`` exceptions ``internal`` as they did not need to be public</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -37,7 +29,7 @@ This is likely to be the final PlatformKit 4 Alpha release. The next pre-release
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0-alpha.3</Version>
-        <PackageVersion>4.0.0-alpha.3</PackageVersion>
+        <PackageVersion>4.0.0-beta.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
