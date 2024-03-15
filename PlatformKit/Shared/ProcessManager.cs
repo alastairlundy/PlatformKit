@@ -340,7 +340,7 @@ namespace PlatformKit
                 throw;
             }
         }
-
+        
         /// <summary>
         /// Open a URL in the default browser.
         /// Courtesy of https://github.com/dotnet/corefx/issues/10361
@@ -348,6 +348,7 @@ namespace PlatformKit
         /// <param name="url">The URL to be opened.</param>
         /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
             try
