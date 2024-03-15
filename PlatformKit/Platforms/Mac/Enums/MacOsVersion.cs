@@ -11,6 +11,7 @@
 // ReSharper disable All
 
 using System;
+using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit.Mac
 {
@@ -19,10 +20,11 @@ namespace PlatformKit.Mac
     /// </summary>
     public enum MacOsVersion
     {
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_9_Mavericks,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_10_Yosemite,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_11_ElCapitan,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_12_Sierra,
