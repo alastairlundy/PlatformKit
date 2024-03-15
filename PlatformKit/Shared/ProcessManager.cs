@@ -240,7 +240,6 @@ namespace PlatformKit
                 
             throw new PlatformNotSupportedException();
         }
-
         
         /// <summary>
         /// Run a command on macOS located in the /usr/bin/ folder.
