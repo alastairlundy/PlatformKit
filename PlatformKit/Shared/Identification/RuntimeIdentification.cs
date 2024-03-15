@@ -207,7 +207,9 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Programmatically generates a .NET Runtime Identifier based on the system calling the method.
+        /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
+        /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
@@ -234,11 +236,17 @@ namespace PlatformKit.Identification
                 throw new ArgumentException();
             }
         }
-        
+
         /// <summary>
-        /// 
+        /// Programmatically generates a .NET Runtime Identifier based on the system calling the method.
+        /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
+        /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
+        /// <param name="identifierType"></param>
+        /// <param name="includeOperatingSystemName"></param>
+        /// <param name="includeOperatingSystemVersion"></param>
         /// <returns></returns>
+        /// <exception cref="RuntimeIdentifierGenerationException"></exception>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
             var osName = GetOsNameString(identifierType);
@@ -333,7 +341,7 @@ namespace PlatformKit.Identification
         }
 
         /// <summary>
-        /// 
+        /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns></returns>
         public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
