@@ -380,8 +380,8 @@ namespace PlatformKit
                 }
                 if (OSAnalyzer.IsMac())
                 {
-                    var task = new Task(() =>
-                        Process.Start("open", url));
+                    var task = new Task(() => Process.Start("open", url));
+                    
                     task.Start();
                     return true;
                 }
