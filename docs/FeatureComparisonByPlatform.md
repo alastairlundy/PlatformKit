@@ -32,7 +32,6 @@ Features:
 ### Process and Command Execution
 | | Windows | macOS | Linux | FreeBSD |
 |-|-|-|-|-|
-| RunProcess (Generic) | ✔️, 2.0.0 | ✔️, 2.0.0 | ✔️, 2.0.0 | :x: | 
 | RunProcess___ | ✔️, 2.0.0 | ✔️, 2.0.0 | ✔️, 2.0.0 | :x: |
 | Run___Command | :heavy_check_mark:, Added in 2.4.0 | :heavy_check_mark:, Added in 2.4.0 | :heavy_check_mark:, Added in 2.4.0 | :x: |
 | RunCommand___ | :no_entry:, Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :no_entry:, Removed in 3.0.0 | :x: |
