@@ -687,7 +687,7 @@ for (var index = 0; index < array.Length; index++)
         }
 
     /// <summary>
-    /// 
+    /// Returns whether the specified version of Windows is Windows 11.
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
