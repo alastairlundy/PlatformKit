@@ -339,7 +339,7 @@ namespace PlatformKit
         /// <param name="url">The URL to be opened.</param>
         /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
         /// <returns></returns>
-        public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
+        public void OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
             try
             {
@@ -362,29 +362,23 @@ namespace PlatformKit
                 if (OSAnalyzer.IsWindows())
                 {
                     RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
-                    return true;
                 }
                 if (OSAnalyzer.IsLinux())
                 {
                     RunLinuxCommand($"xdg-open {url}");
-                    return true;
                 }
                 if (OSAnalyzer.IsMac())
                 {
                     var task = new Task(() =>
                         Process.Start("open", url));
                     task.Start();
-                    return true;
                 }
 #if  NETCOREAPP3_0_OR_GREATER
                 if (OSAnalyzer.IsFreeBSD())
                 {
                     RunFreeBsdCommand($"xdg-open {url}");
-                    return true;
                 }          
 #endif
-
-                return false;
             }
             catch (Exception ex)
             {
