@@ -13,13 +13,12 @@ using PlatformKit.Linux.Enums;
 
 namespace PlatformKit.Linux;
 
-public class SteamOsAnalyzer
+public class SteamOsAnalyzer : LinuxAnalyzer
 {
-    protected LinuxAnalyzer _linuxAnalyzer;
     
     public SteamOsAnalyzer()
     {
-        _linuxAnalyzer = new LinuxAnalyzer();
+        
     }
     
     /// <summary>
@@ -32,8 +31,8 @@ public class SteamOsAnalyzer
     {
         if (OSAnalyzer.IsLinux())
         {
-            var distroInfo = _linuxAnalyzer.GetLinuxDistributionInformation();
-            var distroBase = _linuxAnalyzer.DetectDistroBase();
+            var distroInfo = GetLinuxDistributionInformation();
+            var distroBase = DetectDistroBase();
 
             if ((distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch) 
                 && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))
@@ -69,8 +68,8 @@ public class SteamOsAnalyzer
     {
         if (IsSteamOS(false))
         {
-            var distroInfo = _linuxAnalyzer.GetLinuxDistributionInformation();
-            var distroBase = _linuxAnalyzer.DetectDistroBase();
+            var distroInfo = GetLinuxDistributionInformation();
+            var distroBase = DetectDistroBase();
             
             if (distroBase == LinuxDistroBase.Manjaro
                 && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))
