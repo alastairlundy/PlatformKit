@@ -9,11 +9,88 @@
    */
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+
+using PlatformKit.Linux;
 
 namespace PlatformKit.Software;
 
 public class InstalledApps
 {
+    /*public static AppModel[] Get()
+    {
+        ProcessManager processManager = new ProcessManager();
+        if (OSAnalyzer.IsWindows())
+        {
+            
+            foreach (File file in Envir)
+            {
+                
+            }
+        }
+        else if (OSAnalyzer.IsMac())
+        {
+            
+        }
+        else if (OSAnalyzer.IsLinux())
+        {
+            List<AppModel> apps = new List<AppModel>();
+
+            LinuxAnalyzer linuxAnalyzer = new LinuxAnalyzer();
+            
+            bool useSnap = Directory.Exists("/snap/bin");
+            bool useFlatpak;
+
+            try
+            {
+                string[] flatpakTest = processManager.RunLinuxCommand("flatpak --version").Split(" ");
+                
+                if (flatpakTest[0].Contains("Flatpak"))
+                {
+                    Version.Parse(flatpakTest[1]);
+
+                    useFlatpak = true;
+                }
+                else
+                {
+                    useFlatpak = false;
+                }
+            }
+            catch
+            {
+                useFlatpak = false;
+            }
+            
+            if (useSnap)
+            {
+                foreach (var flatpak in linuxAnalyzer.GetInstalledFlatpaks())
+                {
+                    apps.Add(flatpak);
+                }
+            }
+
+            if (useFlatpak)
+            {
+                foreach (var snap in linuxAnalyzer.GetInstalledSnaps())
+                {
+                    apps.Add(snap);
+                }
+            }
+            
+            foreach (var app in linuxAnalyzer.GetInstalledApps())
+            {
+                apps.Add(app);
+            }
+
+            return apps.ToArray();
+        }
+        else if (OSAnalyzer.IsFreeBSD())
+        {
+            
+        }
+    }*/
+
     /// <summary>
     /// 
     /// </summary>
