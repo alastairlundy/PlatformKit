@@ -9,10 +9,12 @@
    */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
+using PlatformKit.Software;
 
 namespace PlatformKit.Linux;
 
@@ -21,9 +23,154 @@ namespace PlatformKit.Linux;
 /// </summary>
 public class LinuxAnalyzer
 {
+
+    protected ProcessManager _processManager;
+
     public LinuxAnalyzer()
     {
-        
+        _processManager = new ProcessManager();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="includeSnaps"></param>
+    /// <param name="includeFlatpaks"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public AppModel[] GetInstalledApps(bool includeSnaps = false, bool includeFlatpaks = false)
+    {
+        List<AppModel> apps = new List<AppModel>();
+
+        if (OSAnalyzer.IsLinux())
+        {
+            string[] binResult = _processManager.RunLinuxCommand("ls -F /usr/bin | grep -v /").Split(Environment.NewLine);
+            
+            foreach (var app in binResult)
+            {
+                apps.Add(new AppModel()
+                {
+                    ExecutableName = app,
+                    InstallLocation = "/usr/bin"
+                });
+            }
+            
+            if (includeSnaps)
+            {
+                foreach (var snap in GetInstalledSnaps())
+                {
+                    apps.Add(snap);
+                }
+            }
+            if(includeFlatpaks){
+                foreach (var flatpak in GetInstalledFlatpaks())
+                {
+                    apps.Add(flatpak);
+                }
+            }
+
+            return apps.ToArray();
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+    
+    /// <summary>
+    /// Detect what Snap packages (if any) are installed on a linux distribution.
+    /// </summary>
+    /// <returns>Returns a list of installed snaps. Returns an empty array if no Snaps are installed. </returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public AppModel[] GetInstalledSnaps()
+    {
+        List<AppModel> apps = new List<AppModel>();
+
+        if (OSAnalyzer.IsLinux())
+        {
+            bool useSnap = Directory.Exists("/snap/bin");
+
+            if (useSnap)
+            {
+                string[] snapResults = _processManager.RunLinuxCommand("ls /snap/bin").Split(" ");
+
+                foreach (var snap in snapResults)
+                {
+                    apps.Add(new AppModel()
+                    {
+                        ExecutableName = snap,
+                        InstallLocation = "/snap/bin"
+                    });
+                }
+
+                return apps.ToArray();
+            }
+            else
+            {
+                apps.Clear();
+                return apps.ToArray();
+            }
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public AppModel[] GetInstalledFlatpaks()
+    {
+        List<AppModel> apps = new List<AppModel>();
+
+        if (OSAnalyzer.IsLinux())
+        {
+            bool useFlatpaks;
+            
+            string[] flatpakTest = _processManager.RunLinuxCommand("flatpak --version").Split(" ");
+                
+            if (flatpakTest[0].Contains("Flatpak"))
+            {
+                Version.Parse(flatpakTest[1]);
+
+                useFlatpaks = true;
+            }
+            else
+            {
+                useFlatpaks = false;
+            }
+
+            if (useFlatpaks)
+            {
+                string[] flatpakResults = _processManager.RunLinuxCommand("flatpak list --columns=name")
+                    .Split(Environment.NewLine);
+
+                var installLocation = _processManager.RunLinuxCommand("flatpak --installations");
+                
+                foreach (var flatpak in flatpakResults)
+                {
+                    apps.Add(new AppModel()
+                    {
+                        ExecutableName = flatpak,
+                        InstallLocation = installLocation
+                    });
+                }
+                
+                return apps.ToArray();
+            }
+            else
+            {
+                apps.Clear();
+                return apps.ToArray();
+            }
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 
     /// <summary>
