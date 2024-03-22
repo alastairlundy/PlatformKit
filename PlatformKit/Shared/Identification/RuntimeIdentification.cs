@@ -526,7 +526,7 @@ namespace PlatformKit.Identification
 #endif
                                 {
                                     WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
-                                    var windowsVersion = windowsAnalyzer.DetectWindowsVersion();
+                                    var windowsVersion = windowsAnalyzer.GetWindowsVersion();
 
                                     var windowsVersionEnum = windowsAnalyzer.GetWindowsVersionToEnum();
 

@@ -67,7 +67,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 //Console.WriteLine("Caption: " + windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem"));
 
                // Console.WriteLine(processManager.RunPowerShellCommand("systeminfo"));
-               Console.WriteLine("WindowsEdition: " + windowsAnalyzer.DetectWindowsEdition().ToString());
+               Console.WriteLine("WindowsEdition: " + windowsAnalyzer.GetWindowsEdition().ToString());
                
                Console.WriteLine("WinOS " + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
                
@@ -95,7 +95,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("macOS Version Enum: " +
                                   macAnalyzer.GetMacOsVersionToEnum());
                 
-                Console.WriteLine("macOS Version Detected: " + osAnalyzer.DetectOSVersion().ToString());
+                Console.WriteLine("macOS Version Detected: " + osAnalyzer.GetOSVersion().ToString());
                 
                 Console.WriteLine("Darwin Version: " + macAnalyzer.DetectDarwinVersion());
                 Console.WriteLine("Xnu Version: " + macAnalyzer.DetectXnuVersion());

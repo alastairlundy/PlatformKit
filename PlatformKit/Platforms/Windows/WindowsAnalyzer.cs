@@ -34,7 +34,7 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
-    public WindowsEdition DetectWindowsEdition()
+    public WindowsEdition GetWindowsEdition()
     {
         try
         {
@@ -925,7 +925,7 @@ for (var index = 0; index < array.Length; index++)
         {
             if (PlatformAnalyzer.IsWindows())
             {
-                return DetectWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
+                return GetWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
             else
             {
