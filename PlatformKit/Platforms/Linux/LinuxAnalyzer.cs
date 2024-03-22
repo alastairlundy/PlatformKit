@@ -42,7 +42,7 @@ public class LinuxAnalyzer
     {
         List<AppModel> apps = new List<AppModel>();
 
-        if (OSAnalyzer.IsLinux())
+        if (PlatformAnalyzer.IsLinux())
         {
             string[] binResult = _processManager.RunLinuxCommand("ls -F /usr/bin | grep -v /").Split(Environment.NewLine);
             
@@ -86,7 +86,7 @@ public class LinuxAnalyzer
     {
         List<AppModel> apps = new List<AppModel>();
 
-        if (OSAnalyzer.IsLinux())
+        if (PlatformAnalyzer.IsLinux())
         {
             bool useSnap = Directory.Exists("/snap/bin");
 
@@ -126,7 +126,7 @@ public class LinuxAnalyzer
     {
         List<AppModel> apps = new List<AppModel>();
 
-        if (OSAnalyzer.IsLinux())
+        if (PlatformAnalyzer.IsLinux())
         {
             bool useFlatpaks;
             
@@ -180,7 +180,7 @@ public class LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public LinuxDistroBase DetectDistroBase()
     {
-        if (OSAnalyzer.IsLinux())
+        if (PlatformAnalyzer.IsLinux())
         {
             var osRel = GetLinuxDistributionInformation();
 
@@ -225,7 +225,7 @@ public class LinuxAnalyzer
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (OSAnalyzer.IsLinux())
+            if (PlatformAnalyzer.IsLinux())
             {
                 char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
                 
@@ -323,7 +323,7 @@ public class LinuxAnalyzer
         /// <returns></returns>
         public Version DetectLinuxDistributionVersion()
         {
-            if (OSAnalyzer.IsLinux())
+            if (PlatformAnalyzer.IsLinux())
             {
                 var version = DetectLinuxDistributionVersionAsString();
 
@@ -352,7 +352,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public string DetectLinuxDistributionVersionAsString()
         {
-            if (OSAnalyzer.IsLinux())
+            if (PlatformAnalyzer.IsLinux())
             {
                 var linuxDistroInfo = GetLinuxDistributionInformation();
 
@@ -384,7 +384,7 @@ public class LinuxAnalyzer
         /// </exception>
         public Version DetectLinuxKernelVersion()
         {
-            if (OSAnalyzer.IsLinux())
+            if (PlatformAnalyzer.IsLinux())
             {
                 var description = Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty);
@@ -403,7 +403,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
-            if (OSAnalyzer.IsLinux())
+            if (PlatformAnalyzer.IsLinux())
             {
                 return DetectLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
             }

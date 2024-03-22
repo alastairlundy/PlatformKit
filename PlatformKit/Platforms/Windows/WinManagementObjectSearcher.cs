@@ -35,7 +35,7 @@ namespace PlatformKit.Windows
             
             try
             {
-                if (OSAnalyzer.IsWindows())
+                if (PlatformAnalyzer.IsWindows())
                 {
                     var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);

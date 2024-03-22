@@ -32,7 +32,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public Version DetectFreeBSDVersion()
     { 
-        if (OSAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsWindows())
         {
             var version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", String.Empty);
 
@@ -67,7 +67,7 @@ public class FreeBsdAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public bool IsAtLeastVersion(Version expectedVersion)
     {
-        if (OSAnalyzer.IsFreeBSD())
+        if (PlatformAnalyzer.IsFreeBSD())
         {
             return DetectFreeBSDVersion().IsAtLeast((expectedVersion));
         }

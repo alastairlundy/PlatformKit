@@ -229,7 +229,7 @@ namespace PlatformKit
         /// <returns></returns>
         public string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            if (OSAnalyzer.IsWindows())
+            if (PlatformAnalyzer.IsWindows())
             {
                 var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
                                                            //+ "System32" +
@@ -358,21 +358,21 @@ namespace PlatformKit
                     url = url.Replace("http://", "https://");
                 }
 
-                if (OSAnalyzer.IsWindows())
+                if (PlatformAnalyzer.IsWindows())
                 {
                     RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
                 }
-                if (OSAnalyzer.IsLinux())
+                if (PlatformAnalyzer.IsLinux())
                 {
                     RunLinuxCommand($"xdg-open {url}");
                 }
-                if (OSAnalyzer.IsMac())
+                if (PlatformAnalyzer.IsMac())
                 {
                     var task = new Task(() => Process.Start("open", url));
                     task.Start();
                 }
 #if  NETCOREAPP3_0_OR_GREATER
-                if (OSAnalyzer.IsFreeBSD())
+                if (PlatformAnalyzer.IsFreeBSD())
                 {
                     RunFreeBsdCommand($"xdg-open {url}");
                 }          

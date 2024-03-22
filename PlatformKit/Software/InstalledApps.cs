@@ -100,19 +100,19 @@ public class InstalledApps
     {
         ProcessManager processManager = new ProcessManager();
         
-        if (OSAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsWindows())
         {
             processManager.RunProcessWindows(appModel.InstallLocation, appModel.ExecutableName);
         }
-        else if (OSAnalyzer.IsMac())
+        else if (PlatformAnalyzer.IsMac())
         {
             processManager.RunProcessMac(appModel.InstallLocation, appModel.ExecutableName);
         }
-        else if (OSAnalyzer.IsLinux())
+        else if (PlatformAnalyzer.IsLinux())
         {
             processManager.RunProcessLinux(appModel.InstallLocation, appModel.ExecutableName);
         }
-        else if (OSAnalyzer.IsFreeBSD())
+        else if (PlatformAnalyzer.IsFreeBSD())
         {
             processManager.RunProcessFreeBsd(appModel.InstallLocation, appModel.ExecutableName);
         }

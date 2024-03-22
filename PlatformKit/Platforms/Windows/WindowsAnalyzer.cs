@@ -38,7 +38,7 @@ public class WindowsAnalyzer
     {
         try
         {
-            if (OSAnalyzer.IsWindows())
+            if (PlatformAnalyzer.IsWindows())
             {
                 var edition = GetWindowsSystemInformation().OsName.ToLower();
 
@@ -123,7 +123,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWMIClass(string wmiClass)
     {
-        if (OSAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsWindows())
         {
             var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
             // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
@@ -145,7 +145,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWMIValue(string property, string wmiClass)
     {
-        if (OSAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsWindows())
         {
             var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
@@ -186,7 +186,7 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public string GetWindowsRegistryValue(string query, string value){
-        if (OSAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsWindows())
         {
             var result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
@@ -225,7 +225,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
-        if (!OSAnalyzer.IsWindows())
+        if (!PlatformAnalyzer.IsWindows())
         {
             throw new PlatformNotSupportedException();
         }
@@ -673,7 +673,6 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-            if (OSAnalyzer.IsWindows())
             {
                 return IsWindows11(GetWindowsVersionToEnum());
             }
@@ -717,9 +716,9 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-                if (OSAnalyzer.IsWindows())
+                if (PlatformAnalyzer.IsWindows())
                 {
-                    return GetWindowsVersionToEnum(DetectWindowsVersion());
+                    return GetWindowsVersionToEnum(GetWindowsVersion());
                 }
                 else
                 {
@@ -838,11 +837,11 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
-        public Version DetectWindowsVersion()
+        public Version GetWindowsVersion()
         {
             try
             {
-                if (OSAnalyzer.IsWindows())
+                if (PlatformAnalyzer.IsWindows())
                 {
                     string description = RuntimeInformation.OSDescription
                         .Replace("Microsoft Windows", string.Empty)
@@ -924,7 +923,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public bool IsAtLeastVersion(WindowsVersion windowsVersion)
         {
-            if (OSAnalyzer.IsWindows())
+            if (PlatformAnalyzer.IsWindows())
             {
                 return DetectWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
@@ -942,7 +941,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public bool IsAtLeastVersion(Version windowsVersion)
         {
-            if (OSAnalyzer.IsWindows())
+            if (PlatformAnalyzer.IsWindows())
             {
                 return IsAtLeastVersion(GetWindowsVersionToEnum(windowsVersion));
             }

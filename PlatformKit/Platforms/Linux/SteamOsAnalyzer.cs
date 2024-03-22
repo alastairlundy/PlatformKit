@@ -29,7 +29,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     // ReSharper disable once InconsistentNaming
     public bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
-        if (OSAnalyzer.IsLinux())
+        if (PlatformAnalyzer.IsLinux())
         {
             var distroInfo = GetLinuxDistributionInformation();
             var distroBase = DetectDistroBase();

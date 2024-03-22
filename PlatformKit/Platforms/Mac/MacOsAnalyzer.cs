@@ -48,7 +48,7 @@ namespace PlatformKit.Mac;
         {
             try
             {
-                if (OSAnalyzer.IsMac())
+                if (PlatformAnalyzer.IsMac())
                 {
                     return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
                     {
@@ -181,7 +181,7 @@ namespace PlatformKit.Mac;
         /// <exception cref="Exception"></exception>
         public MacOsVersion GetMacOsVersionToEnum(Version input)
         {
-                if (OSAnalyzer.IsMac())
+                if (PlatformAnalyzer.IsMac())
                 {
                     if (input.Major == 10)
                     {
@@ -298,7 +298,7 @@ namespace PlatformKit.Mac;
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             return DetectMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
         }
@@ -316,7 +316,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS. </exception>
     public bool IsAtLeastVersion(Version macOsVersion)
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             return IsAtLeastVersion(GetMacOsVersionToEnum(macOsVersion));
         }
@@ -350,7 +350,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectDarwinVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
@@ -383,7 +383,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectXnuVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
@@ -426,7 +426,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectMacOsVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             try
             {
@@ -472,7 +472,7 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public string DetectMacOsBuildNumber()
     {
-        if (OSAnalyzer.IsMac())
+        if (PlatformAnalyzer.IsMac())
         {
             try
             {
