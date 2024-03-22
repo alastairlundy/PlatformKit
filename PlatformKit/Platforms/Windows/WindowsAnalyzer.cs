@@ -673,6 +673,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
+            if (PlatformAnalyzer.IsWindows())
             {
                 return IsWindows11(GetWindowsVersionToEnum());
             }
