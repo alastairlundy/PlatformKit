@@ -19,14 +19,14 @@ using PlatformKit.Windows;
 namespace PlatformKit;
 
     // ReSharper disable once InconsistentNaming
-    public class OSAnalyzer
+    public class PlatformAnalyzer
     {
         private readonly WindowsAnalyzer _windowsAnalyzer;
         private readonly MacOsAnalyzer _macOsAnalyzer;
         private readonly LinuxAnalyzer _linuxAnalyzer;
         private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
         
-        public OSAnalyzer()
+        public PlatformAnalyzer()
         {
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOsAnalyzer();
@@ -80,13 +80,13 @@ namespace PlatformKit;
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once InconsistentNaming
-        public Version DetectOSVersion()
+        public Version GetOSVersion()
         {
             try
             {
                 if (IsWindows())
                 {
-                    return _windowsAnalyzer.DetectWindowsVersion();
+                    return _windowsAnalyzer.GetWindowsVersion();
                 }
                 if (IsLinux())
                 {
