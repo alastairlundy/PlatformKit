@@ -12,7 +12,7 @@ namespace PlatformKit.Extensions;
 
 public static class StringExtensions
 {
-    public static int CountDotsInString(this string str)
+    internal static int CountDotsInString(this string str)
     {
         int dotCounter = 0;
 

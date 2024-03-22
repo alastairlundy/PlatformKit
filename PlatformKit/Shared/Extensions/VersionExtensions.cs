@@ -24,7 +24,7 @@ public static class VersionExtensions
     /// <param name="numberOfZeroesNeeded">The number of zeroes to add. Valid values are 0 through 3. Defaults to 3.</param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public static string AddMissingZeroes(this Version version, string str, int numberOfZeroesNeeded = 3)
+    internal static string AddMissingZeroes(this Version version, string str, int numberOfZeroesNeeded = 3)
     {
         StringBuilder stringBuilder = new StringBuilder();
         int dots = str.CountDotsInString();
