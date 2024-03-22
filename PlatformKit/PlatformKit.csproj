@@ -48,6 +48,7 @@
 
     <ItemGroup>
       <Folder Include="Platforms" />
+      <Folder Include="Software\Windows\" />
     </ItemGroup>
 
     <ItemGroup>
