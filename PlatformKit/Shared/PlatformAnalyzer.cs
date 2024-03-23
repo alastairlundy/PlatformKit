@@ -45,7 +45,7 @@ namespace PlatformKit;
         internal static bool IsMac()
         {
 #if NET5_0_OR_GREATER
-                  return OperatingSystem.IsMacOS();
+            return OperatingSystem.IsMacOS();
 #else
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif
@@ -54,7 +54,7 @@ namespace PlatformKit;
         internal static bool IsLinux()
         {
 #if NET5_0_OR_GREATER
-                  return OperatingSystem.IsLinux();
+            return OperatingSystem.IsLinux();
 #else
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 #endif
@@ -64,7 +64,7 @@ namespace PlatformKit;
         internal static bool IsFreeBSD()
         {
 #if NET5_0_OR_GREATER
-                  return OperatingSystem.IsFreeBSD();
+            return OperatingSystem.IsFreeBSD();
 #else
         #if NETCOREAPP3_0_OR_GREATER
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD);
@@ -108,7 +108,6 @@ namespace PlatformKit;
             catch (Exception exception)
             {
                 throw;
-
             }
         }
     }
