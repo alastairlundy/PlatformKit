@@ -438,11 +438,7 @@ namespace PlatformKit.Identification
                         }
                         else if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                         {
-#if NET5_0_OR_GREATER
-                            if (OperatingSystem.IsMacOS())
-#else
                             if(PlatformAnalyzer.IsMac())
-#endif
                             {
                                 stringBuilder.Append("-");
                                 stringBuilder.Append("macos");
@@ -498,11 +494,7 @@ namespace PlatformKit.Identification
 
                             if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
                             {
-#if NET5_0_OR_GREATER
-                                if (OperatingSystem.IsMacOS())
-#else
                                 if(PlatformAnalyzer.IsMac())
-#endif
                                 {
                                     MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
                                     var macOsVersion = macOsAnalyzer.GetMacOsVersion();
@@ -511,19 +503,11 @@ namespace PlatformKit.Identification
                                     stringBuilder.Append(".");
                                     stringBuilder.Append(macOsVersion.Minor);
                                 }
-#if NET5_0_OR_GREATER
-                                else if (OperatingSystem.IsLinux())
-#else
                                 else if(PlatformAnalyzer.IsLinux())
-#endif
                                 {
                                     //Do nothing because Linux doesn't have a version specific TFM.
                                 }
-#if NET5_0_OR_GREATER
-                                else if (OperatingSystem.IsWindows())
-#else
                                 else if(PlatformAnalyzer.IsWindows())
-#endif
                                 {
                                     WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
                                     var windowsVersion = windowsAnalyzer.GetWindowsVersion();
@@ -573,11 +557,7 @@ namespace PlatformKit.Identification
                     stringBuilder.Clear();
                     stringBuilder.Append("mono");
                     
-#if NET5_0_OR_GREATER
-                    if (OperatingSystem.IsMacOS())
-#else
                     if(PlatformAnalyzer.IsMac())
-#endif
                     {
                         stringBuilder.Append("mac");
                     }
