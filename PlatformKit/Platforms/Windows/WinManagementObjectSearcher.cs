@@ -10,16 +10,15 @@
 
 using System;
 using System.Collections.Generic;
+using PlatformKit.Software;
 
 namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
     {
-        protected ProcessManager processManager;
-
         public WinManagementObjectSearcher()
         {
-            processManager = new ProcessManager();
+            
         }
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace PlatformKit.Windows
             {
                 if (PlatformAnalyzer.IsWindows())
                 {
-                    var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
+                    string output = CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);
 
                     if (output == null)

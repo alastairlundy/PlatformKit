@@ -22,11 +22,10 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOsAnalyzer
     {
-        private readonly ProcessManager _processManager;
 
         public MacOsAnalyzer()
         {
-            _processManager = new ProcessManager();
+            
         }
         
         /// <summary>

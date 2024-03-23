@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Software;
 
 namespace PlatformKit.Windows;
 
@@ -21,11 +22,9 @@ namespace PlatformKit.Windows;
 /// </summary>
 public class WindowsAnalyzer
 {
-    private readonly ProcessManager _processManager;
-
     public WindowsAnalyzer()
     {
-        _processManager = new ProcessManager();
+        
     }
 
     /// <summary>

@@ -18,11 +18,9 @@ namespace PlatformKit.FreeBSD;
 /// </summary>
 public class FreeBsdAnalyzer
 {
-    private readonly ProcessManager _processManager;
 
     public FreeBsdAnalyzer()
     {
-        _processManager = new ProcessManager();
     }
 
     // ReSharper disable once InconsistentNaming
@@ -34,7 +32,7 @@ public class FreeBsdAnalyzer
     { 
         if (PlatformAnalyzer.IsWindows())
         {
-            var version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", String.Empty);
+            var version = ProcessRunner.RunProcessOnFreeBsd("", "uname", "-v").Replace("FreeBSD", String.Empty);
 
             var arr = version.Split(' ');
 

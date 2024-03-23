@@ -10,8 +10,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-
+using PlatformKit.Extensions;
 using PlatformKit.Linux;
 
 namespace PlatformKit.Software;
@@ -98,23 +99,21 @@ public class InstalledApps
     /// <exception cref="PlatformNotSupportedException"></exception>
     public static void Open(AppModel appModel)
     {
-        ProcessManager processManager = new ProcessManager();
-        
         if (PlatformAnalyzer.IsWindows())
         {
-            processManager.RunProcessWindows(appModel.InstallLocation, appModel.ExecutableName);
+            ProcessRunner.RunProcessOnWindows(appModel.InstallLocation, appModel.ExecutableName);
         }
         else if (PlatformAnalyzer.IsMac())
         {
-            processManager.RunProcessMac(appModel.InstallLocation, appModel.ExecutableName);
+           ProcessRunner.RunProcessOnMac(appModel.InstallLocation, appModel.ExecutableName);
         }
         else if (PlatformAnalyzer.IsLinux())
         {
-            processManager.RunProcessLinux(appModel.InstallLocation, appModel.ExecutableName);
+            ProcessRunner.RunProcessOnLinux(appModel.InstallLocation, appModel.ExecutableName);
         }
         else if (PlatformAnalyzer.IsFreeBSD())
         {
-            processManager.RunProcessFreeBsd(appModel.InstallLocation, appModel.ExecutableName);
+           ProcessRunner.RunProcessOnFreeBsd(appModel.InstallLocation, appModel.ExecutableName);
         }
         else
         {

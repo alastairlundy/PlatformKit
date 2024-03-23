@@ -22,13 +22,11 @@ namespace PlatformKit.Linux;
 /// A class to Detect Linux versions, Linux features, and find out more about a user's Linux installation.
 /// </summary>
 public class LinuxAnalyzer
+
 {
-
-    protected ProcessManager _processManager;
-
     public LinuxAnalyzer()
     {
-        _processManager = new ProcessManager();
+        
     }
 
     /// <summary>
