@@ -22,7 +22,7 @@ public class InstalledApps
     /// </summary>
     /// <returns>Returns a list of installed snaps. Returns an empty array if no Snaps are installed. </returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a Platform other than Linux, macOS, and FreeBsd. </exception>
-    public static AppModel[] GetInstalledSnaps()
+    internal static AppModel[] GetInstalledSnaps()
     {
         List<AppModel> apps = new List<AppModel>();
 
@@ -64,7 +64,7 @@ public class InstalledApps
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
     // ReSharper disable once IdentifierTypo
-    public static AppModel[] GetInstalledFlatpaks()
+    internal static AppModel[] GetInstalledFlatpaks()
     {
         List<AppModel> apps = new List<AppModel>();
 
