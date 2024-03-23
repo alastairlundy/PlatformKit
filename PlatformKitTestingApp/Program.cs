@@ -100,7 +100,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("Xnu Version: " + macAnalyzer.GetXnuVersion());
             }
 
-            processManager.OpenUrlInBrowser("duckduckgo.com");
+            ProcessRunner.OpenUrlInBrowser("duckduckgo.com");
 
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
