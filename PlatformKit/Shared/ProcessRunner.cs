@@ -12,6 +12,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using PlatformKit.Software;
 
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
@@ -21,7 +22,7 @@ namespace PlatformKit
     /// <summary>
     ///  A class to manage processes on a device and/or start new processes.
     /// </summary>
-    public class ProcessManager
+    public static class ProcessRunner
     {
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         /// <param name="windowStyle">Whether to open the window in full screen mode, normal size, minimized, or a different window mode.</param>
         /// <exception cref="Exception"></exception>
-        public string RunProcessWindows(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null,
+        public static string RunProcessOnWindows(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null,
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
@@ -108,7 +109,7 @@ namespace PlatformKit
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
-        public string RunProcessMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
+        public static string RunProcessOnMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             try
             {
@@ -158,7 +159,7 @@ namespace PlatformKit
         /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string RunProcessLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
+        public static string RunProcessOnLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             try
             {
@@ -206,39 +207,9 @@ namespace PlatformKit
         /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string RunProcessFreeBsd(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
+        public static string RunProcessOnFreeBsd(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
-        }
-
-        
-        /// <summary>
-        /// Runs commands in the Windows Cmd Command Prompt.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        public string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null)
-        {
-            return RunProcessWindows(Environment.SystemDirectory, "cmd", command, processStartInfo);
-        }
-
-        /// <summary>
-        /// Runs commands in Windows Powershell.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        public string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null)
-        {
-            if (PlatformAnalyzer.IsWindows())
-            {
-                var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
-                                                           //+ "System32" +
-                               + Path.DirectorySeparatorChar + "WindowsPowerShell" +
-                               Path.DirectorySeparatorChar + "v1.0";
-                return RunProcessWindows(location, "powershell", command, processStartInfo);
-            }
-                
-            throw new PlatformNotSupportedException();
+            return RunProcessOnLinux(executableLocation, executableName, arguments, processStartInfo);
         }
 
         /// <summary>
@@ -248,7 +219,7 @@ namespace PlatformKit
         /// <param name="url">The URL to be opened.</param>
         /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
         /// <returns></returns>
-        public void OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
+        public static void OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
             try
             {
@@ -270,11 +241,11 @@ namespace PlatformKit
 
                 if (PlatformAnalyzer.IsWindows())
                 {
-                    RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
+                    CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
                 }
                 if (PlatformAnalyzer.IsLinux())
                 {
-                    RunLinuxCommand($"xdg-open {url}");
+                    CommandRunner.RunCommandOnLinux($"xdg-open {url}");
                 }
                 if (PlatformAnalyzer.IsMac())
                 {
@@ -284,7 +255,7 @@ namespace PlatformKit
 #if  NETCOREAPP3_0_OR_GREATER
                 if (PlatformAnalyzer.IsFreeBSD())
                 {
-                    RunFreeBsdCommand($"xdg-open {url}");
+                    CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
                 }          
 #endif
             }
