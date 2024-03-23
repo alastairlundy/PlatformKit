@@ -30,7 +30,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public Version DetectFreeBSDVersion()
     { 
-        if (PlatformAnalyzer.IsWindows())
+        if (PlatformAnalyzer.IsFreeBSD())
         {
             var version = ProcessRunner.RunProcessOnFreeBsd("", "uname", "-v").Replace("FreeBSD", String.Empty);
 
