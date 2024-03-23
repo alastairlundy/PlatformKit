@@ -11,7 +11,21 @@ namespace PlatformKit.Software;
 /// </summary>
 public static class CommandRunner
 {
-
+ /*
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="platform"></param>
+    /// <returns></returns>
+    public static string GetOptions(Platform platform)
+    {
+        if (platform == Platform.Linux)
+        {
+            return 
+        }
+    }
+*/
+ 
 /// <summary>
     /// Run a command on macOS located in the /usr/bin/ folder.
     /// </summary>
