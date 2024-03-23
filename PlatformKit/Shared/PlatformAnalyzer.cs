@@ -11,7 +11,6 @@
 using System;
 using System.Runtime.InteropServices;
 using PlatformKit.FreeBSD;
-using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
