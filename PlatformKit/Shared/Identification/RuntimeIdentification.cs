@@ -330,7 +330,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public string DetectRuntimeIdentifier()
+        public string GetRuntimeIdentifier()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
