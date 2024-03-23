@@ -28,7 +28,7 @@ public class FreeBsdAnalyzer
     /// Detects and Returns the Installed version of FreeBSD
     /// </summary>
     /// <returns></returns>
-    public Version DetectFreeBSDVersion()
+    public Version GetFreeBSDVersion()
     { 
         if (PlatformAnalyzer.IsFreeBSD())
         {
@@ -67,7 +67,7 @@ public class FreeBsdAnalyzer
     {
         if (PlatformAnalyzer.IsFreeBSD())
         {
-            return DetectFreeBSDVersion().IsAtLeast((expectedVersion));
+            return GetFreeBSDVersion().IsAtLeast((expectedVersion));
         }
         else
         {
