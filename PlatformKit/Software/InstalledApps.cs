@@ -19,33 +19,177 @@ namespace PlatformKit.Software;
 
 public class InstalledApps
 {
-    /*public static AppModel[] Get()
+    /// <summary>
+    /// Detect what Snap packages (if any) are installed on a linux distribution or on macOS.
+    /// </summary>
+    /// <returns>Returns a list of installed snaps. Returns an empty array if no Snaps are installed. </returns>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a Platform other than Linux, macOS, and FreeBsd. </exception>
+    public static AppModel[] GetInstalledSnaps()
     {
-        ProcessManager processManager = new ProcessManager();
-        if (OSAnalyzer.IsWindows())
+        List<AppModel> apps = new List<AppModel>();
+
+        if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsMac() || PlatformAnalyzer.IsFreeBSD())
         {
-            
-            foreach (File file in Envir)
+            bool useSnap = Directory.Exists("/snap/bin");
+
+            if (useSnap)
             {
-                
+                string[] snapResults = CommandRunner.RunCommandOnLinux("ls /snap/bin").Split(' ');
+
+                foreach (var snap in snapResults)
+                {
+                    apps.Add(new AppModel()
+                    {
+                        ExecutableName = snap,
+                        InstallLocation = "/snap/bin"
+                    });
+                }
+
+                return apps.ToArray();
+            }
+            else
+            {
+                apps.Clear();
+                return apps.ToArray();
             }
         }
-        else if (OSAnalyzer.IsMac())
+        else
         {
-            
+            throw new PlatformNotSupportedException();
         }
-        else if (OSAnalyzer.IsLinux())
+    }
+    
+    /// <summary>
+    ///
+    /// Platforms Supported On: Linux and FreeBsd.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    // ReSharper disable once IdentifierTypo
+    public static AppModel[] GetInstalledFlatpaks()
+    {
+        List<AppModel> apps = new List<AppModel>();
+
+        if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsFreeBSD())
+        {
+            bool useFlatpaks;
+            
+            string[] flatpakTest = CommandRunner.RunCommandOnLinux("flatpak --version").Split(' ');
+                
+            if (flatpakTest[0].Contains("Flatpak"))
+            {
+                Version.Parse(flatpakTest[1]);
+
+                useFlatpaks = true;
+            }
+            else
+            {
+                useFlatpaks = false;
+            }
+
+            if (useFlatpaks)
+            {
+#if NET5_0_OR_GREATER
+                string[] flatpakResults = CommandRunner.RunCommandOnLinux("flatpak list --columns=name")
+                    .Split(Environment.NewLine);
+#else
+                string[] flatpakResults = CommandRunner.RunCommandOnLinux("flatpak list --columns=name")
+                    .Split(Convert.ToChar(Environment.NewLine));
+#endif
+
+                var installLocation = CommandRunner.RunCommandOnLinux("flatpak --installations");
+                
+                foreach (var flatpak in flatpakResults)
+                {
+                    apps.Add(new AppModel()
+                    {
+                        ExecutableName = flatpak,
+                        InstallLocation = installLocation
+                    });
+                }
+                
+                return apps.ToArray();
+            }
+            else
+            {
+                apps.Clear();
+                return apps.ToArray();
+            }
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+    
+    protected static AppModel[] GetOnLinux(bool includeSnaps = false, bool includeFlatpaks = false)
+    {
+        List<AppModel> apps = new List<AppModel>();
+
+        if (PlatformAnalyzer.IsLinux())
+        {
+#if NET5_0_OR_GREATER
+            string[] binResult = CommandRunner.RunCommandOnLinux("ls -F /usr/bin | grep -v /").Split(Environment.NewLine);
+#else
+            string[] binResult = CommandRunner.RunCommandOnLinux("ls -F /usr/bin | grep -v /").Split(Convert.ToChar(Environment.NewLine));
+#endif
+
+            foreach (var app in binResult)
+            {
+                apps.Add(new AppModel()
+                {
+                    ExecutableName = app,
+                    InstallLocation = "/usr/bin"
+                });
+            }
+            
+            if (includeSnaps)
+            {
+                foreach (var snap in InstalledApps.GetInstalledSnaps())
+                {
+                    apps.Add(snap);
+                }
+            }
+            if(includeFlatpaks){
+                foreach (var flatpak in InstalledApps.GetInstalledFlatpaks())
+                {
+                    apps.Add(flatpak);
+                }
+            }
+
+            return apps.ToArray();
+        }
+        else
+        {
+            throw new PlatformNotSupportedException();
+        }
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public static AppModel[] Get()
+    {
+        if (PlatformAnalyzer.IsWindows())
+        {
+            throw new NotImplementedException();
+        }
+        else if (PlatformAnalyzer.IsMac())
+        {
+            throw new NotImplementedException();
+        }
+        else if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsFreeBSD())
         {
             List<AppModel> apps = new List<AppModel>();
-
-            LinuxAnalyzer linuxAnalyzer = new LinuxAnalyzer();
             
             bool useSnap = Directory.Exists("/snap/bin");
             bool useFlatpak;
 
             try
             {
-                string[] flatpakTest = processManager.RunLinuxCommand("flatpak --version").Split(" ");
+                string[] flatpakTest = CommandRunner.RunCommandOnLinux("flatpak --version").Split(' ');
                 
                 if (flatpakTest[0].Contains("Flatpak"))
                 {
@@ -65,7 +209,7 @@ public class InstalledApps
             
             if (useSnap)
             {
-                foreach (var flatpak in linuxAnalyzer.GetInstalledFlatpaks())
+                foreach (var flatpak in GetInstalledFlatpaks())
                 {
                     apps.Add(flatpak);
                 }
@@ -73,24 +217,22 @@ public class InstalledApps
 
             if (useFlatpak)
             {
-                foreach (var snap in linuxAnalyzer.GetInstalledSnaps())
+                foreach (var snap in GetInstalledSnaps())
                 {
                     apps.Add(snap);
                 }
             }
             
-            foreach (var app in linuxAnalyzer.GetInstalledApps())
+            foreach (var app in GetOnLinux())
             {
                 apps.Add(app);
             }
 
             return apps.ToArray();
         }
-        else if (OSAnalyzer.IsFreeBSD())
-        {
-            
-        }
-    }*/
+
+        throw new PlatformNotSupportedException();
+    }
 
     /// <summary>
     /// 
