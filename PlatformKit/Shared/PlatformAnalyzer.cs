@@ -90,11 +90,11 @@ namespace PlatformKit;
                 }
                 if (IsLinux())
                 {
-                    return _linuxAnalyzer.DetectLinuxDistributionVersion();
+                    return _linuxAnalyzer.GetLinuxDistributionVersion();
                 }
                 if (IsMac())
                 {
-                    return _macOsAnalyzer.DetectMacOsVersion();
+                    return _macOsAnalyzer.GetMacOsVersion();
                 }
 
 #if NETCOREAPP3_0_OR_GREATER

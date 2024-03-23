@@ -22,7 +22,6 @@ using PlatformKit.Windows;
 
     var platformManager = new PlatformIdentification();
 var osAnalyzer = new PlatformAnalyzer();
-            var processManager = new ProcessManager();
 var runtimeIdentification = new RuntimeIdentification();
 
 var windowsAnalyzer = new WindowsAnalyzer();
@@ -97,8 +96,8 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 
                 Console.WriteLine("macOS Version Detected: " + osAnalyzer.GetOSVersion().ToString());
                 
-                Console.WriteLine("Darwin Version: " + macAnalyzer.DetectDarwinVersion());
-                Console.WriteLine("Xnu Version: " + macAnalyzer.DetectXnuVersion());
+                Console.WriteLine("Darwin Version: " + macAnalyzer.GetDarwinVersion());
+                Console.WriteLine("Xnu Version: " + macAnalyzer.GetXnuVersion());
             }
 
             processManager.OpenUrlInBrowser("duckduckgo.com");
@@ -108,8 +107,8 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
             if (OperatingSystem.IsLinux())
             {  
                 Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
-                Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
-                Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.DetectLinuxKernelVersion());
+                Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.GetLinuxDistributionVersionAsString());
+                Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.GetLinuxKernelVersion());
                 
                 Console.WriteLine("Is an LTS release? " + linuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
             }

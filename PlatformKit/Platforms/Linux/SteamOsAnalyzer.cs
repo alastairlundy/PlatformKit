@@ -32,7 +32,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
         if (PlatformAnalyzer.IsLinux())
         {
             var distroInfo = GetLinuxDistributionInformation();
-            var distroBase = DetectDistroBase();
+            var distroBase = GetDistroBase();
 
             if ((distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch) 
                 && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))
@@ -69,7 +69,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
         if (IsSteamOS(false))
         {
             var distroInfo = GetLinuxDistributionInformation();
-            var distroBase = DetectDistroBase();
+            var distroBase = GetDistroBase();
             
             if (distroBase == LinuxDistroBase.Manjaro
                 && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))

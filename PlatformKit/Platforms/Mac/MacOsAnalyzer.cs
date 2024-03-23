@@ -169,7 +169,7 @@ namespace PlatformKit.Mac;
         /// <returns></returns>
         public MacOsVersion GetMacOsVersionToEnum()
         {
-            return GetMacOsVersionToEnum(DetectMacOsVersion());
+            return GetMacOsVersionToEnum(GetMacOsVersion());
         }
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            return DetectMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+            return GetMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
         }
         else
         {
@@ -331,15 +331,15 @@ namespace PlatformKit.Mac;
     /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
-    public MacOsSystemInformation DetectMacSystemInformation()
+    public MacOsSystemInformation GetMacSystemInformation()
     {
         return new MacOsSystemInformation()
         {
             ProcessorType = GetMacProcessorType(),
-            MacOsBuildNumber = DetectMacOsBuildNumber(),
-            MacOsVersion = DetectMacOsVersion(),
-            DarwinVersion = DetectDarwinVersion(),
-            XnuVersion = DetectXnuVersion()
+            MacOsBuildNumber = GetMacOsBuildNumber(),
+            MacOsVersion = GetMacOsVersion(),
+            DarwinVersion = GetDarwinVersion(),
+            XnuVersion = GetXnuVersion()
         };
     }
 
@@ -348,7 +348,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
-    public Version DetectDarwinVersion()
+    public Version GetDarwinVersion()
     {
         if (PlatformAnalyzer.IsMac())
         {
@@ -381,7 +381,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
-    public Version DetectXnuVersion()
+    public Version GetXnuVersion()
     {
         if (PlatformAnalyzer.IsMac())
         {
@@ -424,7 +424,7 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
-    public Version DetectMacOsVersion()
+    public Version GetMacOsVersion()
     {
         if (PlatformAnalyzer.IsMac())
         {
@@ -470,7 +470,7 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
-    public string DetectMacOsBuildNumber()
+    public string GetMacOsBuildNumber()
     {
         if (PlatformAnalyzer.IsMac())
         {

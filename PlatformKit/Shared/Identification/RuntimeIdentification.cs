@@ -168,7 +168,7 @@ namespace PlatformKit.Identification
             }
             if (PlatformAnalyzer.IsLinux())
             {
-                osVersion = _linuxAnalyzer.DetectLinuxDistributionVersionAsString();
+                osVersion = _linuxAnalyzer.GetLinuxDistributionVersionAsString();
 
                 int dotCounter = 0;
                 
@@ -194,7 +194,7 @@ namespace PlatformKit.Identification
             }
             if (PlatformAnalyzer.IsMac())
             {
-                var version = _macOsAnalyzer.DetectMacOsVersion();
+                var version = _macOsAnalyzer.GetMacOsVersion();
 
                 if (version.Major == 10)
                 {
@@ -505,7 +505,7 @@ namespace PlatformKit.Identification
 #endif
                                 {
                                     MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
-                                    var macOsVersion = macOsAnalyzer.DetectMacOsVersion();
+                                    var macOsVersion = macOsAnalyzer.GetMacOsVersion();
 
                                     stringBuilder.Append(macOsVersion.Major);
                                     stringBuilder.Append(".");

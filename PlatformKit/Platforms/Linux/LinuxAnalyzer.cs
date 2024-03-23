@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
@@ -176,7 +177,7 @@ public class LinuxAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
-    public LinuxDistroBase DetectDistroBase()
+    public LinuxDistroBase GetDistroBase()
     {
         if (PlatformAnalyzer.IsLinux())
         {
@@ -319,11 +320,11 @@ public class LinuxAnalyzer
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
-        public Version DetectLinuxDistributionVersion()
+        public Version GetLinuxDistributionVersion()
         {
             if (PlatformAnalyzer.IsLinux())
             {
-                var version = DetectLinuxDistributionVersionAsString();
+                var version = GetLinuxDistributionVersionAsString();
 
                 var dotCounter = version.CountDotsInString();
 
@@ -348,7 +349,7 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
-        public string DetectLinuxDistributionVersionAsString()
+        public string GetLinuxDistributionVersionAsString()
         {
             if (PlatformAnalyzer.IsLinux())
             {
@@ -380,7 +381,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">
         ///  Throws a platform not supported exception if run on Windows, macOS, or any platform that isn't Linux.
         /// </exception>
-        public Version DetectLinuxKernelVersion()
+        public Version GetLinuxKernelVersion()
         {
             if (PlatformAnalyzer.IsLinux())
             {
@@ -403,7 +404,7 @@ public class LinuxAnalyzer
         {
             if (PlatformAnalyzer.IsLinux())
             {
-                return DetectLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
+                return GetLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
             }
 
             throw new PlatformNotSupportedException();
