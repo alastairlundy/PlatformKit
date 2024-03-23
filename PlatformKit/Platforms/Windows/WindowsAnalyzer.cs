@@ -146,10 +146,6 @@ public class WindowsAnalyzer
         {
             string result = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
-
-            #if DEBUG
-           //     Console.WriteLine(result);
-            #endif
             
             var arr = result.Split(Convert.ToChar("\r\n"));
             
