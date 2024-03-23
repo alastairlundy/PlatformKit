@@ -29,16 +29,7 @@ public class LinuxAnalyzer
     {
         
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="includeSnaps"></param>
-    /// <param name="includeFlatpaks"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
-
-
+    
     /// <summary>
     /// Detects what base Linux Distribution a Distro is based off of.
     /// </summary>
