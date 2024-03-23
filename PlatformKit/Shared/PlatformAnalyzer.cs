@@ -68,8 +68,9 @@ namespace PlatformKit;
 #else
         #if NETCOREAPP3_0_OR_GREATER
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.FreeBSD);
-        #endif
+        #else
             throw new PlatformNotSupportedException();
+        #endif
 #endif
         }
         
