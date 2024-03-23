@@ -12,6 +12,7 @@ using System;
 using System.Runtime.InteropServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Software;
 
 
 namespace PlatformKit.Mac;
@@ -74,7 +75,7 @@ namespace PlatformKit.Mac;
         /// <exception cref="ArgumentException"></exception>
         public string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            string info = _processManager.RunMacCommand("system_profiler SP" + macSystemProfilerDataType);
+            string info = CommandRunner.RunCommandOnMac("system_profiler SP" + macSystemProfilerDataType);
 
 #if NETSTANDARD2_0_OR_GREATER
             string[] array = info.Split(Convert.ToChar(Environment.NewLine));
@@ -496,6 +497,6 @@ namespace PlatformKit.Mac;
     private string[] GetMacSwVersInfo()
     {
         // ReSharper disable once StringLiteralTypo
-        return _processManager.RunMacCommand("sw_vers").Split(Convert.ToChar(Environment.NewLine));
+        return CommandRunner.RunCommandOnMac("sw_vers").Split(Convert.ToChar(Environment.NewLine));
     }
 }

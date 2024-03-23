@@ -124,10 +124,8 @@ public class WindowsAnalyzer
     {
         if (PlatformAnalyzer.IsWindows())
         {
-            var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
+            return CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
             // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
-
-            return result;
         }
 
         throw new PlatformNotSupportedException();
@@ -146,7 +144,7 @@ public class WindowsAnalyzer
     {
         if (PlatformAnalyzer.IsWindows())
         {
-            var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
+            string result = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
 
             #if DEBUG
@@ -187,7 +185,7 @@ public class WindowsAnalyzer
     public string GetWindowsRegistryValue(string query, string value){
         if (PlatformAnalyzer.IsWindows())
         {
-            var result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
+            string result = CommandRunner.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
                 if (result != null)
                 {
@@ -239,7 +237,7 @@ public class WindowsAnalyzer
         
         NetworkCard lastNetworkCard = null;
 
-        var desc = _processManager.RunPowerShellCommand("systeminfo");
+        var desc = CommandRunner.RunPowerShellCommand("systeminfo");
 
 #if NET5_0_OR_GREATER
         var array = desc.Split(Environment.NewLine);

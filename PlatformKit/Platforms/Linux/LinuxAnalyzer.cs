@@ -42,7 +42,7 @@ public class LinuxAnalyzer
 
         if (PlatformAnalyzer.IsLinux())
         {
-            string[] binResult = _processManager.RunLinuxCommand("ls -F /usr/bin | grep -v /").Split(Environment.NewLine);
+            string[] binResult = CommandRunner.RunCommandOnLinux("ls -F /usr/bin | grep -v /").Split(Environment.NewLine);
             
             foreach (var app in binResult)
             {
@@ -90,7 +90,7 @@ public class LinuxAnalyzer
 
             if (useSnap)
             {
-                string[] snapResults = _processManager.RunLinuxCommand("ls /snap/bin").Split(" ");
+                string[] snapResults = CommandRunner.RunCommandOnLinux("ls /snap/bin").Split(" ");
 
                 foreach (var snap in snapResults)
                 {
@@ -128,7 +128,7 @@ public class LinuxAnalyzer
         {
             bool useFlatpaks;
             
-            string[] flatpakTest = _processManager.RunLinuxCommand("flatpak --version").Split(" ");
+            string[] flatpakTest = CommandRunner.RunCommandOnLinux("flatpak --version").Split(" ");
                 
             if (flatpakTest[0].Contains("Flatpak"))
             {
@@ -143,10 +143,10 @@ public class LinuxAnalyzer
 
             if (useFlatpaks)
             {
-                string[] flatpakResults = _processManager.RunLinuxCommand("flatpak list --columns=name")
+                string[] flatpakResults = CommandRunner.RunCommandOnLinux("flatpak list --columns=name")
                     .Split(Environment.NewLine);
 
-                var installLocation = _processManager.RunLinuxCommand("flatpak --installations");
+                var installLocation = CommandRunner.RunCommandOnLinux("flatpak --installations");
                 
                 foreach (var flatpak in flatpakResults)
                 {
