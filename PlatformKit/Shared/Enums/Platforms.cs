@@ -1,4 +1,4 @@
-﻿namespace PlatformKit.Enums;
+﻿namespace PlatformKit;
 
 public enum Platform
 {
