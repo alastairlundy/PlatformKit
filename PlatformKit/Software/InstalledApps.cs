@@ -36,11 +36,7 @@ public class InstalledApps
 
                 foreach (var snap in snapResults)
                 {
-                    apps.Add(new AppModel()
-                    {
-                        ExecutableName = snap,
-                        InstallLocation = "/snap/bin"
-                    });
+                    apps.Add(new AppModel(snap, "/snap/bin"));
                 }
 
                 return apps.ToArray();
@@ -99,11 +95,7 @@ public class InstalledApps
                 
                 foreach (var flatpak in flatpakResults)
                 {
-                    apps.Add(new AppModel()
-                    {
-                        ExecutableName = flatpak,
-                        InstallLocation = installLocation
-                    });
+                    apps.Add(new AppModel(flatpak, installLocation));
                 }
                 
                 return apps.ToArray();
@@ -134,11 +126,7 @@ public class InstalledApps
 
             foreach (var app in binResult)
             {
-                apps.Add(new AppModel()
-                {
-                    ExecutableName = app,
-                    InstallLocation = "/usr/bin"
-                });
+                apps.Add(new AppModel(app, "/usr/bin"));
             }
             
             if (includeSnaps)

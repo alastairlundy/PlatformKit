@@ -15,7 +15,13 @@ namespace PlatformKit.Software;
 
 public class AppModel
 {
-    public string? Author { get; set; }
+    public AppModel(string executableName, string installLocation)
+    {
+        this.ExecutableName = executableName;
+        this.InstallLocation = installLocation;
+    }
+
+public string? Author { get; set; }
     
     public string? FriendlyName { get; set; }
     public string ExecutableName { get; set; }
