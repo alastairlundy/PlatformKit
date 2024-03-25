@@ -68,18 +68,13 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     {
         if (IsSteamOS(includeHoloIsoAsSteamOs))
         {
-            var distroInfo = GetLinuxDistributionInformation();
             var distroBase = GetDistroBase();
-            
-            if (distroBase == LinuxDistroBase.Manjaro
-                && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))
+
+            var isSteamOsExcludingHolo = IsSteamOS(false);
+
+            if (distroBase == LinuxDistroBase.Manjaro)
             {
-                return SteamOSMode.DesktopMode;
-            }
-            else if ((distroBase == LinuxDistroBase.Manjaro) 
-                     && distroInfo.PrettyName.ToLower().Contains("holo"))
-            {
-                if (includeHoloIsoAsSteamOs)
+                if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
                 {
                     return SteamOSMode.DesktopMode;
                 }
@@ -88,17 +83,9 @@ public class SteamOsAnalyzer : LinuxAnalyzer
                     return SteamOSMode.OsIsNotSteamOS;
                 }
             }
-            
-            else if (distroBase == LinuxDistroBase.Arch &&
-                     distroInfo.PrettyName.ToLower().Contains("steamos") &&
-                     !distroInfo.PrettyName.ToLower().Contains("holo"))
+            else if (distroBase == LinuxDistroBase.Arch)
             {
-                return SteamOSMode.GamingMode;
-            }
-            else if ((distroBase == LinuxDistroBase.Arch) 
-                     && distroInfo.PrettyName.ToLower().Contains("holo"))
-            {
-                if (includeHoloIsoAsSteamOs)
+                if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
                 {
                     return SteamOSMode.GamingMode;
                 }
