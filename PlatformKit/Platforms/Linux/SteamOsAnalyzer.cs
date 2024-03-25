@@ -45,7 +45,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
                 return includeHoloIsoAsSteamOs;
             }
             
-            if (distroBase == LinuxDistroBase.Ubuntu && distroInfo.PrettyName.ToLower().Contains("steamos"))
+            if (distroBase == LinuxDistroBase.Debian && distroInfo.PrettyName.ToLower().Contains("steamos"))
             {
                 return false;
             }
