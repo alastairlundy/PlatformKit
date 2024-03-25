@@ -20,51 +20,6 @@ public static class VersionExtensions
     /// 
     /// </summary>
     /// <param name="version"></param>
-    /// <param name="str"></param>
-    /// <param name="numberOfZeroesNeeded">The number of zeroes to add. Valid values are 0 through 3. Defaults to 3.</param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    internal static string AddMissingZeroes(this Version version, string str, int numberOfZeroesNeeded = 3)
-    {
-        StringBuilder stringBuilder = new StringBuilder();
-        int dots = str.CountDotsInString();
-
-        if (dots == 0)
-        {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
-        }
-        if (dots == 1 && numberOfZeroesNeeded >= 1)
-        {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
-        }
-        if (dots == 2 && numberOfZeroesNeeded >= 2)
-        {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
-        }
-        if (dots == 3 && numberOfZeroesNeeded == 3)
-        {
-            return str;
-        }
-
-        var newDots = stringBuilder.ToString().CountDotsInString();
-        
-        if (newDots == 1 && numberOfZeroesNeeded == 1 || 
-            newDots == 2 && numberOfZeroesNeeded == 2 || 
-            newDots == 3 && numberOfZeroesNeeded == 3)
-        {
-            return stringBuilder.ToString();
-        }
-        
-        throw new ArgumentException();
-    }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="version"></param>
     /// <param name="versionToBeCompared"></param>
     /// <returns></returns>
     public static bool IsAtLeast(this Version version, Version versionToBeCompared)
