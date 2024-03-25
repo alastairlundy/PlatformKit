@@ -422,14 +422,11 @@ namespace PlatformKit.Mac;
     /// Detects the macOS version and returns it as a System.Version object.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="Exception"></exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version GetMacOsVersion()
     {
         if (PlatformAnalyzer.IsMac())
         {
-            try
-            {
                 var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
                 int dotCounter = 0;
@@ -452,11 +449,6 @@ namespace PlatformKit.Mac;
                 }
         
                 return Version.Parse(version);
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
         }
         else
         {
@@ -468,7 +460,6 @@ namespace PlatformKit.Mac;
     /// Detects the Build Number of the installed version of macOS.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="Exception"></exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public string GetMacOsBuildNumber()
     {
