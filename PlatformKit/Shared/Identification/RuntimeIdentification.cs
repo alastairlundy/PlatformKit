@@ -389,7 +389,7 @@ namespace PlatformKit.Identification
                     .Replace("core", String.Empty)
                     .Replace(" ", String.Empty);
                 
-                versionString = new Version().AddMissingZeroes(versionString);
+                versionString = versionString.AddMissingZeroes();
 
                 Version version = new Version(versionString);
 
@@ -408,7 +408,7 @@ namespace PlatformKit.Identification
                     var versionString = RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
                         .Replace(" ", String.Empty);
                     
-                    versionString = new Version().AddMissingZeroes(versionString);
+                    versionString = versionString.AddMissingZeroes();
 
                     Version version = new Version(versionString);
                     
