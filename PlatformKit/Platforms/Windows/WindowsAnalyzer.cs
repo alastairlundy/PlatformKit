@@ -572,10 +572,6 @@ for (var index = 0; index < array.Length; index++)
             .Replace("Data Execution Prevention Available:", String.Empty).Contains("Yes");
         break;
     }
-    else
-    {
-        
-    }
 }
         
         
