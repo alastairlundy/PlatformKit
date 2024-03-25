@@ -144,10 +144,9 @@ public class WindowsAnalyzer
     {
         if (PlatformAnalyzer.IsWindows())
         {
-            string result = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " 
-                                                              + wmiClass + " -Property " + property);
+            string result = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property);
             
-            var arr = result.Split(Convert.ToChar("\r\n"));
+            var arr = result.Split(Convert.ToChar(Environment.NewLine));
             
            foreach (var str in arr)
            {
