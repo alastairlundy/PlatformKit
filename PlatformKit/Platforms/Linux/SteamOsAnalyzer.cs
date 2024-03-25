@@ -66,7 +66,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any OS that isn't SteamOS 3</exception>
     public SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
-        if (IsSteamOS(false))
+        if (IsSteamOS(includeHoloIsoAsSteamOs))
         {
             var distroInfo = GetLinuxDistributionInformation();
             var distroBase = GetDistroBase();
