@@ -265,10 +265,6 @@ for (var index = 0; index < array.Length; index++)
     {
         nextLine = array[index].Replace("  ", String.Empty);
     }
-
-    #if DEBUG
-    Console.WriteLine("NextLine: " + nextLine);
-    #endif
     
     if (nextLine.ToLower().Contains("host name:"))
     {
