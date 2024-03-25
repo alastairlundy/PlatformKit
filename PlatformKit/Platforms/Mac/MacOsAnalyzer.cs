@@ -427,28 +427,9 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-                var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
+            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
-                int dotCounter = 0;
-
-                foreach (var str in version)
-                {
-                    if (str == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
-
-                if (dotCounter == 1)
-                {
-                    version += ".0";
-                }
-                if (dotCounter == 2)
-                {
-                    version += ".0";
-                }
-        
-                return Version.Parse(version);
+           return Version.Parse(version.AddMissingZeroes(4 - version.CountDotsInString()));
         }
         else
         {
