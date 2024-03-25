@@ -580,7 +580,7 @@ for (var index = 0; index < array.Length; index++)
         
     }
 }
-        #endregion
+        
         
         if (networkCardNumber == 1)
         {
@@ -589,6 +589,7 @@ for (var index = 0; index < array.Length; index++)
             
             ipAddresses.Clear();
         }
+        #endregion
         
         windowsSystemInformation.NetworkCards = networkCards.ToArray();
         windowsSystemInformation.Processors = processors.ToArray();
