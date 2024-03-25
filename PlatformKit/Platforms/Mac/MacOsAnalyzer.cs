@@ -474,14 +474,7 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            try
-            {
-                return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
+            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
         }
         else
         {
