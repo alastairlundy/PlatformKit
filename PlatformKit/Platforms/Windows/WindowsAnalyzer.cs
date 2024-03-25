@@ -150,7 +150,6 @@ public class WindowsAnalyzer
             
            foreach (var str in arr)
            {
-               Console.WriteLine(str);
                if (str.ToLower().StartsWith(property.ToLower()))
                {
                    return str
