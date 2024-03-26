@@ -98,14 +98,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
     
         /// <summary>
@@ -121,14 +120,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
 
         /// <summary>
@@ -144,14 +142,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
         
         /// <summary>
