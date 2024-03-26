@@ -14,18 +14,34 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.0.0 Beta 1
-* Renamed ``ProcessManager`` class to ``ProcessRunner`` and moved Command functionality to ``CommandRunner``.
-* Renamed methods in ``ProcessRunner`` and ``CommandRunner`` better reflect what they do.
-* Added the ``AppModel`` class to represent Apps installed on a device.
-* Added the ``InstalledApps`` class to assist with detecting and opening InstalledApps - For now detecting installed apps is implemented on Linux and FreeBsd. Windows and macOS implementations will be added in a future version.
-* Changed the ``SteamOsAnalyzer`` class to extend the LinuxAnalyzer class.
-* Made some extension methods for Strings and Versions internal only as they didn't need to be public.
-* Added the ``Platform`` enum to represent different Platforms (e.g. Windows, Mac, Linux etc).
-* Renamed ``OsAnalyzer`` to ``PlatformAnalyzer``.
-* Renamed methods in ``WindowsAnalyzer``, ``LinuxAnalyzer``, ``MacOsAnalyzer``, and ``FreeBsdAnalyzer`` to start with ``Get`` instead of ``Detect`` for detection based methods.
-* Marked ConsoleHelper class for deprecation and removal in PlatformKit 5
-* Fixed an issue where ``FreeBsdAnalyzer`` would check if it was being run on Windows instead of FreeBSD.</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 4.0.0 Beta 2
+
+### Additions
+* Added missing license notice to ``Platform`` file
+* Added the ability for Commands run through ``CommandRunner`` to be run as Administrator
+
+### Changes
+* ``AppModel`` objects now must be initialized with 2 parameters before they can be used.
+* Moved ``CommandRunner`` to the ``PlatformKit`` namespace
+* Moved ``NetworkCard`` to the ``PlatformKit`` namespace
+* Moved ``AddMissingZeroes`` method from VerstionExtensions to StringExtensions
+* Updated code to reflect moving extension method code.
+* Updated ``OperatingSystemDetectionException`` exception message
+
+### Bug Fixes
+* Fixed an issue where SteamOS 2 (based on Debian) would wrongly be detected as SteamOS - Only SteamOS version 3 (based on Arch linux) is intended to be detected as SteamOS by PlatformKit.
+* Fixed an issue where a ``SteamOsAnalyzer`` method ignored the ``includeHoloIsoAsSteamOs`` parameter
+* Optimised the SteamOS detection method to be more efficient - requiring fewer I/O operations
+* Replaced a hardcoded value in ``WindowsAnalyzer`` with a non hardcoded value
+* Removed old debugging code in ``WindowsAnalyzer``
+* Removed empty ``else`` clause in a ``WindowsAnalyzer`` method
+* Removed redundant re-throwing of Exceptions in ``MacOsAnalyzer``
+* Optimised code in ``MacOsAnalyzer`` using internal extension methods
+* Continued removal of re-throwing errors.
+* General optimizations and improvements
+
+### Known Issues
+* ``InstalledApps.Get()`` has no Windows or Mac implementations - This will be addressed in a future version. </PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,8 +50,8 @@
         <TargetFrameworks>net6.0;netstandard2.0;net8.0</TargetFrameworks>
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
-        <Version>4.0.0-beta.2</Version>
-        <PackageVersion>4.0.0-beta.2</PackageVersion>
+        <Version>4.0.0-beta.3</Version>
+        <PackageVersion>4.0.0-beta.3</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
