@@ -37,70 +37,62 @@ namespace PlatformKit
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
-            try
-            {
-                Process process;
+            Process process;
             
-                if (processStartInfo != null)
-                {
-                    processStartInfo.WorkingDirectory = executableLocation;
-                    processStartInfo.FileName = executableName;
-                    processStartInfo.Arguments = arguments;
-                    processStartInfo.RedirectStandardOutput = true;
-                    process = new Process { StartInfo = processStartInfo};
-                }
-                else
-                {
-                    process = new Process();
-                    
-                    process.StartInfo.FileName = executableName;
-
-                    if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
-                    {
-                        process.StartInfo.FileName += ".exe";
-                    }
-
-                    process.StartInfo.WorkingDirectory = executableLocation;
-                    process.StartInfo.RedirectStandardOutput = true;
-                    process.StartInfo.Arguments = arguments;
-                    process.StartInfo.WindowStyle = windowStyle;
-                }
-
-                if (runAsAdministrator)
-                {
-                    process.StartInfo.Verb = "runas";
-                }
-
-                Task task = new Task(() => process.Start());
-                task.Start();
-
-                task.Wait();
-                var end = process.StandardOutput.ReadToEnd();
-
-                if (end == null)
-                {
-                    throw new NullReferenceException();
-                }
-
-                if (end.ToLower()
-                    .Contains("is not recognized as the name of a cmdlet, function, script file, or operable program"))
-                {
-                    throw new Exception(end);
-                }
-                else if (end.ToLower()
-                         .Contains(
-                             "is not recognized as an internal or external command, operable program or batch file."))
-                {
-                    throw new Exception(end);
-                }
-
-                return end;
-            }
-            catch (Exception ex)
+            if (processStartInfo != null)
             {
-                Console.WriteLine(ex.ToString());
-                throw;
+                processStartInfo.WorkingDirectory = executableLocation;
+                processStartInfo.FileName = executableName;
+                processStartInfo.Arguments = arguments;
+                processStartInfo.RedirectStandardOutput = true;
+                process = new Process { StartInfo = processStartInfo};
             }
+            else
+            {
+                process = new Process();
+                    
+                process.StartInfo.FileName = executableName;
+
+                if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
+                {
+                    process.StartInfo.FileName += ".exe";
+                }
+
+                process.StartInfo.WorkingDirectory = executableLocation;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.Arguments = arguments;
+                process.StartInfo.WindowStyle = windowStyle;
+            }
+
+            if (runAsAdministrator)
+            {
+                process.StartInfo.Verb = "runas";
+            }
+
+            Task task = new Task(() => process.Start());
+            task.Start();
+
+            task.Wait();
+            var end = process.StandardOutput.ReadToEnd();
+
+            if (end == null)
+            {
+                throw new NullReferenceException();
+            }
+
+            if (end.ToLower()
+                .Contains("is not recognized as the name of a cmdlet, function, script file, or operable program"))
+            {
+                throw new Exception(end);
+            }
+            else if (end.ToLower()
+                     .Contains(
+                         "is not recognized as an internal or external command, operable program or batch file."))
+            {
+                throw new Exception(end);
+            }
+
+            return end;
         }
 
         /// <summary>
@@ -111,44 +103,36 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public static string RunProcessOnMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            try
+            var procStartInfo = new ProcessStartInfo
             {
-                var procStartInfo = new ProcessStartInfo
-                {
-                    WorkingDirectory = executableLocation,
-                    FileName = executableName,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = false,
-                    Arguments = arguments
-                };
+                WorkingDirectory = executableLocation,
+                FileName = executableName,
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = false,
+                Arguments = arguments
+            };
 
-                Process process;
+            Process process;
             
-                if (processStartInfo == null)
-                {
-                    process = new Process { StartInfo = procStartInfo };
-                }
-                else
-                {
-                    procStartInfo = processStartInfo;
-                    procStartInfo.WorkingDirectory = executableLocation;
-                    procStartInfo.FileName = executableName;
-                    procStartInfo.Arguments = arguments;
-                    procStartInfo.RedirectStandardOutput = true;
-                    process = new Process { StartInfo = processStartInfo};
-                }
-            
-                process.Start();
-
-                process.WaitForExit();
-                return process.StandardOutput.ReadToEnd();
-            }
-            catch(Exception ex)
+            if (processStartInfo == null)
             {
-                Console.WriteLine(ex.ToString());
-                throw;
+                process = new Process { StartInfo = procStartInfo };
             }
+            else
+            {
+                procStartInfo = processStartInfo;
+                procStartInfo.WorkingDirectory = executableLocation;
+                procStartInfo.FileName = executableName;
+                procStartInfo.Arguments = arguments;
+                procStartInfo.RedirectStandardOutput = true;
+                process = new Process { StartInfo = processStartInfo};
+            }
+            
+            process.Start();
+
+            process.WaitForExit();
+            return process.StandardOutput.ReadToEnd();
         }
 
         /// <summary>
@@ -161,42 +145,34 @@ namespace PlatformKit
         /// <exception cref="Exception"></exception>
         public static string RunProcessOnLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            try
+            ProcessStartInfo procStartInfo;
+                
+            if (processStartInfo == null)
             {
-                ProcessStartInfo procStartInfo;
-                
-                if (processStartInfo == null)
+                procStartInfo = new ProcessStartInfo
                 {
-                     procStartInfo = new ProcessStartInfo
-                    {
-                        WorkingDirectory = executableLocation,
-                        FileName = executableName,
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = false,
-                        Arguments = arguments
-                    };
-                }
-                else
-                {
-                    procStartInfo = processStartInfo;
-                    procStartInfo.WorkingDirectory = executableLocation;
-                    procStartInfo.FileName = executableName;
-                    procStartInfo.Arguments = arguments;
-                    procStartInfo.RedirectStandardOutput = true;
-                }
+                    WorkingDirectory = executableLocation,
+                    FileName = executableName,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = false,
+                    Arguments = arguments
+                };
+            }
+            else
+            {
+                procStartInfo = processStartInfo;
+                procStartInfo.WorkingDirectory = executableLocation;
+                procStartInfo.FileName = executableName;
+                procStartInfo.Arguments = arguments;
+                procStartInfo.RedirectStandardOutput = true;
+            }
                 
-                var process = new Process { StartInfo = procStartInfo };
-                process.Start();
+            var process = new Process { StartInfo = procStartInfo };
+            process.Start();
 
-                process.WaitForExit();
-                return process.StandardOutput.ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
+            process.WaitForExit();
+            return process.StandardOutput.ReadToEnd();
         }
 
         /// <summary>
@@ -221,49 +197,41 @@ namespace PlatformKit
         /// <returns></returns>
         public static void OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
-            try
+            if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
             {
-                if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
+                if (allowNonSecureHttp)
                 {
-                    if (allowNonSecureHttp)
-                    {
-                        url = "http://" + url;
-                    }
-                    else
-                    {
-                        url = "https://" + url;
-                    }
+                    url = "http://" + url;
                 }
-                else if (url.StartsWith("http://") && !allowNonSecureHttp)
+                else
                 {
-                    url = url.Replace("http://", "https://");
+                    url = "https://" + url;
                 }
+            }
+            else if (url.StartsWith("http://") && !allowNonSecureHttp)
+            {
+                url = url.Replace("http://", "https://");
+            }
 
-                if (PlatformAnalyzer.IsWindows())
-                {
-                    CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
-                }
-                if (PlatformAnalyzer.IsLinux())
-                {
-                    CommandRunner.RunCommandOnLinux($"xdg-open {url}");
-                }
-                if (PlatformAnalyzer.IsMac())
-                {
-                    var task = new Task(() => Process.Start("open", url));
-                    task.Start();
-                }
+            if (PlatformAnalyzer.IsWindows())
+            {
+                CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
+            }
+            if (PlatformAnalyzer.IsLinux())
+            {
+                CommandRunner.RunCommandOnLinux($"xdg-open {url}");
+            }
+            if (PlatformAnalyzer.IsMac())
+            {
+                var task = new Task(() => Process.Start("open", url));
+                task.Start();
+            }
 #if  NETCOREAPP3_0_OR_GREATER
                 if (PlatformAnalyzer.IsFreeBSD())
                 {
                     CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
                 }          
 #endif
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
         }
     }
 }

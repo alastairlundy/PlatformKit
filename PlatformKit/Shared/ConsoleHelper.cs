@@ -35,42 +35,34 @@ public class ConsoleHelper
     [Obsolete(DeprecationMessages.DeprecationV5)]
     public static void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
     {
-        try
+        if (durationMilliSeconds is 0 or < 500)
         {
-            if (durationMilliSeconds is 0 or < 500)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            // ReSharper disable once HeapView.ObjectAllocation.Evident
-            var licenseWatch = new Stopwatch();
-
-            var lines = File.ReadAllLines(pathToTextFile);
-
-            foreach (var line in lines)
-            {
-                Console.WriteLine(line);
-            }
-                
-            Console.WriteLine("\r\n");
-            Console.WriteLine("\r\n");
-
-            licenseWatch.Start();
-
-            while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds)
-            {
-                //Do nothing to make sure everybody sees the license.
-            }
-
-            licenseWatch.Stop();
-            licenseWatch.Reset();
-                
-            Console.Clear();
+            throw new ArgumentOutOfRangeException();
         }
-        catch (Exception exception)
+
+        // ReSharper disable once HeapView.ObjectAllocation.Evident
+        var licenseWatch = new Stopwatch();
+
+        var lines = File.ReadAllLines(pathToTextFile);
+
+        foreach (var line in lines)
         {
-            Console.WriteLine(exception.ToString());
-            throw;
+            Console.WriteLine(line);
         }
+                
+        Console.WriteLine(Environment.NewLine);
+        Console.WriteLine(Environment.NewLine);
+
+        licenseWatch.Start();
+
+        while (licenseWatch.ElapsedMilliseconds <= durationMilliSeconds)
+        {
+            //Do nothing to make sure everybody sees the license.
+        }
+
+        licenseWatch.Stop();
+        licenseWatch.Reset();
+                
+        Console.Clear();
     }
 }

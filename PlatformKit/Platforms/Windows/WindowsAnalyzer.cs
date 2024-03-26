@@ -35,82 +35,81 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public WindowsEdition GetWindowsEdition()
     {
-        try
+        if (PlatformAnalyzer.IsWindows())
         {
-            if (PlatformAnalyzer.IsWindows())
+            var edition = GetWindowsSystemInformation().OsName.ToLower();
+
+            //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
+
+            //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+            //   "EditionID");
+
+            if (edition.ToLower().Contains("home"))
             {
-                var edition = GetWindowsSystemInformation().OsName.ToLower();
-
-                //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
-
-                //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-                //   "EditionID");
-
-                if (edition.ToLower().Contains("home"))
-                {
-                    return WindowsEdition.Home;
-                }
-                else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
-                {
-                    return WindowsEdition.ProfessionalForWorkstations;
-                }
-                else if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
-                {
-                    return WindowsEdition.Professional;
-                }
-                else if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-                {
-                    return WindowsEdition.ProfessionalForEducation;
-                }
-                else if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-                {
-                    return WindowsEdition.Education;
-                }
-                else if (edition.ToLower().Contains("server"))
-                {
-                    return WindowsEdition.Server;
-                }
-                else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                         !edition.ToLower().Contains("iot"))
-                {
-                    return WindowsEdition.EnterpriseLTSC;
-                }
-                else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                         !edition.ToLower().Contains("iot"))
-                {
-                    return WindowsEdition.EnterpriseSemiAnnualChannel;
-                }
-                else if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                         edition.ToLower().Contains("iot"))
-                {
-                    return WindowsEdition.IoTEnterpriseLTSC;
-                }
-                else if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                         edition.ToLower().Contains("iot"))
-                {
-                    return WindowsEdition.IoTEnterprise;
-                }
-
-                if (IsWindows11())
-                {
-                    if (edition.ToLower().Contains("se"))
-                    {
-                        return WindowsEdition.SE;
-                    }
-                }
-
-                throw new WindowsEditionDetectionException();
+                return WindowsEdition.Home;
             }
-            else
+
+            if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
             {
-                throw new PlatformNotSupportedException();
+                return WindowsEdition.ProfessionalForWorkstations;
             }
+
+            if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
+            {
+                return WindowsEdition.Professional;
+            }
+
+            if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
+            {
+                return WindowsEdition.ProfessionalForEducation;
+            }
+
+            if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
+            {
+                return WindowsEdition.Education;
+            }
+
+            if (edition.ToLower().Contains("server"))
+            {
+                return WindowsEdition.Server;
+            }
+
+            if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                !edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.EnterpriseLTSC;
+            }
+
+            if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                !edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.EnterpriseSemiAnnualChannel;
+            }
+
+            if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
+                edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterpriseLTSC;
+            }
+
+            if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
+                edition.ToLower().Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterprise;
+            }
+
+            if (IsWindows11())
+            {
+                if (edition.ToLower().Contains("se"))
+                {
+                    return WindowsEdition.SE;
+                }
+            }
+
+            throw new WindowsEditionDetectionException();
         }
-        catch(Exception exception)
-        {
-            Console.WriteLine(exception.ToString());
-            throw;
-        }
+
+        throw new PlatformNotSupportedException();
     }
 
     // ReSharper disable once InconsistentNaming
@@ -125,7 +124,6 @@ public class WindowsAnalyzer
         if (PlatformAnalyzer.IsWindows())
         {
             return CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
-            // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
         }
 
         throw new PlatformNotSupportedException();
@@ -144,9 +142,7 @@ public class WindowsAnalyzer
     {
         if (PlatformAnalyzer.IsWindows())
         {
-            string result = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property);
-            
-            var arr = result.Split(Convert.ToChar(Environment.NewLine));
+            var arr = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property).Split(Convert.ToChar(Environment.NewLine));
             
            foreach (var str in arr)
            {
@@ -161,11 +157,9 @@ public class WindowsAnalyzer
            }
            
            throw new ArgumentException();
-        } 
-        else
-        {
-            throw new PlatformNotSupportedException();
         }
+
+        throw new PlatformNotSupportedException();
     }
 
     /// <summary>
@@ -186,10 +180,8 @@ public class WindowsAnalyzer
                         .Replace("REG_SZ", String.Empty)
                         .Replace(" ", String.Empty);
                 }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+
+                throw new ArgumentNullException();
         }
 
         throw new PlatformNotSupportedException();
@@ -656,14 +648,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-            if (PlatformAnalyzer.IsWindows())
-            {
                 return IsWindows11(GetWindowsVersionToEnum());
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
         }
 
     /// <summary>
@@ -700,14 +685,12 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-                if (PlatformAnalyzer.IsWindows())
+            if (PlatformAnalyzer.IsWindows())
                 {
                     return GetWindowsVersionToEnum(GetWindowsVersion());
                 }
-                else
-                {
-                    throw new PlatformNotSupportedException();
-                }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
@@ -718,99 +701,91 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
         {
-            try
+            if (input.Major == 5)
             {
-                if (input.Major == 5)
-                {
-                    //We don't support Windows XP.
-                    return WindowsVersion.NotSupported;
-                }
-
-                switch (input.Build)
-                {
-                    case 6000:
-                        return WindowsVersion.NotSupported;
-                        //return WindowsVersion.WinVista;
-                    case 6001:
-                        return WindowsVersion.NotSupported;
-                        //return WindowsVersion.WinVistaSP1;
-                    case 6002:
-                        return WindowsVersion.NotSupported;
-                        //return WindowsVersion.WinVistaSP2;
-                    case 6003:
-                        return WindowsVersion.NotSupported;
-                        //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
-                    case 7600:
-                        return WindowsVersion.Win7;
-                    case 7601:
-                        return WindowsVersion.Win7SP1;
-                    case 9200:
-                        return WindowsVersion.Win8;
-                    case 9600:
-                        return WindowsVersion.Win8_1;
-                    case 10240:
-                        return WindowsVersion.Win10_v1507;
-                    case 10586:
-                        return WindowsVersion.Win10_v1511;
-                    case 14393:
-                        return WindowsVersion.Win10_v1607;
-                    case 15063:
-                        return WindowsVersion.Win10_v1703; 
-                    case 15254:
-                        return WindowsVersion.Win10_v1709_Mobile;
-                    case 16299:
-                        return WindowsVersion.Win10_v1709;
-                    case 17134:
-                        return WindowsVersion.Win10_v1803;
-                    case 17763:
-                        return WindowsVersion.Win10_v1809; 
-                    case 18362:
-                        return WindowsVersion.Win10_v1903;
-                    case 18363:
-                        return WindowsVersion.Win10_v1909;
-                    case 19041:
-                        return WindowsVersion.Win10_v2004;
-                    case 19042: 
-                        return WindowsVersion.Win10_20H2;
-                    case 19043:
-                        return WindowsVersion.Win10_21H1;
-                    case 19044:
-                        return WindowsVersion.Win10_21H2;
-                    case 19045:
-                        return WindowsVersion.Win10_22H2;
-                    case 20348:
-                        return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
-                    case 22000:
-                        return WindowsVersion.Win11_21H2;
-                    case 22621:
-                        return WindowsVersion.Win11_22H2;
-                    case 22631:
-                        return WindowsVersion.Win11_23H2;
-                    default:
-                        //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
-                        if (input.Build is > 10240 and < 22000)
-                        {
-                            return WindowsVersion.Win10_InsiderPreview;
-                        }
-                        //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22631)
-                        {
-                            return WindowsVersion.Win11_InsiderPreview;
-                        }
-                        else if (input.Build < 6000)
-                        {
-                            return WindowsVersion.NotSupported;
-                        }
-                        else
-                        {
-                            return WindowsVersion.NotDetected;
-                        }
-                }
+                //We don't support Windows XP.
+                return WindowsVersion.NotSupported;
             }
-            catch (Exception exception)
+
+            switch (input.Build)
             {
-                Console.WriteLine(exception.ToString());
-                throw;
+                case 6000:
+                    return WindowsVersion.NotSupported;
+                //return WindowsVersion.WinVista;
+                case 6001:
+                    return WindowsVersion.NotSupported;
+                //return WindowsVersion.WinVistaSP1;
+                case 6002:
+                    return WindowsVersion.NotSupported;
+                //return WindowsVersion.WinVistaSP2;
+                case 6003:
+                    return WindowsVersion.NotSupported;
+                //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
+                case 7600:
+                    return WindowsVersion.Win7;
+                case 7601:
+                    return WindowsVersion.Win7SP1;
+                case 9200:
+                    return WindowsVersion.Win8;
+                case 9600:
+                    return WindowsVersion.Win8_1;
+                case 10240:
+                    return WindowsVersion.Win10_v1507;
+                case 10586:
+                    return WindowsVersion.Win10_v1511;
+                case 14393:
+                    return WindowsVersion.Win10_v1607;
+                case 15063:
+                    return WindowsVersion.Win10_v1703; 
+                case 15254:
+                    return WindowsVersion.Win10_v1709_Mobile;
+                case 16299:
+                    return WindowsVersion.Win10_v1709;
+                case 17134:
+                    return WindowsVersion.Win10_v1803;
+                case 17763:
+                    return WindowsVersion.Win10_v1809; 
+                case 18362:
+                    return WindowsVersion.Win10_v1903;
+                case 18363:
+                    return WindowsVersion.Win10_v1909;
+                case 19041:
+                    return WindowsVersion.Win10_v2004;
+                case 19042: 
+                    return WindowsVersion.Win10_20H2;
+                case 19043:
+                    return WindowsVersion.Win10_21H1;
+                case 19044:
+                    return WindowsVersion.Win10_21H2;
+                case 19045:
+                    return WindowsVersion.Win10_22H2;
+                case 20348:
+                    return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
+                case 22000:
+                    return WindowsVersion.Win11_21H2;
+                case 22621:
+                    return WindowsVersion.Win11_22H2;
+                case 22631:
+                    return WindowsVersion.Win11_23H2;
+                default:
+                    //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
+                    if (input.Build is > 10240 and < 22000)
+                    {
+                        return WindowsVersion.Win10_InsiderPreview;
+                    }
+                    //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
+
+                    if(input.Build > 22631)
+                    {
+                        return WindowsVersion.Win11_InsiderPreview;
+                    }
+
+                    if (input.Build < 6000)
+                    {
+                        return WindowsVersion.NotSupported;
+                    }
+
+                    return WindowsVersion.NotDetected;
             }
         }
         
@@ -884,10 +859,8 @@ for (var index = 0; index < array.Length; index++)
             {
                 return GetWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            throw new PlatformNotSupportedException();
         }
         
         /// <summary>
@@ -902,9 +875,7 @@ for (var index = 0; index < array.Length; index++)
             {
                 return IsAtLeastVersion(GetWindowsVersionToEnum(windowsVersion));
             }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            throw new PlatformNotSupportedException();
         }
 }

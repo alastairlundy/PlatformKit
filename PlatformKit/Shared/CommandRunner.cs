@@ -129,43 +129,35 @@ public static class CommandRunner
     /// <returns></returns>
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
-        try
+        if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsFreeBSD())
         {
-            if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsFreeBSD())
+            var location = "/usr/bin/";
+
+            var args = command.Split(' ');
+            command = args[0];
+            var processArguments = "";
+
+            if (args.Length > 0)
             {
-                var location = "/usr/bin/";
-
-                var args = command.Split(' ');
-                command = args[0];
-                var processArguments = "";
-
-                if (args.Length > 0)
+                for (int index = 1; index < args.Length; index++)
                 {
-                    for (int index = 1; index < args.Length; index++)
-                    {
-                        processArguments += args[index].Replace(command, String.Empty);
-                    }
+                    processArguments += args[index].Replace(command, String.Empty);
                 }
-
-                if (!Directory.Exists(location))
-                {
-                    throw new DirectoryNotFoundException("Could not find directory " + location);
-                }
-
-                if (runAsAdministrator)
-                {
-                   command = command.Insert(0, "sudo ");
-                }
-                    
-                return ProcessRunner.RunProcessOnLinux(location, command, processArguments);
             }
 
-            throw new PlatformNotSupportedException();
+            if (!Directory.Exists(location))
+            {
+                throw new DirectoryNotFoundException("Could not find directory " + location);
+            }
+
+            if (runAsAdministrator)
+            {
+                command = command.Insert(0, "sudo ");
+            }
+                    
+            return ProcessRunner.RunProcessOnLinux(location, command, processArguments);
         }
-        catch (Exception exception)
-        {
-            Console.WriteLine(exception.ToString());
-            throw;
-        }
+
+        throw new PlatformNotSupportedException();
     }
 }
