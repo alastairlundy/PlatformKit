@@ -189,19 +189,7 @@ public class LinuxAnalyzer
             if (PlatformAnalyzer.IsLinux())
             {
                 var version = GetLinuxDistributionVersionAsString();
-
-                var dotCounter = version.CountDotsInString();
-
-                if (dotCounter == 1)
-                {
-                    version += ".0";
-                }
-                else if (dotCounter == 2)
-                {
-                    version += ".0";
-                }
-
-                return Version.Parse(version);
+                return Version.Parse(version.AddMissingZeroes(version.CountDotsInString()));
             }
             
             throw new PlatformNotSupportedException();
