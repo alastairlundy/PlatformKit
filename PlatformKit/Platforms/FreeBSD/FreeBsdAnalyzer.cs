@@ -32,7 +32,7 @@ public class FreeBsdAnalyzer
     { 
         if (PlatformAnalyzer.IsFreeBSD())
         {
-            var version = ProcessRunner.RunProcessOnFreeBsd("", "uname", "-v").Replace("FreeBSD", String.Empty);
+            var version = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty);
 
             var arr = version.Split(' ');
 
