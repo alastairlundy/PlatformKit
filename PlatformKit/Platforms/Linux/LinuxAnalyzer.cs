@@ -209,8 +209,8 @@ public class LinuxAnalyzer
 
                 var osName = linuxDistroInfo.Name.ToLower();
 
-                if (osName.ToLower().Contains("ubuntu") ||
-                    osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
+                if (osName.Contains("ubuntu") ||
+                    osName.Contains("pop") || osName.Contains("buntu"))
                 {
                     if (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4"))
                     {
