@@ -341,10 +341,9 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            var array = RuntimeInformation.OSDescription.Split(' ');
             
-            return Version.Parse(arr[1].AddMissingZeroes(arr[1].CountDotsInString()));
+            return Version.Parse(array[1].AddMissingZeroes(4 - array[1].CountDotsInString()));
         }
         else
         {
@@ -362,28 +361,25 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            var array = RuntimeInformation.OSDescription.Split(' ');
         
-            for (int index = 0; index < arr.Length; index++)
+            for (int index = 0; index < array.Length; index++)
             {
-                if (arr[index].ToLower().StartsWith("root:xnu-"))
+                if (array[index].ToLower().StartsWith("root:xnu-"))
                 {
-                    arr[index] = arr[index].Replace("root:xnu-", String.Empty)
+                    array[index] = array[index].Replace("root:xnu-", String.Empty)
                         .Replace("~", ".");
 
                     if (IsAppleSiliconMac())
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
-                        
-                        arr[index] = arr[index].Remove((arr.Length + 1) - 3);
+                        array[index] = array[index].Replace("/RELEASE_ARM64_T", String.Empty).Remove((array.Length + 1) - 3);
                     }
                     else
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_X86_64", String.Empty);
+                        array[index] = array[index].Replace("/RELEASE_X86_64", String.Empty);
                     }
 
-                    return Version.Parse(arr[index]);
+                    return Version.Parse(array[index]);
                 }
             }
 
