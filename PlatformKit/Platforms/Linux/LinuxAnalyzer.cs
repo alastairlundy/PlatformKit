@@ -242,10 +242,8 @@ public class LinuxAnalyzer
         {
             if (PlatformAnalyzer.IsLinux())
             {
-                var description = Environment.OSVersion.ToString()
-                    .Replace("Unix ", string.Empty);
-
-                return Version.Parse(description);
+                return Version.Parse(Environment.OSVersion.ToString()
+                    .Replace("Unix ", string.Empty)); 
             }
             
             throw new PlatformNotSupportedException();
