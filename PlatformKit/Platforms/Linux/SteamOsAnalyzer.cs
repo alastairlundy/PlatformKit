@@ -34,17 +34,11 @@ public class SteamOsAnalyzer : LinuxAnalyzer
             var distroInfo = GetLinuxDistributionInformation();
             var distroBase = GetDistroBase();
 
-            if ((distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch) 
-                && distroInfo.PrettyName.ToLower().Contains("steamos") && !distroInfo.PrettyName.ToLower().Contains("holo"))
+            if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)
             {
-                return true;
+                return (includeHoloIsoAsSteamOs && distroInfo.PrettyName.ToLower().Contains("holo") ||
+                        distroInfo.PrettyName.ToLower().Contains("steamos"));
             }
-            else if ((distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch) 
-                     && distroInfo.PrettyName.ToLower().Contains("holo"))
-            {
-                return includeHoloIsoAsSteamOs;
-            }
-            
             if (distroBase == LinuxDistroBase.Debian && distroInfo.PrettyName.ToLower().Contains("steamos"))
             {
                 return false;
