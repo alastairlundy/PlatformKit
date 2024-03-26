@@ -354,20 +354,8 @@ namespace PlatformKit.Mac;
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
-
-            int dotCounter = arr[1].CountDotsInString();
-
-            if (dotCounter == 2)
-            {
-                arr[1] += ".0";
-                return Version.Parse(arr[1]);
-            }
-            if (dotCounter == 3)
-            {
-                return Version.Parse(arr[1]);
-            }
-          
-            throw new PlatformNotSupportedException();
+            
+            return Version.Parse(arr[1].AddMissingZeroes(arr[1].CountDotsInString()));
         }
         else
         {
