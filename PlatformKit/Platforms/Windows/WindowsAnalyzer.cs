@@ -823,43 +823,16 @@ for (var index = 0; index < array.Length; index++)
         // ReSharper disable once MemberCanBePrivate.Global
         public Version GetWindowsVersion()
         {
-            try
+            if (PlatformAnalyzer.IsWindows())
             {
-                if (PlatformAnalyzer.IsWindows())
-                {
-                    string description = RuntimeInformation.OSDescription
-                        .Replace("Microsoft Windows", string.Empty)
-                        .Replace(" ", string.Empty);
+                string description = RuntimeInformation.OSDescription
+                    .Replace("Microsoft Windows", string.Empty)
+                    .Replace(" ", string.Empty);
 
-                    var dotCounter = description.CountDotsInString();
-                    
-                    if (dotCounter == 1)
-                    {
-                        dotCounter++;
-                        description += ".0";
-                    }
-
-                    if (dotCounter == 2)
-                    {
-                        dotCounter++;
-                        description += ".0";
-                    }
-
-                    if (dotCounter > 3)
-                    {
-                        throw new WindowsVersionDetectionException();
-                    }
-
-                    return Version.Parse(description);
-                }
-
-                throw new PlatformNotSupportedException();
+                return Version.Parse(description.AddMissingZeroes());
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw new Exception(exception.ToString());
-            }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>

@@ -343,7 +343,7 @@ namespace PlatformKit.Mac;
         {
             var array = RuntimeInformation.OSDescription.Split(' ');
             
-            return Version.Parse(array[1].AddMissingZeroes(4 - array[1].CountDotsInString()));
+            return Version.Parse(array[1].AddMissingZeroes());
         }
         else
         {
@@ -402,7 +402,7 @@ namespace PlatformKit.Mac;
         {
             var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
-           return Version.Parse(version.AddMissingZeroes(4 - version.CountDotsInString()));
+           return Version.Parse(version.AddMissingZeroes());
         }
         else
         {
