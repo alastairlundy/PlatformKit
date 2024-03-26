@@ -15,7 +15,6 @@ using System.IO;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
-using PlatformKit.Software;
 
 namespace PlatformKit.Linux;
 
