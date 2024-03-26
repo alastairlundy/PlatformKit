@@ -41,16 +41,12 @@ public class InstalledApps
 
                 return apps.ToArray();
             }
-            else
-            {
-                apps.Clear();
-                return apps.ToArray();
-            }
+
+            apps.Clear();
+            return apps.ToArray();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     /// <summary>
@@ -100,16 +96,12 @@ public class InstalledApps
                 
                 return apps.ToArray();
             }
-            else
-            {
-                apps.Clear();
-                return apps.ToArray();
-            }
+
+            apps.Clear();
+            return apps.ToArray();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     protected static AppModel[] GetOnLinux(bool includeSnaps = false, bool includeFlatpaks = false)
@@ -131,13 +123,13 @@ public class InstalledApps
             
             if (includeSnaps)
             {
-                foreach (var snap in InstalledApps.GetInstalledSnaps())
+                foreach (var snap in GetInstalledSnaps())
                 {
                     apps.Add(snap);
                 }
             }
             if(includeFlatpaks){
-                foreach (var flatpak in InstalledApps.GetInstalledFlatpaks())
+                foreach (var flatpak in GetInstalledFlatpaks())
                 {
                     apps.Add(flatpak);
                 }
@@ -145,10 +137,8 @@ public class InstalledApps
 
             return apps.ToArray();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     /// <summary>
