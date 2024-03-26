@@ -46,24 +46,16 @@ namespace PlatformKit.Mac;
         /// <exception cref="Exception"></exception>
         public MacProcessorType GetMacProcessorType()
         {
-            try
+            if (PlatformAnalyzer.IsMac())
             {
-                if (PlatformAnalyzer.IsMac())
+                return RuntimeInformation.OSArchitecture switch
                 {
-                    return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
-                    {
-                        Architecture.Arm64 => MacProcessorType.AppleSilicon,
-                        Architecture.X64 => MacProcessorType.Intel,
-                        _ => MacProcessorType.NotDetected
-                    };
-                }
-                throw new PlatformNotSupportedException();
+                    Architecture.Arm64 => MacProcessorType.AppleSilicon,
+                    Architecture.X64 => MacProcessorType.Intel,
+                    _ => MacProcessorType.NotDetected
+                };
             }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
