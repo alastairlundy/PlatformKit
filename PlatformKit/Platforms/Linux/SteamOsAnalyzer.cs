@@ -32,7 +32,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
         if (PlatformAnalyzer.IsLinux())
         {
             var distroInfo = GetLinuxDistributionInformation();
-            var distroBase = GetDistroBase();
+            var distroBase = GetDistroBase(distroInfo);
 
             if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)
             {
