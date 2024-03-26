@@ -34,9 +34,7 @@ public class FreeBsdAnalyzer
         {
             var version = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty);
 
-            var arr = version.Split(' ');
-
-            var rel = arr[0].Replace("-release", String.Empty);
+            var rel = version.Split(' ')[0].Replace("-release", String.Empty);
 
             return Version.Parse(rel.AddMissingZeroes(rel.CountDotsInString()));
         }
