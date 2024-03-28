@@ -35,7 +35,7 @@ public class WindowsAnalyzer
     /// <exception cref="OperatingSystemDetectionException"></exception>
     public WindowsEdition DetectWindowsEdition()
     {
-        try
+        if (OSAnalyzer.IsWindows())
         {
             var edition = GetWindowsSystemInformation().OsName.ToLower();
                 
@@ -95,25 +95,19 @@ public class WindowsAnalyzer
                 return WindowsEdition.Team;
             }
 
-                if (IsWindows11())
-                {
-                    if (edition.ToLower().Contains("se"))
-                    {
-                        return WindowsEdition.SE;
-                    }
-                }
-
-                throw new WindowsEditionDetectionException();
-            }
-            else
+            if (IsWindows11())
             {
-                throw new PlatformNotSupportedException();
+                if (edition.ToLower().Contains("se"))
+                {
+                    return WindowsEdition.SE;
+                }
             }
+
+            throw new WindowsEditionDetectionException();
         }
-        catch(Exception exception)
+        else
         {
-            Console.WriteLine(exception.ToString());
-            throw;
+            throw new PlatformNotSupportedException();
         }
     }
 
