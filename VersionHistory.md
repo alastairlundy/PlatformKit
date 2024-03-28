@@ -1,5 +1,5 @@
 # Version History
-This document contains the entire version history of the PlatformKit (formerly AluminiumCoreLib) library.
+This document contains the entire version history of the PlatformKit library.
 
 ## Upcoming Releases
 
@@ -14,6 +14,7 @@ This document contains the entire version history of the PlatformKit (formerly A
 ### 3.6
 | Version | Availability | Changelog |
 |-|-|-|
+| 3.6.4 | March 28th 2024 | https://github.com/alastairlundy/PlatformKit/releases/3.6.4 |
 | 3.6.3 | March 15th 2024 | https://github.com/alastairlundy/PlatformKit/releases/3.6.3 |
 | 3.6.2 | February 25th 2024 | https://github.com/alastairlundy/PlatformKit/releases/3.6.2 |
 | 3.6.1 | January 19th 2024 | https://github.com/alastairlundy/PlatformKit/releases/3.6.1 |

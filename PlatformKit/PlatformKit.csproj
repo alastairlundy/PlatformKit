@@ -14,19 +14,18 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.6.2
-* Backport some code comments from 4.x alpha
-* Backport FreeBSD support for ``OpenUrlInBrowser`` from 4.x alpha</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.6.3
+* Fixed an issue where Windows Iot Core Edition and Windows Team Edition would not be detected.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.6.3.0</AssemblyVersion>
-        <FileVersion>3.6.3.0</FileVersion>
-        <Version>3.6.3</Version>
-        <PackageVersion>3.6.3</PackageVersion>
+   <AssemblyVersion>3.6.4.0</AssemblyVersion>
+        <FileVersion>3.6.4.0</FileVersion>
+        <Version>3.6.4</Version>
+        <PackageVersion>3.6.4</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
