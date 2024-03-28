@@ -863,7 +863,7 @@ for (var index = 0; index < array.Length; index++)
         {
             if (PlatformAnalyzer.IsWindows())
             {
-                return GetWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
+                return IsAtLeastVersion(GetWindowsVersionFromEnum(windowsVersion));
             }
 
             throw new PlatformNotSupportedException();
