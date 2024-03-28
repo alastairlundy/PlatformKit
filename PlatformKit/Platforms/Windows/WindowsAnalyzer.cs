@@ -88,6 +88,14 @@ public class WindowsAnalyzer
                 {
                     return WindowsEdition.IoTEnterprise;
                 }
+                else if (edition.Contains("iot") && edition.Contains("core"))
+                {
+                    return WindowsEdition.IoTCore;
+                }
+                else if (edition.Contains("team"))
+                {
+                    return WindowsEdition.Team;
+                }
 
                 if (IsWindows11())
                 {
