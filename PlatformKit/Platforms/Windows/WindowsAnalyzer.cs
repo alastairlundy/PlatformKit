@@ -39,74 +39,73 @@ public class WindowsAnalyzer
         {
             var edition = GetWindowsSystemInformation().OsName.ToLower();
 
-            //var edition = GetWMIValue("Name", "Win32_OperatingSystem");
-
             //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
             //   "EditionID");
 
-            if (edition.ToLower().Contains("home"))
-            {
-                return WindowsEdition.Home;
-            }
+                var edition = GetWindowsSystemInformation().OsName.ToLower();
 
-            if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("workstation"))
-            {
-                return WindowsEdition.ProfessionalForWorkstations;
-            }
-
-            if (edition.ToLower().Contains("pro") && !edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.Professional;
-            }
-
-            if (edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.ProfessionalForEducation;
-            }
-
-            if (!edition.ToLower().Contains("pro") && edition.ToLower().Contains("education"))
-            {
-                return WindowsEdition.Education;
-            }
-
-            if (edition.ToLower().Contains("server"))
-            {
-                return WindowsEdition.Server;
-            }
-
-            if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                !edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.EnterpriseLTSC;
-            }
-
-            if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                !edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.EnterpriseSemiAnnualChannel;
-            }
-
-            if (edition.ToLower().Contains("enterprise") && edition.ToLower().Contains("ltsc") &&
-                edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.IoTEnterpriseLTSC;
-            }
-
-            if (edition.ToLower().Contains("enterprise") && !edition.ToLower().Contains("ltsc") &&
-                edition.ToLower().Contains("iot"))
-            {
-                return WindowsEdition.IoTEnterprise;
-            }
-
-            if (IsWindows11())
-            {
-                if (edition.ToLower().Contains("se"))
+                if (edition.Contains("home"))
                 {
-                    return WindowsEdition.SE;
+                    return WindowsEdition.Home;
                 }
-            }
+                else if (edition.Contains("pro") && edition.Contains("workstation"))
+                {
+                    return WindowsEdition.ProfessionalForWorkstations;
+                }
+                else if (edition.Contains("pro") && !edition.Contains("education"))
+                {
+                    return WindowsEdition.Professional;
+                }
+                else if (edition.Contains("pro") && edition.Contains("education"))
+                {
+                    return WindowsEdition.ProfessionalForEducation;
+                }
+                else if (!edition.Contains("pro") && edition.Contains("education"))
+                {
+                    return WindowsEdition.Education;
+                }
+                else if (edition.Contains("server"))
+                {
+                    return WindowsEdition.Server;
+                }
+                else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                         !edition.Contains("iot"))
+                {
+                    return WindowsEdition.EnterpriseLTSC;
+                }
+                else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                         !edition.Contains("iot"))
+                {
+                    return WindowsEdition.EnterpriseSemiAnnualChannel;
+                }
+                else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                         edition.Contains("iot"))
+                {
+                    return WindowsEdition.IoTEnterpriseLTSC;
+                }
+                else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                         edition.Contains("iot"))
+                {
+                    return WindowsEdition.IoTEnterprise;
+                }
+                else if (edition.Contains("iot") && edition.Contains("core"))
+                {
+                    return WindowsEdition.IoTCore;
+                }
+                else if (edition.Contains("team"))
+                {
+                    return WindowsEdition.Team;
+                }
 
-            throw new WindowsEditionDetectionException();
+                if (IsWindows11())
+                {
+                    if (edition.Contains("se"))
+                    {
+                        return WindowsEdition.SE;
+                    }
+                }
+
+                throw new WindowsEditionDetectionException();
         }
 
         throw new PlatformNotSupportedException();
