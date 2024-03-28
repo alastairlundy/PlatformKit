@@ -46,24 +46,16 @@ namespace PlatformKit.Mac;
         /// <exception cref="Exception"></exception>
         public MacProcessorType GetMacProcessorType()
         {
-            try
+            if (PlatformAnalyzer.IsMac())
             {
-                if (PlatformAnalyzer.IsMac())
+                return RuntimeInformation.OSArchitecture switch
                 {
-                    return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
-                    {
-                        Architecture.Arm64 => MacProcessorType.AppleSilicon,
-                        Architecture.X64 => MacProcessorType.Intel,
-                        _ => MacProcessorType.NotDetected
-                    };
-                }
-                throw new PlatformNotSupportedException();
+                    Architecture.Arm64 => MacProcessorType.AppleSilicon,
+                    Architecture.X64 => MacProcessorType.Intel,
+                    _ => MacProcessorType.NotDetected
+                };
             }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
@@ -106,14 +98,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
     
         /// <summary>
@@ -129,14 +120,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
 
         /// <summary>
@@ -152,14 +142,13 @@ namespace PlatformKit.Mac;
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
         
         /// <summary>
@@ -352,10 +341,9 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            var array = RuntimeInformation.OSDescription.Split(' ');
             
-            return Version.Parse(arr[1].AddMissingZeroes(arr[1].CountDotsInString()));
+            return Version.Parse(array[1].AddMissingZeroes());
         }
         else
         {
@@ -373,28 +361,25 @@ namespace PlatformKit.Mac;
     {
         if (PlatformAnalyzer.IsMac())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            var array = RuntimeInformation.OSDescription.Split(' ');
         
-            for (int index = 0; index < arr.Length; index++)
+            for (int index = 0; index < array.Length; index++)
             {
-                if (arr[index].ToLower().StartsWith("root:xnu-"))
+                if (array[index].ToLower().StartsWith("root:xnu-"))
                 {
-                    arr[index] = arr[index].Replace("root:xnu-", String.Empty)
+                    array[index] = array[index].Replace("root:xnu-", String.Empty)
                         .Replace("~", ".");
 
                     if (IsAppleSiliconMac())
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
-                        
-                        arr[index] = arr[index].Remove((arr.Length + 1) - 3);
+                        array[index] = array[index].Replace("/RELEASE_ARM64_T", String.Empty).Remove((array.Length + 1) - 3);
                     }
                     else
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_X86_64", String.Empty);
+                        array[index] = array[index].Replace("/RELEASE_X86_64", String.Empty);
                     }
 
-                    return Version.Parse(arr[index]);
+                    return Version.Parse(array[index]);
                 }
             }
 
@@ -417,7 +402,7 @@ namespace PlatformKit.Mac;
         {
             var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
-           return Version.Parse(version.AddMissingZeroes(4 - version.CountDotsInString()));
+           return Version.Parse(version.AddMissingZeroes());
         }
         else
         {

@@ -9,13 +9,12 @@
    */
 
 using System;
-using System.Collections.Generic;
+
 using System.IO;
 
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
-using PlatformKit.Software;
 
 namespace PlatformKit.Linux;
 
@@ -29,35 +28,42 @@ public class LinuxAnalyzer
     {
         
     }
+
+    /// <summary>
+    /// Detects what base Linux Distribution a Distro is based off of.
+    /// </summary>
+    /// <returns></returns>
+    public LinuxDistroBase GetDistroBase()
+    {
+        return GetDistroBase(GetLinuxDistributionInformation());
+    }
     
     /// <summary>
     /// Detects what base Linux Distribution a Distro is based off of.
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
-    public LinuxDistroBase GetDistroBase()
+    public LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
     {
         if (PlatformAnalyzer.IsLinux())
         {
-            var osRel = GetLinuxDistributionInformation();
-
-            if (osRel.Identifier_Like.ToLower().Contains("debian"))
+            if (linuxOsRelease.Identifier_Like.ToLower().Contains("debian"))
             {
                 return LinuxDistroBase.Debian;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("ubuntu"))
+            if (linuxOsRelease.Identifier_Like.ToLower().Contains("ubuntu"))
             {
                 return LinuxDistroBase.Ubuntu;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("arch"))
+            if (linuxOsRelease.Identifier_Like.ToLower().Contains("arch"))
             {
                 return LinuxDistroBase.Arch;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("manjaro"))
+            if (linuxOsRelease.Identifier_Like.ToLower().Contains("manjaro"))
             {
                 return LinuxDistroBase.Manjaro;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("fedora"))
+            if (linuxOsRelease.Identifier_Like.ToLower().Contains("fedora"))
             {
                 return LinuxDistroBase.Fedora;
             }
@@ -183,19 +189,7 @@ public class LinuxAnalyzer
             if (PlatformAnalyzer.IsLinux())
             {
                 var version = GetLinuxDistributionVersionAsString();
-
-                var dotCounter = version.CountDotsInString();
-
-                if (dotCounter == 1)
-                {
-                    version += ".0";
-                }
-                else if (dotCounter == 2)
-                {
-                    version += ".0";
-                }
-
-                return Version.Parse(version);
+                return Version.Parse(version.AddMissingZeroes());
             }
             
             throw new PlatformNotSupportedException();
@@ -215,8 +209,8 @@ public class LinuxAnalyzer
 
                 var osName = linuxDistroInfo.Name.ToLower();
 
-                if (osName.ToLower().Contains("ubuntu") ||
-                    osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
+                if (osName.Contains("ubuntu") ||
+                    osName.Contains("pop") || osName.Contains("buntu"))
                 {
                     if (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4"))
                     {
@@ -243,10 +237,8 @@ public class LinuxAnalyzer
         {
             if (PlatformAnalyzer.IsLinux())
             {
-                var description = Environment.OSVersion.ToString()
-                    .Replace("Unix ", string.Empty);
-
-                return Version.Parse(description);
+                return Version.Parse(Environment.OSVersion.ToString()
+                    .Replace("Unix ", string.Empty)); 
             }
             
             throw new PlatformNotSupportedException();

@@ -83,40 +83,39 @@ namespace PlatformKit.Identification
             {
                 return "any";
             }
-            else
+
+            if (PlatformAnalyzer.IsWindows())
             {
-                if (PlatformAnalyzer.IsWindows())
-                {
-                    osName = "win";
-                }
-                if (PlatformAnalyzer.IsMac())
-                {
-                    osName = "osx";
-                }
-                #if NETCOREAPP3_0_OR_GREATER
+                osName = "win";
+            }
+            if (PlatformAnalyzer.IsMac())
+            {
+                osName = "osx";
+            }
+#if NETCOREAPP3_0_OR_GREATER
                 if (PlatformAnalyzer.IsFreeBSD())
                 {
                     osName = "freebsd";
                 }
-                #endif
-                if (PlatformAnalyzer.IsLinux())
+#endif
+            if (PlatformAnalyzer.IsLinux())
+            {
+                if (identifierType == RuntimeIdentifierType.Generic)
                 {
-                    if (identifierType == RuntimeIdentifierType.Generic)
-                    {
-                        return "linux";
-                    }
-                    else if (identifierType == RuntimeIdentifierType.Specific)
-                    {
-                        osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
-                    }
-                    else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
-                    {
-                        osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
-                    }
-                    else
-                    {
-                        throw new LinuxVersionDetectionException();
-                    }
+                    return "linux";
+                }
+
+                if (identifierType == RuntimeIdentifierType.Specific)
+                {
+                    osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                }
+                else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                {
+                    osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                }
+                else
+                {
+                    throw new LinuxVersionDetectionException();
                 }
             }
 
@@ -202,10 +201,8 @@ namespace PlatformKit.Identification
                     {
                         throw new PlatformNotSupportedException();
                     }
-                    else
-                    {
-                        osVersion = $"{version.Major}.{version.Major}";
-                    }
+
+                    osVersion = $"{version.Major}.{version.Major}";
                 }
                 else if (version.Major > 10)
                 {
@@ -230,21 +227,21 @@ namespace PlatformKit.Identification
             {
                 return GenerateRuntimeIdentifier(identifierType, false, false);
             }
-            else if (identifierType == RuntimeIdentifierType.Generic ||
-                     identifierType == RuntimeIdentifierType.Specific && PlatformAnalyzer.IsLinux() ||
-                     identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+
+            if (identifierType == RuntimeIdentifierType.Generic ||
+                identifierType == RuntimeIdentifierType.Specific && PlatformAnalyzer.IsLinux() ||
+                identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
-            else if (identifierType == RuntimeIdentifierType.Specific && !PlatformAnalyzer.IsLinux()
-                     || identifierType == RuntimeIdentifierType.DistroSpecific)
+
+            if (identifierType == RuntimeIdentifierType.Specific && !PlatformAnalyzer.IsLinux()
+                || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
         
         /// <summary>
@@ -385,13 +382,9 @@ namespace PlatformKit.Identification
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append("netcoreapp");
                 
-                var versionString = RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
+                Version version = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
                     .Replace("core", String.Empty)
-                    .Replace(" ", String.Empty);
-                
-                versionString = versionString.AddMissingZeroes();
-
-                Version version = new Version(versionString);
+                    .Replace(" ", String.Empty).AddMissingZeroes());
 
                 stringBuilder.Append(version.Major);
                 stringBuilder.Append(".");
@@ -405,12 +398,8 @@ namespace PlatformKit.Identification
                 
                 if (RuntimeInformation.FrameworkDescription.ToLower().Contains(".net"))
                 {
-                    var versionString = RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
-                        .Replace(" ", String.Empty);
-                    
-                    versionString = versionString.AddMissingZeroes();
-
-                    Version version = new Version(versionString);
+                    Version version = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
+                        .Replace(" ", String.Empty).AddMissingZeroes());
                     
                     stringBuilder.Append("net");
                     
@@ -426,23 +415,23 @@ namespace PlatformKit.Identification
 
                         return stringBuilder.ToString();
                     }
-                    else
-                    {
-                        stringBuilder.Append(version.Major);
-                        stringBuilder.Append(".");
-                        stringBuilder.Append(version.Minor);
 
-                        if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
+                    stringBuilder.Append(version.Major);
+                    stringBuilder.Append(".");
+                    stringBuilder.Append(version.Minor);
+
+                    if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
+                    {
+                        return stringBuilder.ToString();
+                    }
+
+                    if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
+                    {
+                        if(PlatformAnalyzer.IsMac())
                         {
-                            return stringBuilder.ToString();
+                            stringBuilder.Append("-");
+                            stringBuilder.Append("macos");
                         }
-                        else if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
-                        {
-                            if(PlatformAnalyzer.IsMac())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("macos");
-                            }
 #if NET5_0_OR_GREATER
                             else if (OperatingSystem.IsMacCatalyst())
                             {
@@ -450,15 +439,15 @@ namespace PlatformKit.Identification
                                 stringBuilder.Append("maccatalyst");
                             }
 #endif
-                            else if (PlatformAnalyzer.IsWindows())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("windows");
-                            }
-                            else if (PlatformAnalyzer.IsLinux())
-                            {
-                                //Do nothing because Linux doesn't have a dedicated TFM yet
-                            }
+                        else if (PlatformAnalyzer.IsWindows())
+                        {
+                            stringBuilder.Append("-");
+                            stringBuilder.Append("windows");
+                        }
+                        else if (PlatformAnalyzer.IsLinux())
+                        {
+                            //Do nothing because Linux doesn't have a dedicated TFM yet
+                        }
 #if NET5_0_OR_GREATER
                             else if (OperatingSystem.IsAndroid())
                             {
@@ -490,66 +479,59 @@ namespace PlatformKit.Identification
                                 }
                             }
 #endif
-
-
-                            if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
-                            {
-                                if(PlatformAnalyzer.IsMac())
-                                {
-                                    MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
-                                    var macOsVersion = macOsAnalyzer.GetMacOsVersion();
-
-                                    stringBuilder.Append(macOsVersion.Major);
-                                    stringBuilder.Append(".");
-                                    stringBuilder.Append(macOsVersion.Minor);
-                                }
-                                else if(PlatformAnalyzer.IsLinux())
-                                {
-                                    //Do nothing because Linux doesn't have a version specific TFM.
-                                }
-                                else if(PlatformAnalyzer.IsWindows())
-                                {
-                                    WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
-                                    var windowsVersion = windowsAnalyzer.GetWindowsVersion();
-
-                                    var windowsVersionEnum = windowsAnalyzer.GetWindowsVersionToEnum();
-
-                                    switch (windowsVersionEnum)
-                                    {
-                                        case WindowsVersion.Win7 or WindowsVersion.Win7SP1:
-                                            stringBuilder.Append("7.0");
-                                            break;
-                                        case WindowsVersion.Win8:
-                                            stringBuilder.Append("8.0");
-                                            break;
-                                        case WindowsVersion.Win8_1:
-                                            stringBuilder.Append("8.1");
-                                            break;
-                                        default:
-                                            if (windowsAnalyzer.IsWindows10() || windowsAnalyzer.IsWindows11())
-                                            {
-                                                if (windowsVersion.Build >= 14393)
-                                                {
-                                                    stringBuilder.Append(windowsVersion.ToString());
-                                                    break;
-                                                }
-                                                else
-                                                {
-                                                    break;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                throw new OperatingSystemDetectionException();
-                                            }
-                                    }
-                                    
-                                    return stringBuilder.ToString();
-                                }
-                            }
                             
-                            return stringBuilder.ToString();
+                        if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
+                        {
+                            if(PlatformAnalyzer.IsMac())
+                            {
+                                MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
+                                var macOsVersion = macOsAnalyzer.GetMacOsVersion();
+
+                                stringBuilder.Append(macOsVersion.Major);
+                                stringBuilder.Append(".");
+                                stringBuilder.Append(macOsVersion.Minor);
+                            }
+                            else if(PlatformAnalyzer.IsLinux())
+                            {
+                                //Do nothing because Linux doesn't have a version specific TFM.
+                            }
+                            else if(PlatformAnalyzer.IsWindows())
+                            {
+                                WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
+                                var windowsVersion = windowsAnalyzer.GetWindowsVersion();
+
+                                var windowsVersionEnum = windowsAnalyzer.GetWindowsVersionToEnum();
+
+                                switch (windowsVersionEnum)
+                                {
+                                    case WindowsVersion.Win7 or WindowsVersion.Win7SP1:
+                                        stringBuilder.Append("7.0");
+                                        break;
+                                    case WindowsVersion.Win8:
+                                        stringBuilder.Append("8.0");
+                                        break;
+                                    case WindowsVersion.Win8_1:
+                                        stringBuilder.Append("8.1");
+                                        break;
+                                    default:
+                                        if (windowsAnalyzer.IsWindows10() || windowsAnalyzer.IsWindows11())
+                                        {
+                                            if (windowsVersion.Build >= 14393)
+                                            {
+                                                stringBuilder.Append(windowsVersion);
+                                            }
+
+                                            break;
+                                        }
+
+                                        throw new OperatingSystemDetectionException();
+                                }
+                                    
+                                return stringBuilder.ToString();
+                            }
                         }
+                            
+                        return stringBuilder.ToString();
                     }
                 }
                 else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))

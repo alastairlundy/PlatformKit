@@ -32,8 +32,6 @@ namespace PlatformKit.Windows
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
             
-            try
-            {
                 if (PlatformAnalyzer.IsWindows())
                 {
                     string output = CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
@@ -59,13 +57,6 @@ namespace PlatformKit.Windows
                 {
                     throw new PlatformNotSupportedException();
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-
-                throw new Exception(ex.ToString());
-            }
         }
     }
 }

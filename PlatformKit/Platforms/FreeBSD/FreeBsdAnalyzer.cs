@@ -32,24 +32,11 @@ public class FreeBsdAnalyzer
     { 
         if (PlatformAnalyzer.IsFreeBSD())
         {
-            var version = ProcessRunner.RunProcessOnFreeBsd("", "uname", "-v").Replace("FreeBSD", String.Empty);
+            var version = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty);
 
-            var arr = version.Split(' ');
+            var rel = version.Split(' ')[0].Replace("-release", String.Empty);
 
-            var rel = arr[0].Replace("-release", String.Empty);
-
-            int dotCounter = rel.CountDotsInString();
-
-            if (dotCounter == 1)
-            {
-                rel += ".0.0";
-            }
-            else if (dotCounter == 2)
-            {
-                rel += ".0.0";
-            }
-
-            return Version.Parse(rel);
+            return Version.Parse(rel.AddMissingZeroes(rel.CountDotsInString()));
         }
         else
         {
