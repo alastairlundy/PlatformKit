@@ -86,6 +86,7 @@ namespace PlatformKit
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
         // ReSharper disable once InconsistentNaming
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public System.Runtime.InteropServices.OSPlatform GetOSPlatform() {
             System.Runtime.InteropServices.OSPlatform osPlatform = System.Runtime.InteropServices.OSPlatform.Create("Other Platform");
             // Check if it's windows
