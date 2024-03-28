@@ -26,7 +26,6 @@ public class WindowsAnalyzer
     {
         
     }
-
     /// <summary>
     /// Detects the Edition of Windows being run.
     /// </summary>
@@ -35,9 +34,21 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
     public WindowsEdition GetWindowsEdition()
     {
+        return GetWindowsEdition(GetWindowsSystemInformation());
+    }
+
+    /// <summary>
+    /// Detects the Edition of Windows from specified WindowsSystemInformation.
+    /// </summary>
+    /// <param name="windowsSystemInformation"></param>
+    /// <returns></returns>
+    /// <exception cref="WindowsEditionDetectionException"></exception>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public WindowsEdition GetWindowsEdition(WindowsSystemInformation windowsSystemInformation)
+    {
         if (PlatformAnalyzer.IsWindows())
         {
-            var edition = GetWindowsSystemInformation().OsName.ToLower();
+            var edition = windowsSystemInformation.OsName.ToLower();
 
             //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
             //   "EditionID");
@@ -645,7 +656,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-                return IsWindows11(GetWindowsVersionToEnum());
+            return IsWindows11(GetWindowsVersionToEnum());
         }
 
     /// <summary>
@@ -683,9 +694,9 @@ for (var index = 0; index < array.Length; index++)
         public WindowsVersion GetWindowsVersionToEnum()
         {
             if (PlatformAnalyzer.IsWindows())
-                {
-                    return GetWindowsVersionToEnum(GetWindowsVersion());
-                }
+            {
+                return GetWindowsVersionToEnum(GetWindowsVersion());
+            }
 
             throw new PlatformNotSupportedException();
         }
@@ -797,11 +808,9 @@ for (var index = 0; index < array.Length; index++)
         {
             if (PlatformAnalyzer.IsWindows())
             {
-                string description = RuntimeInformation.OSDescription
+                return Version.Parse(RuntimeInformation.OSDescription
                     .Replace("Microsoft Windows", string.Empty)
-                    .Replace(" ", string.Empty);
-
-                return Version.Parse(description.AddMissingZeroes());
+                    .Replace(" ", string.Empty).AddMissingZeroes());
             }
 
             throw new PlatformNotSupportedException();
@@ -870,7 +879,7 @@ for (var index = 0; index < array.Length; index++)
         {
             if (PlatformAnalyzer.IsWindows())
             {
-                return IsAtLeastVersion(GetWindowsVersionToEnum(windowsVersion));
+                return  GetWindowsVersion().IsAtLeast(windowsVersion);
             }
 
             throw new PlatformNotSupportedException();
