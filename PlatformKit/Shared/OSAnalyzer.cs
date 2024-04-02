@@ -10,8 +10,9 @@
 
 using System;
 
-using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Deprecation;
+
+using PlatformKit.FreeBSD;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
