@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PlatformKit" Version="3.6.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Linux\" />
+      <Folder Include="Mac\" />
+      <Folder Include="Shared\" />
+      <Folder Include="Windows\" />
+    </ItemGroup>
+
+</Project>
