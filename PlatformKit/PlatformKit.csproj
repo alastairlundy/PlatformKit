@@ -14,34 +14,7 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.0.0 Beta 2
-
-### Additions
-* Added missing license notice to ``Platform`` file
-* Added the ability for Commands run through ``CommandRunner`` to be run as Administrator
-
-### Changes
-* ``AppModel`` objects now must be initialized with 2 parameters before they can be used.
-* Moved ``CommandRunner`` to the ``PlatformKit`` namespace
-* Moved ``NetworkCard`` to the ``PlatformKit`` namespace
-* Moved ``AddMissingZeroes`` method from VerstionExtensions to StringExtensions
-* Updated code to reflect moving extension method code.
-* Updated ``OperatingSystemDetectionException`` exception message
-
-### Bug Fixes
-* Fixed an issue where SteamOS 2 (based on Debian) would wrongly be detected as SteamOS - Only SteamOS version 3 (based on Arch linux) is intended to be detected as SteamOS by PlatformKit.
-* Fixed an issue where a ``SteamOsAnalyzer`` method ignored the ``includeHoloIsoAsSteamOs`` parameter
-* Optimised the SteamOS detection method to be more efficient - requiring fewer I/O operations
-* Replaced a hardcoded value in ``WindowsAnalyzer`` with a non hardcoded value
-* Removed old debugging code in ``WindowsAnalyzer``
-* Removed empty ``else`` clause in a ``WindowsAnalyzer`` method
-* Removed redundant re-throwing of Exceptions in ``MacOsAnalyzer``
-* Optimised code in ``MacOsAnalyzer`` using internal extension methods
-* Continued removal of re-throwing errors.
-* General optimizations and improvements
-
-### Known Issues
-* ``InstalledApps.Get()`` has no Windows or Mac implementations - This will be addressed in a future version. </PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
