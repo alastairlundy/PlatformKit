@@ -21,7 +21,7 @@ namespace PlatformKit;
         {
         }
 
-        internal static bool IsWindows()
+        public static bool IsWindows()
         {
 #if NET5_0_OR_GREATER
                   return OperatingSystem.IsWindows();
@@ -30,7 +30,7 @@ namespace PlatformKit;
 #endif
         }
         
-        internal static bool IsMac()
+        public static bool IsMac()
         {
 #if NET5_0_OR_GREATER
             return OperatingSystem.IsMacOS();
@@ -39,7 +39,7 @@ namespace PlatformKit;
 #endif
         }
         
-        internal static bool IsLinux()
+        public static bool IsLinux()
         {
 #if NET5_0_OR_GREATER
             return OperatingSystem.IsLinux();
@@ -49,7 +49,7 @@ namespace PlatformKit;
         }
         
         // ReSharper disable once InconsistentNaming
-        internal static bool IsFreeBSD()
+        public static bool IsFreeBSD()
         {
 #if NET5_0_OR_GREATER
             return OperatingSystem.IsFreeBSD();
