@@ -49,11 +49,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
             if (OperatingSystem.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
-
-             //   var res = processManager.RunPowerShellCommand("ping www.duckduckgo.com");
                 
-             //  Console.WriteLine(res);
-             
                // var caption = windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem");
                // var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
                 
@@ -68,18 +64,6 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                Console.WriteLine("WindowsEdition: " + windowsAnalyzer.GetWindowsEdition().ToString());
                
                Console.WriteLine("WinOS " + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
-               
-              /* var desc = processManager.RunPowerShellCommand("systeminfo");
-
-               var arr = desc.Split(Environment.NewLine);
-               
-                   //stringBuilder.ToString().Split(" ");
-
-               for (int index = 0; index < arr.Length; index++)
-               {
-                    Console.WriteLine(index + " " + arr[index]);
-               }
-               */
 
               var sysinfo = windowsAnalyzer.GetWindowsSystemInformation();
               sysinfo.ToConsoleWriteLine();
