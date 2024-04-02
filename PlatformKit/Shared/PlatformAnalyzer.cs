@@ -20,17 +20,9 @@ namespace PlatformKit;
     // ReSharper disable once InconsistentNaming
     public class PlatformAnalyzer
     {
-        private readonly WindowsAnalyzer _windowsAnalyzer;
-        private readonly MacOsAnalyzer _macOsAnalyzer;
-        private readonly LinuxAnalyzer _linuxAnalyzer;
-        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
         
         public PlatformAnalyzer()
         {
-            _windowsAnalyzer = new WindowsAnalyzer();
-            _macOsAnalyzer = new MacOsAnalyzer();
-            _linuxAnalyzer = new LinuxAnalyzer();
-            _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
 
         internal static bool IsWindows()
@@ -72,35 +64,5 @@ namespace PlatformKit;
             throw new PlatformNotSupportedException();
         #endif
 #endif
-        }
-        
-        /// <summary>
-        /// Detect the OS version on Windows, macOS, or Linux.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        // ReSharper disable once InconsistentNaming
-        public Version GetOSVersion()
-        {
-            if (IsWindows())
-            {
-                return _windowsAnalyzer.GetWindowsVersion();
-            }
-            if (IsLinux())
-            {
-                return _linuxAnalyzer.GetLinuxDistributionVersion();
-            }
-            if (IsMac())
-            {
-                return _macOsAnalyzer.GetMacOsVersion();
-            }
-
-#if NETCOREAPP3_0_OR_GREATER
-                if (IsFreeBSD())
-                {
-                    return _freeBsdAnalyzer.GetFreeBSDVersion();
-                }
-#endif
-            throw new PlatformNotSupportedException();
         }
     }
