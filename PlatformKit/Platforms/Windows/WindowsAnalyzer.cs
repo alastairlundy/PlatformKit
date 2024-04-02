@@ -596,7 +596,7 @@ for (var index = 0; index < array.Length; index++)
     }
         
     /// <summary>
-    /// Checks whether a WindowsVersion is Windows 10
+    /// Returns whether a specified version of Windows is Windows 10.
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -656,7 +656,7 @@ for (var index = 0; index < array.Length; index++)
         }
 
     /// <summary>
-    /// 
+    /// Returns whether the specified version of Windows is Windows 11.
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
@@ -813,7 +813,7 @@ for (var index = 0; index < array.Length; index++)
         }
 
         /// <summary>
-        /// 
+        /// Return the version of Windows in the Version format based on the specified WindowsVersion enum.
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
