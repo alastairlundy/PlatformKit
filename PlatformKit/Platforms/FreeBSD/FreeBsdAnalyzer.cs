@@ -28,11 +28,8 @@ public class FreeBsdAnalyzer
     {
         if (PlatformAnalyzer.IsFreeBSD())
         {
-            var version = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty);
-
-            var rel = version.Split(' ')[0].Replace("-release", String.Empty);
-
-            return Version.Parse(rel.AddMissingZeroes(rel.CountDotsInString()));
+            return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty)
+                .Split(' ')[0].Replace("-release",  string.Empty).AddMissingZeroes());
         }
 
         throw new PlatformNotSupportedException();
