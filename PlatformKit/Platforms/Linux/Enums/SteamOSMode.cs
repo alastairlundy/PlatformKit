@@ -10,10 +10,19 @@
 
 namespace PlatformKit.Linux.Enums;
 
+/// <summary>
+/// The mode that SteamOS 3.x and newer is running in.
+/// </summary>
 // ReSharper disable once InconsistentNaming
 public enum SteamOSMode
 {
+    /// <summary>
+    /// The normal UI of the SteamDeck without a desktop environment running.
+    /// </summary>
     GamingMode,
+    /// <summary>
+    /// The mode where the Manjaro desktop environment is running.
+    /// </summary>
     DesktopMode,
     // ReSharper disable once InconsistentNaming
     OsIsNotSteamOS
