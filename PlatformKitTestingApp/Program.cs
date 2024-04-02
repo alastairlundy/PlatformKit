@@ -93,7 +93,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("macOS Version Enum: " +
                                   macAnalyzer.GetMacOsVersionToEnum());
                 
-                Console.WriteLine("macOS Version Detected: " + osAnalyzer.GetOSVersion().ToString());
+                Console.WriteLine("macOS Version Detected: " + macAnalyzer.GetMacOsVersion().ToString());
                 
                 Console.WriteLine("Darwin Version: " + macAnalyzer.GetDarwinVersion());
                 Console.WriteLine("Xnu Version: " + macAnalyzer.GetXnuVersion());
