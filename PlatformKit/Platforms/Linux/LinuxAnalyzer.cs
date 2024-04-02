@@ -65,10 +65,8 @@ public class LinuxAnalyzer
 
             throw new OperatingSystemDetectionException();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
         /// <summary>
