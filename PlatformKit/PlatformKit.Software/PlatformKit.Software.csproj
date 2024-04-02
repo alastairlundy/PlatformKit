@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Linux\" />
-      <Folder Include="Mac\" />
-      <Folder Include="Shared\" />
-      <Folder Include="Windows\" />
     </ItemGroup>
 
 </Project>
