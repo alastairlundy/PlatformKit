@@ -14,12 +14,8 @@ using System.Runtime.InteropServices;
 namespace PlatformKit;
 
     // ReSharper disable once InconsistentNaming
-    public class PlatformAnalyzer
+    public static class PlatformAnalyzer
     {
-        
-        public PlatformAnalyzer()
-        {
-        }
 
         public static bool IsWindows()
         {
