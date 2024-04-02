@@ -66,6 +66,8 @@
         </None>
         
         <None Include="../README.md" Pack="true" PackagePath="\" />
+        
+        <None Remove="PlatformKit.Software\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -78,5 +80,13 @@
           <PackagePath>LICENSE.txt</PackagePath>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="PlatformKit.Software\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="PlatformKit.Software\**" />
     </ItemGroup>
 </Project>
