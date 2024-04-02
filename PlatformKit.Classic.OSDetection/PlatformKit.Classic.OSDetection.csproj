@@ -16,6 +16,7 @@
         <IncludeContentInPack>true</IncludeContentInPack>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <Version>1.1.0</Version>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,7 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="PlatformKit" Version="3.6.2" />
+      <PackageReference Include="PlatformKit" Version="3.6.4.1" />
     </ItemGroup>
 
 </Project>
