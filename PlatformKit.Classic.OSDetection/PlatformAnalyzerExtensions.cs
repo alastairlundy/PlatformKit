@@ -13,13 +13,13 @@ using System;
 namespace PlatformKit.Classic.OSDetection
 {
     // ReSharper disable once InconsistentNaming
-    public static class OSAnalyzerExtensions {
+    public static class PlatformAnalyzerExtensions {
         
     /// <summary>
     /// Returns whether or not the current OS is Windows.
     /// </summary>
     /// <returns></returns>
-    public static bool IsWindows(this PlatformKit.OSAnalyzer osAnalyzer)
+    public static bool IsWindows(this PlatformKit.PlatformAnalyzer platformAnalyzer)
     {
         return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
     }
@@ -29,7 +29,7 @@ namespace PlatformKit.Classic.OSDetection
     /// </summary>
     /// <returns></returns>
     // ReSharper disable once InconsistentNaming
-    public static bool IsMacOS(this PlatformKit.OSAnalyzer osAnalyzer)
+    public static bool IsMacOS(this PlatformKit.PlatformAnalyzer platformAnalyzer)
     {
         return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
     }
@@ -38,7 +38,7 @@ namespace PlatformKit.Classic.OSDetection
     /// Returns whether or not the current OS is Linux based.
     /// </summary>
     /// <returns></returns>
-    public static bool IsLinux(this PlatformKit.OSAnalyzer osAnalyzer)
+    public static bool IsLinux(this PlatformKit.PlatformAnalyzer platformAnalyzer)
     {
         return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
     }
@@ -51,7 +51,7 @@ namespace PlatformKit.Classic.OSDetection
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
-    public static bool IsFreeBSD(this PlatformKit.OSAnalyzer osAnalyzer)
+    public static bool IsFreeBSD(this PlatformKit.PlatformAnalyzer platformAnalyzer)
     {
             return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
     }
