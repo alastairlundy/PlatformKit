@@ -21,7 +21,6 @@ using PlatformKit.Windows;
 
 
     var platformManager = new PlatformIdentification();
-var osAnalyzer = new PlatformAnalyzer();
 var runtimeIdentification = new RuntimeIdentification();
 
 var windowsAnalyzer = new WindowsAnalyzer();
