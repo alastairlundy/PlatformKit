@@ -52,10 +52,8 @@ namespace PlatformKit.Windows
                     
                     return queryObjectsDictionary;
                 }
-                else
-                {
-                    throw new PlatformNotSupportedException();
-                }
+
+                throw new PlatformNotSupportedException();
         }
     }
 }
