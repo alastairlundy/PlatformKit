@@ -21,10 +21,7 @@ namespace PlatformKit.Windows;
 /// </summary>
 public class WindowsAnalyzer
 {
-    public WindowsAnalyzer()
-    {
-        
-    }
+
     /// <summary>
     /// Detects the Edition of Windows being run.
     /// </summary>

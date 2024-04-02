@@ -9,17 +9,13 @@
    */
 
 using System;
+
 using PlatformKit.Linux.Enums;
 
 namespace PlatformKit.Linux;
 
 public class SteamOsAnalyzer : LinuxAnalyzer
 {
-    
-    public SteamOsAnalyzer()
-    {
-        
-    }
     
     /// <summary>
     /// Returns true for SteamOS3 based distributions. 

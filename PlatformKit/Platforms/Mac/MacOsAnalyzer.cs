@@ -21,11 +21,6 @@ namespace PlatformKit.Mac;
     /// </summary>
     public class MacOsAnalyzer
     {
-
-        public MacOsAnalyzer()
-        {
-            
-        }
         
         /// <summary>
         /// Returns whether or not a Mac is Apple Silicon based.

@@ -19,17 +19,13 @@ namespace PlatformKit.FreeBSD;
 public class FreeBsdAnalyzer
 {
 
-    public FreeBsdAnalyzer()
-    {
-    }
-
     // ReSharper disable once InconsistentNaming
     /// <summary>
     /// Detects and Returns the Installed version of FreeBSD
     /// </summary>
     /// <returns></returns>
     public Version GetFreeBSDVersion()
-    { 
+    {
         if (PlatformAnalyzer.IsFreeBSD())
         {
             var version = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty);

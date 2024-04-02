@@ -19,10 +19,6 @@ namespace PlatformKit.Identification;
 /// </summary>
 public class PlatformIdentification
 {
-    public PlatformIdentification()
-    {
-        
-    }
     
         /// <summary>
         /// Return's the executing app's assembly.
