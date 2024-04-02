@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Software;
 
 namespace PlatformKit.Windows;
 

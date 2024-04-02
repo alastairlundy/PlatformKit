@@ -12,8 +12,6 @@ using System;
 using System.Runtime.InteropServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Software;
-
 
 namespace PlatformKit.Mac;
 
