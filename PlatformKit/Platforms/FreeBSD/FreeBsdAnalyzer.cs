@@ -38,10 +38,8 @@ public class FreeBsdAnalyzer
 
             return Version.Parse(rel.AddMissingZeroes(rel.CountDotsInString()));
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     /// <summary>
@@ -56,9 +54,7 @@ public class FreeBsdAnalyzer
         {
             return GetFreeBSDVersion().IsAtLeast((expectedVersion));
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
 }
