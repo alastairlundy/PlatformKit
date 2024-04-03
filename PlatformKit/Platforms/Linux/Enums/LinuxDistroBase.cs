@@ -9,6 +9,9 @@
 
 namespace PlatformKit.Linux.Enums;
 
+/// <summary>
+/// 
+/// </summary>
 public enum LinuxDistroBase
 {
     Debian,
