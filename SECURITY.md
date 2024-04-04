@@ -11,7 +11,7 @@ Versions currently supported by Security Fixes.
 
 ## Reporting a Security Vulnerability
 
-To report a security vulnerability please email ``oss@`` with the Email Subject line of "Security Vulnerability". We will try to reply to your email within 2-3 Business Days acknowledging receipt of your email.
+To report a security vulnerability please email ``platformkit@alastair.mozmail.com`` with the Email Subject line of "Security Vulnerability". We will try to reply to your email within 2-3 Business Days acknowledging receipt of your email.
 
 We will then investigate the issue further and decide whether or not to accept the vulnerability. We will then inform you whether we accept the vulnerability or not.
 
