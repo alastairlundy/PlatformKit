@@ -24,40 +24,46 @@
 
 using System;
 using System.Runtime.InteropServices;
+using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit;
 
     // ReSharper disable once InconsistentNaming
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static class PlatformAnalyzer
     {
 
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsWindows()
         {
 #if NET5_0_OR_GREATER
                   return OperatingSystem.IsWindows();
 #else
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 #endif
         }
         
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsMac()
         {
 #if NET5_0_OR_GREATER
             return OperatingSystem.IsMacOS();
 #else
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 #endif
         }
         
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsLinux()
         {
 #if NET5_0_OR_GREATER
             return OperatingSystem.IsLinux();
 #else
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 #endif
         }
         
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD()
         {
