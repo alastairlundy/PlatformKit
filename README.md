@@ -8,6 +8,14 @@ This can be added to any .NET Standard 2.0, .NET 6, or .NET 8 supported Applicat
 
 NOTE: .NET Standard 2 and .NET 6 support is deprecated and will be removed in PlatformKit 5.
 
+### Compatibility 
+
+| PlatformKit Version series | .NET Targets supported | 
+|-|-|
+| 4.x Pre-release | .NET Standard 2.0, .NET 6 (Explicit support) , and .NET 8 (Explicit support) |
+| 3.x | .NET Standard 2.0 and .NET 6 (Explicit support) |
+| 2.0.0 through 2.6.10 | .NET Standard 2.0|
+
 [![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
 
