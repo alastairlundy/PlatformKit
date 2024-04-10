@@ -37,7 +37,7 @@
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <None Include="..\images\logos\platformkit_logo_512x.jpg">
           <Pack>True</Pack>
@@ -70,7 +70,7 @@
       <EmbeddedResource Remove="PlatformKit.Software\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\PlatformKit.Extensions.OperatingSystem\PlatformKit.Extensions.OperatingSystem.csproj" />
+    <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
+      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.0.*" />
     </ItemGroup>
 </Project>
