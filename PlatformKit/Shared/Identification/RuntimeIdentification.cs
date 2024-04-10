@@ -11,7 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
@@ -30,6 +30,7 @@ namespace PlatformKit.Identification
         private readonly WindowsAnalyzer _windowsAnalyzer;
         private readonly MacOsAnalyzer _macOsAnalyzer;
         private readonly LinuxAnalyzer _linuxAnalyzer;
+        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
 
         /// <summary>
         /// 
@@ -38,7 +39,8 @@ namespace PlatformKit.Identification
         {
             _windowsAnalyzer = new WindowsAnalyzer();
             _macOsAnalyzer = new MacOsAnalyzer();
-            _linuxAnalyzer = new LinuxAnalyzer(); 
+            _linuxAnalyzer = new LinuxAnalyzer();
+            _freeBsdAnalyzer = new FreeBsdAnalyzer();
         }
 
         /// <summary>
@@ -182,6 +184,45 @@ namespace PlatformKit.Identification
                 
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
             }
+
+#if NETCOREAPP3_0_OR_GREATER
+            if (OSAnalyzer.IsFreeBSD())
+            {
+                osVersion = _freeBsdAnalyzer.DetectFreeBSDVersion().ToString();
+
+                int dotCounter = 0;
+                
+                foreach (var c in osVersion)
+                {
+                    if (c == '.')
+                    {
+                        dotCounter++;
+                    }
+                }
+
+                if (dotCounter == 2)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 2);
+                }
+
+                if (dotCounter == 3)
+                {
+                    osVersion = osVersion.Remove(osVersion.Length - 4);
+                }
+                
+                switch (dotCounter)
+                {
+                    case 3:
+                        osVersion = osVersion.Remove(osVersion.Length, 4);
+                        break;
+                    case 2:
+                        osVersion = osVersion.Remove(osVersion.Length, 2);
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+#endif
             if (OSAnalyzer.IsMac())
             {
                 var version = _macOsAnalyzer.DetectMacOsVersion();
