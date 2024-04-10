@@ -43,7 +43,7 @@ public class FreeBsdAnalyzer
     /// Detects and Returns the Installed version of FreeBSD
     /// </summary>
     /// <returns></returns>
-    public Version GetFreeBSDVersion()
+    public static Version GetFreeBSDVersion()
     {
         if (OperatingSystem.IsWindows())
         {
@@ -60,7 +60,7 @@ public class FreeBsdAnalyzer
     /// <param name="expectedVersion"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
-    public bool IsAtLeastVersion(Version expectedVersion)
+    public static bool IsAtLeastVersion(Version expectedVersion)
     {
         if (OperatingSystem.IsFreeBSD())
         {

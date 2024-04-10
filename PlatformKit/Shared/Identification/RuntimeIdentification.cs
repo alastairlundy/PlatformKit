@@ -50,27 +50,12 @@ namespace PlatformKit.Identification
     /// </summary>
     public class RuntimeIdentification
     {
-        private readonly WindowsAnalyzer _windowsAnalyzer;
-        private readonly MacOsAnalyzer _macOsAnalyzer;
-        private readonly LinuxAnalyzer _linuxAnalyzer;
-        private readonly FreeBsdAnalyzer _freeBsdAnalyzer;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public RuntimeIdentification()
-        {
-            _windowsAnalyzer = new WindowsAnalyzer();
-            _macOsAnalyzer = new MacOsAnalyzer();
-            _linuxAnalyzer = new LinuxAnalyzer();
-            _freeBsdAnalyzer = new FreeBsdAnalyzer();
-        }
 
         /// <summary>
         /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
-        protected string GetArchitectureString()
+        protected static string GetArchitectureString()
         {
             string cpuArch = RuntimeInformation.OSArchitecture switch
             {
@@ -93,7 +78,7 @@ namespace PlatformKit.Identification
         /// <param name="identifierType"></param>
         /// <returns></returns>
         /// <exception cref="OperatingSystemDetectionException"></exception>
-        protected string GetOsNameString(RuntimeIdentifierType identifierType)
+        protected static string GetOsNameString(RuntimeIdentifierType identifierType)
         {
             string osName = null;
 
@@ -110,12 +95,10 @@ namespace PlatformKit.Identification
             {
                 osName = "osx";
             }
-#if NETCOREAPP3_0_OR_GREATER
-                if (OperatingSystem.IsFreeBSD())
-                {
-                    osName = "freebsd";
-                }
-#endif
+            if (OperatingSystem.IsFreeBSD())
+            {
+                osName = "freebsd";
+            }
             if (OperatingSystem.IsLinux())
             {
                 if (identifierType == RuntimeIdentifierType.Generic)
@@ -125,11 +108,11 @@ namespace PlatformKit.Identification
 
                 if (identifierType == RuntimeIdentifierType.Specific)
                 {
-                    osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                    osName = LinuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
                 }
                 else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
                 {
-                    osName = _linuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                    osName = LinuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
                 }
                 else
                 {
@@ -146,23 +129,23 @@ namespace PlatformKit.Identification
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="WindowsVersionDetectionException"></exception>
-        protected string GetOsVersionString()
+        protected static string GetOsVersionString()
         {
             string osVersion = null;
 
             if (OperatingSystem.IsWindows())
             {
-                if (_windowsAnalyzer.IsWindows10())
+                if (WindowsAnalyzer.IsWindows10())
                 {
                     osVersion = "10";
                 }
-                else if (_windowsAnalyzer.IsWindows11())
+                else if (WindowsAnalyzer.IsWindows11())
                 {
                     osVersion = "11";
                 }
-                else if (!_windowsAnalyzer.IsWindows10() && !_windowsAnalyzer.IsWindows11())
+                else if (!WindowsAnalyzer.IsWindows10() && !WindowsAnalyzer.IsWindows11())
                 {
-                    switch (_windowsAnalyzer.GetWindowsVersionToEnum())
+                    switch (WindowsAnalyzer.GetWindowsVersionToEnum())
                     {
                         case WindowsVersion.Win7:
                             osVersion = "7";
@@ -185,29 +168,7 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsLinux())
             {
-                osVersion = _linuxAnalyzer.GetLinuxDistributionVersionAsString();
-
-                int dotCounter = 0;
-                
-                foreach (var c in osVersion)
-                {
-                    if (c == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
-
-                if (dotCounter == 2)
-                {
-                    osVersion = osVersion.Remove(osVersion.Length - 2);
-                }
-
-                if (dotCounter == 3)
-                {
-                    osVersion = osVersion.Remove(osVersion.Length - 4);
-                }
-                
-                //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
+                osVersion = LinuxAnalyzer.GetLinuxDistributionVersionAsString();
             }
             if (OperatingSystem.IsMacOS())
             {
@@ -239,7 +200,7 @@ namespace PlatformKit.Identification
         /// <param name="identifierType"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
+        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
@@ -268,7 +229,7 @@ namespace PlatformKit.Identification
         /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <returns></returns>
-        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
+        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
             var osName = GetOsNameString(identifierType);
             var cpuArch = GetArchitectureString();
@@ -345,7 +306,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public string GetRuntimeIdentifier()
+        public static string GetRuntimeIdentifier()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
@@ -363,7 +324,7 @@ namespace PlatformKit.Identification
         /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        public static Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
         {
             Dictionary<RuntimeIdentifierType, string> possibles = new Dictionary<RuntimeIdentifierType, string>
             {
@@ -391,20 +352,20 @@ namespace PlatformKit.Identification
         /// <returns></returns>
         /// <exception cref="OperatingSystemDetectionException">Thrown if there's an issue detecting the Windows Version whilst running on Windows.</exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
+        public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
+            Version frameworkVersion = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
+                .Replace("core", String.Empty)
+                .Replace(" ", String.Empty).AddMissingZeroes());
+            
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.Append("netcoreapp");
-                
-                Version version = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
-                    .Replace("core", String.Empty)
-                    .Replace(" ", String.Empty).AddMissingZeroes());
 
-                stringBuilder.Append(version.Major);
+                stringBuilder.Append(frameworkVersion.Major);
                 stringBuilder.Append(".");
-                stringBuilder.Append(version.Minor);
+                stringBuilder.Append(frameworkVersion.Minor);
 
                 return stringBuilder.ToString();
             }
@@ -414,27 +375,24 @@ namespace PlatformKit.Identification
                 
                 if (RuntimeInformation.FrameworkDescription.ToLower().Contains(".net"))
                 {
-                    Version version = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
-                        .Replace(" ", String.Empty).AddMissingZeroes());
-                    
                     stringBuilder.Append("net");
                     
-                    if (version.Major < 5)
+                    if (frameworkVersion.Major < 5)
                     {
-                        stringBuilder.Append(version.Major);
-                        stringBuilder.Append(version.Minor);
+                        stringBuilder.Append(frameworkVersion.Major);
+                        stringBuilder.Append(frameworkVersion.Minor);
                                                     
-                        if (version.Build != 0)
+                        if (frameworkVersion.Build != 0)
                         {
-                            stringBuilder.Append(version.Build);
+                            stringBuilder.Append(frameworkVersion.Build);
                         }
 
                         return stringBuilder.ToString();
                     }
 
-                    stringBuilder.Append(version.Major);
+                    stringBuilder.Append(frameworkVersion.Major);
                     stringBuilder.Append(".");
-                    stringBuilder.Append(version.Minor);
+                    stringBuilder.Append(frameworkVersion.Minor);
 
                     if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
                     {
@@ -486,7 +444,7 @@ namespace PlatformKit.Identification
                                 stringBuilder.Append("watchos");
                             }
 
-                            if (version.Major >= 8)
+                            if (frameworkVersion.Major >= 8)
                             {
                                 if (OperatingSystem.IsBrowser())
                                 {
@@ -496,7 +454,7 @@ namespace PlatformKit.Identification
                             }
 #endif
                             
-                        if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
+                        if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && frameworkVersion.Major >= 5)
                         {
                             if(OperatingSystem.IsMacOS())
                             {
@@ -512,10 +470,9 @@ namespace PlatformKit.Identification
                             }
                             else if(OperatingSystem.IsWindows())
                             {
-                                WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
-                                var windowsVersion = windowsAnalyzer.GetWindowsVersion();
+                                var windowsVersion = WindowsAnalyzer.GetWindowsVersion();
 
-                                var windowsVersionEnum = windowsAnalyzer.GetWindowsVersionToEnum();
+                                var windowsVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum();
 
                                 switch (windowsVersionEnum)
                                 {
@@ -529,7 +486,7 @@ namespace PlatformKit.Identification
                                         stringBuilder.Append("8.1");
                                         break;
                                     default:
-                                        if (windowsAnalyzer.IsWindows10() || windowsAnalyzer.IsWindows11())
+                                        if (WindowsAnalyzer.IsWindows10() || WindowsAnalyzer.IsWindows11())
                                         {
                                             if (windowsVersion.Build >= 14393)
                                             {

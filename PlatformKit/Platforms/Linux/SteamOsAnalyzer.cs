@@ -41,7 +41,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
     // ReSharper disable once InconsistentNaming
-    public bool IsSteamOS(bool includeHoloIsoAsSteamOs)
+    public static bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
         if (OperatingSystem.IsLinux())
         {
@@ -72,7 +72,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <returns></returns>
     /// <exception cref="ArgumentException">Thrown if Holo ISO is detected and Holo ISO isn't counted as SteamOS.</exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any OS that isn't SteamOS 3</exception>
-    public SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
+    public static SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
         if (IsSteamOS(includeHoloIsoAsSteamOs))
         {
@@ -86,28 +86,23 @@ public class SteamOsAnalyzer : LinuxAnalyzer
                 {
                     return SteamOSMode.DesktopMode;
                 }
-                else
-                {
-                    return SteamOSMode.OsIsNotSteamOS;
-                }
+
+                return SteamOSMode.OsIsNotSteamOS;
             }
-            else if (distroBase == LinuxDistroBase.Arch)
+
+            if (distroBase == LinuxDistroBase.Arch)
             {
                 if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
                 {
                     return SteamOSMode.GamingMode;
                 }
-                else
-                {
-                    return SteamOSMode.OsIsNotSteamOS;
-                }
+
+                return SteamOSMode.OsIsNotSteamOS;
             }
 
             return SteamOSMode.OsIsNotSteamOS;
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
 }

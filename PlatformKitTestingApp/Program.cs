@@ -38,7 +38,6 @@ using PlatformKit.Windows;
 var runtimeIdentification = new RuntimeIdentification();
 
 var windowsAnalyzer = new WindowsAnalyzer();
-var linuxAnalyzer = new LinuxAnalyzer();
 
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     
@@ -102,11 +101,11 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
     
             if (OperatingSystem.IsLinux())
             {  
-                Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
-                Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.GetLinuxDistributionVersionAsString());
-                Console.WriteLine("Linux Kernel Version: " + linuxAnalyzer.GetLinuxKernelVersion());
+                Console.WriteLine("Linux Distro Name: " + LinuxAnalyzer.GetLinuxDistributionInformation().Name);
+                Console.WriteLine("Linux Distro Version: " + LinuxAnalyzer.GetLinuxDistributionVersionAsString());
+                Console.WriteLine("Linux Kernel Version: " + LinuxAnalyzer.GetLinuxKernelVersion());
                 
-                Console.WriteLine("Is an LTS release? " + linuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
+                Console.WriteLine("Is an LTS release? " + LinuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
             }
 
 Console.WriteLine("PlatformKit Version: " + PlatformIdentification.GetPlatformKitVersion().ToString());

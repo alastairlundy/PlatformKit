@@ -41,57 +41,57 @@ namespace PlatformKit.Linux;
 public class LinuxAnalyzer
 {
 
-    /// <summary>
-    /// Detects what base Linux Distribution a Distro is based off of.
-    /// </summary>
-    /// <returns></returns>
-    public LinuxDistroBase GetDistroBase()
-    {
-        return GetDistroBase(GetLinuxDistributionInformation());
-    }
-    
-    /// <summary>
-    /// Detects what base Linux Distribution a Distro is based off of.
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
-    public LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
-    {
-        if (OperatingSystem.IsLinux())
+        /// <summary>
+        /// Detects what base Linux Distribution a Distro is based off of.
+        /// </summary>
+        /// <returns></returns>
+        public static LinuxDistroBase GetDistroBase()
         {
-            if (linuxOsRelease.Identifier_Like.ToLower().Contains("debian"))
-            {
-                return LinuxDistroBase.Debian;
-            }
-            if (linuxOsRelease.Identifier_Like.ToLower().Contains("ubuntu"))
-            {
-                return LinuxDistroBase.Ubuntu;
-            }
-            if (linuxOsRelease.Identifier_Like.ToLower().Contains("arch"))
-            {
-                return LinuxDistroBase.Arch;
-            }
-            if (linuxOsRelease.Identifier_Like.ToLower().Contains("manjaro"))
-            {
-                return LinuxDistroBase.Manjaro;
-            }
-            if (linuxOsRelease.Identifier_Like.ToLower().Contains("fedora"))
-            {
-                return LinuxDistroBase.Fedora;
-            }
-
-            throw new OperatingSystemDetectionException();
+            return GetDistroBase(GetLinuxDistributionInformation());
         }
+        
+        /// <summary>
+        /// Detects what base Linux Distribution a Distro is based off of.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
+        {
+            if (OperatingSystem.IsLinux())
+            {
+                if (linuxOsRelease.Identifier_Like.ToLower().Contains("debian"))
+                {
+                    return LinuxDistroBase.Debian;
+                }
+                if (linuxOsRelease.Identifier_Like.ToLower().Contains("ubuntu"))
+                {
+                    return LinuxDistroBase.Ubuntu;
+                }
+                if (linuxOsRelease.Identifier_Like.ToLower().Contains("arch"))
+                {
+                    return LinuxDistroBase.Arch;
+                }
+                if (linuxOsRelease.Identifier_Like.ToLower().Contains("manjaro"))
+                {
+                    return LinuxDistroBase.Manjaro;
+                }
+                if (linuxOsRelease.Identifier_Like.ToLower().Contains("fedora"))
+                {
+                    return LinuxDistroBase.Fedora;
+                }
 
-        throw new PlatformNotSupportedException();
-    }
+                throw new OperatingSystemDetectionException();
+            }
+
+            throw new PlatformNotSupportedException();
+        }
     
         /// <summary>
         /// Detects Linux Distribution information and returns it.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">This method only runs on Linux. Running it on any other platform will throw this exception.</exception>
-        public LinuxOsRelease GetLinuxDistributionInformation()
+        public static LinuxOsRelease GetLinuxDistributionInformation()
         {
             var linuxDistributionInformation = new LinuxOsRelease();
 
@@ -194,7 +194,7 @@ public class LinuxAnalyzer
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
         /// <returns></returns>
-        public Version GetLinuxDistributionVersion()
+        public static Version GetLinuxDistributionVersion()
         {
             if (OperatingSystem.IsLinux())
             {
@@ -210,7 +210,7 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
-        public string GetLinuxDistributionVersionAsString()
+        public static string GetLinuxDistributionVersionAsString()
         {
             if (OperatingSystem.IsLinux())
             {
@@ -242,7 +242,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">
         ///  Throws a platform not supported exception if run on Windows, macOS, or any platform that isn't Linux.
         /// </exception>
-        public Version GetLinuxKernelVersion()
+        public static Version GetLinuxKernelVersion()
         {
             if (OperatingSystem.IsLinux())
             {
@@ -259,7 +259,7 @@ public class LinuxAnalyzer
         /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
+        public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
             if (OperatingSystem.IsLinux())
             {
