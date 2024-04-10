@@ -211,7 +211,7 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsMacOS())
             {
-                var version = _macOsAnalyzer.GetMacOsVersion();
+                var version = MacOsAnalyzer.GetMacOsVersion();
 
                 if (version.Major == 10)
                 {
@@ -500,8 +500,7 @@ namespace PlatformKit.Identification
                         {
                             if(OperatingSystem.IsMacOS())
                             {
-                                MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
-                                var macOsVersion = macOsAnalyzer.GetMacOsVersion();
+                                var macOsVersion = MacOsAnalyzer.GetMacOsVersion();
 
                                 stringBuilder.Append(macOsVersion.Major);
                                 stringBuilder.Append(".");
