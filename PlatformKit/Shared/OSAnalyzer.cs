@@ -36,7 +36,7 @@ namespace PlatformKit
         }
 
         /// <summary>
-        /// Returns whether or not the current OS is Windows.
+        /// Returns whether the current OS is Windows.
         /// </summary>
         /// <returns></returns>
         [Obsolete(DeprecationMessages.DeprecationV4)]
@@ -46,7 +46,7 @@ namespace PlatformKit
         }
 
         /// <summary>
-        /// Returns whether or not the current OS is macOS.
+        /// Returns whether the current OS is macOS.
         /// </summary>
         /// <returns></returns>
         [Obsolete(DeprecationMessages.DeprecationV4)]
@@ -56,7 +56,7 @@ namespace PlatformKit
         }
         
         /// <summary>
-        /// Returns whether or not the current OS is Linux based.
+        /// Returns whether the current OS is Linux based.
         /// </summary>
         /// <returns></returns>
         [Obsolete(DeprecationMessages.DeprecationV4)]
@@ -67,7 +67,7 @@ namespace PlatformKit
 
         // ReSharper disable once InconsistentNaming
         /// <summary>
-        /// Returns whether or not the current OS is FreeBSD based.
+        /// Returns whether the current OS is FreeBSD based.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an error if run on .NET Standard 2 or .NET Core 2.1 or earlier.</exception>
