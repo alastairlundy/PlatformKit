@@ -34,44 +34,80 @@ namespace PlatformKit.Extensions.OperatingSystem
             return new System.OperatingSystem(platformId, Environment.OSVersion.Version);
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWindows()
         {
             return GetSystem(PlatformID.Win32NT).IsWindows();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
         public static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS()
         {
             return GetSystem(PlatformID.MacOSX).IsMacOS();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS(this System.OperatingSystem operatingSystem)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static bool IsLinux()
         {
             return GetSystem(PlatformID.Unix).IsLinux();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
         public static bool IsLinux(this System.OperatingSystem operatingSystem)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD()
         {
             return GetSystem(PlatformID.Unix).IsFreeBSD();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
