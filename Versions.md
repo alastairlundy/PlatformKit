@@ -2,7 +2,7 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 3.5 & 3.6 | 3.6.4.1 | April 2nd 2024 |
+| 3.5 & 3.6 | 3.6.5 | April 10th 2024 |
 
 ## Unsupported Versions
 
