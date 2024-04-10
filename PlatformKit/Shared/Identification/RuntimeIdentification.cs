@@ -221,12 +221,12 @@ namespace PlatformKit.Identification
                 return GenerateRuntimeIdentifier(identifierType, false, false);
             }
             else if (identifierType == RuntimeIdentifierType.Generic ||
-                     identifierType == RuntimeIdentifierType.Specific && OSAnalyzer.IsLinux() ||
+                     identifierType == RuntimeIdentifierType.Specific && (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) ||
                      identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
-            else if (identifierType == RuntimeIdentifierType.Specific && !OSAnalyzer.IsLinux()
+            else if (identifierType == RuntimeIdentifierType.Specific && (!OSAnalyzer.IsLinux() && !OSAnalyzer.IsFreeBSD())
                      || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
@@ -291,7 +291,7 @@ namespace PlatformKit.Identification
                     }
                 }
 
-                if ((OSAnalyzer.IsLinux() && 
+                if (((OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && 
                      (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
