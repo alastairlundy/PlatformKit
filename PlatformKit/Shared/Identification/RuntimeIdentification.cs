@@ -202,12 +202,12 @@ namespace PlatformKit.Identification
 
                 if (dotCounter == 2)
                 {
-                    osVersion = osVersion.Remove(osVersion.Length - 2);
+                    osVersion = osVersion.Remove(osVersion.Length - 2, 2);
                 }
 
                 if (dotCounter == 3)
                 {
-                    osVersion = osVersion.Remove(osVersion.Length - 4);
+                    osVersion = osVersion.Remove(osVersion.Length - 4, 4);
                 }
                 
                 switch (dotCounter)
