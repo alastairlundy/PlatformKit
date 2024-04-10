@@ -242,12 +242,10 @@ namespace PlatformKit
                 var task = new Task(() => Process.Start("open", url));
                 task.Start();
             }
-#if  NETCOREAPP3_0_OR_GREATER
             if (OperatingSystem.IsFreeBSD())
             {
                 CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
             }          
-#endif
         }
     }
 }
