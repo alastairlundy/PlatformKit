@@ -176,10 +176,10 @@ namespace PlatformKit.Identification
                 switch (osVersion.CountDotsInString())
                 {
                     case 3:
-                        osVersion = osVersion.Remove(osVersion.Length - 4);
+                        osVersion = osVersion.Remove(osVersion.Length - 4, 4);
                         break;
                     case 2:
-                        osVersion = osVersion.Remove(osVersion.Length - 2);
+                        osVersion = osVersion.Remove(osVersion.Length - 2, 2);
                         break;
                     case 1:
                         break;
