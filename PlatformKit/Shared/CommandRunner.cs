@@ -26,6 +26,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
+#if NETSTANDARD2_0
+    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif  
+
 namespace PlatformKit;
 
 /// <summary>
@@ -57,7 +61,7 @@ public static class CommandRunner
  /// <exception cref="PlatformNotSupportedException"></exception>
  public static string RunCommandOnMac(string command, bool runAsAdministrator = false)
     {
-        if (PlatformAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             var location = "/usr/bin/";
                 
@@ -123,7 +127,7 @@ public static class CommandRunner
     /// <returns></returns>
     public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
-        if (PlatformAnalyzer.IsWindows())
+        if (OperatingSystem.IsWindows())
         {
             var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
                                                        + "System32" +
@@ -143,7 +147,7 @@ public static class CommandRunner
     /// <returns></returns>
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
-        if (PlatformAnalyzer.IsLinux() || PlatformAnalyzer.IsFreeBSD())
+        if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
         {
             var location = "/usr/bin/";
 

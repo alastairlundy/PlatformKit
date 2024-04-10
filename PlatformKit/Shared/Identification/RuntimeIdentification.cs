@@ -37,6 +37,10 @@ using PlatformKit.Mac;
 using PlatformKit.FreeBSD;
 
 
+#if NETSTANDARD2_0
+    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 // ReSharper disable InconsistentNaming
 
 namespace PlatformKit.Identification
@@ -98,21 +102,21 @@ namespace PlatformKit.Identification
                 return "any";
             }
 
-            if (PlatformAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 osName = "win";
             }
-            if (PlatformAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 osName = "osx";
             }
 #if NETCOREAPP3_0_OR_GREATER
-                if (PlatformAnalyzer.IsFreeBSD())
+                if (OperatingSystem.IsFreeBSD())
                 {
                     osName = "freebsd";
                 }
 #endif
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 if (identifierType == RuntimeIdentifierType.Generic)
                 {
@@ -146,7 +150,7 @@ namespace PlatformKit.Identification
         {
             string osVersion = null;
 
-            if (PlatformAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 if (_windowsAnalyzer.IsWindows10())
                 {
@@ -179,7 +183,7 @@ namespace PlatformKit.Identification
                     }
                 }
             }
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 osVersion = _linuxAnalyzer.GetLinuxDistributionVersionAsString();
 
@@ -205,7 +209,7 @@ namespace PlatformKit.Identification
                 
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
             }
-            if (PlatformAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 var version = _macOsAnalyzer.GetMacOsVersion();
 
@@ -243,13 +247,13 @@ namespace PlatformKit.Identification
             }
 
             if (identifierType == RuntimeIdentifierType.Generic ||
-                identifierType == RuntimeIdentifierType.Specific && PlatformAnalyzer.IsLinux() ||
+                identifierType == RuntimeIdentifierType.Specific && OperatingSystem.IsLinux() ||
                 identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
 
-            if (identifierType == RuntimeIdentifierType.Specific && !PlatformAnalyzer.IsLinux()
+            if (identifierType == RuntimeIdentifierType.Specific && !OperatingSystem.IsLinux()
                 || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
@@ -279,12 +283,12 @@ namespace PlatformKit.Identification
                 return $"{osName}-{cpuArch}";
             }
             else if (identifierType == RuntimeIdentifierType.Specific ||
-                     PlatformAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
-                     PlatformAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                     OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                     OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 var osVersion = GetOsVersionString();
 
-                if (PlatformAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     if (includeOperatingSystemVersion)
                     {
@@ -296,7 +300,7 @@ namespace PlatformKit.Identification
                     }
                 }
 
-                if (PlatformAnalyzer.IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     if (includeOperatingSystemVersion)
                     {
@@ -308,7 +312,7 @@ namespace PlatformKit.Identification
                     }
                 }
 
-                if ((PlatformAnalyzer.IsLinux() && 
+                if ((OperatingSystem.IsLinux() && 
                      (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
@@ -320,13 +324,13 @@ namespace PlatformKit.Identification
                         return $"{osName}-{cpuArch}";
                     }
                 }
-                if (((PlatformAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
+                if (((OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
                     includeOperatingSystemVersion == false)
                 {
                     return $"{osName}-{cpuArch}";
                 }
             }
-            else if(!PlatformAnalyzer.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
+            else if(!OperatingSystem.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
                 Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
                                   " Calling method using RuntimeIdentifierType.Specific instead.");
@@ -346,14 +350,12 @@ namespace PlatformKit.Identification
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #else
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
             }
-            else
-            {
-                return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
-            }
+
+            return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
 #endif
         }
 
@@ -370,7 +372,7 @@ namespace PlatformKit.Identification
                 { RuntimeIdentifierType.Specific, GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific) }
             };
 
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 possibles.Add(RuntimeIdentifierType.VersionLessDistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
                 possibles.Add(RuntimeIdentifierType.DistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
@@ -441,7 +443,7 @@ namespace PlatformKit.Identification
 
                     if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                     {
-                        if(PlatformAnalyzer.IsMac())
+                        if(OperatingSystem.IsMacOS())
                         {
                             stringBuilder.Append("-");
                             stringBuilder.Append("macos");
@@ -453,12 +455,12 @@ namespace PlatformKit.Identification
                                 stringBuilder.Append("maccatalyst");
                             }
 #endif
-                        else if (PlatformAnalyzer.IsWindows())
+                        else if (OperatingSystem.IsWindows())
                         {
                             stringBuilder.Append("-");
                             stringBuilder.Append("windows");
                         }
-                        else if (PlatformAnalyzer.IsLinux())
+                        else if (OperatingSystem.IsLinux())
                         {
                             //Do nothing because Linux doesn't have a dedicated TFM yet
                         }
@@ -496,7 +498,7 @@ namespace PlatformKit.Identification
                             
                         if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && version.Major >= 5)
                         {
-                            if(PlatformAnalyzer.IsMac())
+                            if(OperatingSystem.IsMacOS())
                             {
                                 MacOsAnalyzer macOsAnalyzer = new MacOsAnalyzer();
                                 var macOsVersion = macOsAnalyzer.GetMacOsVersion();
@@ -505,11 +507,11 @@ namespace PlatformKit.Identification
                                 stringBuilder.Append(".");
                                 stringBuilder.Append(macOsVersion.Minor);
                             }
-                            else if(PlatformAnalyzer.IsLinux())
+                            else if(OperatingSystem.IsLinux())
                             {
                                 //Do nothing because Linux doesn't have a version specific TFM.
                             }
-                            else if(PlatformAnalyzer.IsWindows())
+                            else if(OperatingSystem.IsWindows())
                             {
                                 WindowsAnalyzer windowsAnalyzer = new WindowsAnalyzer();
                                 var windowsVersion = windowsAnalyzer.GetWindowsVersion();
@@ -553,7 +555,7 @@ namespace PlatformKit.Identification
                     stringBuilder.Clear();
                     stringBuilder.Append("mono");
                     
-                    if(PlatformAnalyzer.IsMac())
+                    if(OperatingSystem.IsMacOS())
                     {
                         stringBuilder.Append("mac");
                     }

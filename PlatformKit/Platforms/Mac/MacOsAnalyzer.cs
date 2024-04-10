@@ -27,6 +27,10 @@ using System.Runtime.InteropServices;
 using PlatformKit.Extensions;
 using PlatformKit.Internal.Exceptions;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.Mac;
 
 // ReSharper disable once InconsistentNaming

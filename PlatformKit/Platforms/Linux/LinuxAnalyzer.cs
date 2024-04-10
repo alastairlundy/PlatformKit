@@ -25,10 +25,14 @@
 using System;
 
 using System.IO;
-
 using PlatformKit.Extensions;
+using PlatformKit.Extensions.OperatingSystem;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
+
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
 
 namespace PlatformKit.Linux;
 
@@ -54,7 +58,7 @@ public class LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
     {
-        if (PlatformAnalyzer.IsLinux())
+        if (OperatingSystem.IsLinux())
         {
             if (linuxOsRelease.Identifier_Like.ToLower().Contains("debian"))
             {
@@ -95,7 +99,7 @@ public class LinuxAnalyzer
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
                 
@@ -193,7 +197,7 @@ public class LinuxAnalyzer
         /// <returns></returns>
         public Version GetLinuxDistributionVersion()
         {
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 return Version.Parse(GetLinuxDistributionVersionAsString().AddMissingZeroes());
             }
@@ -209,7 +213,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public string GetLinuxDistributionVersionAsString()
         {
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 var linuxDistroInfo = GetLinuxDistributionInformation();
 
@@ -241,7 +245,7 @@ public class LinuxAnalyzer
         /// </exception>
         public Version GetLinuxKernelVersion()
         {
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 return Version.Parse(Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty)); 
@@ -258,7 +262,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 return GetLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
             }

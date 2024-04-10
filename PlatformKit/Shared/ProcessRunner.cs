@@ -26,6 +26,10 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+#if NETSTANDARD2_0
+    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
@@ -225,24 +229,24 @@ namespace PlatformKit
                 url = url.Replace("http://", "https://");
             }
 
-            if (PlatformAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
             }
-            if (PlatformAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 CommandRunner.RunCommandOnLinux($"xdg-open {url}");
             }
-            if (PlatformAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 var task = new Task(() => Process.Start("open", url));
                 task.Start();
             }
 #if  NETCOREAPP3_0_OR_GREATER
-                if (PlatformAnalyzer.IsFreeBSD())
-                {
-                    CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
-                }          
+            if (OperatingSystem.IsFreeBSD())
+            {
+                CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
+            }          
 #endif
         }
     }

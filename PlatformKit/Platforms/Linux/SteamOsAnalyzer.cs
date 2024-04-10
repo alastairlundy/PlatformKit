@@ -26,6 +26,10 @@ using System;
 
 using PlatformKit.Linux.Enums;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.Linux;
 
 public class SteamOsAnalyzer : LinuxAnalyzer
@@ -39,7 +43,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     // ReSharper disable once InconsistentNaming
     public bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
-        if (PlatformAnalyzer.IsLinux())
+        if (OperatingSystem.IsLinux())
         {
             var distroInfo = GetLinuxDistributionInformation();
             var distroBase = GetDistroBase(distroInfo);

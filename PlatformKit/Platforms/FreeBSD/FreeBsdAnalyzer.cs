@@ -23,7 +23,12 @@
    */
 
 using System;
+
 using PlatformKit.Extensions;
+
+#if NETSTANDARD2_0
+    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
 
 namespace PlatformKit.FreeBSD;
 
@@ -40,7 +45,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public Version GetFreeBSDVersion()
     {
-        if (PlatformAnalyzer.IsFreeBSD())
+        if (OperatingSystem.IsWindows())
         {
             return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty)
                 .Split(' ')[0].Replace("-release",  string.Empty).AddMissingZeroes());
@@ -57,7 +62,7 @@ public class FreeBsdAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public bool IsAtLeastVersion(Version expectedVersion)
     {
-        if (PlatformAnalyzer.IsFreeBSD())
+        if (OperatingSystem.IsFreeBSD())
         {
             return GetFreeBSDVersion().IsAtLeast((expectedVersion));
         }

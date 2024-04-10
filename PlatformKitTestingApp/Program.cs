@@ -39,10 +39,9 @@ var runtimeIdentification = new RuntimeIdentification();
 
 var windowsAnalyzer = new WindowsAnalyzer();
 var linuxAnalyzer = new LinuxAnalyzer();
-var macAnalyzer = new MacOsAnalyzer();
 
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
-
+    
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;
             //    Console.WriteLine(title) ;
@@ -85,16 +84,16 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
 
             if (OperatingSystem.IsMacOS())
             {
-                Console.WriteLine("Is this AppleSilicon?: " + macAnalyzer.IsAppleSiliconMac());
-                Console.WriteLine("Mac Processor Type: " + macAnalyzer.GetMacProcessorType());
+                Console.WriteLine("Is this AppleSilicon?: " + MacOsAnalyzer.IsAppleSiliconMac());
+                Console.WriteLine("Mac Processor Type: " + MacOsAnalyzer.GetMacProcessorType());
 
                 Console.WriteLine("macOS Version Enum: " +
-                                  macAnalyzer.GetMacOsVersionToEnum());
+                                  MacOsAnalyzer.GetMacOsVersionToEnum());
                 
-                Console.WriteLine("macOS Version Detected: " + macAnalyzer.GetMacOsVersion().ToString());
+                Console.WriteLine("macOS Version Detected: " + MacOsAnalyzer.GetMacOsVersion().ToString());
                 
-                Console.WriteLine("Darwin Version: " + macAnalyzer.GetDarwinVersion());
-                Console.WriteLine("Xnu Version: " + macAnalyzer.GetXnuVersion());
+                Console.WriteLine("Darwin Version: " + MacOsAnalyzer.GetDarwinVersion());
+                Console.WriteLine("Xnu Version: " + MacOsAnalyzer.GetXnuVersion());
             }
 
             ProcessRunner.OpenUrlInBrowser("duckduckgo.com");
