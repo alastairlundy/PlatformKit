@@ -180,18 +180,7 @@ public class LinuxAnalyzer
             {
                 var version = DetectLinuxDistributionVersionAsString();
 
-                var dotCounter = version.CountDotsInString();
-
-                if (dotCounter == 1)
-                {
-                    version += ".0";
-                }
-                else if (dotCounter == 2)
-                {
-                    version += ".0";
-                }
-
-                return Version.Parse(version);
+                return Version.Parse(version.AddMissingZeroes());
             }
             
             throw new PlatformNotSupportedException();

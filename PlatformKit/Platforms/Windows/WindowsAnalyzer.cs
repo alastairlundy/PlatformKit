@@ -125,10 +125,6 @@ public class WindowsAnalyzer
         {
             var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
             // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
-            
-//#if DEBUG
-  //          Console.WriteLine(result);              
-//#endif
 
             return result;
         }
@@ -840,24 +836,12 @@ for (var index = 0; index < array.Length; index++)
 
                     var dotCounter = description.CountDotsInString();
                     
-                    if (dotCounter == 1)
-                    {
-                        dotCounter++;
-                        description += ".0";
-                    }
-
-                    if (dotCounter == 2)
-                    {
-                        dotCounter++;
-                        description += ".0";
-                    }
-
                     if (dotCounter > 3)
                     {
                         throw new WindowsVersionDetectionException();
                     }
 
-                    return Version.Parse(description);
+                    return Version.Parse(description.AddMissingZeroes());
                 }
 
                 throw new PlatformNotSupportedException();

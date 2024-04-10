@@ -127,7 +127,7 @@ namespace PlatformKit
             }
 
 #if NETCOREAPP3_0_OR_GREATER
-            if (OperatingSystem.IsFreeBSD())
+            if (IsFreeBSD())
             {
                 return _freeBsdAnalyzer.DetectFreeBSDVersion();
             }

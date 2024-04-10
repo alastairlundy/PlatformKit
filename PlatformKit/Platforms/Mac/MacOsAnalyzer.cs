@@ -58,8 +58,6 @@ public class MacOSAnalyzer : MacOsAnalyzer
         /// <exception cref="Exception"></exception>
         public MacProcessorType GetMacProcessorType()
         {
-            try
-            {
                 if (OSAnalyzer.IsMac())
                 {
                     return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
@@ -70,12 +68,6 @@ public class MacOSAnalyzer : MacOsAnalyzer
                     };
                 }
                 throw new PlatformNotSupportedException();
-            }
-            catch(Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw new Exception(exception.ToString());
-            }
         }
 
         /// <summary>
@@ -373,26 +365,11 @@ public class MacOSAnalyzer : MacOsAnalyzer
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
-
-            int dotCounter = arr[1].CountDotsInString();
-
-            if (dotCounter == 2)
-            {
-                arr[1] = arr[1] + ".0";
-                return Version.Parse(arr[1]);
-            }
-            if (dotCounter == 3)
-            {
-                return Version.Parse(arr[1]);
-            }
-          
-            throw new PlatformNotSupportedException();
+            
+            return Version.Parse(arr[1].AddMissingZeroes());
         }
-        else
-        {
 
-            throw new PlatformNotSupportedException();
-        }
+        throw new PlatformNotSupportedException();
     }
     
     /// <summary>
@@ -418,7 +395,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
                     {
                         arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
                         
-                        arr[index] = arr[index].Remove((arr.Length + 1) - 3);
+                        arr[index] = arr[index].Remove(arr.Length - 3);
                         // M1 specific code
                         // arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
                     }
@@ -449,27 +426,9 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OSAnalyzer.IsMac())
         {
-            try
-            {
-                var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
-
-                int dotCounter = version.CountDotsInString();
-
-                if (dotCounter == 1)
-                {
-                    version += ".0";
-                }
-                if (dotCounter == 2)
-                {
-                    version += ".0";
-                }
+            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
         
-                return Version.Parse(version);
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
+            return Version.Parse(version.AddMissingZeroes());
         }
         else
         {
@@ -487,19 +446,10 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OSAnalyzer.IsMac())
         {
-            try
-            {
-                return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
-            }
-            catch(Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
+            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
 
     // ReSharper disable once IdentifierTypo
