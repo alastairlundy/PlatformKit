@@ -41,7 +41,7 @@ namespace PlatformKit.Mac;
     {
         
         /// <summary>
-        /// Returns whether or not a Mac is Apple Silicon based.
+        /// Returns whether a Mac is Apple Silicon based.
         /// </summary>
         /// <returns></returns>
         public bool IsAppleSiliconMac()
