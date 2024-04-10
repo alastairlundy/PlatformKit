@@ -239,13 +239,15 @@ namespace PlatformKit.Identification
             {
                 return $"any-{GetArchitectureString()}";
             }
-            else if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == true)
+
+            if (identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName)
             {
                 return $"{osName}-{cpuArch}";
             }
-            else if (identifierType == RuntimeIdentifierType.Specific ||
-                     OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
-                     OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+
+            if (identifierType == RuntimeIdentifierType.Specific ||
+                OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 var osVersion = GetOsVersionString();
 
@@ -255,10 +257,8 @@ namespace PlatformKit.Identification
                     {
                         return $"{osName}{osVersion}-{cpuArch}";
                     }
-                    else
-                    {
-                        return $"{osName}-{cpuArch}";
-                    }
+
+                    return $"{osName}-{cpuArch}";
                 }
 
                 if (OperatingSystem.IsMacOS())
@@ -267,23 +267,19 @@ namespace PlatformKit.Identification
                     {
                         return $"{osName}.{osVersion}-{cpuArch}";
                     }
-                    else
-                    {
-                        return $"{osName}-{cpuArch}";
-                    }
+
+                    return $"{osName}-{cpuArch}";
                 }
 
                 if ((OperatingSystem.IsLinux() && 
-                     (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
+                        (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
                     {
                         return $"{osName}.{osVersion}-{cpuArch}";
                     }
-                    else
-                    {
-                        return $"{osName}-{cpuArch}";
-                    }
+
+                    return $"{osName}-{cpuArch}";
                 }
                 if (((OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
                     includeOperatingSystemVersion == false)
@@ -297,7 +293,7 @@ namespace PlatformKit.Identification
                                   " Calling method using RuntimeIdentifierType.Specific instead.");
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
-            
+
             throw new RuntimeIdentifierGenerationException();
         }
 
