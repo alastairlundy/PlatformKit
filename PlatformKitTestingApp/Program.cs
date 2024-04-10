@@ -35,23 +35,20 @@ using PlatformKit.Windows;
 
 
     var platformManager = new PlatformIdentification();
-var runtimeIdentification = new RuntimeIdentification();
-
-var windowsAnalyzer = new WindowsAnalyzer();
-
+    
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     
             var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
             Console.Title = title;
             //    Console.WriteLine(title) ;
           
-            Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
-            Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
-            Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
-            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
-            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + runtimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
+            Console.WriteLine("Programmatically Generated RuntimeID (AnyGeneric): " + RuntimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
+            Console.WriteLine("Programmatically Generated RuntimeID (Generic): " + RuntimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
+            Console.WriteLine("Programmatically Generated RuntimeID (Specific): " + RuntimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
+            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + RuntimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
+            Console.WriteLine("Programmatically Generated RuntimeID (DistroSpecific): " + RuntimeIdentification.GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
 
-            foreach (var candidate in runtimeIdentification.GetPossibleRuntimeIdentifierCandidates())
+            foreach (var candidate in RuntimeIdentification.GetPossibleRuntimeIdentifierCandidates())
             {
                 Console.WriteLine("Possible RID: " + candidate);
             }
@@ -60,7 +57,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
             
             if (OperatingSystem.IsWindows())
             {
-                Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
+                Console.WriteLine("Windows Version Enum: " + WindowsAnalyzer.GetWindowsVersionToEnum());
                 
                // var caption = windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem");
                // var name = windowsAnalyzer.GetWMIValue("Name", "Win32_OperatingSystem");
@@ -73,11 +70,11 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 //Console.WriteLine("Caption: " + windowsAnalyzer.GetWMIValue("Caption", "Win32_OperatingSystem"));
 
                // Console.WriteLine(processManager.RunPowerShellCommand("systeminfo"));
-               Console.WriteLine("WindowsEdition: " + windowsAnalyzer.GetWindowsEdition().ToString());
+               Console.WriteLine("WindowsEdition: " + WindowsAnalyzer.GetWindowsEdition().ToString());
                
-               Console.WriteLine("WinOS " + windowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
+               Console.WriteLine("WinOS " + WindowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
 
-              var sysinfo = windowsAnalyzer.GetWindowsSystemInformation();
+              var sysinfo = WindowsAnalyzer.GetWindowsSystemInformation();
               sysinfo.ToConsoleWriteLine();
             }
 
