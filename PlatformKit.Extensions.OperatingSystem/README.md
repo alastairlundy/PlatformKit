@@ -1,5 +1,14 @@
 ﻿# PlatformKit.Extensions.OperatingSystem
 
+## Usage
+To replace the existing OperatingSystem class in .NET Standard 2 with this one, use this in your using namespaces:
+
+```csharp
+#if NETSTANDARD2_0
+    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+```
+
 ## About
 
 PlatformKit.Extensions.OperatingSystem adds Windows, macOS, Linux, and FreeBSD detection methods to the System.OperatingSystem class via extension methods.

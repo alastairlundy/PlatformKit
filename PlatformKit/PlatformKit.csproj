@@ -69,4 +69,8 @@
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PlatformKit.Extensions.OperatingSystem\PlatformKit.Extensions.OperatingSystem.csproj" />
+    </ItemGroup>
 </Project>
