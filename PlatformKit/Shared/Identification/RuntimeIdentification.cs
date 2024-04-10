@@ -36,7 +36,6 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.FreeBSD;
 
-
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
@@ -170,6 +169,25 @@ namespace PlatformKit.Identification
             {
                 osVersion = LinuxAnalyzer.GetLinuxDistributionVersionAsString();
             }
+            if (OperatingSystem.IsFreeBSD())
+            {
+                osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
+                
+                switch (osVersion.CountDotsInString())
+                {
+                    case 3:
+                        osVersion = osVersion.Remove(osVersion.Length - 4);
+                        break;
+                    case 2:
+                        osVersion = osVersion.Remove(osVersion.Length - 2);
+                        break;
+                    case 1:
+                        break;
+                    case 0:
+                        osVersion += ".0";
+                        break;
+                    }
+            }
             if (OperatingSystem.IsMacOS())
             {
                 var version = MacOsAnalyzer.GetMacOsVersion();
@@ -208,13 +226,13 @@ namespace PlatformKit.Identification
             }
 
             if (identifierType == RuntimeIdentifierType.Generic ||
-                identifierType == RuntimeIdentifierType.Specific && OperatingSystem.IsLinux() ||
+                identifierType == RuntimeIdentifierType.Specific && (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) ||
                 identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
 
-            if (identifierType == RuntimeIdentifierType.Specific && !OperatingSystem.IsLinux()
+            if (identifierType == RuntimeIdentifierType.Specific && (!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD())
                 || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
@@ -271,7 +289,7 @@ namespace PlatformKit.Identification
                     return $"{osName}-{cpuArch}";
                 }
 
-                if ((OperatingSystem.IsLinux() && 
+                if (((OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) && 
                         (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
@@ -287,7 +305,7 @@ namespace PlatformKit.Identification
                     return $"{osName}-{cpuArch}";
                 }
             }
-            else if(!OperatingSystem.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
+            else if((!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD()) && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
                 Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
                                   " Calling method using RuntimeIdentifierType.Specific instead.");
@@ -403,20 +421,20 @@ namespace PlatformKit.Identification
                             stringBuilder.Append("macos");
                         }
 #if NET5_0_OR_GREATER
-                            else if (OperatingSystem.IsMacCatalyst())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("maccatalyst");
-                            }
+                        else if (OperatingSystem.IsMacCatalyst())
+                        {
+                            stringBuilder.Append("-");
+                            stringBuilder.Append("maccatalyst");
+                        }
 #endif
                         else if (OperatingSystem.IsWindows())
                         {
                             stringBuilder.Append("-");
                             stringBuilder.Append("windows");
                         }
-                        else if (OperatingSystem.IsLinux())
+                        else if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
                         {
-                            //Do nothing because Linux doesn't have a dedicated TFM yet
+                            //Do nothing because Linux and FreeBSD don't have dedicated TFMs yet
                         }
 #if NET5_0_OR_GREATER
                             else if (OperatingSystem.IsAndroid())
