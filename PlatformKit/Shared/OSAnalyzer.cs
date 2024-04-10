@@ -113,34 +113,26 @@ namespace PlatformKit
         // ReSharper disable once InconsistentNaming
         public Version DetectOSVersion()
         {
-            try
+            if (IsWindows())
             {
-                if (IsWindows())
-                {
-                    return _windowsAnalyzer.DetectWindowsVersion();
-                }
-                if (IsLinux())
-                {
-                    return _linuxAnalyzer.DetectLinuxDistributionVersion();
-                }
-                if (IsMac())
-                {
-                    return _macOsAnalyzer.DetectMacOsVersion();
-                }
+                return _windowsAnalyzer.DetectWindowsVersion();
+            }
+            if (IsLinux())
+            {
+                return _linuxAnalyzer.DetectLinuxDistributionVersion();
+            }
+            if (IsMac())
+            {
+                return _macOsAnalyzer.DetectMacOsVersion();
+            }
 
 #if NETCOREAPP3_0_OR_GREATER
-                if (OperatingSystem.IsFreeBSD())
-                {
-                    return _freeBsdAnalyzer.DetectFreeBSDVersion();
-                }
-#endif
-                throw new PlatformNotSupportedException();
-            }
-            catch (Exception exception)
+            if (OperatingSystem.IsFreeBSD())
             {
-                throw;
-
+                return _freeBsdAnalyzer.DetectFreeBSDVersion();
             }
+#endif
+            throw new PlatformNotSupportedException();
         }
     }
 }
