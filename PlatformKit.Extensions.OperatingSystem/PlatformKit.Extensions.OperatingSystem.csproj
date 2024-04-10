@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Title>PlatformKit.Extensions.OperatingSystem</Title>
+        <Description>Add Windows, macOS, Linux, and FreeBSD detection to .NET Standard 2 projects via extension methods.</Description>
+        <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
+        <PackageReleaseNotes>Initial release as PlatformKit.Extensions.OperatingSystem</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <PackageVersion>1.0.0.0</PackageVersion>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="..\LICENSE.txt">
+            <Link>LICENSE.txt</Link>
+            <PackagePath>LICENSE.txt</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\images\logos\platformkit_logo_512x.jpg">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>platformkit_logo_512x.jpg</Link>
+        </None>
+
+        <None Include="README.md" Pack="true" PackagePath="\" />
+
+        <None Remove="PlatformKit.Software\**" />
+    </ItemGroup>
+
+
+</Project>
