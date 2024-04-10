@@ -1,11 +1,12 @@
 # Version History
-This document contains the entire version history of the PlatformKit (formerly AluminiumCoreLib) library.
+This document contains the entire version history of the PlatformKit library.
 
 ## Upcoming Releases
 
 ### 4.0
 | Version | Availability | Changelog |
 |-|-|-|
+| 4.0 Beta 5 | April 10th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.5 |
 | 4.0 Beta 4 | April 3rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.4 | 
 | 4.0 Beta 3 | March 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.3 | 
 | 4.0 Beta 2 | March 23rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.2 | 
