@@ -1,8 +1,3 @@
-## Upcoming Versions
-
-| Version series | Latest Pre-release | Date Of Latest Pre-release |
-|-|-|-|
-
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Release |
