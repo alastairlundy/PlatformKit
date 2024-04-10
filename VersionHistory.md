@@ -209,7 +209,6 @@ This document contains the entire version history of the PlatformKit library.
 
 ### Beta 1.0.0
 
-| Beta 1.0.0 | 1 | December 9th 2017 | |
 | Version | Availability | Changelog |
 |---------|----------|-----------|
 | Beta 1.0.0 | December 9th 2017 | |
