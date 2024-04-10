@@ -288,8 +288,8 @@ namespace PlatformKit.Identification
                 return $"{osName}-{cpuArch}";
             }
             else if (identifierType == RuntimeIdentifierType.Specific ||
-                     OSAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
-                     OSAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                     (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                     (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 var osVersion = GetOsVersionString();
 
@@ -355,7 +355,7 @@ namespace PlatformKit.Identification
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #else
-            if (OSAnalyzer.IsLinux())
+            if (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD())
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
             }
