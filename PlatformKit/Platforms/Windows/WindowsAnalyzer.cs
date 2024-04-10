@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Shared.Extensions;
 
 namespace PlatformKit.Windows;
 
@@ -543,15 +544,8 @@ for (var index = 0; index < array.Length; index++)
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
         var compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
-        
-        int dotCounter = 0;
-        foreach (char c in compare)
-        {
-            if (c == '.' || c == ':')
-            {
-                dotCounter++;
-            }
-        }
+
+        int dotCounter = compare.CountDotsInString();
 
         if (dotCounter >= 3 && wasLastLineNetworkLine)
         {
@@ -844,15 +838,7 @@ for (var index = 0; index < array.Length; index++)
                         .Replace("Microsoft Windows", string.Empty)
                         .Replace(" ", string.Empty);
 
-                    var dotCounter = 0;
-
-                    foreach (var t in description)
-                    {
-                        if (t.Equals('.'))
-                        {
-                            dotCounter++;
-                        }
-                    }
+                    var dotCounter = description.CountDotsInString();
                     
                     if (dotCounter == 1)
                     {

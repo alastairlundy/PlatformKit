@@ -12,6 +12,7 @@ using System;
 using System.Runtime.InteropServices;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Shared.Extensions;
 
 
 namespace PlatformKit.Mac;
@@ -373,15 +374,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
 
-            int dotCounter = 0;
-            
-            foreach(var s in arr[1])
-            {
-                if (s == '.')
-                {
-                    dotCounter++;
-                }
-            }
+            int dotCounter = arr[1].CountDotsInString();
 
             if (dotCounter == 2)
             {
@@ -460,15 +453,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
             {
                 var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
 
-                int dotCounter = 0;
-
-                foreach (var str in version)
-                {
-                    if (str == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
+                int dotCounter = version.CountDotsInString();
 
                 if (dotCounter == 1)
                 {

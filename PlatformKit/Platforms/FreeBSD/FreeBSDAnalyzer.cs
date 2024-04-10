@@ -11,6 +11,7 @@
 using System;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Shared.Extensions;
 
 namespace PlatformKit.FreeBSD;
 
@@ -50,15 +51,7 @@ public class FreeBsdAnalyzer
 
             var rel = arr[0].Replace("-release", String.Empty);
 
-            int dotCounter = 0;
-
-            foreach (char c in rel)
-            {
-                if (c == '.')
-                {
-                    dotCounter++;
-                }
-            }
+            int dotCounter = rel.CountDotsInString();
 
             if (dotCounter == 1)
             {

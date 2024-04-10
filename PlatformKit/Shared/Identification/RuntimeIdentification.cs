@@ -17,6 +17,7 @@ using PlatformKit.Internal.Exceptions;
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
+using PlatformKit.Shared.Extensions;
 
 // ReSharper disable InconsistentNaming
 
@@ -162,15 +163,7 @@ namespace PlatformKit.Identification
             {
                 osVersion = _linuxAnalyzer.DetectLinuxDistributionVersionAsString();
 
-                int dotCounter = 0;
-                
-                foreach (var c in osVersion)
-                {
-                    if (c == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
+                int dotCounter = osVersion.CountDotsInString();
 
                 if (dotCounter == 2)
                 {
@@ -190,15 +183,7 @@ namespace PlatformKit.Identification
             {
                 osVersion = _freeBsdAnalyzer.DetectFreeBSDVersion().ToString();
 
-                int dotCounter = 0;
-                
-                foreach (var c in osVersion)
-                {
-                    if (c == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
+                int dotCounter = osVersion.CountDotsInString();
 
                 if (dotCounter == 2)
                 {

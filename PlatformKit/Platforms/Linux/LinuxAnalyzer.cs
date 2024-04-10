@@ -13,6 +13,7 @@ using System.IO;
 
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
+using PlatformKit.Shared.Extensions;
 
 namespace PlatformKit.Linux;
 
@@ -177,17 +178,9 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var dotCounter = 0;
-
                 var version = DetectLinuxDistributionVersionAsString();
 
-                foreach (var c in version)
-                {
-                    if (c == '.')
-                    {
-                        dotCounter++;
-                    }
-                }
+                var dotCounter = version.CountDotsInString();
 
                 if (dotCounter == 1)
                 {
