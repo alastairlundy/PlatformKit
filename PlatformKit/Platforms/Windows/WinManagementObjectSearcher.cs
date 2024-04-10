@@ -33,10 +33,6 @@ namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
     {
-        public WinManagementObjectSearcher()
-        {
-            
-        }
 
         /// <summary>
         ///
@@ -45,7 +41,7 @@ namespace PlatformKit.Windows
         /// <param name="queryObjectsList"></param>
         /// <param name="wmiClass"></param>
         /// <returns></returns>
-        public Dictionary<string, string> Get(List<string> queryObjectsList, string wmiClass)
+        public static Dictionary<string, string> Get(List<string> queryObjectsList, string wmiClass)
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
             
