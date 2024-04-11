@@ -24,6 +24,8 @@
 
 using System;
 using System.Runtime.InteropServices;
+using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
@@ -112,6 +114,84 @@ namespace PlatformKit.Extensions.OperatingSystem
         public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
             return System.Runtime.InteropServices.RuntimeInformation.OSDescription.ToLower().Contains("freebsd");
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            if (IsWindows())
+            {
+                return GetSystem(PlatformID.Win32NT).Version.IsAtLeast(new Version(major, minor, build, revision));
+            }
+
+            throw new PlatformNotSupportedException();
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of macOS is the same or newer than the installed version of Windows.
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        // ReSharper disable once InconsistentNaming
+        public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            if (IsMacOS())
+            {
+                return GetSystem(PlatformID.MacOSX).Version.IsAtLeast(new Version(major, minor, build, revision));
+            }
+
+            throw new PlatformNotSupportedException();
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Windows.
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            if (IsLinux())
+            {
+                return GetSystem(PlatformID.Unix).Version.IsAtLeast(new Version(major, minor, build, revision));
+            }
+
+            throw new PlatformNotSupportedException();
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of Windows.
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <param name="build"></param>
+        /// <param name="revision"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        // ReSharper disable once InconsistentNaming
+        public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            if (IsFreeBSD())
+            {
+                return GetSystem(PlatformID.Unix).Version.IsAtLeast(new Version(major, minor, build, revision));
+            }
+
+            throw new PlatformNotSupportedException();
         }
     }
 }
