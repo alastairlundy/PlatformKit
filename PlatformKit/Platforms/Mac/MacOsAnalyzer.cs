@@ -104,6 +104,7 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsSecureVirtualMemoryEnabled()
         {
             var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
