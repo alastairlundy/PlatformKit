@@ -6,11 +6,13 @@
         <Description>Add Windows, macOS, Linux, and FreeBSD detection to .NET Standard 2 projects via extension methods.</Description>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
-        <PackageReleaseNotes>Initial release as PlatformKit.Extensions.OperatingSystem</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 1.0.0
+* Added ``IsWindowsVersionAtLeast``, ``IsMacOSVersionAtLeast``, ``IsLinuxVersionAtLeast``, and ``IsFreeBSDVersionAtLeast`` methods
+* Added some in code comments.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion>1.0.0.0</FileVersion>
-        <PackageVersion>1.0.0.0</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
