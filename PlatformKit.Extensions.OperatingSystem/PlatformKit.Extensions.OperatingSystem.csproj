@@ -38,5 +38,9 @@
         <None Remove="PlatformKit.Software\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.0" />
+    </ItemGroup>
+
 
 </Project>
