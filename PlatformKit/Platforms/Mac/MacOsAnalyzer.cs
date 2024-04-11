@@ -24,7 +24,10 @@
 
 using System;
 using System.Runtime.InteropServices;
-using PlatformKit.Extensions;
+
+using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
+    
 using PlatformKit.Internal.Exceptions;
 
 #if NETSTANDARD2_0

@@ -25,7 +25,8 @@
 using System;
 
 using System.IO;
-using PlatformKit.Extensions;
+using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 

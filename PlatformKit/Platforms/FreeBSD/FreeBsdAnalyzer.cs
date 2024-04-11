@@ -23,8 +23,8 @@
    */
 
 using System;
-
-using PlatformKit.Extensions;
+using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
