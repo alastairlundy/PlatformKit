@@ -189,51 +189,51 @@ namespace PlatformKit.Mac;
                     if (input.Major == 10)
                     {
                         switch (input.Minor) {
-                        case 0:
-                            //return MacOsVersion.v10_0_Cheetah;
-                            return MacOsVersion.NotSupported;
-                        case 1:
-                            // return MacOsVersion.v10_1_Puma;
-                            return MacOsVersion.NotSupported;
-                        case 2:
-                            // return MacOsVersion.v10_2_Jaguar;
-                            return MacOsVersion.NotSupported;
-                        case 3:
-                            // return MacOsVersion.v10_3_Panther;
-                            return MacOsVersion.NotSupported;
-                        case 4:
-                            // return MacOsVersion.v10_4_Tiger;
-                            return MacOsVersion.NotSupported;
-                        case 5:
-                            // return MacOsVersion.v10_5_Leopard;
-                            return MacOsVersion.NotSupported;
-                        case 6:
-                            //return MacOsVersion.v10_6_SnowLeopard;
-                            return MacOsVersion.NotSupported;
-                        case 7:
-                            //return MacOsVersion.v10_7_Lion;
-                            return MacOsVersion.NotSupported;
-                        case 8:
-                            //return MacOsVersion.v10_8_MountainLion;
-                            return MacOsVersion.NotSupported;
-                        case 9:
-                            return MacOsVersion.v10_9_Mavericks;
-                        case 10:
-                            return MacOsVersion.v10_10_Yosemite;
-                        case 11:
-                            return MacOsVersion.v10_11_ElCapitan;
-                        case 12:
-                            return MacOsVersion.v10_12_Sierra;
-                        case 13:
-                            return MacOsVersion.v10_13_HighSierra;
-                        case 14:
-                            return MacOsVersion.v10_14_Mojave;
-                        case 15:
-                            return MacOsVersion.v10_15_Catalina;
-                        //This is for compatibility reasons.
-                        case 16:
-                            return MacOsVersion.v11_BigSur;
-                        }
+                            case 0:
+                                //return MacOsVersion.v10_0_Cheetah;
+                                return MacOsVersion.NotSupported;
+                            case 1:
+                                // return MacOsVersion.v10_1_Puma;
+                                return MacOsVersion.NotSupported;
+                            case 2:
+                                // return MacOsVersion.v10_2_Jaguar;
+                                return MacOsVersion.NotSupported;
+                            case 3:
+                                // return MacOsVersion.v10_3_Panther;
+                                return MacOsVersion.NotSupported;
+                            case 4:
+                                // return MacOsVersion.v10_4_Tiger;
+                                return MacOsVersion.NotSupported;
+                            case 5:
+                                // return MacOsVersion.v10_5_Leopard;
+                                return MacOsVersion.NotSupported;
+                            case 6:
+                                //return MacOsVersion.v10_6_SnowLeopard;
+                                return MacOsVersion.NotSupported;
+                            case 7:
+                                //return MacOsVersion.v10_7_Lion;
+                                return MacOsVersion.NotSupported;
+                            case 8:
+                                //return MacOsVersion.v10_8_MountainLion;
+                                return MacOsVersion.NotSupported;
+                            case 9:
+                                return MacOsVersion.v10_9_Mavericks;
+                            case 10:
+                                return MacOsVersion.v10_10_Yosemite;
+                            case 11:
+                                return MacOsVersion.v10_11_ElCapitan;
+                            case 12:
+                                return MacOsVersion.v10_12_Sierra;
+                            case 13:
+                                return MacOsVersion.v10_13_HighSierra;
+                            case 14:
+                                return MacOsVersion.v10_14_Mojave;
+                            case 15:
+                                return MacOsVersion.v10_15_Catalina;
+                            //This is for compatibility reasons.
+                            case 16:
+                                return MacOsVersion.v11_BigSur;
+                            }
                     }
 
                     if (input.Major == 11) return MacOsVersion.v11_BigSur;
@@ -349,9 +349,7 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            var array = RuntimeInformation.OSDescription.Split(' ');
-            
-            return Version.Parse(array[1].AddMissingZeroes());
+            return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1].AddMissingZeroes());
         }
 
         throw new PlatformNotSupportedException();
