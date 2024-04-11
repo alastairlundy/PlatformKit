@@ -33,16 +33,16 @@ namespace PlatformKit.Extensions.OperatingSystem
         {
             return new System.OperatingSystem(platformId, Environment.OSVersion.Version);
         }
-        
+
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is Windows.
         /// </summary>
         /// <returns></returns>
         public static bool IsWindows()
         {
             return GetSystem(PlatformID.Win32NT).IsWindows();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +54,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is macOS.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
@@ -62,7 +62,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         {
             return GetSystem(PlatformID.MacOSX).IsMacOS();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -75,14 +75,14 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is Linux.
         /// </summary>
         /// <returns></returns>
         public static bool IsLinux()
         {
             return GetSystem(PlatformID.Unix).IsLinux();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -94,7 +94,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        ///  Returns whether the operating system that is running is FreeBSD.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
@@ -102,7 +102,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         {
             return GetSystem(PlatformID.Unix).IsFreeBSD();
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
