@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 
 using AlastairLundy.System.Extensions.StringExtensions;
 using AlastairLundy.System.Extensions.VersionExtensions;
-    
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
 #if NETSTANDARD2_0
