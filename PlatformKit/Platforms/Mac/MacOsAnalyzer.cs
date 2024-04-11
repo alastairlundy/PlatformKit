@@ -419,7 +419,8 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
+            return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:",
+                String.Empty).Replace(" ", String.Empty);
         }
 
         throw new PlatformNotSupportedException();
