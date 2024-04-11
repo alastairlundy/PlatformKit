@@ -403,9 +403,8 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
-
-           return Version.Parse(version.AddMissingZeroes());
+            return Version.Parse(GetMacSwVersInfo()[1].Replace("ProductVersion:", string.Empty)
+                .Replace(" ", string.Empty).AddMissingZeroes());
         }
 
         throw new PlatformNotSupportedException();
