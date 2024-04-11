@@ -6,14 +6,15 @@ This document contains the entire version history of the PlatformKit library.
 ### 4.0
 | Version | Availability | Changelog |
 |-|-|-|
-| 4.0 Beta 5 | April 10th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.5 |
-| 4.0 Beta 4 | April 3rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.4 | 
-| 4.0 Beta 3 | March 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.3 | 
-| 4.0 Beta 2 | March 23rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.2 | 
-| 4.0 Beta 1 | March 15th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.1 | 
-| 4.0 Alpha 3 | February 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.3 | 
-| 4.0 Alpha 2 | January 19th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.2 | 
-| 4.0 Alpha 1 | January 16th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.1 | 
+| 4.0.0 Beta 6 | April 11th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.6 |
+| 4.0.0 Beta 5 | April 10th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.5 |
+| 4.0.0 Beta 4 | April 3rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.4 | 
+| 4.0.0 Beta 3 | March 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.3 | 
+| 4.0.0 Beta 2 | March 23rd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.2 | 
+| 4.0.0 Beta 1 | March 15th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.1 | 
+| 4.0.0 Alpha 3 | February 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.3 | 
+| 4.0.0 Alpha 2 | January 19th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.2 | 
+| 4.0.0 Alpha 1 | January 16th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.1 | 
 
 ## Stable Releases
 

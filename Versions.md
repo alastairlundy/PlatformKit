@@ -2,7 +2,7 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 4.0 | 4.0.0 Beta 5 | April 10th 2024 |
+| 4.0 | 4.0.0 Beta 6 | April 11th 2024 |
 
 ## Currently Supported Versions
 

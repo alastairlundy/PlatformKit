@@ -14,13 +14,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.0.0 Beta 4
-* Re-licensed library under MIT license as it was originally.
-* Removed PlatformAnalyzer - .NET Standard 2 dependants of PlatformKit now require ``PlatformKit.Extensions.OperatingSystem`` to enable OperatingSystem extension methods.
-* Made methods in the ``WindowsAnalyzer``, ``MacOsAnalyzer``, ``LinuxAnalyzer``, and ``SteamOsAnalyzer`` classes static
-* Made methods in the ``RuntimeIdentification`` class static
-* Fixed a grammar issue in a ``MacOsAnalyzer`` method in code comment
-* Add explicit FreeBSD support for ``RuntimeIdentification`` RuntimeID generation and TFM generation</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 4.0.0 Beta 5
+
+### Removals and Changes
+* Moved extension method code to a separate package - This package is now a dependency of PlatformKit.
+
+### Bug Fixes
+* Fixed a bug with FreeBSD Runtime ID generation - This Bug only affects 4.0.0 Beta 5</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,7 +30,7 @@
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0.0</Version>
-        <PackageVersion>4.0.0-beta.5</PackageVersion>
+        <PackageVersion>4.0.0-beta.6</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
