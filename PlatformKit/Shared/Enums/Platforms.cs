@@ -41,6 +41,7 @@ public enum Platform
     tvOS,
     // ReSharper disable once InconsistentNaming
     watchOS,
+    // ReSharper disable once InconsistentNaming
     wearOS,
     // ReSharper disable once InconsistentNaming
     visionOS,
