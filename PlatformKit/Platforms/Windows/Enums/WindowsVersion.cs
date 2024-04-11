@@ -71,8 +71,8 @@ namespace PlatformKit.Windows
         /// </summary>
         Win10_Server_v1709 = 16299,
         /// <summary>
-        /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly branded as V1709 for Mobile.
-        /// As such UWP API Compatibility is Windows 10 Build 15063 (Win10v1703) or earlier.
+        /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly marketed as V1709 for Mobile.
+        /// Universal Windows Platform API Compatibility is the same as Windows 10 Build 15063 (Win10v1703) or earlier.
         /// </summary>
         Win10_v1709_Mobile = 15254,
         Win10_v1803 = 17134,
@@ -94,9 +94,9 @@ namespace PlatformKit.Windows
         /// </summary>
         Win10_Server2022 = 20348,
         /// <summary>
-        /// Initial launch version of Windows 11 - a new Windows 10 like OS likely based on Windows 10.
+        /// Initial launch version of Windows 11 - a new Windows 10 like OS (likely based on Windows 10).
         /// Windows 11 identifies as Windows 11 Build Number 22000 HOWEVER the numerical representation of this shows it as if it is Windows 10.
-        /// The version string is 10.0.22000.x . This may cause problems if you're looking for "10.0.x.x" in your application.
+        /// The version string is 10.0.22000.x . This may cause problems if you're not differentiating between 10.0.20348 and earlier (Windows 10) and 10.0.22000 or later (Windows 11).
         /// We've created a ``IsWindows11()`` method to detect if a device is running on Windows 11 for your (and our) convenience.
         /// </summary>
         Win11_21H2 = 22000,
