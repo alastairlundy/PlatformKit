@@ -40,7 +40,7 @@ namespace PlatformKit.Mac
         v10_10_Yosemite,
         [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_11_ElCapitan,
-        //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_12_Sierra,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_13_HighSierra,
