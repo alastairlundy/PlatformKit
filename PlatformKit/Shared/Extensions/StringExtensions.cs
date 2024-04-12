@@ -38,12 +38,12 @@ internal static class StringExtensions
             stringBuilder.Append(".");
             stringBuilder.Append("0");
         }
-        if (dots == 1 && numberOfZeroesNeeded >= 1)
+        if (dots == 1 && numberOfZeroesNeeded > 1)
         {
             stringBuilder.Append(".");
             stringBuilder.Append("0");
         }
-        if (dots == 2 && numberOfZeroesNeeded >= 2)
+        if (dots == 2 && numberOfZeroesNeeded > 2)
         {
             stringBuilder.Append(".");
             stringBuilder.Append("0");
