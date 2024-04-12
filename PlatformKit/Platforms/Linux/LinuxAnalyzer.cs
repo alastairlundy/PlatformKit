@@ -94,7 +94,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">This method only runs on Linux. Running it on any other platform will throw this exception.</exception>
         public static LinuxOsRelease GetLinuxDistributionInformation()
         {
-            var linuxDistributionInformation = new LinuxOsRelease();
+            LinuxOsRelease linuxDistributionInformation = new LinuxOsRelease();
 
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
@@ -215,9 +215,9 @@ public class LinuxAnalyzer
         {
             if (OperatingSystem.IsLinux())
             {
-                var linuxDistroInfo = GetLinuxDistributionInformation();
+                LinuxOsRelease linuxDistroInfo = GetLinuxDistributionInformation();
 
-                var osName = linuxDistroInfo.Name.ToLower();
+                string osName = linuxDistroInfo.Name.ToLower();
 
                 if (osName.Contains("ubuntu") ||
                     osName.Contains("pop") || osName.Contains("buntu"))

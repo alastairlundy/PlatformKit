@@ -63,7 +63,7 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsMacOS())
         {
-            var location = "/usr/bin/";
+            string location = "/usr/bin/";
                 
             string[] array = command.Split(' ');
 
@@ -129,7 +129,7 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsWindows())
         {
-            var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
+            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
                                                        + "System32" +
                                                        + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                                        Path.DirectorySeparatorChar + "v1.0";
@@ -149,11 +149,11 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
         {
-            var location = "/usr/bin/";
+            string location = "/usr/bin/";
 
-            var args = command.Split(' ');
+            string[] args = command.Split(' ');
             command = args[0];
-            var processArguments = "";
+            string processArguments = "";
 
             if (args.Length > 0)
             {
