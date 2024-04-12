@@ -45,7 +45,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public static Version GetFreeBSDVersion()
     {
-        if (OperatingSystem.IsWindows())
+        if (OperatingSystem.IsFreeBSD())
         {
             return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty)
                 .Split(' ')[0].Replace("-release",  string.Empty).AddMissingZeroes());
