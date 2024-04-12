@@ -298,8 +298,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OSAnalyzer.IsMac())
         {
-            var detected = DetectMacOsVersion();
-            var expected = GetMacOsVersionFromEnum(macOsVersion);
+            Version detected = DetectMacOsVersion();
+            Version expected = GetMacOsVersionFromEnum(macOsVersion);
             
             if (detected.Major >= expected.Major)
             {
