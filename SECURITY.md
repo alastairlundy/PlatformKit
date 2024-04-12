@@ -6,7 +6,7 @@ Versions currently supported by Security Fixes.
 
 | Version series | Original Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes |
 |--| --|--|--|--|
-| 3.5 and 3.6 | 3.5.0, released on December 28th 2023 | 3.6.5, released on April 2nd 2024 | Yes, until September 28th 2024 | Yes, until September 28th 2024 | 
+| 3.5 and 3.6 | 3.5.0, released on December 28th 2023 | 3.6.6, released on April 12th 2024 | Yes, until September 28th 2024 | Yes, until September 28th 2024 | 
 | 3.4 | 3.4.0, released on September 25th 2023 | 3.4.1, released on December 8th 2023 | No, support ended April 10th 2024 | Yes, until June 25th 2024 | 
 
 
