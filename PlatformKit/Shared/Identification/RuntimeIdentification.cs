@@ -210,7 +210,7 @@ namespace PlatformKit.Identification
 #endif
             if (OSAnalyzer.IsMac())
             {
-                var version = _macOsAnalyzer.DetectMacOsVersion();
+                Version version = _macOsAnalyzer.DetectMacOsVersion();
 
                 if (version.Major == 10)
                 {
@@ -273,8 +273,8 @@ namespace PlatformKit.Identification
         /// <exception cref="RuntimeIdentifierGenerationException"></exception>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
-            var osName = GetOsNameString(identifierType);
-            var cpuArch = GetArchitectureString();
+            string osName = GetOsNameString(identifierType);
+            string cpuArch = GetArchitectureString();
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric ||
                 identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == false)

@@ -35,7 +35,7 @@ namespace PlatformKit.Windows
             
                 if (OSAnalyzer.IsWindows())
                 {
-                    var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
+                    string output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);
 
                     if (output == null)
@@ -47,7 +47,7 @@ namespace PlatformKit.Windows
                     {
                         if (query.Contains(output))
                         {
-                            var value = output.Replace(query + "                         : ", string.Empty);
+                            string value = output.Replace(query + "                         : ", string.Empty);
                             queryObjectsDictionary.Add(query, value);
                         }
                     }
