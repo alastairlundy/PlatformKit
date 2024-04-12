@@ -395,7 +395,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
                     {
                         arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
                         
-                        arr[index] = arr[index].Remove(arr.Length - 3);
+                        arr[index] = arr[index].Remove(arr.Length - 4);
                         // M1 specific code
                         // arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
                     }
