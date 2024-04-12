@@ -62,8 +62,6 @@ namespace PlatformKit
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
-            try
-            {
                 Process process;
             
                 if (processStartInfo != null)
@@ -124,12 +122,6 @@ namespace PlatformKit
                 }
 
                 return end;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
         }
 
         /// <summary>
@@ -140,8 +132,6 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public string RunProcessMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            try
-            {
                 var procStartInfo = new ProcessStartInfo
                 {
                     WorkingDirectory = executableLocation,
@@ -172,12 +162,6 @@ namespace PlatformKit
 
                 process.WaitForExit();
                 return process.StandardOutput.ReadToEnd();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
         }
 
         /// <summary>
@@ -190,8 +174,6 @@ namespace PlatformKit
         /// <exception cref="Exception"></exception>
         public string RunProcessLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            try
-            {
                 ProcessStartInfo procStartInfo;
                 
                 if (processStartInfo == null)
@@ -220,12 +202,6 @@ namespace PlatformKit
 
                 process.WaitForExit();
                 return process.StandardOutput.ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
         }
 
         /// <summary>
@@ -301,8 +277,6 @@ namespace PlatformKit
         /// <exception cref="ArgumentException"></exception>
         public string RunLinuxCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            try
-            {
                 if (OSAnalyzer.IsLinux())
                 {
                     var location = "/usr/bin/";
@@ -328,12 +302,6 @@ namespace PlatformKit
                 }
 
                 throw new PlatformNotSupportedException();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.ToString());
-                throw;
-            }
         }
         
         /// <summary>
@@ -345,8 +313,6 @@ namespace PlatformKit
         /// <returns></returns>
         public bool OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
         {
-            try
-            {
                 if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
                 {
                     if (allowNonSecureHttp)
@@ -389,12 +355,6 @@ namespace PlatformKit
 #endif
 
                 return false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                throw;
-            }
         }
     }
 }
