@@ -228,6 +228,13 @@ namespace PlatformKit
             {
                 url = url.Replace("http://", "https://");
             }
+            else if (url.StartsWith("www."))
+            {
+                if (!allowNonSecureHttp)
+                {
+                    url = url.Replace("www.", "https://www.");
+                }
+            }
 
             if (OperatingSystem.IsWindows())
             {
@@ -245,7 +252,9 @@ namespace PlatformKit
             if (OperatingSystem.IsFreeBSD())
             {
                 CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
-            }          
+            }
+
+            throw new NotImplementedException();
         }
     }
 }
