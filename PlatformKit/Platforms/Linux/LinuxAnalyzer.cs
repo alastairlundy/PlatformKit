@@ -237,36 +237,35 @@ public class LinuxAnalyzer
         /// <param name="expectedKernelVersion">The Kernel Version to compare against.</param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
+        public bool IsAtLeastKernelVersion(Version expectedKernelVersion)
         {
             if (OSAnalyzer.IsLinux())
             {
-                var expected = linuxKernelVersion;
                 Version detected = DetectLinuxKernelVersion();
 
-                if (detected.Major > expected.Major)
+                if (detected.Major > expectedKernelVersion.Major)
                 {
                     return true;
                 }
-                else if(detected.Major == expected.Major)
+                else if(detected.Major == expectedKernelVersion.Major)
                 {
-                    if (detected.Minor > expected.Minor)
+                    if (detected.Minor > expectedKernelVersion.Minor)
                     {
                         return true;
                     }
-                    else if (detected.Minor == expected.Minor)
+                    else if (detected.Minor == expectedKernelVersion.Minor)
                     {
-                        if (detected.Build > expected.Build)
+                        if (detected.Build > expectedKernelVersion.Build)
                         {
                             return true;
                         }
-                        else if (detected.Build == expected.Build)
+                        else if (detected.Build == expectedKernelVersion.Build)
                         {
-                            if (detected.Revision > expected.Revision)
+                            if (detected.Revision > expectedKernelVersion.Revision)
                             {
                                 return true;
                             }
-                            else if (detected.Revision == expected.Revision)
+                            else if (detected.Revision == expectedKernelVersion.Revision)
                             {
                                 return true;
                             }
