@@ -393,9 +393,9 @@ public class MacOSAnalyzer : MacOsAnalyzer
 
                     if (IsAppleSiliconMac())
                     {
-                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
-                        
                         arr[index] = arr[index].Remove(arr.Length - 4);
+                        arr[index] = arr[index].Replace("/RELEASE_ARM64_T", String.Empty);
+
                         // M1 specific code
                         // arr[index] = arr[index].Replace("/RELEASE_ARM64_T8101", String.Empty);
                     }
