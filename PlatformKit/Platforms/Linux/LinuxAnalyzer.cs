@@ -57,10 +57,8 @@ public class LinuxAnalyzer
 
             throw new OperatingSystemDetectionException();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     
@@ -88,8 +86,7 @@ public class LinuxAnalyzer
                     {
                         resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
                     }
-
-                   
+                    
                     if (resultArray[index].ToUpper().Contains("NAME=") 
                         && !resultArray[index].ToUpper().Contains("CODE") 
                         && !resultArray[index].ToUpper().Contains("PRETTY"))
@@ -197,7 +194,6 @@ public class LinuxAnalyzer
             if (OSAnalyzer.IsLinux())
             {
                 var linuxDistroInfo = GetLinuxDistributionInformation();
-
                 var osName = linuxDistroInfo.Name.ToLower();
 
                 if (osName.ToLower().Contains("ubuntu") ||
@@ -248,7 +244,6 @@ public class LinuxAnalyzer
             if (OSAnalyzer.IsLinux())
             {
                 var detected = DetectLinuxKernelVersion();
-
                 var expected = linuxKernelVersion;
 
                 if (detected.Major > expected.Major)

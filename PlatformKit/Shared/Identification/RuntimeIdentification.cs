@@ -218,10 +218,8 @@ namespace PlatformKit.Identification
                     {
                         throw new PlatformNotSupportedException();
                     }
-                    else
-                    {
-                        osVersion = $"{version.Major}.{version.Major}";
-                    }
+                    
+                    osVersion = $"{version.Major}.{version.Major}";
                 }
                 else if (version.Major > 10)
                 {
@@ -311,10 +309,8 @@ namespace PlatformKit.Identification
                     {
                         return $"{osName}.{osVersion}-{cpuArch}";
                     }
-                    else
-                    {
-                        return $"{osName}-{cpuArch}";
-                    }
+                    
+                    return $"{osName}-{cpuArch}";
                 }
 
                 if (((OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && 
@@ -324,10 +320,8 @@ namespace PlatformKit.Identification
                     {
                         return $"{osName}.{osVersion}-{cpuArch}";
                     }
-                    else
-                    {
-                        return $"{osName}-{cpuArch}";
-                    }
+                    
+                    return $"{osName}-{cpuArch}";
                 }
                 if (((OSAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
                     includeOperatingSystemVersion == false)

@@ -288,10 +288,8 @@ namespace PlatformKit
 
                    return RunProcessMac(location, array[0], args);
                 }
-                else
-                {
-                   return RunProcessMac(location, command);
-                }
+
+                return RunProcessMac(location, command);
             }
 
             //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));

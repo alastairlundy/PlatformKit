@@ -49,10 +49,9 @@ public class FreeBsdAnalyzer
 
             var rel = arr[0].Replace("-release", String.Empty);
 
-        else
-        {
-            throw new PlatformNotSupportedException();
             return Version.Parse(rel.AddMissingZeroes(2));
         }
+
+        throw new PlatformNotSupportedException();
     }
 }

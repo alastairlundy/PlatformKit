@@ -106,10 +106,8 @@ public class WindowsAnalyzer
 
             throw new WindowsEditionDetectionException();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
 
     // ReSharper disable once InconsistentNaming
@@ -169,11 +167,9 @@ public class WindowsAnalyzer
            }
            
            throw new ArgumentException();
-        } 
-        else
-        {
-            throw new PlatformNotSupportedException();
         }
+
+        throw new PlatformNotSupportedException();
     }
 
     /// <summary>
@@ -194,10 +190,8 @@ public class WindowsAnalyzer
                         .Replace("REG_SZ", String.Empty)
                         .Replace(" ", String.Empty);
                 }
-                else
-                {
-                    throw new ArgumentNullException();
-                }
+
+                throw new ArgumentNullException();
         }
 
         throw new PlatformNotSupportedException();
@@ -668,10 +662,8 @@ for (var index = 0; index < array.Length; index++)
             {
                 return IsWindows11(GetWindowsVersionToEnum());
             }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            throw new PlatformNotSupportedException();
         }
 
     /// <summary>
@@ -708,14 +700,12 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-                if (OSAnalyzer.IsWindows())
-                {
-                    return GetWindowsVersionToEnum(DetectWindowsVersion());
-                }
-                else
-                {
-                    throw new PlatformNotSupportedException();
-                }
+            if (OSAnalyzer.IsWindows())
+            {
+                return GetWindowsVersionToEnum(DetectWindowsVersion());
+            }
+
+            throw new PlatformNotSupportedException();
         }
 
         /// <summary>
