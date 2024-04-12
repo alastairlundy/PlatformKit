@@ -20,6 +20,7 @@ using PlatformKit.Windows;
 namespace PlatformKit
 {
     // ReSharper disable once InconsistentNaming
+    [Obsolete(DeprecationMessages.DeprecationV4)]
     public class OSAnalyzer
     {
         private readonly WindowsAnalyzer _windowsAnalyzer;
@@ -111,6 +112,7 @@ namespace PlatformKit
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once InconsistentNaming
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public Version DetectOSVersion()
         {
             if (IsWindows())
