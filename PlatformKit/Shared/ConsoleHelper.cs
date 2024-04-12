@@ -11,9 +11,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit;
 
+[Obsolete(DeprecationMessages.DeprecationV4)]
 public class ConsoleHelper
 {
     public ConsoleHelper()
@@ -29,27 +31,25 @@ public class ConsoleHelper
     /// <param name="durationMilliSeconds">The duration to keep the information in the Console. Any value less than 500 will result in an exception being thrown.</param>
     /// <exception cref="ArgumentOutOfRangeException">Is thrown when the duration milliseconds is less than 500 milliseconds.</exception>
     // ReSharper disable once UnusedMember.Global
+    [Obsolete(DeprecationMessages.DeprecationV4)]
     public static void ShowLicenseInConsole(string pathToTextFile, int durationMilliSeconds)
     {
-        try
-        {
             if (durationMilliSeconds is 0 or < 500)
             {
                 throw new ArgumentOutOfRangeException();
             }
 
-            // ReSharper disable once HeapView.ObjectAllocation.Evident
-            var licenseWatch = new Stopwatch();
+            Stopwatch licenseWatch = new Stopwatch();
 
-            var lines = File.ReadAllLines(pathToTextFile);
+            string[] lines = File.ReadAllLines(pathToTextFile);
 
             foreach (var line in lines)
             {
                 Console.WriteLine(line);
             }
                 
-            Console.WriteLine("\r\n");
-            Console.WriteLine("\r\n");
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
 
             licenseWatch.Start();
 
@@ -59,14 +59,6 @@ public class ConsoleHelper
             }
 
             licenseWatch.Stop();
-            licenseWatch.Reset();
-                
             Console.Clear();
-        }
-        catch (Exception exception)
-        {
-            Console.WriteLine(exception.ToString());
-            throw;
-        }
     }
 }
