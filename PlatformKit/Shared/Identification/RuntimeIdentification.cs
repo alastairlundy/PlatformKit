@@ -273,6 +273,7 @@ namespace PlatformKit.Identification
         /// <exception cref="RuntimeIdentifierGenerationException"></exception>
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
+            string osVersion = GetOsVersionString();
             string osName = GetOsNameString(identifierType);
             string cpuArch = GetArchitectureString();
             
@@ -289,7 +290,6 @@ namespace PlatformKit.Identification
                      (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.DistroSpecific ||
                      (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
-                var osVersion = GetOsVersionString();
 
                 if (OSAnalyzer.IsWindows())
                 {
