@@ -51,22 +51,10 @@ public class FreeBsdAnalyzer
 
             var rel = arr[0].Replace("-release", String.Empty);
 
-            int dotCounter = rel.CountDotsInString();
-
-            if (dotCounter == 1)
-            {
-                rel += ".0.0";
-            }
-            else if (dotCounter == 2)
-            {
-                rel += ".0.0";
-            }
-
-            return Version.Parse(rel);
-        }
         else
         {
             throw new PlatformNotSupportedException();
+            return Version.Parse(rel.AddMissingZeroes(2));
         }
     }
 }
