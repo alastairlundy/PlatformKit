@@ -197,7 +197,7 @@ namespace PlatformKit
                     procStartInfo.RedirectStandardOutput = true;
                 }
                 
-                var process = new Process { StartInfo = procStartInfo };
+                Process process = new Process { StartInfo = procStartInfo };
                 process.Start();
 
                 process.WaitForExit();
@@ -223,7 +223,7 @@ namespace PlatformKit
         {
             if (OSAnalyzer.IsWindows())
             {
-                var location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
+                string location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
                                                            //+ "System32" +
                                + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
@@ -245,7 +245,7 @@ namespace PlatformKit
         {
             if (OSAnalyzer.IsMac())
             {
-                var location = "/usr/bin/";
+                string location = "/usr/bin/";
                 
                 string[] array = command.Split(' ');
 
@@ -279,9 +279,9 @@ namespace PlatformKit
         {
                 if (OSAnalyzer.IsLinux())
                 {
-                    var location = "/usr/bin/";
+                    string location = "/usr/bin/";
 
-                    var args = command.Split(' ');
+                    string[] args = command.Split(' ');
                     command = args[0];
                     var processArguments = "";
 

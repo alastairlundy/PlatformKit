@@ -140,10 +140,10 @@ public class WindowsAnalyzer
     {
         if (OSAnalyzer.IsWindows())
         {
-            var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
+            string result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
             
-            var arr = result.Split(Convert.ToChar(Environment.NewLine));
+            string[] arr = result.Split(Convert.ToChar(Environment.NewLine));
             
            foreach (var str in arr)
            {
@@ -175,7 +175,7 @@ public class WindowsAnalyzer
     public string GetWindowsRegistryValue(string query, string value){
         if (OSAnalyzer.IsWindows())
         {
-            var result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
+            string result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
                 if (result != null)
                 {
@@ -304,7 +304,7 @@ for (var index = 0; index < array.Length; index++)
     {
         nextLine = nextLine.Replace("Original Install Date:", String.Empty);
 
-        var info = nextLine.Split(',');
+        string[] info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -317,9 +317,9 @@ for (var index = 0; index < array.Length; index++)
         {
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
-            var hours = info[1].Substring(0, 2);
-            var mins = info[1].Substring(2, 2);
-            var seconds = info[1].Substring(3, 2);
+            string hours = info[1].Substring(0, 2);
+            string mins = info[1].Substring(2, 2);
+            string seconds = info[1].Substring(3, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
             dt = dt.AddMinutes(Double.Parse(mins));
@@ -344,9 +344,9 @@ for (var index = 0; index < array.Length; index++)
         {
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
-            var hours = info[1].Substring(0, 2);
-            var mins = info[1].Substring(2, 2);
-            var seconds = info[1].Substring(4, 2);
+            string hours = info[1].Substring(0, 2);
+            string mins = info[1].Substring(2, 2);
+            string seconds = info[1].Substring(4, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
             dt = dt.AddMinutes(Double.Parse(mins));
@@ -508,7 +508,8 @@ for (var index = 0; index < array.Length; index++)
         
         if (networkCards.Contains(lastNetworkCard))
         {
-           var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+           int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+           
            networkCards[position].ConnectionName = nextLine.Replace("Connection Name:", String.Empty).Replace("  ", String.Empty);
         }
     }
@@ -526,7 +527,7 @@ for (var index = 0; index < array.Length; index++)
     }
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
-        var compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
+        string compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
 
         int dotCounter = compare.CountDotsInString();
 

@@ -36,7 +36,7 @@ public class LinuxAnalyzer
     {
         if (OSAnalyzer.IsLinux())
         {
-            var osRel = GetLinuxDistributionInformation();
+            LinuxOsRelease osRel = GetLinuxDistributionInformation();
 
             if (osRel.Identifier_Like.ToLower().Contains("debian"))
             {
@@ -69,7 +69,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">This method only runs on Linux. Running it on any other platform will throw this exception.</exception>
         public LinuxOsRelease GetLinuxDistributionInformation()
         {
-            var linuxDistributionInformation = new LinuxOsRelease();
+            LinuxOsRelease linuxDistributionInformation = new LinuxOsRelease();
 
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
@@ -191,8 +191,8 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var linuxDistroInfo = GetLinuxDistributionInformation();
-                var osName = linuxDistroInfo.Name.ToLower();
+                LinuxOsRelease linuxDistroInfo = GetLinuxDistributionInformation();
+                string osName = linuxDistroInfo.Name.ToLower();
 
                 if (osName.ToLower().Contains("ubuntu") ||
                     osName.ToLower().Contains("pop") || osName.ToLower().Contains("buntu"))
@@ -222,7 +222,7 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var description = Environment.OSVersion.ToString()
+                string description = Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty);
 
                 return Version.Parse(description.AddMissingZeroes(2));
@@ -234,15 +234,15 @@ public class LinuxAnalyzer
         /// <summary>
         /// Returns whether the installed Linux Kernel version is equal to or newer than the Kernel Version provided as a parameter
         /// </summary>
-        /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
+        /// <param name="expectedKernelVersion">The Kernel Version to compare against.</param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
             if (OSAnalyzer.IsLinux())
             {
-                var detected = DetectLinuxKernelVersion();
                 var expected = linuxKernelVersion;
+                Version detected = DetectLinuxKernelVersion();
 
                 if (detected.Major > expected.Major)
                 {
