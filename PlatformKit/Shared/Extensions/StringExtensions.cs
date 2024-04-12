@@ -31,29 +31,31 @@ internal static class StringExtensions
     internal static string AddMissingZeroes(this string str, int numberOfZeroesNeeded = 3)
     {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append(str);
+        
         int dots = str.CountDotsInString();
 
         if (dots == 0)
         {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
+            stringBuilder.Append('.');
+            stringBuilder.Append('0');
         }
         if (dots == 1 && numberOfZeroesNeeded > 1)
         {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
+            stringBuilder.Append('.');
+            stringBuilder.Append('0');
         }
         if (dots == 2 && numberOfZeroesNeeded > 2)
         {
-            stringBuilder.Append(".");
-            stringBuilder.Append("0");
+            stringBuilder.Append('.');
+            stringBuilder.Append('0');
         }
         if (dots == 3 && numberOfZeroesNeeded == 3)
         {
             return str;
         }
 
-        var newDots = stringBuilder.ToString().CountDotsInString();
+        int newDots = stringBuilder.ToString().CountDotsInString();
         
         if (newDots == 1 && numberOfZeroesNeeded == 1 || 
             newDots == 2 && numberOfZeroesNeeded == 2 || 
