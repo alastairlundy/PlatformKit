@@ -175,9 +175,7 @@ public class LinuxAnalyzer
         {
             if (OSAnalyzer.IsLinux())
             {
-                var version = DetectLinuxDistributionVersionAsString();
-
-                return Version.Parse(version.AddMissingZeroes());
+                return Version.Parse(DetectLinuxDistributionVersionAsString().AddMissingZeroes(2));
             }
             
             throw new PlatformNotSupportedException();
@@ -227,7 +225,7 @@ public class LinuxAnalyzer
                 var description = Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty);
 
-                return Version.Parse(description);
+                return Version.Parse(description.AddMissingZeroes(2));
             }
             
             throw new PlatformNotSupportedException();

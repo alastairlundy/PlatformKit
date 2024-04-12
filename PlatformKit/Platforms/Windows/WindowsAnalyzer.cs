@@ -121,10 +121,7 @@ public class WindowsAnalyzer
     {
         if (OSAnalyzer.IsWindows())
         {
-            var result = _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
-            // var result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass);
-
-            return result;
+            return _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
         }
 
         throw new PlatformNotSupportedException();
@@ -811,14 +808,7 @@ for (var index = 0; index < array.Length; index++)
                         .Replace("Microsoft Windows", string.Empty)
                         .Replace(" ", string.Empty);
 
-                    var dotCounter = description.CountDotsInString();
-                    
-                    if (dotCounter > 3)
-                    {
-                        throw new WindowsVersionDetectionException();
-                    }
-
-                    return Version.Parse(description.AddMissingZeroes());
+                    return Version.Parse(description.AddMissingZeroes(2));
                 }
 
                 throw new PlatformNotSupportedException();
