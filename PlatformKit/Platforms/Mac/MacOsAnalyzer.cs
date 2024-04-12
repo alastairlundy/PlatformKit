@@ -110,14 +110,12 @@ public class MacOSAnalyzer : MacOsAnalyzer
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+            
+            throw new ArgumentException();
         }
     
         /// <summary>
@@ -133,14 +131,12 @@ public class MacOSAnalyzer : MacOsAnalyzer
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
 
         /// <summary>
@@ -156,14 +152,13 @@ public class MacOSAnalyzer : MacOsAnalyzer
             {
                 return false;
             }
-            else if (result.ToLower().Contains("enabled"))
+
+            if (result.ToLower().Contains("enabled"))
             {
                 return true;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            throw new ArgumentException();
         }
         
         /// <summary>
@@ -185,7 +180,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="Exception"></exception>
     public MacOsVersion GetMacOsVersionToEnum(Version input)
     {
-            if (OSAnalyzer.IsMac())
+        if (OSAnalyzer.IsMac())
             {
                 if (input.Major == 10)
                 {
@@ -245,10 +240,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
                 
                 throw new MacOsVersionDetectionException();
             }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+        throw new PlatformNotSupportedException();
     }
 
     /// <summary>
@@ -408,10 +401,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
 
             throw new PlatformNotSupportedException();
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
 
     /// <summary>
@@ -428,10 +419,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
         
             return Version.Parse(version.AddMissingZeroes());
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
     /// <summary>
