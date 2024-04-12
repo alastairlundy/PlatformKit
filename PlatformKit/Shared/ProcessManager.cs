@@ -43,12 +43,10 @@ namespace PlatformKit
 #if NETCOREAPP3_0_OR_GREATER
             if (OSAnalyzer.IsFreeBSD())
             {
-                //       PlatformKitAnalytics.ReportError(new NotImplementedException(), nameof(RunProcess));
                 throw new NotImplementedException();
             }
 #endif
             
-       //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunProcess));
             throw new PlatformNotSupportedException();
         }
 
@@ -292,7 +290,6 @@ namespace PlatformKit
                 return RunProcessMac(location, command);
             }
 
-            //     PlatformKitAnalytics.ReportError(new PlatformNotSupportedException(), nameof(RunMacCommand));
             throw new PlatformNotSupportedException();
         }
 
