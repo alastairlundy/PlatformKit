@@ -302,6 +302,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
 
             var expected = GetMacOsVersionFromEnum(macOsVersion);
 
+            
             if (detected.Major >= expected.Major)
             {
                 if (detected.Minor >= expected.Minor)
