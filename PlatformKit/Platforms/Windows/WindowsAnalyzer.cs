@@ -726,8 +726,6 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="Exception"></exception>
         public WindowsVersion GetWindowsVersionToEnum(Version input)
         {
-            try
-            {
                 if (input.Major == 5)
                 {
                     //We don't support Windows XP.
@@ -795,26 +793,21 @@ for (var index = 0; index < array.Length; index++)
                     case 22631:
                         return WindowsVersion.Win11_23H2;
                     default:
+                        
                         //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
                         if (input.Build is > 10240 and < 22000)
                         {
                             return WindowsVersion.Win10_InsiderPreview;
                         }
+                        
                         //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-                        else if(input.Build > 22631)
+                        if(input.Build > 22631)
                         {
                             return WindowsVersion.Win11_InsiderPreview;
                         }
-                        else
-                        {
-                            return WindowsVersion.NotDetected;
-                        }
+
+                        return WindowsVersion.NotDetected;
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(exception.ToString());
-            }
         }
         
         /// <summary>
@@ -826,8 +819,6 @@ for (var index = 0; index < array.Length; index++)
         // ReSharper disable once MemberCanBePrivate.Global
         public Version DetectWindowsVersion()
         {
-            try
-            {
                 if (OSAnalyzer.IsWindows())
                 {
                     string description = RuntimeInformation.OSDescription
@@ -845,12 +836,6 @@ for (var index = 0; index < array.Length; index++)
                 }
 
                 throw new PlatformNotSupportedException();
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-                throw;
-            }
         }
 
         /// <summary>
@@ -900,16 +885,9 @@ for (var index = 0; index < array.Length; index++)
         {
             if (OSAnalyzer.IsWindows())
             {
-                var detected = DetectWindowsVersion();    
-
-                var expected = GetWindowsVersionFromEnum(windowsVersion);
+                return (DetectWindowsVersion().Build >= GetWindowsVersionFromEnum(windowsVersion).Build);
+            }
             
-                return (detected.Build >= expected.Build);
-            }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+            throw new PlatformNotSupportedException();
         }
-        
 }

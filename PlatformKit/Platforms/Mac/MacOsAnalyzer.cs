@@ -181,7 +181,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     public MacOsVersion GetMacOsVersionToEnum(Version input)
     {
         if (OSAnalyzer.IsMac())
-            {
+        {
                 if (input.Major == 10)
                 {
                     switch (input.Minor)
@@ -299,9 +299,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         if (OSAnalyzer.IsMac())
         {
             var detected = DetectMacOsVersion();
-
             var expected = GetMacOsVersionFromEnum(macOsVersion);
-
             
             if (detected.Major >= expected.Major)
             {

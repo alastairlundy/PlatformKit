@@ -33,8 +33,6 @@ namespace PlatformKit.Windows
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
             
-            try
-            {
                 if (OSAnalyzer.IsWindows())
                 {
                     var output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
@@ -56,16 +54,8 @@ namespace PlatformKit.Windows
                     
                     return queryObjectsDictionary;
                 }
-                else
-                {
-                    throw new PlatformNotSupportedException();
-                }
+
+                throw new PlatformNotSupportedException();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
-        }
     }
 }
