@@ -376,7 +376,7 @@ namespace PlatformKit.Mac;
 
                     if (IsAppleSiliconMac())
                     {
-                        array[index] = array[index].Replace("/RELEASE_ARM64_T", String.Empty).Remove((array.Length + 1) - 3);
+                        array[index] = array[index].Replace("/RELEASE_ARM64_T", String.Empty).Remove(array.Length - 4);
                     }
                     else
                     {
