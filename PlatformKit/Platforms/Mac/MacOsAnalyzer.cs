@@ -331,10 +331,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
 
             return false;
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
+
+        throw new PlatformNotSupportedException();
     }
     
 
