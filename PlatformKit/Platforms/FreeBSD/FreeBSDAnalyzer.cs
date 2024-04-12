@@ -43,9 +43,7 @@ public class FreeBsdAnalyzer
     {
         if (OSAnalyzer.IsFreeBSD())
         {
-            var version = _processManager.RunProcessLinux("", "uname", "-v");
-
-            version = version.Replace("FreeBSD", String.Empty);
+            var version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", String.Empty);
 
             var arr = version.Split(' ');
 
