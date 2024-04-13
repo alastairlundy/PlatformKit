@@ -25,6 +25,7 @@
 using System;
 using AlastairLundy.System.Extensions.StringExtensions;
 using AlastairLundy.System.Extensions.VersionExtensions;
+using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
@@ -60,6 +61,7 @@ public class FreeBsdAnalyzer
     /// <param name="expectedVersion"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsAtLeastVersion(Version expectedVersion)
     {
         if (OperatingSystem.IsFreeBSD())

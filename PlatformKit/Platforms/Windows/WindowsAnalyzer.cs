@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using AlastairLundy.System.Extensions.StringExtensions;
 using AlastairLundy.System.Extensions.VersionExtensions;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
 #if NETSTANDARD2_0
@@ -890,6 +891,7 @@ for (var index = 0; index < array.Length; index++)
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsAtLeastVersion(Version windowsVersion)
         {
             if (OperatingSystem.IsWindows())

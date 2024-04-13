@@ -314,6 +314,7 @@ namespace PlatformKit.Mac;
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS. </exception>
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsAtLeastVersion(Version macOsVersion)
     {
         if (OperatingSystem.IsMacOS())
