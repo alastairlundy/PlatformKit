@@ -64,6 +64,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
                     {
                         Architecture.Arm64 => MacProcessorType.AppleSilicon,
                         Architecture.X64 => MacProcessorType.Intel,
+                        Architecture.Arm => MacProcessorType.NotSupported,
+                        Architecture.X86 => MacProcessorType.NotSupported,
                         _ => MacProcessorType.NotDetected
                     };
                 }
