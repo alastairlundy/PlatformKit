@@ -9,7 +9,7 @@
    */
 
 using System;
-
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
@@ -19,6 +19,7 @@ namespace PlatformKit.Software;
 /// <summary>
 /// 
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV4)]
 public class SoftwareRequirementsAnalyzer
 {
     private readonly MacOsAnalyzer _macOsAnalyzer;
@@ -32,16 +33,19 @@ public class SoftwareRequirementsAnalyzer
         _windowsAnalyzer = new WindowsAnalyzer();
     }
 
+    [Obsolete(DeprecationMessages.DeprecationV4)]
     public bool HasRequiredLinuxKernelVersion(Version requiredLinuxKernel)
     {
         return _linuxAnalyzer.IsAtLeastKernelVersion(requiredLinuxKernel);
     }
 
+    [Obsolete(DeprecationMessages.DeprecationV4)]
     public bool HasRequiredMacOsVersion(MacOsVersion requiredMacOsVersionVersion)
     {
         return _macOsAnalyzer.IsAtLeastMacOSVersion(requiredMacOsVersionVersion);
     }
 
+    [Obsolete(DeprecationMessages.DeprecationV4)]
     public bool HasRequiredWindowsVersion(WindowsVersion requiredWindowsVersion)
     {
         return _windowsAnalyzer.IsAtLeastWindowsVersion(requiredWindowsVersion);
