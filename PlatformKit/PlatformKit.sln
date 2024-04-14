@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKitTestingApp", "..\PlatformKitTestingApp\PlatformKitTestingApp.csproj", "{DBE618CA-7E9A-4FFB-BF8B-72970258174C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Software", "PlatformKit.Software\PlatformKit.Software.csproj", "{CDDCF33D-D682-4789-97C6-616AD2B2774F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{DBE618CA-7E9A-4FFB-BF8B-72970258174C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE618CA-7E9A-4FFB-BF8B-72970258174C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE618CA-7E9A-4FFB-BF8B-72970258174C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDDCF33D-D682-4789-97C6-616AD2B2774F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDDCF33D-D682-4789-97C6-616AD2B2774F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDDCF33D-D682-4789-97C6-616AD2B2774F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDDCF33D-D682-4789-97C6-616AD2B2774F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

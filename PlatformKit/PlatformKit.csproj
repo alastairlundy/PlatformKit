@@ -14,15 +14,8 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.0.0 Beta 6
-* Fixed an isssue where FreeBSD OS detection would fail - This only affects the PlatformKit 4.x beta branch.
-* Deprecated ``IsSecureVirtualMemoryEnabled`` method - This will be removed in PlatformKit 5
-* Deprecate FreeBsdAnalyzer ``IsAtLeastVersion(Version expected)`` method - This will be removed in PlatformKit 5
-* Deprecate WindowsAnalyzer ``IsAtLeastVersion(Version expected)`` method - This will be removed in PlatformKit 5
-* Deprecate MacOsAnalyzer ``IsAtLeastVersion(Version expected)`` method - This will be removed in PlatformKit 5
-* Fixed an issue where XNU Version Detection on Apple Silicon Macs would fail. - This has been backported to PlatformKit 3 as well.
-* Changed some instances of typing in methods to use explicit typing - The outcome of using these methods should remain the same  - This has been backported to PlatformKit 3 as well.
-* Bump required version of ``PlatformKit.Extensions.OperatingSystem`` for .NET Standard 2 users from 1.1.0 to 1.2.0 - This fixes a bug that could cause unnecessary Argument Exceptions to be thrown.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0.0 Beta 7
+* Updated PlatformKit.Extensions.OperatingSystem dependency from 1.2.0 to 1.2.1 - Thereby allowing for re-adding .NET Standard 2 support to PlatformKit 4.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,7 +25,7 @@
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0.0</Version>
-        <PackageVersion>4.0.0-beta.7</PackageVersion>
+        <PackageVersion>4.0.0-beta.7.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
