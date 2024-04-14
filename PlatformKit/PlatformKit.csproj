@@ -67,4 +67,8 @@
     <ItemGroup>
         <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.1"/>
     </ItemGroup>
+    
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.2.1" />
+    </ItemGroup>
 </Project>

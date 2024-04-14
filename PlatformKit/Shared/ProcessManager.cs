@@ -15,6 +15,10 @@ using System.Threading.Tasks;
 
 using PlatformKit.Internal.Deprecation;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
@@ -36,12 +40,12 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public string RunProcess(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            if (OSAnalyzer.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
-            if (OSAnalyzer.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
-            if (OSAnalyzer.IsMac()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
+            if (OperatingSystem.IsWindows()) return RunProcessWindows(executableLocation, executableName, arguments, processStartInfo);
+            if (OperatingSystem.IsLinux()) return RunProcessLinux(executableLocation, executableName, arguments, processStartInfo);
+            if (OperatingSystem.IsMacOS()) return RunProcessMac(executableLocation, executableName, arguments, processStartInfo);
 
 #if NETCOREAPP3_0_OR_GREATER
-            if (OSAnalyzer.IsFreeBSD())
+            if (OperatingSystem.IsFreeBSD())
             {
                 throw new NotImplementedException();
             }
@@ -221,7 +225,7 @@ namespace PlatformKit
         /// <returns></returns>
         public string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 string location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" + Path.DirectorySeparatorChar + "v1.0";
                 return RunProcessWindows(location, "powershell", command, processStartInfo);
@@ -239,7 +243,7 @@ namespace PlatformKit
         /// <exception cref="PlatformNotSupportedException"></exception>
         public string RunMacCommand(string command)
         {
-            if (OSAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 string location = "/usr/bin/";
                 
@@ -249,9 +253,9 @@ namespace PlatformKit
                 {
                     string args = "";
 
-                    foreach (string arg in array)
+                    foreach (string argument in array)
                     {
-                        args += arg + " ";
+                        args += argument + " ";
                     }
 
                     args = args.Replace(array[0], String.Empty);
@@ -273,7 +277,7 @@ namespace PlatformKit
         /// <exception cref="ArgumentException"></exception>
         public string RunLinuxCommand(string command, ProcessStartInfo processStartInfo = null)
         {
-                if (OSAnalyzer.IsLinux())
+                if (OperatingSystem.IsLinux())
                 {
                     string location = "/usr/bin/";
 
@@ -325,30 +329,28 @@ namespace PlatformKit
                     url = url.Replace("http://", "https://");
                 }
 
-                if (OSAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
                     return true;
                 }
-                if (OSAnalyzer.IsLinux())
+                if (OperatingSystem.IsLinux())
                 {
                     RunLinuxCommand($"xdg-open {url}");
                     return true;
                 }
-                if (OSAnalyzer.IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     var task = new Task(() => Process.Start("open", url));
                     
                     task.Start();
                     return true;
                 }
-#if  NETCOREAPP3_1_OR_GREATER
-                if (OSAnalyzer.IsFreeBSD())
+                if (OperatingSystem.IsFreeBSD())
                 {
                     RunLinuxCommand($"xdg-open {url}");
                     return true;
                 }          
-#endif
 
                 return false;
         }

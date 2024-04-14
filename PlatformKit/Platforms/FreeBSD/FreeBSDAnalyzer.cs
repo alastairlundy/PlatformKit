@@ -14,6 +14,10 @@ using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Shared.Extensions;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.FreeBSD;
 
 // ReSharper disable once InconsistentNaming
@@ -42,7 +46,7 @@ public class FreeBsdAnalyzer
     /// <returns></returns>
     public Version DetectFreeBSDVersion()
     {
-        if (OSAnalyzer.IsFreeBSD())
+        if (OperatingSystem.IsFreeBSD())
         {
             string version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", string.Empty);
 

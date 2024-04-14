@@ -19,6 +19,10 @@ using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 // ReSharper disable InconsistentNaming
 
 namespace PlatformKit.Identification
@@ -78,21 +82,19 @@ namespace PlatformKit.Identification
             }
             else
             {
-                if (OSAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     osName = "win";
                 }
-                if (OSAnalyzer.IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     osName = "osx";
                 }
-                #if NETCOREAPP3_0_OR_GREATER
-                if (OSAnalyzer.IsFreeBSD())
+                if (OperatingSystem.IsFreeBSD())
                 {
                     osName = "freebsd";
                 }
-                #endif
-                if (OSAnalyzer.IsLinux())
+                if (OperatingSystem.IsLinux())
                 {
                     if (identifierType == RuntimeIdentifierType.Generic)
                     {
@@ -126,7 +128,7 @@ namespace PlatformKit.Identification
         {
             string osVersion = null;
 
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 if (_windowsAnalyzer.IsWindows10())
                 {
@@ -159,7 +161,7 @@ namespace PlatformKit.Identification
                     }
                 }
             }
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 osVersion = _linuxAnalyzer.DetectLinuxDistributionVersionAsString();
 
@@ -177,9 +179,7 @@ namespace PlatformKit.Identification
                 
                 //osVersion = version.GetFriendlyVersionToString(FriendlyVersionFormatStyle.MajorDotMinor);
             }
-
-#if NETCOREAPP3_0_OR_GREATER
-            if (OSAnalyzer.IsFreeBSD())
+            if (OperatingSystem.IsFreeBSD())
             {
                 osVersion = _freeBsdAnalyzer.DetectFreeBSDVersion().ToString();
 
@@ -207,8 +207,7 @@ namespace PlatformKit.Identification
                         break;
                 }
             }
-#endif
-            if (OSAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 Version version = _macOsAnalyzer.DetectMacOsVersion();
 
@@ -245,12 +244,12 @@ namespace PlatformKit.Identification
                 return GenerateRuntimeIdentifier(identifierType, false, false);
             }
             else if (identifierType == RuntimeIdentifierType.Generic ||
-                     identifierType == RuntimeIdentifierType.Specific && (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) ||
+                     identifierType == RuntimeIdentifierType.Specific && (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) ||
                      identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, false);
             }
-            else if (identifierType == RuntimeIdentifierType.Specific && (!OSAnalyzer.IsLinux() && !OSAnalyzer.IsFreeBSD())
+            else if (identifierType == RuntimeIdentifierType.Specific && (!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD())
                      || identifierType == RuntimeIdentifierType.DistroSpecific)
             {
                 return GenerateRuntimeIdentifier(identifierType, true, true);
@@ -287,11 +286,11 @@ namespace PlatformKit.Identification
                 return $"{osName}-{cpuArch}";
             }
             else if (identifierType == RuntimeIdentifierType.Specific ||
-                     (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.DistroSpecific ||
-                     (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                     (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) && identifierType == RuntimeIdentifierType.DistroSpecific ||
+                     (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
 
-                if (OSAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     if (includeOperatingSystemVersion)
                     {
@@ -303,7 +302,7 @@ namespace PlatformKit.Identification
                     }
                 }
 
-                if (OSAnalyzer.IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     if (includeOperatingSystemVersion)
                     {
@@ -313,7 +312,7 @@ namespace PlatformKit.Identification
                     return $"{osName}-{cpuArch}";
                 }
 
-                if (((OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD()) && 
+                if (((OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD()) && 
                      (identifierType == RuntimeIdentifierType.DistroSpecific) || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
                 {
                     if (includeOperatingSystemVersion)
@@ -323,13 +322,13 @@ namespace PlatformKit.Identification
                     
                     return $"{osName}-{cpuArch}";
                 }
-                if (((OSAnalyzer.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
+                if (((OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.Specific) && includeOperatingSystemVersion == false) ||
                     includeOperatingSystemVersion == false)
                 {
                     return $"{osName}-{cpuArch}";
                 }
             }
-            else if(!OSAnalyzer.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
+            else if(!OperatingSystem.IsLinux() && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
                 Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
                                   " Calling method using RuntimeIdentifierType.Specific instead.");
@@ -349,7 +348,7 @@ namespace PlatformKit.Identification
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
 #else
-            if (OSAnalyzer.IsLinux() || OSAnalyzer.IsFreeBSD())
+            if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
             }
@@ -373,7 +372,7 @@ namespace PlatformKit.Identification
                 { RuntimeIdentifierType.Specific, GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific) }
             };
 
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 possibles.Add(RuntimeIdentifierType.VersionLessDistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
                 possibles.Add(RuntimeIdentifierType.DistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));

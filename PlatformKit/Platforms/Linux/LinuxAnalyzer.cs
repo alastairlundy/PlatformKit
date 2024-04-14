@@ -15,6 +15,10 @@ using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Shared.Extensions;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.Linux;
 
 /// <summary>
@@ -34,7 +38,7 @@ public class LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public LinuxDistroBase DetectDistroBase()
     {
-        if (OSAnalyzer.IsLinux())
+        if (OperatingSystem.IsLinux())
         {
             LinuxOsRelease osRel = GetLinuxDistributionInformation();
 
@@ -74,7 +78,7 @@ public class LinuxAnalyzer
             //Assign a default value.
             linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
                 
@@ -173,7 +177,7 @@ public class LinuxAnalyzer
         /// <returns></returns>
         public Version DetectLinuxDistributionVersion()
         {
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 return Version.Parse(DetectLinuxDistributionVersionAsString().AddMissingZeroes(2));
             }
@@ -189,7 +193,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
         public string DetectLinuxDistributionVersionAsString()
         {
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 LinuxOsRelease linuxDistroInfo = GetLinuxDistributionInformation();
                 string osName = linuxDistroInfo.Name.ToLower();
@@ -220,7 +224,7 @@ public class LinuxAnalyzer
         /// </exception>
         public Version DetectLinuxKernelVersion()
         {
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 string description = Environment.OSVersion.ToString()
                     .Replace("Unix ", string.Empty);
@@ -239,7 +243,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsAtLeastKernelVersion(Version expectedKernelVersion)
         {
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {
                 Version detected = DetectLinuxKernelVersion();
 

@@ -14,6 +14,9 @@ using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
 
 namespace PlatformKit.Mac;
 
@@ -58,7 +61,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         /// <exception cref="Exception"></exception>
         public MacProcessorType GetMacProcessorType()
         {
-                if (OSAnalyzer.IsMac())
+                if (OperatingSystem.IsMacOS())
                 {
                     return RuntimeInformation.OSArchitecture switch
                     {
@@ -182,7 +185,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="Exception"></exception>
     public MacOsVersion GetMacOsVersionToEnum(Version input)
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
                 if (input.Major == 10)
                 {
@@ -298,7 +301,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     // ReSharper disable once InconsistentNaming
     public bool IsAtLeastMacOSVersion(MacOsVersion macOsVersion)
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             Version detected = DetectMacOsVersion();
             Version expected = GetMacOsVersionFromEnum(macOsVersion);
@@ -353,7 +356,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectDarwinVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             string desc = RuntimeInformation.OSDescription;
             string[] arr = desc.Split(' ');
@@ -371,7 +374,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectXnuVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             var desc = RuntimeInformation.OSDescription;
             var arr = desc.Split(' ');
@@ -414,7 +417,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public Version DetectMacOsVersion()
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
         
@@ -432,7 +435,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
     public string DetectMacOsBuildNumber()
     {
-        if (OSAnalyzer.IsMac())
+        if (OperatingSystem.IsMacOS())
         {
             return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:", String.Empty).Replace(" ", String.Empty);
         }
@@ -442,6 +445,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
 
     // ReSharper disable once IdentifierTypo
     /// <summary>
+    ///  ReSharper disable once CommentTypo
     /// Gets info from sw_vers command on Mac.
     /// </summary>
     /// <returns></returns>

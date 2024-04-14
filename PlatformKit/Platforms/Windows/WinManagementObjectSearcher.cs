@@ -11,10 +11,15 @@
 using System;
 using System.Collections.Generic;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.Windows
 {
     public class WinManagementObjectSearcher
     {
+        // ReSharper disable once InconsistentNaming
         protected ProcessManager processManager;
 
         public WinManagementObjectSearcher()
@@ -33,7 +38,7 @@ namespace PlatformKit.Windows
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
             
-                if (OSAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     string output = processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
                         .Replace(wmiClass, string.Empty);

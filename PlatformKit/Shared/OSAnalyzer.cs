@@ -17,6 +17,10 @@ using PlatformKit.Linux;
 using PlatformKit.Mac;
 using PlatformKit.Windows;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit
 {
     // ReSharper disable once InconsistentNaming
@@ -43,7 +47,7 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public static bool IsWindows()
         {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+            return OperatingSystem.IsWindows();
         }
 
         /// <summary>
@@ -53,7 +57,7 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public static bool IsMac()
         {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+            return OperatingSystem.IsMacOS();
         }
         
         /// <summary>
@@ -63,7 +67,7 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public static bool IsLinux()
         {
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Linux);
+            return OperatingSystem.IsLinux();
         }
 
         // ReSharper disable once InconsistentNaming
@@ -75,11 +79,7 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public static bool IsFreeBSD()
         {
-#if NETCOREAPP3_0_OR_GREATER
-            return System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.FreeBSD);
-#else
-            throw new PlatformNotSupportedException();
-#endif
+            return OperatingSystem.IsFreeBSD();
         }
         
         /// <summary>
@@ -127,13 +127,11 @@ namespace PlatformKit
             {
                 return _macOsAnalyzer.DetectMacOsVersion();
             }
-
-#if NETCOREAPP3_0_OR_GREATER
             if (IsFreeBSD())
             {
                 return _freeBsdAnalyzer.DetectFreeBSDVersion();
             }
-#endif
+
             throw new PlatformNotSupportedException();
         }
     }

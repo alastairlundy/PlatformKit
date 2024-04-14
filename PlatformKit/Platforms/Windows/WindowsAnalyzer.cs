@@ -14,6 +14,10 @@ using System.Runtime.InteropServices;
 using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.Internal.Exceptions;
 
+#if NETSTANDARD2_0
+using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#endif
+
 namespace PlatformKit.Windows;
 
 /// <summary>
@@ -35,7 +39,7 @@ public class WindowsAnalyzer
     /// <exception cref="OperatingSystemDetectionException"></exception>
     public WindowsEdition DetectWindowsEdition()
     {
-        if (OSAnalyzer.IsWindows())
+        if (OperatingSystem.IsWindows())
         {
             string edition = GetWindowsSystemInformation().OsName.ToLower();
 
@@ -115,7 +119,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public string GetWMIClass(string wmiClass)
     {
-        if (OSAnalyzer.IsWindows())
+        if (OperatingSystem.IsWindows())
         {
             return _processManager.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
         }
@@ -134,7 +138,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException"></exception>
     public string GetWMIValue(string property, string wmiClass)
     {
-        if (OSAnalyzer.IsWindows())
+        if (OperatingSystem.IsWindows())
         {
             string result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
                                                               + wmiClass + " -Property " + property);
@@ -169,7 +173,7 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
     public string GetWindowsRegistryValue(string query, string value){
-        if (OSAnalyzer.IsWindows())
+        if (OperatingSystem.IsWindows())
         {
             string result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
                     
@@ -206,7 +210,7 @@ public class WindowsAnalyzer
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
-        if (!OSAnalyzer.IsWindows())
+        if (!OperatingSystem.IsWindows())
         {
             throw new PlatformNotSupportedException();
         }
@@ -644,7 +648,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         public bool IsWindows11()
         {
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 return IsWindows11(GetWindowsVersionToEnum());
             }
@@ -686,7 +690,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public WindowsVersion GetWindowsVersionToEnum()
         {
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 return GetWindowsVersionToEnum(DetectWindowsVersion());
             }
@@ -795,7 +799,7 @@ for (var index = 0; index < array.Length; index++)
         // ReSharper disable once MemberCanBePrivate.Global
         public Version DetectWindowsVersion()
         {
-                if (OSAnalyzer.IsWindows())
+                if (OperatingSystem.IsWindows())
                 {
                     string description = RuntimeInformation.OSDescription
                         .Replace("Microsoft Windows", string.Empty)
@@ -852,7 +856,7 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         public bool IsAtLeastWindowsVersion(WindowsVersion windowsVersion)
         {
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 return (DetectWindowsVersion().Build >= GetWindowsVersionFromEnum(windowsVersion).Build);
             }
