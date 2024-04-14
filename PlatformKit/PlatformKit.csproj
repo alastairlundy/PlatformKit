@@ -63,4 +63,8 @@
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
     </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.1"/>
+    </ItemGroup>
 </Project>

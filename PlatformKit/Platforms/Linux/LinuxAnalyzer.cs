@@ -10,7 +10,7 @@
 
 using System;
 using System.IO;
-
+using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Shared.Extensions;

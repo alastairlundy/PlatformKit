@@ -10,9 +10,9 @@
 
 using System;
 using System.Runtime.InteropServices;
+using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
-using PlatformKit.Shared.Extensions;
 
 
 namespace PlatformKit.Mac;

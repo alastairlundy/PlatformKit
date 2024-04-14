@@ -11,13 +11,13 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Mac;
-using PlatformKit.Shared.Extensions;
 
 // ReSharper disable InconsistentNaming
 
