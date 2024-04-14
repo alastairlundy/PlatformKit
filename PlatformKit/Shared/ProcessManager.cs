@@ -224,7 +224,7 @@ namespace PlatformKit
             if (OSAnalyzer.IsWindows())
             {
                 string location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
-                                                           //+ "System32" +
+                                                           + "System32" +
                                + Path.DirectorySeparatorChar + "WindowsPowerShell" +
                                Path.DirectorySeparatorChar + "v1.0";
                 return RunProcessWindows(location, "powershell", command, processStartInfo);
