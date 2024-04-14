@@ -60,7 +60,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         {
                 if (OSAnalyzer.IsMac())
                 {
-                    return System.Runtime.InteropServices.RuntimeInformation.OSArchitecture switch
+                    return RuntimeInformation.OSArchitecture switch
                     {
                         Architecture.Arm64 => MacProcessorType.AppleSilicon,
                         Architecture.X64 => MacProcessorType.Intel,
