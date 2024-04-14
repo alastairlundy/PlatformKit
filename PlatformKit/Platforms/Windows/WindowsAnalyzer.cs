@@ -37,10 +37,7 @@ public class WindowsAnalyzer
     {
         if (OSAnalyzer.IsWindows())
         {
-            var edition = GetWindowsSystemInformation().OsName.ToLower();
-                
-            //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-            //   "EditionID");
+            string edition = GetWindowsSystemInformation().OsName.ToLower();
 
             if (edition.Contains("home"))
             {
@@ -313,11 +310,11 @@ for (var index = 0; index < array.Length; index++)
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
             string hours = info[1].Substring(0, 2);
-            string mins = info[1].Substring(2, 2);
+            string minutes = info[1].Substring(2, 2);
             string seconds = info[1].Substring(3, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
-            dt = dt.AddMinutes(Double.Parse(mins));
+            dt = dt.AddMinutes(Double.Parse(minutes));
             dt = dt.AddSeconds(Double.Parse(seconds));
         }
 
@@ -340,11 +337,11 @@ for (var index = 0; index < array.Length; index++)
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
             string hours = info[1].Substring(0, 2);
-            string mins = info[1].Substring(2, 2);
+            string minutes = info[1].Substring(2, 2);
             string seconds = info[1].Substring(4, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
-            dt = dt.AddMinutes(Double.Parse(mins));
+            dt = dt.AddMinutes(Double.Parse(minutes));
             dt = dt.AddSeconds(Double.Parse(seconds));
         }
 

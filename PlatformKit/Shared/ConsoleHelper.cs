@@ -43,7 +43,7 @@ public class ConsoleHelper
 
             string[] lines = File.ReadAllLines(pathToTextFile);
 
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
                 Console.WriteLine(line);
             }

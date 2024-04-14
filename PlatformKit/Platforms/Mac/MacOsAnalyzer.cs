@@ -104,7 +104,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         /// <exception cref="ArgumentException"></exception>
         public bool IsSecureVirtualMemoryEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -125,7 +125,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         /// <exception cref="ArgumentException"></exception>
         public bool IsSystemIntegrityProtectionEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -146,7 +146,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
         /// <exception cref="ArgumentException"></exception>
         public bool IsActivationLockEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -239,7 +239,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
                 if (input.Major == 14) return MacOsVersion.v14_Sonoma;
                 
                 throw new MacOsVersionDetectionException();
-            }
+        }
 
         throw new PlatformNotSupportedException();
     }
@@ -353,10 +353,10 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OSAnalyzer.IsMac())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            string desc = RuntimeInformation.OSDescription;
+            string[] arr = desc.Split(' ');
             
-            return Version.Parse(arr[1].AddMissingZeroes());
+            return Version.Parse(arr[1].AddMissingZeroes(3));
         }
 
         throw new PlatformNotSupportedException();
