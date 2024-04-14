@@ -24,6 +24,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 #if NETSTANDARD2_0
@@ -83,6 +84,11 @@ namespace PlatformKit
             if (runAsAdministrator)
             {
                 process.StartInfo.Verb = "runas";
+            }
+
+            if (!Directory.Exists(executableLocation))
+            {
+                throw new DirectoryNotFoundException();
             }
 
             Task task = new Task(() => process.Start());

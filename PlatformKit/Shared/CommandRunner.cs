@@ -129,9 +129,9 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsWindows())
         {
-            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar 
-                                                       + "System32" +
-                                                       + Path.DirectorySeparatorChar + "WindowsPowerShell" +
+            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar.ToString() 
+                                                       + "System32" + 
+                                                       Path.DirectorySeparatorChar.ToString() + "WindowsPowerShell" +
                                                        Path.DirectorySeparatorChar + "v1.0";
             return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
         }
