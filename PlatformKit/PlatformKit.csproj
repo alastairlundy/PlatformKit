@@ -15,7 +15,8 @@
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
         <PackageReleaseNotes>### Changes since 4.0.0 Beta 7
-* Updated PlatformKit.Extensions.OperatingSystem dependency from 1.2.0 to 1.2.1 - Thereby allowing for re-adding .NET Standard 2 support to PlatformKit 4.</PackageReleaseNotes>
+* Updated PlatformKit.Extensions.OperatingSystem dependency from 1.2.0 to 1.2.1 - Thereby allowing for re-adding .NET Standard 2 support to PlatformKit 4.
+* Fixed an issue where Windows Powershell commands executed through PlatformKit would fail</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
