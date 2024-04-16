@@ -42,24 +42,34 @@ public class LinuxAnalyzer
         {
             LinuxOsRelease osRel = GetLinuxDistributionInformation();
 
-            if (osRel.Identifier_Like.ToLower().Contains("debian"))
+            osRel.Identifier_Like = osRel.Identifier_Like.ToLower();
+
+            if (osRel.Identifier_Like.Contains("debian"))
             {
                 return LinuxDistroBase.Debian;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("ubuntu"))
+            if (osRel.Identifier_Like.Contains("ubuntu"))
             {
                 return LinuxDistroBase.Ubuntu;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("arch"))
+            if (osRel.Identifier_Like.Contains("arch"))
             {
                 return LinuxDistroBase.Arch;
             }
-            if (osRel.Identifier_Like.ToLower().Contains("fedora"))
+            if (osRel.Identifier_Like.Contains("fedora"))
             {
                 return LinuxDistroBase.Fedora;
             }
+            if (osRel.Identifier_Like.Contains("rhel"))
+            {
+                return LinuxDistroBase.RHEL;
+            }
+            if (osRel.Identifier_Like.Contains("manjaro"))
+            {
+                return LinuxDistroBase.Manjaro;
+            }
 
-            throw new OperatingSystemDetectionException();
+            return LinuxDistroBase.NotDetected;
         }
 
         throw new PlatformNotSupportedException();
