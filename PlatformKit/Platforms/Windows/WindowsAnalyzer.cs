@@ -668,6 +668,7 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
         public bool IsWindows11()
