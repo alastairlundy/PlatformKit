@@ -136,56 +136,6 @@ public class WindowsAnalyzer
         throw new PlatformNotSupportedException();
     }
 
-    // ReSharper disable once InconsistentNaming
-    /// <summary>
-    /// Gets information from a WMI class in WMI.
-    /// </summary>
-    /// <param name="wmiClass"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
-    public static string GetWMIClass(string wmiClass)
-    {
-        if (OperatingSystem.IsWindows())
-        {
-            return CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *");
-        }
-
-        throw new PlatformNotSupportedException();
-    }
-    
-    // ReSharper disable once InconsistentNaming
-    /// <summary>
-    /// Gets a property/value in a WMI Class from WMI.
-    /// </summary>
-    /// <param name="property"></param>
-    /// <param name="wmiClass"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
-    public static string GetWMIValue(string property, string wmiClass)
-    {
-        if (OperatingSystem.IsWindows())
-        {
-            var arr = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property).Split(Convert.ToChar(Environment.NewLine));
-            
-           foreach (var str in arr)
-           {
-               if (str.ToLower().StartsWith(property.ToLower()))
-               {
-                   return str
-                       .Replace(" : ", String.Empty)
-                       .Replace(property, String.Empty)
-                       .Replace(" ", String.Empty);
-                       
-               }
-           }
-           
-           throw new ArgumentException();
-        }
-
-        throw new PlatformNotSupportedException();
-    }
-
     /// <summary>
     ///  Gets the value of a registry key in the Windows registry.
     /// </summary>
