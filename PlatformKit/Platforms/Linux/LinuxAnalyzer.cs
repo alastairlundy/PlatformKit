@@ -27,7 +27,7 @@ using System;
 using System.IO;
 using AlastairLundy.System.Extensions.StringExtensions;
 using AlastairLundy.System.Extensions.VersionExtensions;
-using PlatformKit.Internal.Exceptions;
+
 using PlatformKit.Linux.Enums;
 
 #if NETSTANDARD2_0
