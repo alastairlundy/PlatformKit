@@ -15,5 +15,8 @@ public enum LinuxDistroBase
     Debian,
     Ubuntu,
     Arch,
-    Fedora
+    Fedora,
+    RHEL,
+    Manjaro,
+    NotDetected
 }
