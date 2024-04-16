@@ -35,7 +35,7 @@ namespace PlatformKit.Windows
     {
 
         /// <summary>
-        ///
+        /// Returns a Dictionary of Query objects and their associated WMI values.
         /// WARNING: DO NOT RUN on NON-Windows platforms. This will result in errors.
         /// </summary>
         /// <param name="queryObjectsList"></param>
