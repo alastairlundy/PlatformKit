@@ -58,6 +58,7 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
         {
+            string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
             
             if (OperatingSystem.IsLinux())
             {
