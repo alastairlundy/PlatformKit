@@ -3,6 +3,12 @@ This document contains the entire version history of the PlatformKit library.
 
 ## Stable Releases
 
+### 3.7
+| Version | Availability | Changelog |
+|-|-|-|
+| 3.7.0 RC 1 | April 16th 2024 | https://github.com/alastairlundy/PlatformKit/releases/3.7.0-rc.1 |
+
+
 ### 3.6
 | Version | Availability | Changelog |
 |-|-|-|
