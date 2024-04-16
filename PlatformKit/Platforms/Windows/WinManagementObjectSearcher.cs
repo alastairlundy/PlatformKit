@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
@@ -34,6 +35,9 @@ namespace PlatformKit.Windows
         /// <param name="queryObjectsList"></param>
         /// <param name="wmiClass"></param>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public Dictionary<string, string> Get(List<string> queryObjectsList, string wmiClass)
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();

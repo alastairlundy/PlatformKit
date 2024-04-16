@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using AlastairLundy.System.Extensions.StringExtensions;
 using PlatformKit.Internal.Exceptions;
 
@@ -37,6 +38,9 @@ public class WindowsAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="OperatingSystemDetectionException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public WindowsEdition DetectWindowsEdition()
     {
         if (OperatingSystem.IsWindows())
@@ -117,6 +121,9 @@ public class WindowsAnalyzer
     /// <param name="wmiClass"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public string GetWMIClass(string wmiClass)
     {
         if (OperatingSystem.IsWindows())
@@ -136,6 +143,9 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
     /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public string GetWMIValue(string property, string wmiClass)
     {
         if (OperatingSystem.IsWindows())
@@ -172,6 +182,9 @@ public class WindowsAnalyzer
     /// <param name="value"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on macOS or Linux.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public string GetWindowsRegistryValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
@@ -208,6 +221,9 @@ public class WindowsAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
+   #if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+    #endif
     public WindowsSystemInformation GetWindowsSystemInformation()
     {
         if (!OperatingSystem.IsWindows())
@@ -586,6 +602,9 @@ for (var index = 0; index < array.Length; index++)
         /// Checks whether the detected version of Windows is Windows 10
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public bool IsWindows10()
         {
            return IsWindows10(GetWindowsVersionToEnum());
@@ -596,6 +615,9 @@ for (var index = 0; index < array.Length; index++)
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public bool IsWindows10(WindowsVersion windowsVersion)
     {
         switch (windowsVersion)
@@ -646,6 +668,8 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
+        [SupportedOSPlatform("windows")]
+#endif
         public bool IsWindows11()
         {
             if (OperatingSystem.IsWindows())
@@ -688,6 +712,9 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public WindowsVersion GetWindowsVersionToEnum()
         {
             if (OperatingSystem.IsWindows())
@@ -797,6 +824,9 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public Version DetectWindowsVersion()
         {
                 if (OperatingSystem.IsWindows())
@@ -854,6 +884,9 @@ for (var index = 0; index < array.Length; index++)
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public bool IsAtLeastWindowsVersion(WindowsVersion windowsVersion)
         {
             if (OperatingSystem.IsWindows())
