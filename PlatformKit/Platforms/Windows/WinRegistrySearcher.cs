@@ -31,6 +31,9 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.Windows;
 
+/// <summary>
+/// A class to make searching the Windows Registry easier.
+/// </summary>
 public class WinRegistrySearcher
 {
     /// <summary>
