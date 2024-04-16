@@ -58,30 +58,35 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
         {
+            
             if (OperatingSystem.IsLinux())
             {
-                if (linuxOsRelease.Identifier_Like.ToLower().Contains("debian"))
+                if (identifierLike.Contains("debian"))
                 {
                     return LinuxDistroBase.Debian;
                 }
-                if (linuxOsRelease.Identifier_Like.ToLower().Contains("ubuntu"))
+                if (identifierLike.Contains("ubuntu"))
                 {
                     return LinuxDistroBase.Ubuntu;
                 }
-                if (linuxOsRelease.Identifier_Like.ToLower().Contains("arch"))
+                if (identifierLike.Contains("arch"))
                 {
                     return LinuxDistroBase.Arch;
                 }
-                if (linuxOsRelease.Identifier_Like.ToLower().Contains("manjaro"))
+                if (identifierLike.Contains("manjaro"))
                 {
                     return LinuxDistroBase.Manjaro;
                 }
-                if (linuxOsRelease.Identifier_Like.ToLower().Contains("fedora"))
+                if (identifierLike.Contains("fedora"))
                 {
                     return LinuxDistroBase.Fedora;
                 }
-
-                throw new OperatingSystemDetectionException();
+                if (identifierLike.Contains("rhel"))
+                {
+                    return LinuxDistroBase.RHEL;
+                }
+                
+                return LinuxDistroBase.NotDetected;
             }
 
             throw new PlatformNotSupportedException();
