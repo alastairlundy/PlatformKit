@@ -72,9 +72,9 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                // Console.WriteLine(processManager.RunPowerShellCommand("systeminfo"));
                Console.WriteLine("WindowsEdition: " + WindowsAnalyzer.GetWindowsEdition().ToString());
                
-               Console.WriteLine("WinOS " + WindowsAnalyzer.GetWMIClass("Win32_OperatingSystem"));
+               Console.WriteLine("WinOS " +  WMISearcher.GetWMIClass("Win32_OperatingSystem"));
 
-              var sysinfo = WindowsAnalyzer.GetWindowsSystemInformation();
+              WindowsSystemInformation sysinfo = WindowsAnalyzer.GetWindowsSystemInformation();
               sysinfo.ToConsoleWriteLine();
             }
 
