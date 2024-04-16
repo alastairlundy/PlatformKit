@@ -21,7 +21,7 @@ namespace PlatformKit.Shared.Extensions
         /// Get the list of processes as a String Array
         /// </summary>
         /// <returns></returns>
-        ///
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public static string[] ToStringArray(this Process process)
         {
             var strList = new List<string>();
@@ -42,6 +42,7 @@ namespace PlatformKit.Shared.Extensions
         /// <param name="process"></param>
         /// <param name="processName"></param>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public static bool IsProcessRunning(this Process process, string processName)
         {
             foreach (Process proc in Process.GetProcesses())
@@ -68,6 +69,7 @@ namespace PlatformKit.Shared.Extensions
         /// <param name="process"></param>
         /// <param name="processName"></param>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV4)]
         public static Process GetProcessFromProcessName(this Process process, string processName)
         {
             processName = processName.Replace(".exe", string.Empty);
