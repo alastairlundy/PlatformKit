@@ -25,6 +25,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 #if NETSTANDARD2_0
@@ -50,6 +51,9 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         /// <param name="windowStyle">Whether to open the window in full screen mode, normal size, minimized, or a different window mode.</param>
         /// <exception cref="Exception"></exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public static string RunProcessOnWindows(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null,
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)

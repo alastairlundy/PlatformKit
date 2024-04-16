@@ -25,6 +25,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Versioning;
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
@@ -113,6 +114,9 @@ public static class CommandRunner
     /// <param name="processStartInfo"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
         return ProcessRunner.RunProcessOnWindows(Environment.SystemDirectory, "cmd", command, processStartInfo, runAsAdministrator);
@@ -125,6 +129,9 @@ public static class CommandRunner
     /// <param name="processStartInfo"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
         if (OperatingSystem.IsWindows())
