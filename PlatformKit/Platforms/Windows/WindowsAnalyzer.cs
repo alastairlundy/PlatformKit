@@ -144,34 +144,6 @@ public class WindowsAnalyzer
         throw new PlatformNotSupportedException();
     }
 
-    /// <summary>
-    ///  Gets the value of a registry key in the Windows registry.
-    /// </summary>
-    /// <param name="query"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-    public static string GetWindowsRegistryValue(string query, string value){
-        if (OperatingSystem.IsWindows())
-        {
-            string result = CommandRunner.RunCmdCommand("REG QUERY " + query + " /v " + value);
-                    
-                if (result != null)
-                {
-                    return result.Replace(value, String.Empty)
-                        .Replace("REG_SZ", String.Empty)
-                        .Replace(" ", String.Empty);
-                }
-
-                throw new ArgumentNullException();
-        }
-
-        throw new PlatformNotSupportedException();
-    }
-
     protected static int GetNetworkCardPositionInWindowsSysInfo(List<NetworkCard> networkCards, NetworkCard lastNetworkCard)
     {
         for (int position = 0; position < networkCards.Count; position++)
