@@ -25,8 +25,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using AlastairLundy.System.Extensions.StringExtensions;
 using AlastairLundy.System.Extensions.VersionExtensions;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -48,6 +50,9 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static WindowsEdition GetWindowsEdition()
     {
         return GetWindowsEdition(GetWindowsSystemInformation());
@@ -60,6 +65,9 @@ public class WindowsAnalyzer
     /// <returns></returns>
     /// <exception cref="WindowsEditionDetectionException"></exception>
     /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static WindowsEdition GetWindowsEdition(WindowsSystemInformation windowsSystemInformation)
     {
         if (OperatingSystem.IsWindows())
@@ -143,6 +151,9 @@ public class WindowsAnalyzer
     /// <param name="value"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static string GetWindowsRegistryValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
@@ -179,6 +190,9 @@ public class WindowsAnalyzer
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static WindowsSystemInformation GetWindowsSystemInformation()
     {
         if (!OperatingSystem.IsWindows())
@@ -560,6 +574,9 @@ for (var index = 0; index < array.Length; index++)
     /// Checks whether the detected version of Windows is Windows 10
     /// </summary>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static bool IsWindows10()
     {
         return IsWindows10(GetWindowsVersionToEnum());
@@ -620,6 +637,9 @@ for (var index = 0; index < array.Length; index++)
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static bool IsWindows11()
     { 
         return IsWindows11(GetWindowsVersionToEnum());
@@ -657,6 +677,9 @@ for (var index = 0; index < array.Length; index++)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public static WindowsVersion GetWindowsVersionToEnum()
         {
             if (OperatingSystem.IsWindows())
@@ -770,6 +793,9 @@ for (var index = 0; index < array.Length; index++)
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public static Version GetWindowsVersion()
         {
             if (OperatingSystem.IsWindows())
@@ -825,6 +851,9 @@ for (var index = 0; index < array.Length; index++)
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public static bool IsAtLeastVersion(WindowsVersion windowsVersion)
         {
             if (OperatingSystem.IsWindows())
@@ -842,6 +871,9 @@ for (var index = 0; index < array.Length; index++)
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         public static bool IsAtLeastVersion(Version windowsVersion)
         {
             if (OperatingSystem.IsWindows())
