@@ -46,6 +46,32 @@ public class WinRegistrySearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    public static string GetValue(string query){
+        if (OperatingSystem.IsWindows())
+        {
+            string result = CommandRunner.RunCmdCommand("REG QUERY " + query);
+                    
+            if (result != null)
+            {
+                return result.Replace("REG_SZ", String.Empty);
+            }
+
+            throw new ArgumentNullException();
+        }
+
+        throw new PlatformNotSupportedException();
+    }
+    
+    /// <summary>
+    ///  Gets the value of a registry key in the Windows registry.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
     public static string GetValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
