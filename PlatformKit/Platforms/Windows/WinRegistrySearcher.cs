@@ -54,8 +54,7 @@ public class WinRegistrySearcher
             if (result != null)
             {
                 return result.Replace(value, String.Empty)
-                    .Replace("REG_SZ", String.Empty)
-                    .Replace(" ", String.Empty);
+                    .Replace("REG_SZ", String.Empty);
             }
 
             throw new ArgumentNullException();
