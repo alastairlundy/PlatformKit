@@ -60,7 +60,7 @@ public class LinuxAnalyzer
             {
                 return LinuxDistroBase.Fedora;
             }
-            if (osRel.Identifier_Like.Contains("rhel"))
+            if (osRel.Identifier_Like.Contains("rhel") || osRel.Identifier_Like.Contains("oracle") || osRel.Identifier_Like.Contains("centos") || osRel.Identifier_Like.Contains("suse"))
             {
                 return LinuxDistroBase.RHEL;
             }
