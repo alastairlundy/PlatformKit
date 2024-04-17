@@ -14,12 +14,11 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.0.0 Beta 7.1
-* Moved WMI related code from ``WindowsAnalyzer`` to ``WMISearcher``
-* Moved Windows Registry code from ``WindowsAnalyzer`` to ``WinRegistrySearcher``
-* Add in code comment for ``WinManagementObjectSearcher``
-* Better guard Windows only code in ``WindowsAnalyzer``
-* Added ``RHEL``, ``NotDetected``, and ``NotSupported``, enum values for enum ``LinuxDistroBase``</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0.0 Beta 8
+* Improved robustness of RHEL distro base detection
+* Removed unnecessary modifying of Windows Registry query results prior to returning it
+* Made it easier to get Registry values
+* Removed unnecessary using statements</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -29,7 +28,7 @@
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0.0</Version>
-        <PackageVersion>4.0.0-beta.8</PackageVersion>
+        <PackageVersion>4.0.0-beta.9</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
