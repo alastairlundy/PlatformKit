@@ -61,10 +61,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="PlatformKit.Software\**" />
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
     </ItemGroup>
 
