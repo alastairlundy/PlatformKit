@@ -107,7 +107,7 @@ namespace PlatformKit.Mac;
         [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsSecureVirtualMemoryEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -129,7 +129,7 @@ namespace PlatformKit.Mac;
         /// <exception cref="ArgumentException"></exception>
         public static bool IsSystemIntegrityProtectionEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -151,7 +151,7 @@ namespace PlatformKit.Mac;
         /// <exception cref="ArgumentException"></exception>
         public static bool IsActivationLockEnabled()
         {
-            var result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+            string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -366,7 +366,7 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            var array = RuntimeInformation.OSDescription.Split(' ');
+            string[] array = RuntimeInformation.OSDescription.Split(' ');
         
             for (int index = 0; index < array.Length; index++)
             {
