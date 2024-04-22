@@ -16,6 +16,7 @@ public enum LinuxDistroBase
     Ubuntu,
     Arch,
     Fedora,
+    // ReSharper disable once InconsistentNaming
     RHEL,
     Manjaro,
     NotDetected
