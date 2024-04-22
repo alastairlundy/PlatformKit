@@ -40,7 +40,6 @@ public class WinRegistrySearcher
     ///  Gets the value of a registry key in the Windows registry.
     /// </summary>
     /// <param name="query"></param>
-    /// <param name="value"></param>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
