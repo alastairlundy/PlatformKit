@@ -24,6 +24,9 @@
 
 namespace PlatformKit;
 
+/// <summary>
+/// 
+/// </summary>
 public class NetworkCard
 {
     public string Name { get; set; }
