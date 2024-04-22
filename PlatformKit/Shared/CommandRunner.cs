@@ -26,6 +26,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
+using System.Text;
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
@@ -70,15 +71,14 @@ public static class CommandRunner
 
             if (array.Length > 1)
             {
-                string args = "";
+                StringBuilder stringBuilder = new StringBuilder();
 
-                foreach (string arg in array)
+                foreach (string argument in array)
                 {
-                    args += arg + " ";
+                    stringBuilder.Append(argument + " ");
                 }
 
-                args = args.Replace(array[0], String.Empty);
-                
+                string args = stringBuilder.ToString().Replace(array[0], String.Empty);
                 
                 return ProcessRunner.RunProcessOnMac(location, array[0], args);
             }
