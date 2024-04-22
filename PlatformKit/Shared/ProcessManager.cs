@@ -11,6 +11,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 using PlatformKit.Internal.Deprecation;
@@ -281,13 +282,14 @@ namespace PlatformKit
 
                     string[] args = command.Split(' ');
                     command = args[0];
-                    var processArguments = "";
+
+                    StringBuilder stringBuilder = new StringBuilder();
 
                     if (args.Length > 0)
                     {
                         for (int index = 1; index < args.Length; index++)
                         {
-                            processArguments += args[index].Replace(command, String.Empty);
+                            stringBuilder.Append(args[index].Replace(command, String.Empty));
                         }
                     }
 
@@ -296,7 +298,7 @@ namespace PlatformKit
                         throw new DirectoryNotFoundException("Could not find directory: " + location);
                     }
                     
-                    return RunProcessLinux(location, command, processArguments, processStartInfo);
+                    return RunProcessLinux(location, command, stringBuilder.ToString(), processStartInfo);
                 }
 
                 throw new PlatformNotSupportedException();
