@@ -213,58 +213,5 @@ namespace PlatformKit
         {
             return RunProcessOnLinux(executableLocation, executableName, arguments, processStartInfo);
         }
-
-        /// <summary>
-        /// Open a URL in the default browser.
-        /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-        /// </summary>
-        /// <param name="url">The URL to be opened.</param>
-        /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
-        /// <returns></returns>
-        public static void OpenUrlInBrowser(string url, bool allowNonSecureHttp = false)
-        {
-            if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
-            {
-                if (allowNonSecureHttp)
-                {
-                    url = "http://" + url;
-                }
-                else
-                {
-                    url = "https://" + url;
-                }
-            }
-            else if (url.StartsWith("http://") && !allowNonSecureHttp)
-            {
-                url = url.Replace("http://", "https://");
-            }
-            else if (url.StartsWith("www."))
-            {
-                if (!allowNonSecureHttp)
-                {
-                    url = url.Replace("www.", "https://www.");
-                }
-            }
-
-            if (OperatingSystem.IsWindows())
-            {
-                CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
-            }
-            if (OperatingSystem.IsLinux())
-            {
-                CommandRunner.RunCommandOnLinux($"xdg-open {url}");
-            }
-            if (OperatingSystem.IsMacOS())
-            {
-                var task = new Task(() => Process.Start("open", url));
-                task.Start();
-            }
-            if (OperatingSystem.IsFreeBSD())
-            {
-                CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
-            }
-
-            throw new NotImplementedException();
-        }
     }
 }
