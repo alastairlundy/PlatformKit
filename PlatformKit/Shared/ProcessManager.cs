@@ -106,21 +106,18 @@ namespace PlatformKit
 
                 if (end == null)
                 {
-                    //        PlatformKitAnalytics.ReportError(new NullReferenceException(), nameof(RunProcessWindows));
                     throw new NullReferenceException();
                 }
 
                 if (end.ToLower()
                     .Contains(" is not recognized as the name of a cmdlet, function, script file, or operable program"))
                 {
-                    //        PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
                     throw new Exception(end);
                 }
                 else if (end.ToLower()
                          .Contains(
                              "is not recognized as an internal or external command, operable program or batch file."))
                 {
-                    //     PlatformKitAnalytics.ReportError(new Exception(end), nameof(RunProcessWindows));
 
                     throw new Exception(end);
                 }
