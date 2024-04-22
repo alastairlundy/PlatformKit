@@ -14,11 +14,15 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.0.0 Beta 8
-* Improved robustness of RHEL distro base detection
-* Removed unnecessary modifying of Windows Registry query results prior to returning it
-* Made it easier to get Registry values
-* Removed unnecessary using statements</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0.0 Beta 9
+* Moved ``OpenUrlInBrowser`` method from ``ProcessRunner`` to a new class ``UrlRunner``
+* Renamed ``OpenUrlInBrowser`` method to ``OpenUrlInDefaultBrowser``
+* Reduced potential RAM usage on certain ``CommandRunner`` methods.
+* Moved TFM relatee code from the ``RuntimeIdentification`` class to ``TargetFrameworkIdentification`` class
+* Started work on making TFM related detection code more maintainable - So far this means moving some detection code into several methods with the ``protected`` access modifier. These are for internal use only but help make the code easier to maintain going forward.
+* Removed unnecessary instance of throwing an exception
+* Switched all remaining ``var`` implicit typing to explicit typing
+* Fixed a potential issue where ``OpenUrlInDefaultBrowser`` would have thrown a NotImplementedException - This doesn't affect PlatformKit 3.x</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +32,7 @@
    <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <Version>4.0.0.0</Version>
-        <PackageVersion>4.0.0-beta.9</PackageVersion>
+        <PackageVersion>4.0.0-beta.10</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
