@@ -136,10 +136,8 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsWindows())
         {
-            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar.ToString() 
-                                                       + "System32" + 
-                                                       Path.DirectorySeparatorChar.ToString() + "WindowsPowerShell" +
-                                                       Path.DirectorySeparatorChar + "v1.0";
+            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "System32" +
+                              Path.DirectorySeparatorChar + "WindowsPowerShell" + Path.DirectorySeparatorChar + "v1.0";
             return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
         }
                 
@@ -160,15 +158,18 @@ public static class CommandRunner
 
             string[] args = command.Split(' ');
             command = args[0];
-            string processArguments = "";
 
+            StringBuilder stringBuilder = new StringBuilder();
+            
             if (args.Length > 0)
             {
                 for (int index = 1; index < args.Length; index++)
                 {
-                    processArguments += args[index].Replace(command, String.Empty);
+                    stringBuilder.Append(args[index].Replace(command, String.Empty));
                 }
             }
+
+            string processArguments = stringBuilder.ToString();
 
             if (!Directory.Exists(location))
             {
