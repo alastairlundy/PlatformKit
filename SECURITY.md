@@ -1,5 +1,5 @@
 # Security and Support Policies
-The support policy now will be to support the latest 2 minor releases on a major version if both are on the same major version and to support only the latest minor release per version if multiple major versions are supported.
+The support policy now will be to support the latest 2 minor releases on a major version if only one major version is the same for both and to support only the latest minor release per version if multiple major versions are supported.
 
 ### Currently Supported Versions
 Versions currently supported by Security Fixes.
