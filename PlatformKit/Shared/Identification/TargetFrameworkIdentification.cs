@@ -70,6 +70,26 @@ public class TargetFrameworkIdentification
 
             return stringBuilder.ToString();
         }
+
+        // ReSharper disable once InconsistentNaming
+        protected static string GetMonoTFM()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("mono");
+                    
+            if(OperatingSystem.IsMacOS())
+            {
+                stringBuilder.Append("mac");
+            }
+#if NET5_0_OR_GREATER
+            else if (OperatingSystem.IsAndroid())
+            {
+                stringBuilder.Append("android");
+            }
+#endif
+
+            return stringBuilder.ToString();
+        }
     
         /// <summary>
         /// Detect the Target Framework Moniker (TFM) of the currently running system.
@@ -222,23 +242,7 @@ public class TargetFrameworkIdentification
                 }
                 else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))
                 {
-                    stringBuilder.Clear();
-                    stringBuilder.Append("mono");
-                    
-                    if(OperatingSystem.IsMacOS())
-                    {
-                        stringBuilder.Append("mac");
-                    }
-#if NET5_0_OR_GREATER
-                    else if (OperatingSystem.IsAndroid())
-                    {
-                        stringBuilder.Append("android");
-                    }
-#endif
-                    else
-                    {
-                       return stringBuilder.ToString();
-                    }
+                    return GetMonoTFM();
                 }
             }
 
