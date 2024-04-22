@@ -11,6 +11,7 @@
 using System;
 using System.Runtime.InteropServices;
 using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -303,30 +304,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OperatingSystem.IsMacOS())
         {
-            Version detected = DetectMacOsVersion();
-            Version expected = GetMacOsVersionFromEnum(macOsVersion);
-            
-            if (detected.Major >= expected.Major)
-            {
-                if (detected.Minor >= expected.Minor)
-                {
-                    if (detected.Build >= expected.Build)
-                    {
-                        if (detected.Revision >= expected.Revision)
-                        {
-                            return true;
-                        }
-
-                        return false;
-                    }
-
-                    return false;
-                }
-
-                return false;
-            }
-
-            return false;
+            return DetectMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
         }
 
         throw new PlatformNotSupportedException();

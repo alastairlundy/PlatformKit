@@ -11,6 +11,7 @@
 using System;
 using System.IO;
 using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.System.Extensions.VersionExtensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Shared.Extensions;
@@ -255,53 +256,7 @@ public class LinuxAnalyzer
         {
             if (OperatingSystem.IsLinux())
             {
-                Version detected = DetectLinuxKernelVersion();
-
-                if (detected.Major > expectedKernelVersion.Major)
-                {
-                    return true;
-                }
-                else if(detected.Major == expectedKernelVersion.Major)
-                {
-                    if (detected.Minor > expectedKernelVersion.Minor)
-                    {
-                        return true;
-                    }
-                    else if (detected.Minor == expectedKernelVersion.Minor)
-                    {
-                        if (detected.Build > expectedKernelVersion.Build)
-                        {
-                            return true;
-                        }
-                        else if (detected.Build == expectedKernelVersion.Build)
-                        {
-                            if (detected.Revision > expectedKernelVersion.Revision)
-                            {
-                                return true;
-                            }
-                            else if (detected.Revision == expectedKernelVersion.Revision)
-                            {
-                                return true;
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
+                return DetectLinuxKernelVersion().IsAtLeast(expectedKernelVersion);
             }
 
             throw new PlatformNotSupportedException();

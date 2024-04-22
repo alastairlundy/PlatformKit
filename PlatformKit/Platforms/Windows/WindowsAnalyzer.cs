@@ -891,7 +891,7 @@ for (int index = 0; index < array.Length; index++)
         {
             if (OperatingSystem.IsWindows())
             {
-                return (DetectWindowsVersion().Build >= GetWindowsVersionFromEnum(windowsVersion).Build);
+                return DetectWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
             }
             
             throw new PlatformNotSupportedException();
