@@ -50,9 +50,7 @@ public class FreeBsdAnalyzer
         {
             string version = _processManager.RunProcessLinux("", "uname", "-v").Replace("FreeBSD", string.Empty);
 
-            string[] arr = version.Split(' ');
-
-            string rel = arr[0].Replace("-release", string.Empty);
+            string rel = version.Split(' ')[0].Replace("-release", string.Empty);
 
             return Version.Parse(rel.AddMissingZeroes(2));
         }
