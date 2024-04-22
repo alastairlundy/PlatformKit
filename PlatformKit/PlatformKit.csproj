@@ -14,11 +14,19 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.6 series
-* Removed extension code and added dependency on a System Extensions package
-* Added dependency on PlatformKit.Extensions.OperatingSystem and changed internal OS detection code to use OperatingSystem extensions.
-* Deprecated ``SoftwareRequirementsAnalyzer`` and ``ProcessExtensions`
-* Improved guards against calling Windows only methods on non Windows platforms</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.7.0 RC 1
+* Backported performance improvements from 4.0.0 Beta 10
+* Switched to using explicit typing
+* Reduced code duplication
+
+### Changes since 3.6 series (including changes from 3.7.0 RC 1)
+* Removed internal extension code and added dependency on a System Extensions package
+* Added dependency on PlatformKit.Extensions.OperatingSystem and changed internal OS detection code to use ``OperatingSystem`` extensions.
+* Deprecated ``SoftwareRequirementsAnalyzer`` and ``ProcessExtensions``
+* Improved guards against calling Windows only methods on non Windows platforms
+* Backported performance improvements from 4.0.0 Beta 10
+* Switched to using explicit typing
+* Reduced code duplication</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +36,7 @@
    <AssemblyVersion>3.7.0.0</AssemblyVersion>
         <FileVersion>3.7.0.0</FileVersion>
         <Version>3.7.0.0</Version>
-        <PackageVersion>3.7.0-rc.1</PackageVersion>
+        <PackageVersion>3.7.0</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
