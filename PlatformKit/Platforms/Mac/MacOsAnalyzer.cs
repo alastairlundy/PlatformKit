@@ -49,7 +49,7 @@ namespace PlatformKit.Mac;
         /// <returns></returns>
         public static bool IsAppleSiliconMac()
         {
-            return GetMacProcessorType().Equals(MacProcessorType.AppleSilicon);
+            return GetMacProcessorType() == MacProcessorType.AppleSilicon;
         }
         
         /// <summary>
