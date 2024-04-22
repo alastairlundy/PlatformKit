@@ -72,9 +72,9 @@ public class WindowsAnalyzer
     {
         if (OperatingSystem.IsWindows())
         {
-            var edition = windowsSystemInformation.OsName.ToLower();
+            string edition = windowsSystemInformation.OsName.ToLower();
 
-            //var edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+            //string edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
             //   "EditionID");
             
                 if (edition.Contains("home"))
@@ -182,12 +182,12 @@ public class WindowsAnalyzer
         
         NetworkCard lastNetworkCard = null;
 
-        var desc = CommandRunner.RunPowerShellCommand("systeminfo");
+        string desc = CommandRunner.RunPowerShellCommand("systeminfo");
 
 #if NET5_0_OR_GREATER
-        var array = desc.Split(Environment.NewLine);
+        string[] array = desc.Split(Environment.NewLine);
 #elif NETSTANDARD2_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-        var array = desc.Split(new[]
+        string[] array = desc.Split(new[]
         {
             Environment.NewLine
         }, StringSplitOptions.None);
@@ -200,9 +200,9 @@ bool wasLastLineNetworkLine = false;
 
 int networkCardNumber = 0;
 
-for (var index = 0; index < array.Length; index++)
+for (int index = 0; index < array.Length; index++)
 {
-    var nextLine = "";
+    string nextLine = "";
 
     array[index] = array[index].Replace("  ", String.Empty);
 
@@ -257,7 +257,7 @@ for (var index = 0; index < array.Length; index++)
     {
         nextLine = nextLine.Replace("Original Install Date:", String.Empty);
 
-        var info = nextLine.Split(',');
+        string[] info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -270,9 +270,9 @@ for (var index = 0; index < array.Length; index++)
         {
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
-            var hours = info[1].Substring(0, 2);
-            var mins = info[1].Substring(2, 2);
-            var seconds = info[1].Substring(3, 2);
+            string hours = info[1].Substring(0, 2);
+            string mins = info[1].Substring(2, 2);
+            string seconds = info[1].Substring(3, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
             dt = dt.AddMinutes(Double.Parse(mins));
@@ -284,7 +284,7 @@ for (var index = 0; index < array.Length; index++)
     else if (nextLine.ToLower().Contains("system boot time:"))
     {
         nextLine = nextLine.Replace("System Boot Time:", String.Empty);
-        var info = nextLine.Split(',');
+        string[] info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -297,9 +297,9 @@ for (var index = 0; index < array.Length; index++)
         {
             info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
 
-            var hours = info[1].Substring(0, 2);
-            var mins = info[1].Substring(2, 2);
-            var seconds = info[1].Substring(4, 2);
+            string hours = info[1].Substring(0, 2);
+            string mins = info[1].Substring(2, 2);
+            string seconds = info[1].Substring(4, 2);
 
             dt = dt.AddHours(Double.Parse(hours));
             dt = dt.AddMinutes(Double.Parse(mins));
@@ -461,7 +461,7 @@ for (var index = 0; index < array.Length; index++)
         
         if (networkCards.Contains(lastNetworkCard))
         {
-           var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+           int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
            networkCards[position].ConnectionName = nextLine.Replace("Connection Name:", String.Empty).Replace("  ", String.Empty);
         }
     }
@@ -469,17 +469,17 @@ for (var index = 0; index < array.Length; index++)
     {
         wasLastLineProcLine = false;
         
-        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
         networkCards[position].DhcpEnabled = array[index + 4].ToLower().Contains("yes");
     }
     else if (nextLine.ToLower().Contains("dhcp server:"))
     {
-        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
         networkCards[position].DhcpServer = nextLine.Replace("DHCP Server:", String.Empty).Replace("  ", String.Empty);
     }
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
-        var compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
+        string compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
         
         int dotCounter = 0;
         foreach (char c in compare)

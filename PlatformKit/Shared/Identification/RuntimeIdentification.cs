@@ -189,7 +189,7 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsMacOS())
             {
-                var version = MacOsAnalyzer.GetMacOsVersion();
+                Version version = MacOsAnalyzer.GetMacOsVersion();
 
                 if (version.Major == 10)
                 {
@@ -248,8 +248,8 @@ namespace PlatformKit.Identification
         /// <returns></returns>
         public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
-            var osName = GetOsNameString(identifierType);
-            var cpuArch = GetArchitectureString();
+            string osName = GetOsNameString(identifierType);
+            string cpuArch = GetArchitectureString();
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric ||
                 identifierType == RuntimeIdentifierType.Generic && includeOperatingSystemName == false)
@@ -266,7 +266,7 @@ namespace PlatformKit.Identification
                 OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.DistroSpecific ||
                 OperatingSystem.IsLinux() && identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
             {
-                var osVersion = GetOsVersionString();
+                string osVersion = GetOsVersionString();
 
                 if (OperatingSystem.IsWindows())
                 {

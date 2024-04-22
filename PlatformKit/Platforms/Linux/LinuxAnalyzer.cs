@@ -113,7 +113,7 @@ public class LinuxAnalyzer
 
                 for (int index = 0; index < resultArray.Length; index++)
                 {
-                    foreach (var c in delimiter)
+                    foreach (char c in delimiter)
                     {
                         resultArray[index] = resultArray[index].Replace(c.ToString(), string.Empty);
                     }

@@ -88,7 +88,7 @@ namespace PlatformKit.Mac;
 #elif NET5_0_OR_GREATER
             string[] array = info.Split(Environment.NewLine);
 #endif
-            foreach (var str in array)
+            foreach (string str in array)
             {
                 if (str.ToLower().Contains(key.ToLower()))
                 {

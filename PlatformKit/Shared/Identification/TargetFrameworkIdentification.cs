@@ -192,7 +192,7 @@ public class TargetFrameworkIdentification
                         {
                             if(OperatingSystem.IsMacOS())
                             {
-                                var macOsVersion = MacOsAnalyzer.GetMacOsVersion();
+                                Version macOsVersion = MacOsAnalyzer.GetMacOsVersion();
 
                                 stringBuilder.Append(macOsVersion.Major);
                                 stringBuilder.Append(".");
@@ -204,9 +204,9 @@ public class TargetFrameworkIdentification
                             }
                             else if(OperatingSystem.IsWindows())
                             {
-                                var windowsVersion = WindowsAnalyzer.GetWindowsVersion();
+                                Version windowsVersion = WindowsAnalyzer.GetWindowsVersion();
 
-                                var windowsVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum();
+                                WindowsVersion windowsVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum();
 
                                 switch (windowsVersionEnum)
                                 {

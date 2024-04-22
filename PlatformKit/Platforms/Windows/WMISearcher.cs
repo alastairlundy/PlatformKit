@@ -75,7 +75,7 @@ public class WMISearcher
         {
             string[] arr = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property).Split(Convert.ToChar(Environment.NewLine));
             
-           foreach (var str in arr)
+           foreach (string str in arr)
            {
                if (str.ToLower().StartsWith(property.ToLower()))
                {

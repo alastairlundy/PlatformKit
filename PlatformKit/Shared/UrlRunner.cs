@@ -77,7 +77,7 @@ public class UrlRunner
                 }
                 if (OperatingSystem.IsMacOS())
                 {
-                    var task = new Task(() => Process.Start("open", url));
+                    Task task = new Task(() => Process.Start("open", url));
                     task.Start();
                 }
                 if (OperatingSystem.IsFreeBSD())
