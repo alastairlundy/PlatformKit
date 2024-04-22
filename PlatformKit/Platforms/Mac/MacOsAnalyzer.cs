@@ -286,7 +286,7 @@ namespace PlatformKit.Mac;
             case MacOsVersion.NotDetected:
                 throw new MacOsVersionDetectionException();
             default:
-                throw new ArgumentException();
+                throw new ArgumentException("An invalid MacOsVersion enum value was provided.");
         }        
     }
 
