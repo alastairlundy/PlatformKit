@@ -224,7 +224,7 @@ namespace PlatformKit
         {
             if (OperatingSystem.IsWindows())
             {
-                string location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "WindowsPowerShell" + Path.DirectorySeparatorChar + "v1.0";
+                string location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
                 return RunProcessWindows(location, "powershell", command, processStartInfo);
             }
                 
@@ -246,16 +246,17 @@ namespace PlatformKit
                 
                 string[] array = command.Split(' ');
 
+                StringBuilder stringBuilder = new StringBuilder();
+                
                 if (array.Length > 1)
                 {
-                    string args = "";
 
                     foreach (string argument in array)
                     {
-                        args += argument + " ";
+                        stringBuilder.Append($"{argument} ");
                     }
 
-                    args = args.Replace(array[0], String.Empty);
+                    string args = stringBuilder.ToString().Replace(array[0], String.Empty);
 
                    return RunProcessMac(location, array[0], args);
                 }

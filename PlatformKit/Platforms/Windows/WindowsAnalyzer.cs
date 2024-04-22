@@ -150,8 +150,7 @@ public class WindowsAnalyzer
     {
         if (OperatingSystem.IsWindows())
         {
-            string result = _processManager.RunPowerShellCommand("Get-CimInstance -Class " 
-                                                              + wmiClass + " -Property " + property);
+            string result = _processManager.RunPowerShellCommand($"Get-CimInstance -Class {wmiClass} -Property {property}");
             
             string[] arr = result.Split(Convert.ToChar(Environment.NewLine));
             
@@ -188,7 +187,7 @@ public class WindowsAnalyzer
     public string GetWindowsRegistryValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
-            string result = _processManager.RunCmdCommand("REG QUERY " + query + " /v " + value);
+            string result = _processManager.RunCmdCommand($"REG QUERY {query} /v {value}");
                     
                 if (result != null)
                 {
