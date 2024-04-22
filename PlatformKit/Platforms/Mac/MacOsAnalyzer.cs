@@ -387,8 +387,6 @@ namespace PlatformKit.Mac;
                     return Version.Parse(array[index]);
                 }
             }
-
-            throw new PlatformNotSupportedException();
         }
 
         throw new PlatformNotSupportedException();
