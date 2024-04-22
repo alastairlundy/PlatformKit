@@ -155,7 +155,7 @@ public class WindowsAnalyzer
             
             string[] arr = result.Split(Convert.ToChar(Environment.NewLine));
             
-           foreach (var str in arr)
+           foreach (string str in arr)
            {
                Console.WriteLine(str);
                
@@ -241,12 +241,12 @@ public class WindowsAnalyzer
         
         NetworkCard lastNetworkCard = null;
 
-        var desc = _processManager.RunPowerShellCommand("systeminfo");
+        string desc = _processManager.RunPowerShellCommand("systeminfo");
 
 #if NET5_0_OR_GREATER
-        var array = desc.Split(Environment.NewLine);
+        string[] array = desc.Split(Environment.NewLine);
 #elif NETSTANDARD2_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-        var array = desc.Split(new[]
+        string[] array = desc.Split(new[]
         {
             Environment.NewLine
         }, StringSplitOptions.None);
@@ -259,7 +259,7 @@ bool wasLastLineNetworkLine = false;
 
 int networkCardNumber = 0;
 
-for (var index = 0; index < array.Length; index++)
+for (int index = 0; index < array.Length; index++)
 {
     string nextLine = "";
 
@@ -343,7 +343,7 @@ for (var index = 0; index < array.Length; index++)
     else if (nextLine.ToLower().Contains("system boot time:"))
     {
         nextLine = nextLine.Replace("System Boot Time:", String.Empty);
-        var info = nextLine.Split(',');
+        string[] info = nextLine.Split(',');
 
         DateTime dt = new DateTime();
 
@@ -529,12 +529,12 @@ for (var index = 0; index < array.Length; index++)
     {
         wasLastLineProcLine = false;
         
-        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
         networkCards[position].DhcpEnabled = array[index + 4].ToLower().Contains("yes");
     }
     else if (nextLine.ToLower().Contains("dhcp server:"))
     {
-        var position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
+        int position = GetNetworkCardPositionInWindowsSysInfo(networkCards, lastNetworkCard);
         networkCards[position].DhcpServer = nextLine.Replace("DHCP Server:", String.Empty).Replace("  ", String.Empty);
     }
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))

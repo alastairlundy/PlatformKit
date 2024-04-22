@@ -24,7 +24,7 @@ namespace PlatformKit.Shared.Extensions
         [Obsolete(DeprecationMessages.DeprecationV4)]
         public static string[] ToStringArray(this Process process)
         {
-            var strList = new List<string>();
+            List<string> strList = new List<string>();
             Process[] processes = Process.GetProcesses();
 
             foreach (Process proc in processes)
@@ -47,7 +47,7 @@ namespace PlatformKit.Shared.Extensions
         {
             foreach (Process proc in Process.GetProcesses())
             {
-                var procName =  proc.ProcessName.Replace("System.Diagnostics.Process (", String.Empty);
+                string procName =  proc.ProcessName.Replace("System.Diagnostics.Process (", String.Empty);
 
                 //Console.WriteLine(proc.ProcessName);
 

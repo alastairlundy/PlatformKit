@@ -91,7 +91,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
 #elif NET5_0_OR_GREATER
             string[] array = info.Split(Environment.NewLine);
 #endif
-            foreach (var str in array)
+            foreach (string str in array)
             {
                 if (str.ToLower().Contains(key.ToLower()))
                 {
@@ -376,8 +376,8 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OperatingSystem.IsMacOS())
         {
-            var desc = RuntimeInformation.OSDescription;
-            var arr = desc.Split(' ');
+            string desc = RuntimeInformation.OSDescription;
+            string[] arr = desc.Split(' ');
         
             for (int index = 0; index < arr.Length; index++)
             {
@@ -419,7 +419,7 @@ public class MacOSAnalyzer : MacOsAnalyzer
     {
         if (OperatingSystem.IsMacOS())
         {
-            var version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
+            string version = GetMacSwVersInfo()[1].Replace("ProductVersion:", String.Empty).Replace(" ", String.Empty);
         
             return Version.Parse(version.AddMissingZeroes());
         }
