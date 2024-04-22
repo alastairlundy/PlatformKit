@@ -85,7 +85,6 @@ namespace PlatformKit.Identification
             {
                 return "any";
             }
-
             if (OperatingSystem.IsWindows())
             {
                 osName = "win";

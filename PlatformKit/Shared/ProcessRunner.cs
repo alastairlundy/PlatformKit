@@ -99,7 +99,8 @@ namespace PlatformKit
             task.Start();
 
             task.Wait();
-            var end = process.StandardOutput.ReadToEnd();
+            
+            string end = process.StandardOutput.ReadToEnd();
 
             if (end == null)
             {
@@ -129,7 +130,7 @@ namespace PlatformKit
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
         public static string RunProcessOnMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
-            var procStartInfo = new ProcessStartInfo
+            ProcessStartInfo procStartInfo = new ProcessStartInfo
             {
                 WorkingDirectory = executableLocation,
                 FileName = executableName,
@@ -194,7 +195,7 @@ namespace PlatformKit
                 procStartInfo.RedirectStandardOutput = true;
             }
                 
-            var process = new Process { StartInfo = procStartInfo };
+            Process process = new Process { StartInfo = procStartInfo };
             process.Start();
 
             process.WaitForExit();

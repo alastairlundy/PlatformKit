@@ -73,7 +73,7 @@ public class WMISearcher
     {
         if (OperatingSystem.IsWindows())
         {
-            var arr = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property).Split(Convert.ToChar(Environment.NewLine));
+            string[] arr = CommandRunner.RunPowerShellCommand("Get-CimInstance -Class " + wmiClass + " -Property " + property).Split(Convert.ToChar(Environment.NewLine));
             
            foreach (var str in arr)
            {

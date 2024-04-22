@@ -63,7 +63,7 @@ namespace PlatformKit.Windows
                     {
                         if (query.Contains(output))
                         {
-                            var value = output.Replace(query + "                         : ", string.Empty);
+                            string value = output.Replace(query + "                         : ", string.Empty);
                             queryObjectsDictionary.Add(query, value);
                         }
                     }
