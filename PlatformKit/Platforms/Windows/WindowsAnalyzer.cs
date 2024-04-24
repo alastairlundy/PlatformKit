@@ -603,23 +603,16 @@ for (int index = 0; index < array.Length; index++)
     /// <exception cref="OperatingSystemDetectionException"></exception>
     public static bool IsWindows11(WindowsVersion windowsVersion)
     {
-        switch (windowsVersion)
+        return windowsVersion switch
         {
-            case WindowsVersion.Win11_21H2:
-                return true;
-            case WindowsVersion.Win11_22H2:
-                return true;
-            case WindowsVersion.Win11_23H2:
-                return true;
-            case WindowsVersion.Win11_InsiderPreview:
-                return true;
-            case WindowsVersion.NotSupported:
-                return false;
-            case WindowsVersion.NotDetected:
-                throw new WindowsVersionDetectionException();
-            default:
-                return false;
-        }
+            WindowsVersion.Win11_21H2 => true,
+            WindowsVersion.Win11_22H2 => true,
+            WindowsVersion.Win11_23H2 => true,
+            WindowsVersion.Win11_InsiderPreview => true,
+            WindowsVersion.NotSupported => false,
+            WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
+            _ => false,
+        };
     }
 
         /// <summary>
