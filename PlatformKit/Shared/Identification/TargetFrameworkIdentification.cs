@@ -103,9 +103,9 @@ public class TargetFrameworkIdentification
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
-            Version frameworkVersion = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", String.Empty)
-                .Replace("core", String.Empty)
-                .Replace(" ", String.Empty).AddMissingZeroes());
+            Version frameworkVersion = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
+                .Replace("core", string.Empty)
+                .Replace(" ", string.Empty).AddMissingZeroes());
             
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
