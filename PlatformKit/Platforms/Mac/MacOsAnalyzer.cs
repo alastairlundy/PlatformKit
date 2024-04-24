@@ -257,37 +257,23 @@ namespace PlatformKit.Mac;
     /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
     public static Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
-        switch (macOsVersion)
+        return macOsVersion switch
         {
-            case MacOsVersion.v10_9_Mavericks:
-                return new(10, 9);
-            case MacOsVersion.v10_10_Yosemite:
-                return new(10, 10);
-            case MacOsVersion.v10_11_ElCapitan:
-                return new(10, 11);
-            case MacOsVersion.v10_12_Sierra:
-                return new(10, 12);
-            case MacOsVersion.v10_13_HighSierra:
-                return new(10, 13);
-            case MacOsVersion.v10_14_Mojave:
-                return new(10, 14);
-            case MacOsVersion.v10_15_Catalina:
-                return new(10, 15);
-            case MacOsVersion.v11_BigSur:
-                return new(11, 0);
-            case MacOsVersion.v12_Monterey:
-                return new(12, 0);
-            case MacOsVersion.v13_Ventura:
-                return new(13, 0);
-            case MacOsVersion.v14_Sonoma:
-                return new Version(14, 0);
-            case MacOsVersion.NotSupported:
-                throw new PlatformNotSupportedException();
-            case MacOsVersion.NotDetected:
-                throw new MacOsVersionDetectionException();
-            default:
-                throw new ArgumentException("An invalid MacOsVersion enum value was provided.");
-        }        
+            MacOsVersion.v10_9_Mavericks => new(10, 9),
+            MacOsVersion.v10_10_Yosemite => new(10, 10),
+            MacOsVersion.v10_11_ElCapitan => new(10, 11),
+            MacOsVersion.v10_12_Sierra => new(10, 12),
+            MacOsVersion.v10_13_HighSierra => new(10, 13),
+            MacOsVersion.v10_14_Mojave => new(10, 14),
+            MacOsVersion.v10_15_Catalina => new(10, 15),
+            MacOsVersion.v11_BigSur => new(11, 0),
+            MacOsVersion.v12_Monterey => new(12, 0),
+            MacOsVersion.v13_Ventura => new(13, 0),
+            MacOsVersion.v14_Sonoma => new Version(14, 0),
+            MacOsVersion.NotSupported => throw new PlatformNotSupportedException(),
+            MacOsVersion.NotDetected => throw new MacOsVersionDetectionException(),
+            _ => throw new ArgumentException("An invalid MacOsVersion enum value was provided."),
+        };
     }
 
 
