@@ -78,7 +78,7 @@ public static class CommandRunner
                     stringBuilder.Append($"{argument} ");
                 }
 
-                string args = stringBuilder.ToString().Replace(array[0], String.Empty);
+                string args = stringBuilder.ToString().Replace(array[0], string.Empty);
                 
                 return ProcessRunner.RunProcessOnMac(location, array[0], args);
             }
@@ -165,7 +165,7 @@ public static class CommandRunner
             {
                 for (int index = 1; index < args.Length; index++)
                 {
-                    stringBuilder.Append(args[index].Replace(command, String.Empty));
+                    stringBuilder.Append(args[index].Replace(command, string.Empty));
                 }
             }
 
