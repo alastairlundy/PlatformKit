@@ -132,7 +132,7 @@ public class LinuxAnalyzer
                             linuxDistributionInformation.IsLongTermSupportRelease = true;
                         }
                         
-                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty).Replace("LTS", String.Empty);
+                        resultArray[index] = resultArray[index].Replace("VERSION=", string.Empty).Replace("LTS", string.Empty);
                         
                         linuxDistributionInformation.Version = resultArray[index];
                     }
