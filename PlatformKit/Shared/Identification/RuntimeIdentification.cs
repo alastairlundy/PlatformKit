@@ -56,7 +56,7 @@ namespace PlatformKit.Identification
         /// <returns></returns>
         protected static string GetArchitectureString()
         {
-            string cpuArch = RuntimeInformation.OSArchitecture switch
+            return RuntimeInformation.OSArchitecture switch
             {
                 Architecture.X64 => "x64",
                 Architecture.X86 => "x86",
@@ -67,8 +67,6 @@ namespace PlatformKit.Identification
 #endif
                 _ => null
             };
-
-            return cpuArch;
         }
 
         /// <summary>
