@@ -22,6 +22,7 @@
        SOFTWARE.
    */
 
+using PlatformKit.Internal.Deprecation;
 using System;
 using System.Reflection;
 
@@ -33,33 +34,36 @@ namespace PlatformKit.Identification;
 /// </summary>
 public class PlatformIdentification
 {
-    
-        /// <summary>
-        /// Return's the executing app's assembly.
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once MemberCanBePrivate.Global
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        public Assembly GetAssembly()
+
+    /// <summary>
+    /// Return's the executing app's assembly.
+    /// </summary>
+    /// <returns></returns>
+    // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once MemberCanBeMadeStatic.Global
+    [Obsolete(DeprecationMessages.DeprecationV5)]
+    public Assembly GetAssembly()
         {
             return Assembly.GetEntryAssembly();
         }
 
-        /// <summary>
-        /// Gets the running App's name as reported by the Assembly.
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once UnusedMember.Global
-        public string GetAppName()
+    /// <summary>
+    /// Gets the running App's name as reported by the Assembly.
+    /// </summary>
+    /// <returns></returns>
+    // ReSharper disable once UnusedMember.Global
+    [Obsolete(DeprecationMessages.DeprecationV5)]
+    public string GetAppName()
         {
             return GetAssembly().GetName().Name;
         }
-        
-        /// <summary>
-        /// Return an app's version as a Version data type.
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once UnusedMember.Global
+
+    /// <summary>
+    /// Return an app's version as a Version data type.
+    /// </summary>
+    /// <returns></returns>
+    // ReSharper disable once UnusedMember.Global
+    [Obsolete(DeprecationMessages.DeprecationV5)]
         public Version GetAppVersion()
         {
             return GetAssembly().GetName().Version;
