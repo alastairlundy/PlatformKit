@@ -107,7 +107,7 @@ public class LinuxAnalyzer
 
             if (OperatingSystem.IsLinux())
             {
-                char[] delimiter = { ' ', '\t', '\n', '\r', '"' };
+                char[] delimiter = [' ', '\t', '\n', '\r', '"'];
                 
                 string[] resultArray = File.ReadAllLines("/etc/os-release");
 
