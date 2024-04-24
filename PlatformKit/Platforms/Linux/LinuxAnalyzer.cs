@@ -228,9 +228,9 @@ public class LinuxAnalyzer
                 if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
                 (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4")))
                 {
-                  //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
-                   //This normally occurs with .04 being shown as .4
-                  linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
+                    //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
+                    //This normally occurs with .04 being shown as .4
+                    linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
                 }
               
 
