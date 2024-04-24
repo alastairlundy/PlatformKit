@@ -38,7 +38,7 @@ using PlatformKit.Windows;
     
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     
-            var title = $"{platformManager.GetAppName()} v{platformManager.GetAppVersion()}";
+            var title = $"{platformManager.GetProjectName()} v{platformManager.GetProjectVersion()}";
             Console.Title = title;
             //    Console.WriteLine(title) ;
           

@@ -32,7 +32,7 @@ namespace PlatformKit.Identification;
 /// <summary>
 /// 
 /// </summary>
-public class PlatformIdentification
+public class PlatformKitIdentification
 {
 
     /// <summary>
@@ -48,23 +48,23 @@ public class PlatformIdentification
         }
 
     /// <summary>
-    /// Gets the running App's name as reported by the Assembly.
+    /// Gets the running project's name as reported by the Assembly.
     /// </summary>
     /// <returns></returns>
     // ReSharper disable once UnusedMember.Global
     [Obsolete(DeprecationMessages.DeprecationV5)]
-    public string GetAppName()
+    public string GetProjectName()
         {
             return GetAssembly().GetName().Name;
         }
 
     /// <summary>
-    /// Return an app's version as a Version data type.
+    /// Return a project's version as a Version data type.
     /// </summary>
     /// <returns></returns>
     // ReSharper disable once UnusedMember.Global
     [Obsolete(DeprecationMessages.DeprecationV5)]
-        public Version GetAppVersion()
+        public Version GetProjectVersion()
         {
             return GetAssembly().GetName().Version;
         }
