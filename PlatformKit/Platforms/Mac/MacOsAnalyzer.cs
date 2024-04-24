@@ -92,7 +92,7 @@ namespace PlatformKit.Mac;
             {
                 if (str.ToLower().Contains(key.ToLower()))
                 {
-                    return str.Replace(key, String.Empty).Replace(":", String.Empty);
+                    return str.Replace(key, string.Empty).Replace(":", string.Empty);
                 }
             }
 
@@ -358,16 +358,16 @@ namespace PlatformKit.Mac;
             {
                 if (array[index].ToLower().StartsWith("root:xnu-"))
                 {
-                    array[index] = array[index].Replace("root:xnu-", String.Empty)
+                    array[index] = array[index].Replace("root:xnu-", string.Empty)
                         .Replace("~", ".");
 
                     if (IsAppleSiliconMac())
                     {
-                        array[index] = array[index].Replace("/RELEASE_ARM64_T", String.Empty).Remove(array.Length - 4);
+                        array[index] = array[index].Replace("/RELEASE_ARM64_T", string.Empty).Remove(array.Length - 4);
                     }
                     else
                     {
-                        array[index] = array[index].Replace("/RELEASE_X86_64", String.Empty);
+                        array[index] = array[index].Replace("/RELEASE_X86_64", string.Empty);
                     }
 
                     return Version.Parse(array[index]);
@@ -404,7 +404,7 @@ namespace PlatformKit.Mac;
         if (OperatingSystem.IsMacOS())
         {
             return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:",
-                String.Empty).Replace(" ", String.Empty);
+                string.Empty).Replace(" ", string.Empty);
         }
 
         throw new PlatformNotSupportedException();
