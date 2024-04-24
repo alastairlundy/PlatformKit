@@ -75,7 +75,7 @@ public static class CommandRunner
 
                 foreach (string argument in array)
                 {
-                    stringBuilder.Append(argument + " ");
+                    stringBuilder.Append($"{argument} ");
                 }
 
                 string args = stringBuilder.ToString().Replace(array[0], String.Empty);
