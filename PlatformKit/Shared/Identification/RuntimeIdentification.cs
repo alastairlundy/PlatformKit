@@ -142,25 +142,15 @@ namespace PlatformKit.Identification
                 }
                 else if (!WindowsAnalyzer.IsWindows10() && !WindowsAnalyzer.IsWindows11())
                 {
-                    switch (WindowsAnalyzer.GetWindowsVersionToEnum())
+                    osVersion = WindowsAnalyzer.GetWindowsVersionToEnum() switch
                     {
-                        case WindowsVersion.Win7:
-                            osVersion = "7";
-                            break;
-                        case WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2:
-                            osVersion = "7";
-                            break;
-                        case WindowsVersion.Win8 or WindowsVersion.WinServer_2012:
-                            osVersion = "8";
-                            break;
-                        case WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2:
-                            osVersion = "81";
-                            break;
-                        case WindowsVersion.NotDetected:
-                            throw new WindowsVersionDetectionException();
-                        default:
-                            throw new WindowsVersionDetectionException();
-                    }
+                        WindowsVersion.Win7 => "7",
+                        WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2 => "7",
+                        WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => "8",
+                        WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => "81",
+                        WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
+                        _ => throw new WindowsVersionDetectionException(),
+                    };
                 }
             }
             if (OperatingSystem.IsLinux())
