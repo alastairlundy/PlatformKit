@@ -34,7 +34,7 @@ using PlatformKit.Mac;
 using PlatformKit.Windows;
 
 
-    var platformManager = new PlatformIdentification();
+    var platformManager = new PlatformKitIdentification();
     
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     
@@ -105,7 +105,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("Is an LTS release? " + LinuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
             }
 
-Console.WriteLine("PlatformKit Version: " + PlatformIdentification.GetPlatformKitVersion().ToString());
+Console.WriteLine("PlatformKit Version: " + PlatformKitIdentification.GetPlatformKitVersion().ToString());
 
             Console.WriteLine("Current Directory: " + Environment.CurrentDirectory);
             
