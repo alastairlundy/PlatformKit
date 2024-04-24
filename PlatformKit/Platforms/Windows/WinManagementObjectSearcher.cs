@@ -51,7 +51,7 @@ namespace PlatformKit.Windows
             
                 if (OperatingSystem.IsWindows())
                 {
-                    string output = CommandRunner.RunPowerShellCommand("Get-WmiObject -Class " + wmiClass + " | Select-Object *")
+                    string output = CommandRunner.RunPowerShellCommand($"Get-WmiObject -Class {wmiClass} | Select-Object *")
                         .Replace(wmiClass, string.Empty);
 
                     if (output == null)
