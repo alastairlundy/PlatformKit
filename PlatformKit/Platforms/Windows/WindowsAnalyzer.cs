@@ -73,9 +73,6 @@ public class WindowsAnalyzer
         if (OperatingSystem.IsWindows())
         {
             string edition = windowsSystemInformation.OsName.ToLower();
-
-            //string edition = GetWindowsRegistryValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
-            //   "EditionID");
             
                 if (edition.Contains("home"))
                 {
@@ -561,47 +558,28 @@ for (int index = 0; index < array.Length; index++)
     /// <returns></returns>
     public static bool IsWindows10(WindowsVersion windowsVersion)
     {
-        switch (windowsVersion)
+        return windowsVersion switch
         {
-            case WindowsVersion.Win10_v1507:
-                return true;
-            case WindowsVersion.Win10_v1511:
-                return true;
-            case WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016:
-                return true;
-            case WindowsVersion.Win10_v1703:
-                return true;
-            case WindowsVersion.Win10_v1709_Mobile:
-                return true;
-            case WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709 :
-                return true;
-            case WindowsVersion.Win10_v1803:
-                return true;
-            case WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019:
-                return true;
-            case WindowsVersion.Win10_v1903:
-                return true;
-            case WindowsVersion.Win10_v1909:
-                return true;
-            case WindowsVersion.Win10_v2004:
-                return true;
-            case WindowsVersion.Win10_20H2:
-                return true;
-            case WindowsVersion.Win10_21H1:
-                return true;
-            case WindowsVersion.Win10_21H2:
-                return true;
-            case WindowsVersion.Win10_22H2:
-                return true;
-            case WindowsVersion.Win10_Server2022:
-                return true;
-            case WindowsVersion.Win10_InsiderPreview:
-                return true;
-            case WindowsVersion.NotDetected:
-                throw new WindowsVersionDetectionException();
-            default:
-                return false;
-        }
+            WindowsVersion.Win10_v1507 => true,
+            WindowsVersion.Win10_v1511 => true,
+            WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016 => true,
+            WindowsVersion.Win10_v1703 => true,
+            WindowsVersion.Win10_v1709_Mobile => true,
+            WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709 => true,
+            WindowsVersion.Win10_v1803 => true,
+            WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019 => true,
+            WindowsVersion.Win10_v1903 => true,
+            WindowsVersion.Win10_v1909 => true,
+            WindowsVersion.Win10_v2004 => true,
+            WindowsVersion.Win10_20H2 => true,
+            WindowsVersion.Win10_21H1 => true,
+            WindowsVersion.Win10_21H2 => true,
+            WindowsVersion.Win10_22H2 => true,
+            WindowsVersion.Win10_Server2022 => true,
+            WindowsVersion.Win10_InsiderPreview => true,
+            WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
+            _ => false,
+        };
     }
 
     /// <summary>
