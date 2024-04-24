@@ -64,6 +64,7 @@ namespace PlatformKit.Identification
                 Architecture.Arm64 => "arm64",
 #if NET6_0_OR_GREATER
                 Architecture.S390x => "s390x",
+                Architecture.Wasm => throw new PlatformNotSupportedException(),
 #endif
                 _ => null
             };
