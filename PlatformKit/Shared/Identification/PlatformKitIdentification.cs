@@ -42,7 +42,7 @@ public class PlatformKitIdentification
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once MemberCanBeMadeStatic.Global
     [Obsolete(DeprecationMessages.DeprecationV5)]
-    public Assembly GetAssembly()
+    internal Assembly GetAssembly()
         {
             return Assembly.GetEntryAssembly();
         }
