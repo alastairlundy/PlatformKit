@@ -27,10 +27,10 @@ using System;
 
 namespace PlatformKit.Internal.Exceptions
 {
-    internal class RuntimeIdentifierGenerationException : Exception
+    public class RuntimeIdentifierGenerationException : Exception
     {
 
-        internal RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
+        public RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
         {
             
         }
