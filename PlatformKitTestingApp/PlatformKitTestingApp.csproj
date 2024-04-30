@@ -13,4 +13,8 @@
       <ProjectReference Include="..\PlatformKit\PlatformKit.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.0.0-preview.1" />
+    </ItemGroup>
+
 </Project>

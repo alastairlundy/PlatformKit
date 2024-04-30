@@ -24,9 +24,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-
-using AlastairLundy.System.Extensions.StringExtensions;
-using AlastairLundy.System.Extensions.VersionExtensions;
+using AlastairLundy.Extensions.System.StringExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
