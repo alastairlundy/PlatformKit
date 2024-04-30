@@ -76,7 +76,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.1"/>
+        <PackageReference Include="AlastairLundy.Extensions.System" Version="4.0.0-preview.1" />
     </ItemGroup>
     
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

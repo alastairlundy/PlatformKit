@@ -11,7 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using AlastairLundy.System.Extensions.StringExtensions;
+using AlastairLundy.Extensions.System.StringExtensions;
 using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Exceptions;
 

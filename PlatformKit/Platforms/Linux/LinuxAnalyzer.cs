@@ -10,8 +10,8 @@
 
 using System;
 using System.IO;
-using AlastairLundy.System.Extensions.StringExtensions;
-using AlastairLundy.System.Extensions.VersionExtensions;
+using AlastairLundy.Extensions.System.StringExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Shared.Extensions;
