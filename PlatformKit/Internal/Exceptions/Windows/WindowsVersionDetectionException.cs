@@ -27,9 +27,9 @@ using System;
 
 namespace PlatformKit.Internal.Exceptions;
 
-internal class WindowsVersionDetectionException : Exception
+public class WindowsVersionDetectionException : Exception
 {
-    internal WindowsVersionDetectionException() : base("Failed to detect the version of Windows currently running.")
+    public WindowsVersionDetectionException() : base("Failed to detect the version of Windows currently running.")
     {
         
     }

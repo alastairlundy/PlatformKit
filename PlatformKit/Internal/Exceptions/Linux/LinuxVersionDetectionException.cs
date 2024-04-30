@@ -27,9 +27,9 @@ using System;
 
 namespace PlatformKit.Internal.Exceptions;
 
-internal class LinuxVersionDetectionException : Exception
+public class LinuxVersionDetectionException : Exception
 {
-    internal LinuxVersionDetectionException() : base("Failed to detect the version of Linux running on this computer.")
+    public LinuxVersionDetectionException() : base("Failed to detect the version of Linux running on this computer.")
     {
         
     }

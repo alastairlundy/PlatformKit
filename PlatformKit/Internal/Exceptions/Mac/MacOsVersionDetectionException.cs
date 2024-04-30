@@ -27,9 +27,9 @@ using System;
 
 namespace PlatformKit.Internal.Exceptions;
 
-internal class MacOsVersionDetectionException : Exception
+public class MacOsVersionDetectionException : Exception
 {
-    internal MacOsVersionDetectionException() : base("Failed to detect the version of macOS running on this computer.")
+    public MacOsVersionDetectionException() : base("Failed to detect the version of macOS running on this computer.")
     {
         
     }

@@ -27,9 +27,9 @@ using System;
 
 namespace PlatformKit.Internal.Exceptions;
 
-internal class WindowsEditionDetectionException : Exception
+public class WindowsEditionDetectionException : Exception
 {
-    internal WindowsEditionDetectionException() : base("Failed to detect the Edition of Windows running on this computer.")
+    public WindowsEditionDetectionException() : base("Failed to detect the Edition of Windows running on this computer.")
     {
         
     }
