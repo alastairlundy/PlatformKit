@@ -34,13 +34,13 @@ namespace PlatformKit.Mac
     /// </summary>
     public enum MacOsVersion
     {
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         v10_9_Mavericks,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         v10_10_Yosemite,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         v10_11_ElCapitan,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         v10_12_Sierra,
         //[Obsolete(Deprecation.DeprecationMessages.DeprecationV5)]
         v10_13_HighSierra,
