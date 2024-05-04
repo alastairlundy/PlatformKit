@@ -34,12 +34,13 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         Win8 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         WinServer_2012 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         Win8_1 = 9600,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
+        [Obsolete(DeprecationMessages.FutureDeprecation)]
         WinServer_2012_R2 = 9600,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
