@@ -3,9 +3,12 @@ This document contains the entire version history of the PlatformKit library.
 
 ## Upcoming Releases
 
+## Stable Releases
+
 ### 4.0
 | Version | Availability | Changelog |
 |-|-|-|
+| 4.0.0 | May 4th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0 |
 | 4.0.0 RC 1 | April 29th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-rc.1 |
 | 4.0.0 Beta 10 | April 22nd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.10 |
 | 4.0.0 Beta 9 | April 17th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-beta.9 |
@@ -21,8 +24,6 @@ This document contains the entire version history of the PlatformKit library.
 | 4.0.0 Alpha 3 | February 26th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.3 | 
 | 4.0.0 Alpha 2 | January 19th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.2 | 
 | 4.0.0 Alpha 1 | January 16th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.0.0-alpha.1 | 
-
-## Stable Releases
 
 ### 3.7
 | Version | Availability | Changelog |

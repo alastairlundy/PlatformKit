@@ -2,21 +2,21 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 4.0 | 4.0.0 RC 1| April 29th 2024 |
 
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
+| 4.0 | 4.0.0 | May 4th 2024 |
 | 3.7 | 3.7.1 | May 4th 2024 |
 | 3.5 & 3.6 | 3.6.7 | April 14th 2024 |
-| 3.4 | 3.4.1 | December 8th 2023 |
 
 
 ## Unsupported Versions
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 3.4 | 3.4.1 | December 8th 2023 |
 | 3.3 | 3.3.1 | June 21st 2023 |
 | 3.2 | 3.2.0.1 | January 26th 2023 |
 | 3.1 | 3.1.0 | November 24th 2022 |
