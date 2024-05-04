@@ -223,7 +223,7 @@ namespace PlatformKit.Mac;
                             case 11:
                                 return MacOsVersion.NotSupported;
                             case 12:
-                                return MacOsVersion.v10_12_Sierra;
+                                return MacOsVersion.NotSupported;
                             case 13:
                                 return MacOsVersion.v10_13_HighSierra;
                             case 14:
@@ -258,7 +258,6 @@ namespace PlatformKit.Mac;
     {
         return macOsVersion switch
         {
-            MacOsVersion.v10_12_Sierra => new(10, 12),
             MacOsVersion.v10_13_HighSierra => new(10, 13),
             MacOsVersion.v10_14_Mojave => new(10, 14),
             MacOsVersion.v10_15_Catalina => new(10, 15),
