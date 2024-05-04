@@ -12,7 +12,7 @@ NOTE: .NET Standard 2 and .NET 6 support is deprecated and will be removed in Pl
 
 | PlatformKit Version series | .NET Targets supported | 
 |-|-|
-| 4.x Pre-release | .NET Standard 2.0, .NET 6 (Explicit support) , and .NET 8 (Explicit support) |
+| 4.x | .NET Standard 2.0, .NET 6 (Explicit support) , and .NET 8 (Explicit support) |
 | 3.x | .NET Standard 2.0 and .NET 6 (Explicit support) |
 | 2.0.0 through 2.6.10 | .NET Standard 2.0|
 
