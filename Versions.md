@@ -8,7 +8,7 @@
 
 | Version series | Latest Update | Date of Latest Release |
 |-|-|-|
-| 3.7 | 3.7.0 | April 22nd 2024 |
+| 3.7 | 3.7.1 | May 4th 2024 |
 | 3.5 & 3.6 | 3.6.7 | April 14th 2024 |
 | 3.4 | 3.4.1 | December 8th 2023 |
 
