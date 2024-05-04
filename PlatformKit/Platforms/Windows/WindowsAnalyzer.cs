@@ -661,9 +661,9 @@ for (int index = 0; index < array.Length; index++)
                     return WindowsVersion.NotSupported;
                 //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
                 case 7600:
-                    return WindowsVersion.Win7;
+                    return WindowsVersion.NotSupported;
                 case 7601:
-                    return WindowsVersion.Win7SP1;
+                    return WindowsVersion.NotSupported;
                 case 9200:
                     return WindowsVersion.Win8;
                 case 9600:
@@ -760,8 +760,6 @@ for (int index = 0; index < array.Length; index++)
         {
             return windowsVersion switch
             {
-                WindowsVersion.Win7 => new Version(6, 1, 7600),
-                WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2 => new Version(6, 1, 7601),
                 WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => new Version(6, 2, 9200),
                 WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => new Version(6, 3, 9600),
                 WindowsVersion.Win10_v1507 => new Version(10, 0, 10240),

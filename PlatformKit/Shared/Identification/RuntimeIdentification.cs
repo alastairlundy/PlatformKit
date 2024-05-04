@@ -142,8 +142,6 @@ namespace PlatformKit.Identification
                 {
                     osVersion = WindowsAnalyzer.GetWindowsVersionToEnum() switch
                     {
-                        WindowsVersion.Win7 => "7",
-                        WindowsVersion.Win7SP1 or WindowsVersion.WinServer_2008_R2 => "7",
                         WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => "8",
                         WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => "81",
                         WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),

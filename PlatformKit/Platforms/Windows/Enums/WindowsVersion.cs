@@ -34,14 +34,6 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win7 = 7600,
-        // ReSharper disable once InconsistentNaming
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win7SP1 = 7601,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        WinServer_2008_R2 = 7601,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win8 = 9200,
         [Obsolete(DeprecationMessages.DeprecationV5)]
         WinServer_2012 = 9200,

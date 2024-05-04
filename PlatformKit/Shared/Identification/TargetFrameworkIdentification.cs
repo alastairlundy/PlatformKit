@@ -208,9 +208,6 @@ public class TargetFrameworkIdentification
 
                                 switch (windowsVersionEnum)
                                 {
-                                    case WindowsVersion.Win7 or WindowsVersion.Win7SP1:
-                                        stringBuilder.Append("7.0");
-                                        break;
                                     case WindowsVersion.Win8:
                                         stringBuilder.Append("8.0");
                                         break;
