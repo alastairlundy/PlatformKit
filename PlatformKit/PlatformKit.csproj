@@ -70,10 +70,10 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.2.1" />
+      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.*" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.0.0-preview.1" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.*" />
     </ItemGroup>
 </Project>
