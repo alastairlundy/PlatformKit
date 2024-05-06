@@ -81,9 +81,14 @@ public class LinuxAnalyzer
                 {
                     return LinuxDistroBase.Fedora;
                 }
-                if (identifierLike.Contains("rhel") || identifierLike.Contains("oracle") || identifierLike.Contains("centos") || identifierLike.Contains("suse"))
+                if (identifierLike.Contains("rhel") || identifierLike.Contains("oracle") || identifierLike.Contains("centos"))
                 {
                     return LinuxDistroBase.RHEL;
+                }
+
+                if (identifierLike.Contains("suse"))
+                {
+                    return LinuxDistroBase.SUSE;
                 }
                 
                 return LinuxDistroBase.NotDetected;
