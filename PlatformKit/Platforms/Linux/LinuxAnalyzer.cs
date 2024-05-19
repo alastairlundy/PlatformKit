@@ -258,10 +258,10 @@ public class LinuxAnalyzer
         }
         
         /// <summary>
-        /// Returns whether the installed Linux Kernel version is equal to or newer than the Kernel Version provided as a parameter
+        /// Returns whether the installed Linux Kernel version is equal to or newer than the Kernel Version specified.
         /// </summary>
         /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
-        /// <returns></returns>
+        /// <returns>true if the installed linux kernel version is equal to or newer than the Kernel Version specified; returns false otherwise.</returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {

@@ -38,8 +38,8 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <summary>
     /// Returns true for SteamOS3 based distributions. 
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <returns>true if the OS is SteamOS3 based; returns false otherwise.</returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on an operating system that isn't Linux based.</exception>
     // ReSharper disable once InconsistentNaming
     public static bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
