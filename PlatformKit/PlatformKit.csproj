@@ -14,50 +14,19 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 3.7 series
-
-### Additions
-* Added additional enum values to ``LinuxDistroBase``
-* Added ``SteamOsAnalyzer`` class that extends ``LinuxOsAnalyzer`` class
-  * Added support for detecting SteamOS version
-  * Added support for detecting SteamDeck mode (e.g. Gaming Mode or Desktop Mode)
-* Added Target Framework Moniker (TFM) detection
-* Improved Runtime ID (RID) detection/generation
-
-### Changes
-* Re-licensed the library back to MIT License as the project originally was
-* Optimised and Improved code performance in the library
-* Fixed issues with FreeBSD Runtime ID Generation
-* Moved WMI related code from WindowsAnalyzer to WMISearcher
-* Moved Windows Registry code from WindowsAnalyzer to WinRegistrySearcher
-* Moved TFM relatee code from the RuntimeIdentification class to TargetFrameworkIdentification class
-* Renamed ``MacOSAnalyzer`` class to ``MacOsAnalyzer``
-* Renamed ``FreeBSDAnalyzer`` class to ``FreeBsdAnalyzer``
-* Renamed``PlatformIdentification`` class to ``PlatformKitIdentification``
-* Deprecated some methods in PlatformKitIdentification - These will be removed in V5
-* Added a missing case to a method in the RuntimeIdentification class for wasm - This now throws a PlatformNotSupported exception as this isn't supported for Runtime ID generation.
-* Renamed some methods in Analyzer classes
-* Deprecated some methods that will be removed in V5
-* Moved ``NetworkCard`` to the PlatformKit namespace
-
-### Removals 
-* Removed old debugging code
-* Removed ``ConsoleHelper`` class
-* Removed support for OS X 10.9 through 10.11 (10.9, 10.10, and 10.11.x) - MacOsAnalyzer will now return ``MacOsVersion.NotSupported`` when attempting to detect any of these versions.
-* Removed support for macOS 10.12 "Sierra" - MacOsAnalyzer will now return ``MacOsVersion.NotSupported`` when attempting to detect this version.
-* Removed support for Windows 7, Windows 7 SP1, and Windows Server 2008 R2 - WindowsAnalyzer will now return ``WindowsVersion.NotSupported`` when attempting to detect any of these versions.
-* Removed ``ProcessManager`` - RunProcess methods have been moved to ``ProcessRunner`` class, RunCommand methods have been moved to ``CommandRunner`` class, and the URL opening method has been moved to the ``UrlRunner`` class.
-* Removed ``OSAnalyzer`` class - .NET Standard 2 users of PlatformKit have an additioanl dependency on ``PlatformKit.Extensions.OSDetection`` for Operating System Detection</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.0.0
+* Fixed an issue where SUSE was considered by PlatformKit as based on RHEL
+* Improved XML doc comments</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>4.0.0.0</AssemblyVersion>
-        <FileVersion>4.0.0.0</FileVersion>
-        <Version>4.0.0.0</Version>
-        <PackageVersion>4.0.0</PackageVersion>
+   <AssemblyVersion>4.0.1.0</AssemblyVersion>
+        <FileVersion>4.0.1.0</FileVersion>
+        <Version>4.0.1.0</Version>
+        <PackageVersion>4.0.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
