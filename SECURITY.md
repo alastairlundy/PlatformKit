@@ -13,10 +13,11 @@ Versions currently supported by Security Fixes.
 
 ## Reporting a Security Vulnerability
 
-To report a security vulnerability please email ``platformkitoss@alastair.mozmail.com`` with the Email Subject line of "Security Vulnerability". We will try to reply to your email within 2-3 Business Days acknowledging receipt of your email.
+To report a security vulnerability please privately report a Security Vulnerability in the Security tab on this project within GitHub.
+Please ensure you provide all the details regarding the vulnerability. I will try to reply to your report within 2-3 Business Days acknowledging receipt of it.
 
-We will then investigate the issue further and decide whether or not to accept the vulnerability. We will then inform you whether we accept the vulnerability or not.
+I will then investigate the issue further and decide whether or not to accept the vulnerability. I will then inform you whether we accept the vulnerability or not.
 
-If we accept the vulnerability we ask that you not publish the details of the vulnerability until 1 Business Day after we have released updates patching the security vulnerability.
+If the vulnerability is accepted please do not publish the details of the vulnerability until 1 Business Day after the updates patching the security vulnerability have been released .
 
-If we decline the vulnerability we ask that you not refer to it as a vulnerability and not publish correspondence with us without prior written permission.
+If the vulnerability is rejected please do not refer to it as a vulnerability and do not publish correspondence with us without prior written permission.
