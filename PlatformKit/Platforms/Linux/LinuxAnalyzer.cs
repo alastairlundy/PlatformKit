@@ -27,6 +27,7 @@ using System;
 using System.IO;
 using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Enums;
 
 #if NETSTANDARD2_0
@@ -268,6 +269,7 @@ public class LinuxAnalyzer
         /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
             if (OperatingSystem.IsLinux())
