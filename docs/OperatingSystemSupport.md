@@ -18,6 +18,7 @@ This document is not guaranteed to be accurate or up to date.
 ### Windows 11
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
+| Windows 11 24H2 | 4.1.0 | Still supported |
 | Windows 11 23H2 | 3.4.1 | Still supported |
 | Windows 11 22H2 | 2.6.3 | Still supported |
 | Windows 11 21H2 | 2.0.0 | Still supported |
@@ -63,6 +64,7 @@ This document is not guaranteed to be accurate or up to date.
 ## macOS
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
+| macOS 15 "Sequoia" | 4.1.0 | Still supported |
 | macOS 14 "Sonoma" | 3.4.0 | Still supported |
 | macOS 13 "Ventura" | 2.6.5 | Still supported |
 | macOS 12 "Monterey" | 2.5.0 | Still supported |
