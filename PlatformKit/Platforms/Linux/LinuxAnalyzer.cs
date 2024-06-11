@@ -25,8 +25,10 @@
 using System;
 
 using System.IO;
+
 using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Enums;
 
@@ -46,6 +48,7 @@ public class LinuxAnalyzer
         /// Detects what base Linux Distribution a Distro is based off of.
         /// </summary>
         /// <returns>the distro base of the currently running Linux Distribution</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based operating system.</exception>
         public static LinuxDistroBase GetDistroBase()
         {
             if (OperatingSystem.IsLinux())
@@ -205,11 +208,13 @@ public class LinuxAnalyzer
             throw new PlatformNotSupportedException();
         }
         
+ 
         /// <summary>
         /// Detects the Linux Distribution Version as read from /etc/os-release and re-formats it into the format of System.Version object
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the version of the linux distribution being run.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static Version GetLinuxDistributionVersion()
         {
             if (OperatingSystem.IsLinux())
