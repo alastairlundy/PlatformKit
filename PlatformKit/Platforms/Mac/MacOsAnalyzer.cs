@@ -236,11 +236,27 @@ namespace PlatformKit.Mac;
                             }
                     }
 
-                    if (input.Major == 11) return MacOsVersion.v11_BigSur;
-                    if (input.Major == 12) return MacOsVersion.v12_Monterey;
-                    if (input.Major == 13) return MacOsVersion.v13_Ventura;
-                    if (input.Major == 14) return MacOsVersion.v14_Sonoma;
-                
+                    if (input.Major == 11)
+                    {
+                        return MacOsVersion.v11_BigSur;
+                    }
+                    if (input.Major == 12)
+                    {
+                        return MacOsVersion.v12_Monterey;
+                    }
+                    if (input.Major == 13)
+                    {
+                        return MacOsVersion.v13_Ventura;
+                    }
+                    if (input.Major == 14)
+                    {
+                        return MacOsVersion.v14_Sonoma;
+                    }
+                    if (input.Major == 15)
+                    {
+                        return MacOsVersion.v15_Sequoia;
+                    }
+                    
                     throw new MacOsVersionDetectionException();
             }
 
@@ -265,6 +281,7 @@ namespace PlatformKit.Mac;
             MacOsVersion.v12_Monterey => new(12, 0),
             MacOsVersion.v13_Ventura => new(13, 0),
             MacOsVersion.v14_Sonoma => new Version(14, 0),
+            MacOsVersion.v15_Sequoia => new Version(15,0),
             MacOsVersion.NotSupported => throw new PlatformNotSupportedException(),
             MacOsVersion.NotDetected => throw new MacOsVersionDetectionException(),
             _ => throw new ArgumentException("An invalid MacOsVersion enum value was provided."),

@@ -48,6 +48,7 @@ namespace PlatformKit.Mac
         v12_Monterey,
         v13_Ventura,
         v14_Sonoma,
+        v15_Sequoia,
         NotDetected,
         NotSupported,
     }
