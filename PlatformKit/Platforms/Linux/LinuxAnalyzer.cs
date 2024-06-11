@@ -91,7 +91,6 @@ public class LinuxAnalyzer
                 {
                     return LinuxDistroBase.RHEL;
                 }
-
                 if (identifierLike.Contains("suse"))
                 {
                     return LinuxDistroBase.SUSE;
