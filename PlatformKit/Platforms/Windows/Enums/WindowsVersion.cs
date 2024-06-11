@@ -95,6 +95,7 @@ namespace PlatformKit.Windows
         Win11_21H2 = 22000,
         Win11_22H2 = 22621,
         Win11_23H2 = 22631,
+        Win11_24H2 = 26100,
         Win10_InsiderPreview,
         Win11_InsiderPreview,
         NotDetected,

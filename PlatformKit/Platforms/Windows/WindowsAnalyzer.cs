@@ -607,6 +607,7 @@ for (int index = 0; index < array.Length; index++)
             WindowsVersion.Win11_21H2 => true,
             WindowsVersion.Win11_22H2 => true,
             WindowsVersion.Win11_23H2 => true,
+            WindowsVersion.Win11_24H2 => true,
             WindowsVersion.Win11_InsiderPreview => true,
             WindowsVersion.NotSupported => false,
             WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
@@ -706,6 +707,8 @@ for (int index = 0; index < array.Length; index++)
                     return WindowsVersion.Win11_22H2;
                 case 22631:
                     return WindowsVersion.Win11_23H2;
+                case 26100:
+                    return WindowsVersion.Win11_24H2;
                 default:
                     //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
                     if (input.Build is > 10240 and < 22000)
@@ -781,6 +784,7 @@ for (int index = 0; index < array.Length; index++)
                 WindowsVersion.Win11_21H2 => new Version(10, 0, 22000),
                 WindowsVersion.Win11_22H2 => new Version(10,0,22621),
                 WindowsVersion.Win11_23H2 => new Version(10,0,22631),
+                WindowsVersion.Win11_24H2 => new Version(10,0,26100),
                 _ => throw new WindowsVersionDetectionException()
             };
         }
