@@ -68,8 +68,8 @@ This document is not guaranteed to be accurate or up to date.
 | macOS 12 "Monterey" | 2.5.0 | Still supported |
 | macOS 11 "Big Sur" | 2.5.0 | Still supported |
 | macOS 10.15 "Catalina" | 2.5.0 | Still supported |
-| macOS 10.14 "Mojave" | 2.5.0 | Still supported |
-| macOS 10.13 "High Sierra" | 2.5.0 | Still supported |
+| macOS 10.14 "Mojave" | 2.5.0 | Support ending in 5.0.0 |
+| macOS 10.13 "High Sierra" | 2.5.0 | Support ending in 5.0.0 |
 | macOS 10.12 "Sierra" | 2.5.0 | 3.7.1 |
 
 ### OS X
