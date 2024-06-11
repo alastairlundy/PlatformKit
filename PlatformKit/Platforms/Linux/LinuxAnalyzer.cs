@@ -45,10 +45,15 @@ public class LinuxAnalyzer
         /// <summary>
         /// Detects what base Linux Distribution a Distro is based off of.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the distro base of the currently running Linux Distribution</returns>
         public static LinuxDistroBase GetDistroBase()
         {
-            return GetDistroBase(GetLinuxDistributionInformation());
+            if (OperatingSystem.IsLinux())
+            {
+                return GetDistroBase(GetLinuxDistributionInformation());
+            }
+
+            throw new PlatformNotSupportedException();
         }
         
         /// <summary>
