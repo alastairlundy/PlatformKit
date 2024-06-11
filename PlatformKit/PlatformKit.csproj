@@ -14,19 +14,18 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.7.0
-* Changed PlatformKit.Extensions.OSDetection to use a floating version (any 1.x version) rather than a specific version.
-* Replaced extension dependency with AlastairLundy.Extensions.System - Uses a floating version (4.x)</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.7.1
+* Fixed an issue where SUSE was considered by PlatformKit as based on RHEL</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.7.1.0</AssemblyVersion>
-        <FileVersion>3.7.1.0</FileVersion>
-        <Version>3.7.1.0</Version>
-        <PackageVersion>3.7.1</PackageVersion>
+   <AssemblyVersion>3.7.2.0</AssemblyVersion>
+        <FileVersion>3.7.2.0</FileVersion>
+        <Version>3.7.2.0</Version>
+        <PackageVersion>3.7.2</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
