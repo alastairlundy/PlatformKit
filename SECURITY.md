@@ -8,7 +8,7 @@ Versions currently supported by Security Fixes.
 |--| --|--|--|--|
 | 4.1 | 4.1.0, released on June 11th 2024 | 4.1.0, released on June 11th 2024 | Yes, until PlatformKit 4.3 | Yes, until PlatformKit 4.5 | 
 | 4.0 | 4.0.0, released on May 4th 2024 | 4.0.1, released on May 19th 2024 | Yes, until PlatformKit 4.3 | Yes, until PlatformKit 4.4 | 
-| 3.7 | 3.7.0, released on April 22nd 2024 | 3.7.1, released on May 4th 2024 | Yes, until September 28th 2024 | Yes, until September 28th 2024 | 
+| 3.7 | 3.7.0, released on April 22nd 2024 | 3.7.2, released on June 11th 2024 | Yes, until September 28th 2024 | Yes, until September 28th 2024 | 
 | 3.5 and 3.6 | 3.5.0, released on December 28th 2023 | 3.6.7, released on April 14th 2024 |  Yes, until September 28th 2024 | Yes, until September 28th 2024 | 
 
 

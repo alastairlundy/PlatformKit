@@ -49,9 +49,9 @@ This document is not guaranteed to be accurate or up to date.
 ### Windows 7
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
-| Windows Server 2008 R2 | 2.0.0 | 3.7.1 |
-| Windows 7 SP1 | 2.0.0 | 3.7.1 |
-| Windows 7 | 2.0.0 | 3.7.1 |
+| Windows Server 2008 R2 | 2.0.0 | 3.7.2 |
+| Windows 7 SP1 | 2.0.0 | 3.7.2 |
+| Windows 7 | 2.0.0 | 3.7.2 |
 
 ### Windows Vista
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
@@ -72,12 +72,12 @@ This document is not guaranteed to be accurate or up to date.
 | macOS 10.15 "Catalina" | 2.5.0 | Still supported |
 | macOS 10.14 "Mojave" | 2.5.0 | Support ending in 5.0.0 |
 | macOS 10.13 "High Sierra" | 2.5.0 | Support ending in 5.0.0 |
-| macOS 10.12 "Sierra" | 2.5.0 | 3.7.1 |
+| macOS 10.12 "Sierra" | 2.5.0 | 3.7.2 |
 
 ### OS X
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
 |-|-|-|
-| OS X 10.9 "Mavericks" through OS X 10.11 "El Capitan" | 2.5.0 | 3.7.1 |
+| OS X 10.9 "Mavericks" through OS X 10.11 "El Capitan" | 2.5.0 | 3.7.2 |
 | OS X 10.6 "Snow Leopard" through OS X 10.8 "Mountain Lion" | 2.5.0 | 2.6.10 |
 | OS X 10.0 "Cheetah" through OSX 10.5 "Leopard" | 2.5.0 | 2.6.10 |
 
