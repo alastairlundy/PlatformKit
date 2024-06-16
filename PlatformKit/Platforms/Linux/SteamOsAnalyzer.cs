@@ -36,10 +36,10 @@ public class SteamOsAnalyzer : LinuxAnalyzer
 {
     
     /// <summary>
-    /// Returns true for SteamOS3 based distributions. 
+    /// Detects if a Linux distro is Steam OS.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <returns>true if running on a SteamOS 3.x based distribution; returns false otherwise.</returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
     // ReSharper disable once InconsistentNaming
     public static bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
@@ -65,13 +65,12 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     }
     
     /// <summary>
-    /// Returns whether a device running SteamOS is running in Desktop Mode or in Gaming Mode.
-    /// IMPORTANT: DO NOT RUN on non SteamOS 3 based operating systems.
+    /// Detects whether a device running SteamOS 3.x is running in Desktop Mode or in Gaming Mode.
     /// </summary>
-    /// <param name="includeHoloIsoAsSteamOs"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException">Thrown if Holo ISO is detected and Holo ISO isn't counted as SteamOS.</exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on any OS that isn't SteamOS 3</exception>
+    /// <param name="includeHoloIsoAsSteamOs">Whether to consider Holo ISO as Steam OS.</param>
+    /// <returns>the SteamOS mode being run if run on SteamOS.</returns>
+    /// <exception cref="ArgumentException">Thrown if Holo ISO is detected and if Holo ISO isn't counted as SteamOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't SteamOS 3</exception>
     public static SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
         if (IsSteamOS(includeHoloIsoAsSteamOs))
