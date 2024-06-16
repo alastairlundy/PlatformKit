@@ -52,7 +52,7 @@ public class WinRegistrySearcher
                     
             if (result != null)
             {
-                return result.Replace("REG_SZ", String.Empty);
+                return result.Replace("REG_SZ", string.Empty);
             }
 
             throw new ArgumentNullException();
@@ -78,8 +78,8 @@ public class WinRegistrySearcher
                     
             if (result != null)
             {
-                return result.Replace(value, String.Empty)
-                    .Replace("REG_SZ", String.Empty);
+                return result.Replace(value, string.Empty)
+                    .Replace("REG_SZ", string.Empty);
             }
 
             throw new ArgumentNullException();
