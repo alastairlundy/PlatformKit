@@ -587,26 +587,25 @@ for (int index = 0; index < array.Length; index++)
         return IsWindows11(GetWindowsVersionToEnum());
     }
 
-    /// <summary>
-    /// Returns whether the specified version of Windows is Windows 11.
-    /// </summary>
-    /// <param name="windowsVersion"></param>
-    /// <returns></returns>
-    /// <exception cref="OperatingSystemDetectionException"></exception>
-    public static bool IsWindows11(WindowsVersion windowsVersion)
-    {
-        return windowsVersion switch
+        /// <summary>
+        /// Returns whether the specified version of Windows is Windows 11.
+        /// </summary>
+        /// <param name="windowsVersion"></param>
+        /// <returns></returns>
+        public static bool IsWindows11(WindowsVersion windowsVersion)
         {
-            WindowsVersion.Win11_21H2 => true,
-            WindowsVersion.Win11_22H2 => true,
-            WindowsVersion.Win11_23H2 => true,
-            WindowsVersion.Win11_24H2 => true,
-            WindowsVersion.Win11_InsiderPreview => true,
-            WindowsVersion.NotSupported => false,
-            WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
-            _ => false,
-        };
-    }
+            return windowsVersion switch
+            {
+                WindowsVersion.Win11_21H2 => true,
+                WindowsVersion.Win11_22H2 => true,
+                WindowsVersion.Win11_23H2 => true,
+                WindowsVersion.Win11_24H2 => true,
+                WindowsVersion.Win11_InsiderPreview => true,
+                WindowsVersion.NotSupported => false,
+                WindowsVersion.NotDetected => false,
+                _ => false,
+            };
+        }
 
         /// <summary>
         /// Detects the installed version of Windows and returns it as an enum.
