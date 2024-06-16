@@ -679,7 +679,7 @@ for (int index = 0; index < array.Length; index++)
         /// </summary>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
-        /// <exception cref="OperatingSystemDetectionException"></exception>
+        /// <exception cref="WindowsVersionDetectionException"></exception>
         public static Version GetWindowsVersionFromEnum(WindowsVersion windowsVersion)
         {
             return windowsVersion switch
