@@ -631,97 +631,49 @@ for (int index = 0; index < array.Length; index++)
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         public static WindowsVersion GetWindowsVersionToEnum(Version input)
         {
-            if (input.Major == 5)
+            return input.Build switch
             {
-                //We don't support Windows XP.
-                return WindowsVersion.NotSupported;
-            }
-
-            switch (input.Build)
-            {
-                case 6000:
-                    return WindowsVersion.NotSupported;
+                < 6000 => WindowsVersion.NotSupported,
+                6000 => WindowsVersion.NotSupported,
                 //return WindowsVersion.WinVista;
-                case 6001:
-                    return WindowsVersion.NotSupported;
+                6001 => WindowsVersion.NotSupported,
                 //return WindowsVersion.WinVistaSP1;
-                case 6002:
-                    return WindowsVersion.NotSupported;
+                6002 => WindowsVersion.NotSupported,
                 //return WindowsVersion.WinVistaSP2;
-                case 6003:
-                    return WindowsVersion.NotSupported;
-                //return WindowsVersion.WinServer_2008; //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
-                case 7600:
-                    return WindowsVersion.NotSupported;
-                case 7601:
-                    return WindowsVersion.NotSupported;
-                case 9200:
-                    return WindowsVersion.Win8;
-                case 9600:
-                    return WindowsVersion.Win8_1;
-                case 10240:
-                    return WindowsVersion.Win10_v1507;
-                case 10586:
-                    return WindowsVersion.Win10_v1511;
-                case 14393:
-                    return WindowsVersion.Win10_v1607;
-                case 15063:
-                    return WindowsVersion.Win10_v1703; 
-                case 15254:
-                    return WindowsVersion.Win10_v1709_Mobile;
-                case 16299:
-                    return WindowsVersion.Win10_v1709;
-                case 17134:
-                    return WindowsVersion.Win10_v1803;
-                case 17763:
-                    return WindowsVersion.Win10_v1809; 
-                case 18362:
-                    return WindowsVersion.Win10_v1903;
-                case 18363:
-                    return WindowsVersion.Win10_v1909;
-                case 19041:
-                    return WindowsVersion.Win10_v2004;
-                case 19042: 
-                    return WindowsVersion.Win10_20H2;
-                case 19043:
-                    return WindowsVersion.Win10_21H1;
-                case 19044:
-                    return WindowsVersion.Win10_21H2;
-                case 19045:
-                    return WindowsVersion.Win10_22H2;
-                case 20348:
-                    return WindowsVersion.Win10_Server2022; //Build number used exclusively by Windows Server and not by Windows 10 or 11.
-                case 22000:
-                    return WindowsVersion.Win11_21H2;
-                case 22621:
-                    return WindowsVersion.Win11_22H2;
-                case 22631:
-                    return WindowsVersion.Win11_23H2;
-                case 26100:
-                    return WindowsVersion.Win11_24H2;
-                default:
-                    //Assume any non enumerated value in between Windows 10 versions is an Insider preview for Windows 10.
-                    if (input.Build is > 10240 and < 22000)
-                    {
-                        return WindowsVersion.Win10_InsiderPreview;
-                    }
-                    //Assume non enumerated values for Windows 11 are Insider Previews for Windows 11.
-
-                    if(input.Build > 22631)
-                    {
-                        return WindowsVersion.Win11_InsiderPreview;
-                    }
-
-                    if (input.Build < 6000)
-                    {
-                        return WindowsVersion.NotSupported;
-                    }
-
-                    return WindowsVersion.NotDetected;
-            }
+                6003 => WindowsVersion.NotSupported,
+                //return WindowsVersion.WinServer_2008;
+                //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
+                7600 => WindowsVersion.NotSupported,
+                7601 => WindowsVersion.NotSupported,
+                9200 => WindowsVersion.Win8,
+                9600 => WindowsVersion.Win8_1,
+                10240 => WindowsVersion.Win10_v1507,
+                10586 => WindowsVersion.Win10_v1511,
+                14393 => WindowsVersion.Win10_v1607,
+                15063 => WindowsVersion.Win10_v1703,
+                15254 => WindowsVersion.Win10_v1709_Mobile,
+                16299 => WindowsVersion.Win10_v1709,
+                17134 => WindowsVersion.Win10_v1803,
+                17763 => WindowsVersion.Win10_v1809,
+                18362 => WindowsVersion.Win10_v1903,
+                18363 => WindowsVersion.Win10_v1909,
+                19041 => WindowsVersion.Win10_v2004,
+                19042 => WindowsVersion.Win10_20H2,
+                19043 => WindowsVersion.Win10_21H1,
+                19044 => WindowsVersion.Win10_21H2,
+                19045 => WindowsVersion.Win10_22H2,
+                //Build number used exclusively by Windows Server and not by Windows 10 or 11
+                20348 => WindowsVersion.Win10_Server2022,
+                22000 => WindowsVersion.Win11_21H2,
+                > 10240 and < 22000 => WindowsVersion.Win10_InsiderPreview,
+                22621 => WindowsVersion.Win11_22H2,
+                22631 => WindowsVersion.Win11_23H2,
+                26100 => WindowsVersion.Win11_24H2,
+                > 26100 => WindowsVersion.Win11_InsiderPreview,
+                _ => WindowsVersion.NotDetected
+            };
         }
         
         /// <summary>
