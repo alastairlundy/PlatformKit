@@ -35,6 +35,33 @@ namespace PlatformKit;
 
 public class UrlRunner
 {
+    
+    protected static string MakeUrlSecure(string url)
+    {
+        if (url.StartsWith("http://"))
+        {
+            url = url.Replace("http://", "https://");
+        }
+        else if (url.StartsWith("www."))
+        {
+            url = url.Replace("www.", "https://www.");
+        }
+
+        return url;
+    }
+
+    /// <summary>
+    /// Open a URL in the default browser.
+    /// Courtesy of https://github.com/dotnet/corefx/issues/10361
+    /// </summary>
+    /// <param name="url">The URL to be opened.</param>
+    public static void OpenUrlInDefaultBrowser(string url)
+    {
+        url = UrlHttpFormatting(url, false);
+        url = MakeUrlSecure(url);
+        
+        OpenUrl(url);
+    }
 
     protected static void OpenUrl(string url)
     {
@@ -77,17 +104,5 @@ public class UrlRunner
                         url = "https://" + url;
                     }
                 }
-                else if (url.StartsWith("http://") && !allowNonSecureHttp)
-                {
-                    url = url.Replace("http://", "https://");
-                }
-                else if (url.StartsWith("www."))
-                {
-                    if (!allowNonSecureHttp)
-                    {
-                        url = url.Replace("www.", "https://www.");
-                    }
-                }
-    
             }
 }
