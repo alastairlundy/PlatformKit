@@ -41,7 +41,7 @@ public class WinRegistrySearcher
     /// </summary>
     /// <param name="query"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
@@ -67,7 +67,7 @@ public class WinRegistrySearcher
     /// <param name="query"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
