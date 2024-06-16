@@ -476,15 +476,8 @@ for (int index = 0; index < array.Length; index++)
     else if (nextLine.ToLower().Contains("[") && nextLine.ToLower().Contains("]"))
     {
         string compare = nextLine.Replace("[", String.Empty).Replace("]:", String.Empty);
-        
-        int dotCounter = 0;
-        foreach (char c in compare)
-        {
-            if (c == '.' || c == ':')
-            {
-                dotCounter++;
-            }
-        }
+
+        int dotCounter = compare.CountDotsInString();
 
         if (dotCounter >= 3 && wasLastLineNetworkLine)
         {
