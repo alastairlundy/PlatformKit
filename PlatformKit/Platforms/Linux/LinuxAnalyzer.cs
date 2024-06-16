@@ -48,7 +48,7 @@ public class LinuxAnalyzer
         /// Detects what base Linux Distribution a Distro is based off of.
         /// </summary>
         /// <returns>the distro base of the currently running Linux Distribution</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based operating system.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static LinuxDistroBase GetDistroBase()
         {
             if (OperatingSystem.IsLinux())
@@ -63,7 +63,7 @@ public class LinuxAnalyzer
         /// Detects what base Linux Distribution a Distro is based off of.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
         {
             string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
@@ -90,7 +90,7 @@ public class LinuxAnalyzer
         /// Detects Linux Distribution information and returns it.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">This method only runs on Linux. Running it on any other platform will throw this exception.</exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static LinuxOsRelease GetLinuxDistributionInformation()
         {
             LinuxOsRelease linuxDistributionInformation = new LinuxOsRelease();
@@ -210,8 +210,8 @@ public class LinuxAnalyzer
         /// Detects the Linux Distribution Version as read from /etc/os-release.
         /// Preserves the version if the full version is in a Year.Month.Bugfix format.
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an exception when run on Windows or macOS.</exception>
+        /// <returns>the version of the linux distribution being run as a string.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static string GetLinuxDistributionVersionAsString()
         {
             if (OperatingSystem.IsLinux())
@@ -239,9 +239,7 @@ public class LinuxAnalyzer
         /// Detects the linux kernel version to string.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">
-        ///  Throws a platform not supported exception if run on Windows, macOS, or any platform that isn't Linux.
-        /// </exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static Version GetLinuxKernelVersion()
         {
             if (OperatingSystem.IsLinux())
@@ -258,7 +256,7 @@ public class LinuxAnalyzer
         /// </summary>
         /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
