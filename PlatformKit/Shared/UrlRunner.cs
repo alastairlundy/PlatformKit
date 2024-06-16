@@ -117,5 +117,7 @@ public class UrlRunner
                         url = "https://" + url;
                     }
                 }
+
+                return url;
             }
 }
