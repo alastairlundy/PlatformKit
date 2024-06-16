@@ -65,7 +65,7 @@ public class WindowsAnalyzer
     /// <param name="windowsSystemInformation"></param>
     /// <returns></returns>
     /// <exception cref="WindowsEditionDetectionException"></exception>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
