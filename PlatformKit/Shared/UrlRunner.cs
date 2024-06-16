@@ -35,6 +35,28 @@ namespace PlatformKit;
 
 public class UrlRunner
 {
+
+    protected static void OpenUrl(string url)
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
+        }
+        if (OperatingSystem.IsLinux())
+        {
+            CommandRunner.RunCommandOnLinux($"xdg-open {url}");
+        }
+        if (OperatingSystem.IsMacOS())
+        {
+            Task task = new Task(() => Process.Start("open", url));
+            task.Start();
+        }
+        if (OperatingSystem.IsFreeBSD())
+        {
+            CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
+        }
+    }
+
             /// <summary>
             /// Open a URL in the default browser.
             /// Courtesy of https://github.com/dotnet/corefx/issues/10361
@@ -67,22 +89,5 @@ public class UrlRunner
                     }
                 }
     
-                if (OperatingSystem.IsWindows())
-                {
-                    CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
-                }
-                if (OperatingSystem.IsLinux())
-                {
-                    CommandRunner.RunCommandOnLinux($"xdg-open {url}");
-                }
-                if (OperatingSystem.IsMacOS())
-                {
-                    Task task = new Task(() => Process.Start("open", url));
-                    task.Start();
-                }
-                if (OperatingSystem.IsFreeBSD())
-                {
-                    CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
-                }
             }
 }
