@@ -36,6 +36,7 @@ public enum LinuxDistroBase
     Fedora,
     // ReSharper disable once InconsistentNaming
     RHEL,
+    // ReSharper disable once InconsistentNaming
     SUSE,
     NotDetected,
     NotSupported,
