@@ -76,7 +76,7 @@ namespace PlatformKit
 
                 if (!executableName.EndsWith(".exe") && insertExeInExecutableNameIfMissing)
                 {
-                    process.StartInfo.FileName += ".exe";
+                    process.StartInfo.FileName = $"{process.StartInfo.FileName}.exe";
                 }
 
                 process.StartInfo.WorkingDirectory = executableLocation;
@@ -209,7 +209,6 @@ namespace PlatformKit
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         public static string RunProcessOnFreeBsd(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             return RunProcessOnLinux(executableLocation, executableName, arguments, processStartInfo);
