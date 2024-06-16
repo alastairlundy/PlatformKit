@@ -70,36 +70,17 @@ public class LinuxAnalyzer
             
             if (OperatingSystem.IsLinux())
             {
-                if (identifierLike.Contains("debian"))
+                return identifierLike switch
                 {
-                    return LinuxDistroBase.Debian;
-                }
-                if (identifierLike.Contains("ubuntu"))
-                {
-                    return LinuxDistroBase.Ubuntu;
-                }
-                if (identifierLike.Contains("arch"))
-                {
-                    return LinuxDistroBase.Arch;
-                }
-                if (identifierLike.Contains("manjaro"))
-                {
-                    return LinuxDistroBase.Manjaro;
-                }
-                if (identifierLike.Contains("fedora"))
-                {
-                    return LinuxDistroBase.Fedora;
-                }
-                if (identifierLike.Contains("rhel") || identifierLike.Contains("oracle") || identifierLike.Contains("centos"))
-                {
-                    return LinuxDistroBase.RHEL;
-                }
-                if (identifierLike.Contains("suse"))
-                {
-                    return LinuxDistroBase.SUSE;
-                }
-                
-                return LinuxDistroBase.NotDetected;
+                    "debian" => LinuxDistroBase.Debian,
+                    "ubuntu" => LinuxDistroBase.Ubuntu,
+                    "arch" => LinuxDistroBase.Arch,
+                    "manjaro" => LinuxDistroBase.Manjaro,
+                    "fedora" => LinuxDistroBase.Fedora,
+                    "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+                    "suse" => LinuxDistroBase.SUSE,
+                    _ => LinuxDistroBase.NotDetected
+                };
             }
 
             throw new PlatformNotSupportedException();
