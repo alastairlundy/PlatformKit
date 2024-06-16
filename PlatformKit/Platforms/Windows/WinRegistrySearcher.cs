@@ -48,7 +48,7 @@ public class WinRegistrySearcher
     public static string GetValue(string query){
         if (OperatingSystem.IsWindows())
         {
-            string result = CommandRunner.RunCmdCommand("REG QUERY " + query);
+            string result = CommandRunner.RunCmdCommand($"REG QUERY {query}");
                     
             if (result != null)
             {
@@ -74,7 +74,7 @@ public class WinRegistrySearcher
     public static string GetValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
-            string result = CommandRunner.RunCmdCommand("REG QUERY " + query + " /v " + value);
+            string result = CommandRunner.RunCmdCommand($"REG QUERY {query} /v {value}");
                     
             if (result != null)
             {
