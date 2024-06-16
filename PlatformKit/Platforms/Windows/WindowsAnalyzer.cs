@@ -254,55 +254,15 @@ for (int index = 0; index < array.Length; index++)
         nextLine = nextLine.Replace("Original Install Date:", String.Empty);
 
         string[] info = nextLine.Split(',');
-
-        DateTime dt = new DateTime();
-
-        if (info[0].Contains("/"))
-        {
-            dt = DateTime.Parse(info[0]);
-        }
-
-        if (info[1].Contains(" "))
-        {
-            info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
-
-            string hours = info[1].Substring(0, 2);
-            string mins = info[1].Substring(2, 2);
-            string seconds = info[1].Substring(3, 2);
-
-            dt = dt.AddHours(Double.Parse(hours));
-            dt = dt.AddMinutes(Double.Parse(mins));
-            dt = dt.AddSeconds(Double.Parse(seconds));
-        }
-
-        windowsSystemInformation.OriginalInstallDate = dt;
+        
+        windowsSystemInformation.OriginalInstallDate = info[0].Contains("/") ? DateTime.Parse(info[0]) : DateParser(info);
     }
     else if (nextLine.ToLower().Contains("system boot time:"))
     {
         nextLine = nextLine.Replace("System Boot Time:", String.Empty);
         string[] info = nextLine.Split(',');
-
-        DateTime dt = new DateTime();
-
-        if (info[0].Contains("/"))
-        {
-            dt = DateTime.Parse(info[0]);
-        }
-
-        if (info[1].Contains(" "))
-        {
-            info[1] = info[1].Replace(" ", String.Empty).Replace(":", String.Empty);
-
-            string hours = info[1].Substring(0, 2);
-            string mins = info[1].Substring(2, 2);
-            string seconds = info[1].Substring(4, 2);
-
-            dt = dt.AddHours(Double.Parse(hours));
-            dt = dt.AddMinutes(Double.Parse(mins));
-            dt = dt.AddSeconds(Double.Parse(seconds));
-        }
-
-        windowsSystemInformation.SystemBootTime = dt;
+        
+        windowsSystemInformation.SystemBootTime = info[0].Contains("/") ? DateTime.Parse(info[0]) : DateParser(info);
     }
     else if (nextLine.ToLower().Contains("system manufacturer:"))
     {
@@ -529,6 +489,23 @@ for (int index = 0; index < array.Length; index++)
         windowsSystemInformation.Processors = processors.ToArray();
         windowsSystemInformation.HyperVRequirements = hyperVRequirements;
         return windowsSystemInformation;
+    }
+
+    private static DateTime DateParser(string[] info)
+    {
+        DateTime dt = new DateTime();
+        
+        info[1] = info[1].Replace(" ", string.Empty).Replace(":", string.Empty);
+
+        string hours = info[1].Substring(0, 2);
+        string minutes = info[1].Substring(2, 2);
+        string seconds = info[1].Substring(4, 2);
+
+        dt = dt.AddHours(double.Parse(hours));
+        dt = dt.AddMinutes(double.Parse(minutes));
+        dt = dt.AddSeconds(double.Parse(seconds));
+            
+        return dt;
     }
 
     /// <summary>
