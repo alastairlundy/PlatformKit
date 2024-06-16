@@ -168,7 +168,7 @@ namespace PlatformKit.Identification
                     case 1:
                         break;
                     case 0:
-                        osVersion += ".0";
+                        osVersion = $"{osVersion}.0";
                         break;
                     }
             }
