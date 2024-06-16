@@ -24,8 +24,10 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -45,7 +47,7 @@ namespace PlatformKit.Mac;
         /// <summary>
         /// Returns whether a Mac is Apple Silicon based.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the currently running Mac uses Apple Silicon; false if running on an Intel Mac.</returns>
         public static bool IsAppleSiliconMac()
         {
             return GetMacProcessorType() == MacProcessorType.AppleSilicon;
@@ -55,8 +57,7 @@ namespace PlatformKit.Mac;
         /// Gets the type of Processor in a given Mac returned as the MacProcessorType
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         public static MacProcessorType GetMacProcessorType()
         {
             if (OperatingSystem.IsMacOS())
@@ -65,7 +66,7 @@ namespace PlatformKit.Mac;
                 {
                     Architecture.Arm64 => MacProcessorType.AppleSilicon,
                     Architecture.X64 => MacProcessorType.Intel,
-                    _ => MacProcessorType.NotDetected
+                    _ => MacProcessorType.NotSupported
                 };
             }
             throw new PlatformNotSupportedException();
@@ -124,7 +125,7 @@ namespace PlatformKit.Mac;
         /// <summary>
         ///  Returns whether the Mac running this method has System Integrity Protection enabled or not.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if System Integrity Protection is enabled on this Mac; returns false otherwise.</returns>
         /// <exception cref="ArgumentException"></exception>
         public static bool IsSystemIntegrityProtectionEnabled()
         {
@@ -168,7 +169,7 @@ namespace PlatformKit.Mac;
         /// <summary>
         /// Returns macOS version as a macOS version enum.
         /// </summary>
-        /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         /// <returns></returns>
         public static MacOsVersion GetMacOsVersionToEnum()
         {
@@ -180,8 +181,7 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         public static MacOsVersion GetMacOsVersionToEnum(Version input)
         {
             if (OperatingSystem.IsMacOS())
@@ -268,7 +268,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentException">Throws an exception if an unsupported macOS version is provided.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
     public static Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
     {
@@ -294,7 +294,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion">A MacOsVersion enum representing a major version of macOS.</param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
     public static bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
@@ -311,7 +311,7 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <param name="macOsVersion"></param>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on a platform that isn't macOS. </exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsAtLeastVersion(Version macOsVersion)
     {
@@ -344,7 +344,7 @@ namespace PlatformKit.Mac;
     /// Detects the Darwin Version on macOS
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     public static Version GetDarwinVersion()
     {
         if (OperatingSystem.IsMacOS())
@@ -359,7 +359,7 @@ namespace PlatformKit.Mac;
     /// Detects macOS's XNU Version.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     public static Version GetXnuVersion()
     {
         if (OperatingSystem.IsMacOS())
@@ -394,7 +394,7 @@ namespace PlatformKit.Mac;
     /// Detects the macOS version and returns it as a System.Version object.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     public static Version GetMacOsVersion()
     {
         if (OperatingSystem.IsMacOS())
@@ -409,8 +409,8 @@ namespace PlatformKit.Mac;
     /// <summary>
     /// Detects the Build Number of the installed version of macOS.
     /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't macOS.</exception>
+    /// <returns>the build number of the installed version of macOS.</returns>
+    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     public static string GetMacOsBuildNumber()
     {
         if (OperatingSystem.IsMacOS())
