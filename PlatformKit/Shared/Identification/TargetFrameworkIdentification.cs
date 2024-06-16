@@ -25,8 +25,11 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using AlastairLundy.Extensions.System.StringExtensions;
+
 using PlatformKit.Internal.Exceptions;
+
 using PlatformKit.Mac;
 using PlatformKit.Windows;
     
