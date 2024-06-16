@@ -680,7 +680,6 @@ for (int index = 0; index < array.Length; index++)
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="Exception"></exception>
         // ReSharper disable once MemberCanBePrivate.Global
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
