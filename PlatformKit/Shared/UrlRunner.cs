@@ -25,6 +25,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using PlatformKit.Internal.Deprecation;
 
 
 #if NETSTANDARD2_0
