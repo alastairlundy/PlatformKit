@@ -23,6 +23,7 @@
    */
 
 using System;
+
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -37,7 +38,11 @@ namespace PlatformKit;
 
 public class UrlRunner
 {
-    
+    /// <summary>
+    /// Convert HTTP to HTTPS
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     protected static string MakeUrlSecure(string url)
     {
         if (url.StartsWith("http://"))
