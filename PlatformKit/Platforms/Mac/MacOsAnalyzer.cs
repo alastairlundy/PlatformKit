@@ -339,28 +339,30 @@ namespace PlatformKit.Mac;
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     public static Version GetXnuVersion()
     {
-        if (OperatingSystem.IsMacOS())
+        if (!OperatingSystem.IsMacOS())
         {
-            string[] array = RuntimeInformation.OSDescription.Split(' ');
+            throw new PlatformNotSupportedException();    
+        }
         
-            for (int index = 0; index < array.Length; index++)
+        string[] array = RuntimeInformation.OSDescription.Split(' ');
+        
+        for (int index = 0; index < array.Length; index++)
+        {
+            if (array[index].ToLower().StartsWith("root:xnu-"))
             {
-                if (array[index].ToLower().StartsWith("root:xnu-"))
+                array[index] = array[index].Replace("root:xnu-", string.Empty)
+                    .Replace("~", ".");
+
+                if (IsAppleSiliconMac())
                 {
-                    array[index] = array[index].Replace("root:xnu-", string.Empty)
-                        .Replace("~", ".");
-
-                    if (IsAppleSiliconMac())
-                    {
-                        array[index] = array[index].Replace("/RELEASE_ARM64_T", string.Empty).Remove(array.Length - 4);
-                    }
-                    else
-                    {
-                        array[index] = array[index].Replace("/RELEASE_X86_64", string.Empty);
-                    }
-
-                    return Version.Parse(array[index]);
+                    array[index] = array[index].Replace("/RELEASE_ARM64_T", string.Empty).Remove(array.Length - 4);
                 }
+                else
+                {
+                    array[index] = array[index].Replace("/RELEASE_X86_64", string.Empty);
+                }
+
+                return Version.Parse(array[index]);
             }
         }
 
