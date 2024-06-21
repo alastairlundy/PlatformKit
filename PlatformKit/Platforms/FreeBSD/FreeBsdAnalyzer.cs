@@ -23,8 +23,10 @@
    */
 
 using System;
+
 using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
+
 using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0
@@ -48,8 +50,8 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
-            return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", String.Empty)
-                .Split(' ')[0].Replace("-release",  string.Empty).AddMissingZeroes());
+            return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
+                .Split(' ')[0].Replace("-release",  string.Empty));
         }
 
         throw new PlatformNotSupportedException();
