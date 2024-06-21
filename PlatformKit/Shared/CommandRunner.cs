@@ -63,37 +63,38 @@ public static class CommandRunner
  /// <exception cref="PlatformNotSupportedException"></exception>
  public static string RunCommandOnMac(string command, bool runAsAdministrator = false)
     {
-        if (OperatingSystem.IsMacOS())
+        if (!OperatingSystem.IsMacOS())
         {
-            string location = "/usr/bin/";
+            throw new PlatformNotSupportedException();
+        }
+        
+        string location = "/usr/bin/";
                 
-            string[] array = command.Split(' ');
+        string[] array = command.Split(' ');
 
-            if (array.Length > 1)
+        if (array.Length > 1)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (string argument in array)
             {
-                StringBuilder stringBuilder = new StringBuilder();
-
-                foreach (string argument in array)
-                {
-                    stringBuilder.Append($"{argument} ");
-                }
-
-                string args = stringBuilder.ToString().Replace(array[0], string.Empty);
-                
-                return ProcessRunner.RunProcessOnMac(location, array[0], args);
+                stringBuilder.Append($"{argument} ");
             }
-            else
+
+            string args = stringBuilder.ToString().Replace(array[0], string.Empty);
+                
+            return ProcessRunner.RunProcessOnMac(location, array[0], args);
+        }
+        else
+        {
+            if (runAsAdministrator)
             {
-                if (runAsAdministrator)
-                {
-                    command = command.Insert(0, "sudo ");
-                }
-                
-                return ProcessRunner.RunProcessOnMac(location, command);
+                command = command.Insert(0, "sudo ");
             }
+                
+            return ProcessRunner.RunProcessOnMac(location, command);
         }
 
-        throw new PlatformNotSupportedException();
     }
 
     /// <summary>
@@ -134,14 +135,15 @@ public static class CommandRunner
 #endif
     public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
-        if (OperatingSystem.IsWindows())
+        if (!OperatingSystem.IsWindows())
         {
-            string location = Environment.SystemDirectory + Path.DirectorySeparatorChar + "System32" +
-                              Path.DirectorySeparatorChar + "WindowsPowerShell" + Path.DirectorySeparatorChar + "v1.0";
-            return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
+            throw new PlatformNotSupportedException();
         }
-                
-        throw new PlatformNotSupportedException();
+        
+        string location =
+            $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+        return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
+
     }
 
     /// <summary>
@@ -152,38 +154,38 @@ public static class CommandRunner
     /// <returns></returns>
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
-        if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
+        if (!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD())
         {
-            string location = "/usr/bin/";
+            throw new PlatformNotSupportedException();
+        }
+        
+        string location = "/usr/bin/";
 
-            string[] args = command.Split(' ');
-            command = args[0];
+        string[] args = command.Split(' ');
+        command = args[0];
 
-            StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
             
-            if (args.Length > 0)
+        if (args.Length > 0)
+        {
+            for (int index = 1; index < args.Length; index++)
             {
-                for (int index = 1; index < args.Length; index++)
-                {
-                    stringBuilder.Append(args[index].Replace(command, string.Empty));
-                }
+                stringBuilder.Append(args[index].Replace(command, string.Empty));
             }
-
-            string processArguments = stringBuilder.ToString();
-
-            if (!Directory.Exists(location))
-            {
-                throw new DirectoryNotFoundException("Could not find directory " + location);
-            }
-
-            if (runAsAdministrator)
-            {
-                command = command.Insert(0, "sudo ");
-            }
-                    
-            return ProcessRunner.RunProcessOnLinux(location, command, processArguments);
         }
 
-        throw new PlatformNotSupportedException();
+        string processArguments = stringBuilder.ToString();
+
+        if (!Directory.Exists(location))
+        {
+            throw new DirectoryNotFoundException("Could not find directory " + location);
+        }
+
+        if (runAsAdministrator)
+        {
+            command = command.Insert(0, "sudo ");
+        }
+                    
+        return ProcessRunner.RunProcessOnLinux(location, command, processArguments);
     }
 }
