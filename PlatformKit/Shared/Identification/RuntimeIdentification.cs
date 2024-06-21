@@ -101,13 +101,15 @@ namespace PlatformKit.Identification
                     return "linux";
                 }
 
+                LinuxOsRelease osRelease = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+
                 if (identifierType == RuntimeIdentifierType.Specific)
                 {
-                    osName = LinuxAnalyzer.GetLinuxDistributionInformation().Identifier_Like.ToLower();
+                    osName = osRelease.Identifier_Like.ToLower();
                 }
                 else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
                 {
-                    osName = LinuxAnalyzer.GetLinuxDistributionInformation().Identifier.ToLower();
+                    osName = osRelease.Identifier.ToLower();
                 }
                 else
                 {
