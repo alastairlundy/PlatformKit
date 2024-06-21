@@ -43,25 +43,25 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     // ReSharper disable once InconsistentNaming
     public static bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
-        if (OperatingSystem.IsLinux())
+        if (!OperatingSystem.IsLinux())
         {
-            LinuxOsRelease distroInfo = GetLinuxDistributionInformation();
-            LinuxDistroBase distroBase = GetDistroBase(distroInfo);
+            throw new PlatformNotSupportedException();
+        }
+        
+        LinuxOsRelease distroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+        LinuxDistroBase distroBase = GetDistroBase(distroInfo);
 
-            if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)
-            {
-                return (includeHoloIsoAsSteamOs && distroInfo.PrettyName.ToLower().Contains("holo") ||
-                        distroInfo.PrettyName.ToLower().Contains("steamos"));
-            }
-            if (distroBase == LinuxDistroBase.Debian && distroInfo.PrettyName.ToLower().Contains("steamos"))
-            {
-                return false;
-            }
-
+        if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)
+        {
+            return (includeHoloIsoAsSteamOs && distroInfo.PrettyName.ToLower().Contains("holo") ||
+                    distroInfo.PrettyName.ToLower().Contains("steamos"));
+        }
+        if (distroBase == LinuxDistroBase.Debian && distroInfo.PrettyName.ToLower().Contains("steamos"))
+        {
             return false;
         }
 
-        throw new PlatformNotSupportedException();
+        return false;
     }
     
     /// <summary>
@@ -73,35 +73,35 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't SteamOS 3</exception>
     public static SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
-        if (IsSteamOS(includeHoloIsoAsSteamOs))
+        if (!IsSteamOS(includeHoloIsoAsSteamOs))
         {
-            LinuxDistroBase distroBase = GetDistroBase();
+            throw new PlatformNotSupportedException();    
+        }
+        
+        LinuxDistroBase distroBase = GetDistroBase();
 
-            bool isSteamOsExcludingHolo = IsSteamOS(false);
+        bool isSteamOsExcludingHolo = IsSteamOS(false);
 
-            if (distroBase == LinuxDistroBase.Manjaro)
+        if (distroBase == LinuxDistroBase.Manjaro)
+        {
+            if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
             {
-                if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
-                {
-                    return SteamOSMode.DesktopMode;
-                }
-
-                return SteamOSMode.OsIsNotSteamOS;
-            }
-
-            if (distroBase == LinuxDistroBase.Arch)
-            {
-                if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
-                {
-                    return SteamOSMode.GamingMode;
-                }
-
-                return SteamOSMode.OsIsNotSteamOS;
+                return SteamOSMode.DesktopMode;
             }
 
             return SteamOSMode.OsIsNotSteamOS;
         }
 
-        throw new PlatformNotSupportedException();
+        if (distroBase == LinuxDistroBase.Arch)
+        {
+            if (includeHoloIsoAsSteamOs || isSteamOsExcludingHolo)
+            {
+                return SteamOSMode.GamingMode;
+            }
+
+            return SteamOSMode.OsIsNotSteamOS;
+        }
+
+        return SteamOSMode.OsIsNotSteamOS;
     }
 }
