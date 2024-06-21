@@ -123,25 +123,24 @@ public class LinuxAnalyzer
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static string GetLinuxDistributionVersionAsString()
         {
-            if (OperatingSystem.IsLinux())
+            if (!OperatingSystem.IsLinux())
             {
-                LinuxOsRelease linuxDistroInfo = GetLinuxDistributionInformation();
-
-                string osName = linuxDistroInfo.Name.ToLower();
-
-                if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
-                (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4")))
-                {
-                    //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
-                    //This normally occurs with .04 being shown as .4
-                    linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
-                }
-              
-
-                return linuxDistroInfo.Version;
+                throw new PlatformNotSupportedException();
             }
             
-            throw new PlatformNotSupportedException();
+            LinuxOsRelease linuxDistroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+
+            string osName = linuxDistroInfo.Name.ToLower();
+
+            if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
+                (linuxDistroInfo.Version.Contains(".4.") || linuxDistroInfo.Version.EndsWith(".4")))
+            {
+                //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
+                //This normally occurs with .04 being shown as .4
+                linuxDistroInfo.Version = linuxDistroInfo.Version.Replace(".4", ".04");
+            }
+                
+            return linuxDistroInfo.Version;
         }
 
         /// <summary>
