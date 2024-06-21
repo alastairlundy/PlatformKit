@@ -94,12 +94,7 @@ public class LinuxAnalyzer
         [Obsolete(DeprecationMessages.DeprecationV5)]
         public static LinuxOsRelease GetLinuxDistributionInformation()
         {
-            if (OperatingSystem.IsLinux())
-            {
-                return LinuxOsReleaseRetriever.GetLinuxOsRelease();
-            }
-            
-            throw new PlatformNotSupportedException();
+            return LinuxOsReleaseRetriever.GetLinuxOsRelease();
         }
         
  
@@ -114,7 +109,7 @@ public class LinuxAnalyzer
         {
             if (OperatingSystem.IsLinux())
             {
-                return Version.Parse(GetLinuxDistributionVersionAsString().AddMissingZeroes());
+                return Version.Parse(LinuxOsReleaseRetriever.GetDistributionVersion().ToString());
             }
             
             throw new PlatformNotSupportedException();
