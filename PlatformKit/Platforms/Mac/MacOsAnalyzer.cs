@@ -190,37 +190,7 @@ namespace PlatformKit.Mac;
                 {
                     10 => input.Minor switch
                     {
-                        0 =>
-                            //return MacOsVersion.v10_0_Cheetah;
-                            MacOsVersion.NotSupported,
-                        1 =>
-                            // return MacOsVersion.v10_1_Puma;
-                            MacOsVersion.NotSupported,
-                        2 =>
-                            // return MacOsVersion.v10_2_Jaguar;
-                            MacOsVersion.NotSupported,
-                        3 =>
-                            // return MacOsVersion.v10_3_Panther;
-                            MacOsVersion.NotSupported,
-                        4 =>
-                            // return MacOsVersion.v10_4_Tiger;
-                            MacOsVersion.NotSupported,
-                        5 =>
-                            // return MacOsVersion.v10_5_Leopard;
-                            MacOsVersion.NotSupported,
-                        6 =>
-                            //return MacOsVersion.v10_6_SnowLeopard;
-                            MacOsVersion.NotSupported,
-                        7 =>
-                            //return MacOsVersion.v10_7_Lion;
-                            MacOsVersion.NotSupported,
-                        8 =>
-                            //return MacOsVersion.v10_8_MountainLion;
-                            MacOsVersion.NotSupported,
-                        9 => MacOsVersion.NotSupported,
-                        10 => MacOsVersion.NotSupported,
-                        11 => MacOsVersion.NotSupported,
-                        12 => MacOsVersion.NotSupported,
+                        < 13 => MacOsVersion.NotSupported,
                         13 => MacOsVersion.v10_13_HighSierra,
                         14 => MacOsVersion.v10_14_Mojave,
                         15 => MacOsVersion.v10_15_Catalina,
