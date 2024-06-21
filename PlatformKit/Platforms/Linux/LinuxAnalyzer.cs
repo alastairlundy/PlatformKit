@@ -24,9 +24,6 @@
 
 using System;
 
-using System.IO;
-
-using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
 
 using PlatformKit.Internal.Deprecation;
@@ -53,7 +50,7 @@ public class LinuxAnalyzer
         {
             if (OperatingSystem.IsLinux())
             {
-                return GetDistroBase(GetLinuxDistributionInformation());
+                return GetDistroBase(LinuxOsReleaseRetriever.GetLinuxOsRelease());
             }
 
             throw new PlatformNotSupportedException();
