@@ -4,7 +4,7 @@ The support policy now will be to support the latest 2 minor releases on a major
 ### Currently Supported Versions
 Versions currently supported by Security Fixes.
 
-| Version series | Original Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes |
+| Version series | Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes |
 |--| --|--|--|--|
 | 4.2 | 4.2.0, released on June 21st 2024 | 4.2.0, released on June 21st 2024 | Yes, until PlatformKit 4.4 | Yes, until PlatformKit 4.5 | 
 | 4.1 | 4.1.0, released on June 11th 2024 | 4.1.0, released on June 11th 2024 | Yes, until PlatformKit 4.3 | Yes, until PlatformKit 4.5 | 
