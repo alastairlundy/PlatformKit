@@ -144,7 +144,17 @@ public static class LinuxOsReleaseRetriever
         throw new PlatformNotSupportedException();
     }
 
-    internal static string[] RemoveUnwantedCharacters(string[] data)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="osRelease"></param>
+    /// <returns></returns>
+    public static Version GetDistributionVersion(LinuxOsRelease osRelease)
+    {
+        return Version.Parse(osRelease.Version);
+    }
+
+internal static string[] RemoveUnwantedCharacters(string[] data)
     {
         char[] delimiter = [' ', '\t', '\n', '\r', '"'];
 
