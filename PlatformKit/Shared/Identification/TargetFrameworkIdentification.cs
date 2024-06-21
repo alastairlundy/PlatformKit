@@ -91,6 +91,13 @@ public class TargetFrameworkIdentification
 
             return stringBuilder.ToString();
         }
+
+        public static Version GetDotNetVersion()
+        {
+            return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
+                .Replace("core", string.Empty)
+                .Replace(" ", string.Empty).AddMissingZeroes());
+        }
     
         /// <summary>
         /// Detect the Target Framework Moniker (TFM) of the currently running system.
@@ -104,9 +111,7 @@ public class TargetFrameworkIdentification
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
-            Version frameworkVersion = new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
-                .Replace("core", string.Empty)
-                .Replace(" ", string.Empty).AddMissingZeroes());
+            Version frameworkVersion = GetDotNetVersion();
             
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
