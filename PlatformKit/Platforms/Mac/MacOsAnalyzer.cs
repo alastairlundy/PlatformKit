@@ -296,7 +296,7 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1].AddMissingZeroes());
+            return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
         }
 
         throw new PlatformNotSupportedException();
