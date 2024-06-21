@@ -139,6 +139,17 @@ public static class LinuxOsReleaseRetriever
                 }
             
                 return linuxDistributionInformation;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+    public static Version GetDistributionVersion()
+    {
+        if (OperatingSystem.IsLinux())
+        {
+            return GetDistributionVersion(GetLinuxOsRelease());
         }
 
         throw new PlatformNotSupportedException();
