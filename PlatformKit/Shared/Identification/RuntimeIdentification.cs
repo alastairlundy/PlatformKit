@@ -52,6 +52,7 @@ namespace PlatformKit.Identification
         /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         protected static string GetArchitectureString()
         {
             return RuntimeInformation.OSArchitecture switch
