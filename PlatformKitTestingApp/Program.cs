@@ -74,8 +74,8 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                
                Console.WriteLine("WinOS " +  WMISearcher.GetWMIClass("Win32_OperatingSystem"));
 
-              WindowsSystemInformation sysinfo = WindowsAnalyzer.GetWindowsSystemInformation();
-              sysinfo.ToConsoleWriteLine();
+              WindowsSystemInformationModel sysinfo = WindowsAnalyzer.GetWindowsSystemInformation();
+              Console.WriteLine(sysinfo.ToString());
             }
 
             if (OperatingSystem.IsMacOS())
