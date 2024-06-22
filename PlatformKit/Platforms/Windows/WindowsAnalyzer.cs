@@ -670,7 +670,7 @@ for (int index = 0; index < array.Length; index++)
             {
                 return Version.Parse(RuntimeInformation.OSDescription
                     .Replace("Microsoft Windows", string.Empty)
-                    .Replace(" ", string.Empty).AddMissingZeroes());
+                    .Replace(" ", string.Empty));
             }
 
             throw new PlatformNotSupportedException();

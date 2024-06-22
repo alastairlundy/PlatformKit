@@ -25,7 +25,6 @@
 using System;
 using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.System.StringExtensions;
 using AlastairLundy.Extensions.System.VersionExtensions;
 
 using PlatformKit.Internal.Deprecation;
@@ -349,7 +348,7 @@ namespace PlatformKit.Mac;
         if (OperatingSystem.IsMacOS())
         {
             return Version.Parse(GetMacSwVersInfo()[1].Replace("ProductVersion:", string.Empty)
-                .Replace(" ", string.Empty).AddMissingZeroes());
+                .Replace(" ", string.Empty));
         }
 
         throw new PlatformNotSupportedException();
