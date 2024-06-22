@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Text;
 using PlatformKit.Internal.Deprecation;
 
 // ReSharper disable InconsistentNaming
@@ -89,72 +90,91 @@ public class WindowsSystemInformation
     
     public HyperVRequirements HyperVRequirements { get; set; }
 
-    [Obsolete(DeprecationMessages.DeprecationV5)]
-    public void ToConsoleWriteLine()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
     {
-        Console.WriteLine(nameof(HostName) + ": " + HostName);
-        Console.WriteLine(nameof(OsName) + ": " + OsName);
-        Console.WriteLine(nameof(OsVersion) + ": " + OsVersion);
-        Console.WriteLine(nameof(OsManufacturer) + ": " + OsManufacturer);
-        Console.WriteLine(nameof(OsConfiguration) + ": " + OsConfiguration);
-        Console.WriteLine(nameof(OsBuildType) + ": " + OsBuildType);
-        Console.WriteLine(nameof(RegisteredOwner) + ": " + RegisteredOwner);
-        Console.WriteLine(nameof(RegisteredOrganization) + ": " + RegisteredOrganization);
-        Console.WriteLine(nameof(ProductId) + ": " + ProductId);
-        Console.WriteLine(nameof(OriginalInstallDate) + ": " + OriginalInstallDate);
-        Console.WriteLine(nameof(SystemBootTime) + ": " + SystemBootTime);
-        Console.WriteLine(nameof(SystemManufacturer) + ": " + SystemManufacturer);
-        Console.WriteLine(nameof(SystemModel) + ": " + SystemModel);
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.AppendLine($"{nameof(HostName)}: {HostName}");
+        stringBuilder.AppendLine($"{nameof(OsName)}: {OsName}");
+        stringBuilder.AppendLine($"{nameof(OsVersion)}: {OsVersion}");
+        stringBuilder.AppendLine($"{nameof(OsManufacturer)}: {OsManufacturer}");
+        stringBuilder.AppendLine($"{nameof(OsConfiguration)}: {OsConfiguration}");
+        stringBuilder.AppendLine($"{nameof(OsBuildType)}: {OsBuildType}");
+        stringBuilder.AppendLine($"{nameof(RegisteredOwner)}: {RegisteredOwner}");
+        stringBuilder.AppendLine($"{nameof(RegisteredOrganization)}: {RegisteredOrganization}");
+        stringBuilder.AppendLine($"{nameof(ProductId)}: {ProductId}");
+        stringBuilder.AppendLine($"{nameof(OriginalInstallDate)}: {OriginalInstallDate}");
+        stringBuilder.AppendLine($"{nameof(SystemBootTime)}: {SystemBootTime}");
+        stringBuilder.AppendLine($"{nameof(SystemManufacturer)}: {SystemManufacturer}");
+        stringBuilder.AppendLine($"{nameof(SystemModel)}: {SystemModel}");
 
-        foreach (var str in Processors)
+        foreach (string str in Processors)
         {
-            Console.WriteLine(nameof(Processors) + ": " + str);
+            stringBuilder.AppendLine($"{nameof(Processors)}: {str}");
         }
         
-        Console.WriteLine(nameof(BiosVersion) + ": " + BiosVersion);
-        Console.WriteLine(nameof(WindowsDirectory) + ": " + WindowsDirectory);
-        Console.WriteLine(nameof(SystemDirectory) + ": " + SystemDirectory);
-        Console.WriteLine(nameof(BootDevice) + ": " + BootDevice);;
-        Console.WriteLine(nameof(SystemLocale) + ": " + SystemLocale);
-        Console.WriteLine(nameof(InputLocale) + ": " + InputLocale);
-        Console.WriteLine(nameof(TimeZone) + ": " + TimeZone);
-        Console.WriteLine(nameof(TotalPhysicalMemoryMB) + ": " + TotalPhysicalMemoryMB);
-        Console.WriteLine(nameof(AvailablePhysicalMemoryMB) + ": " + AvailablePhysicalMemoryMB);
-        Console.WriteLine(nameof(VirtualMemoryMaxSizeMB) + ": " + VirtualMemoryMaxSizeMB);
-        Console.WriteLine(nameof(VirtualMemoryAvailableSizeMB) + ": " + VirtualMemoryAvailableSizeMB);
-        Console.WriteLine(nameof(VirtualMemoryInUse) + ": " + VirtualMemoryInUse);
+        stringBuilder.AppendLine($"{nameof(BiosVersion)}: {BiosVersion}");
+        stringBuilder.AppendLine($"{nameof(WindowsDirectory)}: {WindowsDirectory}");
+        stringBuilder.AppendLine($"{nameof(SystemDirectory)}: {SystemDirectory}");
+        stringBuilder.AppendLine($"{nameof(BootDevice)}: {BootDevice}");;
+        stringBuilder.AppendLine($"{nameof(SystemLocale)}: {SystemLocale}");
+        stringBuilder.AppendLine($"{nameof(InputLocale)}: {InputLocale}");
+        stringBuilder.AppendLine($"{nameof(TimeZone)}: {TimeZone}");
+        stringBuilder.AppendLine($"{nameof(TotalPhysicalMemoryMB)}: {TotalPhysicalMemoryMB}");
+        stringBuilder.AppendLine($"{nameof(AvailablePhysicalMemoryMB)}: {AvailablePhysicalMemoryMB}");
+        stringBuilder.AppendLine($"{nameof(VirtualMemoryMaxSizeMB)}: {VirtualMemoryMaxSizeMB}");
+        stringBuilder.AppendLine($"{nameof(VirtualMemoryAvailableSizeMB)}: {VirtualMemoryAvailableSizeMB}");
+        stringBuilder.AppendLine($"{nameof(VirtualMemoryInUse)}: {VirtualMemoryInUse}");
         
-        foreach (var str in PageFileLocations)
+        foreach (string str in PageFileLocations)
         {
-            Console.WriteLine(nameof(PageFileLocations) + ": " + str);
+            stringBuilder.AppendLine($"{nameof(PageFileLocations)}: {str}");
         }
         
-        Console.WriteLine(nameof(Domain) + ": " + Domain);
-        Console.WriteLine(nameof(LogonServer) + ": " + LogonServer);
+        stringBuilder.AppendLine($"{nameof(Domain)}: {Domain}");
+        stringBuilder.AppendLine($"{nameof(LogonServer)}: {LogonServer}");
 
-        foreach (var str in HotfixesInstalled)
+        foreach (string str in HotfixesInstalled)
         {
-            Console.WriteLine(nameof(HotfixesInstalled) + ": " + str);
+            stringBuilder.AppendLine($"{nameof(HotfixesInstalled)}: {str}");
         }
 
-        foreach (var networkCard in NetworkCards)
+        foreach (NetworkCardModel networkCard in NetworkCards)
         {
-            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.Name) + ": " + networkCard.Name);
-            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.ConnectionName) + ": " + networkCard.ConnectionName);
-            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.DhcpEnabled) + ": " + networkCard.DhcpEnabled);
-            Console.WriteLine(nameof(networkCard) + "." + nameof(networkCard.DhcpServer) + ": " + networkCard.DhcpServer);
+            stringBuilder.AppendLine($"{nameof(networkCard)}.{nameof(networkCard.Name)}: {networkCard.Name}");
+            stringBuilder.AppendLine(
+                $"{nameof(networkCard)}.{nameof(networkCard.ConnectionName)}: {networkCard.ConnectionName}");
+            stringBuilder.AppendLine(
+                $"{nameof(networkCard)}.{nameof(networkCard.DhcpEnabled)}: {networkCard.DhcpEnabled}");
+            stringBuilder.AppendLine(
+                $"{nameof(networkCard)}.{nameof(networkCard.DhcpServer)}: {networkCard.DhcpServer}");
             
 
-            foreach (var ipAddress in networkCard.IpAddresses)
+            foreach (string ipAddress in networkCard.IpAddresses)
             {
-                Console.WriteLine(nameof(networkCard.IpAddresses) + ": " + ipAddress);
+                stringBuilder.AppendLine($"{nameof(networkCard.IpAddresses)}: {ipAddress}");
             }
         }
           
-        Console.WriteLine(nameof(HyperVRequirements.DataExecutionPreventionAvailable) + ": " + HyperVRequirements.DataExecutionPreventionAvailable);
-        Console.WriteLine(nameof(HyperVRequirements.SecondLevelAddressTranslation) + ": " + HyperVRequirements.SecondLevelAddressTranslation);
-        Console.WriteLine(nameof(HyperVRequirements.VirtualizationEnabledInFirmware) + ": " + HyperVRequirements.VirtualizationEnabledInFirmware);
-        Console.WriteLine(nameof(HyperVRequirements.VmMonitorModeExtensions) + ": " + HyperVRequirements.VmMonitorModeExtensions);
-        
+        stringBuilder.AppendLine(
+            $"{nameof(HyperVRequirements.DataExecutionPreventionAvailable)}: {HyperVRequirements.DataExecutionPreventionAvailable}");
+        stringBuilder.AppendLine(
+            $"{nameof(HyperVRequirements.SecondLevelAddressTranslation)}: {HyperVRequirements.SecondLevelAddressTranslation}");
+        stringBuilder.AppendLine(
+            $"{nameof(HyperVRequirements.VirtualizationEnabledInFirmware)}: {HyperVRequirements.VirtualizationEnabledInFirmware}");
+        stringBuilder.AppendLine(
+            $"{nameof(HyperVRequirements.VmMonitorModeExtensions)}: {HyperVRequirements.VmMonitorModeExtensions}");
+
+        return stringBuilder.ToString();
+    }
+    
+    [Obsolete(DeprecationMessages.DeprecationV5)]
+    public void ToConsoleWriteLine()
+    {
+        Console.WriteLine(this.ToString());
     }
 }
