@@ -152,7 +152,7 @@ public static class LinuxOsReleaseRetriever
     }
 
     /// <summary>
-    /// 
+    /// Detects the Linux Distribution Version as read from /etc/os-release.
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException"></exception>
@@ -167,7 +167,7 @@ public static class LinuxOsReleaseRetriever
     }
 
     /// <summary>
-    /// 
+    /// Detects the Linux Distribution Version from the LinuxOsReleaseModel object.
     /// </summary>
     /// <param name="osRelease"></param>
     /// <returns></returns>
