@@ -97,12 +97,14 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
             if (OperatingSystem.IsLinux())
-            {  
-                Console.WriteLine("Linux Distro Name: " + LinuxAnalyzer.GetLinuxDistributionInformation().Name);
+            {
+                LinuxOsReleaseModel osRelease = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+                
+                Console.WriteLine("Linux Distro Name: " + osRelease.Name);
                 Console.WriteLine("Linux Distro Version: " + LinuxAnalyzer.GetLinuxDistributionVersionAsString());
                 Console.WriteLine("Linux Kernel Version: " + LinuxAnalyzer.GetLinuxKernelVersion());
                 
-                Console.WriteLine("Is an LTS release? " + LinuxAnalyzer.GetLinuxDistributionInformation().IsLongTermSupportRelease);
+                Console.WriteLine("Is an LTS release? " + osRelease.IsLongTermSupportRelease);
             }
 
 Console.WriteLine("PlatformKit Version: " + PlatformKitIdentification.GetPlatformKitVersion().ToString());
