@@ -85,7 +85,7 @@ public class WindowsSystemInformation
     
     public string[] HotfixesInstalled { get; set; }
     
-    public NetworkCard[] NetworkCards { get; set; }
+    public NetworkCardModel[] NetworkCards { get; set; }
     
     public HyperVRequirements HyperVRequirements { get; set; }
 
