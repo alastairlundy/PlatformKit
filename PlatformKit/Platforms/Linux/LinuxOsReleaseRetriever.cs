@@ -38,9 +38,9 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-    public static LinuxOsRelease GetLinuxOsRelease()
+    public static LinuxOsReleaseModel GetLinuxOsRelease()
     {
-        LinuxOsRelease linuxDistributionInformation = new LinuxOsRelease();
+        LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
 
         //Assign a default value.
         linuxDistributionInformation.IsLongTermSupportRelease = false;
@@ -171,7 +171,7 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <param name="osRelease"></param>
     /// <returns></returns>
-    public static Version GetDistributionVersion(LinuxOsRelease osRelease)
+    public static Version GetDistributionVersion(LinuxOsReleaseModel osRelease)
     {
         return Version.Parse(osRelease.Version);
     }

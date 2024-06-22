@@ -48,7 +48,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
             throw new PlatformNotSupportedException();
         }
         
-        LinuxOsRelease distroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+        LinuxOsReleaseModel distroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
         LinuxDistroBase distroBase = GetDistroBase(distroInfo);
 
         if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)

@@ -61,7 +61,7 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        public static LinuxDistroBase GetDistroBase(LinuxOsRelease linuxOsRelease)
+        public static LinuxDistroBase GetDistroBase(LinuxOsReleaseModel linuxOsRelease)
         {
             string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
             
@@ -89,7 +89,7 @@ public class LinuxAnalyzer
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
-        public static LinuxOsRelease GetLinuxDistributionInformation()
+        public static LinuxOsReleaseModel GetLinuxDistributionInformation()
         {
             return LinuxOsReleaseRetriever.GetLinuxOsRelease();
         }
