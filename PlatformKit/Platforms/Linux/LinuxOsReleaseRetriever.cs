@@ -176,7 +176,43 @@ public static class LinuxOsReleaseRetriever
         return Version.Parse(osRelease.Version);
     }
 
-internal static string[] RemoveUnwantedCharacters(string[] data)
+    /// <summary>
+    /// Detects the Linux Distribution Version as read from /etc/os-release.
+    /// Preserves the version if the full version is in a Year.Month.Bugfix format.
+    /// </summary>
+    /// <returns>the version of the linux distribution being run as a string.</returns>
+    public static string GetLinuxDistributionVersionAsString()
+    {
+        return GetLinuxDistributionVersionAsString(GetLinuxOsRelease());
+    }
+    
+    /// <summary>
+    /// Detects the Linux Distribution Version as read from /etc/os-release.
+    /// Preserves the version if the full version is in a Year.Month.Bugfix format.
+    /// </summary>
+    /// <returns>the version of the linux distribution being run as a string.</returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+    public static string GetLinuxDistributionVersionAsString(LinuxOsReleaseModel osReleaseModel)
+    {
+        if (!OperatingSystem.IsLinux())
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+        string osName = osReleaseModel.Name.ToLower();
+
+        if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
+            (osReleaseModel.Version.Contains(".4.") || osReleaseModel.Version.EndsWith(".4")))
+        {
+            //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
+            //This normally occurs with .04 being shown as .4
+            osReleaseModel.Version = osReleaseModel.Version.Replace(".4", ".04");
+        }
+                
+        return osReleaseModel.Version;
+    }
+    
+    internal static string[] RemoveUnwantedCharacters(string[] data)
     {
         char[] delimiter = [' ', '\t', '\n', '\r', '"'];
 
