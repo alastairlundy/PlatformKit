@@ -73,7 +73,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
-        /// <exception cref="OperatingSystemDetectionException"></exception>
+        /// <exception cref="LinuxVersionDetectionException"></exception>
         protected static string GetOsNameString(RuntimeIdentifierType identifierType)
         {
             string osName = null;
@@ -101,7 +101,7 @@ namespace PlatformKit.Identification
                     return "linux";
                 }
 
-                LinuxOsRelease osRelease = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+                LinuxOsReleaseModel osRelease = LinuxOsReleaseRetriever.GetLinuxOsRelease();
 
                 if (identifierType == RuntimeIdentifierType.Specific)
                 {
