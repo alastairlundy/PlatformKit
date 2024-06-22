@@ -22,16 +22,17 @@
        SOFTWARE.
    */
 
-using System;
-using PlatformKit.Internal.Deprecation;
-
 namespace PlatformKit;
 
-/// <summary>
-/// 
-/// </summary>
-[Obsolete(DeprecationMessages.DeprecationV5)]
-public class NetworkCard : NetworkCardModel
+public class NetworkCardModel
 {
+    public string Name { get; set; }
     
+    public string ConnectionName { get; set; }
+    
+    public bool DhcpEnabled { get; set; }
+    
+    public string DhcpServer { get; set; }
+
+    public string[] IpAddresses { get; set; }
 }
