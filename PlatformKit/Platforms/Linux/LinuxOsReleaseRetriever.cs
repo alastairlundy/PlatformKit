@@ -45,110 +45,110 @@ public static class LinuxOsReleaseRetriever
         //Assign a default value.
         linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-        if (OperatingSystem.IsLinux())
+        if (!OperatingSystem.IsLinux())
         {
-            string[] resultArray = File.ReadAllLines("/etc/os-release");
+            throw new PlatformNotSupportedException();
+        }
+        
+        string[] resultArray = File.ReadAllLines("/etc/os-release");
 
-            resultArray = RemoveUnwantedCharacters(resultArray);
+        resultArray = RemoveUnwantedCharacters(resultArray);
 
-            for (int index = 0; index < resultArray.Length; index++)
+        for (int index = 0; index < resultArray.Length; index++)
+        {
+            string line = resultArray[index].ToUpper();
+
+            if (line.Contains("NAME=") && !line.Contains("VERSION"))
             {
-                string line = resultArray[index].ToUpper();
-
-                if (line.Contains("NAME=") && !line.Contains("VERSION"))
+                if (line.Contains("CODE"))
                 {
-                    if (line.Contains("CODE"))
-                    {
 
-                    }
-
-                    if (line.StartsWith("PRETTY_"))
-                    {
-                        linuxDistributionInformation.PrettyName =
-                            resultArray[index].Replace("PRETTY_NAME=", string.Empty);
-                    }
-
-                    if (!line.Contains("PRETTY") && !line.Contains("CODE"))
-                    {
-                        linuxDistributionInformation.Name = resultArray[index].Replace("NAME=", string.Empty);
-                    }
                 }
 
-                if (line.Contains("VERSION="))
+                if (line.StartsWith("PRETTY_"))
                 {
-                    if (line.Contains("LTS"))
-                    {
-                        linuxDistributionInformation.IsLongTermSupportRelease = true;
-                    }
-                    else
-                    {
-                        linuxDistributionInformation.IsLongTermSupportRelease = false;
-                    }
-
-                    if (line.Contains("ID="))
-                    {
-                        linuxDistributionInformation.VersionId =
-                            resultArray[index].Replace("VERSION_ID=", string.Empty);
-                    }
-                    else if (!line.Contains("ID=") && line.Contains("CODE"))
-                    {
-                        linuxDistributionInformation.VersionCodename =
-                            resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
-                    }
-                    else if (!line.Contains("ID=") && !line.Contains("CODE"))
-                    {
-                        linuxDistributionInformation.Version = resultArray[index].Replace("VERSION=", string.Empty)
-                            .Replace("LTS", string.Empty);
-                    }
+                    linuxDistributionInformation.PrettyName =
+                        resultArray[index].Replace("PRETTY_NAME=", string.Empty);
                 }
 
-                if (line.Contains("ID"))
+                if (!line.Contains("PRETTY") && !line.Contains("CODE"))
                 {
-                    if (line.Contains("ID_LIKE="))
-                    {
-                        linuxDistributionInformation.Identifier_Like =
-                            resultArray[index].Replace("ID_LIKE=", string.Empty);
-
-                        if (linuxDistributionInformation.Identifier_Like.ToLower().Contains("ubuntu") &&
-                            linuxDistributionInformation.Identifier_Like.ToLower().Contains("debian"))
-                        {
-                            linuxDistributionInformation.Identifier_Like = "ubuntu";
-                        }
-                    }
-                    else if (!line.Contains("VERSION"))
-                    {
-                        linuxDistributionInformation.Identifier = resultArray[index].Replace("ID=", string.Empty);
-                    }
-                }
-
-                if (line.Contains("URL="))
-                {
-                    if (line.StartsWith("HOME_"))
-                    {
-                        linuxDistributionInformation.HomeUrl = resultArray[index].Replace("HOME_URL=", string.Empty);
-                    }
-                    else if (line.StartsWith("SUPPORT_"))
-                    {
-                        linuxDistributionInformation.SupportUrl =
-                            resultArray[index].Replace("SUPPORT_URL=", string.Empty);
-                    }
-                    else if (line.StartsWith("BUG_"))
-                    {
-                        linuxDistributionInformation.BugReportUrl =
-                            resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
-                    }
-                    else if (line.StartsWith("PRIVACY_"))
-                    {
-                        linuxDistributionInformation.PrivacyPolicyUrl =
-                            resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
-                    }
+                    linuxDistributionInformation.Name = resultArray[index].Replace("NAME=", string.Empty);
                 }
             }
 
-            return linuxDistributionInformation;
+            if (line.Contains("VERSION="))
+            {
+                if (line.Contains("LTS"))
+                {
+                    linuxDistributionInformation.IsLongTermSupportRelease = true;
+                }
+                else
+                {
+                    linuxDistributionInformation.IsLongTermSupportRelease = false;
+                }
+
+                if (line.Contains("ID="))
+                {
+                    linuxDistributionInformation.VersionId =
+                        resultArray[index].Replace("VERSION_ID=", string.Empty);
+                }
+                else if (!line.Contains("ID=") && line.Contains("CODE"))
+                {
+                    linuxDistributionInformation.VersionCodename =
+                        resultArray[index].Replace("VERSION_CODENAME=", string.Empty);
+                }
+                else if (!line.Contains("ID=") && !line.Contains("CODE"))
+                {
+                    linuxDistributionInformation.Version = resultArray[index].Replace("VERSION=", string.Empty)
+                        .Replace("LTS", string.Empty);
+                }
+            }
+
+            if (line.Contains("ID"))
+            {
+                if (line.Contains("ID_LIKE="))
+                {
+                    linuxDistributionInformation.Identifier_Like =
+                        resultArray[index].Replace("ID_LIKE=", string.Empty);
+
+                    if (linuxDistributionInformation.Identifier_Like.ToLower().Contains("ubuntu") &&
+                        linuxDistributionInformation.Identifier_Like.ToLower().Contains("debian"))
+                    {
+                        linuxDistributionInformation.Identifier_Like = "ubuntu";
+                    }
+                }
+                else if (!line.Contains("VERSION"))
+                {
+                    linuxDistributionInformation.Identifier = resultArray[index].Replace("ID=", string.Empty);
+                }
+            }
+
+            if (line.Contains("URL="))
+            {
+                if (line.StartsWith("HOME_"))
+                {
+                    linuxDistributionInformation.HomeUrl = resultArray[index].Replace("HOME_URL=", string.Empty);
+                }
+                else if (line.StartsWith("SUPPORT_"))
+                {
+                    linuxDistributionInformation.SupportUrl =
+                        resultArray[index].Replace("SUPPORT_URL=", string.Empty);
+                }
+                else if (line.StartsWith("BUG_"))
+                {
+                    linuxDistributionInformation.BugReportUrl =
+                        resultArray[index].Replace("BUG_REPORT_URL=", string.Empty);
+                }
+                else if (line.StartsWith("PRIVACY_"))
+                {
+                    linuxDistributionInformation.PrivacyPolicyUrl =
+                        resultArray[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
+                }
+            }
         }
 
-        throw new PlatformNotSupportedException();
+        return linuxDistributionInformation;
     }
 
     /// <summary>
