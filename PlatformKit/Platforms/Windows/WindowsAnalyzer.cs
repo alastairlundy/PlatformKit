@@ -69,80 +69,81 @@ public class WindowsAnalyzer
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public static WindowsEdition GetWindowsEdition(WindowsSystemInformation windowsSystemInformation)
+    public static WindowsEdition GetWindowsEdition(WindowsSystemInformationModel windowsSystemInformation)
     {
-        if (OperatingSystem.IsWindows())
+        if (!OperatingSystem.IsWindows())
         {
-            string edition = windowsSystemInformation.OsName.ToLower();
+            throw new PlatformNotSupportedException();
+        }
+        
+        string edition = windowsSystemInformation.OsName.ToLower();
             
-                if (edition.Contains("home"))
-                {
-                    return WindowsEdition.Home;
-                }
-                else if (edition.Contains("pro") && edition.Contains("workstation"))
-                {
-                    return WindowsEdition.ProfessionalForWorkstations;
-                }
-                else if (edition.Contains("pro") && !edition.Contains("education"))
-                {
-                    return WindowsEdition.Professional;
-                }
-                else if (edition.Contains("pro") && edition.Contains("education"))
-                {
-                    return WindowsEdition.ProfessionalForEducation;
-                }
-                else if (!edition.Contains("pro") && edition.Contains("education"))
-                {
-                    return WindowsEdition.Education;
-                }
-                else if (edition.Contains("server"))
-                {
-                    return WindowsEdition.Server;
-                }
-                else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
-                         !edition.Contains("iot"))
-                {
-                    return WindowsEdition.EnterpriseLTSC;
-                }
-                else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
-                         !edition.Contains("iot"))
-                {
-                    return WindowsEdition.EnterpriseSemiAnnualChannel;
-                }
-                else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
-                         edition.Contains("iot"))
-                {
-                    return WindowsEdition.IoTEnterpriseLTSC;
-                }
-                else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
-                         edition.Contains("iot"))
-                {
-                    return WindowsEdition.IoTEnterprise;
-                }
-                else if (edition.Contains("iot") && edition.Contains("core"))
-                {
-                    return WindowsEdition.IoTCore;
-                }
-                else if (edition.Contains("team"))
-                {
-                    return WindowsEdition.Team;
-                }
-
-                if (IsWindows11())
-                {
-                    if (edition.Contains("se"))
-                    {
-                        return WindowsEdition.SE;
-                    }
-                }
-
-                throw new WindowsEditionDetectionException();
+        if (edition.Contains("home"))
+        {
+            return WindowsEdition.Home;
+        }
+        else if (edition.Contains("pro") && edition.Contains("workstation"))
+        {
+            return WindowsEdition.ProfessionalForWorkstations;
+        }
+        else if (edition.Contains("pro") && !edition.Contains("education"))
+        {
+            return WindowsEdition.Professional;
+        }
+        else if (edition.Contains("pro") && edition.Contains("education"))
+        {
+            return WindowsEdition.ProfessionalForEducation;
+        }
+        else if (!edition.Contains("pro") && edition.Contains("education"))
+        {
+            return WindowsEdition.Education;
+        }
+        else if (edition.Contains("server"))
+        {
+            return WindowsEdition.Server;
+        }
+        else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                 !edition.Contains("iot"))
+        {
+            return WindowsEdition.EnterpriseLTSC;
+        }
+        else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                 !edition.Contains("iot"))
+        {
+            return WindowsEdition.EnterpriseSemiAnnualChannel;
+        }
+        else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                 edition.Contains("iot"))
+        {
+            return WindowsEdition.IoTEnterpriseLTSC;
+        }
+        else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                 edition.Contains("iot"))
+        {
+            return WindowsEdition.IoTEnterprise;
+        }
+        else if (edition.Contains("iot") && edition.Contains("core"))
+        {
+            return WindowsEdition.IoTCore;
+        }
+        else if (edition.Contains("team"))
+        {
+            return WindowsEdition.Team;
         }
 
-        throw new PlatformNotSupportedException();
+        if (IsWindows11())
+        {
+            if (edition.Contains("se"))
+            {
+                return WindowsEdition.SE;
+            }
+        }
+
+        throw new WindowsEditionDetectionException();
+
     }
 
-    protected static int GetNetworkCardPositionInWindowsSysInfo(List<NetworkCard> networkCards, NetworkCard lastNetworkCard)
+    protected static int GetNetworkCardPositionInWindowsSysInfo(List<NetworkCardModel> networkCards, NetworkCardModel lastNetworkCard)
     {
         for (int position = 0; position < networkCards.Count; position++)
         {
@@ -163,21 +164,21 @@ public class WindowsAnalyzer
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-    public static WindowsSystemInformation GetWindowsSystemInformation()
+    public static WindowsSystemInformationModel GetWindowsSystemInformation()
     {
         if (!OperatingSystem.IsWindows())
         {
             throw new PlatformNotSupportedException();
         }
         
-        WindowsSystemInformation windowsSystemInformation = new WindowsSystemInformation();
+        WindowsSystemInformationModel windowsSystemInformation = new WindowsSystemInformationModel();
         HyperVRequirements hyperVRequirements = new HyperVRequirements();
         
         List<string> processors = new List<string>();
-        List<NetworkCard> networkCards = new List<NetworkCard>();
+        List<NetworkCardModel> networkCards = new List<NetworkCardModel>();
         List<string> ipAddresses = new List<string>();
         
-        NetworkCard lastNetworkCard = null;
+        NetworkCardModel lastNetworkCard = null;
 
         string desc = CommandRunner.RunPowerShellCommand("systeminfo");
 
@@ -347,9 +348,10 @@ for (int index = 0; index < array.Length; index++)
         wasLastLineNetworkLine = false;
         wasLastLineProcLine = false;
         
-        List<string> locations = new List<string>();
-
-        locations.Add(nextLine.Replace("Page File Location(s):", string.Empty));
+        List<string> locations =
+        [
+            nextLine.Replace("Page File Location(s):", string.Empty)
+        ];
 
         int locationNumber = 1;
         
@@ -401,7 +403,7 @@ for (int index = 0; index < array.Length; index++)
         
         wasLastLineProcLine = false;
         
-        NetworkCard networkCard = new NetworkCard
+        NetworkCardModel networkCard = new NetworkCardModel
         {
             Name = array[index + 2].Replace("  ", string.Empty)
         };
