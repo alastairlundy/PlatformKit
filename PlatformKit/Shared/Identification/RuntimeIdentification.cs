@@ -25,15 +25,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
 using AlastairLundy.Extensions.System.StringExtensions;
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
+
 using PlatformKit.Linux;
+using PlatformKit.Linux.Models;
+
 using PlatformKit.Mac;
+
 using PlatformKit.FreeBSD;
+
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

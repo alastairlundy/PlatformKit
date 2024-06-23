@@ -28,6 +28,7 @@ using AlastairLundy.Extensions.System.VersionExtensions;
 
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Enums;
+using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

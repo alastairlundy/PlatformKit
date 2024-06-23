@@ -22,6 +22,8 @@
        SOFTWARE.
    */
 
+using PlatformKit.Windows.Models;
+
 namespace PlatformKit.Windows;
 
 public class HyperVRequirements : HyperVRequirementsModel

@@ -26,15 +26,20 @@
 
 using System.Runtime.InteropServices;
 
+using PlatformKit;
 using PlatformKit.Identification;
 
-using PlatformKit;
+
 using PlatformKit.Linux;
+using PlatformKit.Linux.Models;
+
 using PlatformKit.Mac;
+
 using PlatformKit.Windows;
+using PlatformKit.Windows.Models;
 
 
-    var platformManager = new PlatformKitIdentification();
+var platformManager = new PlatformKitIdentification();
     
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     

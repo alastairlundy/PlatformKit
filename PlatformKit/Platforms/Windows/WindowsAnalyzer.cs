@@ -33,6 +33,9 @@ using AlastairLundy.Extensions.System.VersionExtensions;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
+using PlatformKit.Models;
+using PlatformKit.Windows.Models;
+
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
@@ -172,7 +175,7 @@ public class WindowsAnalyzer
         }
         
         WindowsSystemInformationModel windowsSystemInformation = new WindowsSystemInformationModel();
-        HyperVRequirements hyperVRequirements = new HyperVRequirements();
+        HyperVRequirementsModel hyperVRequirements = new HyperVRequirementsModel();
         
         List<string> processors = new List<string>();
         List<NetworkCardModel> networkCards = new List<NetworkCardModel>();

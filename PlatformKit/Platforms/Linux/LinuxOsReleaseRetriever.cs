@@ -24,6 +24,7 @@
 
 using System;
 using System.IO;
+using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

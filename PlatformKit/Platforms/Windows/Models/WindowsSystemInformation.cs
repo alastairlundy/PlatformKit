@@ -25,6 +25,7 @@
 using System;
 using System.Text;
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Windows.Models;
 
 // ReSharper disable InconsistentNaming
 

@@ -25,6 +25,7 @@
 using System;
 
 using PlatformKit.Linux.Enums;
+using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

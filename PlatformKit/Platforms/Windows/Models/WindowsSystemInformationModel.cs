@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Text;
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Models;
 
-namespace PlatformKit.Windows;
+// ReSharper disable once CheckNamespace
+namespace PlatformKit.Windows.Models;
 
 public class WindowsSystemInformationModel
 {
@@ -59,7 +61,7 @@ public class WindowsSystemInformationModel
     
     public NetworkCardModel[] NetworkCards { get; set; }
     
-    public HyperVRequirements HyperVRequirements { get; set; }
+    public HyperVRequirementsModel HyperVRequirements { get; set; }
 
     /// <summary>
     /// 

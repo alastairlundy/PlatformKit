@@ -22,6 +22,8 @@
        SOFTWARE.
    */
 
+using PlatformKit.Linux.Models;
+
 namespace PlatformKit.Linux;
 
     /// <summary>
