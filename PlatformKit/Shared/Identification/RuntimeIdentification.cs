@@ -26,16 +26,14 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.System.StringExtensions;
+using AlastairLundy.Extensions.System.Versioning;
+
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;
-
 using PlatformKit.Linux;
 using PlatformKit.Linux.Models;
-
 using PlatformKit.Mac;
-
 using PlatformKit.FreeBSD;
 
 
@@ -159,7 +157,7 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsLinux())
             {
-                osVersion = LinuxAnalyzer.GetLinuxDistributionVersionAsString();
+                osVersion = LinuxOsReleaseRetriever.GetLinuxDistributionVersionAsString();
             }
             if (OperatingSystem.IsFreeBSD())
             {

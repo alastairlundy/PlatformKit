@@ -26,7 +26,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using AlastairLundy.Extensions.System.StringExtensions;
+using AlastairLundy.Extensions.System.Versioning;
 
 using PlatformKit.Internal.Exceptions;
 
