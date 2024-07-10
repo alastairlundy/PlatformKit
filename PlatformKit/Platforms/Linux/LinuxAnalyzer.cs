@@ -24,7 +24,7 @@
 
 using System;
 
-using AlastairLundy.Extensions.System.VersionExtensions;
+using AlastairLundy.Extensions.System;
 
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Enums;
