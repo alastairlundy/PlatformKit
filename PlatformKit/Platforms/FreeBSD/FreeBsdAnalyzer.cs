@@ -68,7 +68,7 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
-            return GetFreeBSDVersion().IsAtLeast((expectedVersion));
+            return GetFreeBSDVersion().IsAtLeast(expectedVersion);
         }
 
         throw new PlatformNotSupportedException();
