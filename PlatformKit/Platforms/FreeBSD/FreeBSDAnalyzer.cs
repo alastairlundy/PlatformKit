@@ -9,7 +9,9 @@
    */
 
 using System;
-using AlastairLundy.Extensions.System.StringExtensions;
+
+using AlastairLundy.Extensions.System.Versioning;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Shared.Extensions;
