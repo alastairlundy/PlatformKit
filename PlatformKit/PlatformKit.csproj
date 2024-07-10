@@ -14,32 +14,18 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.1.0
-
-### Additions
-* Added ``LinuxOsReleaseRetriever`` class with static methods
-* Added method to allow library users to detect .NET Version for
-
-### Changes
-* Improved XML doc comments
-* Simplify switch statements to switch expressions
-* Optimizations and improvements 
-
-### Deprecations
-* Deprecated ``GetLinuxDistributionInformation`` method
-* Deprecated ``GetLinuxDistributionVersion`` method
-
-**Full Changelog**: https://github.com/alastairlundy/PlatformKit/compare/4.1.0...4.2.0</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.2.0
+* Updated dependency on System Extensions to version 5 from version 4.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>4.2.0.0</AssemblyVersion>
-        <FileVersion>4.2.0.0</FileVersion>
-        <Version>4.2.0.0</Version>
-        <PackageVersion>4.2.0</PackageVersion>
+   <AssemblyVersion>4.2.1.0</AssemblyVersion>
+        <FileVersion>4.2.1.0</FileVersion>
+        <Version>4.2.1.0</Version>
+        <PackageVersion>4.2.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>

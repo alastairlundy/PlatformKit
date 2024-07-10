@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="4.0.0" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
     </ItemGroup>
 
 </Project>
