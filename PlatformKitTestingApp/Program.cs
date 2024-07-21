@@ -24,6 +24,7 @@
 
 // See https://aka.ms/new-console-template for more information
 
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 using PlatformKit;
@@ -43,7 +44,7 @@ var platformManager = new PlatformKitIdentification();
     
 Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdentifier);
     
-            var title = $"{platformManager.GetProjectName()} v{platformManager.GetProjectVersion()}";
+            var title = $"{Assembly.GetExecutingAssembly().GetName().Name} v{Assembly.GetExecutingAssembly().GetName().Version}";
             Console.Title = title;
             //    Console.WriteLine(title) ;
           
