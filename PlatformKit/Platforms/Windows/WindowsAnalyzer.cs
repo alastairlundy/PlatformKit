@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 using AlastairLundy.Extensions.System;
 
 using AlastairLundy.Extensions.System.Versioning;
