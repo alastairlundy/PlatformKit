@@ -617,18 +617,7 @@ for (int index = 0; index < array.Length; index++)
         {
             return input.Build switch
             {
-                < 6000 => WindowsVersion.NotSupported,
-                6000 => WindowsVersion.NotSupported,
-                //return WindowsVersion.WinVista;
-                6001 => WindowsVersion.NotSupported,
-                //return WindowsVersion.WinVistaSP1;
-                6002 => WindowsVersion.NotSupported,
-                //return WindowsVersion.WinVistaSP2;
-                6003 => WindowsVersion.NotSupported,
-                //return WindowsVersion.WinServer_2008;
-                //Technically Server 2008 also can be Build number 6001 or 6002 but this provides an easier way to identify it.
-                7600 => WindowsVersion.NotSupported,
-                7601 => WindowsVersion.NotSupported,
+                < 9200 => WindowsVersion.NotSupported,
                 9200 => WindowsVersion.Win8,
                 9600 => WindowsVersion.Win8_1,
                 10240 => WindowsVersion.Win10_v1507,

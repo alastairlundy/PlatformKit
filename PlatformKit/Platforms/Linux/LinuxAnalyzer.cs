@@ -95,7 +95,6 @@ public class LinuxAnalyzer
             return LinuxOsReleaseRetriever.GetLinuxOsRelease();
         }
         
- 
         /// <summary>
         /// Detects the Linux Distribution Version as read from /etc/os-release and re-formats it into the format of System.Version object
         ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
