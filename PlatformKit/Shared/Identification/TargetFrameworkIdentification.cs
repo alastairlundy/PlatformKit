@@ -208,9 +208,13 @@ public class TargetFrameworkIdentification
                             {
                                 Version winVersion = WindowsAnalyzer.GetWindowsVersion();
 
-                                if (winVersion.Build == 9200 || winVersion.Build == 9600 || winVersion.Build >= 14393)
+                                if (winVersion.Build == 9200 || winVersion.Build == 9600)
                                 {
                                     stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
+                                }
+                                else if (winVersion.Build >= 14393)
+                                {
+                                    stringBuilder.Append(winVersion);
                                 }
                                 else
                                 {
