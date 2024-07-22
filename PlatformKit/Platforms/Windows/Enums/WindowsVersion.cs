@@ -45,20 +45,19 @@ namespace PlatformKit.Windows
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
         /// </summary>
-        [Obsolete(DeprecationMessages.FutureDeprecation)]
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_v1507 = 10240,
         /// <summary>
         /// Initial release version of Windows 10 for Mobile and Xbox One.
         /// Windows 10 Build Number 10586
         /// </summary>
-        [Obsolete(DeprecationMessages.FutureDeprecation)]
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_v1511 = 10586,
         Win10_v1607 = 14393,
         /// <summary>
         /// Windows Server 2016 based on Windows 10 Build 14393 (Win10v1607)
         /// </summary>
         Win10_Server2016 = 14393,
-        [Obsolete(DeprecationMessages.FutureDeprecation)]
         Win10_v1703 = 15063,
         Win10_v1709 = 16299,
         /// <summary>
