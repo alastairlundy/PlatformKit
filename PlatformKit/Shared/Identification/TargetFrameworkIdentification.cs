@@ -210,32 +210,38 @@ public class TargetFrameworkIdentification
                             }
                             else if(OperatingSystem.IsWindows())
                             {
-                                WindowsVersion windowsVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum();
+                                Version winVersion = WindowsAnalyzer.GetWindowsVersion();
 
-                                switch (windowsVersionEnum)
+                                if (winVersion.Build == 9200)
                                 {
-                                    case WindowsVersion.Win8:
-                                        stringBuilder.Append("8.0");
-                                        break;
-                                    case WindowsVersion.Win8_1:
-                                        stringBuilder.Append("8.1");
-                                        break;
-                                    default:
-                                        Version windowsVersion = WindowsAnalyzer.GetWindowsVersionFromEnum(windowsVersionEnum);
-
-                                        if (WindowsAnalyzer.IsWindows10() || WindowsAnalyzer.IsWindows11())
-                                        {
-                                            if (windowsVersion.Build >= 14393)
-                                            {
-                                                stringBuilder.Append(windowsVersion);
-                                            }
-
-                                            break;
-                                        }
-                                        
-                                        throw new OperatingSystemDetectionException();
+                                    stringBuilder.Append("8.0");
                                 }
-                                    
+                                else if (winVersion.Build == 9600)
+                                {
+                                    stringBuilder.Append("8.1");
+                                }
+                                else if (winVersion.Build >= 14393)
+                                {
+                                    WindowsVersion winVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum(winVersion);
+
+                                    if (WindowsAnalyzer.IsWindows10(winVersionEnum))
+                                    {
+                                        stringBuilder.Append("10");
+                                    }
+                                    else if (WindowsAnalyzer.IsWindows11(winVersionEnum))
+                                    {
+                                        stringBuilder.Append("11");
+                                    }
+                                    else
+                                    {
+                                        throw new PlatformNotSupportedException();
+                                    }
+                                }
+                                else
+                                {
+                                    throw new PlatformNotSupportedException();
+                                }
+
                                 return stringBuilder.ToString();
                             }
                         }

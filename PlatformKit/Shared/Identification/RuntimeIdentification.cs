@@ -147,11 +147,11 @@ namespace PlatformKit.Identification
                 }
                 else if (!WindowsAnalyzer.IsWindows10() && !WindowsAnalyzer.IsWindows11())
                 {
-                    osVersion = WindowsAnalyzer.GetWindowsVersionToEnum() switch
+                    osVersion = WindowsAnalyzer.GetWindowsVersion().Build switch
                     {
-                        WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => "8",
-                        WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => "81",
-                        WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
+                        < 9200 => throw new PlatformNotSupportedException(),
+                        9200 => "8",
+                        9600 => "81",
                         _ => throw new WindowsVersionDetectionException(),
                     };
                 }
