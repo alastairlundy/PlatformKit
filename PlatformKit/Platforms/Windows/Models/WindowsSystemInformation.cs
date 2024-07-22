@@ -34,6 +34,7 @@ namespace PlatformKit.Windows;
 /// <summary>
 /// 
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class WindowsSystemInformation : WindowsSystemInformationModel
 {
 

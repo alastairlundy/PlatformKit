@@ -22,6 +22,8 @@
        SOFTWARE.
    */
 
+using System;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Models;
 
 namespace PlatformKit.Linux;
@@ -29,6 +31,7 @@ namespace PlatformKit.Linux;
     /// <summary>
     /// Represents a Linux Distribution's OsRelease file and information contained therein.
     /// </summary>
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public class LinuxOsRelease : LinuxOsReleaseModel
     {
        

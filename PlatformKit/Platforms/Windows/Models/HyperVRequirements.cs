@@ -22,10 +22,13 @@
        SOFTWARE.
    */
 
+using System;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Windows.Models;
 
 namespace PlatformKit.Windows;
 
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class HyperVRequirements : HyperVRequirementsModel
 {
    
