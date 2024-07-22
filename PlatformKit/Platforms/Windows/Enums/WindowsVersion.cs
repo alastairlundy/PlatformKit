@@ -57,6 +57,7 @@ namespace PlatformKit.Windows
         /// <summary>
         /// Windows Server 2016 based on Windows 10 Build 14393 (Win10v1607)
         /// </summary>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_Server2016 = 14393,
         Win10_v1703 = 15063,
         Win10_v1709 = 16299,
