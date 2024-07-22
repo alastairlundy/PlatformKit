@@ -35,6 +35,7 @@ using PlatformKit.Linux;
 using PlatformKit.Linux.Models;
 using PlatformKit.Mac;
 using PlatformKit.FreeBSD;
+using PlatformKit.Internal.Localizations;
 
 
 #if NETSTANDARD2_0
@@ -297,8 +298,7 @@ namespace PlatformKit.Identification
             }
             else if((!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD()) && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
             {
-                Console.WriteLine("WARNING: Function not supported on Windows or macOS." +
-                                  " Calling method using RuntimeIdentifierType.Specific instead.");
+                Console.WriteLine(Resources.RuntimeInformation_NonLinuxSpecific_Warning);
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
             }
 
