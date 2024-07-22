@@ -118,6 +118,7 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns>the version of the linux distribution being run as a string.</returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static string GetLinuxDistributionVersionAsString()
         {
             if (!OperatingSystem.IsLinux())
