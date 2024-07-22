@@ -36,7 +36,11 @@ This document is not guaranteed to be accurate or up to date.
 | Windows 10 v1709 through Windows 10 v1903 | 2.0.0 | Still supported |
 | Windows Server v1709 | 2.0.0 | Still supported |
 | Windows Server 2016 | 2.0.0 | Still supported |
-| Windows 10 v1507 through Windows 10 v1709 | 2.0.0 | Still supported |
+| Windows 10 v1709 | 2.0.0 | Still supported |
+| Windows 10 v1703 | 2.0.0 | Still supported |
+| Windows 10 v1607 | 2.0.0 | Still supported |
+| Windows 10 v1511 | 2.0.0 | Support ending in PlatformKit 5 |
+| Windows 10 v1507 | 2.0.0 | Support ending in PlatformKit 5 |
 
 ### Windows 8
 | | Minimum PlatformKit Version Required | Final PlatformKit Version Supported |
@@ -69,9 +73,9 @@ This document is not guaranteed to be accurate or up to date.
 | macOS 13 "Ventura" | 2.6.5 | Still supported |
 | macOS 12 "Monterey" | 2.5.0 | Still supported |
 | macOS 11 "Big Sur" | 2.5.0 | Still supported |
-| macOS 10.15 "Catalina" | 2.5.0 | Support ending in 5.0.0 |
-| macOS 10.14 "Mojave" | 2.5.0 | Support ending in 5.0.0 |
-| macOS 10.13 "High Sierra" | 2.5.0 | Support ending in 5.0.0 |
+| macOS 10.15 "Catalina" | 2.5.0 |Support ending in PlatformKit 5 |
+| macOS 10.14 "Mojave" | 2.5.0 | Support ending in PlatformKit 5 |
+| macOS 10.13 "High Sierra" | 2.5.0 | Support ending in PlatformKit 5 |
 | macOS 10.12 "Sierra" | 2.5.0 | 3.7.3 |
 
 ### OS X
