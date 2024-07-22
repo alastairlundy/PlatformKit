@@ -176,7 +176,7 @@ public static class LinuxOsReleaseRetriever
         return Version.Parse(osRelease.Version);
     }
 
-internal static string[] RemoveUnwantedCharacters(string[] data)
+    internal static string[] RemoveUnwantedCharacters(string[] data)
     {
         char[] delimiter = [' ', '\t', '\n', '\r', '"'];
 
