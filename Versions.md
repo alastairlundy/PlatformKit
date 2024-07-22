@@ -5,8 +5,9 @@
 
 ## Currently Supported Versions
 
-| Version series | Latest Update | Date of Latest Release |
+| Version series | Latest Update | Date of Latest Update |
 |-|-|-|
+| 4.3 | 4.3.0 | July 22nd 2024 |
 | 4.2 | 4.2.2 | July 22nd 2024 |
 | 4.1 | 4.1.0 | June 11th 2024 |
 | 4.0 | 4.0.1 | May 19th 2024 |
