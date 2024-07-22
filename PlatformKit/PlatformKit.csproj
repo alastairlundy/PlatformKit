@@ -14,18 +14,21 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 4.2.0
-* Updated dependency on System Extensions to version 5 from version 4.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.2.1
+* Improved efficiency and performance of ``TargetFrameworkIdentification`` class
+* Deprecated support for the ``GetLinuxDistributionVersionAsString`` method in the ``LinuxAnalyzer`` class - This will be removed in PlatformKit 5.
+* Deprecated support for macOS 10.15 "Catalina" - Support for this version will be removed in PlatformKit 5.
+* Clarified that support for Windows 8, Windows 8.1, Windows Server 2012, and Windows Server 2012 R2 will be removed in PlatformKit 5</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>4.2.1.0</AssemblyVersion>
-        <FileVersion>4.2.1.0</FileVersion>
-        <Version>4.2.1.0</Version>
-        <PackageVersion>4.2.1</PackageVersion>
+   <AssemblyVersion>4.2.2.0</AssemblyVersion>
+        <FileVersion>4.2.2.0</FileVersion>
+        <Version>4.2.2.0</Version>
+        <PackageVersion>4.2.2</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>

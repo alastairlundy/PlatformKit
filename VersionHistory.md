@@ -8,6 +8,7 @@ This document contains the entire version history of the PlatformKit library.
 ### 4.2
 | Version | Availability | Changelog |
 |-|-|-|
+| 4.2.2 | July 22nd 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.2.2 |
 | 4.2.1 | July 10th 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.2.1 |
 | 4.2.0 | June 21st 2024 | https://github.com/alastairlundy/PlatformKit/releases/4.2.0 |
 
