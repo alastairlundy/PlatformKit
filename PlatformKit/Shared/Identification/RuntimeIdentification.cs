@@ -131,7 +131,7 @@ namespace PlatformKit.Identification
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         /// <exception cref="WindowsVersionDetectionException"></exception>
-        protected static string GetOsVersionString()
+        internal static string GetOsVersionString()
         {
             string osVersion = null;
 
@@ -185,7 +185,7 @@ namespace PlatformKit.Identification
 
                 if (version.Major == 10)
                 {
-                    if (version.Minor < 9)
+                    if (version.Minor < 12)
                     {
                         throw new PlatformNotSupportedException();
                     }
