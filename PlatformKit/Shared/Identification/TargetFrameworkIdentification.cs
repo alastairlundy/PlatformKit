@@ -210,8 +210,6 @@ public class TargetFrameworkIdentification
                             }
                             else if(OperatingSystem.IsWindows())
                             {
-                                Version windowsVersion = WindowsAnalyzer.GetWindowsVersion();
-
                                 WindowsVersion windowsVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum();
 
                                 switch (windowsVersionEnum)
@@ -223,6 +221,8 @@ public class TargetFrameworkIdentification
                                         stringBuilder.Append("8.1");
                                         break;
                                     default:
+                                        Version windowsVersion = WindowsAnalyzer.GetWindowsVersionFromEnum(windowsVersionEnum);
+
                                         if (WindowsAnalyzer.IsWindows10() || WindowsAnalyzer.IsWindows11())
                                         {
                                             if (windowsVersion.Build >= 14393)
