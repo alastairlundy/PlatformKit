@@ -58,5 +58,14 @@ namespace PlatformKit.Internal.Localizations {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead..
+        /// </summary>
+        internal static string RuntimeInformation_NonLinuxSpecific_Warning {
+            get {
+                return ResourceManager.GetString("RuntimeInformation.NonLinuxSpecific.Warning", resourceCulture);
+            }
+        }
     }
 }
