@@ -72,6 +72,7 @@ public class TargetFrameworkIdentification
 
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
             {
+                stringBuilder.Append(".");
                 stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
             }
         }
