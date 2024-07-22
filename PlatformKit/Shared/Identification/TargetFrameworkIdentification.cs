@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -45,8 +46,109 @@ namespace PlatformKit.Identification;
 public class TargetFrameworkIdentification
 {
     // ReSharper disable once InconsistentNaming
-        protected static string GetNetCoreTFM(Version frameworkVersion)
+    protected static string GetNetTFM()
+    {
+        Version frameworkVersion = GetDotNetVersion();
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        stringBuilder.Append("net");
+
+        stringBuilder.Append(frameworkVersion.Major);
+        stringBuilder.Append(".");
+        stringBuilder.Append(frameworkVersion.Minor);
+        return stringBuilder.ToString();
+    }
+
+    // ReSharper disable once InconsistentNaming
+    protected static string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
+    {
+        Version frameworkVersion = GetDotNetVersion();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (OperatingSystem.IsMacOS())
         {
+            stringBuilder.Append("-");
+            stringBuilder.Append("macos");
+
+            if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
+            {
+                stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
+            }
+        }
+#if NET5_0_OR_GREATER
+        else if (OperatingSystem.IsMacCatalyst())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("maccatalyst");
+        }
+#endif
+        else if (OperatingSystem.IsWindows())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("windows");
+
+            if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
+            {
+                Version winVersion = WindowsAnalyzer.GetWindowsVersion();
+
+                if (winVersion.Build == 9200 || winVersion.Build == 9600)
+                {
+                    stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
+                }
+                else if (winVersion.Build >= 14393)
+                {
+                    stringBuilder.Append(winVersion);
+                }
+                else
+                {
+                    throw new PlatformNotSupportedException();
+                }
+            }
+        }
+        else if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
+        {
+            //Do nothing because Linux doesn't have a version specific TFM.
+        }
+#if NET5_0_OR_GREATER
+        else if (OperatingSystem.IsAndroid())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("android");
+        }
+        else if (OperatingSystem.IsIOS())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("ios");
+        }
+        else if (OperatingSystem.IsTvOS())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("tvos");
+        }
+        else if (OperatingSystem.IsWatchOS())
+        {
+            stringBuilder.Append("-");
+            stringBuilder.Append("watchos");
+        }
+#endif
+#if NET8_0_OR_GREATER
+        if (frameworkVersion.Major >= 8)
+        {
+            if (OperatingSystem.IsBrowser())
+            {
+                 stringBuilder.Append("-");
+                 stringBuilder.Append("browser");
+            }
+        }
+#endif
+        return stringBuilder.ToString();
+    }
+
+    // ReSharper disable once InconsistentNaming
+        protected static string GetNetCoreTFM()
+        {
+            Version frameworkVersion = GetDotNetVersion();
+            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("netcoreapp");
 
@@ -58,8 +160,10 @@ public class TargetFrameworkIdentification
         }
 
         // ReSharper disable once InconsistentNaming
-        protected static string GetNetFrameworkTFM(Version frameworkVersion)
+        protected static string GetNetFrameworkTFM()
         {
+            Version frameworkVersion = GetDotNetVersion();
+            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(frameworkVersion.Major);
             stringBuilder.Append(frameworkVersion.Minor);
@@ -115,122 +219,28 @@ public class TargetFrameworkIdentification
             
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
-                return GetNetCoreTFM(frameworkVersion);
+                return GetNetCoreTFM();
+            }
+            else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))
+            {
+                return GetMonoTFM();
             }
             else
             {
-                StringBuilder stringBuilder = new StringBuilder();
-                
                 if (RuntimeInformation.FrameworkDescription.ToLower().Contains(".net"))
                 {
-                    stringBuilder.Append("net");
-                    
                     if (frameworkVersion.Major < 5)
                     {
-                        return GetNetFrameworkTFM(frameworkVersion);
+                        return GetNetFrameworkTFM();
                     }
-
-                    stringBuilder.Append(frameworkVersion.Major);
-                    stringBuilder.Append(".");
-                    stringBuilder.Append(frameworkVersion.Minor);
-
                     if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
                     {
-                        return stringBuilder.ToString();
+                        return GetNetTFM();
                     }
-
                     if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                     {
-                        if(OperatingSystem.IsMacOS())
-                        {
-                            stringBuilder.Append("-");
-                            stringBuilder.Append("macos");
-                        }
-#if NET5_0_OR_GREATER
-                        else if (OperatingSystem.IsMacCatalyst())
-                        {
-                            stringBuilder.Append("-");
-                            stringBuilder.Append("maccatalyst");
-                        }
-#endif
-                        else if (OperatingSystem.IsWindows())
-                        {
-                            stringBuilder.Append("-");
-                            stringBuilder.Append("windows");
-                        }
-                        else if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
-                        {
-                            //Do nothing because Linux and FreeBSD don't have dedicated TFMs yet
-                        }
-#if NET5_0_OR_GREATER
-                            else if (OperatingSystem.IsAndroid())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("android");
-                            }
-                            else if (OperatingSystem.IsIOS())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("ios");
-                            }
-                            else if (OperatingSystem.IsTvOS())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("tvos");
-                            }
-                            else if (OperatingSystem.IsWatchOS())
-                            {
-                                stringBuilder.Append("-");
-                                stringBuilder.Append("watchos");
-                            }
-
-                            if (frameworkVersion.Major >= 8)
-                            {
-                                if (OperatingSystem.IsBrowser())
-                                {
-                                    stringBuilder.Append("-");
-                                    stringBuilder.Append("browser");
-                                }
-                            }
-#endif
-                            
-                        if (targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific && frameworkVersion.Major >= 5)
-                        {
-                            if(OperatingSystem.IsMacOS())
-                            {
-                                stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
-                            }
-                            else if(OperatingSystem.IsLinux())
-                            {
-                                //Do nothing because Linux doesn't have a version specific TFM.
-                            }
-                            else if(OperatingSystem.IsWindows())
-                            {
-                                Version winVersion = WindowsAnalyzer.GetWindowsVersion();
-
-                                if (winVersion.Build == 9200 || winVersion.Build == 9600)
-                                {
-                                    stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
-                                }
-                                else if (winVersion.Build >= 14393)
-                                {
-                                    stringBuilder.Append(winVersion);
-                                }
-                                else
-                                {
-                                    throw new PlatformNotSupportedException();
-                                }
-
-                                return stringBuilder.ToString();
-                            }
-                        }
-                            
-                        return stringBuilder.ToString();
+                        return GetOsSpecificNetTFM(targetFrameworkType);
                     }
-                }
-                else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))
-                {
-                    return GetMonoTFM();
                 }
             }
 
