@@ -198,11 +198,7 @@ public class TargetFrameworkIdentification
                         {
                             if(OperatingSystem.IsMacOS())
                             {
-                                Version macOsVersion = MacOsAnalyzer.GetMacOsVersion();
-
-                                stringBuilder.Append(macOsVersion.Major);
-                                stringBuilder.Append(".");
-                                stringBuilder.Append(macOsVersion.Minor);
+                                stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
                             }
                             else if(OperatingSystem.IsLinux())
                             {
@@ -212,30 +208,9 @@ public class TargetFrameworkIdentification
                             {
                                 Version winVersion = WindowsAnalyzer.GetWindowsVersion();
 
-                                if (winVersion.Build == 9200)
+                                if (winVersion.Build == 9200 || winVersion.Build == 9600 || winVersion.Build >= 14393)
                                 {
-                                    stringBuilder.Append("8.0");
-                                }
-                                else if (winVersion.Build == 9600)
-                                {
-                                    stringBuilder.Append("8.1");
-                                }
-                                else if (winVersion.Build >= 14393)
-                                {
-                                    WindowsVersion winVersionEnum = WindowsAnalyzer.GetWindowsVersionToEnum(winVersion);
-
-                                    if (WindowsAnalyzer.IsWindows10(winVersionEnum))
-                                    {
-                                        stringBuilder.Append("10");
-                                    }
-                                    else if (WindowsAnalyzer.IsWindows11(winVersionEnum))
-                                    {
-                                        stringBuilder.Append("11");
-                                    }
-                                    else
-                                    {
-                                        throw new PlatformNotSupportedException();
-                                    }
+                                    stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
                                 }
                                 else
                                 {
