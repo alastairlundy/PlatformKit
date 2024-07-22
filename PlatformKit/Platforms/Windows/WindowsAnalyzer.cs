@@ -534,28 +534,10 @@ for (int index = 0; index < array.Length; index++)
     /// <returns></returns>
     public static bool IsWindows10(WindowsVersion windowsVersion)
     {
-        return windowsVersion switch
-        {
-            WindowsVersion.Win10_v1507 => true,
-            WindowsVersion.Win10_v1511 => true,
-            WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016 => true,
-            WindowsVersion.Win10_v1703 => true,
-            WindowsVersion.Win10_v1709_Mobile => true,
-            WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709 => true,
-            WindowsVersion.Win10_v1803 => true,
-            WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019 => true,
-            WindowsVersion.Win10_v1903 => true,
-            WindowsVersion.Win10_v1909 => true,
-            WindowsVersion.Win10_v2004 => true,
-            WindowsVersion.Win10_20H2 => true,
-            WindowsVersion.Win10_21H1 => true,
-            WindowsVersion.Win10_21H2 => true,
-            WindowsVersion.Win10_22H2 => true,
-            WindowsVersion.Win10_Server2022 => true,
-            WindowsVersion.Win10_InsiderPreview => true,
-            WindowsVersion.NotDetected => throw new WindowsVersionDetectionException(),
-            _ => false,
-        };
+        Version version = GetWindowsVersionFromEnum(windowsVersion);
+        
+        return version.IsAtLeast(new Version(10, 0, 10240)) 
+               && version.IsOlderThan(new Version(10, 0, 20349));
     }
 
     /// <summary>

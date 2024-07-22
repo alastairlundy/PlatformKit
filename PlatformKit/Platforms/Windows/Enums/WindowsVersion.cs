@@ -70,6 +70,7 @@ namespace PlatformKit.Windows
         /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly marketed as V1709 for Mobile.
         /// Universal Windows Platform API Compatibility is the same as Windows 10 Build 15063 (Win10v1703) or earlier.
         /// </summary>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_v1709_Mobile = 15254,
         Win10_v1803 = 17134,
         Win10_v1809 = 17763,
