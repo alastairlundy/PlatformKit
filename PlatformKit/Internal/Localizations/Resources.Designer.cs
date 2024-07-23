@@ -60,6 +60,51 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An invalid MacOsVersion enum value was provided..
+        /// </summary>
+        internal static string Exceptions_Arguments_InvalidMacOsVersionEnum {
+            get {
+                return ResourceManager.GetString("Exceptions.Arguments.InvalidMacOsVersionEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_FreeBsdOnly {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.FreeBsdOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_LinuxOnly {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.LinuxOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_MacOnly {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.MacOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_WindowsOnly {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.WindowsOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead..
         /// </summary>
         internal static string RuntimeInformation_NonLinuxSpecific_Warning {

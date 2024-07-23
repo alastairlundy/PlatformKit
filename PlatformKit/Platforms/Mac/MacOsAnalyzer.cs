@@ -68,7 +68,10 @@ namespace PlatformKit.Mac;
                     _ => MacProcessorType.NotSupported
                 };
             }
-            throw new PlatformNotSupportedException();
+            else
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
         }
 
         /// <summary>
@@ -224,7 +227,7 @@ namespace PlatformKit.Mac;
             MacOsVersion.v15_Sequoia => new Version(15,0),
             MacOsVersion.NotSupported => throw new PlatformNotSupportedException(),
             MacOsVersion.NotDetected => throw new MacOsVersionDetectionException(),
-            _ => throw new ArgumentException("An invalid MacOsVersion enum value was provided."),
+            _ => throw new ArgumentException(Resources.Exceptions_Arguments_InvalidMacOsVersionEnum),
         };
     }
 
@@ -242,8 +245,10 @@ namespace PlatformKit.Mac;
         {
             return GetMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
         }
-
-        throw new PlatformNotSupportedException();
+        else
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+        }
     }
     
     /// <summary>
@@ -257,10 +262,12 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            return IsAtLeastVersion(GetMacOsVersionToEnum(macOsVersion));
+            return GetMacOsVersion().IsAtLeast(macOsVersion);
         }
-
-        throw new PlatformNotSupportedException();
+        else
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+        }
     }
     
 
@@ -292,7 +299,7 @@ namespace PlatformKit.Mac;
             return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
         }
 
-        throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
     }
     
     /// <summary>
@@ -304,7 +311,7 @@ namespace PlatformKit.Mac;
     {
         if (!OperatingSystem.IsMacOS())
         {
-            throw new PlatformNotSupportedException();    
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);    
         }
         
         string[] array = RuntimeInformation.OSDescription.Split(' ');
@@ -344,8 +351,10 @@ namespace PlatformKit.Mac;
             return Version.Parse(GetMacSwVersInfo()[1].Replace("ProductVersion:", string.Empty)
                 .Replace(" ", string.Empty));
         }
-
-        throw new PlatformNotSupportedException();
+        else
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+        }
     }
     
     /// <summary>
@@ -360,8 +369,10 @@ namespace PlatformKit.Mac;
             return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:",
                 string.Empty).Replace(" ", string.Empty);
         }
-
-        throw new PlatformNotSupportedException();
+        else
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+        }
     }
 
     // ReSharper disable once IdentifierTypo
