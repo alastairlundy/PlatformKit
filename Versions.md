@@ -11,7 +11,7 @@
 | 4.2 | 4.2.2 | July 22nd 2024 |:white_check_mark: | :white_check_mark: | 
 | 4.1 | 4.1.0 | June 11th 2024 | :x: | :white_check_mark: | 
 | 4.0 | 4.0.1 | May 19th 2024 | :x: | :white_check_mark: | 
-| 3.7 | 3.7.3 | July 10th 2024 | :x: | :white_check_mark: | 
+| 3.7 | 3.7.3 | July 10th 2024 |:white_check_mark: | :white_check_mark: | 
 
 ## Unsupported Versions
 
