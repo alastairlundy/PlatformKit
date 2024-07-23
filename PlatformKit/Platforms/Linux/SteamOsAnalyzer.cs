@@ -23,7 +23,7 @@
    */
 
 using System;
-
+using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
 
@@ -46,7 +46,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     {
         if (!OperatingSystem.IsLinux())
         {
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
         
         LinuxOsReleaseModel distroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
