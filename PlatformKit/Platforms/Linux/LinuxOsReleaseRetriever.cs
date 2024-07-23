@@ -24,6 +24,7 @@
 
 using System;
 using System.IO;
+using AlastairLundy.Extensions.System.EscapeCharacters;
 using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0
@@ -156,7 +157,7 @@ public static class LinuxOsReleaseRetriever
     /// Detects the Linux Distribution Version as read from /etc/os-release.
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based operating system.</exception>
     public static Version GetDistributionVersion()
     {
         if (OperatingSystem.IsLinux())
@@ -221,6 +222,7 @@ public static class LinuxOsReleaseRetriever
         {
             foreach (char c in delimiter)
             {
+                data[i] = data[i].RemoveEscapeCharacters();
                 data[i] = data[i].Replace(c.ToString(), string.Empty);
             }
         }
