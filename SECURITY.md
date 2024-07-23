@@ -9,7 +9,7 @@ The planned support schedule/status of Versions that have not been released yet
 | 4.4 | Yes, until PlatformKit 4.5 | Yes, until PlatformKit 4.5 |
 
 ### Currently Supported Versions
-Versions that currently supported with Bug Fixes and/or Security Fixes.
+Versions that are currently supported with Bug Fixes and/or Security Fixes.
 
 | Version series | Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes |
 |--| --|--|--|--|
