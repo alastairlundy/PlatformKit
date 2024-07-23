@@ -12,13 +12,12 @@
 | 4.1 | 4.1.0 | June 11th 2024 |
 | 4.0 | 4.0.1 | May 19th 2024 |
 | 3.7 | 3.7.3 | July 10th 2024 |
-| 3.5 & 3.6 | 3.6.7 | April 14th 2024 |
-
 
 ## Unsupported Versions
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 3.5 & 3.6 | 3.6.7 | April 14th 2024 |
 | 3.4 | 3.4.1 | December 8th 2023 |
 | 3.3 | 3.3.1 | June 21st 2023 |
 | 3.2 | 3.2.0.1 | January 26th 2023 |
