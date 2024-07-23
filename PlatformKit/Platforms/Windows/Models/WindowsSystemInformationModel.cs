@@ -6,6 +6,7 @@ using PlatformKit.Models;
 // ReSharper disable once CheckNamespace
 namespace PlatformKit.Windows.Models;
 
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class WindowsSystemInformationModel
 {
         public string HostName { get; set; }
@@ -67,6 +68,7 @@ public class WindowsSystemInformationModel
     /// 
     /// </summary>
     /// <returns></returns>
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public override string ToString()
     {
         StringBuilder stringBuilder = new StringBuilder();

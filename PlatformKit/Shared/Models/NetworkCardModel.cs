@@ -22,9 +22,18 @@
        SOFTWARE.
    */
 
+
+using System;
+using PlatformKit.Internal.Deprecation;
 // ReSharper disable once CheckNamespace
+using System.Runtime.CompilerServices;
+
 namespace PlatformKit.Models;
 
+/// <summary>
+/// 
+/// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class NetworkCardModel
 {
     public string Name { get; set; }
