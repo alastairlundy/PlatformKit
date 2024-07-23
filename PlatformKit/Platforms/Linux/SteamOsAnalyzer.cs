@@ -76,7 +76,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     {
         if (!IsSteamOS(includeHoloIsoAsSteamOs))
         {
-            throw new PlatformNotSupportedException();    
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);    
         }
         
         LinuxDistroBase distroBase = GetDistroBase();
