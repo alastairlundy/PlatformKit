@@ -11,6 +11,8 @@
 using System;
 using System.Reflection;
 
+using PlatformKit.Internal.Deprecation;
+
 
 namespace PlatformKit.Identification;
 
@@ -30,6 +32,7 @@ public class PlatformIdentification
         /// <returns></returns>
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once MemberCanBeMadeStatic.Global
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public Assembly GetAssembly()
         {
             return Assembly.GetEntryAssembly();
@@ -40,6 +43,7 @@ public class PlatformIdentification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public string GetAppName()
         {
             return GetAssembly().GetName().Name;
@@ -50,6 +54,7 @@ public class PlatformIdentification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public Version GetAppVersion()
         {
             return GetAssembly().GetName().Version;
