@@ -46,5 +46,4 @@ public enum Platform
     // ReSharper disable once InconsistentNaming
     visionOS,
     Browser,
-    
 }

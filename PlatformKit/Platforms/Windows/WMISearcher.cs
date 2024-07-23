@@ -83,7 +83,6 @@ public class WMISearcher
                        .Replace(" : ", string.Empty)
                        .Replace(property, string.Empty)
                        .Replace(" ", string.Empty);
-                       
                }
            }
            

@@ -34,6 +34,7 @@ public class LinuxOsReleaseModel
     {
         
     }
+    
     public LinuxOsReleaseModel(string name, string version, string identifier, string identifierLike, string prettyName, string versionId, string versionCodeName, string homeUrl, string bugReportUrl, string privacyPolicyUrl, string supportUrl)
     {
         Name = name;
