@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -23,15 +23,21 @@
    */
 
 using System;
-using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit.Mac;
 
 /// <summary>
 /// A class to represent basic macOS System Information.
 /// </summary>
-[Obsolete(DeprecationMessages.DeprecationV5)]
-public class MacOsSystemInformation : MacOsSystemInformationModel
+public class MacOsSystemInformationModel
 {
+    public Version MacOsVersion { get; set; }
     
+    public Version DarwinVersion { get; set; }
+    
+    public Version XnuVersion { get; set; } 
+    
+    public string MacOsBuildNumber { get; set; }
+    
+    public MacProcessorType ProcessorType { get; set; }
 }
