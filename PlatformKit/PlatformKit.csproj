@@ -42,6 +42,12 @@
         <None Include="../README.md" Pack="true" PackagePath="\" />
         
         <None Remove="PlatformKit.Software\**" />
+        
+        <None Remove="PlatformKit.Tests\**" />
+        
+        <None Remove="PlatformKit.Mac\**" />
+        
+        <None Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -58,10 +64,16 @@
 
     <ItemGroup>
       <Compile Remove="PlatformKit.Software\**" />
+      <Compile Remove="PlatformKit.Tests\**" />
+      <Compile Remove="PlatformKit.Mac\**" />
+      <Compile Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
+      <EmbeddedResource Remove="PlatformKit.Tests\**" />
+      <EmbeddedResource Remove="PlatformKit.Mac\**" />
+      <EmbeddedResource Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
