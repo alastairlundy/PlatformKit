@@ -180,11 +180,8 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         public static MacOsVersion GetMacOsVersionToEnum(Version input)
         {
-            if (OperatingSystem.IsMacOS())
-            {
                 return input.Major switch
                 {
                     10 => input.Minor switch
@@ -204,9 +201,6 @@ namespace PlatformKit.Mac;
                     15 => MacOsVersion.v15_Sequoia,
                     _ => MacOsVersion.NotDetected
                 };
-            }
-
-            throw new PlatformNotSupportedException();
         }
 
     /// <summary>
