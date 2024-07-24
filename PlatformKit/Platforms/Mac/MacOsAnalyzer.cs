@@ -58,6 +58,7 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static MacProcessorType GetMacProcessorType()
         {
             if (OperatingSystem.IsMacOS())
@@ -130,6 +131,7 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <returns>true if System Integrity Protection is enabled on this Mac; returns false otherwise.</returns>
         /// <exception cref="ArgumentException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsSystemIntegrityProtectionEnabled()
         {
             string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
@@ -152,6 +154,7 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsActivationLockEnabled()
         {
             string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
