@@ -62,6 +62,12 @@
         <None Include="../README.md" Pack="true" PackagePath="\" />
         
         <None Remove="PlatformKit.Software\**" />
+        
+        <None Remove="PlatformKit.Tests\**" />
+        
+        <None Remove="PlatformKit.Mac\**" />
+        
+        <None Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -82,6 +88,9 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Remove="PlatformKit.Tests\**" />
+      <EmbeddedResource Remove="PlatformKit.Mac\**" />
+      <EmbeddedResource Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -98,5 +107,8 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
+      <Compile Remove="PlatformKit.Tests\**" />
+      <Compile Remove="PlatformKit.Mac\**" />
+      <Compile Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 </Project>
