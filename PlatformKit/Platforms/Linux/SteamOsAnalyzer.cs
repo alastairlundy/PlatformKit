@@ -50,7 +50,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
         }
         
         LinuxOsReleaseModel distroInfo = LinuxOsReleaseRetriever.GetLinuxOsRelease();
-        LinuxDistroBase distroBase = GetDistroBase(distroInfo);
+        LinuxDistroBase distroBase = LinuxOsReleaseRetriever.GetDistroBase(distroInfo);
 
         if (distroBase == LinuxDistroBase.Manjaro || distroBase == LinuxDistroBase.Arch)
         {
@@ -79,7 +79,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);    
         }
         
-        LinuxDistroBase distroBase = GetDistroBase();
+        LinuxDistroBase distroBase = LinuxOsReleaseRetriever.GetDistroBase();
 
         bool isSteamOsExcludingHolo = IsSteamOS(false);
 

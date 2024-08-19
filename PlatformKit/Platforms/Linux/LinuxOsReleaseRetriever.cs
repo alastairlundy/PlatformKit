@@ -179,6 +179,42 @@ public static class LinuxOsReleaseRetriever
     }
 
     /// <summary>
+    /// Detects what base Linux Distribution a Distro is based off of.
+    /// </summary>
+    /// <returns></returns>
+    public static LinuxDistroBase GetDistroBase()
+    {
+        return GetDistroBase(GetLinuxOsRelease());
+    }
+    
+    /// <summary>
+    /// Detects what base Linux Distribution a Distro is based off of.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+    public static LinuxDistroBase GetDistroBase(LinuxOsReleaseModel linuxOsRelease)
+    {
+        string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
+            
+        if (OperatingSystem.IsLinux())
+        {
+            return identifierLike switch
+            {
+                "debian" => LinuxDistroBase.Debian,
+                "ubuntu" => LinuxDistroBase.Ubuntu,
+                "arch" => LinuxDistroBase.Arch,
+                "manjaro" => LinuxDistroBase.Manjaro,
+                "fedora" => LinuxDistroBase.Fedora,
+                "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+                "suse" => LinuxDistroBase.SUSE,
+                _ => LinuxDistroBase.NotDetected
+            };
+        }
+
+        throw new PlatformNotSupportedException();
+    }
+
+    /// <summary>
     /// Detects the Linux Distribution Version as read from /etc/os-release.
     /// Preserves the version if the full version is in a Year.Month.Bugfix format.
     /// </summary>
