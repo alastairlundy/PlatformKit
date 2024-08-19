@@ -36,18 +36,6 @@ public class PlatformKitIdentification
 {
 
     /// <summary>
-    /// Return's the executing app's assembly.
-    /// </summary>
-    /// <returns></returns>
-    // ReSharper disable once MemberCanBePrivate.Global
-    // ReSharper disable once MemberCanBeMadeStatic.Global
-    [Obsolete(DeprecationMessages.DeprecationV5)]
-    internal Assembly GetAssembly()
-        {
-            return Assembly.GetEntryAssembly();
-        }
-
-    /// <summary>
     /// Gets the running project's name as reported by the Assembly.
     /// </summary>
     /// <returns></returns>
@@ -55,7 +43,7 @@ public class PlatformKitIdentification
     [Obsolete(DeprecationMessages.DeprecationV5)]
     public string GetProjectName()
         {
-            return GetAssembly().GetName().Name;
+            return Assembly.GetEntryAssembly()!.GetName().Name;
         }
 
     /// <summary>
@@ -66,7 +54,7 @@ public class PlatformKitIdentification
     [Obsolete(DeprecationMessages.DeprecationV5)]
         public Version GetProjectVersion()
         {
-            return GetAssembly().GetName().Version;
+            return Assembly.GetEntryAssembly()!.GetName().Version;
         }
 
         /// <summary>
