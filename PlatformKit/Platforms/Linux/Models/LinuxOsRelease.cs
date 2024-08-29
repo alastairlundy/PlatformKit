@@ -23,6 +23,7 @@
    */
 
 using System;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Linux.Models;
 

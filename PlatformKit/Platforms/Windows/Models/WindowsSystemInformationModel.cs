@@ -9,7 +9,7 @@ namespace PlatformKit.Windows.Models;
 [Obsolete(DeprecationMessages.DeprecationV5)]
 public class WindowsSystemInformationModel
 {
-        public string HostName { get; set; }
+    public string HostName { get; set; }
     
     public string OsName { get; set; }
     public string OsVersion { get; set; }
