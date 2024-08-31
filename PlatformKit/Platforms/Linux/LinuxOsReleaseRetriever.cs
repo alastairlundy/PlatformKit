@@ -53,7 +53,6 @@ public static class LinuxOsReleaseRetriever
         }
         
         string[] resultArray = File.ReadAllLines("/etc/os-release");
-
         resultArray = RemoveUnwantedCharacters(resultArray);
 
         for (int index = 0; index < resultArray.Length; index++)
@@ -62,10 +61,6 @@ public static class LinuxOsReleaseRetriever
 
             if (line.Contains("NAME=") && !line.Contains("VERSION"))
             {
-                if (line.Contains("CODE"))
-                {
-
-                }
 
                 if (line.StartsWith("PRETTY_"))
                 {
