@@ -47,7 +47,7 @@ public static class LinuxOsReleaseRetriever
         //Assign a default value.
         linuxDistributionInformation.IsLongTermSupportRelease = false;
 
-        if (!OperatingSystem.IsLinux())
+        if (OperatingSystem.IsLinux() == false)
         {
             throw new PlatformNotSupportedException();
         }
