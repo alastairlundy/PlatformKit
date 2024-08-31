@@ -37,6 +37,7 @@ namespace PlatformKit.FreeBSD;
 /// <summary>
 /// A class to detect FreeBSD versions and features.
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class FreeBsdAnalyzer
 {
 
@@ -45,6 +46,7 @@ public class FreeBsdAnalyzer
     /// Detects and Returns the Installed version of FreeBSD
     /// </summary>
     /// <returns></returns>
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static Version GetFreeBSDVersion()
     {
         if (OperatingSystem.IsFreeBSD())
