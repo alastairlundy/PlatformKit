@@ -197,6 +197,10 @@ public class TargetFrameworkIdentification
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static Version GetDotNetVersion()
         {
             return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
