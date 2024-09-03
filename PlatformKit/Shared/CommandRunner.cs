@@ -140,7 +140,7 @@ public static class CommandRunner
     /// <returns></returns>
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
-        if (!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD())
+        if (OperatingSystem.IsLinux() == false && OperatingSystem.IsFreeBSD() == false)
         {
             throw new PlatformNotSupportedException();
         }
