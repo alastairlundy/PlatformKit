@@ -44,7 +44,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     // ReSharper disable once InconsistentNaming
     public static bool IsSteamOS(bool includeHoloIsoAsSteamOs)
     {
-        if (!OperatingSystem.IsLinux())
+        if (OperatingSystem.IsLinux() == false)
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
@@ -74,7 +74,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't SteamOS 3</exception>
     public static SteamOSMode GetSteamOsMode(bool includeHoloIsoAsSteamOs)
     {
-        if (!IsSteamOS(includeHoloIsoAsSteamOs))
+        if (IsSteamOS(includeHoloIsoAsSteamOs) == false)
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);    
         }
