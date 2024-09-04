@@ -14,38 +14,36 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.2 series
+        <PackageReleaseNotes>## Changes since 4.3.0
 
 ### Additions
-* Added some missing xml doc comments
-* Added ``LinuxOsReleaseModel`` - This replaces ``LinuxOsRelease``.
-* Added ``NetworkCardModel`` - This replaces ``NetworkCard``.
-* Added ``HyperVRequirementsModel`` - This replaces ``HyperVRequirements``.
-* Added ``WindowsSystemInformationModel`` - This replaces ``WindowsSystemInformation``.
+* Added a replacement model for ``MacOsSystemInformation`` called ``MacOsSystemInformationModel``
+* Added additional methods to ``LinuxOsReleaseRetriever``
 
-### General Improvements
-* Simplified Windows 10 detection code.
-* Improved maintainability of TFM generation code.
+### General Changes
+* Improved performance of ``LinuxOsReleaseRetriever``
+* Removed commented out code
+* Cleaned up ``PlatformKitIdentification``
+* Started work on re-structuring PlatformKit going forward
+* Minor internal tweaks and improvements
 
 ### Deprecations
-* Deprecated support for Windows 10 Build 10240 (including Windows Server 2016) and Windows 10 Build 10586 - Support for these versions will be removed in PlatformKit 5.
-* Deprecated support for Windows 10 Mobile Build 15254 - Support for this version will be removed in PlatformKit 5.
-* Deprecated support for Windows 10 Insider Preview Builds - Support for this will be removed in PlatformKit 5.
-* Deprecated support for macOS 10.15 "Catalina" - Support for this version will be removed in PlatformKit 5.
-* Deprecated ``LinuxOsRelease`` - This has been replaced by ``LinuxOsReleaseModel`` and will be removed in PlatformKit 5.
-* Deprecated ``NetworkCard``  - This has been replaced by ``NetworkCardModel`` and will be removed in PlatformKit 5.
-* Deprecated ``HyperVRequirements`` - This has been replaced by ``HyperVRequirementsModel`` and will be removed in PlatformKit 5.
-* Deprecated ``WindowsSystemInformation`` - This has been replaced by ``WindowsSystemInformationModel`` and will be removed in PlatformKit 5.</PackageReleaseNotes>
+* Deprecated ``MacOsSystemInformation``
+* Deprecated a number of methods in ``MacOsAnalyzer``
+* Deprecated a number of methods in ``LinuxAnalyzer``
+* Deprecated ``FreeBsdAnalyzer``
+* Deprecated ``Platform`` enum
+* Deprecated ``NetworkCardModel`` enum</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;net8.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>4.3.0.0</AssemblyVersion>
-        <FileVersion>4.3.0.0</FileVersion>
-        <Version>4.3.0.0</Version>
-        <PackageVersion>4.3.0</PackageVersion>
+   <AssemblyVersion>4.4.0.0</AssemblyVersion>
+        <FileVersion>4.4.0.0</FileVersion>
+        <Version>4.4.0.0</Version>
+        <PackageVersion>4.4.0</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>

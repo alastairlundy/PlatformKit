@@ -1,22 +1,14 @@
 # Security and Support Policies
 The support policy now will be to support the latest 2 minor releases on a major version if only one major version is the same for both and to support only the latest minor release per major version if multiple major versions are supported.
 
-### Planned Future Support
-The planned support schedule/status of Versions that have not been released yet 
-
-| Version series | Supported with Bug Fixes | Supported with Security Fixes |
-|--| --|--|
-| 4.4 | Yes, until PlatformKit 5.0 | Yes, until PlatformKit 5.1 |
 
 ### Currently Supported Versions
 Versions that are currently supported with Bug Fixes and/or Security Fixes.
 
 | Version series | Launch Version | Latest version | Supported with Bug Fixes | Supported with Security Fixes |
 |--| --|--|--|--|
+| 4.4 | 4.4.0, released on September 4th 2024 |  4.4.0, released on September 4th 2024 | Yes, until PlatformKit 5.0 | Yes, until PlatformKit 5.1 |
 | 4.3  | 4.3.0, released on July 22nd 2024 | 4.3.0, released on July 22nd 2024 | Yes, until PlatformKit 4.4 | Yes, until PlatformKit 5.0 |
-| 4.2 | 4.2.0, released on June 21st 2024 | 4.2.2, released on July 22nd 2024 | Yes, until PlatformKit 4.4 | Yes, until PlatformKit 4.4 | 
-| 4.1 | 4.1.0, released on June 11th 2024 | 4.1.0, released on June 11th 2024 | :x: | Limited support until PlatformKit 4.4 | 
-| 4.0 | 4.0.0, released on May 4th 2024 | 4.0.1, released on May 19th 2024 | :x: | Limited support until PlatformKit 4.4 | 
 | 3.7 | 3.7.0, released on April 22nd 2024 | 3.7.3, released on July 10th 2024 |  :warning: Limited Support until PlatformKit 5.0 |  :warning: Limited Support until PlatformKit 5.0 | 
 
 ## Reporting a Security Vulnerability
