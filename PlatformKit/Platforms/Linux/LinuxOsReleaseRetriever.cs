@@ -23,8 +23,14 @@
    */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
 using AlastairLundy.Extensions.System.EscapeCharacters;
+
+using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0
@@ -35,6 +41,129 @@ namespace PlatformKit.Linux;
 
 public static class LinuxOsReleaseRetriever
 {
+    
+    public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync()
+    {
+        LinuxOsReleaseModel output = new LinuxOsReleaseModel();
+        //Assign a default value.
+
+        output.IsLongTermSupportRelease = false;
+        
+        if (OperatingSystem.IsLinux() == false)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
+#if NET6_0_OR_GREATER
+        string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
+#else
+        string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
+#endif
+        
+        resultArray = RemoveUnwantedCharacters(resultArray);
+
+        return await Task.Run(()=> ParseOsReleaseInfo(resultArray));
+    }
+
+    private static LinuxOsReleaseModel ParseOsReleaseInfo(IEnumerable<string> osReleaseInfo)
+    {
+        LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
+
+        var releaseInfo = osReleaseInfo as string[] ?? osReleaseInfo.ToArray();
+        for (int index = 0; index < releaseInfo.Count(); index++)
+        {
+            string line = releaseInfo[index].ToUpper();
+
+            if (line.Contains("NAME=") && !line.Contains("VERSION"))
+            {
+
+                if (line.StartsWith("PRETTY_"))
+                {
+                    linuxDistributionInformation.PrettyName =
+                        releaseInfo[index].Replace("PRETTY_NAME=", string.Empty);
+                }
+
+                if (!line.Contains("PRETTY") && !line.Contains("CODE"))
+                {
+                    linuxDistributionInformation.Name = releaseInfo[index]
+                        .Replace("NAME=", string.Empty);
+                }
+            }
+
+            if (line.Contains("VERSION="))
+            {
+                if (line.Contains("LTS"))
+                {
+                    linuxDistributionInformation.IsLongTermSupportRelease = true;
+                }
+                else
+                {
+                    linuxDistributionInformation.IsLongTermSupportRelease = false;
+                }
+
+                if (line.Contains("ID="))
+                {
+                    linuxDistributionInformation.VersionId =
+                        releaseInfo[index].Replace("VERSION_ID=", string.Empty);
+                }
+                else if (!line.Contains("ID=") && line.Contains("CODE"))
+                {
+                    linuxDistributionInformation.VersionCodename =
+                        releaseInfo[index].Replace("VERSION_CODENAME=", string.Empty);
+                }
+                else if (!line.Contains("ID=") && !line.Contains("CODE"))
+                {
+                    linuxDistributionInformation.Version = releaseInfo[index].Replace("VERSION=", string.Empty)
+                        .Replace("LTS", string.Empty);
+                }
+            }
+
+            if (line.Contains("ID"))
+            {
+                if (line.Contains("ID_LIKE="))
+                {
+                    linuxDistributionInformation.Identifier_Like =
+                        releaseInfo[index].Replace("ID_LIKE=", string.Empty);
+
+                    if (linuxDistributionInformation.Identifier_Like.ToLower().Contains("ubuntu") &&
+                        linuxDistributionInformation.Identifier_Like.ToLower().Contains("debian"))
+                    {
+                        linuxDistributionInformation.Identifier_Like = "ubuntu";
+                    }
+                }
+                else if (!line.Contains("VERSION"))
+                {
+                    linuxDistributionInformation.Identifier = releaseInfo[index].Replace("ID=", string.Empty);
+                }
+            }
+
+            if (line.Contains("URL="))
+            {
+                if (line.StartsWith("HOME_"))
+                {
+                    linuxDistributionInformation.HomeUrl = releaseInfo[index].Replace("HOME_URL=", string.Empty);
+                }
+                else if (line.StartsWith("SUPPORT_"))
+                {
+                    linuxDistributionInformation.SupportUrl =
+                        releaseInfo[index].Replace("SUPPORT_URL=", string.Empty);
+                }
+                else if (line.StartsWith("BUG_"))
+                {
+                    linuxDistributionInformation.BugReportUrl =
+                        releaseInfo[index].Replace("BUG_REPORT_URL=", string.Empty);
+                }
+                else if (line.StartsWith("PRIVACY_"))
+                {
+                    linuxDistributionInformation.PrivacyPolicyUrl =
+                        releaseInfo[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
+                }
+            }
+        }
+
+        return linuxDistributionInformation;
+    }
+    
     /// <summary>
     /// Detects Linux Os Release information and returns it.
     /// </summary>
@@ -227,7 +356,7 @@ public static class LinuxOsReleaseRetriever
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
     public static string GetLinuxDistributionVersionAsString(LinuxOsReleaseModel osReleaseModel)
     {
-        if (!OperatingSystem.IsLinux())
+        if (OperatingSystem.IsLinux() == false)
         {
             throw new PlatformNotSupportedException();
         }
@@ -251,9 +380,10 @@ public static class LinuxOsReleaseRetriever
 
         for (int i = 0; i < data.Length; i++)
         {
+            data[i] = data[i].RemoveEscapeCharacters();
+            
             foreach (char c in delimiter)
             {
-                data[i] = data[i].RemoveEscapeCharacters();
                 data[i] = data[i].Replace(c.ToString(), string.Empty);
             }
         }
