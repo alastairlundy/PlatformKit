@@ -22,8 +22,11 @@
        SOFTWARE.
    */
 
-namespace PlatformKit;
+using System;
+using PlatformKit.Internal.Deprecation;
 
+namespace PlatformKit;
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public enum Platform
 {
     // ReSharper disable once InconsistentNaming
