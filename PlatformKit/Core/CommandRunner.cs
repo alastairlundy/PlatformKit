@@ -121,15 +121,15 @@ public static class CommandRunner
 #endif
     public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
-        if (!OperatingSystem.IsWindows())
+        if (OperatingSystem.IsWindows() == false)
         {
             throw new PlatformNotSupportedException();
         }
         
         string location =
             $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+        
         return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
-
     }
 
     /// <summary>
