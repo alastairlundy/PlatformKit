@@ -600,14 +600,11 @@ for (int index = 0; index < array.Length; index++)
         {
             return input.Build switch
             {
-                < 9200 => WindowsVersion.NotSupported,
-                9200 => WindowsVersion.Win8,
-                9600 => WindowsVersion.Win8_1,
+                < 10240 => WindowsVersion.NotSupported,
                 10240 => WindowsVersion.Win10_v1507,
                 10586 => WindowsVersion.Win10_v1511,
                 14393 => WindowsVersion.Win10_v1607,
                 15063 => WindowsVersion.Win10_v1703,
-                15254 => WindowsVersion.Win10_v1709_Mobile,
                 16299 => WindowsVersion.Win10_v1709,
                 17134 => WindowsVersion.Win10_v1803,
                 17763 => WindowsVersion.Win10_v1809,
@@ -661,13 +658,10 @@ for (int index = 0; index < array.Length; index++)
         {
             return windowsVersion switch
             {
-                WindowsVersion.Win8 or WindowsVersion.WinServer_2012 => new Version(6, 2, 9200),
-                WindowsVersion.Win8_1 or WindowsVersion.WinServer_2012_R2 => new Version(6, 3, 9600),
                 WindowsVersion.Win10_v1507 => new Version(10, 0, 10240),
                 WindowsVersion.Win10_v1511 => new Version(10, 0, 10586),
                 WindowsVersion.Win10_v1607 or WindowsVersion.Win10_Server2016 => new Version(10, 0, 14393),
                 WindowsVersion.Win10_v1703 => new Version(10, 0, 15063),
-                WindowsVersion.Win10_v1709_Mobile => new Version(10, 0, 15254),
                 WindowsVersion.Win10_v1709 or WindowsVersion.Win10_Server_v1709 => new Version(10, 0, 16299),
                 WindowsVersion.Win10_v1803 => new Version(10, 0, 17134),
                 WindowsVersion.Win10_v1809 or WindowsVersion.Win10_Server2019 => new Version(10, 0, 17763),
