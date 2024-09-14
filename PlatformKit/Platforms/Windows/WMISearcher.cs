@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.Versioning;
+
 using PlatformKit.Core;
 
 #if NETSTANDARD2_0
