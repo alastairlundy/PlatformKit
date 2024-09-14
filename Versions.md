@@ -9,7 +9,7 @@
 | Version series | Latest Update | Date of Latest Update | Supported with Bug Fixes | Supported with Security Fixes |
 |-|-|-|-|-|
 | 4.4 | 4.4.0 | September 4th 2024 | :white_check_mark: | :white_check_mark: | 
-| 4.3 | 4.3.0 | July 22nd 2024 | :white_check_mark: | :white_check_mark: | 
+| 4.3 | 4.3.0 | July 22nd 2024 | :x: | :white_check_mark: | 
 | 3.7 | 3.7.3 | July 10th 2024 |:white_check_mark: | :white_check_mark: | 
 
 ## Unsupported Versions
