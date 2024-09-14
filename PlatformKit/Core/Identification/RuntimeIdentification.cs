@@ -22,21 +22,25 @@
        SOFTWARE.
    */
 
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.System.Versioning;
 
 using PlatformKit.Internal.Exceptions;
-
-using PlatformKit.Windows;
-using PlatformKit.Linux;
-using PlatformKit.Linux.Models;
-using PlatformKit.Mac;
-using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Localizations;
 
+using PlatformKit.OperatingSystems.FreeBsd;
+
+using PlatformKit.OperatingSystems.Linux;
+
+using PlatformKit.OperatingSystems.Mac;
+
+using PlatformKit.OperatingSystems.Windows;
+using PlatformKit.OperatingSystems.Windows.Extensions;
 
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
@@ -44,7 +48,7 @@ using PlatformKit.Internal.Localizations;
 
 // ReSharper disable InconsistentNaming
 
-namespace PlatformKit.Identification
+namespace PlatformKit.Core.Identification
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
@@ -52,25 +56,54 @@ namespace PlatformKit.Identification
     public class RuntimeIdentification
     {
 
+        protected LinuxOperatingSystem linuxOperatingSystem;
+        protected WindowsOperatingSystem windowsOperatingSystem;
+        protected MacOperatingSystem macOperatingSystem;
+        protected FreeBsdOperatingSystem freeBsdOperatingSystem;
+        
+        public RuntimeIdentification()
+        {
+            linuxOperatingSystem = new LinuxOperatingSystem();
+            macOperatingSystem = new MacOperatingSystem();
+            windowsOperatingSystem = new WindowsOperatingSystem();
+            freeBsdOperatingSystem = new FreeBsdOperatingSystem();
+        }
+        
         /// <summary>
         /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        protected static string GetArchitectureString()
+        protected string GetArchitectureString()
         {
+#if NET5_0_OR_GREATER
             return RuntimeInformation.OSArchitecture switch
             {
                 Architecture.X64 => "x64",
                 Architecture.X86 => "x86",
                 Architecture.Arm => "arm",
                 Architecture.Arm64 => "arm64",
-#if NET6_0_OR_GREATER
+        #if NET6_0_OR_GREATER
                 Architecture.S390x => "s390x",
                 Architecture.Wasm => throw new PlatformNotSupportedException(),
-#endif
+        #endif
                 _ => null
-            };
+            } ?? throw new InvalidOperationException();
+#else
+            switch (RuntimeInformation.OSArchitecture)
+            {
+                case Architecture.Arm:
+                    return "arm";
+                case Architecture.Arm64:
+                    return "arm64";
+                case Architecture.X64:
+                    return "x64";
+                case Architecture.X86:
+                    return "x86";
+                default:
+                    throw new PlatformNotSupportedException();
+            }
+#endif
         }
 
         /// <summary>
@@ -78,48 +111,83 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
-        /// <exception cref="LinuxVersionDetectionException"></exception>
-        protected static string GetOsNameString(RuntimeIdentifierType identifierType)
+        protected async Task<string> GetOsNameString(RuntimeIdentifierType identifierType)
         {
+#if NET5_0_OR_GREATER
+            string? osName = null;
+#else
             string osName = null;
-
+#endif
+            
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
-                return "any";
+                osName = "any";
             }
-            if (OperatingSystem.IsWindows())
+            else
             {
-                osName = "win";
-            }
-            if (OperatingSystem.IsMacOS())
-            {
-                osName = "osx";
-            }
-            if (OperatingSystem.IsFreeBSD())
-            {
-                osName = "freebsd";
-            }
-            if (OperatingSystem.IsLinux())
-            {
-                if (identifierType == RuntimeIdentifierType.Generic)
+                if (OperatingSystem.IsWindows())
                 {
-                    return "linux";
+                    osName = "win";
+                }
+                if (OperatingSystem.IsMacOS())
+                {
+                    osName = "osx";
+                }
+                if (OperatingSystem.IsFreeBSD())
+                {
+                    osName = "freebsd";
+                }
+#if NET6_0_OR_GREATER
+                if (OperatingSystem.IsAndroid())
+                {
+                    osName = "android";
+                }
+                if (OperatingSystem.IsIOS())
+                {
+                    osName = "ios";
+                }
+                if (OperatingSystem.IsTvOS())
+                {
+                    osName = "tvos";
                 }
 
-                LinuxOsReleaseModel osRelease = LinuxOsReleaseRetriever.GetLinuxOsRelease();
+                if (OperatingSystem.IsWatchOS())
+                {
+                    osName = "watchos";
+                }
+#endif
+                if (OperatingSystem.IsLinux())
+                {
+                    if (identifierType == RuntimeIdentifierType.Generic)
+                    {
+                        osName = "linux";
+                    }
+                    else if (identifierType == RuntimeIdentifierType.Specific)
+                    {
+#if NET5_0_OR_GREATER
+                        osName = await linuxOperatingSystem.GetOsReleasePropertyValueAsync("IDENTIFIER_LIKE=");
+#else
+                        osName = await Task.Run(()=> linuxOperatingSystem.GetOsReleasePropertyValueAsync("IDENTIFIER_LIKE="));
+#endif
+                    }
+                    else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
+                    {
+#if NET5_0_OR_GREATER
+                        osName = await linuxOperatingSystem.GetOsReleasePropertyValueAsync("IDENTIFIER=");
+#else
+                        osName = await Task.Run(()=> linuxOperatingSystem.GetOsReleasePropertyValueAsync("IDENTIFIER="));
+#endif
+                    }
+                    else
+                    {
+                        osName = "linux";
+                    }
+                }
+            }
 
-                if (identifierType == RuntimeIdentifierType.Specific)
-                {
-                    osName = osRelease.Identifier_Like.ToLower();
-                }
-                else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
-                {
-                    osName = osRelease.Identifier.ToLower();
-                }
-                else
-                {
-                    throw new LinuxVersionDetectionException();
-                }
+            if (osName == null)
+            {
+                throw new PlatformNotSupportedException();
             }
 
             return osName;
@@ -130,39 +198,60 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        /// <exception cref="WindowsVersionDetectionException"></exception>
-        internal static string GetOsVersionString()
+        internal string GetOsVersionString()
         {
+#if NET5_0_OR_GREATER
+            string? osVersion = null;
+#else
             string osVersion = null;
-
+#endif
             if (OperatingSystem.IsWindows())
             {
-                if (WindowsAnalyzer.IsWindows10())
+                bool isWindows10 = windowsOperatingSystem.IsWindows10();
+                bool isWindows11 = windowsOperatingSystem.IsWindows11();
+                
+                if (isWindows10)
                 {
                     osVersion = "10";
                 }
-                else if (WindowsAnalyzer.IsWindows11())
+                else if (isWindows11)
                 {
                     osVersion = "11";
                 }
-                else if (!WindowsAnalyzer.IsWindows10() && !WindowsAnalyzer.IsWindows11())
+                else if (!isWindows10 && !isWindows11)
                 {
-                    osVersion = WindowsAnalyzer.GetWindowsVersion().Build switch
+#if NET5_0_OR_GREATER
+                    osVersion = windowsOperatingSystem.GetOperatingSystemVersion().Build switch
                     {
                         < 9200 => throw new PlatformNotSupportedException(),
                         9200 => "8",
                         9600 => "81",
-                        _ => throw new WindowsVersionDetectionException(),
+                        _ => throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly)
                     };
+#else
+                    switch (windowsOperatingSystem.GetOperatingSystemVersion().Build)
+                    {
+                        case 9200:
+                            osVersion = "8";
+                            break;
+                        case 9600:
+                            osVersion = "81";
+                            break;
+                        default:
+                            throw new PlatformNotSupportedException(Resources
+                                .Exceptions_PlatformNotSupported_WindowsOnly);
+                    }
+#endif
                 }
             }
             if (OperatingSystem.IsLinux())
             {
-                osVersion = LinuxOsReleaseRetriever.GetLinuxDistributionVersionAsString();
+                osVersion = linuxOperatingSystem.GetOperatingSystemVersion().ToString();
             }
+#if NETCOREAPP3_1_OR_GREATER            
             if (OperatingSystem.IsFreeBSD())
             {
-                osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
+                osVersion = freeBsdOperatingSystem.GetOperatingSystemVersion().ToString();
                 
                 switch (osVersion.CountDotsInString())
                 {
@@ -179,22 +268,28 @@ namespace PlatformKit.Identification
                         break;
                     }
             }
+#endif
             if (OperatingSystem.IsMacOS())
             {
-                Version version = MacOsAnalyzer.GetMacOsVersion();
+                bool isAtLeastHighSierra = OperatingSystem.IsMacOSVersionAtLeast(10, 13);
 
-                if (version.Major == 10)
+                Version version = macOperatingSystem.GetOperatingSystemVersion();
+
+                if (isAtLeastHighSierra)
                 {
-                    if (version.Minor < 12)
+                    
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
                     {
-                        throw new PlatformNotSupportedException();
+                        osVersion = $"{version.Major}";
                     }
-
-                    osVersion = $"{version.Major}.{version.Major}";
+                    else
+                    {
+                        osVersion = $"{version.Major}.{version.Major}";
+                    }
                 }
-                else if (version.Major > 10)
+                else
                 {
-                    osVersion = $"{version.Major}";
+                    throw new PlatformNotSupportedException();
                 }
             }
 
@@ -209,7 +304,7 @@ namespace PlatformKit.Identification
         /// <param name="identifierType"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
@@ -238,9 +333,9 @@ namespace PlatformKit.Identification
         /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <returns></returns>
-        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
+        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
-            string osName = GetOsNameString(identifierType);
+            string osName = GetOsNameString(identifierType).Result;
             string cpuArch = GetArchitectureString();
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric ||
@@ -296,7 +391,7 @@ namespace PlatformKit.Identification
                     return $"{osName}-{cpuArch}";
                 }
             }
-            else if((!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD()) && identifierType is (RuntimeIdentifierType.DistroSpecific or RuntimeIdentifierType.VersionLessDistroSpecific))
+            else if((!OperatingSystem.IsLinux() && !OperatingSystem.IsFreeBSD()) && (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific))
             {
                 Console.WriteLine(Resources.RuntimeInformation_NonLinuxSpecific_Warning);
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
@@ -310,7 +405,7 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public static string GetRuntimeIdentifier()
+        public string GetRuntimeIdentifier()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
@@ -328,7 +423,7 @@ namespace PlatformKit.Identification
         /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
         {
             Dictionary<RuntimeIdentifierType, string> possibilities = new Dictionary<RuntimeIdentifierType, string>
             {

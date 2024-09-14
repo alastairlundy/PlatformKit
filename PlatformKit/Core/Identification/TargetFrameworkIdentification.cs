@@ -23,30 +23,36 @@
    */
 
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
 using AlastairLundy.Extensions.System.Versioning;
 
-using PlatformKit.Internal.Exceptions;
+using PlatformKit.OperatingSystems.Windows;
 
-using PlatformKit.Mac;
-using PlatformKit.Windows;
-    
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
 
-namespace PlatformKit.Identification;
-
+    namespace PlatformKit.Core.Identification
+    {
+        
 /// <summary>
 /// A class to manage RuntimeId detection and programmatic generations
 /// </summary>
 public class TargetFrameworkIdentification
 {
+    protected RuntimeIdentification runtimeIdentification;
+    protected WindowsOperatingSystem windowsOperatingSystem;
+    
+    public TargetFrameworkIdentification()
+    {
+        runtimeIdentification = new RuntimeIdentification();
+        windowsOperatingSystem = new WindowsOperatingSystem();
+    }
+    
     // ReSharper disable once InconsistentNaming
-    protected static string GetNetTFM()
+    protected string GetNetTFM()
     {
         Version frameworkVersion = GetDotNetVersion();
         StringBuilder stringBuilder = new StringBuilder();
@@ -60,7 +66,7 @@ public class TargetFrameworkIdentification
     }
 
     // ReSharper disable once InconsistentNaming
-    protected static string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
+    protected string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
         Version frameworkVersion = GetDotNetVersion();
         StringBuilder stringBuilder = new StringBuilder();
@@ -73,7 +79,7 @@ public class TargetFrameworkIdentification
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
             {
                 stringBuilder.Append(".");
-                stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
+                stringBuilder.Append(runtimeIdentification.GetOsVersionString());
             }
         }
 #if NET5_0_OR_GREATER
@@ -90,15 +96,19 @@ public class TargetFrameworkIdentification
 
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
             {
-                Version winVersion = WindowsAnalyzer.GetWindowsVersion();
+                bool isAtLeastWin8 = OperatingSystem.IsWindowsVersionAtLeast(6,2, 9200);
+                bool isAtLeastWin8Point1 = OperatingSystem.IsWindowsVersionAtLeast(6, 3, 9600);
 
-                if (winVersion.Build == 9200 || winVersion.Build == 9600)
+                bool isAtLeastWin10V1607 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 14393);
+                
+                
+                if (isAtLeastWin8 || isAtLeastWin8Point1)
                 {
-                    stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
+                    stringBuilder.Append(runtimeIdentification.GetOsVersionString());
                 }
-                else if (winVersion.Build >= 14393)
+                else if (isAtLeastWin10V1607)
                 {
-                    stringBuilder.Append(winVersion);
+                    stringBuilder.Append(windowsOperatingSystem.GetOperatingSystemVersion());
                 }
                 else
                 {
@@ -146,7 +156,7 @@ public class TargetFrameworkIdentification
     }
 
     // ReSharper disable once InconsistentNaming
-        protected static string GetNetCoreTFM()
+        protected string GetNetCoreTFM()
         {
             Version frameworkVersion = GetDotNetVersion();
             
@@ -161,7 +171,7 @@ public class TargetFrameworkIdentification
         }
 
         // ReSharper disable once InconsistentNaming
-        protected static string GetNetFrameworkTFM()
+        protected string GetNetFrameworkTFM()
         {
             Version frameworkVersion = GetDotNetVersion();
             
@@ -178,7 +188,7 @@ public class TargetFrameworkIdentification
         }
 
         // ReSharper disable once InconsistentNaming
-        protected static string GetMonoTFM()
+        protected string GetMonoTFM()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("mono");
@@ -201,7 +211,7 @@ public class TargetFrameworkIdentification
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Version GetDotNetVersion()
+        public Version GetDotNetVersion()
         {
             return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
                 .Replace("core", string.Empty)
@@ -216,9 +226,8 @@ public class TargetFrameworkIdentification
         /// </summary>
         /// <param name="targetFrameworkType">The type of TFM to generate.</param>
         /// <returns></returns>
-        /// <exception cref="OperatingSystemDetectionException">Thrown if there's an issue detecting the Windows Version whilst running on Windows.</exception>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
+        public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
             Version frameworkVersion = GetDotNetVersion();
             
@@ -251,4 +260,5 @@ public class TargetFrameworkIdentification
 
             throw new PlatformNotSupportedException();
         }
+    }
 }
