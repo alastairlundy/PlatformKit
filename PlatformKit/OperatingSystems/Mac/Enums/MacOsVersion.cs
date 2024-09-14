@@ -22,22 +22,29 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Linux.Enums;
+// ReSharper disable All
 
-/// <summary>
-/// The mode that SteamOS 3.x and newer is running in.
-/// </summary>
-// ReSharper disable once InconsistentNaming
-public enum SteamOSMode
+using System;
+using PlatformKit.Internal.Deprecation;
+
+namespace PlatformKit.OperatingSystems.Mac
 {
     /// <summary>
-    /// The normal UI of the SteamDeck without a desktop environment running.
+    /// An enum representing macOS versions.
     /// </summary>
-    GamingMode,
-    /// <summary>
-    /// The mode where the Manjaro desktop environment is running.
-    /// </summary>
-    DesktopMode,
-    // ReSharper disable once InconsistentNaming
-    OsIsNotSteamOS
+    public enum MacOsVersion
+    {
+        v10_15_Catalina,
+        /// <summary>
+        /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
+        /// First version to support Apple Silicon Macs.
+        /// </summary>
+        v11_BigSur,
+        v12_Monterey,
+        v13_Ventura,
+        v14_Sonoma,
+        v15_Sequoia,
+        NotDetected,
+        NotSupported,
+    }
 }

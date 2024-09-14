@@ -22,29 +22,30 @@
        SOFTWARE.
    */
 
-// ReSharper disable All
+namespace PlatformKit.OperatingSystems.Windows;
 
-using System;
-using PlatformKit.Internal.Deprecation;
-
-namespace PlatformKit.Mac
+/// <summary>
+/// An enum representing different Windows Editions.
+/// </summary>
+public enum WindowsEdition
 {
+    Home,
+    Education,
+    Professional,
+    ProfessionalForEducation,
+    ProfessionalForWorkstations,
+    // ReSharper disable once InconsistentNaming
+    EnterpriseLTSC,
+    EnterpriseSemiAnnualChannel,
+    IoTCore,
+    IoTEnterprise,
+    // ReSharper disable once InconsistentNaming
+    IoTEnterpriseLTSC,
+    Team,
+    Server,
     /// <summary>
-    /// An enum representing macOS versions.
+    /// Windows 11 or newer only
     /// </summary>
-    public enum MacOsVersion
-    {
-        v10_15_Catalina,
-        /// <summary>
-        /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
-        /// First version to support Apple Silicon Macs.
-        /// </summary>
-        v11_BigSur,
-        v12_Monterey,
-        v13_Ventura,
-        v14_Sonoma,
-        v15_Sequoia,
-        NotDetected,
-        NotSupported,
-    }
+    // ReSharper disable once InconsistentNaming
+    SE,
 }

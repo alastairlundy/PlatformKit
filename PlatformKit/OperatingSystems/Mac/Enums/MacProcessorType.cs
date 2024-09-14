@@ -22,7 +22,7 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Mac
+namespace PlatformKit.OperatingSystems.Mac
 {
     /// <summary>
     /// The type of processor in a modern Mac.

@@ -1,18 +1,18 @@
-/*
+﻿/*
         MIT License
-       
+
        Copyright (c) 2020-2024 Alastair Lundy
-       
+
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
        in the Software without restriction, including without limitation the rights
        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
        copies of the Software, and to permit persons to whom the Software is
        furnished to do so, subject to the following conditions:
-       
+
        The above copyright notice and this permission notice shall be included in all
        copies or substantial portions of the Software.
-       
+
        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,30 +22,16 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Windows;
+// ReSharper disable once CheckNamespace
+namespace PlatformKit.OperatingSystems.Windows;
 
-/// <summary>
-/// An enum representing different Windows Editions.
-/// </summary>
-public enum WindowsEdition
+public class HyperVRequirementsModel
 {
-    Home,
-    Education,
-    Professional,
-    ProfessionalForEducation,
-    ProfessionalForWorkstations,
-    // ReSharper disable once InconsistentNaming
-    EnterpriseLTSC,
-    EnterpriseSemiAnnualChannel,
-    IoTCore,
-    IoTEnterprise,
-    // ReSharper disable once InconsistentNaming
-    IoTEnterpriseLTSC,
-    Team,
-    Server,
-    /// <summary>
-    /// Windows 11 or newer only
-    /// </summary>
-    // ReSharper disable once InconsistentNaming
-    SE,
+    public bool VmMonitorModeExtensions { get; set; }
+    
+    public bool VirtualizationEnabledInFirmware { get; set; }
+    
+    public bool SecondLevelAddressTranslation { get; set; }
+    
+    public bool DataExecutionPreventionAvailable { get; set; }
 }

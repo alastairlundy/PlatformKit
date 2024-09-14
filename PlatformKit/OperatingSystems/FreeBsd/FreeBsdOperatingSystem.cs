@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -23,41 +23,45 @@
    */
 
 using System;
-
-using AlastairLundy.Extensions.System;
-
-using PlatformKit.Internal.Deprecation;
-using PlatformKit.Linux.Enums;
-using PlatformKit.Linux.Models;
-
+using PlatformKit.Core;
+using PlatformKit.OperatingSystems.Abstractions;
+using PlatformKit.OperatingSystems.Abstractions.Core;
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
 
-namespace PlatformKit.Linux;
-
-/// <summary>
-/// A class to Detect Linux versions, Linux features, and find out more about a user's Linux installation.
-/// </summary>
-public class LinuxAnalyzer
+namespace PlatformKit.OperatingSystems.FreeBsd
 {
-    
-    
+    public class FreeBsdOperatingSystem : IOperatingSystem
+    {
 
+        // ReSharper disable once InconsistentNaming
         /// <summary>
-        /// Detects the linux kernel version to string.
+        /// Detects and Returns the Installed version of FreeBSD
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        public static Version GetLinuxKernelVersion()
+        public Version GetOperatingSystemVersion()
         {
-            if (OperatingSystem.IsLinux())
+#if NETCOREAPP3_1_OR_GREATER
+            if (OperatingSystem.IsFreeBSD())
             {
-                return Version.Parse(Environment.OSVersion.ToString()
-                    .Replace("Unix ", string.Empty)); 
-            }
+                string versionString = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
+                    .Split(' ')[0].Replace("-release", string.Empty);
             
+                return Version.Parse(versionString);
+            }
+#endif
             throw new PlatformNotSupportedException();
         }
 
+        public Version GetKernelVersion()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetOperatingSystemBuildNumber()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

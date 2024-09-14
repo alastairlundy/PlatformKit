@@ -23,7 +23,7 @@
    */
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.Linux.Models;
+namespace PlatformKit.OperatingSystems.Linux;
 
 /// <summary>
 /// Represents a Linux Distribution's OsRelease file and information contained therein.

@@ -24,10 +24,7 @@
 
 // ReSharper disable InconsistentNaming
 
-using System;
-using PlatformKit.Internal.Deprecation;
-
-namespace PlatformKit.Windows
+namespace PlatformKit.OperatingSystems.Windows
 {
     /// <summary>
     /// An enum representing different versions of Windows.

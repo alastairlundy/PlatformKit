@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -22,22 +22,22 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Linux.Enums;
+using System;
+
+namespace PlatformKit.OperatingSystems.Mac;
 
 /// <summary>
-/// 
+/// A class to represent basic macOS System Information.
 /// </summary>
-public enum LinuxDistroBase
+public class MacOsSystemInformationModel
 {
-    Debian,
-    Ubuntu,
-    Arch,
-    Manjaro,
-    Fedora,
-    // ReSharper disable once InconsistentNaming
-    RHEL,
-    // ReSharper disable once InconsistentNaming
-    SUSE,
-    NotDetected,
-    NotSupported,
+    public Version MacOsVersion { get; set; }
+    
+    public Version DarwinVersion { get; set; }
+    
+    public Version XnuVersion { get; set; } 
+    
+    public string MacOsBuildNumber { get; set; }
+    
+    public MacProcessorType ProcessorType { get; set; }
 }

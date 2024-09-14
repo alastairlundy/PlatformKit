@@ -22,7 +22,7 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Mac{
+namespace PlatformKit.OperatingSystems.Mac{
     /// <summary>
     /// An enum of all possible Mac SystemProfiler DataTypes
     /// </summary>
