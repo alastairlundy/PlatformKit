@@ -87,20 +87,20 @@ public class UrlRunner
         }
     }
 
-            protected static string UrlHttpFormatting(string url, bool allowNonSecureHttp)
+    protected static string UrlHttpFormatting(string url, bool allowNonSecureHttp)
+    {
+        if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
+        {
+            if (allowNonSecureHttp)
             {
-                if ((!url.StartsWith("https://") || !url.StartsWith("www.")) && (!url.StartsWith("file://")))
-                {
-                    if (allowNonSecureHttp)
-                    {
-                        url = "http://" + url;
-                    }
-                    else
-                    {
-                        url = "https://" + url;
-                    }
-                }
-
-                return url;
+                url = "http://" + url;
             }
+            else
+            {
+                url = "https://" + url;
+            }
+        }
+
+        return url;
+    }
 }

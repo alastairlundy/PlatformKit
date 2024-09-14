@@ -32,7 +32,6 @@ using System.Threading.Tasks;
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
 
-// ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
 namespace PlatformKit.Core
