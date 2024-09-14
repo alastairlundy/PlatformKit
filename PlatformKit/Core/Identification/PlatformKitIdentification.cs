@@ -22,47 +22,23 @@
        SOFTWARE.
    */
 
-using PlatformKit.Internal.Deprecation;
 using System;
 using System.Reflection;
 
-
-namespace PlatformKit.Identification;
-
-/// <summary>
-/// 
-/// </summary>
-public class PlatformKitIdentification
+namespace PlatformKit.Core.Identification
 {
-
     /// <summary>
-    /// Gets the running project's name as reported by the Assembly.
+    /// 
     /// </summary>
-    /// <returns></returns>
-    // ReSharper disable once UnusedMember.Global
-    [Obsolete(DeprecationMessages.DeprecationV5)]
-    public string GetProjectName()
-        {
-            return Assembly.GetEntryAssembly()!.GetName().Name;
-        }
-
-    /// <summary>
-    /// Return a project's version as a Version data type.
-    /// </summary>
-    /// <returns></returns>
-    // ReSharper disable once UnusedMember.Global
-    [Obsolete(DeprecationMessages.DeprecationV5)]
-        public Version GetProjectVersion()
-        {
-            return Assembly.GetEntryAssembly()!.GetName().Version;
-        }
-
+    public class PlatformKitIdentification
+    {
         /// <summary>
         /// Return the version of PlatformKit being run.
         /// </summary>
         /// <returns></returns>
         public static Version GetPlatformKitVersion()
         {
-            return Assembly.GetExecutingAssembly().GetName().Version;
+            return Assembly.GetExecutingAssembly().GetName().Version ?? throw new NullReferenceException();
         }
+    }
 }

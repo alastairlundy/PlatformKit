@@ -28,12 +28,12 @@ namespace PlatformKit.Internal.Deprecation
 {
     internal static class DeprecationMessages
     {
-        private const string V5 = "v5.0.0";
+        private const string V6 = "v6.0.0";
         
         private const string FeatureDeprecation = "This feature is deprecated and will be removed";
         
         internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
         
-        internal const string DeprecationV5 = FeatureDeprecation + " in " + V5;
+        internal const string DeprecationV6 = FeatureDeprecation + " in " + V6;
     }
 }
