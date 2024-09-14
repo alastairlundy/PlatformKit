@@ -26,7 +26,7 @@ using System;
 using System.Runtime.InteropServices;
 
 using AlastairLundy.Extensions.System;
-
+using PlatformKit.Core;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Localizations;

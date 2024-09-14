@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
+using PlatformKit.Core;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

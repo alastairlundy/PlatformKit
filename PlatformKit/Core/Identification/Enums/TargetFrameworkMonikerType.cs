@@ -22,7 +22,7 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Identification;
+namespace PlatformKit.Core.Identification;
 
 public enum TargetFrameworkMonikerType
 {

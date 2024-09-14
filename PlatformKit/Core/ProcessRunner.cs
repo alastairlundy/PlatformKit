@@ -35,7 +35,7 @@ using System.Threading.Tasks;
 // ReSharper disable HeapView.DelegateAllocation
 // ReSharper disable InvalidXmlDocComment
 
-namespace PlatformKit
+namespace PlatformKit.Core
 {
     /// <summary>
     ///  A class to manage processes on a device and/or start new processes.

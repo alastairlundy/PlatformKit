@@ -25,7 +25,7 @@
 using System;
 
 using AlastairLundy.Extensions.System;
-
+using PlatformKit.Core;
 using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0

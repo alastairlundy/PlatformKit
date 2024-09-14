@@ -27,12 +27,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Text;
-
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif  
 
-namespace PlatformKit;
+namespace PlatformKit.Core;
 
 /// <summary>
 /// 

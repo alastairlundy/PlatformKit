@@ -23,7 +23,6 @@
    */
 
 using System;
-
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -34,7 +33,7 @@ using PlatformKit.Internal.Deprecation;
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
 
-namespace PlatformKit;
+namespace PlatformKit.Core;
 
 public class UrlRunner
 {
