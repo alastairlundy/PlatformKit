@@ -27,6 +27,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Text;
+
+using PlatformKit.Internal.Localizations;
+
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif  
@@ -46,6 +49,10 @@ public static class CommandRunner
  /// <param name="runAsAdministrator"></param>
  /// <returns></returns>
  /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+    [SupportedOSPlatform("maccatalyst")]
+#endif
  public static string RunCommandOnMac(string command, bool runAsAdministrator = false)
     {
         if (!OperatingSystem.IsMacOS())
@@ -88,6 +95,9 @@ public static class CommandRunner
     /// <param name="command"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("freebsd")]
+#endif
     public static string RunCommandOnFreeBsd(string command, bool runAsAdministrator = false)
     {
         return RunCommandOnLinux(command, runAsAdministrator);
@@ -122,13 +132,20 @@ public static class CommandRunner
     {
         if (OperatingSystem.IsWindows() == false)
         {
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
         }
         
         string location =
             $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
-        
-        return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
+
+        if (processStartInfo == null)
+        {
+            return ProcessRunner.RunProcessOnWindows(location, "powershell", command, null, runAsAdministrator);
+        }
+        else
+        {
+            return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
+        }
     }
 
     /// <summary>
@@ -137,6 +154,10 @@ public static class CommandRunner
     /// <param name="command"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+    [SupportedOSPlatform("freebsd")]
+#endif
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
         if (OperatingSystem.IsLinux() == false && OperatingSystem.IsFreeBSD() == false)
