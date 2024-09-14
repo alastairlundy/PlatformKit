@@ -34,30 +34,19 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win8 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        WinServer_2012 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win8_1 = 9600,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        WinServer_2012_R2 = 9600,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
         /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_v1507 = 10240,
         /// <summary>
         /// Initial release version of Windows 10 for Mobile and Xbox One.
         /// Windows 10 Build Number 10586
         /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_v1511 = 10586,
         Win10_v1607 = 14393,
         /// <summary>
         /// Windows Server 2016 based on Windows 10 Build 14393 (Win10v1607)
         /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_Server2016 = 14393,
         Win10_v1703 = 15063,
         Win10_v1709 = 16299,
@@ -66,12 +55,6 @@ namespace PlatformKit.Windows
         /// Replaced by Windows Server 2019 (v1809)
         /// </summary>
         Win10_Server_v1709 = 16299,
-        /// <summary>
-        /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly marketed as V1709 for Mobile.
-        /// Universal Windows Platform API Compatibility is the same as Windows 10 Build 15063 (Win10v1703) or earlier.
-        /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win10_v1709_Mobile = 15254,
         Win10_v1803 = 17134,
         Win10_v1809 = 17763,
         /// <summary>
@@ -100,7 +83,6 @@ namespace PlatformKit.Windows
         Win11_22H2 = 22621,
         Win11_23H2 = 22631,
         Win11_24H2 = 26100,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         Win10_InsiderPreview = 20349,
         Win11_InsiderPreview,
         NotDetected,

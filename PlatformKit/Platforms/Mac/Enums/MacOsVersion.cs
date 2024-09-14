@@ -34,11 +34,6 @@ namespace PlatformKit.Mac
     /// </summary>
     public enum MacOsVersion
     {
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        v10_13_HighSierra,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        v10_14_Mojave,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
         v10_15_Catalina,
         /// <summary>
         /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
