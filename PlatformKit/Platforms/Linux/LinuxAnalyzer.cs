@@ -41,89 +41,8 @@ namespace PlatformKit.Linux;
 /// </summary>
 public class LinuxAnalyzer
 {
-
-        /// <summary>
-        /// Detects what base Linux Distribution a Distro is based off of.
-        /// </summary>
-        /// <returns>the distro base of the currently running Linux Distribution</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5 + "\n Use LinuxOsReleaseRetriever.GetDistroBase() instead.")]
-        public static LinuxDistroBase GetDistroBase()
-        {
-            if (OperatingSystem.IsLinux())
-            {
-                return GetDistroBase(LinuxOsReleaseRetriever.GetLinuxOsRelease());
-            }
-
-            throw new PlatformNotSupportedException();
-        }
-        
-        /// <summary>
-        /// Detects what base Linux Distribution a Distro is based off of.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5 + "\n Use LinuxOsReleaseRetriever.GetDistroBase() instead.")]
-        public static LinuxDistroBase GetDistroBase(LinuxOsReleaseModel linuxOsRelease)
-        {
-            string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
-            
-            if (OperatingSystem.IsLinux())
-            {
-                return identifierLike switch
-                {
-                    "debian" => LinuxDistroBase.Debian,
-                    "ubuntu" => LinuxDistroBase.Ubuntu,
-                    "arch" => LinuxDistroBase.Arch,
-                    "manjaro" => LinuxDistroBase.Manjaro,
-                    "fedora" => LinuxDistroBase.Fedora,
-                    "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
-                    "suse" => LinuxDistroBase.SUSE,
-                    _ => LinuxDistroBase.NotDetected
-                };
-            }
-
-            throw new PlatformNotSupportedException();
-        }
     
-        /// <summary>
-        /// Detects Linux Distribution information and returns it.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        public static LinuxOsReleaseModel GetLinuxDistributionInformation()
-        {
-            return LinuxOsReleaseRetriever.GetLinuxOsRelease();
-        }
-        
-        /// <summary>
-        /// Detects the Linux Distribution Version as read from /etc/os-release and re-formats it into the format of System.Version object
-        ///  WARNING: DOES NOT PRESERVE the version if the full version is in a Year.Month.Bugfix format.
-        /// </summary>
-        /// <returns>the version of the linux distribution being run.</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        public static Version GetLinuxDistributionVersion()
-        {
-            if (OperatingSystem.IsLinux())
-            {
-                return Version.Parse(LinuxOsReleaseRetriever.GetDistributionVersion().ToString());
-            }
-            
-            throw new PlatformNotSupportedException();
-        }
-        
-        /// <summary>
-        /// Detects the Linux Distribution Version as read from /etc/os-release.
-        /// Preserves the version if the full version is in a Year.Month.Bugfix format.
-        /// </summary>
-        /// <returns>the version of the linux distribution being run as a string.</returns>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        public static string GetLinuxDistributionVersionAsString()
-        {
-            return LinuxOsReleaseRetriever.GetLinuxDistributionVersionAsString(LinuxOsReleaseRetriever.GetLinuxOsRelease());
-        }
+    
 
         /// <summary>
         /// Detects the linux kernel version to string.
@@ -140,21 +59,5 @@ public class LinuxAnalyzer
             
             throw new PlatformNotSupportedException();
         }
-        
-        /// <summary>
-        /// Returns whether the installed Linux Kernel version is equal to or newer than the Kernel Version provided as a parameter
-        /// </summary>
-        /// <param name="linuxKernelVersion">The Kernel Version to compare against.</param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
-        {
-            if (OperatingSystem.IsLinux())
-            {
-                return GetLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
-            }
 
-            throw new PlatformNotSupportedException();
-        }
 }

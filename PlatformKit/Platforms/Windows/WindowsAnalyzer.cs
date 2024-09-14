@@ -699,24 +699,4 @@ for (int index = 0; index < array.Length; index++)
 
             throw new PlatformNotSupportedException();
         }
-        
-        /// <summary>
-        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
-        /// </summary>
-        /// <param name="windowsVersion"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throws an exception if not run on Windows.</exception>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("windows")]
-#endif
-        public static bool IsAtLeastVersion(Version windowsVersion)
-        {
-            if (OperatingSystem.IsWindows())
-            {
-                return  GetWindowsVersion().IsAtLeast(windowsVersion);
-            }
-
-            throw new PlatformNotSupportedException();
-        }
 }
