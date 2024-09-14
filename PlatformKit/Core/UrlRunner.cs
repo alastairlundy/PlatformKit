@@ -26,9 +26,6 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-using PlatformKit.Internal.Deprecation;
-
-
 #if NETSTANDARD2_0
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
@@ -89,26 +86,6 @@ public class UrlRunner
             CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
         }
     }
-
-            /// <summary>
-            /// Open a URL in the default browser.
-            /// Courtesy of https://github.com/dotnet/corefx/issues/10361
-            /// </summary>
-            /// <param name="url">The URL to be opened.</param>
-            /// <param name="allowNonSecureHttp">Whether to allow non HTTPS links to be opened.</param>
-            /// <returns></returns>
-            [Obsolete(DeprecationMessages.DeprecationV5)]
-            public static void OpenUrlInDefaultBrowser(string url, bool allowNonSecureHttp = false)
-            {
-                url = UrlHttpFormatting(url, allowNonSecureHttp);
-
-                if (!allowNonSecureHttp)
-                {
-                   url = MakeUrlSecure(url);
-                }
-    
-                OpenUrl(url);
-            }
 
             protected static string UrlHttpFormatting(string url, bool allowNonSecureHttp)
             {
