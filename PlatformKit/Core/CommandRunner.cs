@@ -136,7 +136,8 @@ public static class CommandRunner
         }
         
         string location =
-            $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+            $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}" +
+            $"System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
 
         if (processStartInfo == null)
         {
