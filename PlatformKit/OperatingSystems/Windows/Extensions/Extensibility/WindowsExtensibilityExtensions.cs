@@ -25,9 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
-
-using AlastairLundy.Extensions.System.Versioning;
-
+using AlastairLundy.Extensions.System.Strings.Versioning;
 using PlatformKit.Core;
 
 #if NETSTANDARD2_0

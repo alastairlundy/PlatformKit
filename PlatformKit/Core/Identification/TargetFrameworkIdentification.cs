@@ -25,8 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
-
-using AlastairLundy.Extensions.System.Versioning;
+using AlastairLundy.Extensions.System.Strings.Versioning;
 
 using PlatformKit.OperatingSystems.Windows;
 

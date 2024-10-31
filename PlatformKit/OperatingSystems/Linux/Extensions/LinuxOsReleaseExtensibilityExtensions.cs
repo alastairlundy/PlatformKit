@@ -28,7 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.System.EscapeCharacters;
+using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
 
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;

@@ -27,8 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
-using AlastairLundy.Extensions.System.Versioning;
+using AlastairLundy.Extensions.System.Strings.Versioning;
 
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Localizations;
