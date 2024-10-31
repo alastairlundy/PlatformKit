@@ -23,7 +23,6 @@
    */
 
 using System;
-using PlatformKit.OperatingSystems.Abstractions.Core;
 using PlatformKit.OperatingSystems.Mac;
 
 namespace PlatformKit.OperatingSystems.Abstractions;

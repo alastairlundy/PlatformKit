@@ -1,7 +1,7 @@
 ﻿/*
         MIT License
        
-       Copyright (c) 2020-2024 Alastair Lundy
+       Copyright (c) 2024 Alastair Lundy
        
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,16 @@
        SOFTWARE.
    */
 
-using PlatformKit.OperatingSystems.Abstractions.Core;
+using System;
 
-namespace PlatformKit.OperatingSystems.Abstractions;
-
-public interface IFreeBsdOperatingSystem : IOperatingSystem
+namespace PlatformKit.OperatingSystems.Abstractions
 {
-    
+    public interface IOperatingSystem
+    {
+        Version GetOperatingSystemVersion();
+
+        Version GetKernelVersion();
+
+        string GetOperatingSystemBuildNumber();
+    }
 }

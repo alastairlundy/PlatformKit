@@ -25,7 +25,7 @@
 using System;
 using PlatformKit.Core;
 using PlatformKit.OperatingSystems.Abstractions;
-using PlatformKit.OperatingSystems.Abstractions.Core;
+
 #if NETSTANDARD2_0
 using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif

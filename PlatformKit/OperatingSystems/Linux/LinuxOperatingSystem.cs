@@ -38,7 +38,7 @@ using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemEx
 namespace PlatformKit.OperatingSystems.Linux
 {
 
-    public class LinuxOperatingSystem : ILinuxOperatingSystem
+    public class LinuxOperatingSystem : IOperatingSystem
     {
 
         /// <summary>

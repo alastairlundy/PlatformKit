@@ -34,7 +34,7 @@ using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemEx
 
 namespace PlatformKit.OperatingSystems.Windows
 {
-    public class WindowsOperatingSystem : IWindowsOperatingSystem
+    public class WindowsOperatingSystem : IOperatingSystem
     {
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version
