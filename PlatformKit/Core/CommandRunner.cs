@@ -39,6 +39,7 @@ namespace PlatformKit.Core;
 /// <summary>
 /// 
 /// </summary>
+[Obsolete("This class is obsolete and will be removed in a future version. Please use CliRunner instead.")]
 public static class CommandRunner
 {
 

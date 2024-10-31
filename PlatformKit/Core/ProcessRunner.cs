@@ -39,6 +39,7 @@ namespace PlatformKit.Core
     /// <summary>
     ///  A class to manage processes on a device and/or start new processes.
     /// </summary>
+    [Obsolete("This class is obsolete and will be removed in a future version. Please use CliRunner instead.")]
     public static class ProcessRunner
     {
 
