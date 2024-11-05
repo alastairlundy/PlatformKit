@@ -25,12 +25,13 @@
 
 using System;
 
-namespace PlatformKit.Internal.Exceptions;
-
-public class LinuxVersionDetectionException : Exception
+namespace PlatformKit.Internal.Exceptions.Linux
 {
-    public LinuxVersionDetectionException() : base("Failed to detect the version of Linux running on this computer.")
+    public class LinuxVersionDetectionException : Exception
     {
+        public LinuxVersionDetectionException() : base("Failed to detect the version of Linux running on this computer.")
+        {
         
+        }
     }
 }

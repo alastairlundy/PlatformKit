@@ -22,22 +22,23 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.OperatingSystems.Linux;
-
-/// <summary>
-/// 
-/// </summary>
-public enum LinuxDistroBase
+namespace PlatformKit.OperatingSystems.Linux
 {
-    Debian,
-    Ubuntu,
-    Arch,
-    Manjaro,
-    Fedora,
-    // ReSharper disable once InconsistentNaming
-    RHEL,
-    // ReSharper disable once InconsistentNaming
-    SUSE,
-    NotDetected,
-    NotSupported,
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum LinuxDistroBase
+    {
+        Debian,
+        Ubuntu,
+        Arch,
+        Manjaro,
+        Fedora,
+        // ReSharper disable once InconsistentNaming
+        RHEL,
+        // ReSharper disable once InconsistentNaming
+        SUSE,
+        NotDetected,
+        NotSupported,
+    }
 }
