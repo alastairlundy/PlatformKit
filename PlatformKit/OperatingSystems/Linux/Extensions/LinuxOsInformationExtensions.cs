@@ -29,70 +29,71 @@ using System.Threading.Tasks;
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Linux.Extensions;
-
-public static class LinuxOsInformationExtensions
+namespace PlatformKit.OperatingSystems.Linux.Extensions
 {
-    /// <summary>
-    /// Detects what base Linux Distribution a Distro is based off of.
-    /// </summary>
-    /// <returns></returns>
-    public static async Task<LinuxDistroBase> GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem)
+    public static class LinuxOsInformationExtensions
     {
-        LinuxOsReleaseModel osReleaseModel = await linuxOperatingSystem.GetLinuxOsReleaseAsync();
-        return GetDistroBase(linuxOperatingSystem, osReleaseModel);
-    }
-
-    /// <summary>
-    /// Detects what base Linux Distribution a Distro is based off of.
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="System.PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-    public static LinuxDistroBase GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem, LinuxOsReleaseModel linuxOsRelease)
-    {
-        string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
-            
-        if (OperatingSystem.IsLinux())
+        /// <summary>
+        /// Detects what base Linux Distribution a Distro is based off of.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<LinuxDistroBase> GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem)
         {
-            return identifierLike switch
-            {
-                "debian" => LinuxDistroBase.Debian,
-                "ubuntu" => LinuxDistroBase.Ubuntu,
-                "arch" => LinuxDistroBase.Arch,
-                "manjaro" => LinuxDistroBase.Manjaro,
-                "fedora" => LinuxDistroBase.Fedora,
-                "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
-                "suse" => LinuxDistroBase.SUSE,
-                _ => LinuxDistroBase.NotDetected
-            };
+            LinuxOsReleaseModel osReleaseModel = await linuxOperatingSystem.GetLinuxOsReleaseAsync();
+            return GetDistroBase(linuxOperatingSystem, osReleaseModel);
         }
 
-        throw new PlatformNotSupportedException();
-    }
-
-    /// <summary>
-    /// Detects the Linux Distribution Version as read from /etc/os-release.
-    /// Preserves the version if the full version is in a Year.Month.Bugfix format.
-    /// </summary>
-    /// <returns>the version of the linux distribution being run as a string.</returns>
-    /// <exception cref="System.PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
-    public static string GetLinuxDistributionVersionAsString(this LinuxOperatingSystem linuxOperatingSystem, LinuxOsReleaseModel osReleaseModel)
-    {
-        if (OperatingSystem.IsLinux() == false)
+        /// <summary>
+        /// Detects what base Linux Distribution a Distro is based off of.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+        public static LinuxDistroBase GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem, LinuxOsReleaseModel linuxOsRelease)
         {
+            string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
+            
+            if (OperatingSystem.IsLinux())
+            {
+                return identifierLike switch
+                {
+                    "debian" => LinuxDistroBase.Debian,
+                    "ubuntu" => LinuxDistroBase.Ubuntu,
+                    "arch" => LinuxDistroBase.Arch,
+                    "manjaro" => LinuxDistroBase.Manjaro,
+                    "fedora" => LinuxDistroBase.Fedora,
+                    "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+                    "suse" => LinuxDistroBase.SUSE,
+                    _ => LinuxDistroBase.NotDetected
+                };
+            }
+
             throw new PlatformNotSupportedException();
         }
 
-        string osName = osReleaseModel.Name.ToLower();
-
-        if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
-            (osReleaseModel.Version.Contains(".4.") || osReleaseModel.Version.EndsWith(".4")))
+        /// <summary>
+        /// Detects the Linux Distribution Version as read from /etc/os-release.
+        /// Preserves the version if the full version is in a Year.Month.Bugfix format.
+        /// </summary>
+        /// <returns>the version of the linux distribution being run as a string.</returns>
+        /// <exception cref="System.PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+        public static string GetLinuxDistributionVersionAsString(this LinuxOperatingSystem linuxOperatingSystem, LinuxOsReleaseModel osReleaseModel)
         {
-            //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
-            //This normally occurs with .04 being shown as .4
-            osReleaseModel.Version = osReleaseModel.Version.Replace(".4", ".04");
-        }
+            if (OperatingSystem.IsLinux() == false)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            string osName = osReleaseModel.Name.ToLower();
+
+            if ((osName.Contains("ubuntu") || osName.Contains("pop") || osName.Contains("buntu")) &&
+                (osReleaseModel.Version.Contains(".4.") || osReleaseModel.Version.EndsWith(".4")))
+            {
+                //Properly show Year.Month.minor version for Date base distribution versioning such as Pop!_OS and Ubuntu.
+                //This normally occurs with .04 being shown as .4
+                osReleaseModel.Version = osReleaseModel.Version.Replace(".4", ".04");
+            }
                 
-        return osReleaseModel.Version;
+            return osReleaseModel.Version;
+        }
     }
 }

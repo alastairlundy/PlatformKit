@@ -27,62 +27,63 @@ using System;
 using PlatformKit.Core;
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.OperatingSystems.Windows;
-
-public class WindowsSystemInformationModel
+namespace PlatformKit.OperatingSystems.Windows
 {
-    public string HostName { get; set; }
+    public class WindowsSystemInformationModel
+    {
+        public string HostName { get; set; }
     
-    public string OsName { get; set; }
-    public string OsVersion { get; set; }
-    public string OsManufacturer { get; set; }
-    public string OsConfiguration { get; set; }
-    public string OsBuildType { get; set; }
+        public string OsName { get; set; }
+        public string OsVersion { get; set; }
+        public string OsManufacturer { get; set; }
+        public string OsConfiguration { get; set; }
+        public string OsBuildType { get; set; }
     
-    public string RegisteredOwner { get; set; }
-    public string RegisteredOrganization { get; set; }
+        public string RegisteredOwner { get; set; }
+        public string RegisteredOrganization { get; set; }
     
-    public string ProductId { get; set; }
+        public string ProductId { get; set; }
     
-    public DateTime OriginalInstallDate { get; set; }
-    public DateTime SystemBootTime { get; set; }
+        public DateTime OriginalInstallDate { get; set; }
+        public DateTime SystemBootTime { get; set; }
     
-    public string SystemManufacturer { get; set; }
-    public string SystemModel { get; set; }
-    public string SystemType { get; set; }
+        public string SystemManufacturer { get; set; }
+        public string SystemModel { get; set; }
+        public string SystemType { get; set; }
     
-    public string[] Processors { get; set; }
+        public string[] Processors { get; set; }
     
-    public string BiosVersion { get; set; }
-    
-    
-    public string WindowsDirectory { get; set; }
-    public string SystemDirectory { get; set; }
-    
-    public string BootDevice { get; set; }
+        public string BiosVersion { get; set; }
     
     
-    public string SystemLocale { get; set; }
-    public string InputLocale { get; set; }
+        public string WindowsDirectory { get; set; }
+        public string SystemDirectory { get; set; }
     
-    public TimeZoneInfo TimeZone { get; set; }
+        public string BootDevice { get; set; }
     
-    public int TotalPhysicalMemoryMegabyte { get; set; }
-    public int AvailablePhysicalMemoryMegabyte { get; set; }
     
-    public int VirtualMemoryMaxSizeMegabyte { get; set; }
-    public int VirtualMemoryAvailableSizeMegabyte { get; set; }
-    public int VirtualMemoryInUse { get; set; }
+        public string SystemLocale { get; set; }
+        public string InputLocale { get; set; }
     
-    public string Domain { get; set; }
+        public TimeZoneInfo TimeZone { get; set; }
     
-    public string[] PageFileLocations { get; set; }
+        public int TotalPhysicalMemoryMegabyte { get; set; }
+        public int AvailablePhysicalMemoryMegabyte { get; set; }
     
-    public string LogonServer { get; set; }
+        public int VirtualMemoryMaxSizeMegabyte { get; set; }
+        public int VirtualMemoryAvailableSizeMegabyte { get; set; }
+        public int VirtualMemoryInUse { get; set; }
     
-    public string[] HotfixesInstalled { get; set; }
+        public string Domain { get; set; }
     
-    public NetworkCardModel[] NetworkCards { get; set; }
+        public string[] PageFileLocations { get; set; }
     
-    public HyperVRequirementsModel HyperVRequirements { get; set; }
+        public string LogonServer { get; set; }
+    
+        public string[] HotfixesInstalled { get; set; }
+    
+        public NetworkCardModel[] NetworkCards { get; set; }
+    
+        public HyperVRequirementsModel HyperVRequirements { get; set; }
+    }
 }

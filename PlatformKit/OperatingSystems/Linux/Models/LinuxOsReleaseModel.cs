@@ -23,52 +23,53 @@
    */
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.OperatingSystems.Linux;
-
-/// <summary>
-/// Represents a Linux Distribution's OsRelease file and information contained therein.
-/// </summary>
-public class LinuxOsReleaseModel
+namespace PlatformKit.OperatingSystems.Linux
 {
-    public LinuxOsReleaseModel()
+    /// <summary>
+    /// Represents a Linux Distribution's OsRelease file and information contained therein.
+    /// </summary>
+    public class LinuxOsReleaseModel
     {
+        public LinuxOsReleaseModel()
+        {
         
-    }
+        }
     
-    public LinuxOsReleaseModel(string name, string version, string identifier, string identifierLike, string prettyName, string versionId, string versionCodeName, string homeUrl, string bugReportUrl, string privacyPolicyUrl, string supportUrl)
-    {
-        Name = name;
-        Version = version;
-        Identifier = identifier;
-        Identifier_Like = identifierLike;
-        PrettyName = prettyName;
-        VersionId = versionId;
-        VersionCodename = versionCodeName;
-        HomeUrl = homeUrl;
-        SupportUrl = supportUrl;
-        BugReportUrl = bugReportUrl;
-        PrivacyPolicyUrl = privacyPolicyUrl;
-    }
+        public LinuxOsReleaseModel(string name, string version, string identifier, string identifierLike, string prettyName, string versionId, string versionCodeName, string homeUrl, string bugReportUrl, string privacyPolicyUrl, string supportUrl)
+        {
+            Name = name;
+            Version = version;
+            Identifier = identifier;
+            Identifier_Like = identifierLike;
+            PrettyName = prettyName;
+            VersionId = versionId;
+            VersionCodename = versionCodeName;
+            HomeUrl = homeUrl;
+            SupportUrl = supportUrl;
+            BugReportUrl = bugReportUrl;
+            PrivacyPolicyUrl = privacyPolicyUrl;
+        }
     
-    public bool IsLongTermSupportRelease { get; set; }
+        public bool IsLongTermSupportRelease { get; set; }
 
-    public string Name { get; set; }
+        public string Name { get; set; }
 
-    public string Version { get; set; }
+        public string Version { get; set; }
 
-    public string Identifier { get; set; }
+        public string Identifier { get; set; }
 
-    // ReSharper disable once InconsistentNaming
-    public string Identifier_Like { get; set; }
+        // ReSharper disable once InconsistentNaming
+        public string Identifier_Like { get; set; }
 
-    public string PrettyName { get; set; }
+        public string PrettyName { get; set; }
 
-    public string VersionId { get; set; }
+        public string VersionId { get; set; }
 
-    public string HomeUrl { get; set; }
-    public string SupportUrl { get; set; }
-    public string BugReportUrl { get; set; }
-    public string PrivacyPolicyUrl { get; set; }
+        public string HomeUrl { get; set; }
+        public string SupportUrl { get; set; }
+        public string BugReportUrl { get; set; }
+        public string PrivacyPolicyUrl { get; set; }
 
-    public string VersionCodename { get; set; }
+        public string VersionCodename { get; set; }
+    }
 }

@@ -69,8 +69,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Core\Abstractions\" />
-      <Folder Include="Core\Services\Abstractions\" />
       <Folder Include="Platforms" />
     </ItemGroup>
 
