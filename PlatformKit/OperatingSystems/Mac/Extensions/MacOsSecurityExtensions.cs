@@ -23,70 +23,70 @@
    */
 
 using System;
-
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Mac.Extensions;
-
-public static class MacOsSecurityExtensions
+namespace PlatformKit.OperatingSystems.Mac.Extensions
 {
-    /// <summary>
-    ///  Returns whether the Mac running this method has Activation Lock enabled or not.
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    public static bool IsActivationLockEnabled(this MacOperatingSystem macOperatingSystem)
+    public static class MacOsSecurityExtensions
     {
-        if (OperatingSystem.IsMacOS() == false)
+        /// <summary>
+        ///  Returns whether the Mac running this method has Activation Lock enabled or not.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        public static bool IsActivationLockEnabled(this MacOperatingSystem macOperatingSystem)
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
-        }
+            if (OperatingSystem.IsMacOS() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
         
-        string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+            string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
 
-        if (result.ToLower().Contains("disabled"))
-        {
-            return false;
+            if (result.ToLower().Contains("disabled"))
+            {
+                return false;
+            }
+
+            if (result.ToLower().Contains("enabled"))
+            {
+                return true;
+            }
+
+            throw new ArgumentException();
         }
 
-        if (result.ToLower().Contains("enabled"))
+        /// <summary>
+        /// Returns whether the Mac running this method has Secure Virtual Memory enabled or not.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        public static bool IsSecureVirtualMemoryEnabled(this MacOperatingSystem macOperatingSystem)
         {
-            return true;
-        }
-
-        throw new ArgumentException();
-    }
-
-    /// <summary>
-    /// Returns whether the Mac running this method has Secure Virtual Memory enabled or not.
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    public static bool IsSecureVirtualMemoryEnabled(this MacOperatingSystem macOperatingSystem)
-    {
-        if (OperatingSystem.IsMacOS() == false)
-        {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
-        }
+            if (OperatingSystem.IsMacOS() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
         
-        string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+            string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
 
-        if (result.ToLower().Contains("disabled"))
-        {
-            return false;
+            if (result.ToLower().Contains("disabled"))
+            {
+                return false;
+            }
+
+            if (result.ToLower().Contains("enabled"))
+            {
+                return true;
+            }
+
+            throw new ArgumentException();
         }
-
-        if (result.ToLower().Contains("enabled"))
-        {
-            return true;
-        }
-
-        throw new ArgumentException();
     }
 }

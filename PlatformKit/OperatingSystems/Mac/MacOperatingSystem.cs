@@ -25,72 +25,17 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-
-using PlatformKit.Core;
-
 using PlatformKit.Internal.Localizations;
-
 using PlatformKit.OperatingSystems.Abstractions;
-
-
-#if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Mac
+namespace PlatformKit.OperatingSystems
 {
 
-    public class MacOperatingSystem : IMacOperatingSystem
+    public class MacOperatingSystem : AbstractOperatingSystem
     {
-        /// <summary>
-        /// Returns whether a Mac is Apple Silicon based.
-        /// </summary>
-        /// <returns>true if the currently running Mac uses Apple Silicon; false if running on an Intel Mac.</returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("macos")]
-        [SupportedOSPlatform("maccatalyst")]
-#endif
-        public bool IsAppleSiliconMac()
-        {
-#if NET5_0_OR_GREATER
-    return RuntimeInformation.OSArchitecture switch
-            {
-                Architecture.Arm64 => true,
-                Architecture.X64 => false,
-                _ => throw new PlatformNotSupportedException()
-            };        
-#else
-            switch (RuntimeInformation.OSArchitecture)
-            {
-                case Architecture.Arm64:
-                    return true;
-                case Architecture.X64:
-                    return false;
-                default:
-                    throw new PlatformNotSupportedException();
-            }
-#endif
-        }
-
-        /// <summary>
-        /// Detects the Darwin Version on macOS
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("macos")]
-        [SupportedOSPlatform("maccatalyst")]
-#endif
-        public Version GetDarwinVersion()
-        {
-            if (OperatingSystem.IsMacOS())
-            {
-                return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
-            }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
-        }
-
         /// <summary>
         /// Detects the macOS version and returns it as a System.Version object.
         /// </summary>
@@ -100,7 +45,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public Version GetOperatingSystemVersion()
+        public override Version GetOperatingSystemVersion()
         {
             if (OperatingSystem.IsMacOS())
             {
@@ -133,7 +78,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public Version GetKernelVersion()
+        public override Version GetKernelVersion()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -149,7 +94,7 @@ namespace PlatformKit.OperatingSystems.Mac
                     array[index] = array[index].Replace("root:xnu-", string.Empty)
                         .Replace("~", ".");
 
-                    if (IsAppleSiliconMac())
+                    if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
                     {
                         array[index] = array[index].Replace("/RELEASE_ARM64_T", string.Empty).Remove(array.Length - 4);
                     }
@@ -174,7 +119,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public string GetOperatingSystemBuildNumber()
+        public override string GetOperatingSystemBuildNumber()
         {
             if (OperatingSystem.IsMacOS())
             {
@@ -184,27 +129,6 @@ namespace PlatformKit.OperatingSystems.Mac
             else
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("macos")]
-        [SupportedOSPlatform("maccatalyst")]
-#endif
-        public MacProcessorType GetMacProcessorType()
-        {
-            switch (RuntimeInformation.OSArchitecture)
-            {
-                case Architecture.Arm64:
-                    return MacProcessorType.AppleSilicon;
-                case Architecture.X64:
-                    return MacProcessorType.Intel;
-                default:
-                    return MacProcessorType.NotSupported;
             }
         }
     }

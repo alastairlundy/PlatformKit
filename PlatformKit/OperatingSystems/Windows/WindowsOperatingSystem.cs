@@ -25,16 +25,14 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-
 using PlatformKit.OperatingSystems.Abstractions;
-
-#if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 namespace PlatformKit.OperatingSystems.Windows
 {
-    public class WindowsOperatingSystem : IOperatingSystem
+    public class WindowsOperatingSystem : AbstractOperatingSystem
     {
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version
@@ -45,7 +43,7 @@ namespace PlatformKit.OperatingSystems.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
-        public Version GetOperatingSystemVersion()
+        public override Version GetOperatingSystemVersion()
         {
             if (OperatingSystem.IsWindows())
             {
@@ -65,7 +63,7 @@ namespace PlatformKit.OperatingSystems.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
-        public Version GetKernelVersion()
+        public override Version GetKernelVersion()
         {
             return GetOperatingSystemVersion();
         }
@@ -78,7 +76,7 @@ namespace PlatformKit.OperatingSystems.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
-        public string GetOperatingSystemBuildNumber()
+        public override string GetOperatingSystemBuildNumber()
         {
             // ReSharper disable once RedundantAssignment
             string output = string.Empty;

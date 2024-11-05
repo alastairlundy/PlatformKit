@@ -23,62 +23,63 @@
    */
 
 using System;
-
+using AlastairLundy.Extensions.Runtime;
 using PlatformKit.Core;
 
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Mac.Extensions;
-
-public static class MacOsExtensibilityExtensions
+namespace PlatformKit.OperatingSystems.Mac.Extensions
 {
-    /// <summary>
-    /// Gets a value from the Mac System Profiler information associated with a key
-    /// </summary>
-    /// <param name="macOperatingSystem"></param>
-    /// <param name="macSystemProfilerDataType"></param>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    public static string GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
-        MacSystemProfilerDataType macSystemProfilerDataType, string key)
+    public static class MacOsExtensibilityExtensions
     {
-        return GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
-    }
-    
-    /// <summary>
-    /// Gets a value from the Mac System Profiler information associated with a key
-    /// </summary>
-    /// <param name="macSystemProfilerDataType"></param>
-    /// <param name="key"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    public static string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
-    {
-        if (OperatingSystem.IsMacOS() == false)
+        /// <summary>
+        /// Gets a value from the Mac System Profiler information associated with a key
+        /// </summary>
+        /// <param name="macOperatingSystem"></param>
+        /// <param name="macSystemProfilerDataType"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
+            MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            return GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
         }
+    
+        /// <summary>
+        /// Gets a value from the Mac System Profiler information associated with a key
+        /// </summary>
+        /// <param name="macSystemProfilerDataType"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        public static string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
+        {
+            if (OperatingSystem.IsMacOS() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
         
-        string info = CommandRunner.RunCommandOnMac("system_profiler SP" + macSystemProfilerDataType);
+            string info = CommandRunner.RunCommandOnMac("system_profiler SP" + macSystemProfilerDataType);
 
 #if NETSTANDARD2_0_OR_GREATER
         string[] array = info.Split(Convert.ToChar(Environment.NewLine));
 #elif NET5_0_OR_GREATER
             string[] array = info.Split(Environment.NewLine);
 #endif
-        foreach (string str in array)
-        {
-            if (str.ToLower().Contains(key.ToLower()))
+            foreach (string str in array)
             {
-                return str.Replace(key, string.Empty).Replace(":", string.Empty);
+                if (str.ToLower().Contains(key.ToLower()))
+                {
+                    return str.Replace(key, string.Empty).Replace(":", string.Empty);
+                }
             }
-        }
 
-        throw new ArgumentException();
+            throw new ArgumentException();
+        }
     }
 }

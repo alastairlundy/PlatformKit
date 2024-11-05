@@ -24,100 +24,101 @@
 
 using System;
 using System.Runtime.Versioning;
-
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Windows.Extensions.Extensibility;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Windows.Extensions;
-
-public static class WindowsInformationExtensions
+namespace PlatformKit.OperatingSystems.Windows.Extensions
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
-    /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-    public static WindowsEdition GetWindowsEdition(this WindowsOperatingSystem windowsOperatingSystem)
+    public static class WindowsInformationExtensions
     {
-        if (OperatingSystem.IsWindows() == false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="WindowsEditionDetectionException">Throws an exception if operating system detection fails.</exception>
+        /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
+        public static WindowsEdition GetWindowsEdition(this WindowsOperatingSystem windowsOperatingSystem)
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
-        }
-
-        WindowsSystemInformationModel systemInformationModel = windowsOperatingSystem.GetWindowsSystemInformation();
-            
-        string edition = systemInformationModel.OsName.ToLower();
-                
-        if (edition.Contains("home"))
-        {
-            return WindowsEdition.Home;
-        }
-        else if (edition.Contains("pro") && edition.Contains("workstation"))
-        {
-            return WindowsEdition.ProfessionalForWorkstations;
-        }
-        else if (edition.Contains("pro") && !edition.Contains("education"))
-        {
-            return WindowsEdition.Professional;
-        }
-        else if (edition.Contains("pro") && edition.Contains("education"))
-        {
-            return WindowsEdition.ProfessionalForEducation;
-        }
-        else if (!edition.Contains("pro") && edition.Contains("education"))
-        {
-            return WindowsEdition.Education;
-        }
-        else if (edition.Contains("server"))
-        {
-            return WindowsEdition.Server;
-        }
-        else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
-                 !edition.Contains("iot"))
-        {
-            return WindowsEdition.EnterpriseLTSC;
-        }
-        else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
-                 !edition.Contains("iot"))
-        {
-            return WindowsEdition.EnterpriseSemiAnnualChannel;
-        }
-        else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
-                 edition.Contains("iot"))
-        {
-            return WindowsEdition.IoTEnterpriseLTSC;
-        }
-        else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
-                 edition.Contains("iot"))
-        {
-            return WindowsEdition.IoTEnterprise;
-        }
-        else if (edition.Contains("iot") && edition.Contains("core"))
-        {
-            return WindowsEdition.IoTCore;
-        }
-        else if (edition.Contains("team"))
-        {
-            return WindowsEdition.Team;
-        }
-
-        if (windowsOperatingSystem.IsWindows11())
-        {
-            if (edition.Contains("se"))
+            if (OperatingSystem.IsWindows() == false)
             {
-                return WindowsEdition.SE;
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-        }
 
-        throw new WindowsEditionDetectionException();
+            WindowsSystemInformationModel systemInformationModel = windowsOperatingSystem.GetWindowsSystemInformation();
+            
+            string edition = systemInformationModel.OsName.ToLower();
+                
+            if (edition.Contains("home"))
+            {
+                return WindowsEdition.Home;
+            }
+            else if (edition.Contains("pro") && edition.Contains("workstation"))
+            {
+                return WindowsEdition.ProfessionalForWorkstations;
+            }
+            else if (edition.Contains("pro") && !edition.Contains("education"))
+            {
+                return WindowsEdition.Professional;
+            }
+            else if (edition.Contains("pro") && edition.Contains("education"))
+            {
+                return WindowsEdition.ProfessionalForEducation;
+            }
+            else if (!edition.Contains("pro") && edition.Contains("education"))
+            {
+                return WindowsEdition.Education;
+            }
+            else if (edition.Contains("server"))
+            {
+                return WindowsEdition.Server;
+            }
+            else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                     !edition.Contains("iot"))
+            {
+                return WindowsEdition.EnterpriseLTSC;
+            }
+            else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                     !edition.Contains("iot"))
+            {
+                return WindowsEdition.EnterpriseSemiAnnualChannel;
+            }
+            else if (edition.Contains("enterprise") && edition.Contains("ltsc") &&
+                     edition.Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterpriseLTSC;
+            }
+            else if (edition.Contains("enterprise") && !edition.Contains("ltsc") &&
+                     edition.Contains("iot"))
+            {
+                return WindowsEdition.IoTEnterprise;
+            }
+            else if (edition.Contains("iot") && edition.Contains("core"))
+            {
+                return WindowsEdition.IoTCore;
+            }
+            else if (edition.Contains("team"))
+            {
+                return WindowsEdition.Team;
+            }
+
+            if (windowsOperatingSystem.IsWindows11())
+            {
+                if (edition.Contains("se"))
+                {
+                    return WindowsEdition.SE;
+                }
+            }
+
+            throw new WindowsEditionDetectionException();
+        }
     }
 }

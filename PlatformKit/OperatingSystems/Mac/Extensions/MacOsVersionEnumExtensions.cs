@@ -27,100 +27,102 @@ using System.Runtime.Versioning;
 using AlastairLundy.Extensions.System;
 
 using PlatformKit.Internal.Exceptions;
+using PlatformKit.Internal.Exceptions.Mac;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Mac.Extensions;
-
-public static class MacOsVersionEnumExtensions
+namespace PlatformKit.OperatingSystems.Mac.Extensions
 {
-    /// <summary>
-    /// Returns macOS version as a macOS version enum.
-    /// </summary>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    /// <returns></returns>
+    public static class MacOsVersionEnumExtensions
+    {
+        /// <summary>
+        /// Returns macOS version as a macOS version enum.
+        /// </summary>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        /// <returns></returns>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-    public static MacOsVersion GetMacOsVersionToEnum(this MacOperatingSystem macOperatingSystem)
-    {
-        return GetMacOsVersionToEnum(macOperatingSystem.GetOperatingSystemVersion());
-    }
-
-    /// <summary>
-    /// Converts a macOS version to a macOS version enum.
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    public static MacOsVersion GetMacOsVersionToEnum(Version input)
-    {
-        return input.Major switch
+        public static MacOsVersion GetMacOsVersionToEnum(this MacOperatingSystem macOperatingSystem)
         {
-            10 => input.Minor switch
-            {
-                < 15 => MacOsVersion.NotSupported,
-                15 => MacOsVersion.v10_15_Catalina,
-                //This is for compatibility reasons.
-                16 => MacOsVersion.v11_BigSur,
-                _ => MacOsVersion.NotDetected
-            },
-            11 => MacOsVersion.v11_BigSur,
-            12 => MacOsVersion.v12_Monterey,
-            13 => MacOsVersion.v13_Ventura,
-            14 => MacOsVersion.v14_Sonoma,
-            15 => MacOsVersion.v15_Sequoia,
-            _ => MacOsVersion.NotDetected
-        };
-    }
-
-    /// <summary>
-    /// Converts a macOS version enum to a macOS version as a Version object.
-    /// </summary>
-    /// <param name="macOsVersion"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
-    public static Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
-    {
-        return macOsVersion switch
-        {
-            MacOsVersion.v10_15_Catalina => new(10, 15),
-            MacOsVersion.v11_BigSur => new(11, 0),
-            MacOsVersion.v12_Monterey => new(12, 0),
-            MacOsVersion.v13_Ventura => new(13, 0),
-            MacOsVersion.v14_Sonoma => new Version(14, 0),
-            MacOsVersion.v15_Sequoia => new Version(15,0),
-            MacOsVersion.NotSupported => throw new PlatformNotSupportedException(),
-            MacOsVersion.NotDetected => throw new MacOsVersionDetectionException(),
-            _ => throw new ArgumentException(Resources.Exceptions_Arguments_InvalidMacOsVersionEnum),
-        };
-    }
-
-    /// <summary>
-    /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
-    /// </summary>
-    /// <param name="macOperatingSystem"></param>
-    /// <param name="macOsVersion">A MacOsVersion enum representing a major version of macOS.</param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-    // ReSharper disable once InconsistentNaming
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("macos")]
-    [SupportedOSPlatform("maccatalyst")]
-#endif
-    public static bool IsAtLeastVersion(this MacOperatingSystem macOperatingSystem, MacOsVersion macOsVersion)
-    {
-        if (OperatingSystem.IsMacOS())
-        {
-            return macOperatingSystem.GetOperatingSystemVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+            return GetMacOsVersionToEnum(macOperatingSystem.GetOperatingSystemVersion());
         }
-        else
+
+        /// <summary>
+        /// Converts a macOS version to a macOS version enum.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static MacOsVersion GetMacOsVersionToEnum(Version input)
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            return input.Major switch
+            {
+                10 => input.Minor switch
+                {
+                    < 15 => MacOsVersion.NotSupported,
+                    15 => MacOsVersion.v10_15_Catalina,
+                    //This is for compatibility reasons.
+                    16 => MacOsVersion.v11_BigSur,
+                    _ => MacOsVersion.NotDetected
+                },
+                11 => MacOsVersion.v11_BigSur,
+                12 => MacOsVersion.v12_Monterey,
+                13 => MacOsVersion.v13_Ventura,
+                14 => MacOsVersion.v14_Sonoma,
+                15 => MacOsVersion.v15_Sequoia,
+                _ => MacOsVersion.NotDetected
+            };
+        }
+
+        /// <summary>
+        /// Converts a macOS version enum to a macOS version as a Version object.
+        /// </summary>
+        /// <param name="macOsVersion"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        /// <exception cref="MacOsVersionDetectionException">Throws an exception if macOS version detection fails.</exception>
+        public static Version GetMacOsVersionFromEnum(MacOsVersion macOsVersion)
+        {
+            return macOsVersion switch
+            {
+                MacOsVersion.v10_15_Catalina => new(10, 15),
+                MacOsVersion.v11_BigSur => new(11, 0),
+                MacOsVersion.v12_Monterey => new(12, 0),
+                MacOsVersion.v13_Ventura => new(13, 0),
+                MacOsVersion.v14_Sonoma => new Version(14, 0),
+                MacOsVersion.v15_Sequoia => new Version(15,0),
+                MacOsVersion.NotSupported => throw new PlatformNotSupportedException(),
+                MacOsVersion.NotDetected => throw new MacOsVersionDetectionException(),
+                _ => throw new ArgumentException(Resources.Exceptions_Arguments_InvalidMacOsVersionEnum),
+            };
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
+        /// </summary>
+        /// <param name="macOperatingSystem"></param>
+        /// <param name="macOsVersion">A MacOsVersion enum representing a major version of macOS.</param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+        // ReSharper disable once InconsistentNaming
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+    [SupportedOSPlatform("maccatalyst")]
+#endif
+        public static bool IsAtLeastVersion(this MacOperatingSystem macOperatingSystem, MacOsVersion macOsVersion)
+        {
+            if (OperatingSystem.IsMacOS())
+            {
+                return macOperatingSystem.GetOperatingSystemVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+            }
+            else
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
         }
     }
 }

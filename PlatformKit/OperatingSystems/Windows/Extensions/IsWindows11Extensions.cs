@@ -27,43 +27,44 @@ using System.Runtime.Versioning;
 using AlastairLundy.Extensions.System;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Windows.Extensions;
-
-public static class IsWindows11Extensions
+namespace PlatformKit.OperatingSystems.Windows.Extensions
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-    public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem)
+    public static class IsWindows11Extensions
     {
-        if (OperatingSystem.IsWindows())
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
+        public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem)
         {
-            return IsWindows11(windowsOperatingSystem, windowsOperatingSystem.GetOperatingSystemVersion());
+            if (OperatingSystem.IsWindows())
+            {
+                return IsWindows11(windowsOperatingSystem, windowsOperatingSystem.GetOperatingSystemVersion());
+            }
+            else
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
-        else
-        {
-            throw new PlatformNotSupportedException();
-        }
-    }
 
-    /// <summary>
-    /// Returns whether a specified version of Windows is Windows 10.
-    /// </summary>
-    /// <returns>true if a version of Windows is Windows 10</returns>
+        /// <summary>
+        /// Returns whether a specified version of Windows is Windows 10.
+        /// </summary>
+        /// <returns>true if a version of Windows is Windows 10</returns>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("windows")]
 #endif
-    public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem, Version version)
-    {
-        return version.IsAtLeast(new Version(10, 0, 22000))
-               && version.IsOlderThan(new Version(10, 0, 28000));
+        public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem, Version version)
+        {
+            return version.IsAtLeast(new Version(10, 0, 22000))
+                   && version.IsOlderThan(new Version(10, 0, 28000));
+        }
     }
 }

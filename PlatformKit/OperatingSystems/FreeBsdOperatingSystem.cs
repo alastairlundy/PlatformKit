@@ -23,16 +23,16 @@
    */
 
 using System;
-using PlatformKit.Core;
+
 using PlatformKit.OperatingSystems.Abstractions;
 
-#if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.FreeBsd
+namespace PlatformKit.OperatingSystems
 {
-    public class FreeBsdOperatingSystem : IOperatingSystem
+    public class FreeBsdOperatingSystem : AbstractOperatingSystem
     {
 
         // ReSharper disable once InconsistentNaming
@@ -40,9 +40,8 @@ namespace PlatformKit.OperatingSystems.FreeBsd
         /// Detects and Returns the Installed version of FreeBSD
         /// </summary>
         /// <returns></returns>
-        public Version GetOperatingSystemVersion()
+        public override Version GetOperatingSystemVersion()
         {
-#if NETCOREAPP3_1_OR_GREATER
             if (OperatingSystem.IsFreeBSD())
             {
                 string versionString = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
@@ -50,16 +49,15 @@ namespace PlatformKit.OperatingSystems.FreeBsd
             
                 return Version.Parse(versionString);
             }
-#endif
             throw new PlatformNotSupportedException();
         }
 
-        public Version GetKernelVersion()
+        public override Version GetKernelVersion()
         {
             throw new NotImplementedException();
         }
 
-        public string GetOperatingSystemBuildNumber()
+        public override string GetOperatingSystemBuildNumber()
         {
             throw new NotImplementedException();
         }

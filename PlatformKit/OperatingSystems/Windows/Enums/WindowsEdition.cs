@@ -22,30 +22,31 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.OperatingSystems.Windows;
-
-/// <summary>
-/// An enum representing different Windows Editions.
-/// </summary>
-public enum WindowsEdition
+namespace PlatformKit.OperatingSystems.Windows
 {
-    Home,
-    Education,
-    Professional,
-    ProfessionalForEducation,
-    ProfessionalForWorkstations,
-    // ReSharper disable once InconsistentNaming
-    EnterpriseLTSC,
-    EnterpriseSemiAnnualChannel,
-    IoTCore,
-    IoTEnterprise,
-    // ReSharper disable once InconsistentNaming
-    IoTEnterpriseLTSC,
-    Team,
-    Server,
     /// <summary>
-    /// Windows 11 or newer only
+    /// An enum representing different Windows Editions.
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    SE,
+    public enum WindowsEdition
+    {
+        Home,
+        Education,
+        Professional,
+        ProfessionalForEducation,
+        ProfessionalForWorkstations,
+        // ReSharper disable once InconsistentNaming
+        EnterpriseLTSC,
+        EnterpriseSemiAnnualChannel,
+        IoTCore,
+        IoTEnterprise,
+        // ReSharper disable once InconsistentNaming
+        IoTEnterpriseLTSC,
+        Team,
+        Server,
+        /// <summary>
+        /// Windows 11 or newer only
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        SE,
+    }
 }

@@ -24,20 +24,21 @@
 
 using System;
 
-namespace PlatformKit.OperatingSystems.Mac;
-
-/// <summary>
-/// A class to represent basic macOS System Information.
-/// </summary>
-public class MacOsSystemInformationModel
+namespace PlatformKit.OperatingSystems.Mac
 {
-    public Version MacOsVersion { get; set; }
+    /// <summary>
+    /// A class to represent basic macOS System Information.
+    /// </summary>
+    public class MacOsSystemInformationModel
+    {
+        public Version MacOsVersion { get; set; }
     
-    public Version DarwinVersion { get; set; }
+        public Version DarwinVersion { get; set; }
     
-    public Version XnuVersion { get; set; } 
+        public Version XnuVersion { get; set; } 
     
-    public string MacOsBuildNumber { get; set; }
+        public string MacOsBuildNumber { get; set; }
     
-    public MacProcessorType ProcessorType { get; set; }
+        public MacProcessorType ProcessorType { get; set; }
+    }
 }

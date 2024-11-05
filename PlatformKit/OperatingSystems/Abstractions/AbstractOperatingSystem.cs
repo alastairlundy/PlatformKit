@@ -1,7 +1,7 @@
-/*
+﻿/*
         MIT License
        
-       Copyright (c) 2020-2024 Alastair Lundy
+       Copyright (c) 2024 Alastair Lundy
        
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
@@ -22,22 +22,16 @@
        SOFTWARE.
    */
 
-namespace PlatformKit.Core.Identification;
+using System;
 
-/// <summary>
-/// The type of RuntimeIdentifier generated or detected.
-/// </summary>
-public enum RuntimeIdentifierType
+namespace PlatformKit.OperatingSystems.Abstractions
 {
-    AnyGeneric,
-    Generic,
-    Specific,
-    /// <summary>
-    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
-    /// </summary>
-    DistroSpecific,
-    /// <summary>
-    /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
-    /// </summary>
-    VersionLessDistroSpecific
+    public abstract class AbstractOperatingSystem
+    {
+        public abstract Version GetOperatingSystemVersion();
+
+        public abstract Version GetKernelVersion();
+
+        public abstract string GetOperatingSystemBuildNumber();
+    }
 }

@@ -24,68 +24,69 @@
 
 using System;
 using System.Runtime.Versioning;
-
+using AlastairLundy.Extensions.Runtime;
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility;
-
-public static class WindowsRegistryExtensions
+namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
 {
-    /// <summary>
-    ///  Gets the value of a registry key in the Windows registry.
-    /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
+    public static class WindowsRegistryExtensions
+    {
+        /// <summary>
+        ///  Gets the value of a registry key in the Windows registry.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("windows")]
 #endif
-    public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query){
-        if (OperatingSystem.IsWindows())
-        {
-            string result = CommandRunner.RunCmdCommand($"REG QUERY {query}");
-                    
-            if (result != null)
+        public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query){
+            if (OperatingSystem.IsWindows())
             {
-                return result.Replace("REG_SZ", string.Empty);
+                string result = CommandRunner.RunCmdCommand($"REG QUERY {query}");
+                    
+                if (result != null)
+                {
+                    return result.Replace("REG_SZ", string.Empty);
+                }
+
+                throw new ArgumentNullException();
             }
 
-            throw new ArgumentNullException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
         }
 
-        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
-    }
-
-    /// <summary>
-    ///  Gets the value of a registry key in the Windows registry.
-    /// </summary>
-    /// <param name="windowsOperatingSystem"></param>
-    /// <param name="query"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
+        /// <summary>
+        ///  Gets the value of a registry key in the Windows registry.
+        /// </summary>
+        /// <param name="windowsOperatingSystem"></param>
+        /// <param name="query"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("windows")]
 #endif
-    public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query, string value){
-        if (OperatingSystem.IsWindows())
-        {
-            string result = CommandRunner.RunCmdCommand($"REG QUERY {query} /v {value}");
-                    
-            if (result != null)
+        public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query, string value){
+            if (OperatingSystem.IsWindows())
             {
-                return result.Replace(value, string.Empty)
-                    .Replace("REG_SZ", string.Empty);
+                string result = CommandRunner.RunCmdCommand($"REG QUERY {query} /v {value}");
+                    
+                if (result != null)
+                {
+                    return result.Replace(value, string.Empty)
+                        .Replace("REG_SZ", string.Empty);
+                }
+
+                throw new ArgumentNullException();
             }
 
-            throw new ArgumentNullException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
         }
-
-        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
     }
 }
