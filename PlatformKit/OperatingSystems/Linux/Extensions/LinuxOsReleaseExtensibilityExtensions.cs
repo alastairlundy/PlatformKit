@@ -31,7 +31,7 @@ using System.Threading.Tasks;
 using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 namespace PlatformKit.OperatingSystems.Linux.Extensions;
