@@ -28,7 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.System.EscapeCharacters;
+using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
 
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;

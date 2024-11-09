@@ -96,7 +96,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="5.*" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.3.0, 6.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
