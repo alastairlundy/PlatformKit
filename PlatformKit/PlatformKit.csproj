@@ -14,26 +14,7 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.3.0
-
-### Additions
-* Added a replacement model for ``MacOsSystemInformation`` called ``MacOsSystemInformationModel``
-* Added additional methods to ``LinuxOsReleaseRetriever``
-
-### General Changes
-* Improved performance of ``LinuxOsReleaseRetriever``
-* Removed commented out code
-* Cleaned up ``PlatformKitIdentification``
-* Started work on re-structuring PlatformKit going forward
-* Minor internal tweaks and improvements
-
-### Deprecations
-* Deprecated ``MacOsSystemInformation``
-* Deprecated a number of methods in ``MacOsAnalyzer``
-* Deprecated a number of methods in ``LinuxAnalyzer``
-* Deprecated ``FreeBsdAnalyzer``
-* Deprecated ``Platform`` enum
-* Deprecated ``NetworkCardModel`` enum</PackageReleaseNotes>
+        <PackageReleaseNotes></PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -92,7 +73,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="1.*" />
+      <PackageReference Include="PlatformKit.Extensions.OperatingSystem" Version="[1.5.0, 2.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
