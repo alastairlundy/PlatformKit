@@ -15,6 +15,8 @@
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 4.2 | 4.2.2 | July 22nd 2024 |
+| 4.1 | 4.1.0 | June 11th 2024 | 
 | 3.5 & 3.6 | 3.6.7 | April 14th 2024 |
 | 3.4 | 3.4.1 | December 8th 2023 |
 | 3.3 | 3.3.1 | June 21st 2023 |
