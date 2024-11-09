@@ -14,8 +14,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Versioning;
-
+using AlastairLundy.Extensions.System.Strings.Versioning;
 using PlatformKit.Internal.Exceptions;
 
 #if NETSTANDARD2_0
