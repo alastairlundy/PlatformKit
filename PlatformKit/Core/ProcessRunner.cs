@@ -29,7 +29,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 #if NETSTANDARD2_0
-    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 // ReSharper disable HeapView.DelegateAllocation

@@ -29,7 +29,7 @@ using AlastairLundy.Extensions.System;
 using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0
-    using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 namespace PlatformKit.FreeBSD;
