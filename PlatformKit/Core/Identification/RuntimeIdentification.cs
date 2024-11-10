@@ -206,7 +206,6 @@ namespace PlatformKit.Identification
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
         public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
@@ -227,7 +226,7 @@ namespace PlatformKit.Identification
                 return GenerateRuntimeIdentifier(identifierType, true, true);
             }
 
-            throw new ArgumentException();
+            return GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic, true, false);
         }
         
         /// <summary>
