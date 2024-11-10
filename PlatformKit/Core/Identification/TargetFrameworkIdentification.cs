@@ -201,9 +201,17 @@ public class TargetFrameworkIdentification
         /// <returns></returns>
         public static Version GetDotNetVersion()
         {
-            return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
+            string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
+
+            string versionString = frameworkDescription
+                .Replace(".net", string.Empty)
                 .Replace("core", string.Empty)
-                .Replace(" ", string.Empty).AddMissingZeroes());
+                .Replace("mono", string.Empty)
+                .Replace("framework", string.Empty)
+                .Replace(" ", string.Empty)
+                .AddMissingZeroes(numberOfZeroesNeeded: 3);
+
+            return Version.Parse(versionString);
         }
     
         /// <summary>
