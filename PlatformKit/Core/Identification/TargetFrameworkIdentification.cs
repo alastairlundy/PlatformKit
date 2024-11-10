@@ -65,7 +65,7 @@ public class TargetFrameworkIdentification
 
         if (OperatingSystem.IsMacOS())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("macos");
 
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
@@ -77,13 +77,13 @@ public class TargetFrameworkIdentification
 #if NET5_0_OR_GREATER
         else if (OperatingSystem.IsMacCatalyst())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("maccatalyst");
         }
 #endif
         else if (OperatingSystem.IsWindows())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("windows");
 
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
@@ -111,22 +111,22 @@ public class TargetFrameworkIdentification
 #if NET5_0_OR_GREATER
         else if (OperatingSystem.IsAndroid())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("android");
         }
         else if (OperatingSystem.IsIOS())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("ios");
         }
         else if (OperatingSystem.IsTvOS())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("tvos");
         }
         else if (OperatingSystem.IsWatchOS())
         {
-            stringBuilder.Append("-");
+            stringBuilder.Append('-');
             stringBuilder.Append("watchos");
         }
 #endif
@@ -135,7 +135,7 @@ public class TargetFrameworkIdentification
         {
             if (OperatingSystem.IsBrowser())
             {
-                 stringBuilder.Append("-");
+                 stringBuilder.Append('-');
                  stringBuilder.Append("browser");
             }
         }
