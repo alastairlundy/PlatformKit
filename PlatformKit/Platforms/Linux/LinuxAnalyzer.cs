@@ -18,7 +18,7 @@ using PlatformKit.Linux.Enums;
 using PlatformKit.Shared.Extensions;
 
 #if NETSTANDARD2_0
-using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
 namespace PlatformKit.Linux;
