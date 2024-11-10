@@ -48,7 +48,6 @@ public class TargetFrameworkIdentification
     {
         Version frameworkVersion = GetDotNetVersion();
         StringBuilder stringBuilder = new StringBuilder();
-        
         stringBuilder.Append("net");
 
         stringBuilder.Append(frameworkVersion.Major);
@@ -62,7 +61,8 @@ public class TargetFrameworkIdentification
     {
         Version frameworkVersion = GetDotNetVersion();
         StringBuilder stringBuilder = new StringBuilder();
-
+        stringBuilder.Append(GetNetTFM());
+        
         if (OperatingSystem.IsMacOS())
         {
             stringBuilder.Append('-');
@@ -147,7 +147,6 @@ public class TargetFrameworkIdentification
         protected static string GetNetCoreTFM()
         {
             Version frameworkVersion = GetDotNetVersion();
-            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("netcoreapp");
 
@@ -162,8 +161,9 @@ public class TargetFrameworkIdentification
         protected static string GetNetFrameworkTFM()
         {
             Version frameworkVersion = GetDotNetVersion();
-            
             StringBuilder stringBuilder = new StringBuilder();
+            
+            stringBuilder.Append("net");
             stringBuilder.Append(frameworkVersion.Major);
             stringBuilder.Append(frameworkVersion.Minor);
                                                     
