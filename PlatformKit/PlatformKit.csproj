@@ -8,6 +8,8 @@
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit/</RepositoryUrl>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackOnBuild>true</PackOnBuild>
         <PackageId>PlatformKit</PackageId>
         <Owners>AlastairLundy</Owners>
