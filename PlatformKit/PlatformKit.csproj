@@ -31,7 +31,12 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    </ItemGroup>
     
     <ItemGroup>
         <None Include="..\images\logos\platformkit_logo_512x.jpg">
