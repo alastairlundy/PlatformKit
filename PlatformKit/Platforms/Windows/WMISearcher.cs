@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Runtime.Versioning;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
