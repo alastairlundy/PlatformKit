@@ -14,17 +14,21 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 3.7.3
-* Improved compatibility with SystemExtensions 5</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.7.4
+* Replaced OS Extensions usage with RuntimeExtensions (2.1.0 and &lt; 3.0.0)
+* Updated required SystemExtensions version from 5.3.0 to 5.4.0
+
+### Notes:
+This is intended to be one of the final updates for PlatformKit 3.x . Please upgrade to PlatformKit 4.x or newer at the earliest opportunity.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
-   <AssemblyVersion>3.7.4.0</AssemblyVersion>
-        <Version>3.7.4.0</Version>
-        <PackageVersion>3.7.4</PackageVersion>
+   <AssemblyVersion>3.7.5.0</AssemblyVersion>
+        <Version>3.7.5.0</Version>
+        <PackageVersion>3.7.5</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
@@ -76,10 +80,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.3.0, 6.0.0)" />
+        <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.4.0, 6.0.0)" />
     </ItemGroup>
     
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-      <PackageReference Include="AlastairLundy.Extensions.Runtime" Version="[2.0.0, 3.0.0)" />
+      <PackageReference Include="AlastairLundy.Extensions.Runtime" Version="[2.1.0, 3.0.0)" />
     </ItemGroup>
 </Project>

@@ -163,9 +163,9 @@ public class WindowsAnalyzer
                if (str.ToLower().StartsWith(property.ToLower()))
                {
                    return str
-                       .Replace(" : ", String.Empty)
-                       .Replace(property, String.Empty)
-                       .Replace(" ", String.Empty);
+                       .Replace(" : ", string.Empty)
+                       .Replace(property, string.Empty)
+                       .Replace(" ", string.Empty);
                        
                }
            }
