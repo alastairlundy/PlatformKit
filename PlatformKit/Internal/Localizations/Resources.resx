@@ -22,16 +22,16 @@
         <value>WARNING: Function not supported on Windows or macOS. Calling method using RuntimeIdentifierType.Specific instead.</value>
     </data>
     <data name="Exceptions.PlatformNotSupported.MacOnly" xml:space="preserve">
-        <value />
+        <value>This functionality is only supported on macOS.</value>
     </data>
     <data name="Exceptions.PlatformNotSupported.WindowsOnly" xml:space="preserve">
-        <value />
+        <value>This functionality is only supported on Windows.</value>
     </data>
     <data name="Exceptions.PlatformNotSupported.LinuxOnly" xml:space="preserve">
-        <value />
+        <value>This functionality is only supported on Linux.</value>
     </data>
     <data name="Exceptions.PlatformNotSupported.FreeBsdOnly" xml:space="preserve">
-        <value />
+        <value>This functionality is only supported on FreeBSD.</value>
     </data>
     <data name="Exceptions.Arguments.InvalidMacOsVersionEnum" xml:space="preserve">
         <value>An invalid MacOsVersion enum value was provided.</value>
