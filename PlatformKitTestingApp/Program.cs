@@ -23,7 +23,6 @@ using PlatformKit.Windows;
 
 
     var platformManager = new PlatformIdentification();
-var osAnalyzer = new OSAnalyzer();
             var processManager = new ProcessManager();
 var runtimeIdentification = new RuntimeIdentification();
 
@@ -50,7 +49,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
           
             //processManager.OpenUrlInBrowser("duckduckgo.com");
             
-            if (OSAnalyzer.IsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 Console.WriteLine("Windows Version Enum: " + windowsAnalyzer.GetWindowsVersionToEnum());
 
@@ -89,7 +88,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
               sysinfo.ToConsoleWriteLine();
             }
 
-            if (OSAnalyzer.IsMac())
+            if (OperatingSystem.IsMacOS())
             {
                 Console.WriteLine("Is this AppleSilicon?: " + macAnalyzer.IsAppleSiliconMac());
                 Console.WriteLine("Mac Processor Type: " + macAnalyzer.GetMacProcessorType());
@@ -97,7 +96,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
                 Console.WriteLine("macOS Version Enum: " +
                                   macAnalyzer.GetMacOsVersionToEnum());
                 
-                Console.WriteLine("macOS Version Detected: " + osAnalyzer.DetectOSVersion().ToString());
+                //Console.WriteLine("macOS Version Detected: " + OperatingSystem.DetectOSVersion().ToString());
                 
                 Console.WriteLine("Darwin Version: " + macAnalyzer.DetectDarwinVersion());
                 Console.WriteLine("Xnu Version: " + macAnalyzer.DetectXnuVersion());
@@ -107,7 +106,7 @@ Console.WriteLine(".NET Detected RuntimeID: " + RuntimeInformation.RuntimeIdenti
 
             // Console.WriteLine("OsVersion: " + versionAnalyzer.DetectOSVersion());
     
-            if (OSAnalyzer.IsLinux())
+            if (OperatingSystem.IsLinux())
             {  
                 Console.WriteLine("Linux Distro Name: " + linuxAnalyzer.GetLinuxDistributionInformation().Name);
                 Console.WriteLine("Linux Distro Version: " + linuxAnalyzer.DetectLinuxDistributionVersionAsString());
