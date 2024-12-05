@@ -69,7 +69,7 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This functionality is only supported on FreeBSD..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_FreeBsdOnly {
             get {
@@ -78,7 +78,7 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This functionality is only supported on Linux..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_LinuxOnly {
             get {
@@ -87,7 +87,7 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This functionality is only supported on macOS..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_MacOnly {
             get {
@@ -96,7 +96,7 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This functionality is only supported on Windows..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_WindowsOnly {
             get {
