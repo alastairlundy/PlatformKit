@@ -268,31 +268,6 @@ namespace PlatformKit.Mac;
         }
     }
     
-
-    /// <summary>
-    /// Detects macOS System Information.
-    /// </summary>
-    /// <returns></returns>
-    [Obsolete(DeprecationMessages.DeprecationV5)]
-    public static MacOsSystemInformation GetMacSystemInformation()
-    {
-        if (OperatingSystem.IsMacOS())
-        {
-            return new MacOsSystemInformation()
-            {
-                ProcessorType = GetMacProcessorType(),
-                MacOsBuildNumber = GetMacOsBuildNumber(),
-                MacOsVersion = GetMacOsVersion(),
-                DarwinVersion = GetDarwinVersion(),
-                XnuVersion = GetXnuVersion()
-            };
-        }
-        else
-        {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
-        }
-    }
-    
     /// <summary>
     /// Detects macOS System Information.
     /// </summary>
