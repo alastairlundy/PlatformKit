@@ -27,6 +27,7 @@ using System;
 using AlastairLundy.Extensions.System;
 
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
 
@@ -55,7 +56,7 @@ public class LinuxAnalyzer
                 return GetDistroBase(LinuxOsReleaseRetriever.GetLinuxOsRelease());
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
         
         /// <summary>
@@ -83,7 +84,7 @@ public class LinuxAnalyzer
                 };
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
     
         /// <summary>
@@ -111,7 +112,7 @@ public class LinuxAnalyzer
                 return Version.Parse(LinuxOsReleaseRetriever.GetDistributionVersion().ToString());
             }
             
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
         
         /// <summary>
@@ -138,7 +139,7 @@ public class LinuxAnalyzer
                     .Replace("Unix ", string.Empty)); 
             }
             
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
         
         /// <summary>
@@ -155,6 +156,6 @@ public class LinuxAnalyzer
                 return GetLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
 }
