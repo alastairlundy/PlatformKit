@@ -152,7 +152,11 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsFreeBSD())
             {
+                #if NETSTANDARD2_0
+                osVersion = OperatingSystem.Version.ToString();
+                #else
                 osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
+                #endif
                 
                 switch (osVersion.CountDotsInString())
                 {
