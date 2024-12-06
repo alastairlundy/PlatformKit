@@ -193,10 +193,7 @@ namespace PlatformKit.Mac;
                 {
                     10 => input.Minor switch
                     {
-                        < 13 => MacOsVersion.NotSupported,
-                        13 => MacOsVersion.v10_13_HighSierra,
-                        14 => MacOsVersion.v10_14_Mojave,
-                        15 => MacOsVersion.v10_15_Catalina,
+                        < 16 => MacOsVersion.NotSupported,
                         //This is for compatibility reasons.
                         16 => MacOsVersion.v11_BigSur,
                         _ => MacOsVersion.NotDetected
@@ -221,9 +218,6 @@ namespace PlatformKit.Mac;
     {
         return macOsVersion switch
         {
-            MacOsVersion.v10_13_HighSierra => new(10, 13),
-            MacOsVersion.v10_14_Mojave => new(10, 14),
-            MacOsVersion.v10_15_Catalina => new(10, 15),
             MacOsVersion.v11_BigSur => new(11, 0),
             MacOsVersion.v12_Monterey => new(12, 0),
             MacOsVersion.v13_Ventura => new(13, 0),

@@ -183,12 +183,7 @@ namespace PlatformKit.Identification
 
                 if (version.Major == 10)
                 {
-                    if (version.Minor < 12)
-                    {
-                        throw new PlatformNotSupportedException();
-                    }
-
-                    osVersion = $"{version.Major}.{version.Major}";
+                    throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LegacyOS);
                 }
                 else if (version.Major > 10)
                 {

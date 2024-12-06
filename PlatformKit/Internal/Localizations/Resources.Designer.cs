@@ -78,6 +78,15 @@ namespace PlatformKit.Internal.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This functionality is not supported on legacy versions of Operating Systems. Please update your Operating System to use this feature..
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_LegacyOS {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.LegacyOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This functionality is only supported on Linux..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_LinuxOnly {

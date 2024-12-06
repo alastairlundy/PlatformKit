@@ -36,4 +36,7 @@
     <data name="Exceptions.Arguments.InvalidMacOsVersionEnum" xml:space="preserve">
         <value>An invalid MacOsVersion enum value was provided.</value>
     </data>
+    <data name="Exceptions.PlatformNotSupported.LegacyOS" xml:space="preserve">
+        <value>This functionality is not supported on legacy versions of Operating Systems. Please update your Operating System to use this feature.</value>
+    </data>
 </root>
