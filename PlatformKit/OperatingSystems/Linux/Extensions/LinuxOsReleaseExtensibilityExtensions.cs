@@ -167,17 +167,15 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
 
         internal static string[] RemoveUnwantedCharacters(string[] data)
         {
-            char[] delimiter = [' ', '\t', '\n', '\r', '"'];
+            char[] delimiter = ['\t', '\n', '\r', '"'];
 
-            for (int i = 0; i < data.Length; i++)
-            {
-                data[i] = data[i].RemoveEscapeCharacters();
+            data = data.Where(x => string.IsNullOrWhiteSpace(x) == false)
+                .Select(x => x.RemoveEscapeCharacters()).ToArray();
             
                 foreach (char c in delimiter)
                 {
-                    data[i] = data[i].Replace(c.ToString(), string.Empty);
+                    data = data.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
                 }
-            }
 
             return data;
         }
