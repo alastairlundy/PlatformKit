@@ -411,18 +411,12 @@ public static class LinuxOsReleaseRetriever
     {
         char[] delimiter = [' ', '\t', '\n', '\r', '"'];
 
-        data = data.Select(x => x.RemoveEscapeCharacters()).ToArray();
+        data = data.Where(x => x.Contains(" ")  == false)
+            .Select(x => x.RemoveEscapeCharacters()).ToArray();
         
-        for (int i = 0; i < data.Length; i++)
+        foreach (char c in delimiter)
         {
-            data[i] = data[i].RemoveEscapeCharacters();
-            
             data = data.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
-            
-            foreach (char c in delimiter)
-            {
-                data[i] = data[i].Replace(c.ToString(), string.Empty);
-            }
         }
 
         return data;
