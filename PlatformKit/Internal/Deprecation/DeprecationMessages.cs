@@ -35,5 +35,8 @@ namespace PlatformKit.Internal.Deprecation
         internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
         
         internal const string DeprecationV5 = FeatureDeprecation + " in " + V5;
+
+        internal const string DeprecationV5UseCliRunnerInstead =
+            "Usage of this class is deprecated and this functionality will be removed from PlatformKit in Version 5. Please use the CliRunner library instead when it becomes available.";
     }
 }

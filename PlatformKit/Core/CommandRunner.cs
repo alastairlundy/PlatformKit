@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Text;
+using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -37,6 +38,7 @@ namespace PlatformKit;
 /// <summary>
 /// 
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
 public static class CommandRunner
 {
 
@@ -47,6 +49,7 @@ public static class CommandRunner
  /// <param name="runAsAdministrator"></param>
  /// <returns></returns>
  /// <exception cref="PlatformNotSupportedException"></exception>
+ [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
  public static string RunCommandOnMac(string command, bool runAsAdministrator = false)
     {
         if (!OperatingSystem.IsMacOS())
@@ -89,6 +92,7 @@ public static class CommandRunner
     /// <param name="command"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static string RunCommandOnFreeBsd(string command, bool runAsAdministrator = false)
     {
         return RunCommandOnLinux(command, runAsAdministrator);
@@ -104,6 +108,7 @@ public static class CommandRunner
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
         return ProcessRunner.RunProcessOnWindows(Environment.SystemDirectory, "cmd", command, processStartInfo, runAsAdministrator);
@@ -119,6 +124,7 @@ public static class CommandRunner
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
         if (OperatingSystem.IsWindows() == false)
@@ -138,6 +144,7 @@ public static class CommandRunner
     /// <param name="command"></param>
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
         if (OperatingSystem.IsLinux() == false && OperatingSystem.IsFreeBSD() == false)

@@ -27,6 +27,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using PlatformKit.Internal.Deprecation;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -40,6 +41,7 @@ namespace PlatformKit
     /// <summary>
     ///  A class to manage processes on a device and/or start new processes.
     /// </summary>
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static class ProcessRunner
     {
 
@@ -54,6 +56,7 @@ namespace PlatformKit
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
+        [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnWindows(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null,
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
@@ -128,6 +131,7 @@ namespace PlatformKit
         /// <param name="executableLocation">The working directory of the executable.</param>
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="processArguments">Arguments to be passed to the executable.</param>
+        [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             ProcessStartInfo procStartInfo = new ProcessStartInfo
@@ -170,6 +174,7 @@ namespace PlatformKit
         /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             ProcessStartInfo procStartInfo;
@@ -209,6 +214,7 @@ namespace PlatformKit
         /// <param name="executableName">The name of the file to be run.</param>
         /// <param name="arguments">Arguments to be passed to the executable.</param>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnFreeBsd(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
             return RunProcessOnLinux(executableLocation, executableName, arguments, processStartInfo);

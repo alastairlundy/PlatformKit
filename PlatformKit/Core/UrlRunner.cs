@@ -36,6 +36,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 
 namespace PlatformKit;
 
+[Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
 public class UrlRunner
 {
     /// <summary>
@@ -62,6 +63,7 @@ public class UrlRunner
     /// Courtesy of https://github.com/dotnet/corefx/issues/10361
     /// </summary>
     /// <param name="url">The URL to be opened.</param>
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static void OpenUrlInDefaultBrowser(string url)
     {
         url = UrlHttpFormatting(url, false);
