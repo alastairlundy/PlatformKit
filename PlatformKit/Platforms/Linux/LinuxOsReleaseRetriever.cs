@@ -193,7 +193,7 @@ public static class LinuxOsReleaseRetriever
 
         if (OperatingSystem.IsLinux() == false)
         {
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
         
         string[] resultArray = File.ReadAllLines("/etc/os-release");
@@ -307,7 +307,7 @@ public static class LinuxOsReleaseRetriever
             return GetDistributionVersion(GetLinuxOsRelease());
         }
 
-        throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
     }
 
     /// <summary>
@@ -362,7 +362,7 @@ public static class LinuxOsReleaseRetriever
             };
         }
 
-        throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
     }
 
     /// <summary>
@@ -391,7 +391,7 @@ public static class LinuxOsReleaseRetriever
     {
         if (OperatingSystem.IsLinux() == false)
         {
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
 
         string osName = osReleaseModel.Name.ToLower();
