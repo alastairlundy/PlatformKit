@@ -30,8 +30,13 @@ using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
 
+using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
+
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -42,6 +47,9 @@ namespace PlatformKit.Linux;
 public static class LinuxOsReleaseRetriever
 {
     
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync()
     {
         LinuxOsReleaseModel output = new LinuxOsReleaseModel();
@@ -51,7 +59,7 @@ public static class LinuxOsReleaseRetriever
         
         if (OperatingSystem.IsLinux() == false)
         {
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
 
 #if NET6_0_OR_GREATER
@@ -65,6 +73,9 @@ public static class LinuxOsReleaseRetriever
         return await Task.Run(()=> ParseOsReleaseInfo(resultArray));
     }
 
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     private static LinuxOsReleaseModel ParseOsReleaseInfo(IEnumerable<string> osReleaseInfo)
     {
         LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
@@ -164,11 +175,15 @@ public static class LinuxOsReleaseRetriever
         return linuxDistributionInformation;
     }
     
+    
     /// <summary>
     /// Detects Linux Os Release information and returns it.
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static LinuxOsReleaseModel GetLinuxOsRelease()
     {
         LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
@@ -282,6 +297,9 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based operating system.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static Version GetDistributionVersion()
     {
         if (OperatingSystem.IsLinux())
@@ -297,6 +315,9 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <param name="osRelease"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static Version GetDistributionVersion(LinuxOsReleaseModel osRelease)
     {
         return Version.Parse(osRelease.Version);
@@ -306,6 +327,9 @@ public static class LinuxOsReleaseRetriever
     /// Detects what base Linux Distribution a Distro is based off of.
     /// </summary>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static LinuxDistroBase GetDistroBase()
     {
         return GetDistroBase(GetLinuxOsRelease());
@@ -316,6 +340,9 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static LinuxDistroBase GetDistroBase(LinuxOsReleaseModel linuxOsRelease)
     {
         string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
@@ -343,6 +370,9 @@ public static class LinuxOsReleaseRetriever
     /// Preserves the version if the full version is in a Year.Month.Bugfix format.
     /// </summary>
     /// <returns>the version of the linux distribution being run as a string.</returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static string GetLinuxDistributionVersionAsString()
     {
         return GetLinuxDistributionVersionAsString(GetLinuxOsRelease());
@@ -354,6 +384,9 @@ public static class LinuxOsReleaseRetriever
     /// </summary>
     /// <returns>the version of the linux distribution being run as a string.</returns>
     /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
     public static string GetLinuxDistributionVersionAsString(LinuxOsReleaseModel osReleaseModel)
     {
         if (OperatingSystem.IsLinux() == false)
@@ -378,9 +411,13 @@ public static class LinuxOsReleaseRetriever
     {
         char[] delimiter = [' ', '\t', '\n', '\r', '"'];
 
+        data = data.Select(x => x.RemoveEscapeCharacters()).ToArray();
+        
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = data[i].RemoveEscapeCharacters();
+            
+            data = data.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
             
             foreach (char c in delimiter)
             {

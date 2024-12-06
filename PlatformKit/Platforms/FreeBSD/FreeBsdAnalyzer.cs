@@ -27,6 +27,7 @@ using System;
 using AlastairLundy.Extensions.System;
 
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -51,11 +52,15 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
+#if NETSTANDARD2_0
+            return OperatingSystem.Version;
+#else
             return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release",  string.Empty));
+#endif
         }
 
-        throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
     }
     
     /// <summary>
@@ -69,9 +74,13 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
+#if NETSTANDARD2_0
+            return OperatingSystem.IsFreeBSDVersionAtLeast(expectedVersion);
+#else
             return GetFreeBSDVersion().IsAtLeast(expectedVersion);
+#endif
         }
 
-        throw new PlatformNotSupportedException();
+        throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
     }
 }
