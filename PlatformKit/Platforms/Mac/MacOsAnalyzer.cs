@@ -50,7 +50,7 @@ namespace PlatformKit.Mac;
         /// <returns>true if the currently running Mac uses Apple Silicon; false if running on an Intel Mac.</returns>
         public static bool IsAppleSiliconMac()
         {
-            return GetMacProcessorType() == MacProcessorType.AppleSilicon;
+            return OperatingSystem.IsMacOS() && RuntimeInformation.OSArchitecture == Architecture.Arm64;
         }
         
         /// <summary>
