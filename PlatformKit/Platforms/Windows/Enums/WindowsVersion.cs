@@ -34,14 +34,6 @@ namespace PlatformKit.Windows
     /// </summary>
     public enum WindowsVersion
     {
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win8 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        WinServer_2012 = 9200,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win8_1 = 9600,
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        WinServer_2012_R2 = 9600,
         /// <summary>
         /// Initial release version of Windows 10 (Build 10240).
         /// </summary>
@@ -66,12 +58,6 @@ namespace PlatformKit.Windows
         /// Replaced by Windows Server 2019 (v1809)
         /// </summary>
         Win10_Server_v1709 = 16299,
-        /// <summary>
-        /// This is effectively a 2nd revision of v1703 for mobile (Identifies as Windows 10 Build 15254) but was publicly marketed as V1709 for Mobile.
-        /// Universal Windows Platform API Compatibility is the same as Windows 10 Build 15063 (Win10v1703) or earlier.
-        /// </summary>
-        [Obsolete(DeprecationMessages.DeprecationV5)]
-        Win10_v1709_Mobile = 15254,
         Win10_v1803 = 17134,
         Win10_v1809 = 17763,
         /// <summary>

@@ -143,16 +143,8 @@ namespace PlatformKit.Identification
                 {
                     osVersion = "11";
                 }
-                else if (!WindowsAnalyzer.IsWindows10() && !WindowsAnalyzer.IsWindows11())
-                {
-                    osVersion = WindowsAnalyzer.GetWindowsVersion().Build switch
-                    {
-                        < 9200 => throw new PlatformNotSupportedException(),
-                        9200 => "8",
-                        9600 => "81",
-                        _ => throw new WindowsVersionDetectionException(),
-                    };
-                }
+                
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LegacyOS);
             }
             if (OperatingSystem.IsLinux())
             {
