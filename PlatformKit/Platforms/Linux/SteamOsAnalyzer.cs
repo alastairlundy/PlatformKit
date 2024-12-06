@@ -23,6 +23,7 @@
    */
 
 using System;
+
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
@@ -81,7 +82,7 @@ public class SteamOsAnalyzer : LinuxAnalyzer
         
         LinuxDistroBase distroBase = LinuxOsReleaseRetriever.GetDistroBase();
 
-        bool isSteamOsExcludingHolo = IsSteamOS(false);
+        bool isSteamOsExcludingHolo = IsSteamOS(includeHoloIsoAsSteamOs: false);
 
         if (distroBase == LinuxDistroBase.Manjaro)
         {
