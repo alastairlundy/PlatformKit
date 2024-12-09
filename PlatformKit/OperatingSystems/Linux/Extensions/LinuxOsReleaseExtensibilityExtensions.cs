@@ -29,6 +29,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -52,7 +53,7 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         
             if (OperatingSystem.IsLinux() == false)
             {
-                throw new PlatformNotSupportedException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
             }
 
 #if NET6_0_OR_GREATER

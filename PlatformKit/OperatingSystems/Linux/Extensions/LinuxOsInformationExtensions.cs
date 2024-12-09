@@ -24,6 +24,7 @@
 
 using System;
 using System.Threading.Tasks;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -50,24 +51,24 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         /// <exception cref="System.PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         public static LinuxDistroBase GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem, LinuxOsReleaseModel linuxOsRelease)
         {
+            if (OperatingSystem.IsLinux() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
+            
             string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
             
-            if (OperatingSystem.IsLinux())
+            return identifierLike switch
             {
-                return identifierLike switch
-                {
-                    "debian" => LinuxDistroBase.Debian,
-                    "ubuntu" => LinuxDistroBase.Ubuntu,
-                    "arch" => LinuxDistroBase.Arch,
-                    "manjaro" => LinuxDistroBase.Manjaro,
-                    "fedora" => LinuxDistroBase.Fedora,
-                    "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
-                    "suse" => LinuxDistroBase.SUSE,
-                    _ => LinuxDistroBase.NotDetected
-                };
-            }
-
-            throw new PlatformNotSupportedException();
+                "debian" => LinuxDistroBase.Debian,
+                "ubuntu" => LinuxDistroBase.Ubuntu,
+                "arch" => LinuxDistroBase.Arch,
+                "manjaro" => LinuxDistroBase.Manjaro,
+                "fedora" => LinuxDistroBase.Fedora,
+                "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+                "suse" => LinuxDistroBase.SUSE,
+                _ => LinuxDistroBase.NotDetected
+            };
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         {
             if (OperatingSystem.IsLinux() == false)
             {
-                throw new PlatformNotSupportedException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
             }
 
             string osName = osReleaseModel.Name.ToLower();
