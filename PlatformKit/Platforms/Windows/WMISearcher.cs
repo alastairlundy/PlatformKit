@@ -23,7 +23,15 @@
    */
 
 using System;
+using System.IO;
 using System.Runtime.Versioning;
+
+using CliWrap;
+using CliWrap.Buffered;
+
+using PlatformKit.Internal.Localizations;
+
+// ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -57,14 +65,27 @@ namespace PlatformKit.Windows
 #endif
         public static string GetWMIClass(string wmiClass)
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == false)
             {
-                return CommandRunner.RunPowerShellCommand($"Get-WmiObject -Class {wmiClass} | Select-Object *");
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            throw new PlatformNotSupportedException();
+            var task = Cli.Wrap(GetWindowsPowershellLocation())
+                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
+                .ExecuteBufferedAsync();
+                
+            task.Task.RunSynchronously();
+
+            return task.Task.Result.StandardOutput;
         }
-    
+
+        private static string GetWindowsPowershellLocation()
+        {
+            return Environment.SystemDirectory + Path.DirectorySeparatorChar
+                                                                   + "System32" + Path.DirectorySeparatorChar + "WindowsPowerShell"
+                                                                   + Path.DirectorySeparatorChar + "v1.0" + Path.DirectorySeparatorChar + "Powershell.exe";
+        }
+        
         // ReSharper disable once InconsistentNaming
         /// <summary>
         /// Gets a property/value in a WMI Class from WMI.
@@ -87,25 +108,31 @@ namespace PlatformKit.Windows
 #endif
         public static string GetWMIValue(string property, string wmiClass)
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == false)
             {
-                string[] arr = CommandRunner.RunPowerShellCommand($"Get-CimInstance -Class {wmiClass} -Property {property}").Split(Convert.ToChar(Environment.NewLine));
-            
-                foreach (string str in arr)
-                {
-                    if (str.ToLower().StartsWith(property.ToLower()))
-                    {
-                        return str
-                            .Replace(" : ", string.Empty)
-                            .Replace(property, string.Empty)
-                            .Replace(" ", string.Empty);
-                    }
-                }
-           
-                throw new ArgumentException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
+            
+            var task = Cli.Wrap(GetWindowsPowershellLocation())
+                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
+                .ExecuteBufferedAsync();
+                
+            task.Task.RunSynchronously();
 
-            throw new PlatformNotSupportedException();
+            string[] arr = task.Task.Result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
+                
+            foreach (string str in arr)
+            {
+                if (str.ToLower().StartsWith(property.ToLower()))
+                {
+                    return str
+                        .Replace(" : ", string.Empty)
+                        .Replace(property, string.Empty)
+                        .Replace(" ", string.Empty);
+                }
+            }
+           
+            throw new ArgumentException();
         }
     }
 }

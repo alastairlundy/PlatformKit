@@ -25,6 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0
@@ -77,12 +78,12 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
 #endif
         public static Version GetDarwinVersion(this MacOperatingSystem macOperatingSystem)
         {
-            if (OperatingSystem.IsMacOS())
+            if (OperatingSystem.IsMacOS() == false)
             {
-                return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            
+            return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
         }
         
         /// <summary>
@@ -112,21 +113,19 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <returns></returns>
         public static MacOsSystemInformationModel GetMacSystemInformationModel(this MacOperatingSystem macOperatingSystem)
         {
-            if (OperatingSystem.IsMacOS())
-            {
-                return new MacOsSystemInformationModel()
-                {
-                    ProcessorType = macOperatingSystem.GetMacProcessorType(),
-                    MacOsBuildNumber = macOperatingSystem.GetOperatingSystemBuildNumber(),
-                    MacOsVersion = macOperatingSystem.GetOperatingSystemVersion(),
-                    DarwinVersion = macOperatingSystem.GetDarwinVersion(),
-                    XnuVersion = macOperatingSystem.GetKernelVersion()
-                };
-            }
-            else
+            if (!OperatingSystem.IsMacOS())
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
+
+            return new MacOsSystemInformationModel
+            {
+                ProcessorType = macOperatingSystem.GetMacProcessorType(),
+                MacOsBuildNumber = macOperatingSystem.GetOperatingSystemBuildNumber(),
+                MacOsVersion = macOperatingSystem.GetOperatingSystemVersion(),
+                DarwinVersion = macOperatingSystem.GetDarwinVersion(),
+                XnuVersion = macOperatingSystem.GetKernelVersion()
+            };
         }
     }
 }

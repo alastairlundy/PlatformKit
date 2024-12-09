@@ -23,11 +23,10 @@
    */
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
+
 using CliWrap;
 using CliWrap.Buffered;
-using PlatformKit.Core;
 
 using PlatformKit.Internal.Localizations;
 
