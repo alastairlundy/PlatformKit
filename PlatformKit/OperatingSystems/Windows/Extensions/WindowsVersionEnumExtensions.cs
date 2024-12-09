@@ -38,19 +38,6 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
     public static class WindowsVersionEnumExtensions
     {
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-        public static WindowsVersion GetWindowsVersion(this WindowsOperatingSystem windowsOperatingSystem)
-        {
-            return GetWindowsVersionToEnum(windowsOperatingSystem, windowsOperatingSystem.GetOperatingSystemVersion());
-        }
-    
-        /// <summary>
         /// Detects the installed version of Windows and returns it as an enum.
         /// </summary>
         /// <returns></returns>
