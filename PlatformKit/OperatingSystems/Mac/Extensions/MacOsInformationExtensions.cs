@@ -44,6 +44,13 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("tvos")]
 #endif
         public static bool IsAppleSiliconMac(this MacOperatingSystem macOperatingSystem)
         {
@@ -75,6 +82,13 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("tvos")]
 #endif
         public static Version GetDarwinVersion(this MacOperatingSystem macOperatingSystem)
         {
@@ -93,6 +107,13 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("tvos")]
 #endif
         public static MacProcessorType GetMacProcessorType(this MacOperatingSystem macOperatingSystem)
         {
@@ -111,9 +132,20 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// Detects macOS System Information.
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("tvos")]
+#endif
         public static MacOsSystemInformationModel GetMacSystemInformationModel(this MacOperatingSystem macOperatingSystem)
         {
-            if (!OperatingSystem.IsMacOS())
+            if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
