@@ -41,6 +41,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem)
         {
@@ -60,11 +68,19 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         /// <returns>true if a version of Windows is Windows 10</returns>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem, Version version)
         {
             return version.IsAtLeast(new Version(10, 0, 22000))
-                   && version.IsOlderThan(new Version(10, 0, 28000));
+                   && version.IsOlderThan(new Version(10, 0, 29000));
         }
     }
 }

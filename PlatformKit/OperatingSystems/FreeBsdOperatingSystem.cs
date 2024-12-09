@@ -40,6 +40,17 @@ namespace PlatformKit.OperatingSystems
         /// Detects and Returns the Installed version of FreeBSD
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]        
+#endif
         public override Version GetOperatingSystemVersion()
         {
             if (OperatingSystem.IsFreeBSD())
@@ -57,6 +68,17 @@ namespace PlatformKit.OperatingSystems
             throw new NotImplementedException();
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]        
+#endif
         public override string GetOperatingSystemBuildNumber()
         {
             throw new NotImplementedException();

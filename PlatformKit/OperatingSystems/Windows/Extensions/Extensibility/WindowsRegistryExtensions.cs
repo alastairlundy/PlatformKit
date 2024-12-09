@@ -44,6 +44,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query){
             if (OperatingSystem.IsWindows())
@@ -71,6 +79,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query, string value){
             if (OperatingSystem.IsWindows())

@@ -45,6 +45,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         /// <exception cref="PlatformNotSupportedException">Throws an exception if run on a platform that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static WindowsEdition GetWindowsEdition(this WindowsOperatingSystem windowsOperatingSystem)
         {

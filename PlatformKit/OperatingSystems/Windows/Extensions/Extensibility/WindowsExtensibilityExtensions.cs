@@ -57,7 +57,15 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         /// <param name="windowsOperatingSystem"></param>
         /// <returns></returns>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static WindowsSystemInformationModel GetWindowsSystemInformation(
             this WindowsOperatingSystem windowsOperatingSystem)
@@ -71,7 +79,15 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown when not running on Windows.</exception>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public static WindowsSystemInformationModel GetWindowsSystemInformation()
         {

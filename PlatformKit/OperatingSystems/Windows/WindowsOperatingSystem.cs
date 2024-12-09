@@ -42,6 +42,14 @@ namespace PlatformKit.OperatingSystems.Windows
         // ReSharper disable once MemberCanBePrivate.Global
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public override Version GetOperatingSystemVersion()
         {
@@ -62,6 +70,14 @@ namespace PlatformKit.OperatingSystems.Windows
         /// <exception cref="NotImplementedException"></exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public override Version GetKernelVersion()
         {
@@ -75,6 +91,14 @@ namespace PlatformKit.OperatingSystems.Windows
         /// <exception cref="NotImplementedException"></exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]
 #endif
         public override string GetOperatingSystemBuildNumber()
         {
