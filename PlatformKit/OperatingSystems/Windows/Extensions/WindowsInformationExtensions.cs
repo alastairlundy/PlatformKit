@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
@@ -54,14 +55,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static WindowsEdition GetWindowsEdition(this WindowsOperatingSystem windowsOperatingSystem)
+        public static async Task<WindowsEdition> GetWindowsEditionAsync(this WindowsOperatingSystem windowsOperatingSystem)
         {
             if (OperatingSystem.IsWindows() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            WindowsSystemInformationModel systemInformationModel = windowsOperatingSystem.GetWindowsSystemInformation();
+            WindowsSystemInformationModel systemInformationModel = await windowsOperatingSystem.GetWindowsSystemInformationAsync();
             
             string edition = systemInformationModel.OsName.ToLower();
                 

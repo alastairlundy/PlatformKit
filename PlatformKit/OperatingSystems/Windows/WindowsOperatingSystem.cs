@@ -25,7 +25,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
+using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
+// ReSharper disable RedundantBoolCompare
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
@@ -53,14 +56,14 @@ namespace PlatformKit.OperatingSystems.Windows
 #endif
         public override Version GetOperatingSystemVersion()
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == false)
             {
-                return Version.Parse(RuntimeInformation.OSDescription
-                    .Replace("Microsoft Windows", string.Empty)
-                    .Replace(" ", string.Empty));
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-
-            throw new PlatformNotSupportedException();
+            
+            return Version.Parse(RuntimeInformation.OSDescription
+                .Replace("Microsoft Windows", string.Empty)
+                .Replace(" ", string.Empty));
         }
 
         /// <summary>
@@ -88,7 +91,6 @@ namespace PlatformKit.OperatingSystems.Windows
         /// 
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
         [UnsupportedOSPlatform("macos")]

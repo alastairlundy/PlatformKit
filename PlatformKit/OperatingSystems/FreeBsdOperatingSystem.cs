@@ -23,7 +23,12 @@
    */
 
 using System;
+using System.Runtime.Versioning;
 
+using CliWrap;
+using CliWrap.Buffered;
+
+using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -53,14 +58,22 @@ namespace PlatformKit.OperatingSystems
 #endif
         public override Version GetOperatingSystemVersion()
         {
-            if (OperatingSystem.IsFreeBSD())
+            if (OperatingSystem.IsFreeBSD() == false)
             {
-                string versionString = CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
-                    .Split(' ')[0].Replace("-release", string.Empty);
-            
-                return Version.Parse(versionString);
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
-            throw new PlatformNotSupportedException();
+
+            var result = Cli.Wrap("/usr/bin/uname")
+                .WithArguments("-v")
+                .WithWorkingDirectory(Environment.CurrentDirectory)
+                .ExecuteBufferedAsync();
+            
+            result.Task.RunSynchronously();
+            
+            string versionString = result.Task.Result.StandardOutput.Replace("FreeBSD", string.Empty)
+                .Split(' ')[0].Replace("-release", string.Empty);
+            
+            return Version.Parse(versionString);
         }
 
         public override Version GetKernelVersion()
@@ -81,7 +94,7 @@ namespace PlatformKit.OperatingSystems
 #endif
         public override string GetOperatingSystemBuildNumber()
         {
-            throw new NotImplementedException();
+            return GetOperatingSystemVersion().Build.ToString();
         }
     }
 }

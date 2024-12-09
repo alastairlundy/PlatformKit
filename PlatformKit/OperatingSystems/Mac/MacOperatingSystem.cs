@@ -25,8 +25,14 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
+
+using CliWrap;
+using CliWrap.Buffered;
+
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
+
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
@@ -49,7 +55,11 @@ namespace PlatformKit.OperatingSystems
         {
             if (OperatingSystem.IsMacOS())
             {
-                return Version.Parse(GetMacSwVersInfo()[1].Replace("ProductVersion:", string.Empty)
+                var task = GetMacSwVersInfoAsync();
+                task.RunSynchronously();
+                task.Wait();
+                
+                return Version.Parse(task.Result[1].Replace("ProductVersion:", string.Empty)
                     .Replace(" ", string.Empty));
             }
             else
@@ -63,10 +73,13 @@ namespace PlatformKit.OperatingSystems
         /// Gets info from sw_vers command on Mac.
         /// </summary>
         /// <returns></returns>
-        private string[] GetMacSwVersInfo()
+        private async Task<string[]> GetMacSwVersInfoAsync()
         {
+            var result = await Cli.Wrap("/usr/bin/sw_vers")
+                .ExecuteBufferedAsync();
+            
             // ReSharper disable once StringLiteralTypo
-            return CommandRunner.RunCommandOnMac("sw_vers").Split(Convert.ToChar(Environment.NewLine));
+            return result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
         }
 
         /// <summary>
@@ -123,7 +136,12 @@ namespace PlatformKit.OperatingSystems
         {
             if (OperatingSystem.IsMacOS())
             {
-                return GetMacSwVersInfo()[2].ToLower().Replace("BuildVersion:",
+                var task = GetMacSwVersInfoAsync();
+                task.RunSynchronously();
+
+                task.Wait();
+                
+                return task.Result[2].ToLower().Replace("BuildVersion:",
                     string.Empty).Replace(" ", string.Empty);
             }
             else

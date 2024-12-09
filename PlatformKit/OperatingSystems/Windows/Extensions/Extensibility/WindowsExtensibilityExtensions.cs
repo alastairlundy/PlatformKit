@@ -25,8 +25,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
-using AlastairLundy.Extensions.Runtime;
+using System.Threading.Tasks;
+
 using AlastairLundy.Extensions.System.Strings.Versioning;
+
+using CliWrap;
+using CliWrap.Buffered;
 
 using PlatformKit.Core;
 
@@ -67,10 +71,10 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static WindowsSystemInformationModel GetWindowsSystemInformation(
+        public static async Task<WindowsSystemInformationModel> GetWindowsSystemInformationAsync(
             this WindowsOperatingSystem windowsOperatingSystem)
         {
-            return GetWindowsSystemInformation();
+            return await GetWindowsSystemInformationAsync();
         }
     
         /// <summary>
@@ -89,7 +93,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static WindowsSystemInformationModel GetWindowsSystemInformation()
+        public static async Task<WindowsSystemInformationModel> GetWindowsSystemInformationAsync()
         {
             if (OperatingSystem.IsWindows() == false)
             {
@@ -105,8 +109,13 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         
             NetworkCardModel lastNetworkCard = null;
 
-            string desc = CommandRunner.RunPowerShellCommand("systeminfo");
+            var descResult = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+                .WithArguments("systeminfo")
+                .WithWorkingDirectory(Environment.SystemDirectory)
+                .ExecuteBufferedAsync();
 
+            string desc = descResult.StandardOutput;
+            
 #if NET5_0_OR_GREATER
         string[] array = desc.Split(Environment.NewLine);
 #elif NETSTANDARD2_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER

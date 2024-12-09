@@ -23,10 +23,15 @@
    */
 
 using System;
+
 using System.Runtime.Versioning;
-using AlastairLundy.Extensions.Runtime;
-using PlatformKit.Core;
+using System.Threading.Tasks;
+
+using CliWrap;
+using CliWrap.Buffered;
+
 using PlatformKit.Internal.Localizations;
+// ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -53,20 +58,24 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query){
-            if (OperatingSystem.IsWindows())
+        public static async Task<string> GetRegistryValueAsync(this WindowsOperatingSystem windowsOperatingSystem, string query)
+        {
+            if (OperatingSystem.IsWindows() == false)
             {
-                string result = CommandRunner.RunCmdCommand($"REG QUERY {query}");
-                    
-                if (result != null)
-                {
-                    return result.Replace("REG_SZ", string.Empty);
-                }
-
-                throw new ArgumentNullException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            }
+            
+            var result = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+                .WithArguments($"REG QUERY {query}")
+                .WithWorkingDirectory(Environment.SystemDirectory)
+                .ExecuteBufferedAsync();
+                
+            if (string.IsNullOrEmpty(result.StandardOutput) == false)
+            {
+                return result.StandardOutput.Replace("REG_SZ", string.Empty);
             }
 
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            throw new ArgumentNullException();
         }
 
         /// <summary>
@@ -88,21 +97,26 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static string GetRegistryValue(this WindowsOperatingSystem windowsOperatingSystem, string query, string value){
-            if (OperatingSystem.IsWindows())
+        public static async Task<string> GetRegistryValueAsync(this WindowsOperatingSystem windowsOperatingSystem, string query, string value)
+        {
+            if (OperatingSystem.IsWindows() == false)
             {
-                string result = CommandRunner.RunCmdCommand($"REG QUERY {query} /v {value}");
-                    
-                if (result != null)
-                {
-                    return result.Replace(value, string.Empty)
-                        .Replace("REG_SZ", string.Empty);
-                }
-
-                throw new ArgumentNullException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            }
+            
+            var result = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+                .WithArguments($"REG QUERY {query} /v {value}")
+                .WithWorkingDirectory(Environment.SystemDirectory)
+                .ExecuteBufferedAsync();
+                
+            if (string.IsNullOrEmpty(result.StandardOutput) == false)
+            {
+                return result.StandardOutput.Replace(value, string.Empty)
+                    .Replace("REG_SZ", string.Empty);
             }
 
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            throw new ArgumentNullException();
+
         }
     }
 }

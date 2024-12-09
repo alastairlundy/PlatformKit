@@ -23,6 +23,10 @@
    */
 
 using System;
+using System.Text;
+using System.Threading.Tasks;
+using CliWrap;
+using CliWrap.Buffered;
 using PlatformKit.Core;
 
 using PlatformKit.Internal.Localizations;
@@ -45,7 +49,11 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         public static string GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
             MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            return GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
+            var task = GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
+            
+            task.RunSynchronously();
+            
+            return task.Result;
         }
     
         /// <summary>
@@ -56,14 +64,20 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-        public static string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
+        public static async Task<string> GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
             if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
-        
-            string info = CommandRunner.RunCommandOnMac("system_profiler SP" + macSystemProfilerDataType);
+                
+            var result = await Cli.Wrap("/system_profiler")
+                .WithArguments("SP" + macSystemProfilerDataType)
+                .WithWorkingDirectory("/usr/bin/")
+                .WithValidation(CommandResultValidation.None)
+                .ExecuteBufferedAsync();
+
+            string info = result.StandardOutput.ToString();
 
 #if NETSTANDARD2_0_OR_GREATER
         string[] array = info.Split(Convert.ToChar(Environment.NewLine));
