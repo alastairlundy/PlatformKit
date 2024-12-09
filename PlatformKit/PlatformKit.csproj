@@ -43,6 +43,9 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>.snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
     
     <ItemGroup>
@@ -89,6 +92,10 @@
     <ItemGroup>
       <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.4.0, 6.0.0)" />
       <PackageReference Include="CliWrap" Version="[3.6.7, 4.0.0)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
