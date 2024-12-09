@@ -23,9 +23,8 @@
    */
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-using PlatformKit.Internal.Exceptions;
+
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
 

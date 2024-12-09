@@ -23,10 +23,12 @@
    */
 
 using System;
-using System.Runtime.Versioning;
+
 using AlastairLundy.Extensions.System;
 
-using AlastairLundy.Extensions;
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -80,7 +82,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
 #endif
         public static bool IsWindows10(this WindowsOperatingSystem windowsOperatingSystem, Version version)
         {
-            return version.IsAtLeast(new Version(10, 0, 10240))
+            return OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240)
                    && version.IsOlderThan(new Version(10, 0, 20349));
         }
     }

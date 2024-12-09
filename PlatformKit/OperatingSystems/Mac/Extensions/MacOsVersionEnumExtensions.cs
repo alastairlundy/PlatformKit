@@ -23,12 +23,12 @@
    */
 
 using System;
-using System.Runtime.Versioning;
-using AlastairLundy.Extensions.System;
-
-using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Exceptions.Mac;
 using PlatformKit.Internal.Localizations;
+
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -117,7 +117,8 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         {
             if (OperatingSystem.IsMacOS())
             {
-                return macOperatingSystem.GetOperatingSystemVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+                var version = GetMacOsVersionFromEnum(macOsVersion);
+                return OperatingSystem.IsMacOSVersionAtLeast(version.Major, version.Minor, version.Build);
             }
             else
             {
