@@ -32,6 +32,7 @@ namespace PlatformKit.Identification;
 /// <summary>
 /// 
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
 public class PlatformKitIdentification
 {
 

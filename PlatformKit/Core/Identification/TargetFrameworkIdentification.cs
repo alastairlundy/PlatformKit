@@ -27,12 +27,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using AlastairLundy.Extensions.System.Strings.Versioning;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Mac;
 using PlatformKit.Windows;
     
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
@@ -41,6 +42,7 @@ namespace PlatformKit.Identification;
 /// <summary>
 /// A class to manage RuntimeId detection and programmatic generations
 /// </summary>
+[Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
 public class TargetFrameworkIdentification
 {
     // ReSharper disable once InconsistentNaming

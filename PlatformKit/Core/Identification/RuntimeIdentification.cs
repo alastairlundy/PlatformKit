@@ -33,10 +33,11 @@ using PlatformKit.Linux;
 using PlatformKit.Linux.Models;
 using PlatformKit.Mac;
 using PlatformKit.FreeBSD;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
@@ -47,6 +48,7 @@ namespace PlatformKit.Identification
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
     /// </summary>
+    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public class RuntimeIdentification
     {
 

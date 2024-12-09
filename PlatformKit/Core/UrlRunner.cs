@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 using PlatformKit.Internal.Deprecation;
 
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 

@@ -29,7 +29,7 @@ using AlastairLundy.Extensions.System;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 

@@ -38,7 +38,7 @@ using PlatformKit.Linux.Models;
 using System.Runtime.Versioning;
 #endif
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 

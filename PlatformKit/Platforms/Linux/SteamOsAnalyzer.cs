@@ -28,7 +28,7 @@ using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
 
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
