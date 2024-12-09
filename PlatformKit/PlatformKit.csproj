@@ -14,27 +14,22 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.4 series
-
-### Additions
-* ``WindowsOperatingSystem`` class - This replaces ``WindowsAnalyzer``
-* ``MacOperatingSystem`` class - This replaces ``MacOsAnalyzer``
-* ``LinuxOperatingSystem`` class - This replaces ``LinuxAnalyzer``
-* ``FreeBsdOperatingSystem`` class - This replaces ``FreeBsdAnalyzer``
+        <PackageReleaseNotes>## Changes since 5.0.0 Alpha 1
 
 ### Changes
-* Replaced many built in methods with Extension methods
-* Re-structured Operating System detection functionality
-* Made PlatformKit more extensible and made it easier to add support for additional operating systems in the future
-* Changed namespaces and internal folder structure
+* Update SystemExtensions compatibility and require version 5.4.0 or newer from 5.2.0
+* Removed .NET 6 Explicit TFM
+* Removed CommandRunner and ProcessRunner
+* Added dependency on CliWrap for wrapping around CLI programs
+* Remove RuntimeIdentification and TFM Detection code - This has been moved to RuntimeExtensions
+* Replaced OS Extensions dependency with RuntimeExtensions
+* Optimized LinuxOsRetriever code
 
-### Deprecations
-* Removed deprecated classes and methods. 
+### Removals
 
-### OS Support and Discontinuations
-* Discontinued detection support for Windows 8, Windows Server 2012, Windows 8.1, and Windows Server 2012 R2
-* Discontinued detection support for Windows 10 Mobile Build 15254
-* Discontinued detection support for macOS 10.13 "High Sierra" and macOS 10.14 "Mojave"</PackageReleaseNotes>
+* Removed some Operating System Interfaces
+* Removed ``UrlRunner`` this will now be a part of the CliRunner library
+* Removed ProcessRunner and CommandRunner - These will now be a part of the CliRunner library</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +38,7 @@
         <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
    <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <FileVersion>5.0.0.0</FileVersion>
-        <PackageVersion>5.0.0-alpha.1</PackageVersion>
+        <PackageVersion>5.0.0-alpha.2</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
