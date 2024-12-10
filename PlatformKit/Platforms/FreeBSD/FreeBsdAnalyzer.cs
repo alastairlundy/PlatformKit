@@ -52,7 +52,7 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
             return OperatingSystem.Version;
 #else
             return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
@@ -74,7 +74,7 @@ public class FreeBsdAnalyzer
     {
         if (OperatingSystem.IsFreeBSD())
         {
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NETSTANDARD2_1
             return OperatingSystem.IsFreeBSDVersionAtLeast(expectedVersion);
 #else
             return GetFreeBSDVersion().IsAtLeast(expectedVersion);

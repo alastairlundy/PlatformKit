@@ -23,7 +23,10 @@
    */
 
 using System;
+using System.IO;
 using System.Runtime.Versioning;
+using CliWrap;
+using CliWrap.Buffered;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -48,7 +51,14 @@ public class WinRegistrySearcher
     public static string GetValue(string query){
         if (OperatingSystem.IsWindows())
         {
-            string result = CommandRunner.RunCmdCommand($"REG QUERY {query}");
+            var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+                .WithArguments($"REG QUERY {query}")
+                .ExecuteBufferedAsync();
+
+            task.Task.RunSynchronously();
+            task.Task.Wait();
+            
+            string result = task.Task.Result.StandardOutput;
                     
             if (result != null)
             {
@@ -74,7 +84,14 @@ public class WinRegistrySearcher
     public static string GetValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
-            string result = CommandRunner.RunCmdCommand($"REG QUERY {query} /v {value}");
+            var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+                .WithArguments($"REG QUERY {query} /v {value}")
+                .ExecuteBufferedAsync();
+
+            task.Task.RunSynchronously();
+            task.Task.Wait();
+
+            string result = task.Task.Result.StandardOutput;
                     
             if (result != null)
             {

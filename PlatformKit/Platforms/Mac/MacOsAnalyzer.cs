@@ -26,7 +26,8 @@ using System;
 using System.Runtime.InteropServices;
 
 using AlastairLundy.Extensions.System;
-
+using CliWrap;
+using CliWrap.Buffered;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 using PlatformKit.Internal.Localizations;
@@ -85,8 +86,16 @@ namespace PlatformKit.Mac;
         /// <exception cref="ArgumentException"></exception>
         public static string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            string info = CommandRunner.RunCommandOnMac("system_profiler SP" + macSystemProfilerDataType);
+            var task = Cli.Wrap("/usr/bin/system_profiler")
+                .WithArguments("system_profiler SP" + macSystemProfilerDataType)
+                .ExecuteBufferedAsync();
+            
+            task.Task.RunSynchronously();
 
+            task.Task.Wait();
+
+            string info = task.Task.Result.StandardOutput;
+            
 #if NETSTANDARD2_0_OR_GREATER
             string[] array = info.Split(Convert.ToChar(Environment.NewLine));
 #elif NET5_0_OR_GREATER
@@ -386,7 +395,14 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     private static string[] GetMacSwVersInfo()
     {
+        var task = Cli.Wrap("/usr/bin/sw_vers")
+            .ExecuteBufferedAsync();
+
+        task.Task.RunSynchronously();
+
+        task.Task.Wait();
+        
         // ReSharper disable once StringLiteralTypo
-        return CommandRunner.RunCommandOnMac("sw_vers").Split(Convert.ToChar(Environment.NewLine));
+        return task.Task.Result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
     }
 }

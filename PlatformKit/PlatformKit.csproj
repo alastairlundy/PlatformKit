@@ -50,6 +50,10 @@
     </ItemGroup>
     
     <ItemGroup>
+        <PackageReference Include="CliWrap" Version="[3.6.7, 4.0.0)" />
+    </ItemGroup>
+    
+    <ItemGroup>
         <None Include="..\images\logos\platformkit_logo_512x.jpg">
           <Pack>True</Pack>
           <PackagePath></PackagePath>

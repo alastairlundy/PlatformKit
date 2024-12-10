@@ -24,12 +24,14 @@
 
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using AlastairLundy.Extensions.System;
 using AlastairLundy.Extensions.System.Strings.Versioning;
+using CliWrap;
+using CliWrap.Buffered;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -183,7 +185,15 @@ public class WindowsAnalyzer
         
         NetworkCardModel lastNetworkCard = null;
 
-        string desc = CommandRunner.RunPowerShellCommand("systeminfo");
+        var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+            .WithArguments($"systeminfo")
+            .ExecuteBufferedAsync();
+
+        task.Task.RunSynchronously();
+
+        task.Task.Wait();
+        
+        string desc = task.Task.Result.StandardOutput;
 
 #if NET5_0_OR_GREATER
         string[] array = desc.Split(Environment.NewLine);
@@ -535,7 +545,7 @@ for (int index = 0; index < array.Length; index++)
     {
         Version version = GetWindowsVersionFromEnum(windowsVersion);
         
-        return version.IsAtLeast(new Version(10, 0, 10240)) 
+        return OperatingSystem.IsWindowsVersionAtLeast(10,0,10240) 
                && version.IsOlderThan(new Version(10, 0, 20349));
     }
 
@@ -694,7 +704,9 @@ for (int index = 0; index < array.Length; index++)
         {
             if (OperatingSystem.IsWindows())
             {
-                return GetWindowsVersion().IsAtLeast(GetWindowsVersionFromEnum(windowsVersion));
+                var version = GetWindowsVersionFromEnum(windowsVersion);
+                
+                return OperatingSystem.IsWindowsVersionAtLeast(version.Major, version.Minor, version.Build, version.Revision);
             }
 
             throw new PlatformNotSupportedException();
@@ -712,9 +724,9 @@ for (int index = 0; index < array.Length; index++)
 #endif
         public static bool IsAtLeastVersion(Version windowsVersion)
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == true)
             {
-                return  GetWindowsVersion().IsAtLeast(windowsVersion);
+                return OperatingSystem.IsWindowsVersionAtLeast(windowsVersion.Major, windowsVersion.Minor, windowsVersion.Build, windowsVersion.Revision);
             }
 
             throw new PlatformNotSupportedException();
