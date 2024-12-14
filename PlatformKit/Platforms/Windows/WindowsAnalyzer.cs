@@ -28,8 +28,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
+using AlastairLundy.Extensions.Strings.Versioning;
+
+using AlastairLundy.Extensions.Versions;
+    
 using CliWrap;
 using CliWrap.Buffered;
 using PlatformKit.Internal.Deprecation;
