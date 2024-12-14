@@ -80,7 +80,8 @@ This is intended to be one of the final updates for PlatformKit 3.x . Please upg
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.4.0, 6.0.0)" />
+        <PackageReference Include="AlastairLundy.Extensions.Strings" Version="[5.5.0, 6.0.0)" />
+        <PackageReference Include="AlastairLundy.Extensions.Versions" Version="[5.5.0, 6.0.0)" />
     </ItemGroup>
     
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

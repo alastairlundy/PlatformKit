@@ -11,8 +11,10 @@
 using System;
 using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
+using AlastairLundy.Extensions.Strings.Versioning;
+
+using AlastairLundy.Extensions.Versions;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 

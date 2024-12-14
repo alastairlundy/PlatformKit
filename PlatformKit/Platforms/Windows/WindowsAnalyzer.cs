@@ -11,10 +11,13 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
+using AlastairLundy.Extensions.Strings.Versioning;
+using AlastairLundy.Extensions.Versions;
 
-using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
+
 using PlatformKit.Internal.Exceptions;
 
 #if NETSTANDARD2_0

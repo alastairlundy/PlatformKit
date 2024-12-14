@@ -9,10 +9,9 @@
    */
 
 using System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
+using AlastairLundy.Extensions.Strings.Versioning;
+
 using PlatformKit.Internal.Deprecation;
-using PlatformKit.Internal.Exceptions;
-using PlatformKit.Shared.Extensions;
 
 #if NETSTANDARD2_0
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
