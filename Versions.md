@@ -10,12 +10,12 @@
 |-|-|-|-|-|
 | 4.5 | 4.5.0 | December 10th 2024 | :white_check_mark: | :white_check_mark: | 
 | 4.4 | 4.4.3 | December 6th 2024 | :white_check_mark: | :white_check_mark: | 
-| 3.7 | 3.7.5 | December 5th 2024 |:white_check_mark: | :white_check_mark: | 
 
 ## Unsupported Versions
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 3.7 | 3.7.6 | December 14th 2024 |
 | 4.3 | 4.3.0 | July 22nd 2024 |
 | 4.2 | 4.2.2 | July 22nd 2024 |
 | 4.1 | 4.1.0 | June 11th 2024 |

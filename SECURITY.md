@@ -9,7 +9,6 @@ Versions that are currently supported with Bug Fixes and/or Security Fixes.
 |--| --|--|--|--|
 | 4.5 | 4.5.0, released on December 10th 2024 |  4.5.0, released on December 10th 2024 | Yes, until PlatformKit 5.1 | Yes, until PlatformKit 5.1 |
 | 4.4 | 4.4.0, released on September 4th 2024 |  4.4.3, released on December 6th 2024 | Yes, until PlatformKit 5.0 | Yes, until PlatformKit 5.0 |
-| 3.7 | 3.7.0, released on April 22nd 2024 | 3.7.5, released on December 5th 2024 |  :warning: Limited Support until PlatformKit 5.0 |  :warning: Limited Support until PlatformKit 5.0 | 
 
 ## Reporting a Security Vulnerability
 
