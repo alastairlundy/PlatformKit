@@ -91,7 +91,7 @@
 
     <ItemGroup>
       <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.4.0, 6.0.0)" />
-      <PackageReference Include="CliWrap" Version="[3.6.7, 4.0.0)" />
+      <PackageReference Include="CliWrap" Version="[3.7.0, 4.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
