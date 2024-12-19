@@ -26,7 +26,6 @@ using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using CliRunner;
-
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
 

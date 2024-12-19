@@ -53,28 +53,6 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
 
             throw new ArgumentException();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="windowsOperatingSystem"></param>
-        /// <returns></returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("windows")]
-        [UnsupportedOSPlatform("macos")]
-        [UnsupportedOSPlatform("linux")]
-        [UnsupportedOSPlatform("freebsd")]
-        [UnsupportedOSPlatform("browser")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("android")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("watchos")]
-#endif
-        public static async Task<WindowsSystemInformationModel> GetWindowsSystemInformationAsync(
-            this WindowsOperatingSystem windowsOperatingSystem)
-        {
-            return await GetWindowsSystemInformationAsync();
-        }
     
         /// <summary>
         /// Detect WindowsSystemInformation
@@ -92,7 +70,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static async Task<WindowsSystemInformationModel> GetWindowsSystemInformationAsync()
+        public static async Task<WindowsSystemInformationModel> GetWindowsSystemInformationAsync(this WindowsOperatingSystem windowsOperatingSystem)
         {
             if (OperatingSystem.IsWindows() == false)
             {
