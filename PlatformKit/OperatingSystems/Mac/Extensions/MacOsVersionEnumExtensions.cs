@@ -48,7 +48,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-        public static async Task<MacOsVersion> GetMacOsVersionToEnum(this MacOperatingSystem macOperatingSystem)
+        public static async Task<MacOsVersion> GetMacOsVersionToEnumAsync(this MacOperatingSystem macOperatingSystem)
         {
             return GetMacOsVersionToEnum(await macOperatingSystem.GetOperatingSystemVersionAsync());
         }

@@ -46,14 +46,15 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("windows")]
         [UnsupportedOSPlatform("linux")]
 #endif
-        public static async Task<bool> IsActivationLockEnabled(this MacOperatingSystem macOperatingSystem)
+        public static async Task<bool> IsActivationLockEnabledAsync(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
         
-            string result = await macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+            string result = await macOperatingSystem.GetMacSystemProfilerInformationAsync(
+                MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -79,7 +80,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("windows")]
         [UnsupportedOSPlatform("linux")]
 #endif
-        public static async Task<bool> IsSecureVirtualMemoryEnabled(this MacOperatingSystem macOperatingSystem)
+        public static async Task<bool> IsSecureVirtualMemoryEnabledAsync(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {

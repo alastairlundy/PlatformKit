@@ -49,10 +49,10 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("windows")]
         [UnsupportedOSPlatform("linux")]
 #endif
-        public static async Task<string> GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
+        public static async Task<string> GetMacSystemProfilerInformationAsync(this MacOperatingSystem macOperatingSystem,
             MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            return await GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
+            return await GetMacSystemProfilerInformationAsync(macSystemProfilerDataType, key);
         }
     
         /// <summary>
@@ -68,7 +68,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("windows")]
         [UnsupportedOSPlatform("linux")]
 #endif
-        public static async Task<string> GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
+        public static async Task<string> GetMacSystemProfilerInformationAsync(this MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
             if (OperatingSystem.IsMacOS() == false)
             {

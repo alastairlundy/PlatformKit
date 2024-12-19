@@ -54,7 +54,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static async Task<bool> IsWindows10(this WindowsOperatingSystem windowsOperatingSystem)
+        public static async Task<bool> IsWindows10Async(this WindowsOperatingSystem windowsOperatingSystem)
         {
             if (OperatingSystem.IsWindows())
             {

@@ -38,7 +38,7 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         /// Detects what base Linux Distribution a Distro is based off of.
         /// </summary>
         /// <returns></returns>
-        public static async Task<LinuxDistroBase> GetDistroBase(this LinuxOperatingSystem linuxOperatingSystem)
+        public static async Task<LinuxDistroBase> GetDistroBaseAsync(this LinuxOperatingSystem linuxOperatingSystem)
         {
             LinuxOsReleaseModel osReleaseModel = await linuxOperatingSystem.GetLinuxOsReleaseAsync();
             return GetDistroBase(linuxOperatingSystem, osReleaseModel);

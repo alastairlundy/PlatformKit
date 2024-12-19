@@ -144,7 +144,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("tvos")]
 #endif
-        public static async Task<MacOsSystemInformationModel> GetMacSystemInformationModel(this MacOperatingSystem macOperatingSystem)
+        public static async Task<MacOsSystemInformationModel> GetMacSystemInformationModelAsync(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {

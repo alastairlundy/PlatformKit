@@ -41,7 +41,7 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         /// <returns>true if running on a SteamOS 3.x based distribution; returns false otherwise.</returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         // ReSharper disable once InconsistentNaming
-        public static async Task<bool> IsSteamOS(this LinuxOperatingSystem linuxOperatingSystem, bool includeHoloIsoAsSteamOs)
+        public static async Task<bool> IsSteamOSAsync(this LinuxOperatingSystem linuxOperatingSystem, bool includeHoloIsoAsSteamOs)
         {
             if (OperatingSystem.IsLinux() == false)
             {
@@ -72,18 +72,18 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         /// <returns>the SteamOS mode being run if run on SteamOS.</returns>
         /// <exception cref="ArgumentException">Thrown if Holo ISO is detected and if Holo ISO isn't counted as SteamOS.</exception>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't SteamOS 3</exception>
-        public static async Task<SteamOSMode> GetSteamOsMode(this LinuxOperatingSystem linuxOperatingSystem, bool includeHoloIsoAsSteamOs)
+        public static async Task<SteamOSMode> GetSteamOsModeAsync(this LinuxOperatingSystem linuxOperatingSystem, bool includeHoloIsoAsSteamOs)
         {
-            bool isSteamOs = await IsSteamOS(linuxOperatingSystem, includeHoloIsoAsSteamOs);
+            bool isSteamOs = await IsSteamOSAsync(linuxOperatingSystem, includeHoloIsoAsSteamOs);
         
             if (isSteamOs == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);    
             }
         
-            LinuxDistroBase distroBase = await linuxOperatingSystem.GetDistroBase();
+            LinuxDistroBase distroBase = await linuxOperatingSystem.GetDistroBaseAsync();
 
-            bool isSteamOsExcludingHolo = await IsSteamOS(linuxOperatingSystem, false);
+            bool isSteamOsExcludingHolo = await IsSteamOSAsync(linuxOperatingSystem, false);
 
             if (distroBase == LinuxDistroBase.Manjaro)
             {

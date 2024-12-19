@@ -53,7 +53,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static async Task<WindowsVersion> GetWindowsVersionToEnum(this WindowsOperatingSystem windowsOperatingSystem)
+        public static async Task<WindowsVersion> GetWindowsVersionToEnumAsync(this WindowsOperatingSystem windowsOperatingSystem)
         {
             if (OperatingSystem.IsWindows() == false)
             {
