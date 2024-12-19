@@ -24,10 +24,8 @@
 
 using System;
 using System.IO;
-using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using PlatformKit.Internal.Localizations;
-using PlatformKit.OperatingSystems.Abstractions;
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
@@ -37,7 +35,7 @@ using System.Runtime.Versioning;
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems
+namespace PlatformKit.OperatingSystems.Linux
 {
 
     public class LinuxOperatingSystem : AbstractOperatingSystem

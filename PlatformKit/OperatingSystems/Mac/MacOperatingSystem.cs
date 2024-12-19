@@ -26,17 +26,14 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-
 using CliRunner;
-
 using PlatformKit.Internal.Localizations;
-using PlatformKit.OperatingSystems.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
 #endif
 
-namespace PlatformKit.OperatingSystems
+namespace PlatformKit.OperatingSystems.Mac
 {
 
     public class MacOperatingSystem : AbstractOperatingSystem

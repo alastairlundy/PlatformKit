@@ -25,7 +25,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace PlatformKit.OperatingSystems.Abstractions
+namespace PlatformKit.OperatingSystems
 {
     public abstract class AbstractOperatingSystem
     {
