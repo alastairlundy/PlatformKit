@@ -77,7 +77,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
                 
-            var result = await Cli.Run("/system_profiler")
+            var result = await Cli.Run("/usr/bin/system_profiler")
                 .WithArguments("SP" + macSystemProfilerDataType)
                 .WithWorkingDirectory("/usr/bin/")
                 .WithValidation(CommandResultValidation.None)
