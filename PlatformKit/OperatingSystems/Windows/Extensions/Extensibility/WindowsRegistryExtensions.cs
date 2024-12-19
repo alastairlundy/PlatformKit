@@ -43,6 +43,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         /// <summary>
         ///  Gets the value of a registry key in the Windows registry.
         /// </summary>
+        /// <param name="windowsOperatingSystem"></param>
         /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
