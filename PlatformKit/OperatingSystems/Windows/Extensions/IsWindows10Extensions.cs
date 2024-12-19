@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.Versions;
 
@@ -53,11 +54,11 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static bool IsWindows10(this WindowsOperatingSystem windowsOperatingSystem)
+        public static async Task<bool> IsWindows10(this WindowsOperatingSystem windowsOperatingSystem)
         {
             if (OperatingSystem.IsWindows())
             {
-                return IsWindows10(windowsOperatingSystem, windowsOperatingSystem.GetOperatingSystemVersion());
+                return await Task.FromResult(IsWindows10(windowsOperatingSystem, await windowsOperatingSystem.GetOperatingSystemVersionAsync()));
             }
             else
             {

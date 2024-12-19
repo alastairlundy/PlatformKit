@@ -23,6 +23,8 @@
    */
 
 using System;
+using System.Runtime.Versioning;
+using System.Threading.Tasks;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -39,14 +41,19 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-        public static bool IsActivationLockEnabled(this MacOperatingSystem macOperatingSystem)
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+#endif
+        public static async Task<bool> IsActivationLockEnabled(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
         
-            string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
+            string result = await macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
 
             if (result.ToLower().Contains("disabled"))
             {
@@ -67,14 +74,19 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
-        public static bool IsSecureVirtualMemoryEnabled(this MacOperatingSystem macOperatingSystem)
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+#endif
+        public static async Task<bool> IsSecureVirtualMemoryEnabled(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
         
-            string result = macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+            string result = await macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
 
             if (result.ToLower().Contains("disabled"))
             {

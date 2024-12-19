@@ -25,6 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
@@ -54,16 +55,16 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override Version GetOperatingSystemVersion()
+        public override async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsWindows() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            return Version.Parse(RuntimeInformation.OSDescription
+            return await Task.FromResult(Version.Parse(RuntimeInformation.OSDescription
                 .Replace("Microsoft Windows", string.Empty)
-                .Replace(" ", string.Empty));
+                .Replace(" ", string.Empty)));
         }
 
         /// <summary>
@@ -82,9 +83,9 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override Version GetKernelVersion()
+        public override async Task<Version> GetKernelVersionAsync()
         {
-            return GetOperatingSystemVersion();
+            return await GetOperatingSystemVersionAsync();
         }
         
         /// <summary>
@@ -102,12 +103,12 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override string GetOperatingSystemBuildNumber()
+        public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             // ReSharper disable once RedundantAssignment
             string output = string.Empty;
             
-            Version osVersion = GetOperatingSystemVersion();
+            Version osVersion = await GetOperatingSystemVersionAsync();
 
             if (osVersion.Revision != 0)
             {

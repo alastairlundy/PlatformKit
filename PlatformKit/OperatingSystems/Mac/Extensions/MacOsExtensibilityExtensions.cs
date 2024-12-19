@@ -23,11 +23,10 @@
    */
 
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
-
-using CliWrap;
-using CliWrap.Buffered;
-
+using CliRunner;
+using CliRunner.Commands;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -45,14 +44,15 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <param name="macSystemProfilerDataType"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+#endif
+        public static async Task<string> GetMacSystemProfilerInformation(this MacOperatingSystem macOperatingSystem,
             MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
-            var task = GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
-            
-            task.RunSynchronously();
-            
-            return task.Result;
+            return await GetMacSystemProfilerInformation(macSystemProfilerDataType, key);
         }
     
         /// <summary>
@@ -63,6 +63,11 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("linux")]
+#endif
         public static async Task<string> GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
             if (OperatingSystem.IsMacOS() == false)
@@ -70,7 +75,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
                 
-            var result = await Cli.Wrap("/system_profiler")
+            var result = await Cli.Run("/system_profiler")
                 .WithArguments("SP" + macSystemProfilerDataType)
                 .WithWorkingDirectory("/usr/bin/")
                 .WithValidation(CommandResultValidation.None)

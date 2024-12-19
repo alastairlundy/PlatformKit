@@ -38,7 +38,7 @@
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
    <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <FileVersion>5.0.0.0</FileVersion>
-        <PackageVersion>5.0.0-alpha.2</PackageVersion>
+        <PackageVersion>5.0.0-alpha.3</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
@@ -90,9 +90,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CliWrap" Version="[3.7.0, 4.0.0)" />
         <PackageReference Include="AlastairLundy.Extensions.Strings" Version="[5.5.0, 6.0.0)" />
         <PackageReference Include="AlastairLundy.Extensions.Versions" Version="[5.5.0, 6.0.0)" />
+      <PackageReference Include="CliRunner" Version="[0.4.0, 1.0.0)" />
+        <PackageReference Include="CliRunner.Specializations" Version="[0.4.0, 1.0.0)" />
     </ItemGroup>
 
     <ItemGroup>

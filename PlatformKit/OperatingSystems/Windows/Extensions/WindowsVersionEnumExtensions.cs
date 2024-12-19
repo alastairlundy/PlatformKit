@@ -24,9 +24,10 @@
 
 using System;
 using System.Runtime.Versioning;
-
+using System.Threading.Tasks;
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
+// ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -52,14 +53,14 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static WindowsVersion GetWindowsVersionToEnum(this WindowsOperatingSystem windowsOperatingSystem)
+        public static async Task<WindowsVersion> GetWindowsVersionToEnum(this WindowsOperatingSystem windowsOperatingSystem)
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == false)
             {
-                return GetWindowsVersionToEnum(windowsOperatingSystem, windowsOperatingSystem.GetOperatingSystemVersion());
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            
+            return await Task.FromResult(GetWindowsVersionToEnum(windowsOperatingSystem, await windowsOperatingSystem.GetOperatingSystemVersionAsync()));
         }
 
         /// <summary>
@@ -102,6 +103,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         /// <summary>
         /// Return the version of Windows in the Version format based on the specified WindowsVersion enum.
         /// </summary>
+        /// <param name="windowsOperatingSystem"></param>
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="WindowsVersionDetectionException"></exception>

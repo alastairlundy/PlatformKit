@@ -23,15 +23,16 @@
    */
 
 using System;
+using System.Threading.Tasks;
 
 namespace PlatformKit.OperatingSystems.Abstractions
 {
     public abstract class AbstractOperatingSystem
     {
-        public abstract Version GetOperatingSystemVersion();
+        public abstract Task<Version> GetOperatingSystemVersionAsync();
 
-        public abstract Version GetKernelVersion();
+        public abstract Task<Version> GetKernelVersionAsync();
 
-        public abstract string GetOperatingSystemBuildNumber();
+        public abstract Task<string> GetOperatingSystemBuildNumberAsync();
     }
 }

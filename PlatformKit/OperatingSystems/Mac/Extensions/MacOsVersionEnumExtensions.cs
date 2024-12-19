@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Threading.Tasks;
 using PlatformKit.Internal.Exceptions.Mac;
 using PlatformKit.Internal.Localizations;
 
@@ -47,9 +48,9 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-        public static MacOsVersion GetMacOsVersionToEnum(this MacOperatingSystem macOperatingSystem)
+        public static async Task<MacOsVersion> GetMacOsVersionToEnum(this MacOperatingSystem macOperatingSystem)
         {
-            return GetMacOsVersionToEnum(macOperatingSystem.GetOperatingSystemVersion());
+            return GetMacOsVersionToEnum(await macOperatingSystem.GetOperatingSystemVersionAsync());
         }
 
         /// <summary>

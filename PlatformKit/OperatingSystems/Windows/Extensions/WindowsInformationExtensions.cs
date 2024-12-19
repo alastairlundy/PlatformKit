@@ -25,7 +25,7 @@
 using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-using PlatformKit.Internal.Exceptions;
+
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Windows.Extensions.Extensibility;
@@ -63,7 +63,6 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
             }
 
             WindowsSystemInformationModel systemInformationModel = await windowsOperatingSystem.GetWindowsSystemInformationAsync();
-            
             string edition = systemInformationModel.OsName.ToLower();
                 
             if (edition.Contains("home"))
@@ -119,7 +118,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
                 return WindowsEdition.Team;
             }
 
-            if (windowsOperatingSystem.IsWindows11())
+            if (await windowsOperatingSystem.IsWindows11Async())
             {
                 if (edition.Contains("se"))
                 {

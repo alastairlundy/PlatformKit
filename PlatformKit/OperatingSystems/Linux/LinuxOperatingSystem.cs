@@ -25,6 +25,7 @@
 using System;
 using System.IO;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -45,12 +46,12 @@ namespace PlatformKit.OperatingSystems
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-        public override Version GetKernelVersion()
+        public override async Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsLinux())
             {
-                return Version.Parse(Environment.OSVersion.ToString()
-                    .Replace("Unix ", string.Empty));
+                return await Task.FromResult(Version.Parse(Environment.OSVersion.ToString()
+                    .Replace("Unix ", string.Empty)));
             }
             else
             {
@@ -65,9 +66,9 @@ namespace PlatformKit.OperatingSystems
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        public override string GetOperatingSystemBuildNumber()
+        public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
-            return GetOsReleasePropertyValue("VERSION_ID");
+            return await GetOsReleasePropertyValueAsync("VERSION_ID");
         }
 
         /// <summary>
@@ -79,14 +80,14 @@ namespace PlatformKit.OperatingSystems
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        internal string GetOsReleasePropertyValue(string propertyName)
+        internal async Task<string> GetOsReleasePropertyValueAsync(string propertyName)
         {
             if (OperatingSystem.IsLinux())
             {
                 string output = string.Empty;
 
 #if NET5_0_OR_GREATER
-                string[] osReleaseInfo = File.ReadAllLines("/etc/os-release");
+                string[] osReleaseInfo = await File.ReadAllLinesAsync("/etc/os-release");
 #else
                 string[] osReleaseInfo = File.ReadAllLines("/etc/os-release");
 #endif
@@ -115,16 +116,14 @@ namespace PlatformKit.OperatingSystems
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        public override Version GetOperatingSystemVersion()
+        public override async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsLinux())
             {
-                string versionString =  GetOsReleasePropertyValue("VERSION=");
+                string versionString =  await GetOsReleasePropertyValueAsync("VERSION=");
                 versionString = versionString.Replace("LTS", string.Empty);    
                     
-                Version output = Version.Parse(versionString);
-
-                return output;
+                return Version.Parse(versionString);
             }
             else
             {

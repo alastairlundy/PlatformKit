@@ -27,8 +27,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-using CliWrap;
-using CliWrap.Buffered;
+using CliRunner;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
@@ -51,16 +50,14 @@ namespace PlatformKit.OperatingSystems
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override Version GetOperatingSystemVersion()
+        public override async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsMacOS())
             {
-                var task = GetMacSwVersInfoAsync();
-                task.RunSynchronously();
-                task.Wait();
+                string[] task = await GetMacSwVersInfoAsync();
                 
-                return Version.Parse(task.Result[1].Replace("ProductVersion:", string.Empty)
-                    .Replace(" ", string.Empty));
+                return await Task.FromResult(Version.Parse(task[1].Replace("ProductVersion:", string.Empty)
+                    .Replace(" ", string.Empty)));
             }
             else
             {
@@ -73,9 +70,12 @@ namespace PlatformKit.OperatingSystems
         /// Gets info from sw_vers command on Mac.
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+#endif
         private async Task<string[]> GetMacSwVersInfoAsync()
         {
-            var result = await Cli.Wrap("/usr/bin/sw_vers")
+            var result = await Cli.Run("/usr/bin/sw_vers")
                 .ExecuteBufferedAsync();
             
             // ReSharper disable once StringLiteralTypo
@@ -91,7 +91,7 @@ namespace PlatformKit.OperatingSystems
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override Version GetKernelVersion()
+        public override Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -116,7 +116,7 @@ namespace PlatformKit.OperatingSystems
                         array[index] = array[index].Replace("/RELEASE_X86_64", string.Empty);
                     }
 
-                    return Version.Parse(array[index]);
+                    return Task.FromResult(Version.Parse(array[index]));
                 }
             }
 
@@ -132,16 +132,13 @@ namespace PlatformKit.OperatingSystems
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override string GetOperatingSystemBuildNumber()
+        public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             if (OperatingSystem.IsMacOS())
             {
-                var task = GetMacSwVersInfoAsync();
-                task.RunSynchronously();
-
-                task.Wait();
+                var task = await GetMacSwVersInfoAsync();
                 
-                return task.Result[2].ToLower().Replace("BuildVersion:",
+                return task[2].ToLower().Replace("BuildVersion:",
                     string.Empty).Replace(" ", string.Empty);
             }
             else

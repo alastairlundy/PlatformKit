@@ -25,6 +25,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 
 using PlatformKit.Internal.Localizations;
 
@@ -143,21 +144,21 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         [UnsupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("tvos")]
 #endif
-        public static MacOsSystemInformationModel GetMacSystemInformationModel(this MacOperatingSystem macOperatingSystem)
+        public static async Task<MacOsSystemInformationModel> GetMacSystemInformationModel(this MacOperatingSystem macOperatingSystem)
         {
             if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
 
-            return new MacOsSystemInformationModel
+            return await Task.FromResult(new MacOsSystemInformationModel
             {
                 ProcessorType = macOperatingSystem.GetMacProcessorType(),
-                MacOsBuildNumber = macOperatingSystem.GetOperatingSystemBuildNumber(),
-                MacOsVersion = macOperatingSystem.GetOperatingSystemVersion(),
+                MacOsBuildNumber = await macOperatingSystem.GetOperatingSystemBuildNumberAsync(),
+                MacOsVersion = await macOperatingSystem.GetOperatingSystemVersionAsync(),
                 DarwinVersion = macOperatingSystem.GetDarwinVersion(),
-                XnuVersion = macOperatingSystem.GetKernelVersion()
-            };
+                XnuVersion = await macOperatingSystem.GetKernelVersionAsync()
+            });
         }
     }
 }

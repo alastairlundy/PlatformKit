@@ -27,8 +27,7 @@ using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-using CliWrap;
-using CliWrap.Buffered;
+using CliRunner.Specializations.Commands;
 
 using PlatformKit.Internal.Localizations;
 // ReSharper disable RedundantBoolCompare
@@ -65,7 +64,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+            var result = await CmdCommand.Create()
                 .WithArguments($"REG QUERY {query}")
                 .WithWorkingDirectory(Environment.SystemDirectory)
                 .ExecuteBufferedAsync();
@@ -104,7 +103,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+            var result = await CmdCommand.Create()
                 .WithArguments($"REG QUERY {query} /v {value}")
                 .WithWorkingDirectory(Environment.SystemDirectory)
                 .ExecuteBufferedAsync();

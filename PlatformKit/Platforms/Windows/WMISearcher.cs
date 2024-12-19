@@ -25,9 +25,9 @@
 using System;
 using System.IO;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 
-using CliWrap;
-using CliWrap.Buffered;
+using CliRunner.Specializations.Commands;
 
 using PlatformKit.Internal.Localizations;
 
@@ -63,27 +63,18 @@ namespace PlatformKit.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static string GetWMIClass(string wmiClass)
+        public static async Task<string> GetWMIClassAsync(string wmiClass)
         {
             if (OperatingSystem.IsWindows() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            var task = Cli.Wrap(GetWindowsPowershellLocation())
+            var task = await ClassicPowershellCommand.Create()
                 .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
                 .ExecuteBufferedAsync();
-                
-            task.Task.RunSynchronously();
-
-            return task.Task.Result.StandardOutput;
-        }
-
-        private static string GetWindowsPowershellLocation()
-        {
-            return Environment.SystemDirectory + Path.DirectorySeparatorChar
-                                                                   + "System32" + Path.DirectorySeparatorChar + "WindowsPowerShell"
-                                                                   + Path.DirectorySeparatorChar + "v1.0" + Path.DirectorySeparatorChar + "Powershell.exe";
+            
+            return task.StandardOutput;
         }
         
         // ReSharper disable once InconsistentNaming
@@ -106,20 +97,18 @@ namespace PlatformKit.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static string GetWMIValue(string property, string wmiClass)
+        public static async Task<string> GetWMIValueAsync(string property, string wmiClass)
         {
             if (OperatingSystem.IsWindows() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var task = Cli.Wrap(GetWindowsPowershellLocation())
+            var task = await ClassicPowershellCommand.Create()
                 .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
                 .ExecuteBufferedAsync();
-                
-            task.Task.RunSynchronously();
-
-            string[] arr = task.Task.Result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
+            
+            string[] arr = task.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 
             foreach (string str in arr)
             {

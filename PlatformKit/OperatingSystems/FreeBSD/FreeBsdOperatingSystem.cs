@@ -24,9 +24,8 @@
 
 using System;
 using System.Runtime.Versioning;
-
-using CliWrap;
-using CliWrap.Buffered;
+using System.Threading.Tasks;
+using CliRunner;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.OperatingSystems.Abstractions;
@@ -56,27 +55,25 @@ namespace PlatformKit.OperatingSystems
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override Version GetOperatingSystemVersion()
+        public override async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            var result = Cli.Wrap("/usr/bin/uname")
+            var result = await Cli.Run("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory)
                 .ExecuteBufferedAsync();
             
-            result.Task.RunSynchronously();
-            
-            string versionString = result.Task.Result.StandardOutput.Replace("FreeBSD", string.Empty)
+            string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release", string.Empty);
             
             return Version.Parse(versionString);
         }
 
-        public override Version GetKernelVersion()
+        public override Task<Version> GetKernelVersionAsync()
         {
             throw new NotImplementedException();
         }
@@ -92,9 +89,11 @@ namespace PlatformKit.OperatingSystems
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override string GetOperatingSystemBuildNumber()
+        public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
-            return GetOperatingSystemVersion().Build.ToString();
+            var task = await GetOperatingSystemVersionAsync();
+            
+            return task.Build.ToString();
         }
     }
 }

@@ -27,11 +27,8 @@ using System.Collections.Generic;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.System.Strings.Versioning;
-using CliWrap;
-using CliWrap.Buffered;
-
 using AlastairLundy.Extensions.Strings.Versioning;
+using CliRunner.Specializations.Commands;
 using PlatformKit.Core;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -109,7 +106,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         
             NetworkCardModel lastNetworkCard = null;
 
-            var descResult = await Cli.Wrap(Environment.SystemDirectory + "cmd.exe")
+            var descResult = await CmdCommand.Create()
                 .WithArguments("systeminfo")
                 .WithWorkingDirectory(Environment.SystemDirectory)
                 .ExecuteBufferedAsync();
