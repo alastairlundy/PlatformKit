@@ -70,8 +70,24 @@ namespace PlatformKit.OperatingSystems.FreeBSD
             return Version.Parse(versionString);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("freebsd")]
+        [UnsupportedOSPlatform("macos")]
+        [UnsupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("browser")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("watchos")]        
+#endif
+        public async Task<Version> GetKernelVersionAsync()
         {
-            throw new NotImplementedException();
+            return await GetOperatingSystemVersionAsync();
         }
 
 #if NET5_0_OR_GREATER
