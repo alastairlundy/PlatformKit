@@ -86,30 +86,28 @@ namespace PlatformKit.OperatingSystems.Linux
 #endif
         internal async Task<string> GetOsReleasePropertyValueAsync(string propertyName)
         {
-            if (OperatingSystem.IsLinux())
+            if (OperatingSystem.IsLinux() == false)
             {
-                string output = string.Empty;
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
+
+            string output = string.Empty;
 
 #if NET5_0_OR_GREATER
                 string[] osReleaseInfo = await File.ReadAllLinesAsync("/etc/os-release");
 #else
-                string[] osReleaseInfo = File.ReadAllLines("/etc/os-release");
+            string[] osReleaseInfo = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
 #endif
-                
-                foreach (string s in osReleaseInfo)
-                {
-                    if (s.ToUpper().StartsWith(propertyName))
-                    {
-                        output = s.Replace(propertyName, string.Empty);
-                    }
-                }
 
-                return output;
-            }
-            else
+            foreach (string s in osReleaseInfo)
             {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+                if (s.ToUpper().StartsWith(propertyName))
+                {
+                    output = s.Replace(propertyName, string.Empty);
+                }
             }
+
+            return output;
         }
 
         /// <summary>
