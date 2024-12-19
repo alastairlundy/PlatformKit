@@ -38,7 +38,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 namespace PlatformKit.OperatingSystems.Mac
 {
 
-    public class MacOperatingSystem : AbstractOperatingSystem
+    public class MacOperatingSystem : IOperatingSystem
     {
         /// <summary>
         /// Detects the macOS version and returns it as a System.Version object.
@@ -49,7 +49,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -88,7 +88,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override Task<Version> GetKernelVersionAsync()
+        public Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -129,7 +129,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {

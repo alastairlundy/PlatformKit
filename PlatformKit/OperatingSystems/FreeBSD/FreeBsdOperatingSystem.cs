@@ -33,7 +33,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 
 namespace PlatformKit.OperatingSystems.FreeBSD
 {
-    public class FreeBsdOperatingSystem : AbstractOperatingSystem
+    public class FreeBsdOperatingSystem : IOperatingSystem
     {
 
         // ReSharper disable once InconsistentNaming
@@ -52,7 +52,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
@@ -70,7 +70,6 @@ namespace PlatformKit.OperatingSystems.FreeBSD
             return Version.Parse(versionString);
         }
 
-        public override Task<Version> GetKernelVersionAsync()
         {
             throw new NotImplementedException();
         }
@@ -86,7 +85,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             Version result = await GetOperatingSystemVersionAsync();
             

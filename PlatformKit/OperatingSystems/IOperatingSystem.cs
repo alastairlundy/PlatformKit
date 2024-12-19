@@ -27,12 +27,12 @@ using System.Threading.Tasks;
 
 namespace PlatformKit.OperatingSystems
 {
-    public abstract class AbstractOperatingSystem
+    public interface IOperatingSystem
     {
-        public abstract Task<Version> GetOperatingSystemVersionAsync();
+        Task<Version> GetOperatingSystemVersionAsync();
 
-        public abstract Task<Version> GetKernelVersionAsync();
+        Task<Version> GetKernelVersionAsync();
 
-        public abstract Task<string> GetOperatingSystemBuildNumberAsync();
+        Task<string> GetOperatingSystemBuildNumberAsync();
     }
 }
