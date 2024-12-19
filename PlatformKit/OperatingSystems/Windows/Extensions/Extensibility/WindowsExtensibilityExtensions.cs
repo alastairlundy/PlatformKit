@@ -32,6 +32,7 @@ using AlastairLundy.Extensions.Strings.Versioning;
 using CliRunner.Specializations.Commands;
 
 using PlatformKit.Core;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -74,7 +75,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         {
             if (OperatingSystem.IsWindows() == false)
             {
-                throw new PlatformNotSupportedException();
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
         
             WindowsSystemInformationModel windowsSystemInformation = new WindowsSystemInformationModel();
