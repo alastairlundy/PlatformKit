@@ -26,7 +26,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
+
 using CliRunner;
+
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -49,17 +51,15 @@ namespace PlatformKit.OperatingSystems.Mac
 #endif
         public override async Task<Version> GetOperatingSystemVersionAsync()
         {
-            if (OperatingSystem.IsMacOS())
-            {
-                string[] task = await GetMacSwVersInfoAsync();
-                
-                return await Task.FromResult(Version.Parse(task[1].Replace("ProductVersion:", string.Empty)
-                    .Replace(" ", string.Empty)));
-            }
-            else
+            if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
+
+            string[] task = await GetMacSwVersInfoAsync();
+
+            return await Task.FromResult(Version.Parse(task[1].Replace("ProductVersion:", string.Empty)
+                .Replace(" ", string.Empty)));
         }
 
         // ReSharper disable once IdentifierTypo
@@ -131,17 +131,15 @@ namespace PlatformKit.OperatingSystems.Mac
 #endif
         public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
-            if (OperatingSystem.IsMacOS())
-            {
-                var task = await GetMacSwVersInfoAsync();
-                
-                return task[2].ToLower().Replace("BuildVersion:",
-                    string.Empty).Replace(" ", string.Empty);
-            }
-            else
+            if (OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
+
+            string[] task = await GetMacSwVersInfoAsync();
+
+            return task[2].ToLower().Replace("BuildVersion:",
+                string.Empty).Replace(" ", string.Empty);
         }
     }
 }

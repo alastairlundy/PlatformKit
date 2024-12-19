@@ -26,6 +26,7 @@ using System;
 using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.Versions;
+using PlatformKit.Internal.Localizations;
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
@@ -56,14 +57,13 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
 #endif
         public static async Task<bool> IsWindows10Async(this WindowsOperatingSystem windowsOperatingSystem)
         {
-            if (OperatingSystem.IsWindows())
+            if (OperatingSystem.IsWindows() == false)
             {
-                return await Task.FromResult(IsWindows10(windowsOperatingSystem, await windowsOperatingSystem.GetOperatingSystemVersionAsync()));
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-            else
-            {
-                throw new PlatformNotSupportedException();
-            }
+
+            return await Task.FromResult(IsWindows10(windowsOperatingSystem,
+                await windowsOperatingSystem.GetOperatingSystemVersionAsync()));
         }
     
         /// <summary>
