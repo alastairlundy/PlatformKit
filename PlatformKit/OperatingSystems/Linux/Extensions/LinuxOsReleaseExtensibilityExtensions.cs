@@ -178,7 +178,7 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
             return linuxDistroInfo;
         }
 
-        internal static string[] RemoveUnwantedCharacters(string[] data)
+        private static string[] RemoveUnwantedCharacters(string[] data)
         {
             char[] delimiter = ['\t', '\n', '\r', '"'];
 
