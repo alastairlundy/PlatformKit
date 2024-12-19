@@ -18,7 +18,6 @@
 * Replaced ``SystemExtensions`` dependency with split up v5.5 (and newer) versions
 * Replaced ``CliWrap`` dependency and usage with ``CliRunner`` dependency
 * Renamed ``async`` methods to end in ``async``
-* Add .NET 9 TFM
 * Removed duplicate code
 * Adjusted some namespaces</PackageReleaseNotes>
    <Product>PlatformKit</Product>
@@ -35,7 +34,7 @@
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
         <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>.snupkg</SymbolPackageFormat>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
     
