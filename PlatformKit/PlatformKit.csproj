@@ -14,22 +14,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 5.0.0 Alpha 1
-
-### Changes
-* Update SystemExtensions compatibility and require version 5.4.0 or newer from 5.2.0
-* Removed .NET 6 Explicit TFM
-* Removed CommandRunner and ProcessRunner
-* Added dependency on CliWrap for wrapping around CLI programs
-* Remove RuntimeIdentification and TFM Detection code - This has been moved to RuntimeExtensions
-* Replaced OS Extensions dependency with RuntimeExtensions
-* Optimized LinuxOsRetriever code
-
-### Removals
-
-* Removed some Operating System Interfaces
-* Removed ``UrlRunner`` this will now be a part of the CliRunner library
-* Removed ProcessRunner and CommandRunner - These will now be a part of the CliRunner library</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 2
+* Replaced ``SystemExtensions`` dependency with split up v5.5 (and newer) versions
+* Replaced ``CliWrap`` dependency and usage with ``CliRunner`` dependency
+* Renamed ``async`` methods to end in ``async``
+* Add .NET 9 TFM
+* Removed duplicate code
+* Adjusted some namespaces</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

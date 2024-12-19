@@ -2,7 +2,7 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 5.0 | 5.0.0 Alpha 2 | 9th December 2024 |
+| 5.0 | 5.0.0 Alpha 3 | 19th December 2024 |
 
 ## Currently Supported Versions
 
