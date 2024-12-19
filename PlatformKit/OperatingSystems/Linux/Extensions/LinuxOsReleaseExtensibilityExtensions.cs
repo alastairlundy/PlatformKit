@@ -28,7 +28,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.System.Strings.EscapeCharacters;
+using AlastairLundy.Extensions.Strings.EscapeCharacters;
+
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1

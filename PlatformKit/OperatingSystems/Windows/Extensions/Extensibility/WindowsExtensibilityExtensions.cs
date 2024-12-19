@@ -28,10 +28,10 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.System.Strings.Versioning;
-
 using CliWrap;
 using CliWrap.Buffered;
 
+using AlastairLundy.Extensions.Strings.Versioning;
 using PlatformKit.Core;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1

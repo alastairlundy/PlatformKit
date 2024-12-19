@@ -24,7 +24,7 @@
 
 using System;
 
-using AlastairLundy.Extensions.System;
+using AlastairLundy.Extensions.Versions;
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
