@@ -40,11 +40,21 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
 {
     public static class LinuxOsReleaseExtensibilityExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="linuxOperatingSystem"></param>
+        /// <returns></returns>
         public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync(this LinuxOperatingSystem linuxOperatingSystem)
         {
             return await GetLinuxOsReleaseAsync();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
         public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync()
         {
             LinuxOsReleaseModel output = new LinuxOsReleaseModel();
@@ -65,15 +75,16 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         
             resultArray = RemoveUnwantedCharacters(resultArray);
 
-            return await Task.Run(()=> ParseOsReleaseInfo(resultArray));
+            return await Task.FromResult(ParseOsReleaseInfo(resultArray));
         }
 
         private static LinuxOsReleaseModel ParseOsReleaseInfo(IEnumerable<string> osReleaseInfo)
         {
-            LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
-
-            var releaseInfo = osReleaseInfo as string[] ?? osReleaseInfo.ToArray();
-            for (int index = 0; index < releaseInfo.Count(); index++)
+            LinuxOsReleaseModel linuxDistroInfo = new LinuxOsReleaseModel();
+            
+            string[] releaseInfo = osReleaseInfo.Where(x => string.IsNullOrWhiteSpace(x) == false).ToArray();
+            
+            for (int index = 0; index < releaseInfo.Length; index++)
             {
                 string line = releaseInfo[index].ToUpper();
 
@@ -82,13 +93,13 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
 
                     if (line.StartsWith("PRETTY_"))
                     {
-                        linuxDistributionInformation.PrettyName =
+                        linuxDistroInfo.PrettyName =
                             releaseInfo[index].Replace("PRETTY_NAME=", string.Empty);
                     }
 
                     if (!line.Contains("PRETTY") && !line.Contains("CODE"))
                     {
-                        linuxDistributionInformation.Name = releaseInfo[index]
+                        linuxDistroInfo.Name = releaseInfo[index]
                             .Replace("NAME=", string.Empty);
                     }
                 }
@@ -97,26 +108,26 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
                 {
                     if (line.Contains("LTS"))
                     {
-                        linuxDistributionInformation.IsLongTermSupportRelease = true;
+                        linuxDistroInfo.IsLongTermSupportRelease = true;
                     }
                     else
                     {
-                        linuxDistributionInformation.IsLongTermSupportRelease = false;
+                        linuxDistroInfo.IsLongTermSupportRelease = false;
                     }
 
                     if (line.Contains("ID="))
                     {
-                        linuxDistributionInformation.VersionId =
+                        linuxDistroInfo.VersionId =
                             releaseInfo[index].Replace("VERSION_ID=", string.Empty);
                     }
                     else if (!line.Contains("ID=") && line.Contains("CODE"))
                     {
-                        linuxDistributionInformation.VersionCodename =
+                        linuxDistroInfo.VersionCodename =
                             releaseInfo[index].Replace("VERSION_CODENAME=", string.Empty);
                     }
                     else if (!line.Contains("ID=") && !line.Contains("CODE"))
                     {
-                        linuxDistributionInformation.Version = releaseInfo[index].Replace("VERSION=", string.Empty)
+                        linuxDistroInfo.Version = releaseInfo[index].Replace("VERSION=", string.Empty)
                             .Replace("LTS", string.Empty);
                     }
                 }
@@ -125,18 +136,18 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
                 {
                     if (line.Contains("ID_LIKE="))
                     {
-                        linuxDistributionInformation.Identifier_Like =
+                        linuxDistroInfo.Identifier_Like =
                             releaseInfo[index].Replace("ID_LIKE=", string.Empty);
 
-                        if (linuxDistributionInformation.Identifier_Like.ToLower().Contains("ubuntu") &&
-                            linuxDistributionInformation.Identifier_Like.ToLower().Contains("debian"))
+                        if (linuxDistroInfo.Identifier_Like.ToLower().Contains("ubuntu") &&
+                            linuxDistroInfo.Identifier_Like.ToLower().Contains("debian"))
                         {
-                            linuxDistributionInformation.Identifier_Like = "ubuntu";
+                            linuxDistroInfo.Identifier_Like = "ubuntu";
                         }
                     }
                     else if (!line.Contains("VERSION"))
                     {
-                        linuxDistributionInformation.Identifier = releaseInfo[index].Replace("ID=", string.Empty);
+                        linuxDistroInfo.Identifier = releaseInfo[index].Replace("ID=", string.Empty);
                     }
                 }
 
@@ -144,27 +155,27 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
                 {
                     if (line.StartsWith("HOME_"))
                     {
-                        linuxDistributionInformation.HomeUrl = releaseInfo[index].Replace("HOME_URL=", string.Empty);
+                        linuxDistroInfo.HomeUrl = releaseInfo[index].Replace("HOME_URL=", string.Empty);
                     }
                     else if (line.StartsWith("SUPPORT_"))
                     {
-                        linuxDistributionInformation.SupportUrl =
+                        linuxDistroInfo.SupportUrl =
                             releaseInfo[index].Replace("SUPPORT_URL=", string.Empty);
                     }
                     else if (line.StartsWith("BUG_"))
                     {
-                        linuxDistributionInformation.BugReportUrl =
+                        linuxDistroInfo.BugReportUrl =
                             releaseInfo[index].Replace("BUG_REPORT_URL=", string.Empty);
                     }
                     else if (line.StartsWith("PRIVACY_"))
                     {
-                        linuxDistributionInformation.PrivacyPolicyUrl =
+                        linuxDistroInfo.PrivacyPolicyUrl =
                             releaseInfo[index].Replace("PRIVACY_POLICY_URL=", string.Empty);
                     }
                 }
             }
 
-            return linuxDistributionInformation;
+            return linuxDistroInfo;
         }
 
         internal static string[] RemoveUnwantedCharacters(string[] data)

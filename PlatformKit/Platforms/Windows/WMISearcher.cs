@@ -104,11 +104,11 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var task = await ClassicPowershellCommand.Create()
+            var result = await ClassicPowershellCommand.Create()
                 .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
                 .ExecuteBufferedAsync();
             
-            string[] arr = task.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
+            string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 
             foreach (string str in arr)
             {

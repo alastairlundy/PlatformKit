@@ -87,7 +87,8 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
         
-            string result = await macOperatingSystem.GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
+            string result = await macOperatingSystem.GetMacSystemProfilerInformationAsync(
+                MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
 
             if (result.ToLower().Contains("disabled"))
             {

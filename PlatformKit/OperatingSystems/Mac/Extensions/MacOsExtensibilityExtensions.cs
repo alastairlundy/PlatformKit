@@ -81,7 +81,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 .WithValidation(CommandResultValidation.None)
                 .ExecuteBufferedAsync();
 
-            string info = result.StandardOutput.ToString();
+            string info = result.StandardOutput;
 
 #if NETSTANDARD2_0_OR_GREATER
         string[] array = info.Split(Convert.ToChar(Environment.NewLine));

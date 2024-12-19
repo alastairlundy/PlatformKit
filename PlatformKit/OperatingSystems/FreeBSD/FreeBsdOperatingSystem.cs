@@ -88,9 +88,9 @@ namespace PlatformKit.OperatingSystems.FreeBSD
 #endif
         public override async Task<string> GetOperatingSystemBuildNumberAsync()
         {
-            var task = await GetOperatingSystemVersionAsync();
+            Version result = await GetOperatingSystemVersionAsync();
             
-            return task.Build.ToString();
+            return result.Build.ToString();
         }
     }
 }

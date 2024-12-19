@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
+
 using PlatformKit.OperatingSystems.Windows.Extensions.Extensibility;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -62,8 +63,8 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            WindowsSystemInformationModel systemInformationModel = await windowsOperatingSystem.GetWindowsSystemInformationAsync();
-            string edition = systemInformationModel.OsName.ToLower();
+            WindowsSystemInformationModel systemInfoModel = await windowsOperatingSystem.GetWindowsSystemInformationAsync();
+            string edition = systemInfoModel.OsName.ToLower();
                 
             if (edition.Contains("home"))
             {
