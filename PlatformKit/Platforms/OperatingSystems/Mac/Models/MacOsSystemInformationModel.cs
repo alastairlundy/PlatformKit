@@ -1,7 +1,7 @@
 ﻿/*
         MIT License
        
-       Copyright (c) 2024 Alastair Lundy
+       Copyright (c) 2020-2024 Alastair Lundy
        
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
@@ -23,16 +23,32 @@
    */
 
 using System;
-using System.Threading.Tasks;
 
-namespace PlatformKit.OperatingSystems
+namespace PlatformKit.OperatingSystems.Mac
 {
-    public interface IOperatingSystem
+    /// <summary>
+    /// A class to represent basic macOS System Information.
+    /// </summary>
+    public class MacOsSystemInformationModel
     {
-        Task<Version> GetOperatingSystemVersionAsync();
+        public Version MacOsVersion { get; protected set; }
+    
+        public Version DarwinVersion { get; protected set; }
+    
+        public Version XnuVersion { get; protected set; } 
+    
+        public string MacOsBuildNumber { get; protected set; }
+    
+        public bool IsAppleSiliconMac { get; protected set; }
 
-        Task<Version> GetKernelVersionAsync();
 
-        Task<string> GetOperatingSystemBuildNumberAsync();
+        public MacOsSystemInformationModel(Version macOsVersion, Version darwinVersion, Version xnuVersion, string macOsBuildNumber, bool isAppleSiliconMac = false)
+        {
+            MacOsVersion = macOsVersion;
+            DarwinVersion = darwinVersion;
+            XnuVersion = xnuVersion;
+            MacOsBuildNumber = macOsBuildNumber;
+            IsAppleSiliconMac = isAppleSiliconMac;
+        }
     }
 }

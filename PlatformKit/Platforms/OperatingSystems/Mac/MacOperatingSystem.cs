@@ -38,7 +38,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 namespace PlatformKit.OperatingSystems.Mac
 {
 
-    public class MacOperatingSystem : IOperatingSystem
+    public partial class MacOperatingSystem : IOperatingSystem
     {
         /// <summary>
         /// Detects the macOS version and returns it as a System.Version object.

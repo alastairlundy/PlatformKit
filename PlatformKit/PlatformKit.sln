@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.csproj", "{F342367A-019D-4361-9796-0B8C2CC36928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "..\PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -39,7 +39,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 namespace PlatformKit.OperatingSystems.Linux
 {
 
-    public class LinuxOperatingSystem : IOperatingSystem
+    public partial class LinuxOperatingSystem : IOperatingSystem
     {
 
         /// <summary>
@@ -48,7 +48,9 @@ namespace PlatformKit.OperatingSystems.Linux
         /// <returns>the linux kernel version as a C# Version object.</returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("linux")]
+        [UnsupportedOSPlatform("windows")]
+        [UnsupportedOSPlatform("macos")]
 #endif
         public async Task<Version> GetKernelVersionAsync()
         {

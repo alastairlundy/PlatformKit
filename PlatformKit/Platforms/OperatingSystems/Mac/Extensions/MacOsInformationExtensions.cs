@@ -60,7 +60,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
             {
                 Architecture.Arm64 => true,
                 Architecture.X64 => false,
-                _ => throw new PlatformNotSupportedException()
+                _ => false
             };        
 #else
             switch (RuntimeInformation.OSArchitecture)
@@ -70,7 +70,7 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 case Architecture.X64:
                     return false;
                 default:
-                    throw new PlatformNotSupportedException();
+                    return false;
             }
 #endif
         }
@@ -102,34 +102,6 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
         }
         
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("macos")]
-        [SupportedOSPlatform("maccatalyst")]
-        [UnsupportedOSPlatform("windows")]
-        [UnsupportedOSPlatform("linux")]
-        [UnsupportedOSPlatform("browser")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("android")]
-        [UnsupportedOSPlatform("watchos")]
-        [UnsupportedOSPlatform("tvos")]
-#endif
-        public static MacProcessorType GetMacProcessorType(this MacOperatingSystem macOperatingSystem)
-        {
-            switch (RuntimeInformation.OSArchitecture)
-            {
-                case Architecture.Arm64:
-                    return MacProcessorType.AppleSilicon;
-                case Architecture.X64:
-                    return MacProcessorType.Intel;
-                default:
-                    return MacProcessorType.NotSupported;
-            }
-        }
-        
-        /// <summary>
         /// Detects macOS System Information.
         /// </summary>
         /// <returns></returns>
@@ -151,14 +123,12 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
 
-            return await Task.FromResult(new MacOsSystemInformationModel
-            {
-                ProcessorType = macOperatingSystem.GetMacProcessorType(),
-                MacOsBuildNumber = await macOperatingSystem.GetOperatingSystemBuildNumberAsync(),
-                MacOsVersion = await macOperatingSystem.GetOperatingSystemVersionAsync(),
-                DarwinVersion = macOperatingSystem.GetDarwinVersion(),
-                XnuVersion = await macOperatingSystem.GetKernelVersionAsync()
-            });
+            return await Task.FromResult(new MacOsSystemInformationModel(
+                await macOperatingSystem.GetOperatingSystemVersionAsync(),
+                macOperatingSystem.GetDarwinVersion(),
+                await macOperatingSystem.GetKernelVersionAsync(),
+                await macOperatingSystem.GetOperatingSystemBuildNumberAsync(),
+                macOperatingSystem.IsAppleSiliconMac()));
         }
     }
 }

@@ -35,7 +35,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 
 namespace PlatformKit.OperatingSystems.Windows
 {
-    public class WindowsOperatingSystem : IOperatingSystem
+    public partial class WindowsOperatingSystem : IOperatingSystem
     {
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version

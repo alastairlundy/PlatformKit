@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -22,29 +22,33 @@
        SOFTWARE.
    */
 
-// ReSharper disable All
+using System.Linq;
+using System.Threading.Tasks;
 
-using System;
-using PlatformKit.Internal.Deprecation;
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
 
-namespace PlatformKit.OperatingSystems.Mac
+namespace PlatformKit.OperatingSystems.Extensions;
+
+public static class IsAppInstalledExtension
 {
     /// <summary>
-    /// An enum representing macOS versions.
+    /// Determine whether an app is installed or not.
     /// </summary>
-    public enum MacOsVersion
+    /// <param name="operatingSystem"></param>
+    /// <param name="appName"></param>
+    /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("freebsd")]
+#endif
+    public static async Task<bool> IsAppInstalledAsync(this IOperatingSystem operatingSystem, string appName)
     {
-        v10_15_Catalina,
-        /// <summary>
-        /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
-        /// First version to support Apple Silicon Macs.
-        /// </summary>
-        v11_BigSur,
-        v12_Monterey,
-        v13_Ventura,
-        v14_Sonoma,
-        v15_Sequoia,
-        NotDetected,
-        NotSupported,
+        var apps = await operatingSystem.GetInstalledAppsAsync();
+        
+        return apps.Any(app => app.ExecutableName.Equals(appName));
     }
 }
