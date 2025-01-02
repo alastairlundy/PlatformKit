@@ -24,4 +24,7 @@
     <data name="Exceptions.PackageManager.NotInstalled" xml:space="preserve">
         <value>The package manager {x} is not installed on this device.</value>
     </data>
+    <data name="Exceptions.AppModels.NotInstalled" xml:space="preserve">
+        <value>The program or app {x} is not installed on this system. This could be because the program or app does not support this operating system.</value>
+    </data>
 </root>
