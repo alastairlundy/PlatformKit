@@ -30,8 +30,6 @@ using System.Runtime.Versioning;
 
 using AlastairLundy.Extensions.Strings.Versioning;
 
-using AlastairLundy.Extensions.Versions;
-    
 using CliWrap;
 using CliWrap.Buffered;
 using PlatformKit.Internal.Deprecation;
@@ -548,7 +546,7 @@ for (int index = 0; index < array.Length; index++)
         Version version = GetWindowsVersionFromEnum(windowsVersion);
         
         return OperatingSystem.IsWindowsVersionAtLeast(10,0,10240) 
-               && version.IsOlderThan(new Version(10, 0, 20349));
+               && version <= (new Version(10, 0, 20349));
     }
 
     /// <summary>

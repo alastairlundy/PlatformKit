@@ -25,8 +25,6 @@
 using System;
 using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.Versions;
-
 using CliWrap;
 using CliWrap.Buffered;
 
@@ -252,7 +250,7 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            return GetMacOsVersion().IsAtLeast(GetMacOsVersionFromEnum(macOsVersion));
+            return GetMacOsVersion() >= (GetMacOsVersionFromEnum(macOsVersion));
         }
         else
         {
@@ -271,7 +269,7 @@ namespace PlatformKit.Mac;
     {
         if (OperatingSystem.IsMacOS())
         {
-            return GetMacOsVersion().IsAtLeast(macOsVersion);
+            return GetMacOsVersion() >= (macOsVersion);
         }
         else
         {

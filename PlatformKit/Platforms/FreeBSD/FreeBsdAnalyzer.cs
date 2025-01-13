@@ -23,7 +23,7 @@
    */
 
 using System;
-using AlastairLundy.Extensions.Versions;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
@@ -75,7 +75,7 @@ public class FreeBsdAnalyzer
 #if NETSTANDARD2_0 || NETSTANDARD2_1
             return OperatingSystem.IsFreeBSDVersionAtLeast(expectedVersion);
 #else
-            return GetFreeBSDVersion().IsAtLeast(expectedVersion);
+            return GetFreeBSDVersion() >= (expectedVersion);
 #endif
         }
 

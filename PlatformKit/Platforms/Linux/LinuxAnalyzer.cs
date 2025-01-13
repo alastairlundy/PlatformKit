@@ -24,8 +24,6 @@
 
 using System;
 
-using AlastairLundy.Extensions.Versions;
-
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
@@ -154,7 +152,7 @@ public class LinuxAnalyzer
         {
             if (OperatingSystem.IsLinux())
             {
-                return GetLinuxKernelVersion().IsAtLeast(linuxKernelVersion);
+                return GetLinuxKernelVersion() >= (linuxKernelVersion);
             }
 
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
