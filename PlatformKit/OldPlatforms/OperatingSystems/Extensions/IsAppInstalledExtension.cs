@@ -22,8 +22,11 @@
        SOFTWARE.
    */
 
+using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
+using PlatformKit.Core.Models;
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
@@ -36,7 +39,7 @@ public static class IsAppInstalledExtension
     /// <summary>
     /// Determine whether an app is installed or not.
     /// </summary>
-    /// <param name="operatingSystem"></param>
+    /// <param name="installedApps"></param>
     /// <param name="appName"></param>
     /// <returns></returns>
 #if NET5_0_OR_GREATER
@@ -45,10 +48,8 @@ public static class IsAppInstalledExtension
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("freebsd")]
 #endif
-    public static async Task<bool> IsAppInstalledAsync(this IOperatingSystem operatingSystem, string appName)
+    public static bool IsAppInstalledAsync(this IEnumerable<AppModel> installedApps, string appName)
     {
-        var apps = await operatingSystem.GetInstalledAppsAsync();
-        
-        return apps.Any(app => app.ExecutableName.Equals(appName));
+        return installedApps.Any(app => app.ExecutableName.Equals(appName));
     }
 }
