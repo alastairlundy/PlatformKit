@@ -9,8 +9,11 @@
 
 using System;
 using System.Threading.Tasks;
+
 using CliRunner;
-using CliRunner.Commands.Buffered;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 
@@ -22,6 +25,12 @@ namespace PlatformKit.Providers
 {
     public class LinuxPlatformProvider : IPlatformProvider
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public LinuxPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
         
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
@@ -38,9 +47,9 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
-                BufferedCommandResult result = await Cli.Run("/usr/bin/uname")
+                BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
                     .WithArguments($"-v")
-                    .ExecuteBufferedAsync();
+                    .ExecuteBufferedAsync(_commandRunner);
 
                 string versionString = result.StandardOutput
                     .Replace(" ", string.Empty);

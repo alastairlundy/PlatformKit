@@ -14,8 +14,10 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Commands.Buffered;
-using CliRunner.Specializations.Commands;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
+using CliRunner.Specializations;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
@@ -25,6 +27,12 @@ namespace PlatformKit.Providers
 {
     public class WindowsPlatformProvider : IPlatformProvider
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public WindowsPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
         
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]        
@@ -81,9 +89,9 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            BufferedCommandResult result = await CmdCommand.Run()
+            BufferedCommandResult result = await CmdCommand.CreateInstance(_commandRunner)
                 .WithArguments("systeminfo")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             var lines = result.StandardOutput.Split(Environment.NewLine);
             

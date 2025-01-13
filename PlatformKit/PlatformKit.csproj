@@ -82,7 +82,6 @@
 
     <ItemGroup>
         <PackageReference Include="AlastairLundy.Extensions.Strings" Version="[5.5.0, 6.0.0)" />
-        <PackageReference Include="AlastairLundy.Extensions.Versions" Version="[5.5.0, 6.0.0)" />
         <PackageReference Include="CliRunner" Version="[0.8.0, 1.0.0)" />
         <PackageReference Include="CliRunner.Specializations" Version="[0.8.0, 1.0.0)" />
     </ItemGroup>
@@ -93,7 +92,7 @@
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
         <PackageReference Include="AlastairLundy.Extensions.Runtime" Version="[2.1.0, 3.0.0)" />
-        <PackageReference Include="Polyfill" Version="[7.11.0, 8.0.0)"/>
+        <PackageReference Include="Polyfill" Version="[7.12.0, 8.0.0)"/>
         <PackageReference Include="Microsoft.Bcl.HashCode" Version="[6.0.0, 7.0.0)"/>
     </ItemGroup>
 

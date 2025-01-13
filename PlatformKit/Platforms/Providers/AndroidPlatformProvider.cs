@@ -11,7 +11,9 @@ using System;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Commands.Buffered;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
 
 using PlatformKit.Specifics;
 
@@ -25,7 +27,13 @@ namespace PlatformKit.Providers
 {
     public class AndroidPlatformProvider : IAndroidPlatformProvider
     {
-     
+        private readonly ICommandRunner _commandRunner;
+
+        public AndroidPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -95,7 +103,7 @@ namespace PlatformKit.Providers
         {
             BufferedCommandResult result = await Cli.Run("getprop")
                 .WithArguments($"ro.build.version.{value}")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
 
             return result.StandardOutput.Replace(" ", string.Empty);
         }

@@ -12,7 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Commands.Buffered;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
@@ -21,6 +23,13 @@ namespace PlatformKit.Providers
 {
     public class UnixPlatformProvider : IPlatformProvider
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public UnixPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         public async Task<Platform> GetCurrentPlatformAsync()
         {
             throw new System.NotImplementedException();
@@ -33,10 +42,10 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            BufferedCommandResult result = await Cli.Run("/usr/bin/uname")
+            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Replace("BSD", string.Empty)

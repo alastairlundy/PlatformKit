@@ -9,8 +9,12 @@
 
 using System;
 using System.Threading.Tasks;
+
 using CliRunner;
-using CliRunner.Commands.Buffered;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
+
 using PlatformKit.Abstractions;
 
 #if NET5_0_OR_GREATER
@@ -21,6 +25,13 @@ namespace PlatformKit.Providers
 {
     public class DarwinPlatformProvider : IPlatformProvider
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public DarwinPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         public async Task<Platform> GetCurrentPlatformAsync()
         {
             Platform platform = new Platform(await GetOsNameAsync(),
@@ -42,8 +53,8 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetSwVersInfoAsync()
         {
-            var result = await Cli.Run("/usr/bin/sw_vers")
-                .ExecuteBufferedAsync();
+            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/sw_vers")
+                .ExecuteBufferedAsync(_commandRunner);
 
             return result.StandardOutput;
         }
@@ -78,9 +89,9 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
-                BufferedCommandResult result = await Cli.Run("/usr/bin/uname")
+                BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
                     .WithArguments($"-v")
-                    .ExecuteBufferedAsync();
+                    .ExecuteBufferedAsync(_commandRunner);
 
                 string versionString = result.StandardOutput
                     .Replace(" ", string.Empty);

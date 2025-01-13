@@ -8,6 +8,10 @@
  */
 
 using System;
+
+using CliRunner;
+using CliRunner.Abstractions;
+
 using PlatformKit.Abstractions;
 using PlatformKit.Providers;
 
@@ -15,10 +19,21 @@ namespace PlatformKit
 {
     public class DefaultPlatformProviderFactory : IPlatformProviderFactory
     {
+        private readonly ICommandRunner _commandRunner;
 
+        public DefaultPlatformProviderFactory(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         public static DefaultPlatformProviderFactory CreateFactory()
         {
-            return new DefaultPlatformProviderFactory();
+            return new DefaultPlatformProviderFactory(new CommandRunner(new CommandPipeHandler()));
+        }
+
+        public static DefaultPlatformProviderFactory CreateFactory(ICommandRunner commandRunner)
+        {
+            return new DefaultPlatformProviderFactory(commandRunner);
         }
 
         /// <summary>
@@ -88,13 +103,13 @@ namespace PlatformKit
         {
             return platformFamily switch
             {
-                PlatformFamily.WindowsNT => new WindowsPlatformProvider(),
-                PlatformFamily.Darwin => new DarwinPlatformProvider(),
-                PlatformFamily.Linux => new LinuxPlatformProvider(),
-                PlatformFamily.BSD => new BSDPlatformProvider(),
-                PlatformFamily.Android => new AndroidPlatformProvider(),
+                PlatformFamily.WindowsNT => new WindowsPlatformProvider(_commandRunner),
+                PlatformFamily.Darwin => new DarwinPlatformProvider(_commandRunner),
+                PlatformFamily.Linux => new LinuxPlatformProvider(_commandRunner),
+                PlatformFamily.BSD => new BSDPlatformProvider(_commandRunner),
+                PlatformFamily.Android => new AndroidPlatformProvider(_commandRunner),
                 PlatformFamily.Other => throw new PlatformNotSupportedException(),
-                PlatformFamily.Unix => new UnixPlatformProvider(),
+                PlatformFamily.Unix => new UnixPlatformProvider(_commandRunner),
                 _ => throw new ArgumentOutOfRangeException(nameof(platformFamily), platformFamily, null)
             };
         }

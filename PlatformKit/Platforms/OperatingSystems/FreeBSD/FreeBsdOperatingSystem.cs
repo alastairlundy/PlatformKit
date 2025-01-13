@@ -37,7 +37,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 
 namespace PlatformKit.OperatingSystems.FreeBSD
 {
-    public class FreeBsdOperatingSystem : IOperatingSystem
+    public class FreeBsdOperatingSystem
     {
         private readonly ICommandRunner _commandRunner;
 

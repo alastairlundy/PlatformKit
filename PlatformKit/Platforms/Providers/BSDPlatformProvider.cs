@@ -11,11 +11,19 @@
 
 using System;
 using System.Linq;
+
+#if NET5_0_OR_GREATER
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+#endif
+
 using System.Threading.Tasks;
+
 using CliRunner;
-using CliRunner.Commands.Buffered;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
+
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
@@ -23,6 +31,13 @@ namespace PlatformKit.Providers
 {
     public class BSDPlatformProvider : IPlatformProvider
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public BSDPlatformProvider(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("freebsd")]
 #endif
@@ -58,7 +73,7 @@ namespace PlatformKit.Providers
             BufferedCommandResult result = await Cli.Run("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Replace("BSD", string.Empty)
