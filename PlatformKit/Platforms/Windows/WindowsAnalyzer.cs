@@ -25,13 +25,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-using AlastairLundy.Extensions.Strings.Versioning;
-
 using CliWrap;
 using CliWrap.Buffered;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -453,7 +453,7 @@ for (int index = 0; index < array.Length; index++)
     {
         string compare = nextLine.Replace("[", string.Empty).Replace("]:", string.Empty);
 
-        int dotCounter = compare.CountDotsInString();
+        int dotCounter = compare.Count(c => c == '.');
 
         if (dotCounter >= 3 && wasLastLineNetworkLine)
         {
