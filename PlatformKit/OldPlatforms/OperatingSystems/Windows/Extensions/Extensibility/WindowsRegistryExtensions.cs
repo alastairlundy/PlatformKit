@@ -65,7 +65,6 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-            
             var result = await CmdCommand.CreateInstance()
                 .WithArguments($"REG QUERY {query}")
                 .WithWorkingDirectory(Environment.SystemDirectory)
