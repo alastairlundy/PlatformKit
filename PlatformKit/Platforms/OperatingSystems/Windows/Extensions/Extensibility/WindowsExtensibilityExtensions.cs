@@ -28,8 +28,9 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using AlastairLundy.Extensions.Strings.Versioning;
-
-using CliRunner.Specializations.Commands;
+using CliRunner;
+using CliRunner.Extensions;
+using CliRunner.Specializations;
 
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
@@ -87,10 +88,10 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         
             NetworkCardModel lastNetworkCard = null;
 
-            var descResult = await CmdCommand.Create()
+            var descResult = await CmdCommand.CreateInstance()
                 .WithArguments("systeminfo")
                 .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
 
             string desc = descResult.StandardOutput;
             

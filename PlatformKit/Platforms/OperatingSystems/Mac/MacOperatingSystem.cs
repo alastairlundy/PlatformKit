@@ -28,7 +28,8 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-
+using CliRunner.Abstractions;
+using CliRunner.Extensions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -40,6 +41,13 @@ namespace PlatformKit.OperatingSystems.Mac
 
     public partial class MacOperatingSystem : IOperatingSystem
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public MacOperatingSystem(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         /// <summary>
         /// Detects the macOS version and returns it as a System.Version object.
         /// </summary>
@@ -72,8 +80,8 @@ namespace PlatformKit.OperatingSystems.Mac
 #endif
         private async Task<string[]> GetMacSwVersInfoAsync()
         {
-            var result = await Cli.Run("/usr/bin/sw_vers")
-                .ExecuteBufferedAsync();
+            var result = await Command.CreateInstance("/usr/bin/sw_vers")
+                .ExecuteBufferedAsync(_commandRunner);
             
             // ReSharper disable once StringLiteralTypo
             return result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));

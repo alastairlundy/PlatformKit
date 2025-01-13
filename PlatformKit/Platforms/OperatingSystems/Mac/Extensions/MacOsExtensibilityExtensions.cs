@@ -27,8 +27,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Commands;
-
+using CliRunner.Extensions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -77,11 +76,11 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
                 
-            var result = await Cli.Run("/usr/bin/system_profiler")
+            var result = await Command.CreateInstance("/usr/bin/system_profiler")
                 .WithArguments("SP" + macSystemProfilerDataType)
                 .WithWorkingDirectory("/usr/bin/")
                 .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
 
             string info = result.StandardOutput;
 

@@ -26,8 +26,9 @@ using System;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-
-using CliRunner.Specializations.Commands;
+using CliRunner;
+using CliRunner.Extensions;
+using CliRunner.Specializations;
 
 using PlatformKit.Internal.Localizations;
 
@@ -70,9 +71,9 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            var task = await ClassicPowershellCommand.Create()
+            var task = await ClassicPowershellCommand.CreateInstance()
                 .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
             
             return task.StandardOutput;
         }
@@ -104,9 +105,9 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await ClassicPowershellCommand.Create()
+            var result = await ClassicPowershellCommand.CreateInstance()
                 .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
             
             string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 

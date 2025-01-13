@@ -23,9 +23,13 @@
    */
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using CliRunner;
+using CliRunner.Abstractions;
+using CliRunner.Extensions;
+using PlatformKit.Core.Models;
 using PlatformKit.Internal.Localizations;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -35,7 +39,13 @@ namespace PlatformKit.OperatingSystems.FreeBSD
 {
     public class FreeBsdOperatingSystem : IOperatingSystem
     {
+        private readonly ICommandRunner _commandRunner;
 
+        public FreeBsdOperatingSystem(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         // ReSharper disable once InconsistentNaming
         /// <summary>
         /// Detects and Returns the Installed version of FreeBSD
@@ -59,10 +69,10 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            var result = await Cli.Run("/usr/bin/uname")
+            var result = await Command.CreateInstance("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release", string.Empty);
@@ -106,6 +116,11 @@ namespace PlatformKit.OperatingSystems.FreeBSD
             Version result = await GetOperatingSystemVersionAsync();
             
             return result.Build.ToString();
+        }
+
+        public Task<IEnumerable<AppModel>> GetInstalledAppsAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -26,8 +26,9 @@ using System;
 
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-
-using CliRunner.Specializations.Commands;
+using CliRunner;
+using CliRunner.Extensions;
+using CliRunner.Specializations;
 
 using PlatformKit.Internal.Localizations;
 // ReSharper disable RedundantBoolCompare
@@ -65,10 +66,10 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await CmdCommand.Create()
+            var result = await CmdCommand.CreateInstance()
                 .WithArguments($"REG QUERY {query}")
                 .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
                 
             if (string.IsNullOrEmpty(result.StandardOutput) == false)
             {
@@ -104,10 +105,10 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await CmdCommand.Create()
+            var result = await CmdCommand.CreateInstance()
                 .WithArguments($"REG QUERY {query} /v {value}")
                 .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
                 
             if (string.IsNullOrEmpty(result.StandardOutput) == false)
             {

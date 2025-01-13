@@ -5,7 +5,8 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-
+using CliRunner.Abstractions;
+using CliRunner.Extensions;
 using PlatformKit.Core.Models;
 using PlatformKit.Internal.Localizations;
 
@@ -17,6 +18,13 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 
 public partial class LinuxOperatingSystem : IOperatingSystem
 {
+    private readonly ICommandRunner _commandRunner;
+
+    public LinuxOperatingSystem(ICommandRunner commandRunner)
+    {
+        _commandRunner = commandRunner;
+    }
+    
     /// <summary>
     /// 
     /// </summary>
@@ -34,10 +42,10 @@ public partial class LinuxOperatingSystem : IOperatingSystem
         
         List<AppModel> apps = new List<AppModel>();
 
-        var result = await Cli.Run("/usr/bin/ls")
+        var result = await Command.CreateInstance("/usr/bin/ls")
             .WithArguments(" -F /usr/bin | grep -v /")
             .WithWorkingDirectory(Environment.SystemDirectory)
-            .ExecuteBufferedAsync();
+            .ExecuteBufferedAsync(_commandRunner);
 
 #if NET5_0_OR_GREATER
         string[] array = result.StandardOutput.Split(Environment.NewLine);
