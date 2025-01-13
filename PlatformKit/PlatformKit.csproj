@@ -57,7 +57,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Platforms" />
+      <Folder Include="OldPlatforms\" />
+      <Folder Include="OldPlatforms\OperatingSystems\Mac\Models\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -92,6 +93,8 @@
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
         <PackageReference Include="AlastairLundy.Extensions.Runtime" Version="[2.1.0, 3.0.0)" />
+        <PackageReference Include="Polyfill" Version="[7.11.0, 8.0.0)"/>
+        <PackageReference Include="Microsoft.Bcl.HashCode" Version="[6.0.0, 7.0.0)"/>
     </ItemGroup>
 
     <ItemGroup>
