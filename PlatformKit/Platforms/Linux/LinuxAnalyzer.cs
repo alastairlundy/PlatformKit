@@ -23,7 +23,7 @@
    */
 
 using System;
-
+using System.Runtime.Versioning;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
@@ -48,6 +48,9 @@ public class LinuxAnalyzer
         /// <returns>the distro base of the currently running Linux Distribution</returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5 + "\n Use LinuxOsReleaseRetriever.GetDistroBase() instead.")]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static LinuxDistroBase GetDistroBase()
         {
             if (OperatingSystem.IsLinux())
@@ -64,6 +67,9 @@ public class LinuxAnalyzer
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5 + "\n Use LinuxOsReleaseRetriever.GetDistroBase() instead.")]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static LinuxDistroBase GetDistroBase(LinuxOsReleaseModel linuxOsRelease)
         {
             string identifierLike = linuxOsRelease.Identifier_Like.ToLower();
@@ -92,6 +98,9 @@ public class LinuxAnalyzer
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static LinuxOsReleaseModel GetLinuxDistributionInformation()
         {
             return LinuxOsReleaseRetriever.GetLinuxOsRelease();
@@ -104,6 +113,9 @@ public class LinuxAnalyzer
         /// <returns>the version of the linux distribution being run.</returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static Version GetLinuxDistributionVersion()
         {
             if (OperatingSystem.IsLinux())
@@ -120,6 +132,9 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns>the version of the linux distribution being run as a string.</returns>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static string GetLinuxDistributionVersionAsString()
         {
             return LinuxOsReleaseRetriever.GetLinuxDistributionVersionAsString(LinuxOsReleaseRetriever.GetLinuxOsRelease());
@@ -130,6 +145,9 @@ public class LinuxAnalyzer
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static Version GetLinuxKernelVersion()
         {
             if (OperatingSystem.IsLinux())
@@ -148,6 +166,9 @@ public class LinuxAnalyzer
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if not run on a Linux based Operating System.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
         public static bool IsAtLeastKernelVersion(Version linuxKernelVersion)
         {
             if (OperatingSystem.IsLinux())
