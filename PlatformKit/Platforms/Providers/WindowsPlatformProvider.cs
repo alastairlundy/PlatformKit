@@ -23,6 +23,10 @@ using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specifics;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+#endif
+
 namespace PlatformKit.Providers
 {
     public class WindowsPlatformProvider : IPlatformProvider
@@ -41,10 +45,21 @@ namespace PlatformKit.Providers
         {
             Version platformVersion = GetOsVersion();
 
+            string buildNumber = "";
+            if (platformVersion.Revision == 0)
+            {
+                buildNumber = platformVersion.Build.ToString();
+            }
+            else
+            {
+                buildNumber = $"{platformVersion.Build}.{platformVersion.Revision}";
+            }
+
             Platform platform = new Platform(await GetOsNameAsync(),
                 platformVersion,
                 platformVersion,
-                PlatformFamily.WindowsNT);
+                PlatformFamily.WindowsNT,
+                buildNumber);
             
             return platform;
         }

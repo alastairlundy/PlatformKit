@@ -17,6 +17,10 @@ using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+#endif
+
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
 #endif
@@ -37,9 +41,15 @@ namespace PlatformKit.Providers
             Platform platform = new Platform(await GetOsNameAsync(),
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
-                PlatformFamily.Darwin);
+                PlatformFamily.Darwin,
+                await GetBuildNumberAsync());
 
             return platform;
+        }
+
+        private async Task<string> GetBuildNumberAsync()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<string> GetOsNameAsync()

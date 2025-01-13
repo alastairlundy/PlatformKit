@@ -27,6 +27,10 @@ using CliRunner.Extensions;
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+#endif
+
 namespace PlatformKit.Providers
 {
     public class BSDPlatformProvider : IPlatformProvider
@@ -47,9 +51,15 @@ namespace PlatformKit.Providers
                 await GetOsNameAsync(),
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
-                PlatformFamily.BSD);
+                PlatformFamily.BSD,
+                await GetBuildNumberAsync());
             
             return platform;
+        }
+
+        private async Task<string> GetBuildNumberAsync()
+        {
+            throw new NotImplementedException();
         }
 
 #if NET5_0_OR_GREATER

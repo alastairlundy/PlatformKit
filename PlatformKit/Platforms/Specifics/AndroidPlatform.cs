@@ -23,7 +23,7 @@ namespace PlatformKit.Specifics
         /// </summary>
         public string VersionCodeName { get; }
         
-        public AndroidPlatform(string name, Version operatingSystemVersion, Version kernelVersion, int sdkLevel, string versionCodeName) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.Android)
+        public AndroidPlatform(string name, Version operatingSystemVersion, Version kernelVersion, int sdkLevel, string versionCodeName, string buildNumber) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.Android, buildNumber)
         {
             SdkLevel = sdkLevel;
             VersionCodeName = versionCodeName;
@@ -46,6 +46,7 @@ namespace PlatformKit.Specifics
                    Name.Equals(other.Name) &&
                    OperatingSystemVersion.Equals(other.OperatingSystemVersion) &&
                    KernelVersion.Equals(other.KernelVersion) &&
+                   BuildNumber.Equals(other.BuildNumber) &&
                    Family.Equals(other.Family);
         }
 
@@ -72,7 +73,7 @@ namespace PlatformKit.Specifics
         public override int GetHashCode()
         {
             return HashCode.Combine(SdkLevel, VersionCodeName,
-                Name, OperatingSystemVersion, KernelVersion, Family);
+                Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber);
         }
         
         /// <summary>
@@ -82,7 +83,7 @@ namespace PlatformKit.Specifics
         public new object Clone()
         {
             return new AndroidPlatform(Name, OperatingSystemVersion,
-                KernelVersion, SdkLevel, VersionCodeName);
+                KernelVersion, SdkLevel, VersionCodeName, BuildNumber);
         }
     }
 }

@@ -41,16 +41,22 @@ namespace PlatformKit
         /// <summary>
         /// 
         /// </summary>
+        public string BuildNumber { get; }
+        
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="operatingSystemVersion"></param>
         /// <param name="kernelVersion"></param>
         /// <param name="family"></param>
-        public Platform(string name, Version operatingSystemVersion, Version kernelVersion, PlatformFamily family)
+        public Platform(string name, Version operatingSystemVersion, Version kernelVersion, PlatformFamily family, string buildNumber)
         {
             Name = name;
             OperatingSystemVersion = operatingSystemVersion;
             KernelVersion = kernelVersion;
             Family = family;
+            BuildNumber = buildNumber;
         }
 
         /// <summary>
@@ -59,7 +65,7 @@ namespace PlatformKit
         /// <returns></returns>
         public object Clone()
         {
-            return new Platform(Name, OperatingSystemVersion, KernelVersion, Family);
+            return new Platform(Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber);
         }
         
         /// <summary>
@@ -77,7 +83,8 @@ namespace PlatformKit
             return OperatingSystemVersion.Equals(other.OperatingSystemVersion) 
                    && KernelVersion.Equals(other.KernelVersion)
                    && Family.Equals(other.Family)
-                   && Name.Equals(other.Name);
+                   && Name.Equals(other.Name) 
+                   && BuildNumber.Equals(other.BuildNumber);
         }
 
         /// <summary>
@@ -96,7 +103,7 @@ namespace PlatformKit
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, OperatingSystemVersion, KernelVersion, (int)Family);
+            return HashCode.Combine(Name, OperatingSystemVersion, KernelVersion, (int)Family, BuildNumber);
         }
 
         /// <summary>

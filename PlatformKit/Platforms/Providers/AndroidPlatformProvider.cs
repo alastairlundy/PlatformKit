@@ -19,6 +19,10 @@ using PlatformKit.Specifics;
 
 using PlatformKit.Specifics.Abstractions;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+#endif
+
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
 #endif
@@ -47,7 +51,8 @@ namespace PlatformKit.Providers
                 await GetPlatformNameAsync(),
                 await GetPlatformVersionAsync(),
                 await GetPlatformKernelVersionAsync(),
-                PlatformFamily.Android);
+                PlatformFamily.Android,
+                await GetBuildNumberAsync());
         }
         
         /// <summary>
@@ -63,7 +68,13 @@ namespace PlatformKit.Providers
                 await GetPlatformVersionAsync(),
                 await GetPlatformKernelVersionAsync(),
                 await GetSdkLevelAsync(),
-                await GetCodeNameAsync());
+                await GetCodeNameAsync(),
+                await GetBuildNumberAsync());
+        }
+
+        private async Task<string> GetBuildNumberAsync()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<string> GetPlatformNameAsync()

@@ -13,11 +13,9 @@ namespace PlatformKit.Specifics;
 
 public class WindowsPlatform : Platform, IEquatable<WindowsPlatform>
 {
-    public string BuildNumber { get; private set; }
-    
-    public WindowsPlatform(string name, Version operatingSystemVersion, Version kernelVersion, string buildNumber) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.WindowsNT)
+    public WindowsPlatform(string name, Version operatingSystemVersion, Version kernelVersion, string buildNumber) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.WindowsNT, buildNumber)
     {
-        BuildNumber = buildNumber;
+        
     }
 
     public bool Equals(WindowsPlatform other)
