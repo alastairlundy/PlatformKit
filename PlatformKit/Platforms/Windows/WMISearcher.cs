@@ -26,9 +26,8 @@ using System;
 using System.Runtime.Versioning;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
-
 namespace PlatformKit.Windows;
 
 /// <summary>

@@ -28,7 +28,7 @@ using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 
 namespace PlatformKit.FreeBSD;
@@ -51,7 +51,7 @@ public class FreeBsdAnalyzer
         if (OperatingSystem.IsFreeBSD())
         {
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-            return OperatingSystem.Version;
+            return Environment.OSVersion.Version;
 #else
             return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release",  string.Empty));
@@ -73,7 +73,7 @@ public class FreeBsdAnalyzer
         if (OperatingSystem.IsFreeBSD())
         {
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-            return OperatingSystem.IsFreeBSDVersionAtLeast(expectedVersion);
+            return OperatingSystem.IsFreeBSDVersionAtLeast(expectedVersion.Major, expectedVersion.Minor, expectedVersion.Build, expectedVersion.Revision);
 #else
             return GetFreeBSDVersion() >= (expectedVersion);
 #endif

@@ -40,7 +40,7 @@ using PlatformKit.Internal.Localizations;
 
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 
 // ReSharper disable InconsistentNaming
@@ -156,11 +156,11 @@ namespace PlatformKit.Identification
             }
             if (OperatingSystem.IsFreeBSD())
             {
-                #if NETSTANDARD2_0
-                osVersion = OperatingSystem.Version.ToString();
-                #else
+#if NETSTANDARD2_0
+                osVersion = Environment.OSVersion.Version.ToString();
+#else
                 osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
-                #endif
+#endif
                 
                 switch (osVersion.CountDotsInString())
                 {
