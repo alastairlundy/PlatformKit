@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -43,6 +44,8 @@ namespace PlatformKit
         /// </summary>
         public string BuildNumber { get; }
         
+        public Architecture ProcessorArchitecture { get; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -50,13 +53,18 @@ namespace PlatformKit
         /// <param name="operatingSystemVersion"></param>
         /// <param name="kernelVersion"></param>
         /// <param name="family"></param>
-        public Platform(string name, Version operatingSystemVersion, Version kernelVersion, PlatformFamily family, string buildNumber)
+        /// <param name="buildNumber"></param>
+        /// <param name="processorArchitecture"></param>
+        public Platform(string name, Version operatingSystemVersion, Version kernelVersion,
+            PlatformFamily family, string buildNumber,
+            Architecture processorArchitecture)
         {
             Name = name;
             OperatingSystemVersion = operatingSystemVersion;
             KernelVersion = kernelVersion;
             Family = family;
             BuildNumber = buildNumber;
+            ProcessorArchitecture = processorArchitecture;
         }
 
         /// <summary>
@@ -65,7 +73,7 @@ namespace PlatformKit
         /// <returns></returns>
         public object Clone()
         {
-            return new Platform(Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber);
+            return new Platform(Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber, ProcessorArchitecture);
         }
         
         /// <summary>
@@ -84,7 +92,8 @@ namespace PlatformKit
                    && KernelVersion.Equals(other.KernelVersion)
                    && Family.Equals(other.Family)
                    && Name.Equals(other.Name) 
-                   && BuildNumber.Equals(other.BuildNumber);
+                   && BuildNumber.Equals(other.BuildNumber)
+                   && ProcessorArchitecture.Equals(other.ProcessorArchitecture);
         }
 
         /// <summary>
