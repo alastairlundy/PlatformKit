@@ -8,31 +8,76 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
+using PlatformKit.Specializations.Windows;
+
+// ReSharper disable ConvertToPrimaryConstructor
 
 namespace PlatformKit.Specifics;
 
 public class WindowsPlatform : Platform, IEquatable<WindowsPlatform>
 {
-    public WindowsPlatform(string name, Version operatingSystemVersion, Version kernelVersion, string buildNumber) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.WindowsNT, buildNumber)
+    /// <summary>
+    /// 
+    /// </summary>
+    public WindowsEdition Edition { get; }
+    
+    public WindowsPlatform(string name, Version operatingSystemVersion, Version kernelVersion, string buildNumber,
+        WindowsEdition edition, Architecture processorArchitecture) : base(name, operatingSystemVersion, kernelVersion,
+        PlatformFamily.WindowsNT, buildNumber, processorArchitecture)
     {
-        
+        Edition = edition;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     public bool Equals(WindowsPlatform other)
     {
-        throw new NotImplementedException();
+        if (other == null)
+        {
+            return false;
+        }
+        
+        return Name == other.Name && Edition == other.Edition
+            && OperatingSystemVersion == other.OperatingSystemVersion
+            && KernelVersion == other.KernelVersion
+            && BuildNumber == other.BuildNumber
+            && Family == other.Family;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != GetType()) return false;
-        return Equals((WindowsPlatform)obj);
+        if (obj is null)
+        {
+            return false;
+        }
+
+        if (obj is WindowsPlatform platform)
+        {
+            return Equals(platform);
+        }
+        // ReSharper disable once RedundantIfElseBlock
+        else
+        {
+            return false;
+        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public override int GetHashCode()
     {
-        throw new NotImplementedException();
+       return HashCode.Combine(Name, Edition, OperatingSystemVersion, KernelVersion, BuildNumber, Family,
+           ProcessorArchitecture);
     }
 }
