@@ -10,6 +10,7 @@
 // ReSharper disable InconsistentNaming
 
 using System;
+using System.IO;
 using System.Linq;
 
 #if NET5_0_OR_GREATER
@@ -42,8 +43,27 @@ namespace PlatformKit.Providers
         {
             _commandRunner = commandRunner;
         }
-
-        public async Task<string> GetUnameValueAsync(string argument)
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("freebsd")]
+#endif
+        public async Task<Platform> GetCurrentPlatformAsync()
+        {
+            Platform platform = new Platform(
+                await GetOsNameAsync(),
+                await GetOsVersionAsync(),
+                await GetKernelVersionAsync(),
+                PlatformFamily.BSD,
+                await GetBuildNumberAsync(),
+                await GetProcessorArchitectureAsync());
+            
+            return platform;
+        }
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("freebsd")]
+#endif
+        private async Task<string> GetUnameValueAsync(string argument)
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
@@ -57,20 +77,10 @@ namespace PlatformKit.Providers
             
             return result.StandardOutput;
         }
-        
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("freebsd")]
-#endif
-        public async Task<Platform> GetCurrentPlatformAsync()
+
+        private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-            Platform platform = new Platform(
-                await GetOsNameAsync(),
-                await GetOsVersionAsync(),
-                await GetKernelVersionAsync(),
-                PlatformFamily.BSD,
-                await GetBuildNumberAsync());
             
-            return platform;
         }
 
         private async Task<string> GetBuildNumberAsync()
@@ -83,7 +93,27 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetOsNameAsync()
         {
-            
+            if (OperatingSystem.IsFreeBSD())
+            {
+                try
+                {
+                    string[] lines = await File.ReadAllLinesAsync("/etc/freebsd-release");
+
+                    string result = lines.First(x => 
+                            x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))
+                        .Replace("Name=", string.Empty);
+
+                    return result;
+                }
+                catch
+                {
+                    return "FreeBSD";
+                }
+            }
+            else
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
+            }   
         }
         
 #if NET5_0_OR_GREATER
