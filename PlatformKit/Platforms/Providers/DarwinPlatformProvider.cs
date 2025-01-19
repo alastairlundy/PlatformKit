@@ -9,6 +9,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -17,6 +18,7 @@ using CliRunner.Buffered;
 using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -24,6 +26,7 @@ using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSyst
 
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
+// ReSharper disable RedundantBoolCompare
 #endif
 
 namespace PlatformKit.Providers
@@ -38,20 +41,64 @@ namespace PlatformKit.Providers
             _commandRunner = commandRunner;
         }
         
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("watchos")]
+        [SupportedOSPlatform("tvos")]
+#endif
         public async Task<Platform> GetCurrentPlatformAsync()
         {
             Platform platform = new Platform(await GetOsNameAsync(),
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
                 PlatformFamily.Darwin,
-                await GetBuildNumberAsync());
+                await GetBuildNumberAsync(),
+                await GetProcessorArchitectureAsync());
 
             return platform;
         }
 
+        private async Task<Architecture> GetProcessorArchitectureAsync()
+        {
+            if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("watchos")]
+        [SupportedOSPlatform("tvos")]
+#endif
         private async Task<string> GetBuildNumberAsync()
         {
+            if (OperatingSystem.IsMacOS() == false || OperatingSystem.IsMacCatalyst() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
+
+            if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
+            {
+                string result = await GetSwVersInfoAsync();
+
+                string[] resultArray = result.Split(Environment.NewLine);
             
+                return resultArray[2].ToLower().Replace("BuildVersion:",
+                    string.Empty).Replace(" ", string.Empty);
+            }
+            else
+            {
+                return Environment.OSVersion.Version.Build.ToString();
+            }
         }
 
         private async Task<string> GetOsNameAsync()
@@ -62,6 +109,9 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("tvos")]
 #endif
         private async Task<string> GetSwVersInfoAsync()
         {
@@ -74,6 +124,9 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
 #endif
         private async Task<Version> GetOsVersionAsync()
         {
@@ -96,6 +149,7 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
+        
 #endif
         private async Task<Version> GetKernelVersionAsync()
         {
