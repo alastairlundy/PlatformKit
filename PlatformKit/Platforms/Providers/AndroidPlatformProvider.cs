@@ -112,7 +112,7 @@ namespace PlatformKit.Providers
 
         private async Task<string> GetPropValueAsync(string value)
         {
-            BufferedCommandResult result = await Cli.Run("getprop")
+            BufferedCommandResult result = await Command.CreateInstance("getprop")
                 .WithArguments($"ro.build.version.{value}")
                 .ExecuteBufferedAsync(_commandRunner);
 

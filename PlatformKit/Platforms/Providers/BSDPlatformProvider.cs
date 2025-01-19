@@ -42,6 +42,21 @@ namespace PlatformKit.Providers
         {
             _commandRunner = commandRunner;
         }
+
+        public async Task<string> GetUnameValueAsync(string argument)
+        {
+            if (OperatingSystem.IsFreeBSD() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
+            }
+
+            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
+                .WithArguments(argument)
+                .WithWorkingDirectory(Environment.CurrentDirectory)
+                .ExecuteBufferedAsync(_commandRunner);
+            
+            return result.StandardOutput;
+        }
         
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("freebsd")]
@@ -60,7 +75,7 @@ namespace PlatformKit.Providers
 
         private async Task<string> GetBuildNumberAsync()
         {
-            throw new NotImplementedException();
+           
         }
 
 #if NET5_0_OR_GREATER
@@ -76,17 +91,9 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetOsVersionAsync()
         {
-            if (OperatingSystem.IsFreeBSD() == false)
-            {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
-            }
-
-            BufferedCommandResult result = await Cli.Run("/usr/bin/uname")
-                .WithArguments("-v")
-                .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync(_commandRunner);
+            string result = await GetUnameValueAsync("-v");
             
-            string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
+            string versionString = result.Replace("FreeBSD", string.Empty)
                 .Replace("BSD", string.Empty)
                 .Split(' ').First().Replace("-release", string.Empty);
             
@@ -98,7 +105,13 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetKernelVersionAsync()
         {
+            string result = await GetUnameValueAsync("-k");
             
+            string versionString = result.Replace("FreeBSD", string.Empty)
+                .Replace("BSD", string.Empty)
+                .Split(' ').First().Replace("-release", string.Empty);
+            
+            return Version.Parse(versionString);
         }
     }
 }

@@ -82,8 +82,8 @@
 
     <ItemGroup>
         <PackageReference Include="AlastairLundy.Extensions.Strings" Version="[5.5.0, 6.0.0)" />
-        <PackageReference Include="CliRunner" Version="[0.8.0, 1.0.0)" />
-        <PackageReference Include="CliRunner.Specializations" Version="[0.8.0, 1.0.0)" />
+        <PackageReference Include="CliRunner" Version="[0.9.0, 1.0.0)" />
+        <PackageReference Include="CliRunner.Specializations" Version="[0.9.0, 1.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
