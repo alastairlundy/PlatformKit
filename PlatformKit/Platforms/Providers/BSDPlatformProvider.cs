@@ -13,11 +13,6 @@ using System;
 using System.IO;
 using System.Linq;
 
-#if NET5_0_OR_GREATER
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
-#endif
-
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -31,6 +26,9 @@ using PlatformKit.Internal.Localizations;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 // ReSharper disable ConvertToPrimaryConstructor
+#else
+using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Providers
