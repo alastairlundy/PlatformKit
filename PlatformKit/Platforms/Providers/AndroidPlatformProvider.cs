@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -52,9 +53,10 @@ namespace PlatformKit.Providers
                 await GetPlatformVersionAsync(),
                 await GetPlatformKernelVersionAsync(),
                 PlatformFamily.Android,
-                await GetBuildNumberAsync());
+                await GetBuildNumberAsync(),
+                await GetProcessorArchitectureAsync());
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,17 +71,59 @@ namespace PlatformKit.Providers
                 await GetPlatformKernelVersionAsync(),
                 await GetSdkLevelAsync(),
                 await GetCodeNameAsync(),
-                await GetBuildNumberAsync());
+                await GetBuildNumberAsync(),
+                await GetDeviceNameAsync(),
+                await GetProcessorArchitectureAsync());
+        }
+        
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("linux")]
+#endif
+        private async Task<Architecture> GetProcessorArchitectureAsync()
+        {
+                BufferedCommandResult result = await Command.CreateInstance("uname")
+                    .WithArguments("-m")
+                    .ExecuteBufferedAsync(_commandRunner);
+
+                return result.StandardOutput switch
+                {
+                        "aarch64" => Architecture.Arm64,
+                        "aarch32" => Architecture.Arm,
+                        "x86_64" => Architecture.X64,
+                        "x86" => Architecture.X86,
+                        _ => RuntimeInformation.OSArchitecture
+                };
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("android")]
+#endif
         private async Task<string> GetBuildNumberAsync()
         {
-            throw new NotImplementedException();
+                string descProp = await GetPropValueAsync("ro.build.description");
+                
+                string[] results = descProp.Split(' ');
+                
+                return results[3];
         }
 
+        private async Task<string> GetDeviceNameAsync()
+        { 
+                return await GetPropValueAsync("ro.product.model");
+        }
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("android")]
+#endif
         private async Task<string> GetPlatformNameAsync()
         {
-            throw new NotImplementedException();
+                BufferedCommandResult result = await Command.CreateInstance("uname")
+                        .WithArguments("-o")
+                        .ExecuteBufferedAsync(_commandRunner);
+
+                return result.StandardOutput;
         }
 
 #if NET5_0_OR_GREATER
@@ -110,6 +154,9 @@ namespace PlatformKit.Providers
             return int.Parse(version);
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("android")]
+#endif
         private async Task<string> GetPropValueAsync(string value)
         {
             BufferedCommandResult result = await Command.CreateInstance("getprop")

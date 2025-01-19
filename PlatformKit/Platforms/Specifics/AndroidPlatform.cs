@@ -8,11 +8,14 @@
  */
 
 using System;
+using System.Runtime.InteropServices;
 
 namespace PlatformKit.Specifics
 {
     public class AndroidPlatform : Platform, ICloneable, IEquatable<AndroidPlatform>
     {
+        public string DeviceName { get; }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -23,10 +26,13 @@ namespace PlatformKit.Specifics
         /// </summary>
         public string VersionCodeName { get; }
         
-        public AndroidPlatform(string name, Version operatingSystemVersion, Version kernelVersion, int sdkLevel, string versionCodeName, string buildNumber) : base(name, operatingSystemVersion, kernelVersion, PlatformFamily.Android, buildNumber)
+        public AndroidPlatform(string name, Version operatingSystemVersion, Version kernelVersion, int sdkLevel,
+            string versionCodeName, string buildNumber, string deviceName, Architecture processorArchitecture) : base(name,
+            operatingSystemVersion, kernelVersion, PlatformFamily.Android, buildNumber, processorArchitecture)
         {
             SdkLevel = sdkLevel;
             VersionCodeName = versionCodeName;
+            DeviceName = deviceName;
         }
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace PlatformKit.Specifics
         public override int GetHashCode()
         {
             return HashCode.Combine(SdkLevel, VersionCodeName,
-                Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber);
+                Name, OperatingSystemVersion, KernelVersion, Family, BuildNumber, DeviceName);
         }
         
         /// <summary>
@@ -83,7 +89,7 @@ namespace PlatformKit.Specifics
         public new object Clone()
         {
             return new AndroidPlatform(Name, OperatingSystemVersion,
-                KernelVersion, SdkLevel, VersionCodeName, BuildNumber);
+                KernelVersion, SdkLevel, VersionCodeName, BuildNumber, DeviceName, ProcessorArchitecture);
         }
     }
 }
