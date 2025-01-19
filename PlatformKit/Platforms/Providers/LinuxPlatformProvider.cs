@@ -9,6 +9,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -18,6 +19,7 @@ using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Specializations.Linux;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -32,10 +34,12 @@ namespace PlatformKit.Providers
     public class LinuxPlatformProvider : IPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
-
-        public LinuxPlatformProvider(ICommandRunner commandRunner)
+        private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
+        
+        public LinuxPlatformProvider(ICommandRunner commandRunner, ILinuxOsReleaseProvider linuxOsReleaseSearcher)
         {
             _commandRunner = commandRunner;
+            _linuxOsReleaseSearcher = linuxOsReleaseSearcher;
         }
         
 #if NET5_0_OR_GREATER
@@ -48,19 +52,33 @@ namespace PlatformKit.Providers
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
                 PlatformFamily.Linux,
-                await GetOsBuildNumber());
+                await GetOsBuildNumber(),
+                await GetProcessorArchitectureAsync());
 
             return platform;
         }
 
-        private async Task<string> GetOsBuildNumber()
+        private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-            return await GetOsReleasePropertyValueAsync("VERSION_ID");
+            
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]        
+#endif
+        private async Task<string> GetOsBuildNumber()
+        {
+            return await _linuxOsReleaseSearcher.GetPropertyValueAsync("VERSION_ID");
+        }
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]        
+#endif
         private async Task<string> GetOsNameAsync()
         {
-            throw new NotImplementedException();
+            LinuxOsReleaseInfo releaseInfo = await _linuxOsReleaseSearcher.GetReleaseInfoAsync();
+
+            return releaseInfo.PrettyName;
         }
 
         private async Task<Version> GetOsVersionAsync()
@@ -69,40 +87,13 @@ namespace PlatformKit.Providers
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
             }
+            
+            LinuxOsReleaseInfo releaseInfo = await _linuxOsReleaseSearcher.GetReleaseInfoAsync();
 
-            string versionString = await GetOsReleasePropertyValueAsync("VERSION=");
+            string versionString = releaseInfo.Version;
             versionString = versionString.Replace("LTS", string.Empty);
 
             return Version.Parse(versionString);
-        }
-        
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("linux")]
-#endif
-        private async Task<string> GetOsReleasePropertyValueAsync(string propertyName)
-        {
-            if (OperatingSystem.IsLinux() == false)
-            {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-            }
-
-            string output = string.Empty;
-
-#if NET5_0_OR_GREATER
-                string[] osReleaseInfo = await File.ReadAllLinesAsync("/etc/os-release");
-#else
-            string[] osReleaseInfo = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
-#endif
-
-            foreach (string s in osReleaseInfo)
-            {
-                if (s.ToUpper().StartsWith(propertyName))
-                {
-                    output = s.Replace(propertyName, string.Empty);
-                }
-            }
-
-            return output;
         }
 
 #if NET5_0_OR_GREATER
