@@ -14,6 +14,10 @@ using CliRunner.Abstractions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Providers;
+using PlatformKit.Specializations.Linux;
+using PlatformKit.Specializations.Windows.Abstractions;
+
+// ReSharper disable ConvertToPrimaryConstructor
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -24,20 +28,22 @@ namespace PlatformKit
     public class DefaultPlatformProviderFactory : IPlatformProviderFactory
     {
         private readonly ICommandRunner _commandRunner;
+        private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
+        private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public DefaultPlatformProviderFactory(ICommandRunner commandRunner)
+        public DefaultPlatformProviderFactory(ICommandRunner commandRunner,
+            ILinuxOsReleaseProvider linuxOsReleaseSearcher,
+            IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
             _commandRunner = commandRunner;
+            _linuxOsReleaseSearcher = linuxOsReleaseSearcher;
+            _windowsSystemInfoProvider = windowsSystemInfoProvider;
         }
         
-        public static DefaultPlatformProviderFactory CreateFactory()
+        public static DefaultPlatformProviderFactory CreateFactory(ICommandRunner commandRunner,
+            ILinuxOsReleaseProvider linuxOsReleaseSearcher, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
-            return new DefaultPlatformProviderFactory(new CommandRunner(new CommandPipeHandler()));
-        }
-
-        public static DefaultPlatformProviderFactory CreateFactory(ICommandRunner commandRunner)
-        {
-            return new DefaultPlatformProviderFactory(commandRunner);
+            return new DefaultPlatformProviderFactory(commandRunner, linuxOsReleaseSearcher, windowsSystemInfoProvider);
         }
 
         /// <summary>
@@ -77,10 +83,12 @@ namespace PlatformKit
             {
                 platformFamily = PlatformFamily.Linux;
             }*/
+#if NET5_0_OR_GREATER
             else if (OperatingSystem.IsBrowser())
             {
                 platformFamily = PlatformFamily.Other;
             }
+#endif
             else
             {
                 throw new PlatformNotSupportedException();
@@ -107,9 +115,9 @@ namespace PlatformKit
         {
             return platformFamily switch
             {
-                PlatformFamily.WindowsNT => new WindowsPlatformProvider(_commandRunner),
+                PlatformFamily.WindowsNT => new WindowsPlatformProvider(_commandRunner, _windowsSystemInfoProvider),
                 PlatformFamily.Darwin => new DarwinPlatformProvider(_commandRunner),
-                PlatformFamily.Linux => new LinuxPlatformProvider(_commandRunner),
+                PlatformFamily.Linux => new LinuxPlatformProvider(_commandRunner, _linuxOsReleaseSearcher),
                 PlatformFamily.BSD => new BSDPlatformProvider(_commandRunner),
                 PlatformFamily.Android => new AndroidPlatformProvider(_commandRunner),
                 PlatformFamily.Other => throw new PlatformNotSupportedException(),
