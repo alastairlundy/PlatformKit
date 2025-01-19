@@ -15,6 +15,10 @@ using CliRunner.Abstractions;
 using PlatformKit.Abstractions;
 using PlatformKit.Providers;
 
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#endif
+
 namespace PlatformKit
 {
     public class DefaultPlatformProviderFactory : IPlatformProviderFactory

@@ -13,7 +13,7 @@ using PlatformKit.Internal.Localizations;
 namespace PlatformKit.OperatingSystems.Linux;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 
 public partial class LinuxOperatingSystem : IOperatingSystem

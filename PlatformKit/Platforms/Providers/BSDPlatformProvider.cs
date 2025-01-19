@@ -28,7 +28,8 @@ using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+// ReSharper disable ConvertToPrimaryConstructor
 #endif
 
 namespace PlatformKit.Providers
