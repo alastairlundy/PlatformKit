@@ -39,7 +39,7 @@ using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSyst
 namespace PlatformKit.OperatingSystems.Linux
 {
 
-    public partial class LinuxOperatingSystem : IOperatingSystem
+    public partial class LinuxOperatingSystem
     {
 
         /// <summary>

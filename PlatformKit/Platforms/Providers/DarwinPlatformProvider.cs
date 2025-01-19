@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -27,6 +28,7 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.Providers
 {
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
     public class DarwinPlatformProvider : IPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
@@ -49,7 +51,7 @@ namespace PlatformKit.Providers
 
         private async Task<string> GetBuildNumberAsync()
         {
-            throw new NotImplementedException();
+            
         }
 
         private async Task<string> GetOsNameAsync()
@@ -87,7 +89,7 @@ namespace PlatformKit.Providers
             }
             else
             {
-
+                return Environment.OSVersion.Version;
             }
         }
 

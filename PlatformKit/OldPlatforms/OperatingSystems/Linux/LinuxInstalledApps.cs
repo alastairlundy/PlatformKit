@@ -16,7 +16,7 @@ namespace PlatformKit.OperatingSystems.Linux;
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 
-public partial class LinuxOperatingSystem : IOperatingSystem
+public partial class LinuxOperatingSystem
 {
     private readonly ICommandRunner _commandRunner;
 

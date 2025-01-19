@@ -39,7 +39,7 @@ using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSyst
 namespace PlatformKit.OperatingSystems.Mac
 {
 
-    public partial class MacOperatingSystem : IOperatingSystem
+    public partial class MacOperatingSystem
     {
         private readonly ICommandRunner _commandRunner;
 
