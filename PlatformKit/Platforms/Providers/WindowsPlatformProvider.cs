@@ -14,13 +14,13 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
-using CliRunner.Specializations;
 
-using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Specializations.Windows;
+using PlatformKit.Specializations.Windows.Abstractions;
+
 using PlatformKit.Specifics;
+using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -29,13 +29,15 @@ using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSyst
 
 namespace PlatformKit.Providers
 {
-    public class WindowsPlatformProvider : IPlatformProvider
+    public class WindowsPlatformProvider : IWindowsPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
+        private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public WindowsPlatformProvider(ICommandRunner commandRunner)
+        public WindowsPlatformProvider(ICommandRunner commandRunner, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
             _commandRunner = commandRunner;
+            _windowsSystemInfoProvider = windowsSystemInfoProvider;
         }
         
 #if NET5_0_OR_GREATER
@@ -45,7 +47,7 @@ namespace PlatformKit.Providers
         {
             Version platformVersion = GetOsVersion();
 
-            string buildNumber = "";
+            string buildNumber;
             if (platformVersion.Revision == 0)
             {
                 buildNumber = platformVersion.Build.ToString();
@@ -59,7 +61,8 @@ namespace PlatformKit.Providers
                 platformVersion,
                 platformVersion,
                 PlatformFamily.WindowsNT,
-                buildNumber);
+                buildNumber,
+                await GetProcessorArchitectureAsync());
             
             return platform;
         }
@@ -71,12 +74,32 @@ namespace PlatformKit.Providers
         {
             Version platformVersion = GetOsVersion();
 
+            string buildNumber;
+            if (platformVersion.Revision == 0)
+            {
+                buildNumber = platformVersion.Build.ToString();
+            }
+            else
+            {
+                buildNumber = $"{platformVersion.Build}.{platformVersion.Revision}";
+            }
+
             WindowsPlatform platform = new WindowsPlatform(await GetOsNameAsync(),
                 platformVersion,
                 platformVersion,
-                GetOsBuildNumber());
+                buildNumber,
+                await _windowsSystemInfoProvider.GetWindowsEditionAsync(),
+                await GetProcessorArchitectureAsync());
             
             return platform;
+        }
+
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]        
+#endif
+        private async Task<Architecture> GetProcessorArchitectureAsync()
+        {
+           
         }
 
 #if NET5_0_OR_GREATER
@@ -93,27 +116,20 @@ namespace PlatformKit.Providers
                 .Replace("Microsoft Windows", string.Empty)
                 .Replace(" ", string.Empty));
         }
-
+        
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]        
 #endif
         private async Task<string> GetOsNameAsync()
         {
-            if (OperatingSystem.IsWindows() == false)
-            {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
-            }
-
-            BufferedCommandResult result = await CmdCommand.CreateInstance(_commandRunner)
-                .WithArguments("systeminfo")
-                .ExecuteBufferedAsync(_commandRunner);
-            
-            var lines = result.StandardOutput.Split(Environment.NewLine);
-            
-            return lines.First(x => x.Contains("OS Name:"))
-                .Replace("OS Name:", string.Empty);
+            WindowsSystemInfo windowsSystemInfo =
+                await _windowsSystemInfoProvider.GetWindowsSystemInfoAsync();
+               return windowsSystemInfo.OsName;
         }
         
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+#endif
         private string GetOsBuildNumber()
         {
             // ReSharper disable once RedundantAssignment
