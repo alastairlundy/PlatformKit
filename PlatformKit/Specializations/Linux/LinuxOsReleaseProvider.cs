@@ -1,29 +1,13 @@
 ﻿/*
-        MIT License
+    PlatformKit
+    Copyright (c) 2020-2025 Alastair Lundy
 
-       Copyright (c) 2020-2024 Alastair Lundy
-
-       Permission is hereby granted, free of charge, to any person obtaining a copy
-       of this software and associated documentation files (the "Software"), to deal
-       in the Software without restriction, including without limitation the rights
-       to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-       copies of the Software, and to permit persons to whom the Software is
-       furnished to do so, subject to the following conditions:
-
-       The above copyright notice and this permission notice shall be included in all
-       copies or substantial portions of the Software.
-
-       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-       IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-       FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-       AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-       LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-       OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-       SOFTWARE.
-   */
+    This Source Code Form is subject to the terms of the Mozilla Public
+    License, v. 2.0. If a copy of the MPL was not distributed with this
+    file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,39 +17,37 @@ using AlastairLundy.Extensions.Strings.EscapeCharacters;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
-namespace PlatformKit.OperatingSystems.Linux.Extensions
-{
-    public static class LinuxOsReleaseExtensibilityExtensions
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="linuxOperatingSystem"></param>
-        /// <returns></returns>
-        public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync(this LinuxOperatingSystem linuxOperatingSystem)
-        {
-            return await GetLinuxOsReleaseAsync();
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
-        public static async Task<LinuxOsReleaseModel> GetLinuxOsReleaseAsync()
-        {
-            LinuxOsReleaseModel output = new LinuxOsReleaseModel();
-            //Assign a default value.
+namespace PlatformKit.Specializations.Linux;
 
-            output.IsLongTermSupportRelease = false;
+public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
+{
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
+    public async Task<string> GetPropertyValueAsync(string propertyName)
+    {
+        throw new System.NotImplementedException();
+    }
+
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
+    public async Task<LinuxOsReleaseInfo> GetReleaseInfoAsync()
+    {
+        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+        //Assign a default value.
+
+        output.IsLongTermSupportRelease = false;
         
-            if (OperatingSystem.IsLinux() == false)
-            {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-            }
+        if (OperatingSystem.IsLinux() == false)
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+        }
 
 #if NET6_0_OR_GREATER
             string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
@@ -73,16 +55,48 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
         string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
 #endif
         
-            resultArray = RemoveUnwantedCharacters(resultArray);
+        resultArray = RemoveUnwantedCharacters(resultArray);
 
-            return await Task.FromResult(ParseOsReleaseInfo(resultArray));
-        }
+        return await Task.FromResult(ParseOsReleaseInfo(resultArray));
+    }
 
-        private static LinuxOsReleaseModel ParseOsReleaseInfo(IEnumerable<string> osReleaseInfo)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]    
+#endif
+    public async Task<LinuxDistroBase> GetDistroBaseAsync()
+    {
+        if (OperatingSystem.IsLinux() == false)
         {
-            LinuxOsReleaseModel linuxDistroInfo = new LinuxOsReleaseModel();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+        }
+        
+        LinuxOsReleaseInfo osReleaseInfo = await GetReleaseInfoAsync();
+        
+        string identifierLike = osReleaseInfo.Identifier_Like.ToLower();
             
-            string[] releaseInfo = osReleaseInfo.Where(x => string.IsNullOrWhiteSpace(x) == false).ToArray();
+        return identifierLike switch
+        {
+            "debian" => LinuxDistroBase.Debian,
+            "ubuntu" => LinuxDistroBase.Ubuntu,
+            "arch" => LinuxDistroBase.Arch,
+            "manjaro" => LinuxDistroBase.Manjaro,
+            "fedora" => LinuxDistroBase.Fedora,
+            "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+            "suse" => LinuxDistroBase.SUSE,
+            _ => LinuxDistroBase.NotDetected
+        };
+    }
+
+    private LinuxOsReleaseInfo ParseOsReleaseInfo(string[] resultArray)
+    {
+        LinuxOsReleaseInfo linuxDistroInfo = new LinuxOsReleaseInfo();
+            
+            string[] releaseInfo = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false).ToArray();
             
             for (int index = 0; index < releaseInfo.Length; index++)
             {
@@ -176,21 +190,20 @@ namespace PlatformKit.OperatingSystems.Linux.Extensions
             }
 
             return linuxDistroInfo;
-        }
+    }
 
-        private static string[] RemoveUnwantedCharacters(string[] data)
-        {
-            char[] delimiter = ['\t', '\n', '\r', '"'];
+    private string[] RemoveUnwantedCharacters(string[] resultArray)
+    {
+        char[] delimiter = ['\t', '\n', '\r', '"'];
 
-            data = data.Where(x => string.IsNullOrWhiteSpace(x) == false)
-                .Select(x => x.RemoveEscapeCharacters()).ToArray();
+        resultArray = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false)
+            .Select(x => x.RemoveEscapeCharacters()).ToArray();
             
-                foreach (char c in delimiter)
-                {
-                    data = data.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
-                }
-
-            return data;
+        foreach (char c in delimiter)
+        {
+            resultArray = resultArray.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
         }
+
+        return resultArray;
     }
 }
