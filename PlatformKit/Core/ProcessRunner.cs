@@ -106,6 +106,8 @@ namespace PlatformKit
             
             string end = process.StandardOutput.ReadToEnd();
 
+            process.Close();
+            
             if (end == null)
             {
                 throw new NullReferenceException();
@@ -164,7 +166,10 @@ namespace PlatformKit
             process.Start();
 
             process.WaitForExit();
-            return process.StandardOutput.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
+
+            process.Close();
+            return output;
         }
 
         /// <summary>
@@ -205,7 +210,11 @@ namespace PlatformKit
             process.Start();
 
             process.WaitForExit();
-            return process.StandardOutput.ReadToEnd();
+            
+            string output = process.StandardOutput.ReadToEnd();
+            
+            process.Close();
+            return output;
         }
 
         /// <summary>
