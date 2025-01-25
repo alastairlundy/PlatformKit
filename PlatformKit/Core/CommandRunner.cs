@@ -25,12 +25,18 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Versioning;
 using System.Text;
+
+using CliWrap;
+using CliWrap.Buffered;
+
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit;
@@ -111,7 +117,20 @@ public static class CommandRunner
     [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
     public static string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
     {
-        return ProcessRunner.RunProcessOnWindows(Environment.SystemDirectory, "cmd", command, processStartInfo, runAsAdministrator);
+        if (OperatingSystem.IsWindows() == false)
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+        }
+        
+        var task = Cli.Wrap($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe")
+            .WithArguments(command)
+            .ExecuteBufferedAsync();
+
+        task.Task.RunSynchronously();
+
+        task.Task.Wait();
+
+        return task.Task.Result.StandardOutput;
     }
 
     /// <summary>
@@ -132,10 +151,18 @@ public static class CommandRunner
             throw new PlatformNotSupportedException();
         }
         
-        string location =
-            $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+        string location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32" +
+                          $"{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+
+        var task = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}powershell.exe")
+            .WithArguments(command)
+            .ExecuteBufferedAsync();
         
-        return ProcessRunner.RunProcessOnWindows(location, "powershell", command, processStartInfo, runAsAdministrator);
+        task.Task.RunSynchronously();
+        
+        task.Task.Wait();
+        
+        return task.Task.Result.StandardOutput;
     }
 
     /// <summary>
@@ -153,7 +180,7 @@ public static class CommandRunner
         }
         
         string location = "/usr/bin/";
-
+        
         string[] args = command.Split(' ');
         command = args[0];
 
@@ -166,19 +193,20 @@ public static class CommandRunner
                 stringBuilder.Append(args[index].Replace(command, string.Empty));
             }
         }
-
-        string processArguments = stringBuilder.ToString();
-
-        if (!Directory.Exists(location))
-        {
-            throw new DirectoryNotFoundException("Could not find directory " + location);
-        }
-
+        
         if (runAsAdministrator)
         {
             command = command.Insert(0, "sudo ");
         }
-                    
-        return ProcessRunner.RunProcessOnLinux(location, command, processArguments);
+        
+        var task = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}{command}")
+            .WithArguments(stringBuilder.ToString())
+            .ExecuteBufferedAsync();
+        
+        task.Task.RunSynchronously();
+
+        task.Task.Wait();
+        
+        return task.Task.Result.StandardOutput;
     }
 }
