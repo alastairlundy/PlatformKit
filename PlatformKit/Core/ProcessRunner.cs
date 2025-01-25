@@ -28,8 +28,11 @@ using System.IO;
 using System.Threading.Tasks;
 
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Localizations;
 
-#if NET5_0_OR_GREATER
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
 using System.Runtime.Versioning;
 #endif
 
@@ -61,6 +64,11 @@ namespace PlatformKit
             bool runAsAdministrator = false, bool insertExeInExecutableNameIfMissing = true,
             ProcessWindowStyle windowStyle = ProcessWindowStyle.Normal)
         {
+            if (OperatingSystem.IsWindows() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            }
+            
             Process process;
             
             if (processStartInfo != null)
@@ -136,6 +144,11 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnMac(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
+            if (OperatingSystem.IsMacOS() == false && OperatingSystem.IsMacCatalyst() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
+            }
+            
             ProcessStartInfo procStartInfo = new ProcessStartInfo
             {
                 WorkingDirectory = executableLocation,
@@ -182,6 +195,11 @@ namespace PlatformKit
         [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
         public static string RunProcessOnLinux(string executableLocation, string executableName, string arguments = "", ProcessStartInfo processStartInfo = null)
         {
+            if (OperatingSystem.IsLinux() == false && OperatingSystem.IsFreeBSD() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
+            
             ProcessStartInfo procStartInfo;
                 
             if (processStartInfo == null)
