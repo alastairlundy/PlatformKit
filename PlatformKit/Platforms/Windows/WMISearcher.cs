@@ -24,7 +24,6 @@
 
 using System;
 using System.IO;
-using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner.Abstractions;
@@ -37,7 +36,9 @@ using PlatformKit.Internal.Localizations;
 // ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Windows

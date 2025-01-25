@@ -27,12 +27,10 @@ using System.Threading.Tasks;
 
 using PlatformKit.Internal.Localizations;
 
-#if NET5_0_OR_GREATER
-using System.Runtime.Versioning;
-#endif
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.OperatingSystems.Windows.Extensions
