@@ -26,6 +26,8 @@ using System;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using CliRunner;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
 using PlatformKit.Internal.Localizations;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -59,10 +61,10 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            var result = await Cli.Run("/usr/bin/uname")
+            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release", string.Empty);

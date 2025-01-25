@@ -27,7 +27,10 @@ using System.IO;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-using CliRunner.Specializations.Commands;
+using CliRunner.Abstractions;
+using CliRunner.Buffered;
+using CliRunner.Extensions;
+using CliRunner.Specializations;
 
 using PlatformKit.Internal.Localizations;
 
@@ -45,6 +48,13 @@ namespace PlatformKit.Windows
 // ReSharper disable once InconsistentNaming
     public class WMISearcher
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public WMISearcher(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         // ReSharper disable once InconsistentNaming
         /// <summary>
         /// Gets information from a WMI class in WMI.
@@ -70,9 +80,9 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            var task = await ClassicPowershellCommand.Create()
+            BufferedCommandResult task = await ClassicPowershellCommand.CreateInstance()
                 .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             return task.StandardOutput;
         }
@@ -104,9 +114,9 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await ClassicPowershellCommand.Create()
+            BufferedCommandResult result = await ClassicPowershellCommand.CreateInstance()
                 .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
-                .ExecuteBufferedAsync();
+                .ExecuteBufferedAsync(_commandRunner);
             
             string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 

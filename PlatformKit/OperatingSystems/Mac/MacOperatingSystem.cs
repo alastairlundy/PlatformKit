@@ -28,7 +28,7 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-
+using CliRunner.Extensions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -69,11 +69,14 @@ namespace PlatformKit.OperatingSystems.Mac
         /// <returns></returns>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
 #endif
         private async Task<string[]> GetMacSwVersInfoAsync()
         {
-            var result = await Cli.Run("/usr/bin/sw_vers")
-                .ExecuteBufferedAsync();
+#pragma warning disable CA1416
+            var result = await Command.CreateInstance("/usr/bin/sw_vers")
+                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+#pragma warning restore CA1416
             
             // ReSharper disable once StringLiteralTypo
             return result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
