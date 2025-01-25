@@ -25,7 +25,6 @@
 using System;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.Versions;
 using PlatformKit.Internal.Localizations;
 
 #if NET5_0_OR_GREATER
@@ -84,7 +83,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         public static bool IsWindows10(this WindowsOperatingSystem windowsOperatingSystem, Version version)
         {
             return OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240)
-                   && version.IsOlderThan(new Version(10, 0, 20349));
+                   && version < new Version(10, 0, 20349);
         }
     }
 }

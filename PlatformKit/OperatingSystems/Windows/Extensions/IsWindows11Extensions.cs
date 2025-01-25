@@ -25,7 +25,6 @@
 using System;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.Versions;
 using PlatformKit.Internal.Localizations;
 
 #if NET5_0_OR_GREATER
@@ -85,7 +84,7 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions
         public static bool IsWindows11(this WindowsOperatingSystem windowsOperatingSystem, Version version)
         {
             return OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)
-                   && version.IsOlderThan(new Version(10, 0, 29000));
+                   && version < new Version(10, 0, 29000);
         }
     }
 }
