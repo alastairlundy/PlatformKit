@@ -34,6 +34,8 @@ using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Mac;
@@ -49,6 +51,9 @@ namespace PlatformKit.Mac;
         /// Returns whether a Mac is Apple Silicon based.
         /// </summary>
         /// <returns>true if the currently running Mac uses Apple Silicon; false if running on an Intel Mac.</returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static bool IsAppleSiliconMac()
         {
             return OperatingSystem.IsMacOS() && RuntimeInformation.OSArchitecture == Architecture.Arm64;
@@ -60,6 +65,9 @@ namespace PlatformKit.Mac;
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static MacProcessorType GetMacProcessorType()
         {
             if (OperatingSystem.IsMacOS())
@@ -84,6 +92,9 @@ namespace PlatformKit.Mac;
         /// <param name="key"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif 
         public static string GetMacSystemProfilerInformation(MacSystemProfilerDataType macSystemProfilerDataType, string key)
         {
             var task = Cli.Wrap("/usr/bin/system_profiler")
@@ -118,6 +129,9 @@ namespace PlatformKit.Mac;
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static bool IsSecureVirtualMemoryEnabled()
         {
             string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "Secure Virtual Memory");
@@ -141,6 +155,9 @@ namespace PlatformKit.Mac;
         /// <returns>true if System Integrity Protection is enabled on this Mac; returns false otherwise.</returns>
         /// <exception cref="ArgumentException"></exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static bool IsSystemIntegrityProtectionEnabled()
         {
             string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.SoftwareDataType, "System Integrity Protection");
@@ -164,6 +181,9 @@ namespace PlatformKit.Mac;
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static bool IsActivationLockEnabled()
         {
             string result = GetMacSystemProfilerInformation(MacSystemProfilerDataType.HardwareDataType, "Activation Lock Status");
@@ -186,6 +206,9 @@ namespace PlatformKit.Mac;
         /// </summary>
         /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
         public static MacOsVersion GetMacOsVersionToEnum()
         {
             return GetMacOsVersionToEnum(GetMacOsVersion());
@@ -246,6 +269,9 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     // ReSharper disable once InconsistentNaming
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static bool IsAtLeastVersion(MacOsVersion macOsVersion)
     {
         if (OperatingSystem.IsMacOS())
@@ -265,6 +291,9 @@ namespace PlatformKit.Mac;
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
     [Obsolete(DeprecationMessages.DeprecationV5)]
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static bool IsAtLeastVersion(Version macOsVersion)
     {
         if (OperatingSystem.IsMacOS())
@@ -281,6 +310,9 @@ namespace PlatformKit.Mac;
     /// Detects macOS System Information.
     /// </summary>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static MacOsSystemInformationModel GetMacSystemInformationModel()
     {
         if (OperatingSystem.IsMacOS())
@@ -305,6 +337,9 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static Version GetDarwinVersion()
     {
         if (OperatingSystem.IsMacOS())
@@ -320,6 +355,9 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static Version GetXnuVersion()
     {
         if (!OperatingSystem.IsMacOS())
@@ -357,6 +395,9 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns></returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static Version GetMacOsVersion()
     {
         if (OperatingSystem.IsMacOS())
@@ -375,6 +416,9 @@ namespace PlatformKit.Mac;
     /// </summary>
     /// <returns>the build number of the installed version of macOS.</returns>
     /// <exception cref="PlatformNotSupportedException">Throw if run on an Operating System that isn't macOS.</exception>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     public static string GetMacOsBuildNumber()
     {
         if (OperatingSystem.IsMacOS())
@@ -393,6 +437,9 @@ namespace PlatformKit.Mac;
     /// Gets info from sw_vers command on Mac.
     /// </summary>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("macos")]
+#endif
     private static string[] GetMacSwVersInfo()
     {
         var task = Cli.Wrap("/usr/bin/sw_vers")
