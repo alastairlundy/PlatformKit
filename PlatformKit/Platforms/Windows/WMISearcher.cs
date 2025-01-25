@@ -63,7 +63,7 @@ namespace PlatformKit.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static async Task<string> GetWMIClassAsync(string wmiClass)
+        public async Task<string> GetWMIClassAsync(string wmiClass)
         {
             if (OperatingSystem.IsWindows() == false)
             {
@@ -97,7 +97,7 @@ namespace PlatformKit.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public static async Task<string> GetWMIValueAsync(string property, string wmiClass)
+        public async Task<string> GetWMIValueAsync(string property, string wmiClass)
         {
             if (OperatingSystem.IsWindows() == false)
             {
