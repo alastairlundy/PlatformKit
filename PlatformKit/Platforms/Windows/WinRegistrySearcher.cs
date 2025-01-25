@@ -24,13 +24,14 @@
 
 using System;
 using System.IO;
-using System.Runtime.Versioning;
 
 using CliWrap;
 using CliWrap.Buffered;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Windows;

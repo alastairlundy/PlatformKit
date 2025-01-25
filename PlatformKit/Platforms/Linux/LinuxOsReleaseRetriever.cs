@@ -34,12 +34,10 @@ using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
 using PlatformKit.Linux.Models;
 
-#if NET5_0_OR_GREATER
-using System.Runtime.Versioning;
-#endif
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Linux;

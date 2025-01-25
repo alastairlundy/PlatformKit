@@ -71,7 +71,7 @@ public static class CommandRunner
             }
 
             string args = stringBuilder.ToString().Replace(array[0], string.Empty);
-                
+            
             return ProcessRunner.RunProcessOnMac(location, array[0], args);
         }
         else

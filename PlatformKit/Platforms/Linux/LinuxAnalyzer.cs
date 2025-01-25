@@ -23,7 +23,7 @@
    */
 
 using System;
-using System.Runtime.Versioning;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
@@ -32,6 +32,8 @@ using PlatformKit.Linux.Models;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Linux;
