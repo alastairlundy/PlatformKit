@@ -9,6 +9,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+// ReSharper disable RedundantBoolCompare
 #endif
 
 #if NET5_0_OR_GREATER
@@ -90,7 +92,7 @@ namespace PlatformKit.Providers
             {
                 string result = await GetSwVersInfoAsync();
 
-                string[] resultArray = result.Split(Environment.NewLine);
+                string[] resultArray = result.Split(Environment.NewLine.ToCharArray().First());
             
                 return resultArray[2].ToLower().Replace("BuildVersion:",
                     string.Empty).Replace(" ", string.Empty);
