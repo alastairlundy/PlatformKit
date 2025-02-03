@@ -20,6 +20,7 @@ using CliRunner.Extensions;
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specializations.Linux;
+using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -31,7 +32,7 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.Providers
 {
-    public class LinuxPlatformProvider : IPlatformProvider
+    public class LinuxPlatformProvider : ILinuxPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
