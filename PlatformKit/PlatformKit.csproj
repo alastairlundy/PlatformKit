@@ -84,15 +84,15 @@
         <PackageReference Include="AlastairLundy.Extensions.Strings" Version="[5.5.0, 6.0.0)" />
         <PackageReference Include="CliRunner" Version="[0.9.0, 1.0.0)" />
         <PackageReference Include="CliRunner.Specializations" Version="[0.9.0, 1.0.0)" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="AlastairLundy.OSCompatibilityLib" Version="[3.0.0, 4.0.0)" />
+        <PackageReference Include="AlastairLundy.OSCompatibilityLib" Version="[3.0.1, 4.0.0)" />
         <PackageReference Include="Polyfill" Version="[7.12.0, 8.0.0)"/>
         <PackageReference Include="Microsoft.Bcl.HashCode" Version="[6.0.0, 7.0.0)"/>
     </ItemGroup>
