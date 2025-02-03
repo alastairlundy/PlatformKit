@@ -12,7 +12,7 @@
 using System;
 using System.IO;
 using System.Linq;
-
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -95,8 +95,12 @@ namespace PlatformKit.Providers
             {
                 try
                 {
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+                    string[] lines = await Task.FromResult(File.ReadAllLines("/etc/freebsd-release"));
+#else
                     string[] lines = await File.ReadAllLinesAsync("/etc/freebsd-release");
-
+#endif
+                    
                     string result = lines.First(x => 
                             x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))
                         .Replace("Name=", string.Empty);

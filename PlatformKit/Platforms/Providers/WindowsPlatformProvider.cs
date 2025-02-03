@@ -9,7 +9,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner.Abstractions;
@@ -24,6 +23,8 @@ using PlatformKit.Specifics.Abstractions;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 // ReSharper disable RedundantExplicitArrayCreation
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Providers
