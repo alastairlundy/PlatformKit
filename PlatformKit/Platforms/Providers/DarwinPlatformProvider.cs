@@ -20,6 +20,8 @@ using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Specifics;
+using PlatformKit.Specifics.Abstractions;
 
 // ReSharper disable RedundantBoolCompare
 
@@ -36,7 +38,7 @@ using System.Runtime.Versioning;
 namespace PlatformKit.Providers
 {
     [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
-    public class DarwinPlatformProvider : IPlatformProvider
+    public class DarwinPlatformProvider : IDarwinPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
 
@@ -64,6 +66,41 @@ namespace PlatformKit.Providers
             return platform;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("watchos")]
+        [SupportedOSPlatform("tvos")]
+#endif
+        public async Task<DarwinPlatform> GetCurrentDarwinPlatformAsync()
+        {
+            DarwinPlatform darwinPlatform = new DarwinPlatform(
+                await GetOsNameAsync(), await GetDarwinVersionAsync(), 
+                await GetOsVersionAsync(),
+                await GetKernelVersionAsync(),
+                await GetBuildNumberAsync(),
+                await GetProcessorArchitectureAsync());
+            
+            return darwinPlatform;
+        }
+
+        private async Task<Version> GetDarwinVersionAsync()
+        {
+            if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
@@ -85,7 +122,11 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetBuildNumberAsync()
         {
-            if (OperatingSystem.IsMacOS() == false || OperatingSystem.IsMacCatalyst() == false)
+            if (OperatingSystem.IsMacOS() == false ||
+                OperatingSystem.IsMacCatalyst() == false ||
+                OperatingSystem.IsWatchOS() == false ||
+                OperatingSystem.IsIOS() == false ||
+                OperatingSystem.IsTvOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
