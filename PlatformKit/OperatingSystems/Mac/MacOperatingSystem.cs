@@ -27,11 +27,13 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Extensions;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
+
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -41,6 +43,13 @@ namespace PlatformKit.OperatingSystems.Mac
 
     public class MacOperatingSystem : AbstractOperatingSystem
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public MacOperatingSystem(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         /// <summary>
         /// Detects the macOS version and returns it as a System.Version object.
         /// </summary>
@@ -75,8 +84,11 @@ namespace PlatformKit.OperatingSystems.Mac
         private async Task<string[]> GetMacSwVersInfoAsync()
         {
 #pragma warning disable CA1416
-            var result = await Command.CreateInstance("/usr/bin/sw_vers")
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/sw_vers");
+            
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 #pragma warning restore CA1416
             
             // ReSharper disable once StringLiteralTypo

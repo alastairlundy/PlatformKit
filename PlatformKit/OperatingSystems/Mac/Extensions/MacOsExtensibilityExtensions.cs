@@ -26,11 +26,12 @@ using System;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Extensions;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -76,13 +77,18 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
-                
-            var result = await Command.CreateInstance("/usr/bin/system_profiler")
+
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/system_profiler")
                 .WithArguments("SP" + macSystemProfilerDataType)
                 .WithWorkingDirectory("/usr/bin/")
-                .WithValidation(CommandResultValidation.None)
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+                .WithValidation(CommandResultValidation.None);
 
+            Command command = commandBuilder.ToCommand();
+
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            
+            BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
+            
             string info = result.StandardOutput;
 
 #if NETSTANDARD2_0_OR_GREATER

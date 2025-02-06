@@ -26,14 +26,14 @@ using System;
 
 using System.Threading.Tasks;
 using CliRunner;
-using CliRunner.Extensions;
-using CliRunner.Specializations;
-
+using CliRunner.Abstractions;
+using CliRunner.Builders;
+using CliRunner.Specializations.Configurations;
 using PlatformKit.Internal.Localizations;
 // ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -66,12 +66,17 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
-            
-            var result = await CmdCommand.CreateInstance()
+
+            ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
                 .WithArguments($"REG QUERY {query}")
-                .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
-                
+                .WithWorkingDirectory(Environment.SystemDirectory);
+            
+            Command command = commandBuilder.ToCommand();
+
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            
+            BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
+            
             if (string.IsNullOrEmpty(result.StandardOutput) == false)
             {
                 return result.StandardOutput.Replace("REG_SZ", string.Empty);
@@ -106,11 +111,16 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
             
-            var result = await CmdCommand.CreateInstance()
+            ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
                 .WithArguments($"REG QUERY {query} /v {value}")
-                .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
-                
+                .WithWorkingDirectory(Environment.SystemDirectory);
+            
+            Command command = commandBuilder.ToCommand();
+
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            
+            BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
+            
             if (string.IsNullOrEmpty(result.StandardOutput) == false)
             {
                 return result.StandardOutput.Replace(value, string.Empty)

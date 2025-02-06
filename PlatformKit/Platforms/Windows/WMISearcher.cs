@@ -23,20 +23,20 @@
    */
 
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
+using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
-using CliRunner.Specializations;
+using CliRunner.Builders;
+
+using CliRunner.Specializations.Configurations;
 
 using PlatformKit.Internal.Localizations;
 
 // ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -81,11 +81,15 @@ namespace PlatformKit.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            BufferedCommandResult task = await ClassicPowershellCommand.CreateInstance()
-                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                .ExecuteBufferedAsync(_commandRunner);
+            ICommandBuilder commandBuilder = new CommandBuilder(
+                    new ClassicPowershellCommandConfiguration())
+                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *");
             
-            return task.StandardOutput;
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            
+            return result.StandardOutput;
         }
         
         // ReSharper disable once InconsistentNaming
@@ -114,10 +118,13 @@ namespace PlatformKit.Windows
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
+
+            ICommandBuilder commandBuilder = new CommandBuilder(new ClassicPowershellCommandConfiguration())
+                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}");
             
-            BufferedCommandResult result = await ClassicPowershellCommand.CreateInstance()
-                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
-                .ExecuteBufferedAsync(_commandRunner);
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 

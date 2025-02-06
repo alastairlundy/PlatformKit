@@ -26,16 +26,17 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.Strings.Versioning;
-using CliRunner;
-using CliRunner.Extensions;
-using CliRunner.Specializations;
+using AlastairLundy.Extensions.System.Strings;
 
+using CliRunner;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
+using CliRunner.Specializations.Configurations;
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -89,11 +90,16 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         
             NetworkCardModel lastNetworkCard = null;
 
-            var descResult = await CmdCommand.CreateInstance()
+            ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
                 .WithArguments("systeminfo")
-                .WithWorkingDirectory(Environment.SystemDirectory)
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+                .WithWorkingDirectory(Environment.SystemDirectory);
 
+            Command command = commandBuilder.ToCommand();
+
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            
+            var descResult = await commandRunner.ExecuteBufferedAsync(command);
+            
             string desc = descResult.StandardOutput;
             
 #if NET5_0_OR_GREATER

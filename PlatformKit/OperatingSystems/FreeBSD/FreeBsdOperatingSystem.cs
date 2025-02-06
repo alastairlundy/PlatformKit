@@ -24,13 +24,14 @@
 
 using System;
 using System.Threading.Tasks;
+
 using CliRunner;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -40,6 +41,13 @@ namespace PlatformKit.OperatingSystems.FreeBSD
     public class FreeBsdOperatingSystem : AbstractOperatingSystem
     {
 
+        private readonly ICommandRunner _commandRunner;
+
+        public FreeBsdOperatingSystem(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         // ReSharper disable once InconsistentNaming
         /// <summary>
         /// Detects and Returns the Installed version of FreeBSD
@@ -63,10 +71,13 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
                 .WithArguments("-v")
-                .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+                .WithWorkingDirectory(Environment.CurrentDirectory);
+
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release", string.Empty);
@@ -74,9 +85,24 @@ namespace PlatformKit.OperatingSystems.FreeBSD
             return Version.Parse(versionString);
         }
 
-        public override Task<Version> GetKernelVersionAsync()
+        public override async Task<Version> GetKernelVersionAsync()
         {
-            throw new NotImplementedException();
+            if (OperatingSystem.IsFreeBSD() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
+            }
+            
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                .WithArguments("-k")
+                .WithWorkingDirectory(Environment.CurrentDirectory);
+
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+            string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty);
+            
+            return Version.Parse(versionString);
         }
 
 #if NET5_0_OR_GREATER

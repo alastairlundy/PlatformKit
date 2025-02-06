@@ -28,12 +28,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.Strings.EscapeCharacters;
+using AlastairLundy.Extensions.System.Strings;
 
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
