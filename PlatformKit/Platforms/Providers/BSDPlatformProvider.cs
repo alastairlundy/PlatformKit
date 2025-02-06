@@ -24,7 +24,8 @@ using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 // ReSharper disable ConvertToPrimaryConstructor
 #else
 using System.Runtime.InteropServices;

@@ -13,15 +13,13 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
-
+using CliRunner.Builders;
 using PlatformKit.Specifics;
 
 using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -81,9 +79,12 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-                BufferedCommandResult result = await Command.CreateInstance("uname")
-                    .WithArguments("-m")
-                    .ExecuteBufferedAsync(_commandRunner);
+                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                        .WithArguments("-m");
+                
+                Command command = commandBuilder.ToCommand();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 return result.StandardOutput switch
                 {
@@ -117,9 +118,12 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetPlatformNameAsync()
         {
-                BufferedCommandResult result = await Command.CreateInstance("uname")
-                        .WithArguments("-o")
-                        .ExecuteBufferedAsync(_commandRunner);
+                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                        .WithArguments("-o");
+                
+                Command command = commandBuilder.ToCommand();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 return result.StandardOutput;
         }
@@ -139,7 +143,7 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetPlatformKernelVersionAsync()
         {
-            throw new NotImplementedException();
+            
         }
 
 #if NET5_0_OR_GREATER
@@ -157,10 +161,13 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetPropValueAsync(string value)
         {
-            BufferedCommandResult result = await Command.CreateInstance("getprop")
-                .WithArguments($"ro.build.version.{value}")
-                .ExecuteBufferedAsync(_commandRunner);
-
+            ICommandBuilder commandBuilder = new CommandBuilder("getprop")
+                      .WithArguments($"ro.build.version.{value}");
+                
+            Command command = commandBuilder.ToCommand();
+                
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            
             return result.StandardOutput.Replace(" ", string.Empty);
         }
 

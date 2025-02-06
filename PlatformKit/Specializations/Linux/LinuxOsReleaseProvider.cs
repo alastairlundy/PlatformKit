@@ -12,12 +12,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.Strings.EscapeCharacters;
+using AlastairLundy.Extensions.System.Strings;
 
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #else
 using System.Runtime.Versioning;
 #endif
@@ -31,7 +32,7 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 #endif
     public async Task<string> GetPropertyValueAsync(string propertyName)
     {
-        throw new System.NotImplementedException();
+        
     }
 
 #if NET5_0_OR_GREATER

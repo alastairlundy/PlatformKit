@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
+using CliRunner.Builders;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
@@ -23,7 +22,8 @@ using PlatformKit.Specializations.Linux;
 using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #endif
 
 #if NET5_0_OR_GREATER
@@ -104,9 +104,12 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsLinux())
             {
-                BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
-                    .WithArguments($"-v")
-                    .ExecuteBufferedAsync(_commandRunner);
+                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                    .WithArguments($"-v");
+
+                Command command = commandBuilder.ToCommand();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 string versionString = result.StandardOutput
                     .Replace(" ", string.Empty);

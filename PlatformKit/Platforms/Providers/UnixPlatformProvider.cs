@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
+using CliRunner.Builders;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #endif
 
 namespace PlatformKit.Providers
@@ -41,15 +41,20 @@ namespace PlatformKit.Providers
         
         public async Task<Version> GetPlatformVersionAsync()
         {
-            if (OperatingSystem.IsFreeBSD() == false && OperatingSystem.IsLinux() == false && OperatingSystem.IsMacOS() == false)
+            if (OperatingSystem.IsFreeBSD() == false &&
+                OperatingSystem.IsLinux() == false &&
+                OperatingSystem.IsMacOS() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
                 .WithArguments("-v")
-                .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync(_commandRunner);
+                .WithWorkingDirectory(Environment.CurrentDirectory);
+
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Replace("BSD", string.Empty)

@@ -20,9 +20,10 @@ using PlatformKit.Specializations.Windows.Abstractions;
 using PlatformKit.Specifics;
 using PlatformKit.Specifics.Abstractions;
 
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 // ReSharper disable RedundantExplicitArrayCreation
+
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif

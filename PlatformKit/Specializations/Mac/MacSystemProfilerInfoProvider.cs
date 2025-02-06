@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
+using CliRunner.Builders;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #else
 using System.Runtime.Versioning;
 #endif
@@ -122,12 +122,15 @@ public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
-                
-        BufferedCommandResult result = await Command.CreateInstance("/usr/bin/system_profiler")
+
+        ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/system_profiler")
             .WithArguments("SP" + macSystemProfilerDataType)
             .WithWorkingDirectory("/usr/bin/")
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteBufferedAsync(_commandRunner);
+            .WithValidation(CommandResultValidation.None);
+        
+        Command command = commandBuilder.ToCommand();
+        
+        BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
         string info = result.StandardOutput;
 

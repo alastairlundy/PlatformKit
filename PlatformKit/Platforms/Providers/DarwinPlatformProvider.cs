@@ -21,9 +21,11 @@ using CliRunner.Extensions;
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 // ReSharper disable RedundantBoolCompare
+
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #endif
 
 #if NET5_0_OR_GREATER

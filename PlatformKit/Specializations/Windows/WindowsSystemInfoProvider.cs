@@ -11,12 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
+using CliRunner.Builders;
 using CliRunner.Specializations;
-
+using CliRunner.Specializations.Configurations;
 using PlatformKit.Internal.Exceptions.Windows;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specializations.Shared;
@@ -24,7 +23,8 @@ using PlatformKit.Specializations.Windows.Abstractions;
 
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #else
 using System.Runtime.Versioning;
 #endif
@@ -64,11 +64,14 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
         
           NetworkCardModel lastNetworkCard = null;
 
-          BufferedCommandResult descResult = await CmdCommand.CreateInstance()
+          ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
               .WithArguments("systeminfo")
-              .WithWorkingDirectory(Environment.SystemDirectory)
-              .ExecuteBufferedAsync(_commandRunner);
+              .WithWorkingDirectory(Environment.SystemDirectory);
 
+          Command command = commandBuilder.ToCommand();
+              
+          BufferedCommandResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
+          
           string desc = descResult.StandardOutput;
             
 #if NET5_0_OR_GREATER

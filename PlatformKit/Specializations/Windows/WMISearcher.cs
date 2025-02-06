@@ -12,9 +12,9 @@ using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
-using CliRunner.Buffered;
-using CliRunner.Extensions;
-using CliRunner.Specializations;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
+using CliRunner.Specializations.Configurations;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specializations.Windows.Abstractions;
@@ -22,7 +22,8 @@ using PlatformKit.Specializations.Windows.Abstractions;
 // ReSharper disable RedundantBoolCompare
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #endif
 
 namespace PlatformKit.Specializations.Windows
@@ -33,6 +34,13 @@ namespace PlatformKit.Specializations.Windows
 // ReSharper disable once InconsistentNaming
     public class WMISearcher : IWMISearcher
     {
+        private readonly ICommandRunner _commandRunner;
+
+        public WMISearcher(ICommandRunner commandRunner)
+        {
+            _commandRunner = commandRunner;
+        }
+        
         // ReSharper disable once InconsistentNaming
         /// <summary>
         /// Gets information from a WMI class in WMI.
@@ -58,11 +66,15 @@ namespace PlatformKit.Specializations.Windows
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            BufferedCommandResult task = await ClassicPowershellCommand.CreateInstance()
-                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+            ICommandBuilder commandBuilder = new CommandBuilder(
+                    new ClassicPowershellCommandConfiguration())
+                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *");
+
+            Command command = commandBuilder.ToCommand();
             
-            return task.StandardOutput;
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            
+            return result.StandardOutput;
         }
         
         // ReSharper disable once InconsistentNaming
@@ -91,10 +103,13 @@ namespace PlatformKit.Specializations.Windows
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
+
+            ICommandBuilder commandBuilder = new CommandBuilder(new ClassicPowershellCommandConfiguration())
+                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}");
             
-            var result = await ClassicPowershellCommand.CreateInstance()
-                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
-                .ExecuteBufferedAsync(new CommandRunner(new CommandPipeHandler()));
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
                 

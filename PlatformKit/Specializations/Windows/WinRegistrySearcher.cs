@@ -8,13 +8,20 @@
  */
 
 using System.Threading.Tasks;
-
+using CliRunner.Abstractions;
 using PlatformKit.Specializations.Windows.Abstractions;
 
 namespace PlatformKit.Specializations.Windows;
 
 public class WinRegistrySearcher : IWinRegistrySearcher
 {
+    private readonly ICommandRunner _commandRunner;
+
+    public WinRegistrySearcher(ICommandRunner commandRunner)
+    {
+        _commandRunner = commandRunner;
+    }
+    
     public async Task<string> GetValueAsync(string query)
     {
         throw new System.NotImplementedException();

@@ -20,7 +20,8 @@ using PlatformKit.Specializations.Windows.Abstractions;
 // ReSharper disable ConvertToPrimaryConstructor
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+
 #endif
 
 namespace PlatformKit
