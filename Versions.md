@@ -2,19 +2,20 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 5.0 | 5.0.0 Alpha 4 | 25th January 2025 |
+| 5.0 | 5.0.0 Alpha 4.1 | February 6th 2025 |
 
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Update | Supported with Bug Fixes | Supported with Security Fixes |
 |-|-|-|-|-|
 | 4.5 | 4.5.1 | December 15th 2024 | :white_check_mark: | :white_check_mark: | 
-| 4.4 | 4.4.3 | December 6th 2024 | :white_check_mark: | :white_check_mark: | 
+
 
 ## Unsupported Versions
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
+| 4.4 | 4.4.3 | December 6th 2024 |
 | 3.7 | 3.7.6 | December 14th 2024 |
 | 4.3 | 4.3.0 | July 22nd 2024 |
 | 4.2 | 4.2.2 | July 22nd 2024 |
