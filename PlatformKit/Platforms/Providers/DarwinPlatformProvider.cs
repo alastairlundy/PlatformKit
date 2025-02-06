@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
+using CliRunner.Builders;
 using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
@@ -119,8 +119,11 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetSwVersInfoAsync()
         {
-            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/sw_vers")
-                .ExecuteBufferedAsync(_commandRunner);
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/sw_vers");
+            
+            Command command = commandBuilder.ToCommand();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
             return result.StandardOutput;
         }
@@ -159,9 +162,12 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
-                BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
-                    .WithArguments($"-v")
-                    .ExecuteBufferedAsync(_commandRunner);
+                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                    .WithArguments($"-v");
+                
+                Command command = commandBuilder.ToCommand();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 string versionString = result.StandardOutput
                     .Replace(" ", string.Empty);
