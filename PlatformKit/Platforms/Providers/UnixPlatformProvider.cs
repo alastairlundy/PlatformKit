@@ -9,6 +9,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -17,6 +18,7 @@ using CliRunner.Builders;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -25,7 +27,7 @@ using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 
 namespace PlatformKit.Providers
 {
-    public class UnixPlatformProvider : IPlatformProvider
+    public class UnixPlatformProvider : IUnixPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
 
@@ -36,10 +38,36 @@ namespace PlatformKit.Providers
         
         public async Task<Platform> GetCurrentPlatformAsync()
         {
-            throw new System.NotImplementedException();
+           Platform platform = new Platform(await GetPlatformNameAsync(),
+               await GetPlatformVersionAsync(),
+               await GetKernelVersionAsync(), PlatformFamily.Unix,
+               await GetPlatformBuildNumberAsync(),
+               await GetPlatformArchitectureAsync());
+           
+           return platform;
         }
-        
-        public async Task<Version> GetPlatformVersionAsync()
+
+        private async Task<Architecture> GetPlatformArchitectureAsync()
+        {
+            
+        }
+
+        private async Task<string> GetPlatformBuildNumberAsync()
+        {
+            
+        }
+
+        private async Task<string> GetPlatformNameAsync()
+        {
+            
+        }
+
+        private async Task<Version> GetKernelVersionAsync()
+        {
+            
+        }
+
+        private async Task<Version> GetPlatformVersionAsync()
         {
             if (OperatingSystem.IsFreeBSD() == false &&
                 OperatingSystem.IsLinux() == false &&
