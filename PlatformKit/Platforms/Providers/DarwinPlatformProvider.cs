@@ -94,7 +94,7 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
             {
-                
+                return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
             }
             else
             {
@@ -106,7 +106,24 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
             {
+                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                    .WithArguments($"-m");
                 
+                Command command = commandBuilder.Build();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+                switch (result.StandardOutput.ToLower())
+                {
+                    case "x86-64":
+                        return Architecture.X64;
+                    case "aarch64":
+                        return Architecture.Arm64;
+                    case "aarch32" or "aarch":
+                        return Architecture.Arm;
+                    default:
+                        return Architecture.X64;
+                }
             }
             else
             {
@@ -149,7 +166,7 @@ namespace PlatformKit.Providers
 
         private async Task<string> GetOsNameAsync()
         {
-
+            return RuntimeInformation.OSDescription.Split(' ').First();
         }
 
 #if NET5_0_OR_GREATER
