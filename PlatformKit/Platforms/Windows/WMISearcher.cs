@@ -25,7 +25,7 @@
 using System;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
@@ -74,7 +74,8 @@ public class WMISearcher
     {
         if (OperatingSystem.IsWindows())
         {
-            string[] arr = CommandRunner.RunPowerShellCommand($"Get-CimInstance -Class {wmiClass} -Property {property}").Split(Convert.ToChar(Environment.NewLine));
+            string[] arr = CommandRunner.RunPowerShellCommand($"Get-CimInstance -Class {wmiClass} -Property {property}")
+                .Split(Convert.ToChar(Environment.NewLine));
             
            foreach (string str in arr)
            {

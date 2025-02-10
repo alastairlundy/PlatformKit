@@ -40,7 +40,7 @@ using PlatformKit.Internal.Localizations;
 
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #endif
 
 // ReSharper disable InconsistentNaming
