@@ -72,7 +72,7 @@ namespace PlatformKit.Providers
             {
                 case "x86":
                     return Architecture.X86;
-                case "x86-64":
+                case "x86_64":
                     return Architecture.X64;
                 case "aarch64":
                     return Architecture.Arm64;

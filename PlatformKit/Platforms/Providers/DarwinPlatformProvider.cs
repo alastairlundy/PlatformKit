@@ -114,7 +114,7 @@ namespace PlatformKit.Providers
 
                 switch (result.StandardOutput.ToLower())
                 {
-                    case "x86-64":
+                    case "x86_64":
                         return Architecture.X64;
                     case "aarch64":
                         return Architecture.Arm64;
