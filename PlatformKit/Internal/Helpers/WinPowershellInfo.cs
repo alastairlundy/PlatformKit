@@ -5,6 +5,6 @@ namespace PlatformKit.Internal.Helpers;
 
 internal static class WinPowershellInfo
 {
-    internal static string Location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32" +
-                                      $"{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
+    internal static readonly string Location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32" +
+                                               $"{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
 }
