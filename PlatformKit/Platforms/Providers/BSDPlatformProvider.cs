@@ -68,27 +68,6 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("freebsd")]
 #endif
-        private async Task<string> GetUnameValueAsync(string argument)
-        {
-            if (OperatingSystem.IsFreeBSD() == false)
-            {
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
-            }
-
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
-                .WithArguments(argument)
-                .WithWorkingDirectory(Environment.CurrentDirectory);
-
-            Command command = commandBuilder.Build();
-
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-            return result.StandardOutput;
-        }
-
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("freebsd")]
-#endif
         private async Task<string> GetOsNameAsync()
         {
             if (OperatingSystem.IsFreeBSD())

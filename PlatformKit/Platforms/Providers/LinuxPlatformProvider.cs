@@ -32,12 +32,14 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.Providers
 {
-    public class LinuxPlatformProvider : ILinuxPlatformProvider
+    public class LinuxPlatformProvider : UnixPlatformProvider, ILinuxPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
         
-        public LinuxPlatformProvider(ICommandRunner commandRunner, ILinuxOsReleaseProvider linuxOsReleaseSearcher)
+        public LinuxPlatformProvider(ICommandRunner commandRunner,
+            ILinuxOsReleaseProvider linuxOsReleaseSearcher)
+            : base(commandRunner)
         {
             _commandRunner = commandRunner;
             _linuxOsReleaseSearcher = linuxOsReleaseSearcher;
@@ -46,7 +48,7 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        public async Task<Platform> GetCurrentPlatformAsync()
+        public new async Task<Platform> GetCurrentPlatformAsync()
         {
             Platform platform = new Platform(
                 await GetOsNameAsync(),
@@ -54,39 +56,9 @@ namespace PlatformKit.Providers
                 await GetKernelVersionAsync(),
                 PlatformFamily.Linux,
                 await GetOsBuildNumber(),
-                await GetProcessorArchitectureAsync());
+                await GetPlatformArchitectureAsync());
 
             return platform;
-        }
-
-        private async Task<Architecture> GetProcessorArchitectureAsync()
-        {
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
-                .WithArguments($"-m");
-                
-            Command command = commandBuilder.Build();
-                
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-            switch (result.StandardOutput.ToLower())
-            {
-                case "x86":
-                    return Architecture.X86;
-                case "x86_64":
-                    return Architecture.X64;
-                case "aarch64":
-                    return Architecture.Arm64;
-                case "aarch32" or "aarch":
-                    return Architecture.Arm;
-#if NET8_0_OR_GREATER
-                case "s390x":
-                    return Architecture.S390x;
-                case "ppc64le":
-                    return Architecture.Ppc64le;
-#endif
-                default:
-                    return Architecture.X64;
-            }
         }
 
 #if NET5_0_OR_GREATER
@@ -109,7 +81,7 @@ namespace PlatformKit.Providers
 
         private async Task<Version> GetOsVersionAsync()
         {
-            if (!OperatingSystem.IsLinux())
+            if (OperatingSystem.IsLinux() == false)
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
             }
@@ -125,19 +97,13 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        private async Task<Version> GetKernelVersionAsync()
+        private new async Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsLinux())
             {
-                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
-                    .WithArguments($"-v");
+                string result = await GetUnameValueAsync("-v");
 
-                Command command = commandBuilder.Build();
-                
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-                string versionString = result.StandardOutput
-                    .Replace(" ", string.Empty);
+                string versionString = result.Replace(" ", string.Empty);
                 
                 return Version.Parse(versionString);
             }

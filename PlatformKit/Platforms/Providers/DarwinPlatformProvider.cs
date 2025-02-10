@@ -54,7 +54,7 @@ namespace PlatformKit.Providers
         [SupportedOSPlatform("watchos")]
         [SupportedOSPlatform("tvos")]
 #endif
-        public async Task<Platform> GetCurrentPlatformAsync()
+        public new async Task<Platform> GetCurrentPlatformAsync()
         {
             Platform platform = new Platform(await GetOsNameAsync(),
                 await GetOsVersionAsync(),

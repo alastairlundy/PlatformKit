@@ -62,7 +62,7 @@ namespace PlatformKit.Providers
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("linux")]
 #endif
-        private async Task<string> GetUnameValueAsync(string argument)
+        protected async Task<string> GetUnameValueAsync(string argument)
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
