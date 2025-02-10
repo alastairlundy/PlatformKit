@@ -26,8 +26,9 @@ using System;
 
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using CliWrap;
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Helpers;
 
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -78,18 +79,17 @@ public class UrlRunner
         {
             CommandRunner.RunCmdCommand($"/c start {url.Replace("&", "^&")}", new ProcessStartInfo { CreateNoWindow = true});
         }
-        if (OperatingSystem.IsLinux())
+        if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
         {
-            CommandRunner.RunCommandOnLinux($"xdg-open {url}");
+            //Discard BufferedCommandResult after usage
+            _ = Cli.Wrap("/usr/bin/xdg-open")
+                .WithArguments(url)
+                .ExecuteBufferedSync();
         }
         if (OperatingSystem.IsMacOS())
         {
             Task task = new Task(() => Process.Start("open", url));
             task.Start();
-        }
-        if (OperatingSystem.IsFreeBSD())
-        {
-            CommandRunner.RunCommandOnFreeBsd($"xdg-open {url}");
         }
     }
 
@@ -103,9 +103,13 @@ public class UrlRunner
             [Obsolete(DeprecationMessages.DeprecationV5)]
             public static void OpenUrlInDefaultBrowser(string url, bool allowNonSecureHttp = false)
             {
+                allowNonSecureHttp = false;
+                
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 url = UrlHttpFormatting(url, allowNonSecureHttp);
 
-                if (!allowNonSecureHttp)
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                if (allowNonSecureHttp == false)
                 {
                    url = MakeUrlSecure(url);
                 }

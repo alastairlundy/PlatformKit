@@ -309,6 +309,7 @@ namespace PlatformKit.Mac;
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("macos")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static MacOsSystemInformationModel GetMacSystemInformationModel()
     {
         if (OperatingSystem.IsMacOS())

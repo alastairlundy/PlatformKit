@@ -24,6 +24,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using CliWrap;
+using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -52,8 +55,11 @@ namespace PlatformKit.Windows
             
                 if (OperatingSystem.IsWindows())
                 {
-                    string output = CommandRunner.RunPowerShellCommand($"Get-WmiObject -Class {wmiClass} | Select-Object *")
-                        .Replace(wmiClass, string.Empty);
+                    var result = Cli.Wrap($"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe")
+                        .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
+                        .ExecuteBufferedSync();
+                    
+                    string output = result.StandardOutput.Replace(wmiClass, string.Empty);
 
                     if (output == null)
                     {
