@@ -34,10 +34,12 @@ using PlatformKit.Windows;
 using PlatformKit.Linux;
 using PlatformKit.Linux.Models;
 using PlatformKit.Mac;
-using PlatformKit.FreeBSD;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
 
+#if NETSTANDARD2_1 || NET5_0_OR_GREATER
+using PlatformKit.FreeBSD;
+#endif
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
