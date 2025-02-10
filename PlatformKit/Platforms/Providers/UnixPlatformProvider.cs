@@ -49,7 +49,32 @@ namespace PlatformKit.Providers
 
         private async Task<Architecture> GetPlatformArchitectureAsync()
         {
-            
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                .WithArguments($"-m");
+                
+            Command command = commandBuilder.Build();
+                
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+            switch (result.StandardOutput.ToLower())
+            {
+                case "x86":
+                    return Architecture.X86;
+                case "x86_64":
+                    return Architecture.X64;
+                case "aarch64":
+                    return Architecture.Arm64;
+                case "aarch32" or "aarch":
+                    return Architecture.Arm;
+#if NET8_0_OR_GREATER
+                case "s390x":
+                    return Architecture.S390x;
+                case "ppc64le":
+                    return Architecture.Ppc64le;
+#endif
+                default:
+                    return Architecture.X64;
+            }
         }
 
         private async Task<string> GetPlatformBuildNumberAsync()
@@ -64,7 +89,28 @@ namespace PlatformKit.Providers
 
         private async Task<Version> GetKernelVersionAsync()
         {
-            
+            ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                .WithArguments("-r");
+                
+            Command command = commandBuilder.Build();
+                
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+            int indexOfDash = result.StandardOutput.IndexOf('-');
+
+            string versionString;
+                
+            if (indexOfDash != -1)
+            {
+                versionString = result.StandardOutput.Substring(indexOfDash,
+                    result.StandardOutput.Length - indexOfDash);
+            }
+            else
+            { 
+                versionString = result.StandardOutput;
+            }
+                
+            return Version.Parse(versionString);
         }
 
         private async Task<Version> GetPlatformVersionAsync()
@@ -76,7 +122,7 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+            ICommandBuilder commandBuilder = new CommandBuilder("uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
