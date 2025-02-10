@@ -17,7 +17,6 @@ using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
 using CliRunner.Builders.Abstractions;
-using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
@@ -98,7 +97,7 @@ namespace PlatformKit.Providers
             }
             else
             {
-                
+                 
             }
         }
 
@@ -127,7 +126,7 @@ namespace PlatformKit.Providers
             }
             else
             {
-                
+                return RuntimeInformation.OSArchitecture;
             }
         }
         

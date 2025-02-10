@@ -61,7 +61,32 @@ namespace PlatformKit.Providers
 
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-            
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                .WithArguments($"-m");
+                
+            Command command = commandBuilder.Build();
+                
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+            switch (result.StandardOutput.ToLower())
+            {
+                case "x86":
+                    return Architecture.X86;
+                case "x86-64":
+                    return Architecture.X64;
+                case "aarch64":
+                    return Architecture.Arm64;
+                case "aarch32" or "aarch":
+                    return Architecture.Arm;
+#if NET8_0_OR_GREATER
+                case "s390x":
+                    return Architecture.S390x;
+                case "ppc64le":
+                    return Architecture.Ppc64le;
+#endif
+                default:
+                    return Architecture.X64;
+            }
         }
 
 #if NET5_0_OR_GREATER
