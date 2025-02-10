@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Specializations.Configurations;
 using PlatformKit.Internal.Localizations;
 // ReSharper disable RedundantBoolCompare
@@ -71,9 +72,9 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 .WithArguments($"REG QUERY {query}")
                 .WithWorkingDirectory(Environment.SystemDirectory);
             
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
             
             BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
             
@@ -115,9 +116,9 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 .WithArguments($"REG QUERY {query} /v {value}")
                 .WithWorkingDirectory(Environment.SystemDirectory);
             
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
             
             BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
             

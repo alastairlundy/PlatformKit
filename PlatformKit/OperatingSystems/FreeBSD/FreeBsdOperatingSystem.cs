@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -75,7 +76,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
@@ -96,7 +97,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 .WithArguments("-k")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 

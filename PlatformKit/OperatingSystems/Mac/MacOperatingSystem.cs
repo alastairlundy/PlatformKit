@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
-
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -86,7 +86,7 @@ namespace PlatformKit.OperatingSystems.Mac
 #pragma warning disable CA1416
             ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/sw_vers");
             
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 #pragma warning restore CA1416

@@ -28,6 +28,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -83,9 +84,9 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 .WithWorkingDirectory("/usr/bin/")
                 .WithValidation(CommandResultValidation.None);
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
             
             BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
             

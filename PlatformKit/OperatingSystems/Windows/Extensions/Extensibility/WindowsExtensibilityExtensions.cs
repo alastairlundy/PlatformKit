@@ -31,6 +31,7 @@ using AlastairLundy.Extensions.System.Strings;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Specializations.Configurations;
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
@@ -94,9 +95,9 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
                 .WithArguments("systeminfo")
                 .WithWorkingDirectory(Environment.SystemDirectory);
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler());
+            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
             
             var descResult = await commandRunner.ExecuteBufferedAsync(command);
             
