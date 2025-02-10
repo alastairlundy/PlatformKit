@@ -7,6 +7,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+using System;
 using Microsoft.Extensions.DependencyInjection;
 
 using PlatformKit.Providers;
@@ -27,19 +28,42 @@ public static class DependencyInjectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection UsePlatformKit(this IServiceCollection services)
+    public static IServiceCollection UsePlatformKit(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
     {
-        services = services.AddSingleton(typeof(IAndroidPlatformProvider), typeof(AndroidPlatformProvider));
-        services = services.AddSingleton(typeof(IWindowsPlatformProvider), typeof(WindowsPlatformProvider));
+        services = services.Add(typeof(IUnixPlatformProvider), typeof(UnixPlatformProvider), serviceLifetime);
+        services = services.Add(typeof(IDarwinPlatformProvider), typeof(DarwinPlatformProvider), serviceLifetime);
+        services = services.Add(typeof(IAndroidPlatformProvider), typeof(AndroidPlatformProvider), serviceLifetime);
+        services = services.Add(typeof(IWindowsPlatformProvider), typeof(WindowsPlatformProvider), serviceLifetime);
         
-        services = services.AddSingleton(typeof(IMacSystemProfilerInfoProvider), typeof(MacSystemProfilerInfoProvider));
+        services = services.Add(typeof(IMacSystemProfilerInfoProvider), typeof(MacSystemProfilerInfoProvider), serviceLifetime);
         
-        services = services.AddSingleton(typeof(ISteamOsInfoProvider), typeof(SteamOsInfoProvider));
-        services = services.AddSingleton(typeof(ILinuxOsReleaseProvider), typeof(LinuxOsReleaseProvider));
+        services = services.Add(typeof(ISteamOsInfoProvider), typeof(SteamOsInfoProvider), serviceLifetime);
+        services = services.Add(typeof(ILinuxOsReleaseProvider), typeof(LinuxOsReleaseProvider), serviceLifetime);
         
-        services = services.AddSingleton(typeof(IWindowsSystemInfoProvider), typeof(WindowsSystemInfoProvider));
-        services = services.AddSingleton(typeof(IWMISearcher), typeof(WMISearcher));
-        services = services.AddSingleton(typeof(IWinRegistrySearcher), typeof(WinRegistrySearcher));
+        services = services.Add(typeof(IWindowsSystemInfoProvider), typeof(WindowsSystemInfoProvider), serviceLifetime);
+        services = services.Add(typeof(IWMISearcher), typeof(WMISearcher), serviceLifetime);
+        services = services.Add(typeof(IWinRegistrySearcher), typeof(WinRegistrySearcher), serviceLifetime);
+        
+        return services;
+    }
+
+    private static IServiceCollection Add(this IServiceCollection services, Type serviceType, Type implementationType, ServiceLifetime serviceLifetime)
+    {
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services = services.AddSingleton(serviceType, implementationType);
+                break;
+            case ServiceLifetime.Scoped:
+                services.AddScoped(serviceType, implementationType);
+                break;
+            case ServiceLifetime.Transient:
+                services.AddTransient(serviceType, implementationType);
+                break;
+            default:
+                services.AddSingleton(serviceType, implementationType);
+                break;
+        }
         
         return services;
     }
