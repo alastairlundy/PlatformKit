@@ -109,6 +109,9 @@ namespace PlatformKit.Providers
                 return results[3];
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("android")]
+#endif
         private async Task<string> GetDeviceNameAsync()
         { 
                 return await GetPropValueAsync("ro.product.model");
@@ -144,7 +147,27 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetPlatformKernelVersionAsync()
         {
-            
+                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                        .WithArguments("-r");
+                
+                Command command = commandBuilder.Build();
+                
+                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+
+                int indexOfDash = result.StandardOutput.IndexOf('-');
+
+                string versionString;
+                
+                if (indexOfDash != -1)
+                {
+                        versionString = result.StandardOutput.Substring(indexOfDash, result.StandardOutput.Length - indexOfDash);
+                }
+                else
+                { 
+                        versionString = result.StandardOutput;
+                }
+                
+                return Version.Parse(versionString);
         }
 
 #if NET5_0_OR_GREATER

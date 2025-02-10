@@ -27,12 +27,39 @@ namespace PlatformKit.Specializations.Linux;
 
 public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
     public async Task<string> GetPropertyValueAsync(string propertyName)
     {
+        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+        //Assign a default value.
+
+        output.IsLongTermSupportRelease = false;
         
+        if (OperatingSystem.IsLinux() == false)
+        {
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+        }
+
+#if NET6_0_OR_GREATER
+        string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
+#else
+        string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
+#endif
+
+        resultArray = RemoveUnwantedCharacters(resultArray);
+        
+        string result = resultArray.First(x => x.Contains(propertyName));
+        
+        return result.Replace(propertyName, string.Empty)
+            .Replace("=", string.Empty);
     }
 
 #if NET5_0_OR_GREATER
@@ -195,7 +222,7 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 
     private string[] RemoveUnwantedCharacters(string[] resultArray)
     {
-        char[] delimiter = ['\t', '\n', '\r', '"'];
+        char[] delimiter = ['\t', '"'];
 
         resultArray = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false)
             .Select(x => x.RemoveEscapeCharacters()).ToArray();
