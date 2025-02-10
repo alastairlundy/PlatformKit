@@ -38,11 +38,11 @@ using System.Runtime.Versioning;
 namespace PlatformKit.Providers
 {
     [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
-    public class DarwinPlatformProvider : IDarwinPlatformProvider
+    public class DarwinPlatformProvider : UnixPlatformProvider, IDarwinPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
 
-        public DarwinPlatformProvider(ICommandRunner commandRunner)
+        public DarwinPlatformProvider(ICommandRunner commandRunner) : base(commandRunner)
         {
             _commandRunner = commandRunner;
         }
@@ -61,7 +61,7 @@ namespace PlatformKit.Providers
                 await GetKernelVersionAsync(),
                 PlatformFamily.Darwin,
                 await GetBuildNumberAsync(),
-                await GetProcessorArchitectureAsync());
+                await GetPlatformArchitectureAsync());
 
             return platform;
         }
@@ -84,7 +84,7 @@ namespace PlatformKit.Providers
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
                 await GetBuildNumberAsync(),
-                await GetProcessorArchitectureAsync());
+                await GetPlatformArchitectureAsync());
             
             return darwinPlatform;
         }
@@ -101,7 +101,7 @@ namespace PlatformKit.Providers
             }
         }
 
-        private async Task<Architecture> GetProcessorArchitectureAsync()
+        protected new async Task<Architecture> GetPlatformArchitectureAsync()
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
             {
@@ -216,7 +216,7 @@ namespace PlatformKit.Providers
         [SupportedOSPlatform("maccatalyst")]
         
 #endif
-        private async Task<Version> GetKernelVersionAsync()
+        private new async Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {

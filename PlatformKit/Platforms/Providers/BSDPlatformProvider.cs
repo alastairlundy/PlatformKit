@@ -35,31 +35,36 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.Providers
 {
-    public class BSDPlatformProvider : IPlatformProvider
+    public class BSDPlatformProvider : UnixPlatformProvider
     {
         private readonly ICommandRunner _commandRunner;
 
-        public BSDPlatformProvider(ICommandRunner commandRunner)
+        public BSDPlatformProvider(ICommandRunner commandRunner) : base(commandRunner)
         {
             _commandRunner = commandRunner;
         }
-        
+
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("freebsd")]
 #endif
-        public async Task<Platform> GetCurrentPlatformAsync()
+        public new async Task<Platform> GetCurrentPlatformAsync()
         {
             Platform platform = new Platform(
                 await GetOsNameAsync(),
-                await GetOsVersionAsync(),
+                await GetPlatformVersionAsync(),
                 await GetKernelVersionAsync(),
                 PlatformFamily.BSD,
                 await GetBuildNumberAsync(),
-                await GetProcessorArchitectureAsync());
-            
+                await GetPlatformArchitectureAsync());
+
             return platform;
         }
-        
+
+        private async Task<string> GetBuildNumberAsync()
+        {
+
+        }
+
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("freebsd")]
 #endif
@@ -73,47 +78,12 @@ namespace PlatformKit.Providers
             ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
                 .WithArguments(argument)
                 .WithWorkingDirectory(Environment.CurrentDirectory);
-            
+
             Command command = commandBuilder.Build();
-            
+
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
-            
+
             return result.StandardOutput;
-        }
-
-        private async Task<Architecture> GetProcessorArchitectureAsync()
-        {
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
-                .WithArguments($"-m");
-                
-            Command command = commandBuilder.Build();
-                
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-            switch (result.StandardOutput.ToLower())
-            {
-                case "x86":
-                    return Architecture.X86;
-                case "x86_64":
-                    return Architecture.X64;
-                case "aarch64":
-                    return Architecture.Arm64;
-                case "aarch32" or "aarch":
-                    return Architecture.Arm;
-#if NET8_0_OR_GREATER
-                case "s390x":
-                    return Architecture.S390x;
-                case "ppc64le":
-                    return Architecture.Ppc64le;
-#endif
-                default:
-                    return Architecture.X64;
-            }
-        }
-
-        private async Task<string> GetBuildNumberAsync()
-        {
-           
         }
 
 #if NET5_0_OR_GREATER
@@ -130,8 +100,8 @@ namespace PlatformKit.Providers
 #else
                     string[] lines = await File.ReadAllLinesAsync("/etc/freebsd-release");
 #endif
-                    
-                    string result = lines.First(x => 
+
+                    string result = lines.First(x =>
                             x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))
                         .Replace("Name=", string.Empty);
 
@@ -145,35 +115,7 @@ namespace PlatformKit.Providers
             else
             {
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
-            }   
-        }
-        
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("freebsd")]
-#endif
-        private async Task<Version> GetOsVersionAsync()
-        {
-            string result = await GetUnameValueAsync("-v");
-            
-            string versionString = result.Replace("FreeBSD", string.Empty)
-                .Replace("BSD", string.Empty)
-                .Split(' ').First().Replace("-release", string.Empty);
-            
-            return Version.Parse(versionString);
-        }
-
-#if NET5_0_OR_GREATER
-        [SupportedOSPlatform("freebsd")]
-#endif
-        private async Task<Version> GetKernelVersionAsync()
-        {
-            string result = await GetUnameValueAsync("-k");
-            
-            string versionString = result.Replace("FreeBSD", string.Empty)
-                .Replace("BSD", string.Empty)
-                .Split(' ').First().Replace("-release", string.Empty);
-            
-            return Version.Parse(versionString);
+            }
         }
     }
 }
