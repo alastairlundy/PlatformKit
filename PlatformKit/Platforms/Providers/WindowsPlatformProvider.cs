@@ -10,9 +10,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
+using CliRunner;
 using CliRunner.Abstractions;
-
+using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specializations.Windows;
 using PlatformKit.Specializations.Windows.Abstractions;
@@ -48,21 +49,11 @@ namespace PlatformKit.Providers
         {
             Version platformVersion = GetOsVersion();
 
-            string buildNumber;
-            if (platformVersion.Revision == 0)
-            {
-                buildNumber = platformVersion.Build.ToString();
-            }
-            else
-            {
-                buildNumber = $"{platformVersion.Build}.{platformVersion.Revision}";
-            }
-
             Platform platform = new Platform(await GetOsNameAsync(),
                 platformVersion,
                 platformVersion,
                 PlatformFamily.WindowsNT,
-                buildNumber,
+                GetOsBuildNumber(),
                 await GetProcessorArchitectureAsync());
             
             return platform;
@@ -100,7 +91,31 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-           
+            if (OperatingSystem.IsWindows() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
+            }
+
+            ICommandBuilder commandBuilder = new CommandBuilder("echo")
+                .WithArguments("%PROCESSOR_ARCHITECTURE%");
+            
+            Command command = commandBuilder.Build();
+            
+            var result = await _commandRunner.ExecuteBufferedAsync(command);
+
+            switch (result.StandardOutput.ToLower())
+            {
+                case "x86":
+                    return Architecture.X86;
+                case "amd64":
+                    return Architecture.X64;
+                case "arm64":
+                    return Architecture.Arm64;
+                case "arm":
+                    return Architecture.Arm;
+                default:
+                    return Architecture.X64;
+            }
         }
 
 #if NET5_0_OR_GREATER
