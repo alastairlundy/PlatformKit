@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -110,14 +111,47 @@ namespace PlatformKit.Providers
             }
         }
 
-        private async Task<string> GetPlatformBuildNumberAsync()
+        protected async Task<string> GetPlatformBuildNumberAsync()
         {
             
         }
 
         private async Task<string> GetPlatformNameAsync()
         {
-            
+            if (OperatingSystem.IsFreeBSD())
+            {
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+                    string[] lines = await Task.FromResult(File.ReadAllLines("/etc/freebsd-release"));
+#else
+                string[] lines = await File.ReadAllLinesAsync("/etc/freebsd-release");
+#endif
+
+                string result = lines.First(x =>
+                        x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))
+                    .Replace("Name=", string.Empty);
+
+                return result;
+            }
+            if (OperatingSystem.IsLinux())
+            {
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+                    string[] lines = await Task.FromResult(File.ReadAllLines("/etc/os-release"));
+#else
+                string[] lines = await File.ReadAllLinesAsync("/etc/os-release");
+#endif
+
+                string result = lines.First(x =>
+                        x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))
+                    .Replace("Name=", string.Empty);
+
+                return result;
+            }
+            if (OperatingSystem.IsMacOS())
+            {
+                return "macOS";
+            }
+
+            return "Unix";
         }
 
 #if NET5_0_OR_GREATER
