@@ -26,7 +26,9 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using AlastairLundy.Extensions.Strings.Versioning;
+
+using AlastairLundy.Extensions.System.Strings.Versioning;
+
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
 
@@ -42,7 +44,7 @@ namespace PlatformKit.Identification;
 /// <summary>
 /// A class to manage RuntimeId detection and programmatic generations
 /// </summary>
-[Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
+[Obsolete(DeprecationMessages.DeprecationV5)]
 public class TargetFrameworkIdentification
 {
     // ReSharper disable once InconsistentNaming
