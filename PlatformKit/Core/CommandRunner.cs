@@ -25,12 +25,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 using CliWrap;
 using CliWrap.Buffered;
 
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Helpers;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -70,13 +72,9 @@ public static class CommandRunner
         if (array.Length > 1)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendJoin(' ', array.Skip(1));
 
-            foreach (string argument in array)
-            {
-                stringBuilder.Append($"{argument} ");
-            }
-
-            string args = stringBuilder.ToString().Replace(array[0], string.Empty);
+            string args = stringBuilder.ToString();
             
             return ProcessRunner.RunProcessOnMac(location, array[0], args);
         }
@@ -122,15 +120,11 @@ public static class CommandRunner
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
         }
         
-        var task = Cli.Wrap($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe")
+        BufferedCommandResult result = Cli.Wrap($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe")
             .WithArguments(command)
-            .ExecuteBufferedAsync();
+            .ExecuteBufferedSync();
 
-        task.Task.RunSynchronously();
-
-        task.Task.Wait();
-
-        return task.Task.Result.StandardOutput;
+       return result.StandardOutput;
     }
 
     /// <summary>
@@ -154,15 +148,11 @@ public static class CommandRunner
         string location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32" +
                           $"{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
 
-        var task = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}powershell.exe")
+        BufferedCommandResult result = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}powershell.exe")
             .WithArguments(command)
-            .ExecuteBufferedAsync();
+            .ExecuteBufferedSync();
         
-        task.Task.RunSynchronously();
-        
-        task.Task.Wait();
-        
-        return task.Task.Result.StandardOutput;
+        return result.StandardOutput;
     }
 
     /// <summary>
@@ -188,10 +178,7 @@ public static class CommandRunner
             
         if (args.Length > 0)
         {
-            for (int index = 1; index < args.Length; index++)
-            {
-                stringBuilder.Append(args[index].Replace(command, string.Empty));
-            }
+            stringBuilder.AppendJoin(' ', args.Skip(1));
         }
         
         if (runAsAdministrator)
@@ -199,14 +186,10 @@ public static class CommandRunner
             command = command.Insert(0, "sudo ");
         }
         
-        var task = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}{command}")
+        var result = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}{command}")
             .WithArguments(stringBuilder.ToString())
-            .ExecuteBufferedAsync();
+            .ExecuteBufferedSync();
         
-        task.Task.RunSynchronously();
-
-        task.Task.Wait();
-        
-        return task.Task.Result.StandardOutput;
+        return result.StandardOutput;
     }
 }

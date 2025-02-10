@@ -27,6 +27,7 @@ using System.IO;
 
 using CliWrap;
 using CliWrap.Buffered;
+using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -53,18 +54,13 @@ public class WinRegistrySearcher
     public static string GetValue(string query){
         if (OperatingSystem.IsWindows())
         {
-            var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+            var result = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
                 .WithArguments($"REG QUERY {query}")
-                .ExecuteBufferedAsync();
-
-            task.Task.RunSynchronously();
-            task.Task.Wait();
-            
-            string result = task.Task.Result.StandardOutput;
+                .ExecuteBufferedSync();
                     
             if (result != null)
             {
-                return result.Replace("REG_SZ", string.Empty);
+                return result.StandardOutput.Replace("REG_SZ", string.Empty);
             }
 
             throw new ArgumentNullException();
@@ -86,18 +82,13 @@ public class WinRegistrySearcher
     public static string GetValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {
-            var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+            var result = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
                 .WithArguments($"REG QUERY {query} /v {value}")
-                .ExecuteBufferedAsync();
-
-            task.Task.RunSynchronously();
-            task.Task.Wait();
-
-            string result = task.Task.Result.StandardOutput;
+                .ExecuteBufferedSync();
                     
             if (result != null)
             {
-                return result.Replace(value, string.Empty)
+                return result.StandardOutput.Replace(value, string.Empty)
                     .Replace("REG_SZ", string.Empty);
             }
 

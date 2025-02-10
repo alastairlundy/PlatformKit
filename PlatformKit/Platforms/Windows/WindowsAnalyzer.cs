@@ -33,7 +33,7 @@ using CliWrap.Buffered;
 
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
-
+using PlatformKit.Internal.Helpers;
 using PlatformKit.Models;
 using PlatformKit.Windows.Models;
 
@@ -186,15 +186,11 @@ public class WindowsAnalyzer
         
         NetworkCardModel lastNetworkCard = null;
 
-        var task = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
+        var result = Cli.Wrap(Environment.SystemDirectory + Path.DirectorySeparatorChar + "cmd.exe")
             .WithArguments($"systeminfo")
-            .ExecuteBufferedAsync();
-
-        task.Task.RunSynchronously();
-
-        task.Task.Wait();
+            .ExecuteBufferedSync();
         
-        string desc = task.Task.Result.StandardOutput;
+        string desc = result.StandardOutput;
 
 #if NET5_0_OR_GREATER
         string[] array = desc.Split(Environment.NewLine);
