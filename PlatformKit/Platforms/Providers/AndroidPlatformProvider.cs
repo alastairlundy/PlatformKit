@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Specifics;
 
 using PlatformKit.Specifics.Abstractions;
@@ -82,7 +83,7 @@ namespace PlatformKit.Providers
                 ICommandBuilder commandBuilder = new CommandBuilder("uname")
                         .WithArguments("-m");
                 
-                Command command = commandBuilder.ToCommand();
+                Command command = commandBuilder.Build();
                 
                 BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -121,7 +122,7 @@ namespace PlatformKit.Providers
                 ICommandBuilder commandBuilder = new CommandBuilder("uname")
                         .WithArguments("-o");
                 
-                Command command = commandBuilder.ToCommand();
+                Command command = commandBuilder.Build();
                 
                 BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -164,7 +165,7 @@ namespace PlatformKit.Providers
             ICommandBuilder commandBuilder = new CommandBuilder("getprop")
                       .WithArguments($"ro.build.version.{value}");
                 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
                 
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             

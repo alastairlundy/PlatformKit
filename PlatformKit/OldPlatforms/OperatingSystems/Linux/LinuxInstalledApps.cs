@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
+using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Extensions;
 using PlatformKit.Core.Models;
 using PlatformKit.Internal.Localizations;
@@ -43,11 +45,14 @@ public partial class LinuxOperatingSystem
         
         List<AppModel> apps = new List<AppModel>();
 
-        var result = await Command.CreateInstance("/usr/bin/ls")
+        ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/ls")
             .WithArguments(" -F /usr/bin | grep -v /")
-            .WithWorkingDirectory(Environment.SystemDirectory)
-            .ExecuteBufferedAsync(_commandRunner);
-
+            .WithWorkingDirectory(Environment.SystemDirectory);
+        
+        Command command = commandBuilder.Build();
+        
+        var result = await _commandRunner.ExecuteBufferedAsync(command);
+        
 #if NET5_0_OR_GREATER
         string[] array = result.StandardOutput.Split(Environment.NewLine);
 #else

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Specializations.Configurations;
 
 using PlatformKit.Internal.Localizations;
@@ -70,7 +71,7 @@ namespace PlatformKit.Specializations.Windows
                     new ClassicPowershellCommandConfiguration())
                 .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *");
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
@@ -107,7 +108,7 @@ namespace PlatformKit.Specializations.Windows
             ICommandBuilder commandBuilder = new CommandBuilder(new ClassicPowershellCommandConfiguration())
                 .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}");
             
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             

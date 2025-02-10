@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
-
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specifics.Abstractions;
@@ -80,7 +80,7 @@ namespace PlatformKit.Providers
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
-            Command command = commandBuilder.ToCommand();
+            Command command = commandBuilder.Build();
             
             BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             

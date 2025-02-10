@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -128,7 +129,7 @@ public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
             .WithWorkingDirectory("/usr/bin/")
             .WithValidation(CommandResultValidation.None);
         
-        Command command = commandBuilder.ToCommand();
+        Command command = commandBuilder.Build();
         
         BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 

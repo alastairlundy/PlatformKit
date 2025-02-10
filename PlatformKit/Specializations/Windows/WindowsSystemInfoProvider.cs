@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Specializations;
 using CliRunner.Specializations.Configurations;
 using PlatformKit.Internal.Exceptions.Windows;
@@ -68,7 +69,7 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
               .WithArguments("systeminfo")
               .WithWorkingDirectory(Environment.SystemDirectory);
 
-          Command command = commandBuilder.ToCommand();
+          Command command = commandBuilder.Build();
               
           BufferedCommandResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
           

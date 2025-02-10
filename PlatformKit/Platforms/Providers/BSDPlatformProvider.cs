@@ -17,7 +17,8 @@ using System.Threading.Tasks;
 
 using CliRunner;
 using CliRunner.Abstractions;
-using CliRunner.Buffered;
+using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
 using CliRunner.Extensions;
 
 using PlatformKit.Abstractions;
@@ -69,10 +70,13 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            BufferedCommandResult result = await Command.CreateInstance("/usr/bin/uname")
+            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
                 .WithArguments(argument)
-                .WithWorkingDirectory(Environment.CurrentDirectory)
-                .ExecuteBufferedAsync(_commandRunner);
+                .WithWorkingDirectory(Environment.CurrentDirectory);
+            
+            Command command = commandBuilder.Build();
+            
+            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             return result.StandardOutput;
         }

@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
-
+using CliRunner.Builders.Abstractions;
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specializations.Linux;
@@ -107,7 +107,7 @@ namespace PlatformKit.Providers
                 ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
                     .WithArguments($"-v");
 
-                Command command = commandBuilder.ToCommand();
+                Command command = commandBuilder.Build();
                 
                 BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
