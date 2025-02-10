@@ -18,7 +18,6 @@ using CliRunner.Abstractions;
 using CliRunner.Builders;
 using CliRunner.Builders.Abstractions;
 
-using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Specifics;
 using PlatformKit.Specifics.Abstractions;
@@ -56,7 +55,7 @@ namespace PlatformKit.Providers
 #endif
         public new async Task<Platform> GetCurrentPlatformAsync()
         {
-            Platform platform = new Platform(await GetOsNameAsync(),
+            Platform platform = new Platform(GetOsName(),
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
                 PlatformFamily.Darwin,
@@ -80,7 +79,7 @@ namespace PlatformKit.Providers
         public async Task<DarwinPlatform> GetCurrentDarwinPlatformAsync()
         {
             DarwinPlatform darwinPlatform = new DarwinPlatform(
-                await GetOsNameAsync(), await GetDarwinVersionAsync(), 
+                 GetOsName(), await GetDarwinVersionAsync(), 
                 await GetOsVersionAsync(),
                 await GetKernelVersionAsync(),
                 await GetBuildNumberAsync(),
@@ -163,7 +162,7 @@ namespace PlatformKit.Providers
             }
         }
 
-        private async Task<string> GetOsNameAsync()
+        private string GetOsName()
         {
             return RuntimeInformation.OSDescription.Split(' ').First();
         }
