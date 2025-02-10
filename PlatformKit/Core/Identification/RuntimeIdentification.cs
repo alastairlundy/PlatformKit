@@ -147,8 +147,10 @@ namespace PlatformKit.Identification
                 {
                     osVersion = "11";
                 }
-                
-                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LegacyOS);
+                else
+                {
+                    throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LegacyOS);
+                }
             }
             if (OperatingSystem.IsLinux())
             {
