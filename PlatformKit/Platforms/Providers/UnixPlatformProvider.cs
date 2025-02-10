@@ -11,7 +11,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 using CliRunner;
@@ -24,7 +23,8 @@ using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
-
+#else
+using System.Runtime.Versioning;
 #endif
 
 namespace PlatformKit.Providers

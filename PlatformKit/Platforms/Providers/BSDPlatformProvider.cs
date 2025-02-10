@@ -62,7 +62,7 @@ namespace PlatformKit.Providers
 
         private async Task<string> GetBuildNumberAsync()
         {
-
+            
         }
 
 #if NET5_0_OR_GREATER
