@@ -127,11 +127,11 @@ public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
         ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/system_profiler")
             .WithArguments("SP" + macSystemProfilerDataType)
             .WithWorkingDirectory("/usr/bin/")
-            .WithValidation(CommandResultValidation.None);
+            .WithValidation(ProcessResultValidation.None);
         
         Command command = commandBuilder.Build();
         
-        BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+        BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
         string info = result.StandardOutput;
 

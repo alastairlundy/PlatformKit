@@ -109,7 +109,7 @@ namespace PlatformKit.Providers
                 
                 Command command = commandBuilder.Build();
                 
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 switch (result.StandardOutput.ToLower())
                 {
@@ -180,7 +180,7 @@ namespace PlatformKit.Providers
             
             Command command = commandBuilder.Build();
             
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
             return result.StandardOutput;
         }
@@ -224,7 +224,7 @@ namespace PlatformKit.Providers
                 
                 Command command = commandBuilder.Build();
                 
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 string versionString = result.StandardOutput
                     .Replace(" ", string.Empty);

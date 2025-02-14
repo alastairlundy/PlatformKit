@@ -71,7 +71,7 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 
           Command command = commandBuilder.Build();
               
-          BufferedCommandResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
+          BufferedProcessResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
           
           string desc = descResult.StandardOutput;
             

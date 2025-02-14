@@ -85,7 +85,7 @@ namespace PlatformKit.Providers
                 
                 Command command = commandBuilder.Build();
                 
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 return result.StandardOutput switch
                 {
@@ -127,7 +127,7 @@ namespace PlatformKit.Providers
                 
                 Command command = commandBuilder.Build();
                 
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 return result.StandardOutput;
         }
@@ -152,7 +152,7 @@ namespace PlatformKit.Providers
                 
                 Command command = commandBuilder.Build();
                 
-                BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
                 int indexOfDash = result.StandardOutput.IndexOf('-');
 
@@ -190,7 +190,7 @@ namespace PlatformKit.Providers
                 
             Command command = commandBuilder.Build();
                 
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             return result.StandardOutput.Replace(" ", string.Empty);
         }

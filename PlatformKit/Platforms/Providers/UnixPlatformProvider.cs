@@ -76,7 +76,7 @@ namespace PlatformKit.Providers
             
             Command command = commandBuilder.Build();
             
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
             
             return result.StandardOutput;
         }
