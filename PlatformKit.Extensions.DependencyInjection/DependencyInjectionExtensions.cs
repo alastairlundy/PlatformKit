@@ -8,18 +8,10 @@
  */
 
 using System;
+
 using Microsoft.Extensions.DependencyInjection;
 
-using PlatformKit.Providers;
-
-using PlatformKit.Specializations.Linux;
-using PlatformKit.Specializations.Mac;
-using PlatformKit.Specializations.Windows;
-using PlatformKit.Specializations.Windows.Abstractions;
-
-using PlatformKit.Specifics.Abstractions;
-
-namespace PlatformKit.Extensions;
+namespace PlatformKit.Extensions.DependencyInjection;
 
 public static class DependencyInjectionExtensions
 {
@@ -41,7 +33,6 @@ public static class DependencyInjectionExtensions
         services = services.Add(typeof(ILinuxOsReleaseProvider), typeof(LinuxOsReleaseProvider), serviceLifetime);
         
         services = services.Add(typeof(IWindowsSystemInfoProvider), typeof(WindowsSystemInfoProvider), serviceLifetime);
-        services = services.Add(typeof(IWMISearcher), typeof(WMISearcher), serviceLifetime);
         services = services.Add(typeof(IWinRegistrySearcher), typeof(WinRegistrySearcher), serviceLifetime);
         
         return services;
