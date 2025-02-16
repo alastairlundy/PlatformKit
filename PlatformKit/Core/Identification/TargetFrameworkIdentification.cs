@@ -27,7 +27,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using AlastairLundy.Extensions.System.Strings.Versioning;
+using AlastairLundy.Extensions.System.Strings;
 
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
@@ -212,8 +212,7 @@ public class TargetFrameworkIdentification
                 .Replace("core", string.Empty)
                 .Replace("mono", string.Empty)
                 .Replace("framework", string.Empty)
-                .Replace(" ", string.Empty)
-                .AddMissingZeroes(numberOfZeroesNeeded: 3);
+                .Replace(" ", string.Empty);
 
             return Version.Parse(versionString);
         }
