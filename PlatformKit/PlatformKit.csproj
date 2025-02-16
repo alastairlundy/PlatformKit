@@ -81,9 +81,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0-preview.2, 6.0.0)" />
-        <PackageReference Include="CliRunner" Version="1.0.0-alpha.4" />
-        <PackageReference Include="CliRunner.Specializations" Version="1.0.0-alpha.4" />
+        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
+        <PackageReference Include="CliRunner" Version="1.0.0-beta.1" />
+        <PackageReference Include="CliRunner.Specializations" Version="1.0.0-beta.1" />
     </ItemGroup>
 
     <ItemGroup>
