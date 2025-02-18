@@ -33,13 +33,13 @@ This document is not guaranteed to be accurate or up to date.
 | Windows 10 20H2 | 2.0.0 | Still supported |
 | Windows 10 v1903 through Windows 10 v2004 | 2.0.0 | Still supported |
 | Windows Server 2019 | 2.0.0 | Still supported |
-| Windows 10 v1709 through Windows 10 v1903 | 2.0.0 | Still supported |
-| Windows Server v1709 | 2.0.0 | Still supported |
+| Windows 10 v1709 through Windows 10 v1903 | 2.0.0 | Support ending in PlatformKit 5 |
+| Windows Server v1709 | 2.0.0 | Support ending in PlatformKit 5 |
 | Windows Server 2016 | 2.0.0 | Support ending in PlatformKit 5 |
 | Windows 10 v1709 | 2.0.0 | Still supported |
 | Windows 10 v1709 for Mobile | 2.0.0 | 4.4.3 |
-| Windows 10 v1703 | 2.0.0 | Still supported |
-| Windows 10 v1607 | 2.0.0 | Still supported |
+| Windows 10 v1703 | 2.0.0 | Support ending in PlatformKit 5 |
+| Windows 10 v1607 | 2.0.0 | Support ending in PlatformKit 5 |
 | Windows 10 v1511 | 2.0.0 | Support ending in PlatformKit 5 |
 | Windows 10 v1507 | 2.0.0 | Support ending in PlatformKit 5 |
 
