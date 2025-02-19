@@ -24,7 +24,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using PlatformKit.Core.Models;
 
 namespace PlatformKit.Core.Extensions
 {

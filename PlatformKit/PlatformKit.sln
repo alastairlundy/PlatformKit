@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions.Depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "..\PlatformKit.Windows\PlatformKit.Windows.csproj", "{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Core", "..\PlatformKit.Core\PlatformKit.Core.csproj", "{2BBB21DF-A016-42EF-A13D-678473F605E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
