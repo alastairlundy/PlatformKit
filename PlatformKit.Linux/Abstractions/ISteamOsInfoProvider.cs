@@ -7,28 +7,26 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
-#endif
-
 using System.Threading.Tasks;
 
-namespace PlatformKit.Specializations.Linux;
+// ReSharper disable InconsistentNaming
 
-public interface ILinuxOsReleaseProvider
+namespace PlatformKit.Linux.Abstractions;
+
+public interface ISteamOsInfoProvider
 {
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<string> GetPropertyValueAsync(string propertyName);
+    public Task<SteamOSMode> GetSteamOSModeAsync();
+
+    public Task<SteamOSMode> GetSteamOSModeAsync(bool includeHoloIsoAsSteamOs);
     
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
+    public Task<bool> IsSteamOSAsync();
+    public Task<bool> IsSteamOSAsync(bool includeHoloIsoAsSteamOs);
 
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
-#endif
-    public Task<LinuxDistroBase> GetDistroBaseAsync();
 }

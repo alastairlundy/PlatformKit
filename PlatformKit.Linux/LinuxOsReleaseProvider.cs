@@ -7,15 +7,6 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-using AlastairLundy.Extensions.System.Strings;
-
-using PlatformKit.Internal.Localizations;
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 
@@ -23,7 +14,17 @@ using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 using System.Runtime.Versioning;
 #endif
 
-namespace PlatformKit.Specializations.Linux;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+using AlastairLundy.Extensions.System.Strings;
+
+using PlatformKit.Linux.Abstractions;
+using PlatformKit.Linux.Internal.Localizations;
+
+namespace PlatformKit.Linux;
 
 public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 {
