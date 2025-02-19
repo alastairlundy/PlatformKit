@@ -7,30 +7,29 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
-using CliRunner.Specializations;
-using CliRunner.Specializations.Configurations;
-using PlatformKit.Internal.Exceptions.Windows;
-using PlatformKit.Internal.Localizations;
-using PlatformKit.Specializations.Shared;
-using PlatformKit.Specializations.Windows.Abstractions;
-
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
-
 #else
 using System.Runtime.Versioning;
 #endif
 
-namespace PlatformKit.Specializations.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using CliRunner;
+using CliRunner.Abstractions;
+using CliRunner.Builders;
+using CliRunner.Builders.Abstractions;
+using CliRunner.Specializations.Configurations;
+
+using PlatformKit.Core;
+using PlatformKit.Windows.Abstractions;
+using PlatformKit.Windows.Exceptions;
+
+namespace PlatformKit.Windows;
 
 public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 {
@@ -295,11 +294,14 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
                   }
         
                   wasLastLineProcLine = false;
-        
-                  NetworkCardModel networkCard = new NetworkCardModel
-                  {
-                      Name = array[index + 2].Replace("  ", string.Empty)
-                  };
+
+                  NetworkCardModel networkCard = new NetworkCardModel(
+                      name: array[index + 2].Replace("  ", string.Empty),
+                  connectionName: "",
+                      dhcpServer: "",
+                      ipAddresses: ipAddresses.ToArray(),
+                      isDhcpEnabled: false);
+                    
 
                   networkCards.Add(networkCard);
                   lastNetworkCard = networkCard; 

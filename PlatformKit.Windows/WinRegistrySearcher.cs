@@ -8,10 +8,11 @@
  */
 
 using System.Threading.Tasks;
-using CliRunner.Abstractions;
-using PlatformKit.Specializations.Windows.Abstractions;
 
-namespace PlatformKit.Specializations.Windows;
+using CliRunner.Abstractions;
+using PlatformKit.Windows.Abstractions;
+
+namespace PlatformKit.Windows;
 
 public class WinRegistrySearcher : IWinRegistrySearcher
 {

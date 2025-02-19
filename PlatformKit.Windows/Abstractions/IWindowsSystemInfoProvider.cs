@@ -9,12 +9,11 @@
 
 using System.Threading.Tasks;
 
-namespace PlatformKit.Specializations.Windows.Abstractions
+namespace PlatformKit.Windows.Abstractions;
+
+public interface IWindowsSystemInfoProvider
 {
-    public interface IWinRegistrySearcher
-    {
-        public Task<string> GetValueAsync(string query);
-        
-        public Task<string> GetValueAsync(string query, string key);
-    }
+    public Task<WindowsSystemInfo> GetWindowsSystemInfoAsync();
+    
+    public Task<WindowsEdition> GetWindowsEditionAsync();
 }

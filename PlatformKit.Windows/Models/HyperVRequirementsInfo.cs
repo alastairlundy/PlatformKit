@@ -8,7 +8,7 @@
  */
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.Specializations.Windows
+namespace PlatformKit.Windows
 {
     public class HyperVRequirementsInfo
     {

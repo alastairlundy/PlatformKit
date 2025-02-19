@@ -25,7 +25,7 @@
 
 using System;
 
-namespace PlatformKit.Internal.Exceptions.Windows
+namespace PlatformKit.Windows.Exceptions
 {
     public class WindowsEditionDetectionException : Exception
     {

@@ -21,7 +21,7 @@
 * Removed duplicate code
 * Adjusted some namespaces</PackageReleaseNotes>
    <Product>PlatformKit</Product>
-        <LangVersion>default</LangVersion>
+        <LangVersion>13</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -57,8 +57,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="OldPlatforms\" />
+      <Folder Include="Core\" />
       <Folder Include="Platforms\OperatingSystems\" />
+      <Folder Include="Specializations\Linux\" />
+      <Folder Include="Specializations\Shared\Models\" />
+      <Folder Include="Specializations\Windows\" />
     </ItemGroup>
 
     <ItemGroup>

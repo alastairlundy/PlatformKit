@@ -7,7 +7,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-namespace PlatformKit.Specializations.Windows
+namespace PlatformKit.Windows
 {
     /// <summary>
     /// An enum representing different Windows Editions.

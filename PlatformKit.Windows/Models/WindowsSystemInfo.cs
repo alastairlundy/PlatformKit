@@ -9,10 +9,10 @@
 
 using System;
 
-using PlatformKit.Specializations.Shared;
+using PlatformKit.Core;
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.Specializations.Windows
+namespace PlatformKit.Windows
 {
     public class WindowsSystemInfo
     {
