@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>13</LangVersion>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>net9.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>PlatformKit.Core</Title>
+        <Authors>AlastairLundy</Authors>
+        <Copyright>Copyright (c) Alastair Lundy 2025</Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
+        <PackageTags>platform detection, CSharp,</PackageTags>
+        <Version>5.0.0-preview.1</Version>
+        <Description>Models and interfaces required by PlatformKit platform enablement packages.</Description>
+        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="..\LICENSE.txt">
+            <Link>LICENSE.txt</Link>
+            <PackagePath>LICENSE.txt</PackagePath>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+    <None Include="..\images\logos\platformkit_logo_512x.jpg">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>platformkit_logo_512x.jpg</Link>
+    </None>
+    </ItemGroup>
+
+</Project>
