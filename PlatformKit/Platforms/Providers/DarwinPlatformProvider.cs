@@ -12,7 +12,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
+using AlastairLundy.Extensions.Processes;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -39,9 +39,9 @@ namespace PlatformKit.Providers
     [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
     public class DarwinPlatformProvider : UnixPlatformProvider, IDarwinPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
 
-        public DarwinPlatformProvider(ICommandRunner commandRunner) : base(commandRunner)
+        public DarwinPlatformProvider(ICliCommandRunner commandRunner) : base(commandRunner)
         {
             _commandRunner = commandRunner;
         }
@@ -104,10 +104,10 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
             {
-                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/uname")
                     .WithArguments($"-m");
                 
-                Command command = commandBuilder.Build();
+                CliCommand command = commandBuilder.Build();
                 
                 BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -176,9 +176,9 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetSwVersInfoAsync()
         {
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/sw_vers");
+            ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/sw_vers");
             
-            Command command = commandBuilder.Build();
+            CliCommand command = commandBuilder.Build();
             
             BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -219,7 +219,7 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
-                ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+                ICliCommandRunner commandBuilder = new CliCommandBuilder("/usr/bin/uname")
                     .WithArguments($"-v");
                 
                 Command command = commandBuilder.Build();

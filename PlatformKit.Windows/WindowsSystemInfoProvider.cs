@@ -33,9 +33,9 @@ namespace PlatformKit.Windows;
 
 public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 {
-    private readonly ICommandRunner _commandRunner;
+    private readonly ICliCommandRunner _commandRunner;
 
-    public WindowsSystemInfoProvider(ICommandRunner commandRunner)
+    public WindowsSystemInfoProvider(ICliCommandRunner commandRunner)
     {
         _commandRunner = commandRunner;
     }
@@ -64,7 +64,7 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
         
           NetworkCardModel lastNetworkCard = null;
 
-          ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
+          ICliCommandRunner commandBuilder = new CliCommandRunner(new CmdCommandConfiguration())
               .WithArguments("systeminfo")
               .WithWorkingDirectory(Environment.SystemDirectory);
 

@@ -15,8 +15,6 @@ using CliRunner.Abstractions;
 using CliRunner.Builders;
 using CliRunner.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
-using PlatformKit.Specializations.Windows;
-using PlatformKit.Specializations.Windows.Abstractions;
 
 using PlatformKit.Specifics;
 using PlatformKit.Specifics.Abstractions;
@@ -33,10 +31,10 @@ namespace PlatformKit.Providers
 {
     public class WindowsPlatformProvider : IWindowsPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
         private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public WindowsPlatformProvider(ICommandRunner commandRunner, IWindowsSystemInfoProvider windowsSystemInfoProvider)
+        public WindowsPlatformProvider(ICliCommandRunner commandRunner, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
             _commandRunner = commandRunner;
             _windowsSystemInfoProvider = windowsSystemInfoProvider;
@@ -96,10 +94,10 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            ICommandBuilder commandBuilder = new CommandBuilder("echo")
+            ICliCommandBuilder commandBuilder = new CliCommandBuilder("echo")
                 .WithArguments("%PROCESSOR_ARCHITECTURE%");
             
-            Command command = commandBuilder.Build();
+            CliCommand command = commandBuilder.Build();
             
             var result = await _commandRunner.ExecuteBufferedAsync(command);
 

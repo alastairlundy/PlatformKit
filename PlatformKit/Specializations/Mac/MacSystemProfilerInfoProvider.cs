@@ -10,7 +10,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-
+using AlastairLundy.Extensions.Processes;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -30,9 +30,9 @@ namespace PlatformKit.Specializations.Mac;
 
 public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
 {
-    private readonly ICommandRunner _commandRunner;
+    private readonly ICliCommandRunner _commandRunner;
 
-    public MacSystemProfilerInfoProvider(ICommandRunner commandRunner)
+    public MacSystemProfilerInfoProvider(ICliCommandRunner commandRunner)
     {
         _commandRunner = commandRunner;
     }
@@ -124,12 +124,12 @@ public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
 
-        ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/system_profiler")
+        ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/system_profiler")
             .WithArguments("SP" + macSystemProfilerDataType)
             .WithWorkingDirectory("/usr/bin/")
             .WithValidation(ProcessResultValidation.None);
         
-        Command command = commandBuilder.Build();
+        CliCommand command = commandBuilder.Build();
         
         BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 

@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
+using AlastairLundy.Extensions.Processes;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -31,9 +31,9 @@ namespace PlatformKit.Providers
 {
     public class UnixPlatformProvider : IUnixPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
 
-        public UnixPlatformProvider(ICommandRunner commandRunner)
+        public UnixPlatformProvider(ICliCommandRunner commandRunner)
         {
             _commandRunner = commandRunner;
         }
@@ -70,11 +70,11 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            ICommandBuilder commandBuilder = new CommandBuilder("uname")
+            ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
                 .WithArguments(argument)
                 .WithWorkingDirectory(Environment.CurrentDirectory);
             
-            Command command = commandBuilder.Build();
+            CliCommand command = commandBuilder.Build();
             
             BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
             

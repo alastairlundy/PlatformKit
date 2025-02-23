@@ -32,10 +32,10 @@ namespace PlatformKit.Providers
 {
     public class LinuxPlatformProvider : UnixPlatformProvider, ILinuxPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
         
-        public LinuxPlatformProvider(ICommandRunner commandRunner,
+        public LinuxPlatformProvider(ICliCommandRunner commandRunner,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher)
             : base(commandRunner)
         {

@@ -37,9 +37,9 @@ namespace PlatformKit.Providers
 {
     public class BSDPlatformProvider : UnixPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
 
-        public BSDPlatformProvider(ICommandRunner commandRunner) : base(commandRunner)
+        public BSDPlatformProvider(ICliCommandRunner commandRunner) : base(commandRunner)
         {
             _commandRunner = commandRunner;
         }
@@ -74,7 +74,11 @@ namespace PlatformKit.Providers
             {
                 try
                 {
+#if NET6_0_OR_GREATER
                     string[] lines = await File.ReadAllLinesAsync("/etc/freebsd-release");
+#else
+                    string[] lines = await FilePolyfill.ReadAllLinesAsync("/etc/freebsd-release");
+#endif
 
                     string result = lines.First(x =>
                             x.Contains("name=", StringComparison.CurrentCultureIgnoreCase))

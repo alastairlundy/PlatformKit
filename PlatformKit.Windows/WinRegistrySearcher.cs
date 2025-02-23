@@ -16,9 +16,9 @@ namespace PlatformKit.Windows;
 
 public class WinRegistrySearcher : IWinRegistrySearcher
 {
-    private readonly ICommandRunner _commandRunner;
+    private readonly ICliCommandRunner _commandRunner;
 
-    public WinRegistrySearcher(ICommandRunner commandRunner)
+    public WinRegistrySearcher(ICliCommandRunner commandRunner)
     {
         _commandRunner = commandRunner;
     }

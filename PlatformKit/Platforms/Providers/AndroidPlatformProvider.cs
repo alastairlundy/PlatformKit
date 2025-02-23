@@ -10,7 +10,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
+using AlastairLundy.Extensions.Processes;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -29,9 +29,9 @@ namespace PlatformKit.Providers
 {
     public class AndroidPlatformProvider : IAndroidPlatformProvider
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
 
-        public AndroidPlatformProvider(ICommandRunner commandRunner)
+        public AndroidPlatformProvider(ICliCommandRunner commandRunner)
         {
             _commandRunner = commandRunner;
         }
@@ -80,10 +80,10 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
                         .WithArguments("-m");
                 
-                Command command = commandBuilder.Build();
+                CliCommand command = commandBuilder.Build();
                 
                 BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -122,10 +122,10 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetPlatformNameAsync()
         {
-                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
                         .WithArguments("-o");
                 
-                Command command = commandBuilder.Build();
+                CliCommand command = commandBuilder.Build();
                 
                 BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -147,10 +147,10 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetPlatformKernelVersionAsync()
         {
-                ICommandBuilder commandBuilder = new CommandBuilder("uname")
+                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
                         .WithArguments("-r");
                 
-                Command command = commandBuilder.Build();
+                CliCommand command = commandBuilder.Build();
                 
                 BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
 
@@ -185,10 +185,10 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetPropValueAsync(string value)
         {
-            ICommandBuilder commandBuilder = new CommandBuilder("getprop")
+            ICliCommandBuilder commandBuilder = new CliCommandBuilder("getprop")
                       .WithArguments($"ro.build.version.{value}");
                 
-            Command command = commandBuilder.Build();
+            CliCommand command = commandBuilder.Build();
                 
             BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
             

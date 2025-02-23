@@ -28,11 +28,11 @@ namespace PlatformKit
 {
     public class DefaultPlatformProviderFactory : IPlatformProviderFactory
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandRunner _commandRunner;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
         private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public DefaultPlatformProviderFactory(ICommandRunner commandRunner,
+        public DefaultPlatformProviderFactory(ICliCommandRunner commandRunner,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher,
             IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
@@ -41,7 +41,7 @@ namespace PlatformKit
             _windowsSystemInfoProvider = windowsSystemInfoProvider;
         }
         
-        public static DefaultPlatformProviderFactory CreateFactory(ICommandRunner commandRunner,
+        public static DefaultPlatformProviderFactory CreateFactory(ICliCommandRunner commandRunner,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
             return new DefaultPlatformProviderFactory(commandRunner, linuxOsReleaseSearcher, windowsSystemInfoProvider);
