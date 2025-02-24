@@ -15,8 +15,13 @@
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Initial release as standalone package</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <PackageTags>platformkit, os-release, linux,</PackageTags>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
 
     <ItemGroup>
