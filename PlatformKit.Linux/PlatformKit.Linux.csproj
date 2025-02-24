@@ -15,6 +15,8 @@
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Initial release as standalone package</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
+        <PackageTags>platformkit, os-release, linux,</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -45,6 +47,14 @@
           <PackagePath>LICENSE.txt</PackagePath>
         <Link>LICENSE.txt</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\images\logos\platformkit_logo_512x.jpg">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>platformkit_logo_512x.jpg</Link>
+      </None>
     </ItemGroup>
 
 </Project>
