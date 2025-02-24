@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AlastairLundy.Extensions.Processes;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -64,11 +64,11 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
         
           NetworkCardModel lastNetworkCard = null;
 
-          ICliCommandRunner commandBuilder = new CliCommandRunner(new CmdCommandConfiguration())
+          ICliCommandBuilder commandBuilder = new CliCommandBuilder(new CmdCommandConfiguration())
               .WithArguments("systeminfo")
               .WithWorkingDirectory(Environment.SystemDirectory);
 
-          Command command = commandBuilder.Build();
+          CliCommand command = commandBuilder.Build();
               
           BufferedProcessResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
           
