@@ -2,16 +2,15 @@
 This package contains class models and interfaces required by PlatformKit platform enablement packages (e.g. PlatformKit.Windows etc).
 
 ## How to Use the Project
-An explanation of how to use the built code in some way.
+
 
 ## How to build the code
-An explanation of how to build the code from source
+To build the project in Debug mode run the following command: ``dotnet build -c Debug``.
+
+To build the project in Release mode run the following command: ``dotnet build -C Release``
 
 ## How to contribute to the project
-The steps to take to contribute to the project.
-
-## Roadmap
-This package aims to contain core models and interfaces required by PlatformKit for Platform enablement, and not much else.
+If you'd like to contribute to the code, please fork the project, make your changes, and then open a Pull Request.
 
 ## Credits/ Acknowledgements
 
