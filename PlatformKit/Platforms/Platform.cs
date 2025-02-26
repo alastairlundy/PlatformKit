@@ -49,17 +49,17 @@ namespace PlatformKit
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="platformName"></param>
         /// <param name="operatingSystemVersion"></param>
         /// <param name="kernelVersion"></param>
         /// <param name="family"></param>
         /// <param name="buildNumber"></param>
         /// <param name="processorArchitecture"></param>
-        public Platform(string name, Version operatingSystemVersion, Version kernelVersion,
+        public Platform(string platformName, Version operatingSystemVersion, Version kernelVersion,
             PlatformFamily family, string buildNumber,
             Architecture processorArchitecture)
         {
-            Name = name;
+            Name = platformName;
             OperatingSystemVersion = operatingSystemVersion;
             KernelVersion = kernelVersion;
             Family = family;
