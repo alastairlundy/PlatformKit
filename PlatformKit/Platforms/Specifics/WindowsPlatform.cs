@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable ConvertToPrimaryConstructor
 
-namespace PlatformKit.Specifics;
+namespace PlatformKit.Platforms.Specifics;
 
 public class WindowsPlatform : Platform, IEquatable<WindowsPlatform>
 {
