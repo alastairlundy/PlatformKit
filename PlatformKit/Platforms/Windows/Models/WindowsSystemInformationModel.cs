@@ -69,7 +69,7 @@ public class WindowsSystemInformationModel
     /// </summary>
     /// <returns></returns>
     [Obsolete(DeprecationMessages.DeprecationV5)]
-    public override string ToString()
+    public new string ToString()
     {
         StringBuilder stringBuilder = new StringBuilder();
         

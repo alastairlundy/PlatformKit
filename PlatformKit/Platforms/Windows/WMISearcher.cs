@@ -23,6 +23,9 @@
    */
 
 using System;
+using System.IO;
+using CliWrap;
+using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -52,7 +55,11 @@ public class WMISearcher
     {
         if (OperatingSystem.IsWindows())
         {
-            return CommandRunner.RunPowerShellCommand($"Get-WmiObject -Class {wmiClass} | Select-Object *");
+            var result = Cli.Wrap($"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe")
+                .WithArguments($"Get-WmiObject -Class {wmiClass} | Select-Object *")
+                .ExecuteBufferedSync();
+            
+            return result.StandardOutput;
         }
 
         throw new PlatformNotSupportedException();
@@ -74,8 +81,11 @@ public class WMISearcher
     {
         if (OperatingSystem.IsWindows())
         {
-            string[] arr = CommandRunner.RunPowerShellCommand($"Get-CimInstance -Class {wmiClass} -Property {property}")
-                .Split(Convert.ToChar(Environment.NewLine));
+            var result = Cli.Wrap($"{WinPowershellInfo.Location}{Path.DirectorySeparatorChar}powershell.exe")
+                .WithArguments($"Get-CimInstance -Class {wmiClass} -Property {property}")
+                .ExecuteBufferedSync();
+
+            string[] arr = result.StandardOutput.Split(Convert.ToChar(Environment.NewLine));
             
            foreach (string str in arr)
            {

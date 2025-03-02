@@ -29,7 +29,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 
 using CliWrap;
-using CliWrap.Buffered;
 
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Exceptions;
@@ -60,6 +59,7 @@ public class WindowsAnalyzer
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static WindowsEdition GetWindowsEdition()
     {
         return GetWindowsEdition(GetWindowsSystemInformation());
@@ -75,6 +75,7 @@ public class WindowsAnalyzer
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static WindowsEdition GetWindowsEdition(WindowsSystemInformationModel windowsSystemInformation)
     {
         if (!OperatingSystem.IsWindows())
@@ -149,6 +150,7 @@ public class WindowsAnalyzer
 
     }
 
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     protected static int GetNetworkCardPositionInWindowsSysInfo(List<NetworkCardModel> networkCards, NetworkCardModel lastNetworkCard)
     {
         for (int position = 0; position < networkCards.Count; position++)
@@ -170,6 +172,7 @@ public class WindowsAnalyzer
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static WindowsSystemInformationModel GetWindowsSystemInformation()
     {
         if (!OperatingSystem.IsWindows())
@@ -528,6 +531,7 @@ for (int index = 0; index < array.Length; index++)
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsWindows10()
     {
         return IsWindows10(GetWindowsVersionToEnum());
@@ -538,6 +542,10 @@ for (int index = 0; index < array.Length; index++)
     /// </summary>
     /// <param name="windowsVersion"></param>
     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("windows")]
+#endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsWindows10(WindowsVersion windowsVersion)
     {
         Version version = GetWindowsVersionFromEnum(windowsVersion);
@@ -554,6 +562,7 @@ for (int index = 0; index < array.Length; index++)
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static bool IsWindows11()
     { 
         return IsWindows11(GetWindowsVersionToEnum());
@@ -587,6 +596,7 @@ for (int index = 0; index < array.Length; index++)
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static WindowsVersion GetWindowsVersionToEnum()
         {
             if (OperatingSystem.IsWindows())
@@ -602,6 +612,7 @@ for (int index = 0; index < array.Length; index++)
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static WindowsVersion GetWindowsVersionToEnum(Version input)
         {
             return input.Build switch
@@ -661,6 +672,7 @@ for (int index = 0; index < array.Length; index++)
         /// <param name="windowsVersion"></param>
         /// <returns></returns>
         /// <exception cref="WindowsVersionDetectionException"></exception>
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static Version GetWindowsVersionFromEnum(WindowsVersion windowsVersion)
         {
             return windowsVersion switch
@@ -697,6 +709,7 @@ for (int index = 0; index < array.Length; index++)
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static bool IsAtLeastVersion(WindowsVersion windowsVersion)
         {
             if (OperatingSystem.IsWindows())

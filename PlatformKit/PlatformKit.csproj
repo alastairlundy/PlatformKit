@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <Authors>Alastair Lundy</Authors>
-        <Company />
         <Description>Cross-platform Operating System Detection, Operating System Version Detection, Apple Silicon Mac Detection, programmatic .NET Runtime ID Generation, and more. For a full list of features please visit: https://github.com/alastairlundy/PlatformKit/blob/main/docs/FeatureComparisonByPlatform.md</Description>
         <Copyright>Copyright (c) Alastair Lundy 2020-2025</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit/</RepositoryUrl>
@@ -16,39 +15,34 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.6.2
-* Downgraded dependency on SystemExtensions back to 5.4.1 from 5.5.0 due to StringExtensions discontinuation as a separate package
-* Fixed a bug that would throw an exception when using the ``RuntimeIdentification`` class on Windows based operating systems</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 4.7.0
+* Updated SystemExtensions dependency to 6.0.0 from 5.4.1</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
-   <AssemblyVersion>4.6.3.0</AssemblyVersion>
-        <Version>4.6.3.0</Version>
-        <PackageVersion>4.6.3</PackageVersion>
+   <AssemblyVersion>4.7.1.0</AssemblyVersion>
+        <Version>4.7.1.0</Version>
+        <PackageVersion>4.7.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <IncludeContentInPack>true</IncludeContentInPack>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
-    </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="CliWrap" Version="[3.7.1, 4.0.0)" />
+        <PackageReference Include="CliWrap" Version="[3.8.0, 4.0.0)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1' ">
-        <PackageReference Include="Polyfill" Version="[7.16.1, 8.0.0)" />
+        <PackageReference Include="Polyfill" Version="[7.18.0, 8.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.4.1, 6.0.0)" />
+        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
     </ItemGroup>
     
     <ItemGroup>
