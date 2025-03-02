@@ -18,12 +18,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
 using AlastairLundy.Extensions.Processes;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
-using CliRunner.Specializations.Configurations;
+
 
 using PlatformKit.Core;
 using PlatformKit.Windows.Abstractions;
@@ -34,11 +35,11 @@ namespace PlatformKit.Windows;
 
 public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
 {
-    private readonly ICliCommandRunner _commandRunner;
+    private readonly ICliCommandInvoker _cliCommandInvoker;
 
-    public WindowsSystemInfoProvider(ICliCommandRunner commandRunner)
+    public WindowsSystemInfoProvider(ICliCommandInvoker cliCommandInvoker)
     {
-        _commandRunner = commandRunner;
+       _cliCommandInvoker = cliCommandInvoker;
     }
 
     /// <summary>
@@ -65,13 +66,13 @@ public class WindowsSystemInfoProvider : IWindowsSystemInfoProvider
         
           NetworkCardModel lastNetworkCard = null;
 
-          ICliCommandBuilder commandBuilder = new CliCommandBuilder(new CmdCommandConfiguration())
+          ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder(new CmdCommandConfiguration())
               .WithArguments("systeminfo")
               .WithWorkingDirectory(Environment.SystemDirectory);
 
-          CliCommand command = commandBuilder.Build();
+          CliCommandConfiguration command = commandBuilder.Build();
               
-          BufferedProcessResult descResult = await _commandRunner.ExecuteBufferedAsync(command);
+          BufferedProcessResult descResult = await _cliCommandInvoker.ExecuteBufferedAsync(command);
           
           string desc = descResult.StandardOutput;
             

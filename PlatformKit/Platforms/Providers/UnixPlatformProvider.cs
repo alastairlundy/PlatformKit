@@ -7,35 +7,33 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using AlastairLundy.Extensions.Processes;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
-
-using PlatformKit.Internal.Localizations;
-using PlatformKit.Specifics.Abstractions;
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
+using System;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.Extensions.Processes;
+using PlatformKit.Internal.Localizations;
+using PlatformKit.Specifics.Abstractions;
 
-namespace PlatformKit.Providers
+namespace PlatformKit.Platforms.Providers
 {
     public class UnixPlatformProvider : IUnixPlatformProvider
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
 
-        public UnixPlatformProvider(ICliCommandRunner commandRunner)
+        public UnixPlatformProvider(ICliCommandInvoker cliCommandInvoker)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
         }
         
         /// <summary>
@@ -62,6 +60,7 @@ namespace PlatformKit.Providers
         [SupportedOSPlatform("freebsd")]
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("android")]
 #endif
         protected async Task<string> GetUnameValueAsync(string argument)
         {
@@ -70,13 +69,13 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/uname")
                 .WithArguments(argument)
                 .WithWorkingDirectory(Environment.CurrentDirectory);
             
-            CliCommand command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
             
             return result.StandardOutput;
         }

@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
+using AlastairLundy.CliInvoke.Abstractions;
 using CliRunner;
 using CliRunner.Abstractions;
 using CliRunner.Builders;
@@ -22,6 +22,7 @@ using CliRunner.Builders.Abstractions;
 
 using PlatformKit.Abstractions;
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Platforms.Providers;
 
 // ReSharper disable ConvertToPrimaryConstructor
 
@@ -37,11 +38,11 @@ namespace PlatformKit.Providers
 {
     public class BSDPlatformProvider : UnixPlatformProvider
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
 
-        public BSDPlatformProvider(ICliCommandRunner commandRunner) : base(commandRunner)
+        public BSDPlatformProvider(ICliCommandInvoker cliCommandInvoker) : base(cliCommandInvoker)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
         }
 
 #if NET5_0_OR_GREATER

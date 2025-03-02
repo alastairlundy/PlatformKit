@@ -12,13 +12,16 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+
 using AlastairLundy.Extensions.Processes;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
 
 using PlatformKit.Internal.Localizations;
+using PlatformKit.Platforms.Providers;
 using PlatformKit.Specifics;
 using PlatformKit.Specifics.Abstractions;
 
@@ -39,11 +42,11 @@ namespace PlatformKit.Providers
     [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
     public class DarwinPlatformProvider : UnixPlatformProvider, IDarwinPlatformProvider
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
 
-        public DarwinPlatformProvider(ICliCommandRunner commandRunner) : base(commandRunner)
+        public DarwinPlatformProvider(ICliCommandInvoker cliCommandInvoker) : base(cliCommandInvoker)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
         }
         
 #if NET5_0_OR_GREATER
@@ -96,7 +99,7 @@ namespace PlatformKit.Providers
             }
             else
             {
-                 
+                return Version.Parse(RuntimeInformation.OSDescription.Split(' ')[1]);
             }
         }
 
@@ -104,14 +107,9 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() == true || OperatingSystem.IsMacCatalyst() == true)
             {
-                ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/uname")
-                    .WithArguments($"-m");
-                
-                CliCommand command = commandBuilder.Build();
-                
-                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                string result = await GetUnameValueAsync("-m");
 
-                switch (result.StandardOutput.ToLower())
+                switch (result.ToLower())
                 {
                     case "x86_64":
                         return Architecture.X64;
@@ -176,11 +174,11 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetSwVersInfoAsync()
         {
-            ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/sw_vers");
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/sw_vers");
             
-            CliCommand command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
 
             return result.StandardOutput;
         }
@@ -197,8 +195,8 @@ namespace PlatformKit.Providers
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
                 string result = await GetSwVersInfoAsync();
-
-                string versionString = result.Split(Environment.NewLine)[1]
+                
+                string versionString = result.Split(Environment.NewLine.ToCharArray())[1]
                     .Replace("ProductVersion:", string.Empty)
                     .Replace(" ", string.Empty);
 
@@ -219,15 +217,9 @@ namespace PlatformKit.Providers
         {
             if (OperatingSystem.IsMacOS() || OperatingSystem.IsMacCatalyst())
             {
-                ICliCommandRunner commandBuilder = new CliCommandBuilder("/usr/bin/uname")
-                    .WithArguments($"-v");
+                string result = await GetUnameValueAsync("-v");
                 
-                Command command = commandBuilder.Build();
-                
-                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-                string versionString = result.StandardOutput
-                    .Replace(" ", string.Empty);
+                string versionString = result.Replace(" ", string.Empty);
                 
                 return Version.Parse(versionString);
             }

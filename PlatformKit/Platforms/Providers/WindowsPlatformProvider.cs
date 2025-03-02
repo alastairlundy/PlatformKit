@@ -7,36 +7,33 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
+// ReSharper disable RedundantExplicitArrayCreation
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
-
-using PlatformKit.Specifics;
+using PlatformKit.Platforms.Specifics;
 using PlatformKit.Specifics.Abstractions;
-
-// ReSharper disable RedundantExplicitArrayCreation
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
 
-namespace PlatformKit.Providers
+namespace PlatformKit.Platforms.Providers
 {
     public class WindowsPlatformProvider : IWindowsPlatformProvider
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
         private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public WindowsPlatformProvider(ICliCommandRunner commandRunner, IWindowsSystemInfoProvider windowsSystemInfoProvider)
+        public WindowsPlatformProvider(ICliCommandInvoker cliCommandInvoker, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
             _windowsSystemInfoProvider = windowsSystemInfoProvider;
         }
         
@@ -94,12 +91,12 @@ namespace PlatformKit.Providers
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
             }
 
-            ICliCommandBuilder commandBuilder = new CliCommandBuilder("echo")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("echo")
                 .WithArguments("%PROCESSOR_ARCHITECTURE%");
             
-            CliCommand command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            var result = await _commandRunner.ExecuteBufferedAsync(command);
+            var result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
 
             switch (result.StandardOutput.ToLower())
             {

@@ -7,33 +7,35 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-using System;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using AlastairLundy.Extensions.Processes;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
-using PlatformKit.Specifics;
-
-using PlatformKit.Specifics.Abstractions;
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
 
-namespace PlatformKit.Providers
-{
-    public class AndroidPlatformProvider : IAndroidPlatformProvider
-    {
-        private readonly ICliCommandRunner _commandRunner;
+using System;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
-        public AndroidPlatformProvider(ICliCommandRunner commandRunner)
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+
+using AlastairLundy.Extensions.Processes;
+using PlatformKit.Providers;
+using PlatformKit.Specifics;
+using PlatformKit.Specifics.Abstractions;
+
+namespace PlatformKit.Platforms.Providers
+{
+    public class AndroidPlatformProvider : UnixPlatformProvider, IAndroidPlatformProvider
+    { 
+            private readonly ICliCommandInvoker _cliCommandInvoker;
+
+        public AndroidPlatformProvider(ICliCommandInvoker cliCommandInvoker) : base(cliCommandInvoker)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
         }
         
         /// <summary>
@@ -43,7 +45,7 @@ namespace PlatformKit.Providers
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("android")]
 #endif
-        public async Task<Platform> GetCurrentPlatformAsync()
+        public new async Task<Platform> GetCurrentPlatformAsync()
         {
             return new Platform(
                 await GetPlatformNameAsync(),
@@ -80,14 +82,9 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Architecture> GetProcessorArchitectureAsync()
         {
-                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
-                        .WithArguments("-m");
+                string result = await GetUnameValueAsync("-m");
                 
-                CliCommand command = commandBuilder.Build();
-                
-                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-                return result.StandardOutput switch
+                return result switch
                 {
                         "aarch64" => Architecture.Arm64,
                         "aarch32" => Architecture.Arm,
@@ -121,21 +118,14 @@ namespace PlatformKit.Providers
         [SupportedOSPlatform("android")]
 #endif
         private async Task<string> GetPlatformNameAsync()
-        {
-                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
-                        .WithArguments("-o");
-                
-                CliCommand command = commandBuilder.Build();
-                
-                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
-
-                return result.StandardOutput;
+        { 
+                return await GetUnameValueAsync("-o");
         }
 
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("android")]
 #endif
-        private async Task<Version> GetPlatformVersionAsync()
+        private new async Task<Version> GetPlatformVersionAsync()
         {
             string version = await GetPropValueAsync("release");
             
@@ -147,24 +137,19 @@ namespace PlatformKit.Providers
 #endif
         private async Task<Version> GetPlatformKernelVersionAsync()
         {
-                ICliCommandBuilder commandBuilder = new CliCommandBuilder("uname")
-                        .WithArguments("-r");
-                
-                CliCommand command = commandBuilder.Build();
-                
-                BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+                string result = await GetUnameValueAsync("-r");
 
-                int indexOfDash = result.StandardOutput.IndexOf('-');
+                int indexOfDash = result.IndexOf('-');
 
                 string versionString;
                 
                 if (indexOfDash != -1)
                 {
-                        versionString = result.StandardOutput.Substring(indexOfDash, result.StandardOutput.Length - indexOfDash);
+                        versionString = result.Substring(indexOfDash, result.Length - indexOfDash);
                 }
                 else
                 { 
-                        versionString = result.StandardOutput;
+                        versionString = result;
                 }
                 
                 return Version.Parse(versionString);
@@ -185,12 +170,12 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetPropValueAsync(string value)
         {
-            ICliCommandBuilder commandBuilder = new CliCommandBuilder("getprop")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("getprop")
                       .WithArguments($"ro.build.version.{value}");
                 
-            CliCommand command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
                 
-            BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
             
             return result.StandardOutput.Replace(" ", string.Empty);
         }
