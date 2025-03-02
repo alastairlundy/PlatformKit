@@ -28,6 +28,7 @@ using CliRunner.Specializations.Configurations;
 using PlatformKit.Core;
 using PlatformKit.Windows.Abstractions;
 using PlatformKit.Windows.Exceptions;
+using PlatformKit.Windows.Internal;
 
 namespace PlatformKit.Windows;
 

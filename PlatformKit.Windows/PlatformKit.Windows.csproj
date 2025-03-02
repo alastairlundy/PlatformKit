@@ -12,5 +12,20 @@
         <PackageReference Include="CliRunner" Version="1.0.0-beta.3"/>
         <PackageReference Include="CliRunner.Specializations" Version="1.0.0-beta.3"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Internal\Localizations\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Internal\Localizations\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
     
 </Project>
