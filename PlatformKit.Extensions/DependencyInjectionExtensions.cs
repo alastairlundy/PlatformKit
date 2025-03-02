@@ -11,7 +11,7 @@ using System;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PlatformKit.Extensions.DependencyInjection;
+namespace PlatformKit.Extensions;
 
 public static class DependencyInjectionExtensions
 {

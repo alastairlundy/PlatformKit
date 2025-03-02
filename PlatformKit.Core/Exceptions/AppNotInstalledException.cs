@@ -1,8 +1,6 @@
 using System;
 
-using PlatformKit.Abstractions.Localizations;
-
-namespace PlatformKit.Abstractions.Exceptions;
+namespace PlatformKit.Core.Exceptions;
 
 public class AppNotInstalledException : Exception
 {
