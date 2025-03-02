@@ -10,11 +10,14 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+
 using AlastairLundy.Extensions.Processes;
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
+
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
@@ -30,11 +33,11 @@ namespace PlatformKit.Specializations.Mac;
 
 public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
 {
-    private readonly ICliCommandRunner _commandRunner;
+    private readonly ICliCommandInvoker _cliCommandInvoker;
 
-    public MacSystemProfilerInfoProvider(ICliCommandRunner commandRunner)
+    public MacSystemProfilerInfoProvider(ICliCommandInvoker cliCommandInvoker)
     {
-        _commandRunner = commandRunner;
+        _cliCommandInvoker = cliCommandInvoker;
     }
     
     /// <summary>
@@ -124,14 +127,14 @@ public class MacSystemProfilerInfoProvider : IMacSystemProfilerInfoProvider
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
 
-        ICliCommandBuilder commandBuilder = new CliCommandBuilder("/usr/bin/system_profiler")
+        ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/system_profiler")
             .WithArguments("SP" + macSystemProfilerDataType)
             .WithWorkingDirectory("/usr/bin/")
             .WithValidation(ProcessResultValidation.None);
         
-        CliCommand command = commandBuilder.Build();
+        CliCommandConfiguration command = commandBuilder.Build();
         
-        BufferedProcessResult result = await _commandRunner.ExecuteBufferedAsync(command);
+        BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
 
         string info = result.StandardOutput;
 

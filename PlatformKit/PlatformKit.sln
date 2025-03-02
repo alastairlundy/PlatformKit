@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "..\PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions.DependencyInjection", "..\PlatformKit.Extensions.DependencyInjection\PlatformKit.Extensions.DependencyInjection.csproj", "{85B8A386-81F5-465F-B1A2-78291D0B30CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions", "..\PlatformKit.Extensions\PlatformKit.Extensions.csproj", "{85B8A386-81F5-465F-B1A2-78291D0B30CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "..\PlatformKit.Windows\PlatformKit.Windows.csproj", "{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}"
 EndProject

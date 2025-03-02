@@ -8,11 +8,12 @@
  */
 
 using System;
-
+using AlastairLundy.CliInvoke.Abstractions;
 using CliRunner;
 using CliRunner.Abstractions;
 
 using PlatformKit.Abstractions;
+using PlatformKit.Platforms.Providers;
 using PlatformKit.Providers;
 using PlatformKit.Specializations.Linux;
 using PlatformKit.Specializations.Windows.Abstractions;
@@ -28,23 +29,23 @@ namespace PlatformKit
 {
     public class DefaultPlatformProviderFactory : IPlatformProviderFactory
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
         private readonly IWindowsSystemInfoProvider _windowsSystemInfoProvider;
 
-        public DefaultPlatformProviderFactory(ICliCommandRunner commandRunner,
+        public DefaultPlatformProviderFactory(ICliCommandInvoker cliCommandInvoker,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher,
             IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = cliCommandInvoker;
             _linuxOsReleaseSearcher = linuxOsReleaseSearcher;
             _windowsSystemInfoProvider = windowsSystemInfoProvider;
         }
         
-        public static DefaultPlatformProviderFactory CreateFactory(ICliCommandRunner commandRunner,
+        public static DefaultPlatformProviderFactory CreateFactory(ICliCommandInvoker cliCommandInvoker,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher, IWindowsSystemInfoProvider windowsSystemInfoProvider)
         {
-            return new DefaultPlatformProviderFactory(commandRunner, linuxOsReleaseSearcher, windowsSystemInfoProvider);
+            return new DefaultPlatformProviderFactory(cliCommandInvoker, linuxOsReleaseSearcher, windowsSystemInfoProvider);
         }
 
         /// <summary>
