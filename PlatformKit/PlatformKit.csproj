@@ -43,14 +43,6 @@
         </None>
         
         <None Include="../README.md" Pack="true" PackagePath="\" />
-        
-        <None Remove="PlatformKit.Software\**" />
-        
-        <None Remove="PlatformKit.Tests\**" />
-        
-        <None Remove="PlatformKit.Mac\**" />
-        
-        <None Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -66,14 +58,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="PlatformKit.Software\**" />
       <EmbeddedResource Update="Internal\Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Remove="PlatformKit.Tests\**" />
-      <EmbeddedResource Remove="PlatformKit.Mac\**" />
-      <EmbeddedResource Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
