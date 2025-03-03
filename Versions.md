@@ -2,12 +2,13 @@
 
 | Version series | Latest Pre-release | Date Of Latest Pre-release |
 |-|-|-|
-| 5.0 | 5.0.0 Alpha 4.2 | February 10th 2025 |
+| 5.0 | 5.0.0 Alpha 5 | March 3rd 2025 |
 
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Update | Supported with Bug Fixes | Supported with Security Fixes |
 |-|-|-|-|-|
+| 4.7 | 4.7.1 | February 18th 2025 | :white_check_mark: | :white_check_mark: | 
 | 4.5 | 4.5.1 | December 15th 2024 | :white_check_mark: | :white_check_mark: | 
 
 

@@ -14,9 +14,12 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 4.1
-* Updated CliRunner dependency from 0.12.0 to 1.0.0 Alpha 3
-* Updated command running code to reflect dependency update</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 4.2
+* Updated to CliInvoke 1.0.0
+            * Removed Windows Registry searching code - Use Microsoft.Windows.Compatibility instead.
+            * Removed AbstractOperatingSystem class
+            * 
+        </PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
