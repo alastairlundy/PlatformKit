@@ -11,8 +11,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
-
+using AlastairLundy.CliInvoke.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Platforms.Providers;
 using PlatformKit.Specializations.Linux;
@@ -32,14 +31,14 @@ namespace PlatformKit.Providers
 {
     public class LinuxPlatformProvider : UnixPlatformProvider, ILinuxPlatformProvider
     {
-        private readonly ICliCommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _commandInvoker;
         private readonly ILinuxOsReleaseProvider _linuxOsReleaseSearcher;
         
-        public LinuxPlatformProvider(ICliCommandRunner commandRunner,
+        public LinuxPlatformProvider(ICliCommandInvoker cliCommandInvoker,
             ILinuxOsReleaseProvider linuxOsReleaseSearcher)
-            : base(commandRunner)
+            : base(cliCommandInvoker)
         {
-            _commandRunner = commandRunner;
+            _commandInvoker = cliCommandInvoker;
             _linuxOsReleaseSearcher = linuxOsReleaseSearcher;
         }
         

@@ -8,6 +8,12 @@
  */
 
 // ReSharper disable RedundantExplicitArrayCreation
+
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = Polyfills.OperatingSystemPolyfill;
+#else
+using System.Runtime.Versioning;
+#endif
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -18,13 +24,8 @@ using AlastairLundy.CliInvoke.Builders.Abstractions;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Platforms.Specifics;
 using PlatformKit.Specifics.Abstractions;
-#if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = Polyfills.OperatingSystemPolyfill;
-#else
-using System.Runtime.Versioning;
-#endif
 
-namespace PlatformKit.Platforms.Providers
+namespace PlatformKit.Providers
 {
     public class WindowsPlatformProvider : IWindowsPlatformProvider
     {

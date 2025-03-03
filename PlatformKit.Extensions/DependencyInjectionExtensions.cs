@@ -19,6 +19,7 @@ public static class DependencyInjectionExtensions
     /// 
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="serviceLifetime"></param>
     /// <returns></returns>
     public static IServiceCollection UsePlatformKit(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Singleton)
     {
