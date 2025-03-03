@@ -24,11 +24,15 @@
 
 using System;
 using System.Threading.Tasks;
-
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.Extensions.IO.Files;
+using AlastairLundy.Extensions.Processes;
+using AlastairLundy.Extensions.Processes.Piping;
+using AlastairLundy.Extensions.Processes.Piping.Abstractions;
+using AlastairLundy.Extensions.Processes.Utilities;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -79,16 +83,20 @@ namespace PlatformKit.OperatingSystems.Mac.Extensions
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
             }
 
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/system_profiler")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/system_profiler")
                 .WithArguments("SP" + macSystemProfilerDataType)
                 .WithWorkingDirectory("/usr/bin/")
-                .WithValidation(CommandResultValidation.None);
+                .WithValidation(ProcessResultValidation.None);
 
-            Command command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
+            IProcessPipeHandler processPipeHandler = new ProcessPipeHandler();
             
-            BufferedCommandResult result = await commandRunner.ExecuteBufferedAsync(command);
+            ICliCommandInvoker commandRunner = new CliCommandInvoker(
+               new PipedProcessRunner(new ProcessRunnerUtility(new FilePathResolver()), processPipeHandler),
+               processPipeHandler, new CommandProcessFactory());
+            
+            BufferedProcessResult result = await commandRunner.ExecuteBufferedAsync(command);
             
             string info = result.StandardOutput;
 

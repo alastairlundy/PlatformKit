@@ -25,14 +25,19 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.CliInvoke.Specializations.Configurations;
+using AlastairLundy.Extensions.IO.Files;
+using AlastairLundy.Extensions.Processes;
+using AlastairLundy.Extensions.Processes.Piping;
+using AlastairLundy.Extensions.Processes.Piping.Abstractions;
+using AlastairLundy.Extensions.Processes.Utilities;
 using AlastairLundy.Extensions.System.Strings;
 
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
-using CliRunner.Specializations.Configurations;
+
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
 
@@ -91,17 +96,21 @@ namespace PlatformKit.OperatingSystems.Windows.Extensions.Extensibility
         
             NetworkCardModel lastNetworkCard = null;
 
-            ICommandBuilder commandBuilder = new CommandBuilder(new CmdCommandConfiguration())
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder(new CmdCommandConfiguration())
                 .WithArguments("systeminfo")
                 .WithWorkingDirectory(Environment.SystemDirectory);
 
-            Command command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
 
-            ICommandRunner commandRunner = new CommandRunner(new CommandPipeHandler(), new ProcessCreator());
+            IProcessPipeHandler processPipeHandler = new ProcessPipeHandler();
             
-            var descResult = await commandRunner.ExecuteBufferedAsync(command);
+            ICliCommandInvoker commandRunner = new CliCommandInvoker(
+                new PipedProcessRunner(new ProcessRunnerUtility(new FilePathResolver()), processPipeHandler),
+                processPipeHandler, new CommandProcessFactory());
             
-            string desc = descResult.StandardOutput;
+            BufferedProcessResult result = await commandRunner.ExecuteBufferedAsync(command);
+            
+            string desc = result.StandardOutput;
             
 #if NET5_0_OR_GREATER
         string[] array = desc.Split(Environment.NewLine);

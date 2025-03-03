@@ -25,11 +25,11 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.Extensions.Processes;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -43,11 +43,11 @@ namespace PlatformKit.OperatingSystems.Mac
 
     public class MacOperatingSystem : AbstractOperatingSystem
     {
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _commandInvoker;
 
-        public MacOperatingSystem(ICommandRunner commandRunner)
+        public MacOperatingSystem(ICliCommandInvoker commandInvoker)
         {
-            _commandRunner = commandRunner;
+           _commandInvoker = commandInvoker;
         }
         
         /// <summary>
@@ -84,11 +84,11 @@ namespace PlatformKit.OperatingSystems.Mac
         private async Task<string[]> GetMacSwVersInfoAsync()
         {
 #pragma warning disable CA1416
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/sw_vers");
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/sw_vers");
             
-            Command command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _commandInvoker.ExecuteBufferedAsync(command);
 #pragma warning restore CA1416
             
             // ReSharper disable once StringLiteralTypo

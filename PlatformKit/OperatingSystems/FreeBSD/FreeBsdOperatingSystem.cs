@@ -24,11 +24,11 @@
 
 using System;
 using System.Threading.Tasks;
-
-using CliRunner;
-using CliRunner.Abstractions;
-using CliRunner.Builders;
-using CliRunner.Builders.Abstractions;
+using AlastairLundy.CliInvoke;
+using AlastairLundy.CliInvoke.Abstractions;
+using AlastairLundy.CliInvoke.Builders;
+using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.Extensions.Processes;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -42,11 +42,11 @@ namespace PlatformKit.OperatingSystems.FreeBSD
     public class FreeBsdOperatingSystem : AbstractOperatingSystem
     {
 
-        private readonly ICommandRunner _commandRunner;
+        private readonly ICliCommandInvoker _cliCommandInvoker;
 
-        public FreeBsdOperatingSystem(ICommandRunner commandRunner)
+        public FreeBsdOperatingSystem(ICliCommandInvoker commandInvoker)
         {
-            _commandRunner = commandRunner;
+            _cliCommandInvoker = commandInvoker;
         }
         
         // ReSharper disable once InconsistentNaming
@@ -72,13 +72,13 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
 
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/uname")
                 .WithArguments("-v")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
-            Command command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
             
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty)
                 .Split(' ')[0].Replace("-release", string.Empty);
@@ -93,13 +93,13 @@ namespace PlatformKit.OperatingSystems.FreeBSD
                 throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
             }
             
-            ICommandBuilder commandBuilder = new CommandBuilder("/usr/bin/uname")
+            ICliCommandConfigurationBuilder commandBuilder = new CliCommandConfigurationBuilder("/usr/bin/uname")
                 .WithArguments("-k")
                 .WithWorkingDirectory(Environment.CurrentDirectory);
 
-            Command command = commandBuilder.Build();
+            CliCommandConfiguration command = commandBuilder.Build();
             
-            BufferedCommandResult result = await _commandRunner.ExecuteBufferedAsync(command);
+            BufferedProcessResult result = await _cliCommandInvoker.ExecuteBufferedAsync(command);
 
             string versionString = result.StandardOutput.Replace("FreeBSD", string.Empty);
             
