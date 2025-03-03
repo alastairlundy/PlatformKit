@@ -41,7 +41,7 @@ using System.Runtime.Versioning;
 namespace PlatformKit.OperatingSystems.Mac
 {
 
-    public class MacOperatingSystem : AbstractOperatingSystem
+    public class MacOperatingSystem
     {
         private readonly ICliCommandInvoker _commandInvoker;
 
@@ -59,7 +59,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -104,7 +104,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override Task<Version> GetKernelVersionAsync()
+        public Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {
@@ -145,7 +145,7 @@ namespace PlatformKit.OperatingSystems.Mac
         [SupportedOSPlatform("macos")]
         [SupportedOSPlatform("maccatalyst")]
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             if (OperatingSystem.IsMacOS() == false)
             {

@@ -36,7 +36,7 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.OperatingSystems.Windows
 {
-    public class WindowsOperatingSystem : AbstractOperatingSystem
+    public class WindowsOperatingSystem
     {
         /// <summary>
         /// Detects Windows Version and returns it as a System.Version
@@ -55,7 +55,7 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsWindows() == false)
             {
@@ -83,7 +83,7 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override async Task<Version> GetKernelVersionAsync()
+        public async Task<Version> GetKernelVersionAsync()
         {
             return await GetOperatingSystemVersionAsync();
         }
@@ -103,7 +103,7 @@ namespace PlatformKit.OperatingSystems.Windows
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             // ReSharper disable once RedundantAssignment
             string output = string.Empty;

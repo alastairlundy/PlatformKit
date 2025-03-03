@@ -39,7 +39,7 @@ using System.Runtime.Versioning;
 
 namespace PlatformKit.OperatingSystems.FreeBSD
 {
-    public class FreeBsdOperatingSystem : AbstractOperatingSystem
+    public class FreeBsdOperatingSystem
     {
 
         private readonly ICliCommandInvoker _cliCommandInvoker;
@@ -65,7 +65,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
@@ -86,7 +86,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
             return Version.Parse(versionString);
         }
 
-        public override async Task<Version> GetKernelVersionAsync()
+        public async Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsFreeBSD() == false)
             {
@@ -117,7 +117,7 @@ namespace PlatformKit.OperatingSystems.FreeBSD
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("watchos")]        
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             Version result = await GetOperatingSystemVersionAsync();
             

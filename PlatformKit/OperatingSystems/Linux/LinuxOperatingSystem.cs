@@ -37,7 +37,7 @@ using System.Runtime.Versioning;
 namespace PlatformKit.OperatingSystems.Linux
 {
 
-    public class LinuxOperatingSystem : AbstractOperatingSystem
+    public class LinuxOperatingSystem
     {
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace PlatformKit.OperatingSystems.Linux
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-        public override async Task<Version> GetKernelVersionAsync()
+        public async Task<Version> GetKernelVersionAsync()
         {
             if (OperatingSystem.IsLinux())
             {
@@ -68,7 +68,7 @@ namespace PlatformKit.OperatingSystems.Linux
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        public override async Task<string> GetOperatingSystemBuildNumberAsync()
+        public async Task<string> GetOperatingSystemBuildNumberAsync()
         {
             return await GetOsReleasePropertyValueAsync("VERSION_ID");
         }
@@ -116,7 +116,7 @@ namespace PlatformKit.OperatingSystems.Linux
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        public override async Task<Version> GetOperatingSystemVersionAsync()
+        public async Task<Version> GetOperatingSystemVersionAsync()
         {
             if (OperatingSystem.IsLinux())
             {
