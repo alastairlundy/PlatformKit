@@ -77,9 +77,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CliRunner" Version="1.0.0-alpha.3" />
-        <PackageReference Include="CliRunner.Specializations" Version="1.0.0-alpha.3" />
         <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
+        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.0.0, 2.0.0)" />
+        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.0.0, 2.0.0)" />
     </ItemGroup>
 
     <ItemGroup>
