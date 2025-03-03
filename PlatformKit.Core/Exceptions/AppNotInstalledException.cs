@@ -1,4 +1,5 @@
 using System;
+using PlatformKit.Core.Internal.Localizations;
 
 namespace PlatformKit.Core.Exceptions;
 
