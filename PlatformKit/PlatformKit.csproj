@@ -14,12 +14,21 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 4.2
-* Updated to CliInvoke 1.0.0
-            * Removed Windows Registry searching code - Use Microsoft.Windows.Compatibility instead.
-            * Removed AbstractOperatingSystem class
-            * 
-        </PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 5.0.0 Alpha 4.2
+
+### Additions
+* Added several Platform classes (including a Platform base class) to represent Platform details
+* Added Platform Provider interfaces as interfaces to provide Platform Details - Implementing classes will replace the ``WindowsOperatingSystem``, ``MacOperatingSystem``, ``LinuxOperatingSystem``, and ``FreeBSDOperatingSystem`` classes respectively in a future PlatformKit 5.0 pre-release version
+* Added PlatformFamily enum to represent Platform families
+
+### Changes
+* Updated CliRunner 1.0.0 Alpha 3 to CliInvoke 1.0.0 now that the name and package have changed
+* Updated System Extensions to 6.0.0
+* Updated  Polyfill to 7.20.0 from 7.16.1
+
+### Removals
+* Removed Windows Registry searching related code - Use the ``Microsoft.Windows.Compatibility`` package if you need this functionality
+* Removed AbstractOperatingSystem - OS Specific Operating System classes will be removed in a future PlatformKit 5 pre-release version once their replacements are ready</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +37,7 @@
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
    <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <FileVersion>5.0.0.0</FileVersion>
-        <PackageVersion>5.0.0-alpha.4.3</PackageVersion>
+        <PackageVersion>5.0.0-alpha.5.0</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
