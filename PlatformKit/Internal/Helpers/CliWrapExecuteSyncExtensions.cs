@@ -9,7 +9,7 @@ internal static class CliWrapExecuteSyncExtensions
     internal static BufferedCommandResult ExecuteBufferedSync(this Command command)
     {
         Task<BufferedCommandResult> task = command.ExecuteBufferedAsync();
-        task.RunSynchronously();
+        task.Start();
         
         task.Wait();
 
