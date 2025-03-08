@@ -25,6 +25,7 @@
 using System;
 using System.IO;
 using CliWrap;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -51,6 +52,7 @@ public class WMISearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static string GetWMIClass(string wmiClass)
     {
         if (OperatingSystem.IsWindows())
@@ -77,6 +79,7 @@ public class WMISearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static string GetWMIValue(string property, string wmiClass)
     {
         if (OperatingSystem.IsWindows())

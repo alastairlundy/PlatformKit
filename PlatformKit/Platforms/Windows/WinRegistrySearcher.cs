@@ -27,6 +27,7 @@ using System.IO;
 
 using CliWrap;
 using CliWrap.Buffered;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -51,6 +52,7 @@ public class WinRegistrySearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static string GetValue(string query){
         if (OperatingSystem.IsWindows())
         {
@@ -79,6 +81,7 @@ public class WinRegistrySearcher
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public static string GetValue(string query, string value){
         if (OperatingSystem.IsWindows())
         {

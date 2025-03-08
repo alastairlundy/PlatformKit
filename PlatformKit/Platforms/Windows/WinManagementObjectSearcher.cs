@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using CliWrap;
+using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -49,6 +50,7 @@ namespace PlatformKit.Windows
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
 #endif
+        [Obsolete(DeprecationMessages.DeprecationV5)]
         public static Dictionary<string, string> Get(List<string> queryObjectsList, string wmiClass)
         {
             Dictionary<string, string> queryObjectsDictionary = new Dictionary<string, string>();
