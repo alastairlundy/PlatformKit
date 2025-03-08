@@ -5,6 +5,7 @@ This document contains the entire version history of the PlatformKit library.
 ### 5.0
 | Version | Availability | Changelog |
 |-|-|-|
+| 5.0.0 Alpha 5 | March 3rd 2025 |  https://github.com/alastairlundy/PlatformKit/releases/5.0.0-alpha.5 |
 | 5.0.0 Alpha 4.2 | February 10th 2025 |  https://github.com/alastairlundy/PlatformKit/releases/5.0.0-alpha.4.2 |
 | 5.0.0 Alpha 4.1 | February 6th 2025 |  https://github.com/alastairlundy/PlatformKit/releases/5.0.0-alpha.4.1 |
 | 5.0.0 Alpha 4 | January 25th 2025 |  https://github.com/alastairlundy/PlatformKit/releases/5.0.0-alpha.4 |
