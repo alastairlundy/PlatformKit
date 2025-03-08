@@ -78,8 +78,9 @@ public static class LinuxOsReleaseRetriever
     {
         LinuxOsReleaseModel linuxDistributionInformation = new LinuxOsReleaseModel();
 
-        var releaseInfo = osReleaseInfo as string[] ?? osReleaseInfo.ToArray();
-        for (int index = 0; index < releaseInfo.Count(); index++)
+        string[] releaseInfo = osReleaseInfo as string[] ?? osReleaseInfo.ToArray();
+        
+        for (int index = 0; index < releaseInfo.Length; index++)
         {
             string line = releaseInfo[index].ToUpper();
 
@@ -195,6 +196,7 @@ public static class LinuxOsReleaseRetriever
         }
         
         string[] resultArray = File.ReadAllLines("/etc/os-release");
+        
         resultArray = RemoveUnwantedCharacters(resultArray);
 
         for (int index = 0; index < resultArray.Length; index++)

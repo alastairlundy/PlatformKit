@@ -23,6 +23,7 @@
    */
 
 using System;
+
 using PlatformKit.Internal.Deprecation;
 
 namespace PlatformKit;
