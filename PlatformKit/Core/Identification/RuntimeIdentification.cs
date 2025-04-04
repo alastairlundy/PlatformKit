@@ -26,8 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.System.Strings;
-
 using PlatformKit.Internal.Exceptions;
 
 using PlatformKit.Windows;

@@ -28,7 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AlastairLundy.Extensions.System.Strings;
+using AlastairLundy.DotExtensions.Strings;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Linux.Enums;
