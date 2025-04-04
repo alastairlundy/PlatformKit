@@ -22,8 +22,8 @@
         <LangVersion>13</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
         <Version>4.7.3.0</Version>
         <PackageVersion>4.7.3</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
@@ -70,7 +70,6 @@
     <ItemGroup>
       <Content Include="..\LICENSE.txt">
         <Link>LICENSE.txt</Link>
-          <PackagePath>LICENSE.txt</PackagePath>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
