@@ -34,6 +34,8 @@ using PlatformKit.Linux.Models;
 using PlatformKit.Mac;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
+using AlastairLundy.DotExtensions.Strings;
+
 
 #if NETSTANDARD2_1 || NET5_0_OR_GREATER
 using PlatformKit.FreeBSD;
