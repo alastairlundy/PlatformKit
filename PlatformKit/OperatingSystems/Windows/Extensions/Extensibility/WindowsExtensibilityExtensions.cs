@@ -25,15 +25,17 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke;
 using AlastairLundy.CliInvoke.Abstractions;
 using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
 using AlastairLundy.CliInvoke.Specializations.Configurations;
+
 using AlastairLundy.Extensions.IO.Files;
+
 using AlastairLundy.Extensions.Processes;
 using AlastairLundy.Extensions.Processes.Piping;
-using AlastairLundy.Extensions.Processes.Piping.Abstractions;
 using AlastairLundy.Extensions.Processes.Utilities;
 
 
@@ -41,6 +43,11 @@ using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
 
 using AlastairLundy.DotExtensions.Strings;
+
+using AlastairLundy.Extensions.Processes.Abstractions;
+using AlastairLundy.Extensions.Processes.Abstractions.Piping;
+
+
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
