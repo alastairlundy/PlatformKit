@@ -13,7 +13,7 @@
 
 namespace PlatformKit.Core
 {
-    /// <summary>
+    /*/// <summary>
     /// 
     /// </summary>
     /// <param name="executableName"></param>
@@ -22,5 +22,5 @@ namespace PlatformKit.Core
     {
         public string ExecutableName { get; protected set; } = executableName;
         public string InstallLocation { get; protected set; } = installLocation;
-    }
+    }*/
 }

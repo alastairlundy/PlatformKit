@@ -27,16 +27,16 @@ using System.Linq;
 
 namespace PlatformKit.Core.Extensions
 {
-    public static class ExtractAppNameExtensions
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="apps">The packages to have the package names extracted from.</param>
-        /// <returns></returns>
-        public static IEnumerable<string> ExtractAppNames(this IEnumerable<AppModel> apps)
-        {
-            return apps.Select(x => x.ExecutableName);
-        }
-    }
+    //public static class ExtractAppNameExtensions
+    //{
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    /// <param name="apps">The packages to have the package names extracted from.</param>
+    //    /// <returns></returns>
+    //    public static IEnumerable<string> ExtractAppNames(this IEnumerable<AppModel> apps)
+    //    {
+    //        return apps.Select(x => x.ExecutableName);
+    //    }
+    //}
 }
