@@ -25,8 +25,5 @@ You can get PlatformKit on [Nuget](https://www.nuget.org/packages/PlatformKit/)
 ### PlatformKit Capabilities
 To learn more about which versions of PlatformKit support which features, please check out [our feature comparison document](docs/FeatureComparisonByPlatform.md)
 
-## Contributions
-See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
-
 ### Apps and Libraries built with PlatformKit
 If your project uses PlatformKit and would like to be featured here, please submit a new issue asking for this.
