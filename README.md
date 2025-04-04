@@ -29,4 +29,4 @@ To learn more about which versions of PlatformKit support which features, please
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
 
 ### Apps and Libraries built with PlatformKit
-If you'd like to add your app here and it uses this library then please submit a new issue asking for this.
+If your project uses PlatformKit and would like to be featured here, please submit a new issue asking for this.
