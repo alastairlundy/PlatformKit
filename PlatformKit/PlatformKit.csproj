@@ -42,7 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
+        <PackageReference Include="AlastairLundy.DotExtensions" Version="[6.3.0, 7.0.0)" />
     </ItemGroup>
     
     <ItemGroup>
