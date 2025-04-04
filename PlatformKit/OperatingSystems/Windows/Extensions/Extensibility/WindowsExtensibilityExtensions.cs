@@ -35,12 +35,12 @@ using AlastairLundy.Extensions.Processes;
 using AlastairLundy.Extensions.Processes.Piping;
 using AlastairLundy.Extensions.Processes.Piping.Abstractions;
 using AlastairLundy.Extensions.Processes.Utilities;
-using AlastairLundy.Extensions.System.Strings;
 
 
 using PlatformKit.Core;
 using PlatformKit.Internal.Localizations;
 
+using AlastairLundy.DotExtensions.Strings;
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
