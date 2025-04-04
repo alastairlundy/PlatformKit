@@ -10,10 +10,10 @@ NOTE: .NET Standard 2 and .NET 6 support is deprecated and will be removed in Pl
 
 ### Compatibility 
 
-| PlatformKit Version series | .NET Targets supported | 
-|-|-|
-| 4.x | .NET Standard 2.0, .NET 6 (Explicit support) , and .NET 8 (Explicit support) |
-| 3.0.0 through 3.7.x | .NET Standard 2.0 and .NET 6 (Explicit support) |
+| PlatformKit Version series | .NET Targets supported                           | 
+|----------------------------|--------------------------------------------------|
+| 4.x                        | .NET Standard 2.0, and .NET 8 (Explicit support) |
+| 3.0.0 through 3.7.x        | .NET Standard 2.0 and .NET 6 (Explicit support)  |
 
 [![NuGet](https://img.shields.io/nuget/v/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/) 
 [![NuGet](https://img.shields.io/nuget/dt/PlatformKit.svg)](https://www.nuget.org/packages/PlatformKit/)
