@@ -31,6 +31,8 @@ using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
 using AlastairLundy.Extensions.Processes;
 using PlatformKit.Internal.Localizations;
+using AlastairLundy.Extensions.Processes.Abstractions;
+
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = Polyfills.OperatingSystemPolyfill;
