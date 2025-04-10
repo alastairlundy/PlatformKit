@@ -11,7 +11,6 @@
 | 4.7 | 4.7.2 | March 8th 2025 | :white_check_mark: | :white_check_mark: | 
 | 4.6 | 4.6.3 | February 10th 2025 | :white_check_mark: | :white_check_mark: | 
 | 4.5 | 4.5.1 | December 15th 2024 | :white_check_mark: | :white_check_mark: | 
-:white_check_mark: | :white_check_mark: | 
 
 ## Unsupported Versions
 
