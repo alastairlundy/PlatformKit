@@ -19,14 +19,16 @@ public interface ISteamOsInfoProvider
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<SteamOSMode> GetSteamOSModeAsync();
+     Task<SteamOSMode> GetSteamOSModeAsync();
 
-    public Task<SteamOSMode> GetSteamOSModeAsync(bool includeHoloIsoAsSteamOs);
+     Task<SteamOSMode> GetSteamOSModeAsync(bool includeHoloIsoAsSteamOs);
     
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<bool> IsSteamOSAsync();
-    public Task<bool> IsSteamOSAsync(bool includeHoloIsoAsSteamOs);
+     Task<bool> IsSteamOSAsync();
+    
+    
+     Task<bool> IsSteamOSAsync(bool includeHoloIsoAsSteamOs);
 
 }

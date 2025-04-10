@@ -15,18 +15,32 @@ namespace PlatformKit.Linux.Abstractions;
 
 public interface ILinuxOsReleaseProvider
 {
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
-#endif
-    public Task<string> GetPropertyValueAsync(string propertyName);
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
+     Task<string> GetPropertyValueAsync(string propertyName);
+    
+     /// <summary>
+     /// 
+     /// </summary>
+     /// <returns></returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
+     Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
 
+     /// <summary>
+     /// 
+     /// </summary>
+     /// <returns></returns>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public Task<LinuxDistroBase> GetDistroBaseAsync();
+     Task<LinuxDistroBase> GetDistroBaseAsync();
 }
