@@ -22,6 +22,7 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
@@ -49,7 +50,6 @@
 
     <ItemGroup>
       <Content Include="..\LICENSE.txt">
-          <PackagePath>LICENSE.txt</PackagePath>
         <Link>LICENSE.txt</Link>
       </Content>
     </ItemGroup>
