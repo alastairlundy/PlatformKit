@@ -27,6 +27,9 @@ using PlatformKit.Linux.Internal.Localizations;
 
 namespace PlatformKit.Linux;
 
+/// <summary>
+/// 
+/// </summary>
 public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 {
     /// <summary>
