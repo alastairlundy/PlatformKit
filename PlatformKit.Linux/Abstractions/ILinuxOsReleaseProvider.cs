@@ -13,34 +13,37 @@ using System.Threading.Tasks;
 
 namespace PlatformKit.Linux.Abstractions;
 
+/// <summary>
+/// Defines an interface for retrieving information about a Linux operating system.
+/// </summary>
 public interface ILinuxOsReleaseProvider
 {
     
     /// <summary>
-    /// 
+    /// Retrieves the value of the specified property from the current system.
     /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
+    /// <param name="propertyName">The name of the property to retrieve.</param>
+    /// <returns>The value of the specified property as a string.</returns>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-     Task<string> GetPropertyValueAsync(string propertyName);
-    
-     /// <summary>
-     /// 
-     /// </summary>
-     /// <returns></returns>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
-#endif
-     Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
+    Task<string> GetPropertyValueAsync(string propertyName);
 
-     /// <summary>
-     /// 
-     /// </summary>
-     /// <returns></returns>
+    /// <summary>
+    /// Retrieves information about the current Linux operating system release.
+    /// </summary>
+    /// <returns>An object containing information about the Linux operating system release.</returns>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-     Task<LinuxDistroBase> GetDistroBaseAsync();
+    Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
+    
+    /// <summary>
+    /// Retrieves information about the base distribution of the current Linux operating system.
+    /// </summary>
+    /// <returns>The base distribution of the Linux operating system.</returns>
+#if NET5_0_OR_GREATER
+    [SupportedOSPlatform("linux")]
+#endif
+    Task<LinuxDistroBase> GetDistroBaseAsync();
 }
