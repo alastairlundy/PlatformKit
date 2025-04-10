@@ -40,15 +40,15 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 #endif
     public async Task<string> GetPropertyValueAsync(string propertyName)
     {
-        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
-        //Assign a default value.
-
-        output.IsLongTermSupportRelease = false;
-        
         if (OperatingSystem.IsLinux() == false)
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
+        
+        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+        //Assign a default value.
+
+        output.IsLongTermSupportRelease = false;
 
 #if NET6_0_OR_GREATER
         string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
@@ -69,15 +69,14 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
 #endif
     public async Task<LinuxOsReleaseInfo> GetReleaseInfoAsync()
     {
-        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
-        //Assign a default value.
-
-        output.IsLongTermSupportRelease = false;
-        
         if (OperatingSystem.IsLinux() == false)
         {
             throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
+        
+        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+        //Assign a default value.
+        output.IsLongTermSupportRelease = false;
 
 #if NET6_0_OR_GREATER
             string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
