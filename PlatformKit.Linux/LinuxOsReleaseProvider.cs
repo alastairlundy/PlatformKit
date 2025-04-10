@@ -64,6 +64,11 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
             .Replace("=", string.Empty);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
