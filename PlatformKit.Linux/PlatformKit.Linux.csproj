@@ -47,13 +47,7 @@
         <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
     </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-      </Content>
-    </ItemGroup>
-
+    
     <ItemGroup>
       <None Include="..\images\logos\platformkit_logo_512x.jpg">
         <Pack>True</Pack>
