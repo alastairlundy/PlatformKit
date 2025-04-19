@@ -24,10 +24,17 @@ using PlatformKit.Linux.Internal.Localizations;
 
 namespace PlatformKit.Linux;
 
+/// <summary>
+/// 
+/// </summary>
 public class SteamOsInfoProvider : ISteamOsInfoProvider
 {
     private readonly ILinuxOsReleaseProvider _linuxOsReleaseProvider;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="linuxOsReleaseProvider"></param>
     public SteamOsInfoProvider(ILinuxOsReleaseProvider linuxOsReleaseProvider)
     {
         _linuxOsReleaseProvider = linuxOsReleaseProvider;

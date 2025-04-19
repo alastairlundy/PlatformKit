@@ -14,16 +14,43 @@ namespace PlatformKit.Linux
     /// </summary>
     public enum LinuxDistroBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Debian,
+        /// <summary>
+        /// 
+        /// </summary>
         Ubuntu,
+        /// <summary>
+        /// 
+        /// </summary>
         Arch,
+        /// <summary>
+        /// 
+        /// </summary>
         Manjaro,
+        /// <summary>
+        /// 
+        /// </summary>
         Fedora,
         // ReSharper disable once InconsistentNaming
+        /// <summary>
+        /// 
+        /// </summary>
         RHEL,
         // ReSharper disable once InconsistentNaming
+        /// <summary>
+        /// 
+        /// </summary>
         SUSE,
+        /// <summary>
+        /// 
+        /// </summary>
         NotDetected,
+        /// <summary>
+        /// 
+        /// </summary>
         NotSupported,
     }
 }

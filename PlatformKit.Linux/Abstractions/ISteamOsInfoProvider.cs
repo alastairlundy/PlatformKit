@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace PlatformKit.Linux.Abstractions;
 
+/// <summary>
+/// 
+/// </summary>
 public interface ISteamOsInfoProvider
 {
     
