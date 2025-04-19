@@ -9,7 +9,7 @@
         <Version>1.0.0-preview.1</Version>
         <Title>PlatformKit.Linux</Title>
         <Authors>AlastairLundy</Authors>
-        <Description>Linux OsRelease detection and other Linux support enablement code for PlatformKit</Description>
+        <Description>Linux OsRelease detection and other Linux support enablement code for PlatformKit.</Description>
         <Copyright>Copyright (c) Alastair Lundy 2024-2025</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/PlatformKit</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
