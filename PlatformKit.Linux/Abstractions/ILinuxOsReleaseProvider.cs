@@ -11,39 +11,40 @@
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
-namespace PlatformKit.Linux.Abstractions;
-
-/// <summary>
-/// Defines an interface for retrieving information about a Linux operating system.
-/// </summary>
-public interface ILinuxOsReleaseProvider
+namespace AlastairLundy.PlatformKit.Linux.Abstractions
 {
-    
     /// <summary>
-    /// Retrieves the value of the specified property from the current system.
+    /// Defines an interface for retrieving information about a Linux operating system.
     /// </summary>
-    /// <param name="propertyName">The name of the property to retrieve.</param>
-    /// <returns>The value of the specified property as a string.</returns>
+    public interface ILinuxOsReleaseProvider
+    {
+    
+        /// <summary>
+        /// Retrieves the value of the specified property from the current system.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to retrieve.</param>
+        /// <returns>The value of the specified property as a string.</returns>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("linux")]
 #endif
-    Task<string> GetPropertyValueAsync(string propertyName);
+        Task<string> GetPropertyValueAsync(string propertyName);
 
-    /// <summary>
-    /// Retrieves information about the current Linux operating system release.
-    /// </summary>
-    /// <returns>An object containing information about the Linux operating system release.</returns>
+        /// <summary>
+        /// Retrieves information about the current Linux operating system release.
+        /// </summary>
+        /// <returns>An object containing information about the Linux operating system release.</returns>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("linux")]
 #endif
-    Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
+        Task<LinuxOsReleaseInfo> GetReleaseInfoAsync();
     
-    /// <summary>
-    /// Retrieves information about the base distribution of the current Linux operating system.
-    /// </summary>
-    /// <returns>The base distribution of the Linux operating system.</returns>
+        /// <summary>
+        /// Retrieves information about the base distribution of the current Linux operating system.
+        /// </summary>
+        /// <returns>The base distribution of the Linux operating system.</returns>
 #if NET5_0_OR_GREATER
-    [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("linux")]
 #endif
-    Task<LinuxDistroBase> GetDistroBaseAsync();
+        Task<LinuxDistroBase> GetDistroBaseAsync();
+    }
 }

@@ -7,7 +7,7 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-namespace PlatformKit.Linux
+namespace AlastairLundy.PlatformKit.Linux
 {
     /// <summary>
     /// The mode that SteamOS 3.x and newer is running in.

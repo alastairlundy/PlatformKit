@@ -8,7 +8,7 @@
  */
 
 // ReSharper disable once CheckNamespace
-namespace PlatformKit.Linux
+namespace AlastairLundy.PlatformKit.Linux
 {
     /// <summary>
     /// Represents a Linux Distribution's OsRelease file and information contained therein.

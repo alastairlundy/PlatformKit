@@ -24,8 +24,7 @@ using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
 using AlastairLundy.CliInvoke.Specializations.Configurations;
 using AlastairLundy.Extensions.Processes;
-
-
+using AlastairLundy.Extensions.Processes.Abstractions;
 using PlatformKit.Core;
 using PlatformKit.Windows.Abstractions;
 using PlatformKit.Windows.Exceptions;

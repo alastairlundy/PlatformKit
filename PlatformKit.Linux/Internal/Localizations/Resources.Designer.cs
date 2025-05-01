@@ -7,10 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PlatformKit.Linux.Internal.Localizations {
-    using System;
-    
-    
+namespace AlastairLundy.PlatformKit.Linux.Internal.Localizations {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

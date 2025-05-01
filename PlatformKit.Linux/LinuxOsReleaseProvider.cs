@@ -13,7 +13,6 @@ using OperatingSystem = Polyfills.OperatingSystemPolyfill;
 #else
 using System.Runtime.Versioning;
 #endif
-
 using System;
 using System.IO;
 using System.Linq;
@@ -21,117 +20,116 @@ using System.Threading.Tasks;
 
 using AlastairLundy.DotExtensions.Strings;
 
-using PlatformKit.Linux.Abstractions;
+using AlastairLundy.PlatformKit.Linux.Abstractions;
+using AlastairLundy.PlatformKit.Linux.Internal.Localizations;
 
-using PlatformKit.Linux.Internal.Localizations;
-
-namespace PlatformKit.Linux;
-
-/// <summary>
-/// 
-/// </summary>
-public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
+namespace AlastairLundy.PlatformKit.Linux
 {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="propertyName"></param>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+    public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public async Task<string> GetPropertyValueAsync(string propertyName)
-    {
-        if (OperatingSystem.IsLinux() == false)
+        public async Task<string> GetPropertyValueAsync(string propertyName)
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-        }
+            if (OperatingSystem.IsLinux() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
         
-        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
-        //Assign a default value.
+            LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+            //Assign a default value.
 
-        output.IsLongTermSupportRelease = false;
+            output.IsLongTermSupportRelease = false;
 
 #if NET6_0_OR_GREATER
         string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
 #else
-        string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
+            string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
 #endif
 
-        resultArray = RemoveUnwantedCharacters(resultArray);
+            resultArray = RemoveUnwantedCharacters(resultArray);
         
-        string result = resultArray.First(x => x.Contains(propertyName));
+            string result = resultArray.First(x => x.Contains(propertyName));
         
-        return result.Replace(propertyName, string.Empty)
-            .Replace("=", string.Empty);
-    }
+            return result.Replace(propertyName, string.Empty)
+                .Replace("=", string.Empty);
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]
 #endif
-    public async Task<LinuxOsReleaseInfo> GetReleaseInfoAsync()
-    {
-        if (OperatingSystem.IsLinux() == false)
+        public async Task<LinuxOsReleaseInfo> GetReleaseInfoAsync()
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-        }
+            if (OperatingSystem.IsLinux() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
         
-        LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
-        //Assign a default value.
-        output.IsLongTermSupportRelease = false;
+            LinuxOsReleaseInfo output = new LinuxOsReleaseInfo();
+            //Assign a default value.
+            output.IsLongTermSupportRelease = false;
 
 #if NET6_0_OR_GREATER
             string[] resultArray = await File.ReadAllLinesAsync("/etc/os-release");
 #else
-        string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
+            string[] resultArray = await Task.Run(() => File.ReadAllLines("/etc/os-release"));
 #endif
         
-        resultArray = RemoveUnwantedCharacters(resultArray);
+            resultArray = RemoveUnwantedCharacters(resultArray);
 
-        return await Task.FromResult(ParseOsReleaseInfo(resultArray));
-    }
+            return await Task.FromResult(ParseOsReleaseInfo(resultArray));
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("linux")]    
 #endif
-    public async Task<LinuxDistroBase> GetDistroBaseAsync()
-    {
-        if (OperatingSystem.IsLinux() == false)
+        public async Task<LinuxDistroBase> GetDistroBaseAsync()
         {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-        }
+            if (OperatingSystem.IsLinux() == false)
+            {
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            }
         
-        LinuxOsReleaseInfo osReleaseInfo = await GetReleaseInfoAsync();
+            LinuxOsReleaseInfo osReleaseInfo = await GetReleaseInfoAsync();
         
-        string identifierLike = osReleaseInfo.Identifier_Like.ToLower();
+            string identifierLike = osReleaseInfo.Identifier_Like.ToLower();
             
-        return identifierLike switch
-        {
-            "debian" => LinuxDistroBase.Debian,
-            "ubuntu" => LinuxDistroBase.Ubuntu,
-            "arch" => LinuxDistroBase.Arch,
-            "manjaro" => LinuxDistroBase.Manjaro,
-            "fedora" => LinuxDistroBase.Fedora,
-            "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
-            "suse" => LinuxDistroBase.SUSE,
-            _ => LinuxDistroBase.NotDetected
-        };
-    }
+            return identifierLike switch
+            {
+                "debian" => LinuxDistroBase.Debian,
+                "ubuntu" => LinuxDistroBase.Ubuntu,
+                "arch" => LinuxDistroBase.Arch,
+                "manjaro" => LinuxDistroBase.Manjaro,
+                "fedora" => LinuxDistroBase.Fedora,
+                "rhel" or "oracle" or "centos" => LinuxDistroBase.RHEL,
+                "suse" => LinuxDistroBase.SUSE,
+                _ => LinuxDistroBase.NotDetected
+            };
+        }
 
-    private LinuxOsReleaseInfo ParseOsReleaseInfo(string[] resultArray)
-    {
-        LinuxOsReleaseInfo linuxDistroInfo = new LinuxOsReleaseInfo();
+        private LinuxOsReleaseInfo ParseOsReleaseInfo(string[] resultArray)
+        {
+            LinuxOsReleaseInfo linuxDistroInfo = new LinuxOsReleaseInfo();
             
             string[] releaseInfo = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false).ToArray();
             
@@ -227,20 +225,21 @@ public class LinuxOsReleaseProvider : ILinuxOsReleaseProvider
             }
 
             return linuxDistroInfo;
-    }
-
-    private string[] RemoveUnwantedCharacters(string[] resultArray)
-    {
-        char[] delimiter = ['\t', '"'];
-
-        resultArray = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false)
-            .Select(x => x.RemoveEscapeCharacters()).ToArray();
-            
-        foreach (char c in delimiter)
-        {
-            resultArray = resultArray.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
         }
 
-        return resultArray;
+        private string[] RemoveUnwantedCharacters(string[] resultArray)
+        {
+            char[] delimiter = ['\t', '"'];
+
+            resultArray = resultArray.Where(x => string.IsNullOrWhiteSpace(x) == false)
+                .Select(x => x.RemoveEscapeCharacters()).ToArray();
+            
+            foreach (char c in delimiter)
+            {
+                resultArray = resultArray.Select(x => x.Replace(c.ToString(), string.Empty)).ToArray();
+            }
+
+            return resultArray;
+        }
     }
 }
