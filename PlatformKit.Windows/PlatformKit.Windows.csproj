@@ -9,8 +9,8 @@
 
     <ItemGroup>
         <PackageReference Include="PlatformKit.Core" Version="5.0.0-preview.1"/>
-        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.0.0, 2.0.0)"/>
-        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.0.0, 2.0.0)"/>
+        <PackageReference Include="AlastairLundy.CliInvoke" Version="1.2.0"/>
+        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="1.2.0"/>
     </ItemGroup>
 
     <ItemGroup>
