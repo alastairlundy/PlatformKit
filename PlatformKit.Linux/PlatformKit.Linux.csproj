@@ -23,14 +23,17 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+        <AssemblyName>AlastairLundy.PlatformKit.Linux</AssemblyName>
+        <RootNamespace>AlastairLundy.PlatformKit.Linux</RootNamespace>
+        <PackageId>AlastairLundy.PlatformKit.Linux</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.DotExtensions" Version="[6.4.0, 7.0.0)" />
+        <PackageReference Include="AlastairLundy.DotExtensions" Version="6.7.0" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="Polyfill" Version="[7.27.0, 8.0.0)"/>
+        <PackageReference Include="Polyfill" Version="7.27.0"/>
     </ItemGroup>
 
     <ItemGroup>
