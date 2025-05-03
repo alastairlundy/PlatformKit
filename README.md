@@ -12,7 +12,7 @@ NOTE: .NET Standard 2 and .NET 6 support is deprecated and will be removed in Pl
 
 | PlatformKit Version series | .NET Targets supported | 
 |-|-|
-| 5.x | .NET Standard 2.0, and .NET 8 |
+| 5.x | .NET Standard 2.0, .NET 8, and .NET 9 |
 | 4.x | .NET Standard 2.0, .NET 6 , and .NET 8 |
 | 3.0.0 through 3.7.x | .NET Standard 2.0 and .NET 6 |
 
@@ -28,6 +28,3 @@ To learn more about which versions of PlatformKit support which features, please
 
 ## Contributions
 See [Contributing guide](/CONTRIBUTING.md) for how to contribute to this project.
-
-### Apps and Libraries built with PlatformKit
-If you'd like to add your app here and it uses this library then please submit a new issue asking for this.

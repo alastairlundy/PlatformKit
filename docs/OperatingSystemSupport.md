@@ -4,10 +4,10 @@ This document is not guaranteed to be accurate or up to date.
 ## Operating Systems Supported by PlatformKit
 * [Windows](#windows)
     * [Windows 11](#windows-11)
-    *   [Windows 10](#windows-10)
-    *   [Windows 8.x](#windows-8)
-    *   [Windows 7](#windows-7)
-    *   [Windows Vista](#windows-vista)
+    * [Windows 10](#windows-10)
+    * [Windows 8.x](#windows-8)
+    * [Windows 7](#windows-7)
+    * [Windows Vista](#windows-vista)
 * Mac
   * [macOS](#macos)
   * [OS X](#os-x)
