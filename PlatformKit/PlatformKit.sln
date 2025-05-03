@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Core", "..\Plat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Linux", "..\PlatformKit.Linux\PlatformKit.Linux.csproj", "{1389CE70-C5FC-4E58-9105-DC30F4F12226}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{28202FF7-5BFD-4960-93E3-976409401AE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1389CE70-C5FC-4E58-9105-DC30F4F12226} = {28202FF7-5BFD-4960-93E3-976409401AE0}
+		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D} = {28202FF7-5BFD-4960-93E3-976409401AE0}
 	EndGlobalSection
 EndGlobal
