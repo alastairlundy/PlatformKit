@@ -64,14 +64,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-          <PackagePath>LICENSE.txt</PackagePath>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
       <EmbeddedResource Update="Internal\Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
