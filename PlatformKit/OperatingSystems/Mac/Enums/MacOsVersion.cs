@@ -22,18 +22,29 @@
        SOFTWARE.
    */
 
-using System;
+// ReSharper disable All
 
-namespace PlatformKit.Internal.Deprecation
+using System;
+using PlatformKit.Internal.Deprecation;
+
+namespace PlatformKit.OperatingSystems.Mac
 {
-    internal static class DeprecationMessages
+    /// <summary>
+    /// An enum representing macOS versions.
+    /// </summary>
+    public enum MacOsVersion
     {
-        private const string V6 = "v6.0.0";
-        
-        private const string FeatureDeprecation = "This feature is deprecated and will be removed";
-        
-        internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
-        
-        internal const string DeprecationV6 = FeatureDeprecation + " in " + V6;
+        v10_15_Catalina,
+        /// <summary>
+        /// First version of macOS to move away from Major version 10 in [Major].[Minor].[Update]
+        /// First version to support Apple Silicon Macs.
+        /// </summary>
+        v11_BigSur,
+        v12_Monterey,
+        v13_Ventura,
+        v14_Sonoma,
+        v15_Sequoia,
+        NotDetected,
+        NotSupported,
     }
 }

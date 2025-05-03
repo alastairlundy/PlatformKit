@@ -8,7 +8,8 @@
  */
 
 // ReSharper disable InconsistentNaming
-namespace PlatformKit
+// ReSharper disable CheckNamespace
+namespace PlatformKit.Platforms
 {
     public enum PlatformFamily
     {

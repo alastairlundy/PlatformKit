@@ -1,4 +1,4 @@
-﻿/*
+/*
         MIT License
        
        Copyright (c) 2020-2025 Alastair Lundy
@@ -22,21 +22,31 @@
        SOFTWARE.
    */
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-
-using PlatformKit.Abstractions.Models;
-
-namespace PlatformKit.Abstractions.OperatingSystems
+namespace PlatformKit.OperatingSystems.Windows
 {
-    public interface IOperatingSystemInformation : IOperatingSystemVersionInformation
+    /// <summary>
+    /// An enum representing different Windows Editions.
+    /// </summary>
+    public enum WindowsEdition
     {
-        
-        
-        
-        
-
+        Home,
+        Education,
+        Professional,
+        ProfessionalForEducation,
+        ProfessionalForWorkstations,
+        // ReSharper disable once InconsistentNaming
+        EnterpriseLTSC,
+        EnterpriseSemiAnnualChannel,
+        IoTCore,
+        IoTEnterprise,
+        // ReSharper disable once InconsistentNaming
+        IoTEnterpriseLTSC,
+        Team,
+        Server,
+        /// <summary>
+        /// Windows 11 or newer only
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        SE,
     }
 }

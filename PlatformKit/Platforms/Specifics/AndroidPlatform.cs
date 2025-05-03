@@ -9,8 +9,9 @@
 
 using System;
 using System.Runtime.InteropServices;
+// ReSharper disable CheckNamespace
 
-namespace PlatformKit.Specifics
+namespace PlatformKit.Platforms.Specifics
 {
     public class AndroidPlatform : Platform, ICloneable, IEquatable<AndroidPlatform>
     {

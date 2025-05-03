@@ -9,9 +9,12 @@
 
 using System.Threading.Tasks;
 
-using PlatformKit.Abstractions;
+using PlatformKit.Platforms.Abstractions;
 
-namespace PlatformKit.Specifics.Abstractions
+using PlatformKit.Platforms.Specifics;
+// ReSharper disable CheckNamespace
+
+namespace PlatformKit.Platforms.Specifics.Abstractions
 {
     public interface IAndroidPlatformProvider : IPlatformProvider
     {

@@ -14,21 +14,30 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>### Changes since 5.0.0 Alpha 2
-* Replaced ``SystemExtensions`` dependency with split up v5.5 (and newer) versions
-* Replaced ``CliWrap`` dependency and usage with ``CliRunner`` dependency
-* Renamed ``async`` methods to end in ``async``
-* Removed duplicate code
-* Adjusted some namespaces</PackageReleaseNotes>
+        <PackageReleaseNotes>## Changes since 5.0.0 Alpha 4.2
+
+### Additions
+* Added several Platform classes (including a Platform base class) to represent Platform details
+* Added Platform Provider interfaces as interfaces to provide Platform Details - Implementing classes will replace the ``WindowsOperatingSystem``, ``MacOperatingSystem``, ``LinuxOperatingSystem``, and ``FreeBSDOperatingSystem`` classes respectively in a future PlatformKit 5.0 pre-release version
+* Added PlatformFamily enum to represent Platform families
+
+### Changes
+* Updated CliRunner 1.0.0 Alpha 3 to CliInvoke 1.0.0 now that the name and package have changed
+* Updated System Extensions to 6.0.0
+* Updated  Polyfill to 7.20.0 from 7.16.1
+
+### Removals
+* Removed Windows Registry searching related code - Use the ``Microsoft.Windows.Compatibility`` package if you need this functionality
+* Removed AbstractOperatingSystem - OS Specific Operating System classes will be removed in a future PlatformKit 5 pre-release version once their replacements are ready</PackageReleaseNotes>
    <Product>PlatformKit</Product>
-        <LangVersion>13</LangVersion>
+        <LangVersion>default</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
    <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <FileVersion>5.0.0.0</FileVersion>
-        <PackageVersion>5.0.0-alpha.3</PackageVersion>
+        <PackageVersion>5.0.0-alpha.5</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
@@ -46,44 +55,35 @@
         </None>
         
         <None Include="../README.md" Pack="true" PackagePath="\" />
-        
-        <None Remove="PlatformKit.Software\**" />
-        
-        <None Remove="PlatformKit.Tests\**" />
-        
-        <None Remove="PlatformKit.Mac\**" />
-        
-        <None Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Platforms\OperatingSystems\" />
-      <Folder Include="Specializations\Linux\" />
-      <Folder Include="Specializations\Shared\Models\" />
-      <Folder Include="Specializations\Windows\" />
+      <Folder Include="Platforms" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="PlatformKit.Software\**" />
+      <Content Include="..\LICENSE.txt">
+        <Link>LICENSE.txt</Link>
+          <PackagePath>LICENSE.txt</PackagePath>
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
       <EmbeddedResource Update="Internal\Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Remove="PlatformKit.Tests\**" />
-      <EmbeddedResource Remove="PlatformKit.Mac\**" />
-      <EmbeddedResource Remove="PlatformKit.Linux\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
-        <PackageReference Include="AlastairLundy.Extensions.Processes" Version="[1.2.1, 2.0.0)"/>
-        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.0.0, 2.0.0)" />
-        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.0.0, 2.0.0]" />
+        <PackageReference Include="AlastairLundy.DotExtensions" Version="[6.3.0, 7.0.0)" />
+        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.1.0, 2.0.0)" />
+        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.1.0, 2.0.0)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="Polyfill" Version="[7.20.0, 8.0.0)"/>
-        <PackageReference Include="Microsoft.Bcl.HashCode" Version="[6.0.0, 7.0.0)"/>
+        <PackageReference Include="Polyfill" Version="[7.24.0, 8.0.0)" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2025 Alastair Lundy
@@ -24,16 +24,21 @@
 
 using System;
 
-namespace PlatformKit.Internal.Deprecation
+namespace PlatformKit.OperatingSystems.Mac
 {
-    internal static class DeprecationMessages
+    /// <summary>
+    /// A class to represent basic macOS System Information.
+    /// </summary>
+    public class MacOsSystemInformationModel
     {
-        private const string V6 = "v6.0.0";
-        
-        private const string FeatureDeprecation = "This feature is deprecated and will be removed";
-        
-        internal const string FutureDeprecation = FeatureDeprecation + " in a future version.";
-        
-        internal const string DeprecationV6 = FeatureDeprecation + " in " + V6;
+        public Version MacOsVersion { get; set; }
+    
+        public Version DarwinVersion { get; set; }
+    
+        public Version XnuVersion { get; set; } 
+    
+        public string MacOsBuildNumber { get; set; }
+    
+        public MacProcessorType ProcessorType { get; set; }
     }
 }

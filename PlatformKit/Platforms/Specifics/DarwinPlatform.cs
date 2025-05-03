@@ -7,10 +7,11 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-using System;
-using System.Runtime.InteropServices;
+ using System;
+ using System.Runtime.InteropServices;
+// ReSharper disable CheckNamespace
 
-namespace PlatformKit.Specifics;
+ namespace PlatformKit.Platforms.Specifics;
 
 public class DarwinPlatform : Platform, IEquatable<DarwinPlatform>
 {

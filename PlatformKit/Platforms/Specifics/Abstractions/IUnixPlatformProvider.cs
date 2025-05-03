@@ -7,9 +7,10 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-using PlatformKit.Abstractions;
 
-namespace PlatformKit.Specifics.Abstractions;
+using PlatformKit.Platforms.Abstractions;
+
+namespace PlatformKit.Platforms.Specifics.Abstractions;
 
 public interface IUnixPlatformProvider : IPlatformProvider
 {

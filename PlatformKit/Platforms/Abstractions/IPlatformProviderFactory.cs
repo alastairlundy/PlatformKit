@@ -7,7 +7,8 @@
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-namespace PlatformKit.Abstractions
+// ReSharper disable CheckNamespace
+namespace PlatformKit.Platforms.Abstractions
 {
     public interface IPlatformProviderFactory
     {

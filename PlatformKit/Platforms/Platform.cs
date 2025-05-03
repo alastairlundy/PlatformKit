@@ -9,10 +9,11 @@
 
 using System;
 using System.Runtime.InteropServices;
+// ReSharper disable CheckNamespace
 
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace PlatformKit
+namespace PlatformKit.Platforms
 {
     /// <summary>
     /// 

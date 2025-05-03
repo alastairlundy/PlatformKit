@@ -1,7 +1,7 @@
 /*
         MIT License
        
-       Copyright (c) 2020-2020-2025 Alastair Lundy
+       Copyright (c) 2020-2025 Alastair Lundy
        
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 
 using System;
 
-namespace PlatformKit.Windows.Exceptions
+namespace PlatformKit.Internal.Exceptions.Windows
 {
     public class WindowsEditionDetectionException : Exception
     {

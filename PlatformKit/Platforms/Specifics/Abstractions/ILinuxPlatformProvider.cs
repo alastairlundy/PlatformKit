@@ -9,9 +9,10 @@
 
 using System.Threading.Tasks;
 
-using PlatformKit.Abstractions;
+using PlatformKit.Platforms.Abstractions;
+// ReSharper disable CheckNamespace
 
-namespace PlatformKit.Specifics.Abstractions;
+namespace PlatformKit.Platforms.Specifics.Abstractions;
 
 public interface ILinuxPlatformProvider : IPlatformProvider
 {

@@ -8,8 +8,9 @@
  */
 
 using System.Threading.Tasks;
+// ReSharper disable CheckNamespace
 
-namespace PlatformKit.Abstractions
+namespace PlatformKit.Platforms.Abstractions
 {
     /// <summary>
     /// An interface to allow for providing details on the current Platform.
