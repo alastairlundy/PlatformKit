@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net9.0;net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.0-preview.1</Version>
+        <Version>5.0.0-preview.1</Version>
         <Title>PlatformKit.Linux</Title>
         <Authors>AlastairLundy</Authors>
         <Description>Linux OsRelease detection and other Linux support enablement code for PlatformKit.</Description>
@@ -15,7 +15,6 @@
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Initial release as standalone package</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
         <PackageTags>platformkit, os-release, linux,</PackageTags>
         <IncludeContentInPack>true</IncludeContentInPack>
@@ -23,11 +22,16 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <AssemblyName>AlastairLundy.PlatformKit.Linux</AssemblyName>
         <RootNamespace>AlastairLundy.PlatformKit.Linux</RootNamespace>
         <PackageId>AlastairLundy.PlatformKit.Linux</PackageId>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    
     <ItemGroup>
         <PackageReference Include="AlastairLundy.DotExtensions" Version="6.7.0" />
     </ItemGroup>
