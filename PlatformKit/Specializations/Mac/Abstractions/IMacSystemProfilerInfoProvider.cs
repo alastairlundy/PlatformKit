@@ -9,8 +9,9 @@
 
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using PlatformKit.OperatingSystems.Mac;
 
-namespace PlatformKit.Specializations.Mac;
+namespace PlatformKit.Specializations.Mac.Abstractions;
 
 public interface IMacSystemProfilerInfoProvider
 {
@@ -18,18 +19,18 @@ public interface IMacSystemProfilerInfoProvider
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-    public Task<string> GetMacSystemProfilerValue(MacSystemProfilerDataType macSystemProfilerDataType, string key);
+    Task<string> GetMacSystemProfilerValue(MacSystemProfilerDataType macSystemProfilerDataType, string key);
 
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-    public Task<bool> IsActivationLockEnabledAsync();
+    Task<bool> IsActivationLockEnabledAsync();
     
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("macos")]
     [SupportedOSPlatform("maccatalyst")]
 #endif
-    public Task<bool> IsSecureVirtualMemoryEnabledAsync();
+    Task<bool> IsSecureVirtualMemoryEnabledAsync();
 
 }

@@ -17,6 +17,7 @@ using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
 
 using AlastairLundy.Extensions.Processes;
+using AlastairLundy.Extensions.Processes.Abstractions;
 
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -27,6 +28,9 @@ using System.Runtime.Versioning;
 #endif
 
 using PlatformKit.Internal.Localizations;
+using PlatformKit.OperatingSystems.Mac;
+using PlatformKit.Specializations.Mac.Abstractions;
+
 // ReSharper disable ConvertToPrimaryConstructor
 
 namespace PlatformKit.Specializations.Mac;

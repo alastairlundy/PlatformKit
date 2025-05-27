@@ -24,7 +24,7 @@
 ### Changes
 * Updated CliRunner 1.0.0 Alpha 3 to CliInvoke 1.0.0 now that the name and package have changed
 * Updated System Extensions to 6.0.0
-* Updated  Polyfill to 7.20.0 from 7.16.1
+* Updated  Polyfill to 7.27.0 from 7.20.0
 
 ### Removals
 * Removed Windows Registry searching related code - Use the ``Microsoft.Windows.Compatibility`` package if you need this functionality
@@ -62,14 +62,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-          <PackagePath>LICENSE.txt</PackagePath>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Update="Internal\Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -77,13 +69,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.DotExtensions" Version="[6.3.0, 7.0.0)" />
-        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.1.0, 2.0.0)" />
-        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.1.0, 2.0.0)" />
+        <PackageReference Include="AlastairLundy.DotExtensions" Version="6,7.0" />
+        <PackageReference Include="AlastairLundy.CliInvoke" Version="1.2.0" />
+        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="1.2.0" />
+        <PackageReference Include="AlastairLundy.PlatformKit.Linux" Version="5.0.0-preview.1"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="Polyfill" Version="[7.24.0, 8.0.0)" />
+        <PackageReference Include="Polyfill" Version="7.27.0" />
     </ItemGroup>
 
     <ItemGroup>
