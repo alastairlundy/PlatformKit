@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit.csproj", "{F342367A-019D-4361-9796-0B8C2CC36928}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit\PlatformKit.csproj", "{D3EA356D-E9F8-4892-A10B-97458484D58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "..\PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Core", "PlatformKit.Core\PlatformKit.Core.csproj", "{2522AF9B-EA13-4CA9-8B2A-B3596F3B08E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions", "..\PlatformKit.Extensions\PlatformKit.Extensions.csproj", "{85B8A386-81F5-465F-B1A2-78291D0B30CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions", "PlatformKit.Extensions\PlatformKit.Extensions.csproj", "{54FCC062-25FC-45BB-AF1F-9F626EADC68F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "..\PlatformKit.Windows\PlatformKit.Windows.csproj", "{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "PlatformKit.Windows\PlatformKit.Windows.csproj", "{24C91D08-9238-4E2C-8BC5-E0147BEC684F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Core", "..\PlatformKit.Core\PlatformKit.Core.csproj", "{2BBB21DF-A016-42EF-A13D-678473F605E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Linux", "PlatformKit.Linux\PlatformKit.Linux.csproj", "{ADE008F3-A565-44DA-B982-165A2A6CC344}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Linux", "..\PlatformKit.Linux\PlatformKit.Linux.csproj", "{1389CE70-C5FC-4E58-9105-DC30F4F12226}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{BB5FD812-69AD-4DA0-873C-AC6690828838}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,29 +18,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F342367A-019D-4361-9796-0B8C2CC36928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F342367A-019D-4361-9796-0B8C2CC36928}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F342367A-019D-4361-9796-0B8C2CC36928}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7F44AE5-F4D1-4BB9-8D04-F13D1CFAF23B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85B8A386-81F5-465F-B1A2-78291D0B30CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85B8A386-81F5-465F-B1A2-78291D0B30CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85B8A386-81F5-465F-B1A2-78291D0B30CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85B8A386-81F5-465F-B1A2-78291D0B30CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66227412-FA8E-45EC-BB1E-21B0E27A0C7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BBB21DF-A016-42EF-A13D-678473F605E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1389CE70-C5FC-4E58-9105-DC30F4F12226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3EA356D-E9F8-4892-A10B-97458484D58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3EA356D-E9F8-4892-A10B-97458484D58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3EA356D-E9F8-4892-A10B-97458484D58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3EA356D-E9F8-4892-A10B-97458484D58D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
