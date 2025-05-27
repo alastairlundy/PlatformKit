@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /PlatformKit/.idea
 /src/.idea
+/src/PlatformKit/.idea
