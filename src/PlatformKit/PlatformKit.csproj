@@ -58,6 +58,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="OperatingSystems\Mac\Enums\" />
+      <Folder Include="OperatingSystems\Mac\Models\" />
       <Folder Include="Platforms" />
     </ItemGroup>
 
@@ -69,10 +71,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.DotExtensions" Version="6,7.0" />
+        <PackageReference Include="AlastairLundy.DotExtensions" Version="7.2.0" />
         <PackageReference Include="AlastairLundy.CliInvoke" Version="1.2.0" />
         <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="1.2.0" />
-        <PackageReference Include="AlastairLundy.PlatformKit.Linux" Version="5.0.0-preview.1"/>
+        <PackageReference Include="AlastairLundy.OsReleaseNet" Version="1.0.1" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netstandard2.1'">

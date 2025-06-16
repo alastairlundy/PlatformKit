@@ -8,15 +8,16 @@
  */
 
 using System.Threading.Tasks;
+using PlatformKit.Platforms.Primitives;
+
 // ReSharper disable CheckNamespace
 
-namespace PlatformKit.Platforms.Abstractions
+namespace PlatformKit.Platforms.Abstractions;
+
+/// <summary>
+/// An interface to allow for providing details on the current Platform.
+/// </summary>
+public interface IPlatformProvider
 {
-    /// <summary>
-    /// An interface to allow for providing details on the current Platform.
-    /// </summary>
-    public interface IPlatformProvider
-    {
-        public Task<Platform> GetCurrentPlatformAsync();
-    }
+    public Task<Platform> GetCurrentPlatformAsync();
 }

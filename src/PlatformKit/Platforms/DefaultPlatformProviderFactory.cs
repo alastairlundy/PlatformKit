@@ -10,7 +10,6 @@
 using System;
 using AlastairLundy.CliInvoke.Abstractions;
 using AlastairLundy.PlatformKit.Linux.Abstractions;
-using PlatformKit.Abstractions;
 using PlatformKit.Platforms.Abstractions;
 using PlatformKit.Platforms.Providers;
 using PlatformKit.Providers;
