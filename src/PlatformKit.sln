@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "PlatformKit.Windows\PlatformKit.Windows.csproj", "{24C91D08-9238-4E2C-8BC5-E0147BEC684F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Linux", "PlatformKit.Linux\PlatformKit.Linux.csproj", "{ADE008F3-A565-44DA-B982-165A2A6CC344}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{BB5FD812-69AD-4DA0-873C-AC6690828838}"
 EndProject
 Global
