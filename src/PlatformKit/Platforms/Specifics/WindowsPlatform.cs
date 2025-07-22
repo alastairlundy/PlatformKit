@@ -9,6 +9,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using PlatformKit.Windows;
 
 // ReSharper disable ConvertToPrimaryConstructor
 

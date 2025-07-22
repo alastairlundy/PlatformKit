@@ -24,7 +24,7 @@
         <LangVersion>13</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
         <TargetFrameworks>net8.0;netstandard2.0;net9.0</TargetFrameworks>
    <AssemblyVersion>5.0.0.0</AssemblyVersion>
         <FileVersion>5.0.0.0</FileVersion>
@@ -64,14 +64,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\LICENSE.txt">
-        <Link>LICENSE.txt</Link>
-          <PackagePath>LICENSE.txt</PackagePath>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
       <EmbeddedResource Remove="PlatformKit.Software\**" />
       <EmbeddedResource Update="Internal\Localizations\Resources.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -83,15 +75,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AlastairLundy.Extensions.System" Version="[6.0.0, 7.0.0)" />
-        <PackageReference Include="AlastairLundy.Extensions.Processes" Version="[1.2.1, 2.0.0)"/>
-        <PackageReference Include="AlastairLundy.CliInvoke" Version="[1.0.0, 2.0.0)" />
-        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="[1.0.0, 2.0.0]" />
+        <PackageReference Include="AlastairLundy.CliInvoke" Version="1.4.5" />
+        <PackageReference Include="AlastairLundy.CliInvoke.Specializations" Version="1.4.5" />
+        <PackageReference Include="AlastairLundy.OsReleaseNet" Version="1.0.3" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-        <PackageReference Include="Polyfill" Version="[7.20.0, 8.0.0)"/>
-        <PackageReference Include="Microsoft.Bcl.HashCode" Version="[6.0.0, 7.0.0)"/>
+        <PackageReference Include="Polyfill" Version="8.7.3"/>
+        <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -103,5 +94,9 @@
       <Compile Remove="PlatformKit.Tests\**" />
       <Compile Remove="PlatformKit.Mac\**" />
       <Compile Remove="PlatformKit.Linux\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PlatformKit.Windows\PlatformKit.Windows.csproj" />
     </ItemGroup>
 </Project>

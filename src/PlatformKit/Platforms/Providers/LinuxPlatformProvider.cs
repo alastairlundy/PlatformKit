@@ -11,11 +11,16 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
 using AlastairLundy.CliInvoke.Abstractions;
+
+using AlastairLundy.OsReleaseNet;
+using AlastairLundy.OsReleaseNet.Abstractions;
+
 using PlatformKit.Internal.Localizations;
+
 using PlatformKit.Platforms.Providers;
-using PlatformKit.Specializations.Linux;
-using PlatformKit.Specializations.Linux.Abstractions;
+
 using PlatformKit.Specifics.Abstractions;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -63,7 +68,7 @@ namespace PlatformKit.Providers
 #endif
         private async Task<string> GetOsBuildNumber()
         {
-            return await _linuxOsReleaseSearcher.GetPropertyValueAsync("VERSION_ID");
+            return await _linuxOsReleaseSearcher.GetReleaseInfoPropertyValueAsync("VERSION_ID");
         }
         
 #if NET5_0_OR_GREATER

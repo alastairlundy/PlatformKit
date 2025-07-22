@@ -21,9 +21,12 @@ using AlastairLundy.CliInvoke;
 using AlastairLundy.CliInvoke.Abstractions;
 using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
+using AlastairLundy.CliInvoke.Core.Primitives;
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Platforms.Specifics;
 using PlatformKit.Specifics.Abstractions;
+using PlatformKit.Windows;
+using PlatformKit.Windows.Abstractions;
 
 namespace PlatformKit.Providers
 {

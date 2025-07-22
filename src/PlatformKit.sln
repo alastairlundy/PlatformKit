@@ -2,13 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit", "PlatformKit\PlatformKit.csproj", "{D3EA356D-E9F8-4892-A10B-97458484D58D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Core", "PlatformKit.Core\PlatformKit.Core.csproj", "{2522AF9B-EA13-4CA9-8B2A-B3596F3B08E6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions", "PlatformKit.Extensions\PlatformKit.Extensions.csproj", "{54FCC062-25FC-45BB-AF1F-9F626EADC68F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Windows", "PlatformKit.Windows\PlatformKit.Windows.csproj", "{24C91D08-9238-4E2C-8BC5-E0147BEC684F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Abstractions", "PlatformKit.Abstractions\PlatformKit.Abstractions.csproj", "{BB5FD812-69AD-4DA0-873C-AC6690828838}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

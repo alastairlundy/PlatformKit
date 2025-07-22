@@ -17,8 +17,8 @@ using AlastairLundy.CliInvoke;
 using AlastairLundy.CliInvoke.Abstractions;
 using AlastairLundy.CliInvoke.Builders;
 using AlastairLundy.CliInvoke.Builders.Abstractions;
-
-using AlastairLundy.Extensions.Processes;
+using AlastairLundy.CliInvoke.Core.Primitives;
+using AlastairLundy.CliInvoke.Core.Primitives.Results;
 
 using PlatformKit.Internal.Localizations;
 using PlatformKit.Platforms.Providers;

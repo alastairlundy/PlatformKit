@@ -9,11 +9,11 @@
 
 using System;
 using AlastairLundy.CliInvoke.Abstractions;
-
-
+using AlastairLundy.OsReleaseNet.Abstractions;
 using PlatformKit.Abstractions;
 using PlatformKit.Platforms.Providers;
 using PlatformKit.Providers;
+using PlatformKit.Windows.Abstractions;
 
 // ReSharper disable ConvertToPrimaryConstructor
 
@@ -114,13 +114,13 @@ namespace PlatformKit
         {
             return platformFamily switch
             {
-                PlatformFamily.WindowsNT => new WindowsPlatformProvider(_commandRunner, _windowsSystemInfoProvider),
-                PlatformFamily.Darwin => new DarwinPlatformProvider(_commandRunner),
-                PlatformFamily.Linux => new LinuxPlatformProvider(_commandRunner, _linuxOsReleaseSearcher),
-                PlatformFamily.BSD => new BSDPlatformProvider(_commandRunner),
-                PlatformFamily.Android => new AndroidPlatformProvider(_commandRunner),
+                PlatformFamily.WindowsNT => new WindowsPlatformProvider(_cliCommandInvoker, _windowsSystemInfoProvider),
+                PlatformFamily.Darwin => new DarwinPlatformProvider(_cliCommandInvoker),
+                PlatformFamily.Linux => new LinuxPlatformProvider(_cliCommandInvoker, _linuxOsReleaseSearcher),
+                PlatformFamily.BSD => new BSDPlatformProvider(_cliCommandInvoker),
+                PlatformFamily.Android => new AndroidPlatformProvider(_cliCommandInvoker),
                 PlatformFamily.Other => throw new PlatformNotSupportedException(),
-                PlatformFamily.Unix => new UnixPlatformProvider(_commandRunner),
+                PlatformFamily.Unix => new UnixPlatformProvider(_cliCommandInvoker),
                 _ => throw new ArgumentOutOfRangeException(nameof(platformFamily), platformFamily, null)
             };
         }
