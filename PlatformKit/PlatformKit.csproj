@@ -15,7 +15,7 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.7.6
+        <PackageReleaseNotes>## Changes since 4.7.5
 
 **NOTES**: This version contains breaking changes and removes some functionality.
 
