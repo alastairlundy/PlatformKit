@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Internal.Exceptions;
@@ -166,7 +167,7 @@ namespace PlatformKit.Identification
                 osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
 #endif
                 
-                switch (osVersion.CountDotsInString())
+                switch (osVersion.Count(x => x == '.'))
                 {
                     case 3:
                         osVersion = osVersion.Remove(osVersion.Length - 4, 4);
