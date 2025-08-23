@@ -52,7 +52,7 @@ namespace PlatformKit.Identification
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
     /// </summary>
-    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
+    [Obsolete(DeprecationMessages.DeprecationV5)]
     public class RuntimeIdentification
     {
 

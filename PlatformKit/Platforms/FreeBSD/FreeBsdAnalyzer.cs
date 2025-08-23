@@ -23,8 +23,10 @@
    */
 
 using System;
-
+using CliWrap;
+using CliWrap.Buffered;
 using PlatformKit.Internal.Deprecation;
+using PlatformKit.Internal.Helpers;
 using PlatformKit.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -53,8 +55,14 @@ public class FreeBsdAnalyzer
 #if NETSTANDARD2_0 || NETSTANDARD2_1
             return Environment.OSVersion.Version;
 #else
-            return Version.Parse(CommandRunner.RunCommandOnFreeBsd("uname -v").Replace("FreeBSD", string.Empty)
-                .Split(' ')[0].Replace("-release",  string.Empty));
+            BufferedCommandResult result = Cli.Wrap("/usr/bin/uname")
+                .WithArguments("-v")
+                .ExecuteBufferedSync();
+            
+            string standardOutput= result.StandardOutput.Replace("FreeBSD", string.Empty)
+                .Split(' ')[0].Replace("-release",  string.Empty);
+            
+            return Version.Parse(standardOutput);
 #endif
         }
 
