@@ -4,9 +4,7 @@
 
 PlatformKit is a C# .NET library focusing on dealing with cross-platform OS detection, OS version detection, platform specific code, and platform specific issues.
 
-This can be added to any .NET Standard 2.0, .NET 6, or .NET 8 supported Application or Library.
-
-NOTE: .NET Standard 2 and .NET 6 support is deprecated and will be removed in PlatformKit 5.
+This can be added to any .NET Standard 2.0, .NET 8, or .NET 9 supported Application or Library.
 
 ### Compatibility 
 
