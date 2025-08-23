@@ -47,49 +47,8 @@ namespace PlatformKit;
 /// 
 /// </summary>
 [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
-public static class CommandRunner
+internal static class CommandRunner
 {
-
- /// <summary>
- /// Run a command on macOS located in the /usr/bin/ folder.
- /// </summary>
- /// <param name="command"></param>
- /// <param name="runAsAdministrator"></param>
- /// <returns></returns>
- /// <exception cref="PlatformNotSupportedException"></exception>
- [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
- public static string RunCommandOnMac(string command, bool runAsAdministrator = false)
-    {
-        if (!OperatingSystem.IsMacOS())
-        {
-            throw new PlatformNotSupportedException();
-        }
-        
-        string location = "/usr/bin/";
-                
-        string[] array = command.Split(' ');
-
-        if (array.Length > 1)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.AppendJoin(' ', array.Skip(1));
-
-            string args = stringBuilder.ToString();
-            
-            return ProcessRunner.RunProcessOnMac(location, array[0], args);
-        }
-        else
-        {
-            if (runAsAdministrator)
-            {
-                command = command.Insert(0, "sudo ");
-            }
-                
-            return ProcessRunner.RunProcessOnMac(location, command);
-        }
-
-    }
-
     /// <summary>
     /// Run a command or program as if inside a terminal on FreeBSD.
     /// </summary>
@@ -97,62 +56,9 @@ public static class CommandRunner
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
     [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
-    public static string RunCommandOnFreeBsd(string command, bool runAsAdministrator = false)
+    internal static string RunCommandOnFreeBsd(string command, bool runAsAdministrator = false)
     {
         return RunCommandOnLinux(command, runAsAdministrator);
-    }
-
-    /// <summary>
-    /// Runs commands in the Windows Cmd Command Prompt.
-    /// </summary>
-    /// <param name="command"></param>
-    /// <param name="processStartInfo"></param>
-    /// <param name="runAsAdministrator"></param>
-    /// <returns></returns>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
-    public static string RunCmdCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
-    {
-        if (OperatingSystem.IsWindows() == false)
-        {
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
-        }
-        
-        BufferedCommandResult result = Cli.Wrap($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe")
-            .WithArguments(command)
-            .ExecuteBufferedSync();
-
-       return result.StandardOutput;
-    }
-
-    /// <summary>
-    /// Runs commands in Windows Powershell.
-    /// </summary>
-    /// <param name="command"></param>
-    /// <param name="processStartInfo"></param>
-    /// <param name="runAsAdministrator"></param>
-    /// <returns></returns>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-    [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
-    public static string RunPowerShellCommand(string command, ProcessStartInfo processStartInfo = null, bool runAsAdministrator = false)
-    {
-        if (OperatingSystem.IsWindows() == false)
-        {
-            throw new PlatformNotSupportedException();
-        }
-        
-        string location = $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}System32" +
-                          $"{Path.DirectorySeparatorChar}WindowsPowerShell{Path.DirectorySeparatorChar}v1.0";
-
-        BufferedCommandResult result = Cli.Wrap($"{location}{Path.DirectorySeparatorChar}powershell.exe")
-            .WithArguments(command)
-            .ExecuteBufferedSync();
-        
-        return result.StandardOutput;
     }
 
     /// <summary>
@@ -162,7 +68,7 @@ public static class CommandRunner
     /// <param name="runAsAdministrator"></param>
     /// <returns></returns>
     [Obsolete(DeprecationMessages.DeprecationV5UseCliRunnerInstead)]
-    public static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
+    internal static string RunCommandOnLinux(string command, bool runAsAdministrator = false)
     {
         if (OperatingSystem.IsLinux() == false && OperatingSystem.IsFreeBSD() == false)
         {
