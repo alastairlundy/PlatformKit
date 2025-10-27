@@ -13,7 +13,7 @@ using PlatformKit.Abstractions;
 
 namespace PlatformKit.Specifics.Abstractions;
 
-public interface ILinuxPlatformProvider : IPlatformProvider
+public interface ILinuxPlatformProvider : IPlatformInfoProvider
 {
     
 }

@@ -13,7 +13,7 @@ using PlatformKit.Abstractions;
 
 namespace PlatformKit.Specifics.Abstractions;
 
-public interface IDarwinPlatformProvider : IPlatformProvider
+public interface IDarwinPlatformProvider : IPlatformInfoProvider
 {
     public Task<DarwinPlatform> GetCurrentDarwinPlatformAsync();
 }

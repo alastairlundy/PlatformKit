@@ -11,12 +11,12 @@ namespace PlatformKit.Abstractions
 {
     public interface IPlatformProviderFactory
     {
-        public IPlatformProvider CreatePlatformProvider();
+        public IPlatformInfoProvider CreatePlatformProvider();
         
-        public bool TryCreatePlatformProvider(out IPlatformProvider? platformProvider);
+        public bool TryCreatePlatformProvider(out IPlatformInfoProvider? platformProvider);
         
-        public IPlatformProvider CreatePlatformProvider(PlatformFamily platformFamily);
+        public IPlatformInfoProvider CreatePlatformProvider(PlatformFamily platformFamily);
         
-        public bool TryCreatePlatformProvider(PlatformFamily platformFamily, out IPlatformProvider? provider);
+        public bool TryCreatePlatformProvider(PlatformFamily platformFamily, out IPlatformInfoProvider? provider);
     }
 }

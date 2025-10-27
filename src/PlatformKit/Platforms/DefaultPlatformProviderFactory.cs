@@ -50,7 +50,7 @@ namespace PlatformKit
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public IPlatformProvider CreatePlatformProvider()
+        public IPlatformInfoProvider CreatePlatformProvider()
         {
             PlatformFamily platformFamily;
             
@@ -96,7 +96,7 @@ namespace PlatformKit
             return CreatePlatformProvider(platformFamily);
         }
 
-        public bool TryCreatePlatformProvider(out IPlatformProvider? platformProvider)
+        public bool TryCreatePlatformProvider(out IPlatformInfoProvider? platformProvider)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace PlatformKit
             }
         }
 
-        public IPlatformProvider CreatePlatformProvider(PlatformFamily platformFamily)
+        public IPlatformInfoProvider CreatePlatformProvider(PlatformFamily platformFamily)
         {
             return platformFamily switch
             {
@@ -125,7 +125,7 @@ namespace PlatformKit
             };
         }
 
-        public bool TryCreatePlatformProvider(PlatformFamily platformFamily, out IPlatformProvider? provider)
+        public bool TryCreatePlatformProvider(PlatformFamily platformFamily, out IPlatformInfoProvider? provider)
         {
             try
             {

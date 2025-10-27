@@ -14,7 +14,7 @@ namespace PlatformKit.Abstractions
     /// <summary>
     /// An interface to allow for providing details on the current Platform.
     /// </summary>
-    public interface IPlatformProvider
+    public interface IPlatformInfoProvider
     {
         public Task<Platform> GetCurrentPlatformAsync();
     }

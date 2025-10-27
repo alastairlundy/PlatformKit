@@ -11,7 +11,7 @@ using PlatformKit.Abstractions;
 
 namespace PlatformKit.Specifics.Abstractions;
 
-public interface IUnixPlatformProvider : IPlatformProvider
+public interface IUnixPlatformProvider : IPlatformInfoProvider
 {
     
 }

@@ -13,7 +13,7 @@ using PlatformKit.Abstractions;
 
 namespace PlatformKit.Specifics.Abstractions
 {
-    public interface IAndroidPlatformProvider : IPlatformProvider
+    public interface IAndroidPlatformProvider : IPlatformInfoProvider
     {
         public Task<AndroidPlatform> GetCurrentAndroidPlatformAsync();
     }

@@ -14,7 +14,7 @@ using PlatformKit.Platforms.Specifics;
 
 namespace PlatformKit.Specifics.Abstractions;
 
-public interface IWindowsPlatformProvider : IPlatformProvider
+public interface IWindowsPlatformProvider : IPlatformInfoProvider
 {
     public Task<WindowsPlatform> GetCurrentWindowsPlatformAsync();
 }

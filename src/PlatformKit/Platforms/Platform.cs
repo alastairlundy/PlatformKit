@@ -28,7 +28,7 @@ namespace PlatformKit
         /// 
         /// </summary>
         public Version OperatingSystemVersion { get; }
-        
+
         /// <summary>
         /// 
         /// </summary>
