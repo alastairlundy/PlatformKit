@@ -1,9 +1,3 @@
-## Upcoming Versions
-
-| Version series | Latest Pre-release | Date Of Latest Pre-release |
-|-|-|-|
-| 5.0 | 5.0.0 Alpha 5 | March 3rd 2025 |
-
 ## Currently Supported Versions
 
 | Version series | Latest Update | Date of Latest Update | Supported with Bug Fixes | Supported with Security Fixes |
