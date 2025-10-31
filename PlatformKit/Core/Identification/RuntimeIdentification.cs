@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using PlatformKit.Internal.Exceptions;
@@ -34,7 +35,6 @@ using PlatformKit.Linux.Models;
 using PlatformKit.Mac;
 using PlatformKit.Internal.Deprecation;
 using PlatformKit.Internal.Localizations;
-using AlastairLundy.DotExtensions.Strings;
 
 
 #if NETSTANDARD2_1 || NET5_0_OR_GREATER
@@ -166,7 +166,7 @@ namespace PlatformKit.Identification
                 osVersion = FreeBsdAnalyzer.GetFreeBSDVersion().ToString();
 #endif
                 
-                switch (osVersion.CountDotsInString())
+                switch (osVersion.Count(x => x == '.'))
                 {
                     case 3:
                         osVersion = osVersion.Remove(osVersion.Length - 4, 4);
