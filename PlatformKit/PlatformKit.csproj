@@ -15,19 +15,13 @@
         <Summary>PlatformKit is a library dealing with Platform specific code, platform specific issues, and platform detection in C# .NET Core.</Summary>
         <PackageTags>platform detection, CSharp,</PackageTags>
         <Title>PlatformKit</Title>
-        <PackageReleaseNotes>## Changes since 4.7.5
+        <PackageReleaseNotes>## Changes since 4.8.0
+* Updated DotExtensions dependency from 7.6.5 to 8.6.3
+* Updated Polyfill from 8.7.3 to 8.9.0
 
-**NOTES**: This version contains breaking changes and removes some functionality.
-
-### Breaking Changes
-* Removed ``CommandRunner`` class
-* Removed ``ProcessRunner`` class
-* Removed ``PlatformKitIdentification`` class
-* Removed ``UrlRunner`` class
-
-### Other Changes
-* Updated DotExtensions from 7.3.0 to 7.6.5 for .NET Standard 2.0 users, and from 7.3.0 to 8.2.0 for .NET 8 and .NET 9 users
-* Updated Polyfill from 8.1.0 to 8.7.3</PackageReleaseNotes>
+## Notes
+* Final release for PlatformKit.
+* PlatformKit is being archived and sunset - See Readme for more details.</PackageReleaseNotes>
    <Product>PlatformKit</Product>
         <LangVersion>13</LangVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,7 +29,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<TargetFrameworks>net8.0;netstandard2.0;netstandard2.1;net9.0</TargetFrameworks>
         <Version>4.8.0.0</Version>
-        <PackageVersion>4.8.0</PackageVersion>
+        <PackageVersion>4.8.1</PackageVersion>
         <PackageProjectUrl>https://github.com/alastairlundy/PlatformKit/</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
