@@ -1,7 +1,6 @@
 # Version History
 This document contains the entire version history of the PlatformKit library.
 
-## Upcoming Releases
 
 ## Stable Releases
 
