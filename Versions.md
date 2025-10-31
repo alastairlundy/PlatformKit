@@ -12,7 +12,7 @@
 
 | Version series | Last Update | Date of Last Update |
 |-|-|-|
-| 4.7 | 4.7.5 | October 31st 2025 |
+| 4.7 | 4.7.6 | October 31st 2025 |
 | 4.6 | 4.6.3 | February 10th 2025 |
 | 4.5 | 4.5.1 | December 15th 2024 |
 | 4.4 | 4.4.3 | December 6th 2024 |
